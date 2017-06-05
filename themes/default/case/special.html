@@ -1,0 +1,72 @@
+<{include file="block/header.html"}>
+<!--面包屑导航开始-->
+<div class="main_topnav mb20">
+	<div class="mainwd">
+		<p><span class="ico_list breadna"></span>您的位置：<a href="index"><{$CONFIG.site.title}></a>
+			><a href="<{link ctl='case:items'}>">装修案例</a>
+		</p>
+	</div>
+</div>
+<!--面包屑导航结束-->
+<div class="mainwd">
+	<!--主体内容开始-->
+	<div class="mb20 pding area choose_option">
+		<table>
+        	 <{foreach $attr_values as $item}>
+                <tr>                    
+                   	<td class="tit"><{$item.title}>:</td>
+                    <td><a href="<{$item.link}>" class="<{if $item.checked == true}> current<{/if}>">不限 </a>                  
+                    <{foreach $item.values as $item2}>
+                    <a href="<{$item2.link}>" class="<{if $item2.checked ==true}>current<{/if}>"><{$item2.title}></a>
+                    <{/foreach}>
+                    </td>
+             	</tr>
+			 <{/foreach}>
+		</table>
+	</div>
+	<div class="mb10">
+		<div class="sort_box">
+			<p class="sort_list hoverno">
+            	<span class="lt">
+                    <a href="<{$order_url.today}>"> 今日推荐<span class="<{if $url_data.order != 2 && $url_data.order != 3}>sort_ico ico_list sort_on_ico<{else}>sort_ico ico_list<{/if}>"></span></a>
+                    <a href="<{$order_url.like}>">最受欢迎 <span  class="<{if $url_data.order == 2}>sort_ico ico_list sort_on_ico<{else}>sort_ico ico_list<{/if}>"></span></a>
+                    <a href="<{$order_url.pv}>">最人气排行 <span  class="<{if $url_data.order == 3}>sort_ico ico_list sort_on_ico<{else}>sort_ico ico_list<{/if}>"></span></a>
+				</span>			
+                <span class="rt">
+                    <a href="<{link ctl='case:items'}>" title="列表模式" ><font class="ico_list block_over"></font></a>
+					<a href="<{link ctl='case:special'}>"  title="专辑模式" class="on"><font class="ico_list li_on"></font></a>
+				</span>
+			</p>
+		</div>
+	</div>
+	<div class="mb20 case_aterfall">
+    	 <{foreach $photos as $item}>
+         		<div class="case_aterfall_li">
+                    <div class="opacity_img hoverno">
+                        <a href="<{link ctl='case:detail' arg0=$item.case_id}>"  target="_blank">
+                        <img src="<{$pager.img}>/<{$item.photo}>_thumb.jpg" />
+                        </a>
+                        <span class="bg"></span>
+                        <span class="text"><a href="<{link ctl='case:detail' arg0=$item.case_id}>">免费户型设计</a>
+                        </span>
+                    </div>
+                    <p class="tit"><a href="<{link ctl='case:detail' arg0=$item.case_id}>"  target="_blank"><{$item.title|cutstr:25}></a>
+                    </p>
+                </div>
+         <{/foreach}>	
+	</div>
+    
+	<div class="cl"></div>
+     <{if $pager.pagebar}><div class="page hoverno"><{$pager.pagebar}></div><{/if}>
+</div>
+<script type="text/javascript">
+(function(K, $){
+  var $container = $('#container');
+      $container.imagesLoaded(function(){
+        $container.masonry({
+        itemSelector: '.case_aterfall_li'
+      });
+    }); 
+})(window.KT, window.jQuery);
+</script>
+<{include file="block/footer.html"}>
