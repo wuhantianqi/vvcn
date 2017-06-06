@@ -2,7 +2,7 @@
 /**
  * Copy Right IJH.CC
  * Each engineer has a duty to keep the code elegant
- * $Id: order.ctl.php 9378 2015-03-27 02:07:36Z youyi $
+ * $Id: order.ctl.php 3903 2014-03-17 02:09:44Z youyi $
  */
 
 if(!defined('__CORE_DIR')){

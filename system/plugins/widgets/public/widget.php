@@ -3,7 +3,7 @@
  * Copy Right IJH.CC
  * Each engineer has a duty to keep the code elegant
  * Author @shzhrui<Anhuike@gmail.com>
- * $Id: widget.php 12719 2015-07-02 10:47:00Z maoge $
+ * $Id: widget.php 5454 2014-06-11 05:17:35Z $
  */
 
 class Widget_Public extends Model
@@ -33,7 +33,7 @@ class Widget_Public extends Model
     {
         $params['tpl'] =  $params['tpl'] ? $params['tpl'] : 'sobox.html';
         $request = K::$system->request;
-        $all_sotype = array('gs'=>array('ctl'=>'gs:items', 'title'=>'公司'), 'mall/store'=>array('ctl'=>'mall/store','title'=>'商铺'), 'product'=>array('ctl'=>'mall/product','title'=>'商品'), 'designer'=>array('ctl'=>'designer:items','title'=>'设计师'), 'mechanic'=>array('ctl'=>'mechanic:items','title'=>'技工'), 'case'=>array('ctl'=>'case:album', 'title'=>'搜案例'), 'home'=>array('ctl'=>'home:items','title'=>'小区'), 'site'=>array('ctl'=>'site:items','title'=>'工地'), 'home:tuan'=>array('ctl'=>'home:tuan','title'=>'团装'), 'article'=>array('ctl'=>'article:items','title'=>'学装修'));
+        $all_sotype = array('gs'=>array('ctl'=>'gs:items', 'title'=>'公司'), 'mall/store'=>array('ctl'=>'mall/store','title'=>'商铺'), 'product'=>array('ctl'=>'mall/product','title'=>'商品'), 'designer'=>array('ctl'=>'designer:items','title'=>'设计师'), 'mechanic'=>array('ctl'=>'mechanic:items','title'=>'技工'), 'case'=>array('ctl'=>'case:album', 'title'=>'案例'), 'home'=>array('ctl'=>'home:items','title'=>'小区'), 'site'=>array('ctl'=>'home:items','title'=>'工地'), 'home:tuan'=>array('ctl'=>'home:tuan','title'=>'团装'), 'article'=>array('ctl'=>'article:items','title'=>'学装修'));
         
         if($a = $sotype[$request['ctl'].':'.$request['act']]){            
         }else if($request['ctl'] == 'mall/store'){
@@ -44,7 +44,7 @@ class Widget_Public extends Model
             $a = array('ctl'=>'article:items','title'=>'学装修');
         }else if(strpos($request['ctl'], 'case') !== false){
             $a = array('ctl'=>'case:album','title'=>'案例');
-        }else if(strpos($request['ctl'], 'site') !== false){
+        }else if(strpos($request['ctl'], 'home') !== false){
             $a = array('ctl'=>'site:items','title'=>'工地');
         }else if(!$a = $sotype[$request['ctl']]){
             $a = array('ctl'=>'gs:items','title'=>'公司');

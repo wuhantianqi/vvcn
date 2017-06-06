@@ -1,6 +1,7 @@
 <{include file="block/small-header.html"}>
 <link type="text/css" rel="stylesheet" href="/themes/default/shop/style/default/style.css" />
-<{if $shop.skin_cfg}><{foreach $shop.skin_cfg.css as $css}><link rel="stylesheet" type="text/css" href="<{$pager.theme}>/<{$css}>"/><{/foreach}><{/if}>
+<script type="text/javascript" src="<{$pager.res}>/script/jquery.qrcode.min.js"></script>
+<{if $shop.skin_cfg}><{foreach $shop.skin_cfg.css as $css}><link rel="stylesheet" type="text/css" href="<{$pager.theme}>"/><{/foreach}><{/if}>
 <!--面包屑导航开始-->
 <div class="mb10 subwd sub_topnav">
 	<p><span class="ico_list breadna"></span>您的位置：<a href="<{link ctl='index'}>"><{$CONFIG.site.title}></a>
@@ -12,14 +13,21 @@
 	<!--头部导航开始-->
 	<div class="shop_banner"><img src="<{$pager.img}>/<{$shop.banner}>" /></div>
 	<div class="shop_nav mb10 hoverno">
-		<ul>
+		<ul class="lt">
 			<li><a href="<{$shop.shop_url}>" <{if $request.act=='index'}>class="current"<{/if}>>商铺首页</a></li>
 			<li><a href="<{link ctl='mall/shop:info' arg0=$shop.shop_id shop=$shop}>" <{if $request.act=='info'}>class="current"<{/if}>>商家介绍</a></li>
 			<li><a href="<{link ctl='mall/shop:product' arg0=$shop.shop_id shop=$shop}>" <{if $request.act=='product'}>class="current"<{/if}>>所有产品</a></li>
 			<li><a href="<{link ctl='mall/shop:coupon' arg0=$shop.shop_id shop=$shop}>" <{if $request.act=='coupon'}>class="current"<{/if}>>优惠券</a></li>
 			<li><a href="<{link ctl='mall/shop:news' arg0=$shop.shop_id shop=$shop}>" <{if $request.act=='news'}>class="current"<{/if}>>活动资讯</a></li>
+			<{if $shop.group.priv.allow_mendian > -1}><li><a href="<{link ctl='mall/shop:mendian' arg0=$shop.shop_id shop=$shop}>" <{if $request.act=='mendian'}>class="current"<{/if}>>门店展示</a></li><{/if}>
 			<li><a href="<{link ctl='mall/shop:comment' arg0=$shop.shop_id shop=$shop}>" <{if $request.act=='comment'}>class="current"<{/if}>>口碑点评</a></li>
+			<li></li>
 		</ul>
+		<div class="rt"><div class="coDe">
+			<div class="pic">[ 手机扫码 ]<img src="%THEME%/static/images/codeico.jpg" /></div>
+			<div class="show" id="QRimg" style="padding:5px;background-color:#fff;height:80px;" val="<{$mobile_url}>"></div>
+			</div></div>
+		<div class="cl"></div>
 	</div>
 	<!--头部导航结束-->
 	<!--左边主体内容开始-->
@@ -30,7 +38,7 @@
 			<p>口碑：<{$shop.score}></p>
 			<p>信誉：<{$shop.credit|shoprank}></p>
 			<p>电话：<{$shop.show_phone}></p>
-			<p>客服：<{$shop.show_qq|qq:1}></p>
+			<p>客服：<br /><{$shop.show_qq|qq}></p>
 			<p>关注数 : <font class="fontcl2"><{$shop.views}></font></p>
 			<p>入驻时间 : <{$shop.dateline|format:"Y-m-d"}></p>
 		</div>
@@ -57,3 +65,13 @@
 		</div>
 	</div>
 	<!--左边主体内容结束-->
+<script>
+$(".coDe ").mouseover(function(){
+	$(this).find(".show").show();
+	}).mouseleave(function(){
+	$(this).find(".show").hide();
+});
+(function(){
+	$("#QRimg").qrcode({width:80,height:80,correctLevel:0,text:"<{$mobile_url}>"}); 
+	})(window.KT, window.jQuery);
+</script>

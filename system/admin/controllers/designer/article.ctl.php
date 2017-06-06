@@ -2,7 +2,7 @@
 /**
  * Copy Right IJH.CC
  * Each engineer has a duty to keep the code elegant
- * $Id: article.ctl.php 9378 2015-03-27 02:07:36Z youyi $
+ * $Id$
  */
 
 if(!defined('__CORE_DIR')){
@@ -17,7 +17,9 @@ class Ctl_Designer_article extends Ctl
 		$filter = $pager = array();
 		$pager['page'] = max(intval($page), 1);
 		$pager['limit'] = $limit = 50;
-		
+		if(CITY_ID){
+			$filter['city_id'] = CITY_ID;
+		}
 		if($items = K::M('designer/article')->items($filter, null, $page, $limit, $count)){
 			$pager['count'] = $count;
 			$pager['pagebar'] = $this->mkpage($count, $limit, $page, $this->mklink(null, array('{page}')), array('SO'=>$SO));
@@ -38,7 +40,9 @@ class Ctl_Designer_article extends Ctl
 			$pager['page'] = max(intval($page), 1);
 			$pager['limit'] = $limit = 50;
 			$filter['uid'] = $uid;
-			
+			if(CITY_ID){
+				$filter['city_id'] = CITY_ID;
+			}
 			if($items = K::M('designer/article')->items($filter, null, $page, $limit, $count)){
 				$pager['count'] = $count;
 				$pager['pagebar'] = $this->mkpage($count, $limit, $page, $this->mklink(null, array('{page}')), array('SO'=>$SO));
@@ -48,8 +52,7 @@ class Ctl_Designer_article extends Ctl
 			$this->pagedata['pager'] = $pager;
 			$this->tmpl = 'admin:designer/article/items.html';
 		}
-    }
-
+    }
 
     public function create($uid)
     {
@@ -124,7 +127,9 @@ class Ctl_Designer_article extends Ctl
             if($items = K::M('designer/article')->items_by_ids($ids)){
                 $aids = $designer_ids = array();
                 foreach($items as $v){
-                    
+                    if(CITY_ID && CITY_ID != $v['city_id']){
+                        continue;
+                    }
                     $aids[$v['article_id']] = $v['article_id'];
                     $designer_ids[$v['uid']] = $v['uid'];
                 }

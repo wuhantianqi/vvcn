@@ -2,7 +2,7 @@
 /**
  * Copy Right IJH.CC
  * Each engineer has a duty to keep the code elegant
- * $Id: photo.ctl.php 9378 2015-03-27 02:07:36Z youyi $
+ * $Id: photo.ctl.php 2034 2013-12-07 03:08:33Z $
  */
 if (!defined('__CORE_DIR')) {
     exit("Access Denied");

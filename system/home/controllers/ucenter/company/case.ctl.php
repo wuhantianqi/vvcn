@@ -2,7 +2,7 @@
 /**
  * Copy Right IJH.CC
  * Each engineer has a duty to keep the code elegant
- * $Id: case.ctl.php 14902 2015-08-12 10:17:00Z xiaorui $
+ * $Id$
  */
 
 class Ctl_Ucenter_Company_Case extends Ctl_Ucenter
@@ -92,7 +92,7 @@ class Ctl_Ucenter_Company_Case extends Ctl_Ucenter
             }
         } else {
             $this->pagedata['designers'] = K::M('designer/designer')->items(array('company_id'=>$company['company_id']), null, 1, 200);
-            $pager = array('audit_case'=>$audit_case, 'audit_title'=>$audit_title);
+            $pager = array('audit_case'=>$audit_case, 'audit_title'=>$audit_title,'city_id'=>$company['city_id']);
             $this->pagedata['pager'] = $pager;
             $this->tmpl = 'ucenter/company/case/create.html';
         }
@@ -163,6 +163,8 @@ class Ctl_Ucenter_Company_Case extends Ctl_Ucenter
             }
             $this->pagedata['designers'] = K::M('designer/designer')->items(array('company_id' => $company['company_id']), array(), 1, 1000, $c);
             $this->pagedata['detail'] = $detail;
+			$pager['city_id'] = $company['city_id'];
+			$this->pagedata['pager'] = $pager;
             $this->tmpl = 'ucenter/company/case/edit.html';
         }
     }
@@ -267,6 +269,7 @@ class Ctl_Ucenter_Company_Case extends Ctl_Ucenter
         }else if ($case['company_id'] != $company['company_id']) {
             $this->err->add('不许越权管理别人的内容', 212);
         }else if(K::M('case/case')->delete($case_id)){
+            K::M('company/company')->update_count($company['company_id'], 'case_num', -1);
             $this->err->add('删除案例成功');
         }   
     }

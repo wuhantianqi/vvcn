@@ -2,7 +2,7 @@
 /**
  * Copy Right IJH.CC
  * Each engineer has a duty to keep the code elegant
- * $Id: ask.mdl.php 9378 2015-03-27 02:07:36Z youyi $
+ * $Id: ask.mdl.php 5649 2014-06-25 11:13:56Z youyi $
  */
 
 if(!defined('__CORE_DIR')){
@@ -49,4 +49,5 @@ class Mdl_Ask_Ask extends Mdl_Table
         }
         return $items;
     }
+    
 }

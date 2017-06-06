@@ -11,7 +11,7 @@
     <{foreach $items as $item}>
     <tr>
         <td class="left"><label><{$item.news_id}><label></td>
-        <td><a href="<{link ctl='company:newsDetail' arg0=$item.company_id arg1=$item.news_id}>" target="_blank"><b><{$item.title}></a></td>
+        <td><a href="<{link ctl='news:detail' arg0=$item.news_id}>" target="_blank"><b><{$item.title}></a></td>
 		<td><{if $item.audit}><b class="blue">通过</b><{else}><b class="red">待审</b><{/if}></td><td><{$item.dateline|format}></td>
         <td>
             <a href="<{link ctl='ucenter/company/news:edit' arg0=$item.news_id}>"  class="pbtn">修改</a>

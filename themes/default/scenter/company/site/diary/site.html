@@ -1,0 +1,42 @@
+<{include file="scenter/block/header.html"}>
+<div class="ucenter_t">
+    <ul><li class="on">工地日记</li></ul>
+    <span class="r"><a href="<{link ctl='scenter/company/diary:create' arg0=$site.site_id}>" class="pbtn">添加日记</a></span>
+</div>
+<div class="ucenter_c">
+    <table width="100%" border="0" cellspacing="0" class="info"> 
+        <tbody>
+            <tr>
+                <th>工程名称：</th><td colspan="5"><{$site.title}></td>
+            </tr>
+            <tr>
+                <th>施工小区：</th><td colspan="5"><{$site.home_name|default:'--'}></td>
+            </tr>
+            <tr><th>施工地址：</th>
+                <td colspan="5"><{$site['city_name']}><{$site.addr}></td>
+            </tr>
+             <tr><th>施工面积：</th>
+                <td colspan="5"><{$site['house_mj']}>&nbsp;m<sup>2</sup></td>
+            </tr>
+            <tr><th>工程造价：</th><td colspan="5"><{$site['price']}>&nbsp;元</td></tr>   
+            <tr><td colspan="10" style="height:10px;"></td></tr>
+        </tbody>
+    </table>    
+    <div class="alert alert-info">工地日记 </div>  
+    <table width="100%" border="0" cellspacing="0" class="table">
+    <tr><th>工地</th><th class="w-200">阶段</th><th class="w-200">标题</th><th class="w-150">创建时间</th><th class="w-150">操作</th></tr>
+    <{foreach $items as $item}>
+    <tr> 
+        <td><{$site.title|default:'--'}></td><td><{$item.status_title}></td><td><{$item.title}></td><td><{$item.dateline|format}></td>
+        <td>
+            <a href="<{link ctl='scenter/company/diary:edit' arg0=$item.item_id}>" class="pbtn">修改</a>
+            <a href="<{link ctl='scenter/company/diary:delete' arg0=$item.item_id}>" mini-act="删除" mini-confirm="确定要删除吗？" class="pbtn red">删除</a>
+        </td>
+    </tr>
+    <{foreachelse}>
+     <tr><td colspan="20"><p class="tips"><span class="notice">没有数据</span></p></td></tr>
+    <{/foreach}>
+    </table>
+	<div class="page"><{$pager.pagebar}></div>
+</div>
+<{include file="scenter/block/footer.html"}>

@@ -2,7 +2,7 @@
 /**
  * Copy Right IJH.CC
  * Each engineer has a duty to keep the code elegant
- * $Id: product.ctl.php 10290 2015-05-16 09:41:00Z maoge $
+ * $Id$
  */
 
 if(!defined('__CORE_DIR')){
@@ -20,15 +20,25 @@ class Ctl_Mobile_Product extends Ctl_Mobile
             $system->request['act'] = 'index';
             $system->request['args'] = array($match[1]);
         }      
-    }    
+    } 
+	
+	public function index()
+    {
+		$this->tmpl = 'mobile/product/index.html';
+	}
 
-    public function index($cat_id=null,$page=1)
+    public function items($cat_id=null, $page=1)
     {
         $filter = $pager = array();
+        $cat_id = (int)$cat_id;
         $pager['page'] = max(intval($page), 1);
         $pager['limit'] = $limit = 6;
         $filter['city_id'] = $this->request['city_id'];
-        $filter['audit'] = 1;$filter['closed'] = 0;$filter['cat_id'] = $cat_id;
+        $filter['audit'] = 1;
+        $filter['closed'] = 0;
+        if($cat_id){
+            $filter['cat_id'] = $cat_id;
+        }
 		if ($kw = $this->GP('kw')) {
             $pager['sokw'] = $kw = htmlspecialchars($kw);
             $filter['name'] = "LIKE:%{$kw}%";            
@@ -65,6 +75,15 @@ class Ctl_Mobile_Product extends Ctl_Mobile
         $this->pagedata['items'] = $items;
 		$pager['backurl'] = $this->mklink('mobile');
         $this->pagedata['pager'] = $pager;
+        $seo = array('cate_title'=>'', 'cate_seo_title'=>'', 'cate_seo_keywords'=>'', 'cate_seo_description'=>'');
+        if($cate){
+            $seo['cate_title'] = $cate['title'];
+            $seo['cate_seo_title'] = $cate['seo_title'];
+            $seo['cate_seo_keywords'] = $cate['seo_keywords'];
+            $seo['cate_seo_description'] = $cate['seo_description'];
+        }
+        $this->seo->init('mall_product', $seo);
+        $this->pagedata['pager'] = $pager;        
         $this->tmpl = 'mobile/product/items.html';
     }
 
@@ -76,19 +95,28 @@ class Ctl_Mobile_Product extends Ctl_Mobile
             $this->error(404);
         }else if($detail['closed'] == 1){
             $this->error(404);
-        }else if(empty($detail['audit'])){
+        }else if(!$shop = K::M('shop/shop')->detail($detail['shop_id'])){
+            $this->error(404);
+        }else if(empty($detail['audit']) || empty($shop['audit'])){
             $this->err->add("内容审核中，暂不可访问", 211)->response();
         }else{
-			$cateone = K::M('shop/cate')->detail($detail['cat_id']);
-			if($cateone['parent_id'] == '350'){
-				$detail['is_dingzhi']= true;
-			}
             $this->pagedata['detail'] = $detail;
 			$this->pagedata['fields'] = K::M('product/fields')->detail($product_id);
             $this->pagedata['product_spec_list'] = K::M('product/spec')->items_by_product($product_id);
             $this->pagedata['product_photo_list'] = K::M('product/photo')->items_by_product($product_id);
 			$pager['backurl'] = $this->mklink('mobile/product');
 			$this->pagedata['pager'] = $pager;
+            $seo = array('title'=>$detail['title'], 'cate_name'=>$detail['cate_name'], 'shop_name'=>$shop['name'],'shop_title'=>$shop['title']);
+            $this->seo->init('product_detail', $seo);
+            if($seo_title = $detail['seo_title']){
+                $this->seo->set_title($seo_title);
+            }
+            if($seo_description = $detail['seo_description']){
+                $this->seo->set_description($seo_description);
+            }
+            if($seo_keywords = $detail['seo_keywords']){
+                $this->seo->set_keywords($seo_keywords);
+            }            
 			$this->tmpl = 'mobile/product/detail.html';
 		}
     }
@@ -102,6 +130,7 @@ class Ctl_Mobile_Product extends Ctl_Mobile
         }else if(empty($product['audit'])){
             $this->err->add('商品审核中', 211);   
         }else{
+			
 			$pager['tender_hide'] = 1;
             $shop = $this->check_shop($product['shop_id']);
             $this->pagedata['product'] = $product;

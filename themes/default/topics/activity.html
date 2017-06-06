@@ -1,0 +1,126 @@
+<{include file="block/small-header.html"}>
+<link href="/themes/default/topics/static/style/topics.css" rel="stylesheet" type="text/css">
+<script type="text/javascript" src="/themes/default/topics/static/js/jquery.easing.min.js"></script>
+<script type="text/javascript" src="/themes/default/topics/static/js/jQueryRotate.js"></script>
+<style type="text/css">
+/*
+body{background:url(bg.png) 0 0 repeat;}
+
+.rotate-con-pan{background:url(disk.jpg) no-repeat 0 0;background-size:100% 100%;position:relative;width:480px;height:480px;box-sizing:border-box;-moz-box-sizing:border-box;-webkit-box-sizing:border-box;margin:0 auto}
+.rotate-con-zhen{width:112px;height:224px;background:url(start.png) no-repeat 0 0;background-size:100% 100%;cursor:pointer;position:absolute;left:180px;top:140px;}
+*/
+</style>
+
+<div class="zt_acty_banner"></div>
+<div class="zt_acty_yellow">
+	<div class="subwd">
+		<div class="zt_acty_turn">
+            <div class="rotate-con-pan">
+            <{if $CONFIG.activity.activityimg}>
+                 <img src="<{$pager.img}>/<{$CONFIG.activity.activityimg}>" />
+            <{else}>
+				<img src="<{$pager.theme}>/default/topics/static/images/disk.png" />
+            <{/if}>
+				<img src="<{$pager.theme}>/default/topics/static/images/start.png" class="rotate-con-zhen" />
+            </div>
+			<div class="zt_acty_turn_roll rt">
+				<h2>转盘中奖名单</h2>
+				<div class="zt_acty_turn_ul">
+					<ul>
+                    	<{foreach $log as $k => $v}>
+                            <li>
+                                <span class="lt"><{$member[$v.uid].uname|cutstr:3:'**'}></span><span class="rt"><{$luck[$v.luck_id].product_name}></span><p class="cl"></p>
+                            </li>
+                        <{/foreach}>
+					</ul>
+				</div>
+			</div>
+			<div class="acit_link">
+			<p><a href="<{link ctl='topics:create' arg0=2}>" mini-width='400' mini-load="我要兑换">兑换</a><a href="<{link ctl='ucenter/member/tickets:index'}>">中奖记录</a>你还有<span id='count'><{$count|default:0}></span>次抽奖机会</p>
+		</div>
+		</div>
+	</div>
+</div>
+<div class="zt_acty_purple">
+	<div class="subwd">
+		<div class="zt_acty_guize zt_acty_jpin">
+			<span class="ab_title">抽奖奖品</span>
+			<div class="list">
+				<ul>
+                	<{calldata mdl="luck/luck" type=2 audit=1 closed=0 order="prize:asc" limit="8"}>
+                    	<li>
+                             <img src="<{$pager.img}>/<{$item.thumb}>" />
+                            <b><{$prize[$item.prize]}></b><p><{$item.product_name}></p>
+                        </li>
+                    <{/calldata}>
+				</ul>
+			</div>
+		</div>
+	</div>
+</div>
+<div class="zt_acty_blue">
+	<div class="subwd">
+		<div class="zt_acty_guize">
+			<span class="ab_title">活动规则</span>
+			<div class="text">
+				<{$CONFIG.activity.rule}> 
+			</div>
+		</div>
+	</div>
+</div>
+<script type="text/javascript">
+(function(K, $){
+$(document).ready(function(){
+	//报名活动专题页文字滚动
+        $(".zt_acty_turn_ul li:odd").addClass('grayBg');
+        $(function(){
+            $("div.zt_acty_turn_ul").myScroll({
+                speed:40, //数值越大，速度越慢
+                rowHeight:32//li的高度
+            });
+        });
+});
+$(function(){
+	var __IS_RUN_ROTATE = false;
+	$(".rotate-con-zhen").rotate({
+		bind:{
+			click:function(){
+				if(__IS_RUN_ROTATE){
+                    return false;
+                }
+                __IS_RUN_ROTATE = true;
+				 $.post('<{link ctl="topics:result"}>', {name:"activity"}, function(result){
+                    if(result.error == 101){
+                        Widget.Login();
+                    }else if(result.error){
+                        Widget.MsgBox.error(result.message.join(","));
+                    }else{
+                        $('#count').html(result.data.count);
+                        $(".rotate-con-zhen").rotate({
+                            duration:3000,               //转动时间
+                            angle: 0,                    //起始角度
+                            animateTo:3600-45-23+result.data.dengji*45,      //结束的角度
+                            easing: $.easing.easeOutSine,//动画效果，需加载jquery.easing.min.js
+                            callback: function(){
+                                Widget.MsgBox.success(result.data.title);
+                                __IS_RUN_ROTATE = false;
+                            }
+                        });                        
+                    }                
+                }, 'json');
+				
+				$(this).rotate({
+                        duration:3000,               //转动时间
+                        angle: 0,                    //起始角度
+                        animateTo:3600,      //结束的角度
+                        easing: $.easing.easeOutSine,//动画效果，需加载jquery.easing.min.js
+                        callback: function(){}
+                  });
+				 
+			}
+		}
+	});
+});
+})(window.KT, window.jQuery);
+</script>
+<{include file="block/small-footer.html"}>

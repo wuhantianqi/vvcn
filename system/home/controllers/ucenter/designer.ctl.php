@@ -2,7 +2,7 @@
 /**
  * Copy Right IJH.CC
  * Each engineer has a duty to keep the code elegant
- * $Id: designer.ctl.php 10942 2015-06-19 14:57:58Z maoge $
+ * $Id$
  */
 
 if(!defined('__CORE_DIR')){
@@ -25,7 +25,7 @@ class Ctl_Ucenter_Designer extends Ctl_Ucenter
             if(!$data = $this->check_fields($data, $this->_allow_fields)){
                 $this->err->add('非法的数据提交', 211);
             }else{
-                if(!isset($designer['school'])){
+                if(!$designer['designer_id']){
 					$data['uid'] = $this->uid;
 					if($group = K::M('member/group')->default_group('designer')){
 						$data['group_id'] = $group['group_id'];

@@ -2,7 +2,7 @@
 /**
  * Copy Right IJH.CC
  * Each engineer has a duty to keep the code elegant
- * $Id: store.ctl.php 10579 2015-06-01 02:01:55Z xiaorui $
+ * $Id$
  */
 
 if(!defined('__CORE_DIR')){
@@ -44,7 +44,7 @@ class Ctl_Mobile_Store extends Ctl_Mobile
         $order_list = array(0=>'默认排序',1=>'热门排序', 2=>'口碑排序', 3=>'最新排序');
         $filter['city_id'] = $this->request['city_id'];
         $filter['closed'] = 0;
-        $filter['audit'] = 1;
+        $filter['audit'] = 1;        
         if($cat_id && $cate_list[$cat_id]){
             $filter['cat_id'] = $cat_id;
         }
@@ -81,6 +81,11 @@ class Ctl_Mobile_Store extends Ctl_Mobile
         $this->pagedata['group_list'] = $group_list;
         $this->pagedata['order_list'] = $order_list;
         $this->pagedata['pager'] = $pager;
+        $this->seo->init('mall_store',array('cate_name'=>$cate['title'], 
+            'cate_seo_title'=>$cate['seo_title'],
+            'cate_seo_keywords'=>$cate['seo_keywords'],
+            'cate_seo_description'=>$cate['seo_description'],
+            'page'=>($page > 1) ? $page : ''));        
         $this->tmpl = 'mobile/store/items.html';
     }
 }

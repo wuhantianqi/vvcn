@@ -1,0 +1,99 @@
+<{assign var="tpl_page_title" value="装修案例"}>
+<{include file="mobile/block/header.html"}>
+<div id="topSearch">
+	<div class="search_box">
+		<form action="<{link ctl='mobile/case:items'}>" method="post">
+			<input type="text" name="kw" class="lt txt" placeholder="搜美图"  value="<{$pager.sokw}>" />
+			<input type="submit" value="搜美图" class="btn" />
+			<div class="cl"></div>
+		</form>
+	</div>
+</div>
+<section id="" class="page_center_box">
+<div class="xgtBeauty_box"> <{adv id="85" name="新模板手机案例" city_id=$request.city_id limit="1"}> </div>
+<div class="xgtBeauty_box">
+	<div class="xgtBeauty_show">
+		<{KT name="新模板手机案例聚合页户型之美" city_id=$request.city_id limit="2"}><{if $index==0}><a class="xgtBeauty_item" href="<{link ctl='mobile/case:detail' arg0=$item.case_id}>"><img src="<{$pager.img}>/<{$item.thumb}>" /><p><span><{$item.title}></span></p></a>
+		<{/if}>
+		 <{/KT}>
+		<a class="xgtBeauty_item" href="<{link ctl='mobile/case:items'}>"> <img src="/themes/default/mobile/static/images/xgt1.png" alt=""> </a> 
+		<{KT id="4" name="新模板手机案例聚合页户型之美" city_id=$request.city_id limit="2"}>
+		<{if $index==1}><a class="xgtBeauty_item" href="<{link ctl='mobile/case:detail' arg0=$item.case_id}>"><img src="<{$pager.img}>/<{$item.thumb}>" /><p><span><{$item.title}></span></p></a>
+		<{/if}>
+		 <{/KT}>
+		 </div>
+	<ul class="xgtBeauty_list">
+		<{foreach $attr_values as $v}>
+		<{if $v@index == 0}>
+		<li>
+			<p><{$v.title}></p>
+			<p>TYPE</p>
+		</li>
+		<ul>
+			<{foreach $v['values'] as $vv}>
+			<{if $vv@index<6}>
+			<li><a title="<{$vv.title}>" href="<{$vv.link}>"><{$vv.title}></a></li>
+			<{/if}>
+			<{/foreach}>
+		</ul>
+		<{/if}>
+		<{/foreach}>
+	</ul>
+</div>
+<div class="xgtBeauty_box">
+	<div class="xgtBeauty_show">
+	<{KT name="新模板手机案例聚合页风格之多" city_id=$request.city_id limit="2"}><{if $index==0}><a class="xgtBeauty_item" href="<{link ctl='mobile/case:detail' arg0=$item.case_id}>"><img src="<{$pager.img}>/<{$item.thumb}>" /><p><span><{$item.title}></span></p></a>
+		<{/if}>
+		 <{/KT}>
+		 <a class="xgtBeauty_item" href="<{link ctl='mobile/case:items'}>"> <img src="/themes/default/mobile/static/images/xgt2.png" alt=""> </a> 
+		 <{KT id="4" name="新模板手机案例聚合页风格之多" city_id=$request.city_id limit="2"}>
+		<{if $index==1}><a class="xgtBeauty_item" href="<{link ctl='mobile/case:detail' arg0=$item.case_id}>"><img src="<{$pager.img}>/<{$item.thumb}>" /><p><span><{$item.title}></span></p></a>
+		<{/if}>
+		 <{/KT}>
+		 </div>
+	<ul class="xgtBeauty_list">
+		<{foreach $attr_values as $v}>
+		<{if $v@index == 1}>
+		<li>
+			<p><{$v.title}></p>
+			<p>STYLE</p>
+		</li>
+		<ul>
+			<{foreach $v['values'] as $vv}>
+			<{if $vv@index<6}>
+			<li><a title="<{$vv.title}>" href="<{$vv.link}>"><{$vv.title}></a></li>
+			<{/if}>
+			<{/foreach}>
+		</ul>
+		<{/if}>
+		<{/foreach}>
+	</ul>
+</div>
+<div class="xgtBeauty_box">
+	<div class="xgtBeauty_show"><{KT name="新模板手机案例聚合页价格之优" city_id=$request.city_id limit="2"}><{if $index==0}><a class="xgtBeauty_item" href="<{link ctl='mobile/case:detail' arg0=$item.case_id}>"><img src="<{$pager.img}>/<{$item.thumb}>" /><p><span><{$item.title}></span></p></a>
+		<{/if}>
+		 <{/KT}>
+		 <a class="xgtBeauty_item" href="<{link ctl='mobile/case:items'}>"> <img src="/themes/default/mobile/static/images/xgt3.png" alt=""> </a> 
+		 <{KT id="4" name="新模板手机案例聚合页价格之优" city_id=$request.city_id limit="2"}>
+		<{if $index==1}><a class="xgtBeauty_item" href="<{link ctl='mobile/case:detail' arg0=$item.case_id}>"><img src="<{$pager.img}>/<{$item.thumb}>" /><p><span><{$item.title}></span></p></a>
+		<{/if}>
+		 <{/KT}> </div>
+	<ul class="xgtBeauty_list">
+		<{foreach $attr_values as $v}>
+		<{if $v@index == 1}>
+		<li>
+			<p><{$v.title}></p>
+			<p>PRICE</p>
+		</li>
+		<ul>
+			<{foreach $v['values'] as $vv}>
+			<{if $vv@index<6}>
+			<li><a title="<{$vv.title}>" href="<{$vv.link}>"><{$vv.title}></a></li>
+			<{/if}>
+			<{/foreach}>
+		</ul>
+		<{/if}>
+		<{/foreach}>
+	</ul>
+</div>
+<{include file="mobile/block/footer.html"}>

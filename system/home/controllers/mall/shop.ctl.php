@@ -2,7 +2,7 @@
 /**
  * Copy Right IJH.CC
  * Each engineer has a duty to keep the code elegant
- * $Id: shop.ctl.php 9372 2015-03-26 06:32:36Z youyi $
+ * $Id$
  */
 
 if(!defined('__CORE_DIR')){
@@ -33,16 +33,36 @@ class Ctl_Mall_Shop extends Ctl
         $cate = K::M('shop/cate')->cate($shop['cat_id']);        
         $this->seo->set_shop($shop);
         $this->seo->init('shop', array('cate_name'=>$cate['title']));
-        $this->tmpl = 'shop/index.html';
+        $this->pagedata['mobile_url'] = $this->mklink('mobile/shop', array($shop_id));
+		if($shop['skin'] == 'default'){
+			$this->tmpl = 'shop/index.html';
+		}else{
+			$this->tmpl = 'shop/'.$shop['skin'].'/index.html';
+		}
     }
+
+	public function detail_c($cat_id)
+	{
+        $shop = K::M('shop/shop')->items(array('cat_id'=>$cat_id,'audit'=>'1','closed'=>'0','city_id'=>$this->request['city_id']),null,1,8);
+		
+		$product = K::M('product/product')->items(array('vcat_id'=>$cat_id,'audit'=>'1','closed'=>'0','city_id'=>$this->request['city_id']),null,1,3);
+        $this->pagedata['shop'] = $shop;
+		$this->pagedata['product'] = $product;
+		$this->tmpl = 'shop/detail_c.html';
+	}
 
     public function info($shop_id)
     {
         $shop = $this->check_shop($shop_id);
         $cate = K::M('shop/cate')->cate($shop['cat_id']);        
         $this->seo->set_shop($shop);
-        $this->seo->init('shop', array('cate_name'=>$cate['title']));        
-        $this->tmpl = 'shop/info.html';
+        $this->seo->init('shop', array('cate_name'=>$cate['title']));      
+        $this->pagedata['mobile_url'] = $this->mklink('mobile/shop', array($shop_id));
+		if($shop['skin'] == 'default'){
+			$this->tmpl = 'shop/info.html';
+		}else{
+			$this->tmpl = 'shop/'.$shop['skin'].'/info.html';
+		}
     }
 
     public function news($shop_id, $page=1)
@@ -55,8 +75,13 @@ class Ctl_Mall_Shop extends Ctl
         }
         $cate = K::M('shop/cate')->cate($shop['cat_id']);        
         $this->seo->set_shop($shop);
-        $this->seo->init('shop', array('cate_name'=>$cate['title']));        
-        $this->tmpl = 'shop/news.html';
+        $this->seo->init('shop', array('cate_name'=>$cate['title'])); 
+        $this->pagedata['mobile_url'] = $this->mklink('mobile/shop', array($shop_id));
+		if($shop['skin'] == 'default'){
+			$this->tmpl = 'shop/news.html';
+		}else{
+			$this->tmpl = 'shop/'.$shop['skin'].'/news.html';
+		}
     }
 
     public function mendian($shop_id, $page=1)
@@ -67,7 +92,11 @@ class Ctl_Mall_Shop extends Ctl
             $pager['pagebar'] = $this->mkpage($count, $limit, $page, $this->mklink('mall/shop:mendian', array($shop_id, '{page}'), array('shop'=>$shop)));
             $this->pagedata['items'] = $items;
         }
-        $this->tmpl = 'shop/mendian.html';
+		if($shop['skin'] == 'default'){
+			$this->tmpl = 'shop/mendian.html';
+		}else{
+			$this->tmpl = 'shop/'.$shop['skin'].'/mendian.html';
+		}
     }
 
     public function newsdetail($news_id)
@@ -90,8 +119,12 @@ class Ctl_Mall_Shop extends Ctl
             $this->pagedata['pager'] = $pager;
             $cate = K::M('shop/cate')->cate($shop['cat_id']);        
             $this->seo->set_shop($shop);
-            $this->seo->init('shop', array('cate_name'=>$cate['title']));            
-            $this->tmpl = 'shop/newsdetail.html';
+            $this->seo->init('shop', array('cate_name'=>$cate['title']));  
+			if($shop['skin'] == 'default'){
+				$this->tmpl = 'shop/newsdetail.html';
+			}else{
+				$this->tmpl = 'shop/'.$shop['skin'].'/newsdetail.html';
+			}
         }
     }
 
@@ -113,7 +146,11 @@ class Ctl_Mall_Shop extends Ctl
                 $pager['next'] = array_shift($next);
             }
             $this->pagedata['pager'] = $pager;
-            $this->tmpl = 'shop/mendiandetail.html';
+			if($shop['skin'] == 'default'){
+				$this->tmpl = 'shop/mendiandetail.html';
+			}else{
+				$this->tmpl = 'shop/'.$shop['skin'].'/mendiandetail.html';
+			}
         }
     }
 
@@ -144,8 +181,14 @@ class Ctl_Mall_Shop extends Ctl
         $this->pagedata['pager'] = $pager;
         $cate = K::M('shop/cate')->cate($shop['cat_id']);        
         $this->seo->set_shop($shop);
-        $this->seo->init('shop', array('cate_name'=>$cate['title']));        
-        $this->tmpl = 'shop/product.html';
+        $this->seo->init('shop', array('cate_name'=>$cate['title']));
+        $this->pagedata['mobile_url'] = $this->mklink('mobile/shop', array($shop_id));
+        $this->pagedata['mobile_buy_url'] = $this->mklink('mobile/shop:product', array($shop_id));
+		if($shop['skin'] == 'default'){
+			$this->tmpl = 'shop/product.html';
+		}else{
+			$this->tmpl = 'shop/'.$shop['skin'].'/product.html';
+		}
     }
 
     public function coupon($shop_id, $page=1)
@@ -161,8 +204,13 @@ class Ctl_Mall_Shop extends Ctl
         }
         $cate = K::M('shop/cate')->cate($shop['cat_id']);        
         $this->seo->set_shop($shop);
-        $this->seo->init('shop', array('cate_name'=>$cate['title']));             
-        $this->tmpl = 'shop/coupon.html';
+        $this->seo->init('shop', array('cate_name'=>$cate['title']));       
+        $this->pagedata['mobile_url'] = $this->mklink('mobile/shop', array($shop_id));
+		if($shop['skin'] == 'default'){
+			$this->tmpl = 'shop/coupon.html';
+		}else{
+			$this->tmpl = 'shop/'.$shop['skin'].'/coupon.html';
+		}
     }
 
     public function comment($shop_id, $page=1)
@@ -192,14 +240,18 @@ class Ctl_Mall_Shop extends Ctl
         $cate = K::M('shop/cate')->cate($shop['cat_id']);        
         $this->seo->set_shop($shop);
         $this->seo->init('shop', array('cate_name'=>$cate['title']));      
-        $this->tmpl = 'shop/comments.html';
+		if($shop['skin'] == 'default'){
+			$this->tmpl = 'shop/comments.html';
+		}else{
+			$this->tmpl = 'shop/'.$shop['skin'].'/comments.html';
+		}
     }
 
     public function savecomment($shop_id)
     {
         $shop = $this->check_shop($shop_id);
         if($this->check_login()){
-            $allow_comment = K::M('member/group')->check_priv($this->MEMBER['group_id'], 'allow_comment');
+            $allow_comment = K::M('member/group')->check_priv($this->MEMBER['group_id'], 'allow_score');
             if($allow_comment < 0){
                 $this->err->add('您是【'.$this->MEMBER['group_name'].'】没有权限发表点评', 333);
             }else if($this->uid == $shop['uid']){

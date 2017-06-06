@@ -3,7 +3,7 @@
  * Copy Right IJH.CC
  * Each engineer has a duty to keep the code elegant
  * Author @shzhrui<Anhuike@gmail.com>
- * $Id: widget.php 9378 2015-03-27 02:07:36Z youyi $
+ * $Id: widget.php 2415 2013-12-20 16:25:04Z youyi $
  */
 
 class Widget_Attr extends Model 
@@ -49,6 +49,23 @@ class Widget_Attr extends Model
         }        
         $data['attrs'] = K::M('data/attr')->attrs_by_from($params['from']);
         return $data;          	
+    }
+    
+    public function form_show(&$params)
+    {
+        $params['tpl'] = $params['tpl'] ? $params['tpl'] : 'attr-form_show.html';
+        $data['value'] = array();
+        if($params['value']){
+            if(!is_array($params['value'])){
+                $data['value'] = explode(',', $params['value']);
+            }
+            $data['value'] = $params['value'];
+        }
+        if($params['colspan']){
+            $data['colspan'] = $params['colspan'];
+        }
+        $data['attrs'] = K::M('data/attr')->attrs_by_from($params['from']);
+        return $data;
     }
 
     public function from(&$params)

@@ -1,28 +1,30 @@
 <{assign var="tpl_page_title" value="优惠信息报名查看"}>
 <{include file="mobile/block/header.html"}>
-<div class="pding">
+<div class="pading admin_banner">
+	<a href="<{link ctl='mobile/ucenter:info'}>" style="display:block;">
+	<div class="admin_intro"><img src="<{$pager.img}>/<{$MEMBER.face}>" class="lt" />
+		<div class="lt">
+			<p><{$MEMBER.uname}></p>
+			<p>账户类型：<u><{$MEMBER.from_title}></u> </p>
+			<p>我的金币：<u><{$MEMBER.gold}></u></p>
+		</div>
+		<div class="cl"></div>
+	</div>
+	</a>
+</div>
+
+<div class="yuyue_list">
 <{if !$items}><div class="no_record">暂无记录信息</div><{/if}>
     <{foreach $items as $item}>
 	<div class="yuyue_box">
-		<table cellpadding="0" cellspacing="0">
-        	<tr>
-				<td>
-				优惠信息：<{$youhui_list[$item.youhui_id].title|default:"--"}>
-				</td>
-			</tr>
-            <tr>
-				<td>
-				状态：<{$item.status_title}>
-				</td>
-			</tr>
-			<tr><td>姓名：<{$item.contact}></td></tr>
-            <tr>
-				<td>
-				电话：<{if $group.priv.show_yuyue_mobile>0}><{$item.mobile}><{else}><b class="pointcl"><{$item.mobile|cutstr:6}></b><{/if}>
-				</td>
-			</tr>
-			<tr><td>预约时间：<{$item.dateline|format}></td></tr>
-		</table>
+		
+				<h3>优惠信息：<{$youhui_list[$item.youhui_id].title|default:"--"}></h3>
+				<div class="yuyue_box_in">
+				<p>状态：<{$item.status_title}></p>
+				<p>姓名：<{$item.contact}></p>
+				<p>电话：<{if $group.priv.show_yuyue_mobile>0}><{$item.mobile}><{else}><b class="pointcl"><{$item.mobile|cutstr:6}></b><{/if}></p>
+				<p>预约时间：<{$item.dateline|format}></p>
+				</div>
 	</div>
     <{/foreach}>
 </div>

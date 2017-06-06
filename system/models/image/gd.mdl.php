@@ -3,7 +3,7 @@
  * Copy Right IJH.CC
  * Each engineer has a duty to keep the code elegant
  * Author @shzhrui<Anhuike@gmail.com>
- * $Id: gd.mdl.php 9378 2015-03-27 02:07:36Z youyi $
+ * $Id: gd.mdl.php 6058 2014-08-09 09:42:33Z youyi $
  */
 
 class Mdl_Image_Gd

@@ -2,7 +2,7 @@
 /**
  * Copy Right IJH.CC
  * Each engineer has a duty to keep the code elegant
- * $Id: company.ctl.php 10519 2015-05-27 12:48:27Z xiaorui $
+ * $Id: company.ctl.php 3419 2014-02-21 09:42:53Z youyi $
  */
 if (!defined('__CORE_DIR')) {
     exit("Access Denied");
@@ -48,7 +48,9 @@ class Ctl_Company_Company extends Ctl
         }
         $uids = array();
         $filter['closed'] = 0;
-       
+        if(CITY_ID){
+            $filter['city_id'] = CITY_ID;
+        }
         if ($items = K::M('company/company')->items($filter, null, $page, $limit, $count)) {
             foreach($items as $k=>$v){
                 $uids[] = $v['uid'];
@@ -77,7 +79,9 @@ class Ctl_Company_Company extends Ctl
         $uids = array();
         $filter['closed'] = 0;
         $filter['audit'] = 0;
-        
+        if(CITY_ID){
+            $filter['city_id'] = CITY_ID;
+        }
         if ($items = K::M('company/company')->items($filter, null, $page, $limit, $count)) {
             foreach($items as $k=>$v){
                 $uids[] = $v['uid'];
@@ -124,7 +128,9 @@ class Ctl_Company_Company extends Ctl
             if (is_numeric($SO['audit'])) {$filter['audit'] = $SO['audit'];}
         }
         $filter['closed'] = 0;
-       
+        if(CITY_ID){
+            $filter['city_id'] = CITY_ID;
+        }
         if($items = K::M('company/company')->items($filter, null, $page, $limit, $count)){
             $pager['count'] = $count;
             $pager['pagebar'] = $this->mkpage($count, $limit, $page, $this->mklink(null, array('{page}')), array('SO'=>$SO, 'multi'=>$multi));
@@ -161,16 +167,20 @@ class Ctl_Company_Company extends Ctl
                             if ($a = $upload->upload($attach, 'company')) {
                                 $data[$k] = $a['photo'];
                                 if ($k === 'logo') {
-                                    $size['photo'] = $cfg['company']['logo'] ? $cfg['company']['logo'] : '200X100';
-                                } else {
-                                    $size['photo'] = $cfg['company']['thumb'] ? $cfg['company']['thumb'] : '300X300';
-                                }
+                                    $size['photo'] = $cfg['companydecorate1'] ? $cfg['companydecorate1'] : '200X100';
+                                } else if($k === 'thumb') {
+                                    $size['photo'] = $cfg['companydecorate2'] ? $cfg['companydecorate2'] : '300X300';
+                                }else{
+									$size['photo'] = '1000X200';
+								}
                                 $oImg->thumbs($a['file'], array($size['photo'] => $a['file']), false);
                             }
                         }
                     }
                 }
-               
+                if(CITY_ID){
+                    $data['city_id'] = CITY_ID;
+                }
                 $data['lat'] = trim($data['lat']);
                 if ($company_id = K::M('company/company')->create($data)) {
                     if($data['uid'] && isset($data['group_id'])){
@@ -219,24 +229,26 @@ class Ctl_Company_Company extends Ctl
                             if ($a = $upload->upload($attach, 'company')) {
                                 $data[$k] = $a['photo'];
                                 if ($k === 'logo') {
-                                    $size['photo'] = $cfg['company']['logo'] ? $cfg['company']['logo'] : '200X100';
-                                } else {
-                                    $size['photo'] = $cfg['company']['thumb'] ? $cfg['company']['thumb'] : '300X300';
-                                }
+                                    $size['photo'] = $cfg['companydecorate1'] ? $cfg['companydecorate1'] : '200X100';
+                                } else if($k === 'thumb') {
+                                    $size['photo'] = $cfg['companydecorate2'] ? $cfg['companydecorate2'] : '300X300';
+                                }else{
+									$size['photo'] = '1000X200';
+								}
                                 $oImg->thumbs($a['file'], array($size['photo'] => $a['file']));
                             }
                         }
                     }                
                 }
+
                 unset($data['city_id'],$data['company_id']);
                 if (K::M('company/company')->update($company_id, $data)) {
                     if($data['uid'] && isset($data['group_id'])){
                         K::M('member/member')->update($data['uid'], array('group_id'=>(int)$data['group_id']), true);
                     }
-                    if(!$attr =  $this->GP('attr')){
-                        $attr = array();
+                    if($attr =  $this->GP('attr')){
+                        K::M('company/attr')->update($company_id,$attr);       
                     }
-                    K::M('company/attr')->update($company_id, $attr);  
                     if($fields = $this->GP('fields')){                     
                          K::M('company/fields')->update($company_id,$fields);     
                     }
@@ -307,7 +319,9 @@ class Ctl_Company_Company extends Ctl
             if($items = K::M('company/company')->items_by_ids($ids)){
                 $aids  = array();
                 foreach($items as $v){
-                   
+                    if(CITY_ID && CITY_ID != $v['city_id']){
+                        continue;
+                    }
                     $aids[$v['company_id']] = $v['company_id'];
                 }
                 if($aids && K::M('company/company')->delete($aids)){

@@ -3,7 +3,7 @@
  * Copy Right IJH.CC
  * Each engineer has a duty to keep the code elegant
  * Author @shzhrui<Anhuike@gmail.com>
- * $Id: adv.mdl.php 14902 2015-08-12 10:17:00Z xiaorui $
+ * $Id: adv.mdl.php 6177 2014-08-28 02:57:24Z youyi $
  */
 
 if(!defined('__CORE_DIR')){
@@ -68,17 +68,16 @@ class Mdl_Adv_Adv extends Mdl_Table
         if($adv_id = intval($params['adv_id'])){
             if(!$detail = $this->detail($adv_id)){
                 return false;
-            }
-            $adv = $detail;
+            }            
         }else if($params['name']){
-            if(!$adv = $this->adv_by_name($params['name'])){
+            if(!$detail = $this->adv_by_name($params['name'])){
                 return false;
-            }else if(!$detail = $this->detail($adv['adv_id'])){
-                return false;
-            }           
+            }
+            $detail['items'] = K::M('adv/item')->items_by_adv($detail['adv_id']);
         }else{
             return false;
         }
+        $adv = $detail;
         $adv['GUID'] = K::GUID('adv');
         $nums = intval($params['limit']);
         $order = strtolower($params['order']);
@@ -124,23 +123,44 @@ class Mdl_Adv_Adv extends Mdl_Table
             if($nums > 0){
                 $item_list = array_slice($item_list,0,$nums);
             }
-            if(empty($tmpl)){
+			$cfg = K::$system->config->get('attach');
+			$site = K::$system->config->get('site');
+            if($adv['from'] == 'script'){
+                $content = '';
+                foreach($item_list as $item){
+                    $content .= $item['script'];
+                }
+            }else if(empty($tmpl)){				
                 $tmpl = $adv['tmpl'];
-                $tmpl = str_replace(array('[loop]', '[/loop]'), array('<{foreach $items as $item}>', '<{/foreach}>'), $tmpl);
-                $data = $smarty->tpl_vars;
-                $smarty->assign('adv', $adv);
-                $smarty->assign('items', $item_list);
-                $content = $smarty->fetch("string:{$tmpl}");
-                $smarty->tpl_vars = $data;
+				$content .= str_replace('<{$adv.GUID}>',$adv['GUID'],substr($tmpl,0,strpos($tmpl,'[loop]')));
+				if(defined('IN_MOBILE')){
+					preg_match('/\[loop\][\s]*((<li>)?[\s\S]+(<\/li>)?)[\s]*\[\/loop\]/i',$tmpl,$match);
+					preg_match('/\[loop\]([\<\>\/a-z]+)\[\/loop\]/i',$tmpl,$match2);
+				}else{
+					preg_match('/\[loop\][\s]*([\s\S]+)[\s]*\[\/loop\]/i',$tmpl,$match);
+				}
+				foreach($item_list as $k => $item){
+					$content .= str_replace(array('<{$item.a_attr}>','<{$pager.img}>','<{$item.clickurl}>','<{$item.link}>','<{$item.title}>','<{$item.thumb}>','<{$item.item_attr}>'), array('target='."'".$item['target']."'",$cfg['url'],$item['link'],$item['link'],$item['title'], $item['thumb'], $item['item_attr']), $match[1]);
+				}
+				if($match2){
+					$content .=substr($tmpl,strpos($tmpl,'[/loop]')+7,strrpos($tmpl,'[loop]')-strpos($tmpl,'[/loop]')-7);
+					foreach($item_list as $k => $item){
+						$content .=  $match2[1];
+					}
+					$content .=substr($tmpl,strrpos($tmpl,'[/loop]')+7);
+				}else{					
+					$content .= substr($tmpl,strpos($tmpl,'[/loop]')+7);
+				}
+				//echo $content;echo "File:", __FILE__, ',Line:',__LINE__;exit;
             }else{
                 $smarty->assign('adv', $adv);
                 $content = '';
                 foreach($item_list as $item){
                     $smarty->assign('item', $item);
                     $content .= $smarty->fetch("string:{$tmpl}");
-                }                
-            }
-            return $content;
+                }
+            }			
+            return $content; // $content;
         }
         return false;
     }    

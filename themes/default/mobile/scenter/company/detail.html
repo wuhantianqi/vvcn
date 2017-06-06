@@ -1,0 +1,161 @@
+<{assign var="tpl_page_title" value="装修保详情"}>
+<{include file="mobile/block/header.html"}>
+<header class="control">
+	<i class="left"><a href="<{if $pager.backurl}><{$pager.backurl}><{else}><{link ctl='mobile/index'}><{/if}>" id="gobackIco"></a></i>
+    <div class="title"><{$status[$item.status]}></div>
+    <i class="right"></i>
+</header>
+
+
+<section id="" class="page_center_box">
+		<div class="loginInfor mb10">
+			<div class="loginIf_list loginIf_list_ct">
+				<div class="fl ctIco"><i class="icco icco1"></i> </div>
+				<div class="ifInput">
+                <{if $step.yezhu_status == 1}>用户<i class="ctenIco"></i><{else}>用户<i class="ctenIco gray_ctenIco"></i><{/if}>
+                </div>
+				<div class="clear"></div>
+			</div>
+			<div class="loginIf_list loginIf_list_ct">
+				<div class="fl ctIco"><i class="icco icco4"></i> </div>
+				<div class="ifInput">
+                	 <{if $step.company_status == 1}>公司<i class="ctenIco"></i><{else}>公司<i class="ctenIco gray_ctenIco"></i><{/if}>
+                </div>
+				<div class="clear"></div>
+			</div>
+			<div class="loginIf_list loginIf_list_ct">
+				<div class="fl ctIco"><i class="icco icco10"></i> </div>
+				<div class="ifInput">
+                	 <{if $step.status == 1}>平台<i class="ctenIco"></i><{else}>平台<i class="ctenIco gray_ctenIco"></i><{/if}>
+                </div>
+				<div class="clear"></div>
+			</div>
+			<div class="loginIf_list">
+				<div class="fl ctIco"></div>
+				<div class="ifInput">
+                	<{if $step.company_status == 0 }>
+                            请尽快上传<{$status[$item.status+1]}>的完工证明
+                            <{elseif $step.company_status == 1 && $step.yezhu_status == 0 && $step.status == 0}>
+                            	请等待用户确认
+                            <{elseif $step.company_status == 1 && $step.yezhu_status == 1 && $step.status == 0}>
+                            	请等待平台确认
+                            <{else}>
+                                <{if $item.status < '7' && $item.status > '1'}>
+                                <a href="<{link ctl='mobile/scenter/company:zxb_detail' arg0=$item.zxb_id arg1=$item.status+1}>"><{$status[$item.status+1]}></a>
+                                <{else}>
+                                交易已结束
+                                <{/if}>
+                            <{/if}>
+                 
+                </div>
+				<div class="clear"></div>
+			</div>
+		</div>
+		<div class="mb10 ten_detail">
+        
+        <form action="<{link ctl='mobile/scenter/company:zxb_detail' arg0=$item.zxb_id arg1=$item.status+1}>"  mini-form="zxb" method="post"  onsubmit="return check()" ENCTYPE="multipart/form-data">
+    <input type="hidden" name="step_id" value="<{$step.step_id}>" >
+    
+		<table cellpadding="0" cellspacing="0">
+        	<{if $step.yezhu_status == 0 && $step.company_id}>
+            	<tr>
+                    <th>
+                    图片上传
+                    </th>
+                    <td>
+                     <label class="pubInt_file">图片上传<input id='photo1' type="file" name="files[]"  value="" multiple /><span class="black9 ml10" id='pval'></span></label>
+                    </td>
+                </tr>
+                <tr>
+                    <th>
+                    完工描述
+                    </th>
+                    <td>
+                     <textarea name="data[company_content]"><{$step.company_content}></textarea>
+                    </td>
+                </tr>
+                 
+                </table>
+                </div>		
+                <div class="yuee_btn"> <input class="btn"  type="submit" value="修改提交" /></div>
+       	<{elseif $step.yezhu_status == 0 && !$step.company_id}>
+         	<tr>
+                    <th>
+                    图片上传
+                    </th>
+                    <td>
+                     <label class="pubInt_file">图片上传<input id='photo1' type="file"  name="files[]"  value="" multiple /><span class="black9 ml10" id='pval'></span></label>
+                    </td>
+                </tr>
+                <tr>
+                    <th>
+                    完工描述
+                    </th>
+                    <td>
+                     <textarea name="data[company_content]"><{$step.company_content}></textarea>
+                    </td>
+                </tr>
+                 
+                </table>
+                </div>		
+                <div class="yuee_btn"> <input class="btn"  type="submit" value="确认提交" /></div>
+        <{else}>
+        	<div class="add_moren"> 
+                    
+                    <div class="add_jia">
+                      
+                        <p>业主打款证据： <{if $step.yezhu_photo}><img src="<{$pager.img}>/<{$step.yezhu_photo}>" photo="<{$pager.img}>/<{$step.yezhu_photo}>"/><{/if}></p>
+                        <p>业主描述内容： <{$step.yezhu_content}></p>
+                        <p>公司描述：<{$step.company_content}><br/>
+                        
+                  		<{foreach $photo as $v}>
+                            <img src="<{$pager.img}>/<{$v.photo}>"><br>
+                        <{/foreach}></p>
+                        <p>平台审核内容： <{$step.content}></p>
+                       
+                    </div>
+                  
+            </div>
+           
+          <{/if}>
+	</form>
+</section>
+
+
+<script>
+	$("#photo1").change(function () {
+          //$('#pval').html($('#photo1').val());
+     });
+	jQuery(window).load(function () {
+			var width = document.body.clientWidth;
+            jQuery("img").each(function () {
+                DrawImage(this,width,1000);
+            });
+        });
+        function DrawImage(ImgD, FitWidth, FitHeight) {
+            var image = new Image();
+            image.src = ImgD.src;
+            if (image.width > 0 && image.height > 0) {
+                if (image.width / image.height >= FitWidth / FitHeight) {
+                    if (image.width > FitWidth) {
+                        ImgD.width = FitWidth;
+                        ImgD.height = (image.height * FitWidth) / image.width;
+                    } else {
+                        ImgD.width = image.width;
+                        ImgD.height = image.height;
+                    }
+                } else {
+                    if (image.height > FitHeight) {
+                        ImgD.height = FitHeight;
+                        ImgD.width = (image.width * FitHeight) / image.height;
+                    } else {
+                        ImgD.width = image.width;
+                        ImgD.height = image.height;
+                    }
+                }
+            }
+        }
+</script>
+</body>
+</html>
+

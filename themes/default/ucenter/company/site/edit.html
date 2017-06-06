@@ -19,7 +19,7 @@
         <td>
             <input type="hidden" name="data[home_id]" id="select_home_id" value="<{$detail.home_id}>"/>
             <input type="text" name="data[home_name]" id="select_home_name" value="<{$detail.home_name}>" class="input"/>
-            <a class="pbtn" action="<{link ctl='ucenter/misc/select:home'}>" mini-select="#select_home_id,#select_home_name/N/<{$company.city_id}>/选择小区"/>选择小区</a><br />
+            <a class="pbtn" action="<{link ctl='ucenter/misc/select:home' arg0=$pager.city_id}>" mini-select="#select_home_id,#select_home_name/N/<{$company.city_id}>/选择小区"/>选择小区</a><br />
         </td>
     </tr>
     <tr><th>案例：</th>

@@ -1,16 +1,17 @@
 <{assign var="tpl_page_title" value="优惠信息列表"}>
 <{include file="mobile/block/header.html"}>
-<div class="mb10"></div>
-<ul class="app_menu youhui_menu">
-<{foreach from=$items item=item}>
-    <li>
-        <a href="<{link ctl='mobile/youhui:detail' arg0=$item.youhui_id}>"><img src="<{$pager.img}>/<{$item.photo}>" class="lt pic"  />
-        <h2><{$item.title|cutstr:25}></h2>           
+<section id="" class="page_center_box mt10">
+<ul class="decorator_list_box">
+	<{foreach from=$items item=item}>
+	<li class="decorator_list"> <a href="<{link ctl='mobile/youhui:detail' arg0=$item.youhui_id}>">
+		<div class="fl img"><img src="<{$pager.img}>/<{$item.photo}>" /></div>
+		<div class="wz">
+			<p class="black3"><{$item.title}></p>
             <p class="nowrap"><{if $item.ltime>time() && $item.stime<time()}><font class="app_ico time_ico"></font><{else}><font class="app_ico time_over_ico"></font><{/if}><span remaintime="<{$item.ltime}>"></span></p>
-            <div class="cl"></div>
-         </a>
-    </li>
-<{/foreach}>	
+		</div>
+		<div class="clear"></div>
+		</a> </li>
+	<{/foreach}>
 </ul>
 <div class="page"><{$pager.pagebar}></div>
 

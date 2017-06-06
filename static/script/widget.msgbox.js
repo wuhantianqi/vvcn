@@ -78,7 +78,7 @@ MsgBox.error=function(msg,options,callback){
 MsgBox.notice=function(msg,options,callback){
 	return new MessageBox(msg||"操作成功!",'notice',options,callback);   
 };
-MsgBox.load=function(msg,options,callback){
+MsgBox.load=function(msg,options, callback){
 	options = $.extend({delay:120,callback:function(){MsgBox.error("很抱歉,操作失败!!");}},options||{});
 	return new MessageBox(msg||"数据处理中..",'load',options,callback);   
 };

@@ -33,17 +33,18 @@
 	<form id="items-form">
     <table width="100%" border="0" cellspacing="0" class="table-data table">
     <tr>
-		<th class="w-100">ID</th><th>标题</th>
+		<th class="w-100">ID</th><th>标题</th><{if $pager.from == 'about' || $pager.from == 'article'}><th class="w-50">城市</th><{/if}>
 		<th class="w-200">分类</th><{if $pager.from != 'article'}><th class="w-100">页面名称</th><{/if}>
-		<th class="w-50">隐藏</th><th class="w-50">状态</th><th class="w-100">添加时间</th><th class="w-150">操作</th>
+		<th class="w-50">隐藏</th><th class="w-50">状态</th><th class="w-50">排序</th><th class="w-100">添加时间</th><th class="w-150">操作</th>
 	</tr>
     <{foreach $items as $item}>
     <tr>
 		<td class="left"><label><input type="checkbox" value="<{$item.article_id}>" name="article_id[]" CK="PRI"/><{$item.article_id}><label></td>
-		<td class="left"><{$item.title}></td>
+		<td class="left"><{$item.title}></td><{if $pager.from == 'about'}><td><{$city_list[$item.city_id].city_name}></td><{elseif $pager.from == 'article'}><td><{$city_list[$item.city_id].city_name|default:'总站'}></td><{/if}>
 		<td><{$item.cat_title}></td><{if $pager.from != 'article'}><td><{$item.page}></td><{/if}>
 		<td><{if $item.hidden}><span class="red">隐藏</span><{else}>显示<{/if}></td>
-		<td><{if $item.audit}><b class="blue">已发布</b><{else}><b class="red">待审箱</b><{/if}></td><td><{$item.dateline|format}></td>
+		<td><{if $item.audit}><b class="blue">已发布</b><{else}><b class="red">待审箱</b><{/if}></td>
+		<td><{$item.orderby}></td><td><{$item.dateline|format}></td>
 		<td>
 			<{if $item.from == 'about'}>
 			<{link ctl="article/about:edit" args=$item.article_id title="修改" class="button"}>

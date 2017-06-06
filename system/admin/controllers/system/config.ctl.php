@@ -3,7 +3,7 @@
  * Copy Right IJH.CC
  * Each engineer has a duty to keep the code elegant
  * Author @shzhrui<Anhuike@gmail.com>
- * $Id: config.ctl.php 9378 2015-03-27 02:07:36Z youyi $
+ * $Id: config.ctl.php 4351 2014-04-01 03:29:16Z youyi $
  */
 
 class Ctl_System_Config extends Ctl

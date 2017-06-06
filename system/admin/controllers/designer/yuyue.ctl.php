@@ -2,7 +2,7 @@
 /**
  * Copy Right IJH.CC
  * Each engineer has a duty to keep the code elegant
- * $Id: yuyue.ctl.php 9378 2015-03-27 02:07:36Z youyi $
+ * $Id: yuyue.ctl.php 5702 2014-06-27 10:55:04Z youyi $
  */
 
 if(!defined('__CORE_DIR')){
@@ -25,7 +25,9 @@ class Ctl_Designer_Yuyue extends Ctl
             if($SO['contact']){$filter['contact'] = "LIKE:%".$SO['contact']."%";}
             if(is_numeric($SO['status'])){$filter['status'] = $SO['status'];}
         }
-        
+        if(CITY_ID){
+            $filter['city_id'] = CITY_ID;
+        }
         if($items = K::M('designer/yuyue')->items($filter, null, $page, $limit, $count)){
             foreach($items as $k=>$v){
 				if(!empty($v['uid'])){
@@ -149,7 +151,9 @@ class Ctl_Designer_Yuyue extends Ctl
             if($items = K::M('designer/yuyue')->items_by_ids($ids)){
                 $aids = $designer_ids = array();
                 foreach($items as $v){
-                    
+                    if(CITY_ID && CITY_ID != $v['city_id']){
+                        continue;
+                    }
                     $aids[$v['yuyue_id']] = $aids['yuyue_id'];
                     $designer_ids[$v['designer_id']] = $v['designer_id'];
                 }

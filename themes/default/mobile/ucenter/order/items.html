@@ -1,44 +1,84 @@
 <{assign var="tpl_page_title" value="订单列表"}>
 <{include file="mobile/block/header.html"}>
-<div class="pding">
-<{foreach $items as $order}>
- <div class="yuyue_box zbiao_manage">
- <table cellpadding="0" cellspacing="0">
-  	<tr>
-        <td width="40%">卖家：<{$shop_list[$order.shop_id].name|default:'--'}></td>
-        <td width="60%"><a href="<{link ctl='mobile/ucenter/order:detail' arg0=$order.order_no}>"><u class="fontcl2">订单详情</u></a></td>
-    </tr>
-<{foreach $product_list as $product}>
-    <{if $product.order_id == $order.order_id}>
-            <tr>
-                <td rowspan="2"><img src="<{$pager.img}>/<{$product.photo}>.jpg" photo="<{$pager.img}>/<{$product.photo}>.jpg"></td>
-            </tr>
-            <tr>
-                <td><{$product.product_name}><{if $product.spec_id}><br/>规格：<{$product.spec_name}><{/if}><br/>￥<{$product.product_price}> x <{$product.number}></td>
-            </tr>
-    <{/if}>
-    <{/foreach}>
-    <tr>
-    	<td rowspan="<{$order.product_number}>" class="order-status w-150">
-            <{if $order.order_status == 2}><b class="gray">订单完成</b>
-            <{elseif $order.order_status == 1}><a href="<{link ctl='mobile/ucenter/order:update' arg0='ship' arg1=$order.order_no}>" mini-act="确认收货" mini-confirm="确定已经收到货后，再确认收货" class="btn mainbtn">确认收货</a>
-            <{elseif $order.order_status < 0}><b class="gray">订单已经取消</b>
-            <{elseif empty($order.pay_status)}><a href="<{link ctl='mobile/ucenter/order:update' arg0='cancel' arg1=$order.order_no}>" mini-act="取消订单" mini-confirm="您确定要取消该订单" class="btn mainbtn">取消订单</span>
-            <{else}><b class="gray">等待卖家发货</b>
-            <{/if}>
-        </td>
-         <td>
-        ￥<{$order.amount }><span class="gray">(<{if $order.freight>0}>运费：￥<{$order.freight}><{else}>包邮<{/if}>)</span><br/>
-         <{if $order.order_status < 2 && $order.order_status >=0}>
-            <{if $order.pay_status}><b><a>已经支付</a></b><{else}><a href="<{link ctl='mobile/ucenter/order:payment' arg0=$order.order_no}>" class="btn mainbtn">立即支付</a><{/if}>
-         <{/if}>
-        </td>
-    
-    </tr>
-     </table>
-      </div>
-   <{foreachelse}>
-   <div class="no_record">暂无记录信息</div>
-    <{/foreach}>
+<header class="control">
+	<i class="left"><a href="<{if $pager.backurl}><{$pager.backurl}><{else}><{link ctl='mobile/index'}><{/if}>" id="gobackIco"></a></i>
+    <div class="title">订单列表</div>
+    <i class="right"></i>
+</header>
+
+<div id="htSearch-bar">
+	<ul>
+    	<li class="list <{if !$pager.type}>on<{/if}>"><a href="<{link ctl='mobile/ucenter/order:index'}>"><i>全部</i></a></li>
+    	<li class="list <{if $pager.type=='unpay'}>on<{/if}>"><a href="<{link ctl='mobile/ucenter/order:index' arg0='unpay'}>"><i>未付款</i></a></li>
+        <li class="list <{if $pager.type=='payed'}>on<{/if}>"><a href="<{link ctl='mobile/ucenter/order:index' arg0='payed'}>"><i>已付款</i></a></li>
+        <li class="list <{if $pager.type=='ship'}>on<{/if}>"><a href="<{link ctl='mobile/ucenter/order:index' arg0='ship'}>"><i>已发货</i></a></li>
+        <li class="list <{if $pager.type=='finish'}>on<{/if}>"><a href="<{link ctl='mobile/ucenter/order:index' arg0='finish'}>"><i>已完成</i></a></li>
+    </ul>
 </div>
-<{include file="mobile/block/footer.html"}>
+
+<section id="" class="page_center_box">
+	<ul class="mineOrder_box mt10">
+    	<{foreach $items as $order}>
+    
+            <li class="mineOrder_list">
+                <div class="title">
+                    <p class="fl"><i></i>卖家：<{$shop_list[$order.shop_id].name|default:'--'}></p>
+                    <a href="<{link ctl='mobile/ucenter/order:detail' arg0=$order.order_no}>" class="fr xiangqing">订单详情</a>
+                </div>
+                <div class="nr">
+                	<ul>
+                       <{foreach $product_list as $product}>
+                           <{if $product.order_id == $order.order_id}>
+                    	<li class="list">
+                      
+                        	<img src="<{$pager.img}>/<{$product.photo}>.jpg" photo="<{$pager.img}>/<{$product.photo}>.jpg">
+                            <div class="wz">
+                             
+                                    <p class="bt"><{$product.product_name}></p>
+                                    <p class="black9">单价：￥<{$product.product_price}>&nbsp;&nbsp;&nbsp;&nbsp;数量：<{$product.number}>件</p>
+                                    <{if $product.spec_id}> <p class="black9">规格：<{$product.spec_name}></p><{/if}>
+                                
+                            </div>
+                           
+                            <div class="clear"></div>
+                        </li>
+                         <{/if}>
+                       <{/foreach}>
+                    </ul>
+                    <div class="wz wz_pub">
+                    	<p class="black3">总价：<span class="price pointcl">￥<{$order.amount}></span><em>（<{if $order.freight>0}>运费：￥<{$order.freight}><{else}>包邮<{/if}>）</em></p>
+                    	<p class="black9">收货地址：<{$order.addr}></p>
+                        <div class="state_box">
+                        
+                            <{if $order.order_status == 2}>
+                            订单完成
+                             <{elseif $order.order_status == 1}>
+                             <a href="<{link ctl='mobile/ucenter/order:update' arg0='ship' arg1=$order.order_no}>" mini-act="确认收货" mini-confirm="确定已经收到货后，再确认收货" class="state bg_3">确认收货</a>
+                            <{elseif $order.order_status < 0}>
+                            订单已经取消 
+                            <{elseif empty($order.pay_status)}>
+                            <a href="<{link ctl='mobile/ucenter/order:update' arg0='cancel' arg1=$order.order_no}>" mini-act="取消订单" mini-confirm="您确定要取消该订单" class="state bg_2">取消订单</a>
+                            <{else}>
+                            等待卖家发货
+                            <{/if}>
+              
+                            <{if $order.order_status < 2 && $order.order_status >=0}>
+                                <{if $order.pay_status}>
+                                已经支付
+                                <{else}>
+                                <a href="<{link ctl='mobile/trade/order:payment' arg0=$order.order_no}>" class="state bg_1 ml10">立即支付</a>
+                                <{/if}>
+                            <{/if}>
+                        </div>
+                    </div>
+                </div>
+            </li>
+        <{foreachelse}>
+            <div class="loginInfor_tishi">暂无记录信息</div>
+        <{/foreach}>
+        
+    </ul>
+</section>
+
+</body>
+</html>

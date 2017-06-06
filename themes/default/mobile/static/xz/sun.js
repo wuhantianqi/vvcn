@@ -504,7 +504,7 @@ var ScrollFix = function(elem) {
 $(document).ready(function() {
 	if (!window.navigator.standalone) {
 		if (navigator.userAgent.match(/like Mac OS X/i)) {
-			$('head').append('<link rel="apple-touch-icon-precomposed" href="resources/icon_pastel.png" />');
+			$('head').append('<link rel="apple-touch-icon-precomposed" href="/themes/default/mobile/static/images/apple114.png" />');
 			$('body').addClass('install').html('<div id="install"><div id="homescreen"><h2 id="add">添加到您的 <strong>手机主屏幕</strong></h2></div></div>');
 		} else {
 			$('.overlay').click(function() {
@@ -564,7 +564,7 @@ $(document).ready(function() {
 			
 			// #Application start
 			// _Take-off_
-			$('.slide').append('<div class="loading" /><script>window.location.href="http://m.51wn.cn"</script>');
+			$('.slide').append('<div class="loading" /><script>window.location.href="'+window.URL.mobile+'"</script>');
 			
 			// #First Time
 			// _If a user visits for the first time — fill in local storage values_
@@ -932,59 +932,7 @@ $(document).ready(function() {
 				}
 				
 			});
-			
-			// #Weather fetching
-			// _Google and Yahoo! in wonderful cooperation. Beautiful_ //
-			if (navigator.geolocation) {  
-				navigator.geolocation.getCurrentPosition(
-					function(position) {  
-						var lat = position.coords.latitude;
-						var lon = position.coords.longitude;
-						//lat = '34.04697';
-						//lon = '-118.238983';
-						$.ajax({
-							//url: 'http://where.yahooapis.com/geocode?location=' + lat + '+' + lon +'&gflags=R&flags=J&appid=gg96E56o',
-							url: 'http://51wn.cn/geocode?location=' + lat + '+' + lon +'&gflags=R&flags=J&appid=gg96E56o',
-							dataType: 'json',
-							success: function(data) {
-						  		city = data.ResultSet.Results[0].city.split('-')[0];
-						  		id = data.ResultSet.Results[0].woeid;
-						  		$.ajax({
-						  		  url: 'api2.php',
-						  		  dataType: 'json',
-						  		  type: 'post',
-						  		  data: { 
-						  		  			city: city + ',' + data.ResultSet.Results[0].country,
-						  		  			id: id,  
-						  		  			lat: lat,
-						  		  			lon: lon,
-						  		  			timezone: timezone
-						  		  		},
-						  		  success: function(data) {
-						  		  	$('.loading').remove();
-						  			weather(data, '0', city);
-						  			$('#small div.slide:eq(0)').html($('#layer .slide:eq(0)').html());
-						  		  }
-						  		});
-						  		
-							},
-							error: function(request, status, error) {
-								console.log('Error');
-							}
-						});
-						
-			  		}, 
-			  		function(error) {	  			
-			  			notification('An error occurred', 'Your location could not be determined.');
-			  			console.log(error);
-			  		},
-			  		{
-						enableHighAccuracy: true,
-						timeout: 10000,
-						maximumAge: 0
-			  		}
-			  	);
-			}
+
 			$.each(cities, function(index) {
 				var i = index + 1;
 				$('#settings .cities').append('<li><span></span><input value="'+cities[index][0]+'" autocorrect="off" />');

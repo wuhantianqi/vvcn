@@ -2,7 +2,7 @@
 /**
  * Copy Right IJH.CC
  * Each engineer has a duty to keep the code elegant
- * $Id: cart.mdl.php 9378 2015-03-27 02:07:36Z youyi $
+ * $Id: cart.mdl.php 5608 2014-06-23 11:36:07Z youyi $
  */
 
 if(!defined('__CORE_DIR')){
@@ -43,7 +43,7 @@ class Mdl_Trade_Cart extends Model
         $cart_num = (int)$this->cart[$key];
         $quantity += $cart_num;
         $spid = (int)$spid;
-		
+        $product = K::M('product/product')->detail($pid);
         if($spid && $spec = K::M('product/spec')->detail($spid)){
             if($spec['product_id'] != $pid){
                 $this->err->add('非法的数据提交', 312);
@@ -52,11 +52,15 @@ class Mdl_Trade_Cart extends Model
                 $this->err->add('该商品库存不足', 313);
                 return false;
             }
-        }else if(!$product = K::M('product/product')->detail($pid)){
+			if($product['sale_type'] == '1' && $product['sale_sku']-$product['sale_count']< $quantity){
+				$this->err->add('该商品库存不足', 313);
+                return false;
+			}
+        }else if(!$product){
             $this->err->add('非法的数据提交', 314);
             return false;
         }
-        if(empty($spec) && $spec['sale_sku'] < $spec['sale_count']){
+        if(empty($spec) && $spec['sale_sku'] < $spec['sale_count']){echo "File:", __FILE__, ',Line:',__LINE__;exit;
             $this->err->add('该商品库存不足', 313);
             return false;
         }

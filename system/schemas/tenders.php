@@ -2,7 +2,7 @@
 /**
  * Copy Right IJH.CC
  * Each engineer has a duty to keep the code elegant
- * $Id: tenders.php 10009 2015-05-04 13:49:04Z maoge $
+ * $Id$
  */
 
 if(!defined('__CORE_DIR')){
@@ -41,6 +41,22 @@ return array (
     'comment' => '',
     'default' => 'TZX',
     'SO' => '=',
+  ),
+   'allow_looks' => 
+  array (
+    'field' => 'allow_looks',
+    'label' => '允许投标',
+    'pk' => false,
+    'add' => true,
+    'edit' => true,
+    'html' => false,
+    'empty' => true,
+    'show' => true,
+    'list' => true,
+    'type' => 'text',
+    'comment' => '',
+    'default' => '',
+    'SO' => '',
   ),
   'city_id' => 
   array (
@@ -138,6 +154,38 @@ return array (
     'default' => '',
     'SO' => 'like',
   ),
+  'zxb_id' => 
+  array (
+    'field' => 'zxb_id',
+    'label' => '装修保ID',
+    'pk' => false,
+    'add' => true,
+    'edit' => true,
+    'html' => false,
+    'empty' => true,
+    'show' => true,
+    'list' => false,
+    'type' => 'int',
+    'comment' => '',
+    'default' => '',
+    'SO' => false,
+  ),
+  'fenxiaoid' => 
+  array (
+    'field' => 'fenxiaoid',
+    'label' => '分销ID',
+    'pk' => false,
+    'add' => true,
+    'edit' => true,
+    'html' => false,
+    'empty' => true,
+    'show' => true,
+    'list' => false,
+    'type' => 'int',
+    'comment' => '',
+    'default' => '',
+    'SO' => false,
+  ),
   'home_id' => 
   array (
     'field' => 'home_id',
@@ -217,22 +265,6 @@ return array (
     'comment' => '',
     'default' => '',
     'SO' => false,
-  ),
-  'allow_looks' => 
-  array (
-    'field' => 'allow_looks',
-    'label' => '允许投标',
-    'pk' => false,
-    'add' => true,
-    'edit' => true,
-    'html' => false,
-    'empty' => true,
-    'show' => true,
-    'list' => true,
-    'type' => 'text',
-    'comment' => '',
-    'default' => '',
-    'SO' => '',
   ),
   'budget_id' => 
   array (

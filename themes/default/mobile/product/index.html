@@ -1,0 +1,32 @@
+<{assign var="tpl_page_title" value="商城首页"}>
+<{include file="mobile/block/header.html"}>
+<section id="index" class="page_center_box">
+	<div class="banner ">
+		<div class="flexslider "> <{adv id="86" name="手机版商城首页轮播广告" city_id=$request.city_id}> </div>
+	</div>
+	<!--主要功能区开始-->
+	<ul class="function productIndex mb10">
+		<li><a href="<{link ctl='mobile/product:items'}>"><i class="ico_9"></i>
+			<p>商品列表</p>
+			</a></li>
+		<li><a href="<{link ctl='mobile/trade/cart:index'}>"><i class="ico_12"></i>
+			<p>购物车</p>
+			</a></li>
+	</ul>
+	<!--主要功能区结束--> 
+	<!--商城热卖商品内容开始-->
+	<div class="hotGoods">
+		<h1><span>热卖商品</span></h1>
+		<ul class="hotGoods_list">
+			<{KT id="35" name="商城商品列表右侧热卖商品" city_id=$request.city_id limit=4}>
+			<li> <a href="<{link ctl='mobile/product:detail' arg0=$item.product_id}>">
+				<div class="img"><img src="<{$pager.img}>/<{$item.thumb}>" width="100%" height="" /></div>
+				<p class="overflow_clear"><{$item.name}> </p>
+				<p class="price pointcl">¥<{$item.price}><del>￥<{$item.market_price}></del></p>
+				</a> </li>
+			<{/KT}>
+		</ul>
+	</div>
+	<!--商城热卖商品内容结束--> 
+<!--底部浮动招标开始--> 
+<{include file="mobile/block/footer.html"}> 

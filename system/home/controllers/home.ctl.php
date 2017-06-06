@@ -2,7 +2,7 @@
 /**
  * Copy Right IJH.CC
  * Each engineer has a duty to keep the code elegant
- * $Id: home.ctl.php 13890 2015-07-13 01:37:31Z maoge $
+ * $Id$
  */
 
 class Ctl_Home extends Ctl
@@ -90,7 +90,7 @@ class Ctl_Home extends Ctl
         if ($kw = $this->GP('kw')) {
             $pager['sokw'] = $kw = htmlspecialchars($kw);
             $params['kw'] = $kw;
-            $filter[':OR'] = array('title'=>"LIKE:%{$kw}%", 'name'=>"LIKE:%{$kw}%");  
+            $filter[':OR'] = array('title'=>'LIKE:%'.$kw.'%', 'name'=>'LIKE:%'.$kw.'%');
         }
         if($order == 1){
             $orderby = array('price'=>'DESC');
@@ -118,7 +118,7 @@ class Ctl_Home extends Ctl
         }
         if($page > 1){
             $seo['page'] = $page;
-        }    
+        }
         $this->seo->init('home_items', $seo);
         $this->tmpl = 'home/items.html';
     }
@@ -126,7 +126,7 @@ class Ctl_Home extends Ctl
     public function detail($home_id)
     {
         $home = $this->check_home($home_id);
-        K::M('home/home')->update_count($home_id, 'views', 1);  
+        K::M('home/home')->update_count($home_id, 'views', 1);   
         $this->tmpl = 'home/detail.html';
     }
 
@@ -142,7 +142,7 @@ class Ctl_Home extends Ctl
         if($items = K::M('case/case')->items($filter, NULL, $page, $limit, $count)){
             $pager['count'] = $count;
             $pager['pagebar'] = $this->mkpage($count, $limit, $page, $this->mklink('home:cases',array($home_id, '{page}')));
-			$uids = $company_ids = array();                
+			$company_ids = $uids = array();                
             foreach ($items as $val) {
                 $uids[$val['uid']] = $val['uid'];
                 if (!empty($val['company_id'])) {
@@ -153,22 +153,25 @@ class Ctl_Home extends Ctl
                 $this->pagedata['company_list'] = K::M('company/company')->items_by_ids($company_ids);
             }
 			if($member_list = K::M('member/member')->items_by_ids($uids)){
-                $designer_ids = array();
+                $designer_ids = $gz_ids = array();
                 foreach($member_list as $v){
                     if($v['from'] == 'designer'){
                         $designer_ids[$v['uid']] = $v['uid'];
                     }
-                } 
+                    if($v['from'] == 'gz'){
+                        $gz_ids[$v['uid']] = $v['uid'];
+                    }
+                }
                 if($designer_ids){
                     $this->pagedata['designer_list'] = K::M('designer/designer')->items_by_ids($designer_ids);
-                }         
+                }
+                if($gz_ids){
+                    $this->pagedata['gz_list'] = K::M('gz/gz')->items_by_ids($gz_ids);
+                }                
             }
-
-			$this->pagedata['items'] = $items;
         }
-		K::M('home/home')->update_count($home_id, 'views', 1); 
         $this->pagedata['pager'] = $pager;
-        
+        $this->pagedata['items'] = $items;
         $this->tmpl = 'home/cases.html';
     
     }
@@ -176,7 +179,6 @@ class Ctl_Home extends Ctl
     public function info($home_id)
     {
        $home = $this->check_home($home_id);
-	    K::M('home/home')->update_count($home_id, 'views', 1);
        $this->tmpl = 'home/info.html';
     }
 
@@ -192,11 +194,10 @@ class Ctl_Home extends Ctl
 		if($items = K::M('home/photo')->items($filter, NULL, $page, $limit, $count)){
             $pager['count'] = $count;
             $pager['pagebar'] = $this->mkpage($count, $limit, $page, $this->mklink('home:photo',array($home_id, $type, '{page}')));
-			$this->pagedata['items'] = $items;
         }
 		$this->pagedata['type'] = $type;
 		$this->pagedata['pager'] = $pager;
-		K::M('home/home')->update_count($home_id, 'views', 1);
+		$this->pagedata['items'] = $items;
 		$this->tmpl = 'home/photo.html';
         
     }
@@ -213,27 +214,39 @@ class Ctl_Home extends Ctl
 		if($items = K::M('home/site')->items($filter, NULL, $page, $limit, $count)){                
 			$pager['count'] = $count;
 			$pager['pagebar'] = $this->mkpage($count, $limit, $page, $this->mklink('home:site',array($home_id, '{page}')));
-            $uids = array();
+            $company_ids = $uids = array();
 			foreach ($items as $val) {
                 $uids[$val['uid']] = $val['uid'];
+				if (!empty($val['company_id'])) {
+					$company_ids[$val['company_id']] = $val['company_id'];
+				}
+			}
+			
+			if (!empty($company_ids)){
+				$this->pagedata['company_list'] = K::M('company/company')->items_by_ids($company_ids);
 			}
 			
             if($member_list = K::M('member/member')->items_by_ids($uids)){
-                $designer_ids  = array();
+                $designer_ids = $gz_ids = array();
                 foreach($member_list as $v){
                     if($v['from'] == 'designer'){
                         $designer_ids[$v['uid']] = $v['uid'];
                     }
+                    if($v['from'] == 'gz'){
+                        $gz_ids[$v['uid']] = $v['uid'];
+                    }
                 }
                 if($designer_ids){
                     $this->pagedata['designer_list'] = K::M('designer/designer')->items_by_ids($designer_ids);
-                }     
+                }
+                if($gz_ids){
+                    $this->pagedata['gz_list'] = K::M('gz/gz')->items_by_ids($gz_ids);
+                }                
             }
-			$this->pagedata['items'] = $items;
 		}
-		K::M('home/home')->update_count($home_id, 'views', 1);
 		$this->pagedata['status'] =K::M('home/site')->get_status();
 		$this->pagedata['pager'] = $pager;
+		$this->pagedata['items'] = $items;
 		$this->tmpl = 'home/site.html';
     }
 
@@ -246,9 +259,17 @@ class Ctl_Home extends Ctl
             $this->error(404);
         }else{
             $this->pagedata['case'] = $case;
-            if($case['uid']){
+            if($case['company_id']){          
+                $company = K::M('company/company')->detail($case['company_id']);
+				$company['group'] = K::M('member/group')->check_priv($company['group_id'],'allow_yuyue');
+				$this->pagedata['company'] = $company;
+            }else if($case['uid']){
                 if($member = K::M('member/member')->member($case['uid'])){
-                    if($member['from'] == 'designer'){
+                    if($member['from'] == 'gz'){
+                        $gz = K::M('gz/gz')->detail($case['uid']);
+						$gz['group'] = K::M('member/group')->check_priv($gz['group_id'],'allow_yuyue');
+						$this->pagedata['gz'] = $gz;
+                    }else if($member['from'] == 'designer'){
                         $designer = K::M('designer/designer')->detail($case['uid']);
 						$designer['group'] = K::M('member/group')->check_priv($designer['group_id'],'allow_yuyue');
 						$this->pagedata['designer'] = $designer;
@@ -263,7 +284,6 @@ class Ctl_Home extends Ctl
                 $pager['pagebar'] = $this->mkpage($count, $limit, $page, $this->mklink(null, array($home_id, $case_id, '{page}')));
                 $this->pagedata['items'] = $items;
             }
-			K::M('home/home')->update_count($home_id, 'views', 1);
             $this->tmpl = 'home/caseDetail.html';
         }
     }
@@ -421,6 +441,7 @@ class Ctl_Home extends Ctl
             $seo = array('title'=>$detail['title'], 'home_name'=>$home['name'], 'company_name'=>$company['name'], 'tuan_desc'=>'');
             $seo['tuan_desc'] = K::M('content/text')->substr(K::M('content/html')->text($detail['content'], true), 0, 200);
             $this->seo->init('home_tuan_detail', $seo);
+            $this->pagedata['mobile_url'] = $this->mklink('mobile/home:tuanDetail', array($tuan_id));
             $this->tmpl = 'home/tuanDetail.html';
         }
     }
@@ -457,8 +478,11 @@ class Ctl_Home extends Ctl
 					if ($sign_id = K::M('home/sign')->create($data)) {
 						K::M('home/tuan')->update_count($tuan_id,'sign_num', 1);
 						$home = K::M('home/home')->detail($detail['home_id']);
+						$company = K::M('company/company')->detail($detail['company_id']);
 						$smsdata = $maildata = array('contact'=>$data['contact'] ? $data['contact'] : '业主','mobile'=>$data['mobile'],'home_tuan'=>$home['name'],'tuan_name'=>$detail['title']);
 						K::M('sms/sms')->send($data['mobile'], 'home_tuan', $smsdata);
+						K::M('sms/sms')->company($company, 'home_tuan_company', $smsdata);
+						K::M('helper/mail')->sendcompany($company, 'home_tuan', $maildata);
 						$this->err->add('恭喜您报名成功');
 					}
 				}

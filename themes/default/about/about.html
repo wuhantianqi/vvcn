@@ -2,7 +2,7 @@
 <!--面包屑导航开始-->
 <div class="mb10 subwd sub_topnav">
 	<p><span class="ico_list breadna"></span>您的位置：<a href="<{link ctl='index'}>"><{$CONFIG.site.title}></a>
-		><a href="<{link ctl='about' arg0=$info.page}>"><{$info.title}></a>
+		&gt;<a href="<{link ctl='about' arg0=$info.page}>"><{$info.title}></a>
 	</p>
 </div>
 <!--面包屑导航结束-->
@@ -10,8 +10,8 @@
 	<!--主体左边内容开始-->
 	<div class="about_lt lt">
 		<ul>
-            <{foreach from=$items item=item}>
-            	<li><a <{if $item.page == $page}>class="current"<{/if}> href="<{link ctl='about' arg0=$item.page}>"><{$item.title}></a></li>
+            <{foreach $items as $item}>
+			<li><a <{if $item.page == $page}>class="current"<{/if}> href="<{$item.link}>"><{$item.title}></a></li>
             <{/foreach}>
 		</ul>
 	</div>

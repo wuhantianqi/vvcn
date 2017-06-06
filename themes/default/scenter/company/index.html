@@ -1,0 +1,169 @@
+<{include file="scenter/block/header.html"}>
+<div style="width:923px;padding:12px;margin:0 auto;">
+    <div class="index_rt_top">
+        <a href="#" class="lt"><img src="<{$pager.img}>/<{$company.thumb}>" width="120" height="120"/></a>
+        <div class="shop_top_lt lt">
+            <p class="title"><{$company.name}></p>
+            <p>公司名称：<a href="<{$company.company_url}>" target="_blank"><{$company.title}></a> 
+            </p>
+            <p>服务口号：<{$company.slogan}></a></p>
+            <p>公司地址：<{$company.city_name}> <{$company.area_name}> <{$company.addr}></p>
+        </div>
+        <div class="shop_top_rt lt">
+            <p>公司评分</p>
+            <p><span class="starswx"><em style="width:<{$company.avg_score*20}>%;"></em></span><span></span><span class="block_lt"><{$company.avg_score}>分</span></p>
+            <p>入住时间：<{$company.dateline|format:"Y-m-d"}></p>
+            <p>公司等级：<{$company.group_name}></p>
+        </div>
+		<div class="shop_top_rt_fresh rt">
+		<p class="refresh"><a href="<{link ctl='scenter/company:refresh' http='ajax'}>" mini-load="刷新排名"  mini-width="400">刷新排名</a><span>最新刷新时间为：<br /><{$company.flushtime|format}></span></p>
+		</div>
+    </div>
+	<div class="index_all"  id='container'>
+    
+    </div>
+    
+    <div class="index_all"  id='container2'>
+    
+    </div>
+    <div class="index_cont_lt lt">
+        <div class="index_c_lt">
+            <p class="title"><font class="index_c_lt_icon1 sel_index_c_lt_icon1"></font>公司统计</p>
+            <p class="txt">您需要关注的情况</p>
+            <p class="txt">
+                <a href="<{link ctl='scenter/company/yuyue:company'}>" class="green">业主预约(<{$company.yuyue_num}>)</a>
+                <a href="<{link ctl='scenter/company/youhui:sign'}>" class="green">活动报名(<{$youhui_sign_count}>)</a>
+                <a href="<{link ctl='scenter/company/comment:company'}>" class="green">评论数(<{$company.comments}>)</a>
+            </p>         
+            <p class="txt">
+                <a href="<{link ctl='scenter/company/case:index'}>">公司案例(<{$company.case_num}>)</a>               
+                <a href="<{link ctl='scenter/company/case:index'}>">在建工地(<{$company.site_num}>)</a>               
+                <a href="<{link ctl='scenter/company/youhui:index'}>">优惠活动(<{$company.youhui_num}>)</a>
+            </p>             
+        </div>
+    </div>
+    
+    
+    <div class="index_cont_rt rt">
+        <{if $CONFIG.bulletin.company}>
+        <div class="index_c_rt">
+            <p class="title"><font class="index_c_rt_icon1 sel_index_c_lt_icon1"></font>公告</p>
+            <p class="txt"><{$CONFIG.bulletin.company}></p>
+        </div>
+        <{/if}>
+        <div class="index_c_rt">
+            <p class="title"><font class="index_c_rt_icon2 sel_index_c_lt_icon2"></font>平台联系方式</p>
+            <p class="txt">客服电话: <font class="green"><{$CONFIG.site.phone}></font></p>
+            <p>服务时间:9:00-18:00(周一至周日)</p>          
+        </div>
+    </div>
+</div>
+
+ <script src="<{$pager.res}>/highcharts/highcharts.js"></script>
+<script src="<{$pager.res}>/highcharts/modules/exporting.js"></script>
+
+ <script type="text/javascript">
+$(function () {
+    $('#container').highcharts({
+       
+        title: {
+            text: '预约'
+        },
+        subtitle: {
+            text: '统计时间:<{$smarty.now|date_format:"%Y-%m-%d %H:%M:%S"}>'
+        },
+        xAxis: {
+            categories: [<{foreach $data as $k=>$d name=d}>"<{$k}>"<{if !$smarty.foreach.d.last}>,<{/if}><{/foreach}>],
+            crosshair: true
+        },
+        credits: {
+            enabled: false
+        },
+        yAxis: {
+            min: 0,
+            //tickInterval: 10,
+            title: {
+                text: '七日数据分析'
+            }
+        },
+        tooltip: {
+            headerFormat: '<span style="font-size:10px">{point.key}</span><table>',
+            pointFormat: '<tr><td style="color:{series.color};padding:0">{series.name}: </td>' +
+                '<td style="padding:0"><b>{point.y:.1f}</b></td></tr>',
+            footerFormat: '</table>',
+            shared: true,
+            useHTML: true
+        },
+        plotOptions: {
+            column: {
+                pointPadding: 0.2,
+                borderWidth: 0,
+            }
+        },
+        series: [{
+            name: '业主预约',
+            data: [<{foreach $data as $d name=d1}><{$d['yuyue']}><{if !$smarty.foreach.d1.last}>,<{/if}><{/foreach}>]
+        }, {
+            name: '活动报名',
+            data:  [<{foreach $data as $d name=d2}><{$d['sign']}><{if !$smarty.foreach.d2.last}>,<{/if}><{/foreach}>]
+        }, {
+            name: ' 评论数',
+            data:  [<{foreach $data as $d name=d3}><{$d['comment']}><{if !$smarty.foreach.d3.last}>,<{/if}><{/foreach}>]
+        }]
+    });
+});
+		</script>
+        
+        
+        <script type="text/javascript">
+$(function () {
+    $('#container2').highcharts({
+       
+        title: {
+            text: '数据'
+        },
+        subtitle: {
+            text: '统计时间:<{$smarty.now|date_format:"%Y-%m-%d %H:%M:%S"}>'
+        },
+        xAxis: {
+            categories: [<{foreach $data as $k=>$d name=d}>"<{$k}>"<{if !$smarty.foreach.d.last}>,<{/if}><{/foreach}>],
+            crosshair: true
+        },
+        credits: {
+            enabled: false
+        },
+        yAxis: {
+            min: 0,
+            //tickInterval: 10,
+            title: {
+                text: '七日数据分析'
+            }
+        },
+        tooltip: {
+            headerFormat: '<span style="font-size:10px">{point.key}</span><table>',
+            pointFormat: '<tr><td style="color:{series.color};padding:0">{series.name}: </td>' +
+                '<td style="padding:0"><b>{point.y:.1f}</b></td></tr>',
+            footerFormat: '</table>',
+            shared: true,
+            useHTML: true
+        },
+        plotOptions: {
+            column: {
+                pointPadding: 0.2,
+                borderWidth: 0,
+            }
+        },
+        series: [{
+            name: '公司案例',
+            data: [<{foreach $data2 as $d name=d1}><{$d['case']}><{if !$smarty.foreach.d1.last}>,<{/if}><{/foreach}>]
+        }, {
+            name: '在建工地',
+            data:  [<{foreach $data2 as $d name=d2}><{$d['site']}><{if !$smarty.foreach.d2.last}>,<{/if}><{/foreach}>]
+        }, {
+            name: '优惠活动',
+            data:  [<{foreach $data2 as $d name=d4}><{$d['youhui']}><{if !$smarty.foreach.d4.last}>,<{/if}><{/foreach}>]
+        }]
+    });
+});
+		</script>
+<{include file="scenter/block/footer.html"}>

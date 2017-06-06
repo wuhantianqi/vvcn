@@ -2,7 +2,7 @@
 /**
  * Copy Right IJH.CC
  * Each engineer has a duty to keep the code elegant
- * $Id: member.mdl.php 9378 2015-03-27 02:07:36Z youyi $
+ * $Id$
  */
 
 if(!defined('__CORE_DIR')){
@@ -14,14 +14,14 @@ class Mdl_Member_Member extends Mdl_Table
 
     protected $_table = 'member';
     protected $_pk = 'uid';
-    protected $_cols = 'uid,uname,passwd,from,mail,gender,city_id,group_id,mobile,credits,realname,face,face_80,face_32,Y,M,D,verify,uc_uid,cart,regip,closed,lastlogin,lasactive,dateline';
+    protected $_cols = 'uid,uname,passwd,from,mail,gender,city_id,group_id,mobile,credits,realname,face,face_80,face_32,Y,M,D,verify,uc_uid,cart,regip,closed,lastlogin,jifen,lasactive,dateline,truste_money';
     protected $_orderby = array('uid'=>'DESC');
 
     CONST VERIFY_MAIL = 1; //邮箱认证
     CONST VERIFY_MOBILE = 2; //手机认证
     CONST VERIFY_NAME = 4;  //实名认证
 
-    protected $_from_list = array('member'=>'业主', 'designer'=>'设计师', 'company'=>'公司', 'shop'=>'商家' ,'mechanic'=>'技工');
+    protected $_from_list = array('member'=>'业主','company'=>'公司',  'designer'=>'设计师', 'shop'=>'商家' ,'mechanic'=>'技工', 'gz'=>'工长');
 
     public function from_list()
     {
@@ -78,6 +78,26 @@ class Mdl_Member_Member extends Mdl_Table
         return $this->db->GetRow($sql);
     }
 
+	public function update_money($uid, $money,$log)
+    {
+        if(!$uid = (int)$uid){
+            return false;
+        }else if(!is_numeric($money)){
+            $this->err->add('金额不合法', 213);
+            return false;
+        }else if(empty($log)){
+            $this->err->add('日志不能空', 213);
+            return false;
+        }
+        $sql = "UPDATE ".$this->table($this->_table)." SET `truste_money`=`truste_money`+{$money} WHERE uid='$uid'";
+        if($res = $this->db->Execute($sql)){
+			$audit = $money > 0 ? 1 : 0;
+            $a = array('uid'=>$uid, 'money'=>$money, 'audit'=>$audit, 'log'=>$log);
+            K::M('shop/money')->create($a);
+		}
+        return $res;        
+    }
+
     protected function _format_row($row)
     {
         static $gender = array('man'=>'男','woman'=>'女');
@@ -90,6 +110,13 @@ class Mdl_Member_Member extends Mdl_Table
         $row['verify_mail'] = $row['verify'] & self::VERIFY_MAIL ? true :false;
         $row['verify_mobile'] = $row['verify'] & self::VERIFY_MOBILE ? true :false;
         $row['verify_name'] = $row['verify'] & self::VERIFY_NAME ? true :false;
+        if(in_array($row['from'],array('designer','gz','mechanic'))){
+            $row['ucenter_url'] = '/dcenter/'.$row['from'];
+        }else if(in_array($row['from'],array('shop','company'))){
+            $row['ucenter_url'] = '/scenter/'.$row['from'];
+        }else{
+            $row['ucenter_url'] = '/ucenter/'.$row['from'];
+        }
         if($row['verify_name']){
             if($row['from'] == 'member' || $row['from'] == 'designer' ||  $row['from'] == 'mechanic'){
                 $row['uname_v'] = $row['uname'].'<i class="rz_v_hy"></i>';

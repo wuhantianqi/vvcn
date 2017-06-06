@@ -1,0 +1,42 @@
+<{assign var="seo_sub_title" value="<{$title}>"}>
+<{include file="block/small-header.html"}>
+<div class="subwd"> 
+	<!--主体内容开始-->
+	<div class="login_box qqreg_login_box">
+		<div class="login_lt qqregBox">
+			<h2><font id='form' >请绑定账号</font></h2>
+			<form  id="account-form" action="<{link ctl='passport:weixinreg' http='ajax'}>" method="post" mini-form="login">
+				<input type="hidden" name="openid" value="<{$openid}>" />
+				<input type="hidden" name="access_token" value="<{$access_token}>" />
+				<table>
+					<tr>
+						<td class="title">用户名</td>
+						<td class="middle">
+							<p class="input"><span class="ico_list username_ico lt"></span>
+								<input class="text lt"  name="account[uname]" type="text" placeholder="请输入您的用户名" />
+							</p>
+						</td>
+						<td></td>
+					</tr>
+					<tr>
+						<td class="title">密码</td>
+						<td class="middle">
+							<p class="input"><span class="ico_list password_ico lt"></span>
+								<input class="text lt" name="account[passwd]" type="password" placeholder="请输入您的用户密码" />
+							</p>
+						</td>
+						<td></td>
+					</tr>
+					<tr>
+						<td></td>
+						<td class="middle">
+							<input type="submit" class="btn" value="立即注册" />
+						</td>
+						<td></td>
+					</tr>
+				</table>
+			</form>
+		</div>
+	</div>
+</div>
+<{include file="block/small-footer.html"}> 

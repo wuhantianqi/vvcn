@@ -46,6 +46,7 @@
                             <td><{$item.dateline|format}></td>
                             <td><{if $item.audit}>正常<{else}><b class="red">待审</b><{/if}></td>
                             <td>
+                                <{link ctl="block/item:push" arg0='diary' arg1=$item.diary_id title="推送" load="mini:推送日记" class="button"}>
                                 <{link ctl="diary/item:index" args=$item.diary_id title="写日记" class="button"}>
                                 <{link ctl="diary/diary:edit" args=$item.diary_id title="修改" class="button"}>
                                 <{link ctl="diary/diary:delete" args=$item.diary_id act="mini:删除" confirm="mini:确定要删除吗？" title="删除" class="button"}>

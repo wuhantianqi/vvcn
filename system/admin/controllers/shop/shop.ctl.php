@@ -2,7 +2,7 @@
 /**
  * Copy Right IJH.CC
  * Each engineer has a duty to keep the code elegant
- * $Id: shop.ctl.php 9378 2015-03-27 02:07:36Z youyi $
+ * $Id: shop.ctl.php 5867 2014-07-12 02:04:39Z youyi $
  */
 
 if(!defined('__CORE_DIR')){
@@ -35,7 +35,9 @@ class Ctl_Shop_Shop extends Ctl
             }
         }
         $filter['closed'] = 0;
-		
+		if(CITY_ID){
+			$filter['city_id'] = CITY_ID;
+		}
         if($items = K::M('shop/shop')->items($filter, null, $page, $limit, $count)){
         	$pager['count'] = $count;
             $uids = array();
@@ -89,7 +91,9 @@ class Ctl_Shop_Shop extends Ctl
             }
         }
         $filter['closed'] = 0;
-		
+		if(CITY_ID){
+			$filter['city_id'] = CITY_ID;
+		}
         if($items = K::M('shop/shop')->items($filter, null, $page, $limit, $count)){
             $pager['count'] = $count;
             $pager['pagebar'] = $this->mkpage($count, $limit, $page, $this->mklink(null, array('{page}')), array('SO'=>$SO, 'multi'=>$multi));
@@ -116,7 +120,9 @@ class Ctl_Shop_Shop extends Ctl
                         $data = array_merge($data, $photos);
                     }
                 }
-				
+				if(CITY_ID){
+					$data['city_id'] = CITY_ID;
+				}
                 if($shop_id = K::M('shop/shop')->create($data)){
                     if($data['uid'] && isset($data['group_id'])){
                         K::M('member/member')->update($data['uid'], array('group_id'=>(int)$data['group_id']), true);

@@ -3,7 +3,7 @@
  * Copy Right IJH.CC
  * Each engineer has a duty to keep the code elegant
  * Author @shzhrui<Anhuike@gmail.com>
- * $Id: widget.php 9378 2015-03-27 02:07:36Z youyi $
+ * $Id: widget.php 3464 2014-10-25 09:09:38Z youyi $
  */
 
 class Widget_Tenders extends Model
@@ -27,7 +27,7 @@ class Widget_Tenders extends Model
         if(!empty($home_ids)) $data['home_list'] = K::M('home/main')->items_by_ids($home_ids);
         $data['tuan'] = $tuan;
         $params['tpl'] = $params['tpl'] ? $params['tpl']  : 'index.html'; 
-        return $data;        
+        return $data;
     }
 
 	public function from(&$params)
@@ -40,7 +40,7 @@ class Widget_Tenders extends Model
 		}
 		$data['value'] = $params['value'] ? $params['value'] : 0;
     	$data['options'] = K::M('tenders/tenders')->from_list();
-    	return $data;			
+    	return $data;
 	}
     
 	public function setting(&$params)

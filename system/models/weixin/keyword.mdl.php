@@ -2,7 +2,7 @@
 /**
  * Copy Right IJH.CC
  * Each engineer has a duty to keep the code elegant
- * $Id: keyword.mdl.php 9378 2015-03-27 02:07:36Z youyi $
+ * $Id$
  */
 
 if(!defined('__CORE_DIR')){
@@ -14,7 +14,7 @@ class Mdl_Weixin_Keyword extends Mdl_Table
   
     protected $_table = 'weixin_keyword';
     protected $_pk = 'kw_id';
-    protected $_cols = 'kw_id,wx_id,keyword,len,reply_id,content,hits,dateline';
+    protected $_cols = 'kw_id,wx_id,wx_sid,keyword,len,reply_id,plugin,content,hits,dateline';
 
     
     public function create($data, $checked=false)

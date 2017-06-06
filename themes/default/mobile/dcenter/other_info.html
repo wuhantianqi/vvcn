@@ -1,0 +1,15 @@
+<{assign var="tpl_page_title" value="请填写<{$MEMBER.from_title}>资料"}>
+<div class="pading admin_banner">
+	<div class="admin_intro"><img src="<{$pager.img}>/<{$MEMBER.face}>" class="lt" />
+		<div class="lt">
+			<p><{$MEMBER.uname}></p>
+			<p>账户类型：<u><{$MEMBER.from_title}></u> </p>
+			<p>我的金币：<u><{$MEMBER.gold}></u></p>
+		</div>
+		<div class="cl"></div>
+	</div>
+</div>
+<{include file="mobile/block/header.html"}>
+	<div class="no_record">请到电脑版去完善<{$MEMBER.from_title}>资料</div>
+</body>
+</html>

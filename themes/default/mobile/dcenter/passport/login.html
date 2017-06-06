@@ -1,0 +1,65 @@
+<{assign var="is_index_home" value="服务人员中心"}>
+<{include file="mobile/block/header.html"}>
+<header class="control">
+	<i class="left"><a href="<{if $pager.backurl}><{$pager.backurl}><{else}><{link ctl='mobile/index'}><{/if}>" id="gobackIco"></a></i>
+    <div class="title">服务人员中心</div>
+    <i class="right"><a href="<{link ctl='mobile/dcenter/passport:signup'}>" class="signupIco">注册</a></i>
+</header>
+<section id="" class="page_center_box">
+
+	<form id='login-form'>
+	<div class="loginInfor">
+        <div class="loginIf_list">
+			<div class="fl ifIco"><i class="icco icco1"></i>
+			</div>
+			<div class="ifInput">
+				<input type="text" name="data[uname]" placeholder="手机/用户名">
+			</div>
+			<div class="clear"></div>
+		</div>
+		 <div class="loginIf_list">
+			<div class="fl ifIco"><i class="icco icco9"></i>
+			</div>
+			<div class="ifInput">
+				<input type="password" name="data[passwd]" placeholder="密码">
+			</div>
+			<div class="clear"></div>
+		</div>
+        <{if $CONFIG.access.verifycode.login}>
+        	 <div class="loginIf_list">
+                <div class="fl ifIco"><i class="icco icco1"></i>
+                </div>
+                <div class="ifInput">
+                    <input class="text short lt" type="text" name="verifycode" placeholder="请输入验证码"/>
+                </div>
+                <div class="rt yanzh"><img verify="#pass-verify" src="<{link ctl='mobile/magic:verify' http='ajax'}>&_=<{$pager.dateline}>" id="pass-verify"/></div>
+                <div class="clear"></div>
+            </div>
+		<{/if}>
+     </div>
+    <div class="yuee_btn">
+    <a  href="#" id='login-btn' class="btn">登录</a>
+    </div>
+	</form>
+	
+</section>
+<script type="text/javascript">
+$(document).ready(function(){
+    $("#login-btn").click(function(){
+        $.post('<{link ctl="mobile/dcenter/passport:login"}>',$("#login-form").serialize(),function(ret){
+            if(ret.error){
+                 Widget.MsgBox.error(ret.message.join(","));
+            }else{
+                window.location="<{link ctl='mobile/dcenter/index'}>";
+            }
+        },'json');
+    });        
+});
+</script> 
+<script>
+$("[verify]").click(function(){
+	$($(this).attr("verify")).attr("src", "<{link ctl='mobile/magic:verify' http='ajax'}>&_"+Math.random());
+});
+</script> 
+</body>
+</html>

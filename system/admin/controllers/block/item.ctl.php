@@ -3,7 +3,7 @@
  * Copy Right IJH.CC
  * Each engineer has a duty to keep the code elegant
  * Author @shzhrui<Anhuike@gmail.com>
- * $Id: item.ctl.php 9378 2015-03-27 02:07:36Z youyi $
+ * $Id: item.ctl.php 6074 2014-08-12 17:10:33Z youyi $
  */
 
 if(!defined('__CORE_DIR')){
@@ -230,7 +230,7 @@ class Ctl_Block_Item extends Ctl
             $upload = K::M('magic/upload');
             foreach($attachs as $k=>$attach){
                 if($attach['error'] == UPLOAD_ERR_OK){
-                    if($a = $upload->upload($attach, 'adv', $item[$k])){
+                    if($a = $upload->upload($attach, 'adv', null)){
                         $photos[$k] = $a['photo'];
                     }
                 }

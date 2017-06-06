@@ -28,8 +28,8 @@ URL格式说明<br />
     </td>
 </tr>
 <tr>
-	<th>招标：</th><td><input type="text" name="config[tenders]" value="<{$config.tenders|default:''}>" class="input w-100"/></td>
     <th>公司：</th><td><input type="text" name="config[gs]" value="<{$config.gs|default:''}>" class="input w-100"/></td>
+    <th>工长：</th><td><input type="text" name="config[gz]" value="<{$config.gz|default:''}>" class="input w-100"/></td>
 </tr>
 <tr>
     <th>设计师：</th><td><input type="text" name="config[designer]" value="<{$config.designer|default:''}>" class="input w-100"/></td>
@@ -52,8 +52,12 @@ URL格式说明<br />
     <th>新闻：</th><td><input type="text" name="config[news]" value="<{$config.news|default:''}>" class="input w-100"/></td>
 </tr>
 <tr>
-    <th>商铺：</th><td><input type="text" name="config[mall/store]" value="<{$config.mall/store|default:''}>" class="input w-100"/></td>
+    <th>商铺：</th><td><input type="text" name="config[mall/store]" value="<{$config['mall/store']|default:''}>" class="input w-100"/></td>
     <th>商品：</th><td><input type="text" name="config[product]" value="<{$config.product|default:''}>" class="input w-100"/></td>
+</tr>
+<tr>
+    <th>招标：</th><td><input type="text" name="config[tenders]" value="<{$config.tenders|default:''}>" class="input w-100"/></td>
+    <th>装修保：</th><td><input type="text" name="config[zxb]" value="<{$config.zxb|default:''}>" class="input w-100"/></td>
 </tr>
 <tr>
     <th>案例：</th><td><input type="text" name="config[case]" value="<{$config.case|default:''}>" class="input w-100"/></td>
@@ -61,7 +65,7 @@ URL格式说明<br />
 </tr>
 <tr>
     <th>公司主页：</th><td><input type="text" name="config[company]" value="<{$config.company|default:''}>" class="input w-100"/></td>
-    <th>商铺主页：</th><td><input type="text" name="config[mall/shop]" value="<{$config.mall/shop|default:''}>" class="input w-100"/></td>
+    <th>商铺主页：</th><td><input type="text" name="config[mall/shop]" value="<{$config['mall/shop']|default:''}>" class="input w-100"/></td>
 </tr>
 <tr><th class="clear-th-bottom"></th><td class="clear-td-bottom" colspan="10"><input type="submit" class="bt-big" value="提交数据" /></td></tr>
 </table>

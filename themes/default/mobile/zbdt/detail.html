@@ -1,0 +1,91 @@
+<{assign var="tpl_page_title" value="设计师简介"}>
+<{include file="mobile/block/header.html"}>
+<section id="" class="page_center_box">
+<div class="designerDetails">
+	<div class="zbdtTop">
+		<h2><{$detail.title}><{if $detail.status==2}><small>招标结束</small><{elseif $detail.sign_uid>0}><small class="over">已签单</small><{else}><small class="over">招标中</small><{/if}></h2>
+		<p>
+			<label><span>招标数：</span><font class="pointcl"><{$detail.max_look}></font>位</label>
+			<label><span>发布者：</span><{$detail.contact}> </label>
+			<label><span>发布时间：</span><{$detail.dateline|format}></label>
+		</p>
+		<div class="clear"></div>
+	</div>
+	<div class="nr mb10">
+		<p>服务需求：<{$detail.title}></p>
+		<p>预算总价：<span class="pointcl"><{$detail.budget}></span></p>
+		<p>所在区域：<{$detail.city_name}> <{$detail.area_name}></p>
+		<div class="article">具体要求：<{$detail.comment}></div>
+	</div>
+</div>
+<div class="indexTitle">
+	<h1 class="fl">参与竞标公司</h1>
+	<div class="hd fr">
+		<!--a href="<{link ctl='mobile/truste:index'}>" class="btn smhgBtn">我要竟标</a--> 
+	</div>
+	<div class="clear"></div>
+</div>
+<ul class="tender_menu">
+	<{foreach $look_list as $item}>
+	<li> <{if $member_list[$item.uid].from == 'company'}>
+		<div class="tender_de_com">
+			<div class="tender_de_com_lt fl"> <a href="###"><img src="<{$pager.img}>/<{$company_list[$item.uid].thumb}>" class="lt pic" /></a>
+				<p class="tit"><{$company_list[$item.uid].name}></p>
+			</div>
+			<div class="tender_de_com_rt fl">
+				<p class="line"> <span>投标次数：<font class="fontcl2"><{$company_list[$item.uid].tenders_num}></font></span> <span>投标时间：<{$item.dateline|format}></span> <span>信誉：<{$company_list[$item.uid].score}></span> <span>中标次数：<font class="fontcl2"><{$company_list[$item.uid].tenders_sign}></font></span> <{if !$detail.sign_uid && $detail.uid == $MEMBER.uid}><span>业主评标：<a href="#" class="btn btn_sub_smler">中标</a> </span><{/if}> </p>
+				<div class="pding liuyan">
+					<p>留言：<{$item.content}></p>
+				</div>
+			</div>
+			<div class="cl"></div>
+		</div>
+		<{/if}>
+		<{if $member_list[$item.uid].from == 'shop'}>
+		<div class="tender_de_com">
+			<div class="tender_de_com_lt fl"> <a href="###"> <img src="<{$pager.img}>/<{$shop_list[$item.uid].logo}>" class="lt pic" /></a>
+				<p class="tit">投标者：<{$shop_list[$item.uid].name}></p>
+			</div>
+			<div class="tender_de_com_rt fl">
+				<p class="line"> <span>投标次数：<font class="fontcl2"><{$shop_list[$item.uid].tenders_num}></font></span> <span>投标时间：<{$item.dateline|format}></span> <span>信誉：<{$shop_list[$item.uid].credits}></span> <span>中标次数：<font class="fontcl2"><{$shop_list[$item.uid].tenders_sign}></font></span> <{if !$detail.sign_uid && $detail.uid == $MEMBER.uid}><span>业主评标：<a href="#" class="btn btn_sub_smler">中标</a> </span><{/if}> </p>
+				<div class="pding liuyan">
+					<p>留言：<{$item.content}></p>
+				</div>
+			</div>
+			<div class="clear"></div>
+		</div>
+		<{/if}>
+		<{if $member_list[$item.uid].from == 'gz'}>
+		<div class="tender_de_com">
+			<div class="tender_de_com_lt lt"> <a href="###"> <img src="<{$pager.img}>/<{$member_list[$item.uid].face_80}>" class="lt pic" /></a>
+				<p class="tit"><{$gz_list[$item.uid].name}></p>
+			</div>
+			<div class="tender_de_com_rt lt">
+				<p class="line"> <span>投标次数：<font class="fontcl2"><{$gz_list[$item.uid].tenders_num}></font></span> <span>投标时间：<{$item.dateline|format}></span> <span>信誉：<{$gz_list[$item.uid].credits}></span> <span>中标次数：<font class="fontcl2"><{$gz_list[$item.uid].tenders_sign}></font></span> <{if !$detail.sign_uid && $detail.uid == $MEMBER.uid}><span>业主评标：<a href="#" class="btn btn_sub_smler">中标</a> </span><{/if}> </p>
+				<div class="pding liuyan">
+					<p>留言：<{$item.content}></p>
+				</div>
+			</div>
+			<div class="clear"></div>
+		</div>
+		<{/if}>
+		<{if $member_list[$item.uid].from == 'designer'}>
+		<div class="tender_de_com">
+			<div class="tender_de_com_lt fl"> <img src="<{$pager.img}>/<{$member_list[$item.uid].face_80}>" class="lt pic" />
+				<p class="tit"><{$designer_list[$item.uid].name}></p>
+			</div>
+			<div class="tender_de_com_rt fl">
+				<p class="line"> <span>投标次数：<font class="fontcl2"><{$designer_list[$item.uid].tenders_num}></font></span> <span>投标时间：<{$item.dateline|format}></span> <span>信誉：<{$designer_list[$item.uid].credits}></span> <span>中标次数：<font class="fontcl2"><{$designer_list[$item.uid].tenders_sign}></font></span> <{if !$detail.sign_uid && $detail.uid == $MEMBER.uid}><span>业主评标：<a href="#" class="btn btn_sub_smler">中标</a> </span><{/if}> </p>
+				<div class="pding liuyan">
+					<p>留言：<{$item.content}></p>
+				</div>
+			</div>
+			<div class="clear"></div>
+		</div>
+		<{/if}>
+		<{if $detail.sign_uid == $item.uid}>
+		<div class="tender_suspend"><img src="%THEME%/static/images/tender_zb.png" /></div>
+		<{/if}> </li>
+	<{/foreach}>
+</ul>
+<{include file="mobile/block/footer.html"}> 

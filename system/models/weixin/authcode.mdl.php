@@ -2,7 +2,7 @@
 /**
  * Copy Right IJH.CC
  * Each engineer has a duty to keep the code elegant
- * $Id: authcode.mdl.php 9378 2015-03-27 02:07:36Z youyi $
+ * $Id$
  */
 
 if(!defined('__CORE_DIR')){
@@ -14,7 +14,7 @@ class Mdl_Weixin_Authcode extends Mdl_Table
   
     protected $_table = 'weixin_authcode';
     protected $_pk = 'id';
-    protected $_cols = 'id,code,uid,type,addon,dateline';
+    protected $_cols = 'id,code,uid,type,addon,status,dateline';
 
     
     public function create($data, $checked=false)
@@ -22,6 +22,7 @@ class Mdl_Weixin_Authcode extends Mdl_Table
         if(!$checked && !$data = $this->_check($data)){
             return false;
         }
+        $data['dateline'] = $data['dateline'] ? $data['dateline'] : __TIME;
         return $this->db->insert($this->_table, $data, true);
     }
 

@@ -1,0 +1,42 @@
+<{assign var="tpl_page_title" value="学装修分类"}>
+<{include file="mobile/block/header.html"}>
+<section id="" class="page_center_box">
+<!--主要功能区开始-->
+<ul class="xzxFunction mb10">
+	<li><a href="<{link ctl='mobile/case'}>"><i class="ico_1"></i>
+		<p>效果图</p>
+		</a></li>
+	<li><a href="<{link ctl='mobile/article'}>"><i class="ico_2"><em></em></i>
+		<p>学装修</p>
+		</a></li>
+	<li><a href="<{link ctl='mobile/designer'}>"><i class="ico_3"><em></em></i>
+		<p>设计师</p>
+		</a></li>
+	<li><a href="<{link ctl='mobile/tenders'}>"><i class="ico_4"><em></em></i>
+		<p>我要装修</p>
+		</a></li>
+</ul>
+<!--主要功能区结束--> 
+<{foreach $article as $v}>
+<div class="zxKnowledge mb10">
+	<h1><{$v.title}></h1>
+	<ul class="list_box">
+        <{calldata mdl='article/article' cat_id=$v.cat_id audit='1' hidden='0' closed=0 city_id=$request.city_id limit=2}>
+        <li>
+			<div class="fl img"><a href="<{$item.link}>"><img src="<{$pager.img}>/<{$item.thumb}>" /></a></div>
+			<div class="wz"> <a href="<{$item.link}>">
+				<h3 class="overflow_clear"><{$item.title|cutstr:80}></h3>
+				<p><{$item.desc|cutstr:80}></p>
+				</a> </div>
+		</li>
+		<{/calldata}>
+	</ul>
+	<a href="<{link ctl='mobile/article:items' arg0=$v.cat_id}>" class="long_btn">进入<{$v.title}></a> </div>
+<{/foreach}> 
+<!--<ul class="pub_menu">
+	<{foreach $v.children as $vv}>
+	<li><a href="<{link ctl='mobile/article:items' arg0=$vv.cat_id}>"><{$vv.title}></a></li>
+	<{/foreach}>
+</ul>
+--> 
+<{include file="mobile/block/footer.html"}>

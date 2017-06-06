@@ -2,7 +2,7 @@
 /**
  * Copy Right IJH.CC
  * Each engineer has a duty to keep the code elegant
- * $Id: home.ctl.php 14553 2015-07-23 12:31:45Z maoge $
+ * $Id$
  */
 
 if(!defined('__CORE_DIR')){
@@ -22,12 +22,13 @@ class Ctl_Home_Home extends Ctl
             if($SO['home_id']){$filter['home_id'] = $SO['home_id'];}
             if($SO['city_id']){$filter['city_id'] = $SO['city_id'];}
             if($SO['area_id']){$filter['area_id'] = $SO['area_id'];}
-            if($SO['title']){$filter['title'] = "LIKE:%".$SO['title']."%";}
+            if($name = trim($SO['name'])){
+                $filter[':OR'] = array('title'=>"LIKE:%".$name."%", 'name'=>"LIKE:%".$name."%");
+            }
             if(is_numeric($SO['audit'])){$filter['audit'] = $SO['audit'];}
             if(is_array($SO['dateline'])){if($SO['dateline'][0] && $SO['dateline'][1]){$a = strtotime($SO['dateline'][0]); $b = strtotime($SO['dateline'][1])+86400;$filter['dateline'] = $a."~".$b;}}
         }
         $filter['closed'] = 0;
-		
         if($items = K::M('home/home')->items($filter, null, $page, $limit, $count)){
         	$pager['count'] = $count;
         	$pager['pagebar'] = $this->mkpage($count, $limit, $page, $this->mklink(null, array('{page}')), array('SO'=>$SO));
@@ -60,14 +61,16 @@ class Ctl_Home_Home extends Ctl
             if($SO['id']){$filter['id'] = $SO['id'];}
             if($SO['city_id']){$filter['city_id'] = $SO['city_id'];}
             if($SO['area_id']){$filter['area_id'] = $SO['area_id'];}
-            if($SO['title']){$filter['title'] = "LIKE:%".$SO['title']."%";}
+            if($SO['name']){$filter['title'] = "LIKE:%".$SO['name']."%";}
             if($SO['tel']){$filter['tel'] = "LIKE:%".$SO['tel']."%";}
             if($SO['kf']){$filter['kf'] = "LIKE:%".$SO['kf']."%";}
             if(is_array($SO['lng'])){$a = intval($SO['lng'][0]);$b=intval($SO['lng'][1]);if($a && $b){$filter['lng'] = $a."~".$b;}}
             if(is_array($SO['lat'])){$a = intval($SO['lat'][0]);$b=intval($SO['lat'][1]);if($a && $b){$filter['lat'] = $a."~".$b;}}
         }
         $filter['closed'] = 0;
-		
+		if(CITY_ID){
+            $filter['city_id'] = CITY_ID;
+        }
         if($items = K::M('home/home')->items($filter, null, $page, $limit, $count)){
             $pager['count'] = $count;
             $pager['pagebar'] = $this->mkpage($count, $limit, $page, $this->mklink(null, array('{page}')), array('SO'=>$SO, 'multi'=>$multi));
@@ -100,7 +103,9 @@ class Ctl_Home_Home extends Ctl
 						}
 					}
 				}
-				
+				if(CITY_ID){
+                    $data['city_id'] = CITY_ID;
+                }
 				$data['lat'] = trim($data['lat']);
                 if($home_id = K::M('home/home')->create($data)){
                     if($attr=  $this->GP('attr')){
@@ -174,7 +179,9 @@ class Ctl_Home_Home extends Ctl
 			if($items = K::M('home/home')->items_by_ids($ids)){
                 $aids = $home_ids = array();
                 foreach($items as $v){
-                   
+                    if(CITY_ID && CITY_ID != $v['city_id']){
+                        continue;
+                    }
                     $aids[$v['home_id']] = $v['home_id'];
                 }
                 if($aids && K::M('home/home')->batch($aids, array('audit'=>1))){
@@ -200,7 +207,9 @@ class Ctl_Home_Home extends Ctl
             if($items = K::M('home/home')->items_by_ids($ids)){
                 $aids = $home_ids = array();
                 foreach($items as $v){
-                    
+                    if(CITY_ID && CITY_ID != $v['city_id']){
+                        continue;
+                    }
                     $aids[$v['home_id']] = $v['home_id'];
                 }
                 if($aids && K::M('home/home')->delete($aids)){

@@ -3,7 +3,7 @@
  * Copy Right IJH.CC
  * Each engineer has a duty to keep the code elegant
  * Author @shzhrui<Anhuike@gmail.com>
- * $Id: attr.ctl.php 9378 2015-03-27 02:07:36Z youyi $
+ * $Id: attr.ctl.php 2070 2013-12-09 09:04:47Z youyi $
  */
 
 if(!defined('__CORE_DIR')){

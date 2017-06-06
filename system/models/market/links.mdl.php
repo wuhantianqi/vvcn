@@ -3,7 +3,7 @@
  * Copy Right IJH.CC
  * Each engineer has a duty to keep the code elegant
  * Author @shzhrui<Anhuike@gmail.com>
- * $Id: links.mdl.php 9378 2015-03-27 02:07:36Z youyi $
+ * $Id: links.mdl.php 2034 2013-12-07 03:08:33Z $
  */
 
 if(!defined('__CORE_DIR')){
@@ -35,6 +35,14 @@ class Mdl_Market_Links extends Mdl_Table
             return false;
         }
         return $this->db->update($this->_table, $data, $this->field($this->_pk, $pk));
+    }
+
+    protected function _format_row($row)
+    {
+        if($city = K::M('data/city')->city($row['city_id'])){
+            $row['city_name'] = $city['city_name'];
+        }
+        return $row;
     }
 
     protected function _check($data, $link_id=null)

@@ -2,7 +2,7 @@
 /**
  * Copy Right IJH.CC
  * Each engineer has a duty to keep the code elegant
- * $Id: product.mdl.php 9378 2015-03-27 02:07:36Z youyi $
+ * $Id: product.mdl.php 2621 2013-12-30 01:10:05Z youyi $
  */
 
 if(!defined('__CORE_DIR')){
@@ -34,18 +34,37 @@ class Mdl_Trade_Product extends Mdl_Table
         return $this->db->update($this->_table, $data, $this->field($this->_pk, $pk));
     }
 
+	public function top_cate($cat_id)
+    {
+        if(!$cat_id = (int)$cat_id){
+            return false;
+        }
+        if($cats = K::M('shop/cate')->fetch_all()){
+            while($a = $cats[$cat_id]){
+                if(empty($a['parent_id'])){
+                    return $a["cat_id"];
+                }
+                $cat_id = $a['parent_id'];
+            }
+        }
+        return false;               
+    }
+
     public function order_products($order_id)
     {
         if(!$order_id = (int)$order_id){
             return false;
         }
         $products = array();
-        $sql = "SELECT op.*,p.photo FROM ".$this->table($this->_table)." op LEFT JOIN ".$this->table('product')." p ON op.product_id=p.product_id WHERE op.order_id=$order_id";
+        $sql = "SELECT op.*,p.photo,p.cat_id FROM ".$this->table($this->_table)." op LEFT JOIN ".$this->table('product')." p ON op.product_id=p.product_id WHERE op.order_id=$order_id";
         if($rs = $this->db->Execute($sql)){
             while($row = $rs->fetch()){
                 $products[$row['order_pid']] = $row;
             }
         }
+		foreach($products as $k => $v){
+			$products[$k]['cat_id'] = $this->top_cate($v['cat_id']);
+		}
         return $products;
     }
 }

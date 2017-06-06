@@ -3,7 +3,7 @@
  * Copy Right IJH.CC
  * Each engineer has a duty to keep the code elegant
  * Author shzhrui<anhuike@gmail.com>
- * $Id: mysql.mdl.php 10202 2015-05-13 01:54:12Z maoge $
+ * $Id: mysql.mdl.php 5639 2014-06-25 06:37:14Z youyi $
  */
 
 if(!defined('__CORE_DIR')){
@@ -284,6 +284,7 @@ class Mdl_Mysql_Mysql
                 $count++;
             }
         }
+        print_r($this->SQLLOG());
         return $count;
     }
 

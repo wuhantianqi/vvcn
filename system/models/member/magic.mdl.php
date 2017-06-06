@@ -2,7 +2,7 @@
 /**
  * Copy Right IJH.CC
  * Each engineer has a duty to keep the code elegant
- * $Id: magic.mdl.php 12719 2015-07-02 10:47:00Z maoge $
+ * $Id$
  */
 
 Import::M('member/member');
@@ -62,6 +62,10 @@ class Mdl_Member_Magic extends Mdl_Member_Member
                     if($this->db->affected_rows()){
                         $this->clear_cache($uid);
                     }
+					
+					$this->reg_jifen($uid);
+
+
                     $this->err->add('手机验证成功',411);
                     return true;
                 }else{
@@ -73,6 +77,34 @@ class Mdl_Member_Magic extends Mdl_Member_Member
         }
         return false;
     }
+
+	public function reg_jifen($uid)
+	{
+		if($uid){
+			//送积分 		
+			$fenxiao = K::$system->config->get('fenxiao');
+			K::M('member/member')->update_count($uid,'jifen',$fenxiao['newreg']);
+			K::M('fenxiao/log')->log($uid,0, 1,$fenxiao['newreg'], '新注册用户手机验证');
+
+			//送红包
+			$packet['title'] = '新用户注册红包';
+			$packet['code'] = K::M('member/packet')->create_code();
+			$packet['is_use'] = 1;
+			$packet['uid'] = $uid;
+			$packet['type'] = '1';
+			$packet['price'] = '10';
+			$packet['man'] = '100';
+			$packet['time'] = '30';
+			$packet['ltime'] = time()+30*24*60*60;
+			K::M('member/packet')->create($packet);
+
+			//如果是用户推荐的
+			if($fenxiaoid = $this->cookie->get('fenxiaoid')){
+				K::M('member/member')->update_count($fenxiaoid,'jifen',$fenxiao['tuijian']);
+				K::M('fenxiao/log')->log($fenxiaoid,0, 1,$fenxiao['tuijian'], '推荐新用户获得积分');
+			}
+		}
+	}
     
     public function send_verify_mobile($uid)
     {   

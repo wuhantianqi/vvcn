@@ -1,0 +1,32 @@
+<{include file="dcenter/block/header.html"}>
+<div class="ucenter_t">
+    <ul>
+        <li class="on">我的招标</li>
+    </ul>
+</div>
+<div class="ucenter_c">
+    <table width="100%" border="0" cellspacing="0" class="table">
+    <tr>
+        <th class="w-80">ID</th><th class="w-100">城市</th><th class="w-100">称呼</th><th>电话</th>
+        <th class="w-100">已投标</th><th class="w-50">状态</th><th class="w-150">发布时间</th>
+        <th class="w-100">操作</th>
+    </tr>
+    <{foreach $items as $item}>
+    <tr>
+        <td class="left"><label><{$item.truste_id}><label></td><td><{$item.city_name}></td>
+        <td><{$item.contact}></td><td><{$item.mobile}></td><td><{$item.looks}></td>
+        <td>
+        <{if $item.sign_uid}><{if $item.status == 2}>已完工<{else}><b class="green">已签</b><{/if}><{else class="blue"}><b>招标中</b><{/if}>
+        </td>
+        <td><{$item.dateline|format}></td>
+        <td>
+            <a href="<{link ctl='dcenter/member/truste:trusteDetail' arg0=$item.truste_id}>" class="pbtn">查看</a>
+        </td>
+    </tr>
+    <{foreachelse}>
+     <tr><td colspan="20"><p class="tips"><span class="notice">没有数据</span></p></td></tr>
+    <{/foreach}>
+    </table>
+    </form>
+</div>
+<{include file="dcenter/block/footer.html"}>

@@ -27,7 +27,8 @@
 <{if $pager.from == 'article'}>
 <tr><th>缩略图：</th><td><input type="file" name="data[thumb]" class="input w-300" /><{if $detail.thumb}><img src="<{$pager.img}>/<{$detail.thumb}>" class="wh-100"/><{/if}></td></tr>
 <{else}>
-<tr><th>页面名：</th><td><input type="text" name="data[page]" value="<{$detail.page}>" class="input w-200"/><span class="tip-comment">只支持字母数字，不可与其它页面名重复</span></td></tr>
+<tr><th>页面名：</th><td><input type="text" name="data[page]" value="<{$detail.page}>" class="input w-200"/></td></tr>
+<tr><th>城市：</th><td><{widget id="data/region" level=2 city_id=$detail.city_id}></td></tr>
 <{/if}>
 <tr><th>描述：</th><td><textarea name="data[desc]" class="textarea"><{$detail.desc}></textarea></td></tr>
 <tr><th>跳转：</th>

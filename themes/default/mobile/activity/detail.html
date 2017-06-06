@@ -1,0 +1,47 @@
+<{assign var="tpl_page_title" value="活动详情"}>
+<{include file="mobile/block/header.html"}>
+<section id="" class="page_center_box">
+<div class="zxCompany_intro mt10">
+	<div class="nrBox mb10">
+		<div class="nr lh30">
+			<h1><{$detail.title}></h1>
+			<img src="<{$pager.img}>/<{$detail.thumb}>" class="pic"/>
+			<p class="nowrap"><{if $detail.end_time>time() && $detail.bg_time<time()}><font class="app_ico time_ico"></font><{else}><font class="app_ico time_over_ico"></font><{/if}><span  remaintime="<{$detail.end_time}>"></span></p>
+			<p><span class="black9">活动开始时间：</span><{$detail.bg_time|format:'Y-m-d'}></p>
+			<p><span class="black9">活动结束时间：</span><{$detail.end_time|format:'Y-m-d'}></p>
+			<p><span class="black9">已报名人数：</span> <{$detail.sign_num}></p>
+			<{if $detail.end_time>time() && $detail.bg_time<time()}> <a href="<{link ctl='mobile/activity:yuyue' arg0=$detail.activity_id}>" class="long_btn">立刻报名</a> <{else}> <a class="long_btn">报名结束</a> <{/if}></div>
+	</div>
+	<div class="nrBox mb10">
+		<h3>活动详情</h3>
+		<div class="nr article"><{$detail.info}></div>
+	</div>
+</div>
+<script type="text/javascript">
+(function(K, $){
+    $(function(){
+    var dateTime = new Date();
+    var difference = dateTime.getTime() - <{$pager.dateline}>*1000;	
+    setInterval(function(){
+      $("[remaintime]").each(function(){
+        var obj = $(this);
+        var endTime = new Date(parseInt(obj.attr('remaintime')) * 1000);
+        var nowTime = new Date();
+        var nMS=endTime.getTime() - nowTime.getTime() + difference;
+        var myD=Math.floor(nMS/(1000 * 60 * 60 * 24));
+        var myH=Math.floor(nMS/(1000*60*60)) % 24;
+        var myM=Math.floor(nMS/(1000*60)) % 60;
+        var myS=Math.floor(nMS/1000) % 60;
+        var myMS=Math.floor(nMS/100) % 10;
+        if(myD>= 0){
+			var str = myD+"天"+myH+"小时"+myM+"分"+myS+"."+myMS+"秒";
+        }else{
+			var str = "真遗憾您来晚了，抢购已经结束。";	
+		}
+		obj.html(str);
+      });
+    }, 100);
+});
+})(window.KT, window.jQuery);
+</script> 
+<{include file="mobile/block/footer.html"}> 

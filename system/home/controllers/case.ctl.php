@@ -2,7 +2,7 @@
 /**
  * Copy Right IJH.CC
  * Each engineer has a duty to keep the code elegant
- * $Id: case.ctl.php 12909 2015-07-03 10:09:32Z maoge $
+ * $Id$
  */
 
 class Ctl_Case extends Ctl
@@ -18,7 +18,7 @@ class Ctl_Case extends Ctl
         $order = 0;
         $attr_values = K::M('data/attr')->attrs_by_from('zx:case', true);
         $uri = $this->request['uri'];
-        if(preg_match('/items(-[\d\-]+)?(-(\d+)).html/i', $uri, $m)){
+        if(preg_match('/items-([\d\-]+)?(-(\d+)).html/i', $uri, $m)){
             $page = (int)$m[3];
             if($m[1]){
                 $attr_vids = explode('-', trim($m[1], '-'));
@@ -68,7 +68,7 @@ class Ctl_Case extends Ctl
         $pager['order'] = $order;
         $pager['limit'] = $limit = 20;
         $pager['count'] = $count = 0;
-        //$filter['city_id'] = array($this->request['city_id'], 0);
+        $filter['city_id'] = array($this->request['city_id'], 0);
         $filter['closed'] = 0;
         $filter['audit'] = 1;
         if($attr_ids){
@@ -214,7 +214,7 @@ class Ctl_Case extends Ctl
         }
         if($page > 1){
             $seo['page'] = $page;
-        }    
+        }
         $this->seo->init('case', $seo);
         $this->tmpl = 'case/album.html';
 	}
@@ -226,7 +226,9 @@ class Ctl_Case extends Ctl
         if($company_id = $case['company_id']){
 		  $this->pagedata['company'] = K::M('company/company')->detail($case['company_id']);
         }else if($member = K::M('member/member')->member($case['uid'])){
-            if($member['from'] == 'designer'){
+            if($member['from'] == 'gz'){
+                $this->pagedata['gz'] = K::M('gz/gz')->detail($case['uid']);
+            }else if($member['from'] == 'designer'){
                 $this->pagedata['designer'] = K::M('designer/designer')->detail($case['uid']);
             }
         }
@@ -256,8 +258,10 @@ class Ctl_Case extends Ctl
 		$this->pagedata['comment_yz'] = $access['verifycode']['comment'];
         $this->pagedata['detail'] = $case;
         $this->pagedata['pager'] = $pager;
+        $this->pagedata['mobile_url'] = $this->mklink('mobile/case:detail', array($case_id));
 		$this->seo->init('case_detail',array(
 			'title' => $case['title'],
+            'home_name'=>$detail['home_name'],
 			'seo_title' => $case['seo_title'],
 			'seo_keywords' => $case['seo_keywords'],
 			'seo_description' => $case['seo_description'],

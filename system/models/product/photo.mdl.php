@@ -2,7 +2,7 @@
 /**
  * Copy Right IJH.CC
  * Each engineer has a duty to keep the code elegant
- * $Id: photo.mdl.php 9378 2015-03-27 02:07:36Z youyi $
+ * $Id: photo.mdl.php 2466 2013-12-23 11:13:30Z youyi $
  */
 
 if(!defined('__CORE_DIR')){
@@ -66,7 +66,7 @@ class Mdl_Product_Photo extends Mdl_Table
         $oImg = K::M('image/gd');
         $thumbs = $size = array();
         $size['photo'] = $cfg['product']['photo'] ? $cfg['product']['photo'] : '720';
-        $size['thumb'] = $cfg['product']['thumb'] ? $cfg['product']['thumb'] : '200';
+        $size['thumb'] = $cfg['product']['thumb'] ? $cfg['product']['thumb'] : '360';
         $size['small'] = $cfg['product']['small'] ? $cfg['product']['small'] : '60X60';
         $thumbs = array($size['photo']=>"{$D}/{$fname}",$size['thumb']=>"{$D}/{$fname}_thumb.jpg",$size['small']=>"{$D}/{$fname}_small.jpg");
         $oImg->thumbs($F, $thumbs);

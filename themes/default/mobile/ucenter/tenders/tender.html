@@ -1,44 +1,80 @@
 <{assign var="tpl_page_title" value="我的招标信息"}>
 <{include file="mobile/block/header.html"}>
-<div class="pding">
-	 <{if !$items}><div class="no_record">暂无记录信息</div><{/if}>
+<header class="control">
+	<i class="left"><a href="<{if $pager.backurl}><{$pager.backurl}><{else}><{link ctl='mobile/index'}><{/if}>" id="gobackIco"></a></i>
+    <div class="title">我的招标信息</div>
+    <i class="right"></i>
+</header>
+
+<section id="" class="page_center_box">
+	<div class="order_top">
+		<div class="order_chose"> <a href="<{link ctl='mobile/ucenter/tenders:tender' arg0=1}>"  <{if $audit == 1}> class="current"<{/if}>> 已审核 </a> 
+        <a href="<{link ctl='mobile/ucenter/tenders:tender' arg0=0}>" <{if !$audit}> class="current"<{/if}>> 待审核 </a> </div>
+	</div>
+
+<div class="yuyue_list">
+	 <{if !$items}> <div class="loginInfor_tishi">暂无记录信息</div><{/if}>
       <div class="yuyue_box zbiao_manage">
-            <table cellpadding="0" cellspacing="0">
+     
 	 <{foreach $items as $item}>
-       
-                <tr>
-                    <td class="title">标题</td>
-                    <td><{$item.title}></td>
-                </tr>
-                <tr>
-                    <td class="title">看标需要消耗金币</td>
-                    <td><{$item.gold}></td>
-                </tr>
-                <tr>
-                	<td class="title">允许看标的企业数</td>
-                    <td><{$item.max_look}></td>
-                </tr>
-                <tr>
-                    <td class="title">IP</td>
-                    <td><{$item.clientip}></td>
-                </tr>
-                <tr>
-                    <td class="title">创建时间</td>
-                    <td><{$item.dateline|format}></td>
-                </tr>
-                <tr>
-                    <td class="title">当前状态</td>
-                    <td><{if $item.status}><b>已签单</b><{elseif $item.audit}><b>已审核</b><{else}><b class="pointcl">待审核</b><{/if}></td>
-                </tr>
-                <tr>
-				
-					<td class="title">操作</td>
-					<td><a href="<{link ctl='mobile/ucenter/member:tenderDetail' arg0=$item.tenders_id}>" title="查看" class="btn subbtn_full">查看</a></td>
-				</tr>
+     	 <div class="mb10 center_tenders">
+		<table width="100%" cellpadding="0" cellspacing="0">
+			<tr>
+				<th width="50%">
+				标题
+				</th>
+				<td>
+				<{$item.title}>
+				</td>
 			</tr>
-           
+			<tr>
+				<th>
+				金币
+				</th>
+				<td>
+				<{$item.gold}>
+				</td>
+			</tr>
+            <tr>
+				<th>
+				允许看标的企业数
+				</th>
+				<td>
+				<{$item.max_look}>
+				</td>
+			</tr>
+			<tr>
+				<th>
+				看标的企业数
+				</th>
+				<td>
+				<{$item.looks}>
+				</td>
+			</tr>
+			<tr>
+				<th>
+				IP
+				</th>
+				<td>
+				<{$item.clientip}>
+				</td>
+			</tr>
+			<tr>
+				<th>
+				创建时间
+				</th>
+				<td>
+				<{$item.dateline|format}>
+				</td>
+			</tr>
+		</table>
+		<div class="tenBtn">
+			<a href="<{link ctl='mobile/ucenter/member:tenderDetail' arg0=$item.tenders_id}>" title="查看" class="btn subbtn_full">查看</a>
+		</div>
+	</div>
+      
     <{/foreach}>
-     </table>
-        </div>
-</div>
-<{include file="mobile/block/footer.html"}>
+    </section>
+</body>
+</html>
+

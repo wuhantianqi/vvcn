@@ -25,6 +25,9 @@ class Mdl_System_Audit extends Mdl_Table
             case 'designer':
                 return $this->designer($auth, $member, $title);              
                 break;
+			case 'gz':
+                return $this->gz($auth, $member, $title);              
+                break;
             case 'company':
                 if(empty($data)){
                     $data = K::M('company/company')->company_by_uid($member['uid']);
@@ -85,7 +88,20 @@ class Mdl_System_Audit extends Mdl_Table
         return 0;        
     }
 
-	
+	public function gz($auth, $gz, &$title='')
+    {
+        if(empty($gz)) return 0; // 支持一下点评的时候需要匿名来点评
+        $cfg = K::M('system/config')->get('audit');
+        $key = $auth.'_gz_';
+        if(!empty($gz['group_id'])){
+            $key.='Y'; $title = '认证工长';
+        }else{
+            $key.='N'; $title = '普通工长';
+        }
+        if(isset($cfg[$key])) return (int)$cfg[$key];
+        return 0;        
+    }
+    
     public function company($auth, $company, &$title='')
     {
         if(empty($company)) return -1;

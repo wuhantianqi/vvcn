@@ -2,7 +2,7 @@
 /**
  * Copy Right IJH.CC
  * Each engineer has a duty to keep the code elegant
- * $Id: log.mdl.php 9378 2015-03-27 02:07:36Z youyi $
+ * $Id: log.mdl.php 3123 2014-01-18 10:26:16Z youyi $
  */
 
 if(!defined('__CORE_DIR')){
@@ -14,7 +14,7 @@ class Mdl_Payment_Log extends Mdl_Table
   
     protected $_table = 'payment_log';
     protected $_pk = 'log_id';
-    protected $_cols = 'log_id,uid,shop_id,from,payment,trade_no,amount,payed,payedip,payedtime,pay_trade_no,extra_pay,clientip,dateline';
+    protected $_cols = 'log_id,uid,shop_id,from,payment,trade_no,amount,packet,payed,payedip,payedtime,pay_trade_no,extra_pay,clientip,dateline,truste_id';
     protected $_orderby = array('log_id'=>'DESC');
 
     

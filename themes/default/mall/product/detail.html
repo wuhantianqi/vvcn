@@ -12,8 +12,12 @@
 				</ul>
 			</div>
 			<div class="rt goods_intro">
+				<div class="coDe" style="top:0;border:none;">
+				<div id="QRbuy" style="padding:5px;height:150px;width:150px;z-index:100; border:none; background:#f5f5f5; left:0px;" val="<{$mobile_buy_url}>"></div>
+				</div>
 				<p>商铺价：<b class="fontcl2" id="product_spec_price">￥<{$detail.price}> </b></p>
 				<p>市场价：<del class="graycl">￥<{$detail.market_price}> </del></p>
+                <p>单位：<{$detail.danwei}></p>
                 <{if $detail.onpayment}>
 				<p>总销量：<{$detail.buys}></p>
                 <{else}>
@@ -35,11 +39,11 @@
                <{else}>
                	 <p>库存数：<{$detail.store}></p>
                 <{/if}>
-                    
-                				
+				
 				<div class="goods_buy_cont">
                 <!-- 商品规格值 -->
                 <input type="hidden" id="product_spec_id" value="0" />
+				
                 <div class="jh-key">
                     <{if $product_spec_list}>             
                     <div class="jh-spec">
@@ -105,10 +109,10 @@
                     <{foreach $comments as $item}>
                     <li>
                         <div class="lt">
-                            <img src="<{$pager.img}>/<{$member_list[$item.uid].face_80}>" class="lt" /><br />
+                            <img src="<{$pager.img}>/<{$member_list[$item.uid].face_80}>" class="lt face" /><br />
                         </div>
                         <div class="rt">
-                            <p class="graycl"><span class="lt"><{$member_list[$item.uid].uname}><b score="item_score" data-score="<{$comment.score}>"></b><b class="fontcl2"><{$item.score}>分</b></span><span class="rt time"><{$item.dateline|format}></span></p>
+                            <p class="graycl"><span class="lt"><{$member_list[$item.uid].uname}><b class="item_score" score="item_score" data-score="<{$comment.score}>"></b><b class="fontcl2"><{$item.score}>分</b></span><span class="rt time"><{$item.dateline|format}></span></p>
                             <p class="cl"></p><p><{$item.content}></p>
                             <{if $v.reply}><p class="cl"></p><p class="huifu">回复：<{$item.reply}></p><{/if}>
                         </div>						
@@ -136,6 +140,14 @@
 <script type="text/javascript" src="<{$pager.res}>/script/cloud-zoom.js"></script>
 <script type="text/javascript" src="<{$pager.res}>/script/raty/jquery.raty.js"></script>
 <script type="text/javascript">
+$(".coDe ").mouseover(function(){
+	$(this).addClass('current');
+	$(this).find('.pic').addClass('current');
+	}).mouseleave(function(){
+	$(this).removeClass('current');
+	$(this).find('.pic').removeClass('current');
+});
+
 (function(K, $){
 <{if $product_spec_list}>
 var product_spec_list = [];
@@ -184,6 +196,7 @@ $("#product_spec_ul .sp-txt a").click(function(){
     }    
 });
 $("#product_spec_ul .sp-txt a").eq(0).click();
+
 <{/if}> 
     $('b[comment-score]').raty({
         path: "<{$pager.res}>/script/raty/img/",
@@ -217,10 +230,12 @@ $("#product_spec_ul .sp-txt a").eq(0).click();
                 window.location = "<{link ctl='mall/cart' http='base'}>";
             }else{
                 Widget.MsgBox.success('添加到购物车成功');
+				window.location = "<{link ctl='trade/cart' http='base'}>";
             }
         });
     });
 $(function(){
+	$("#QRbuy").qrcode({width:150,height:150,correctLevel:0,text:"<{$mobile_buy_url}>"}); 
     var dateTime = new Date();
     var difference = dateTime.getTime() - <{$pager.dateline}>*1000;	
     setInterval(function(){

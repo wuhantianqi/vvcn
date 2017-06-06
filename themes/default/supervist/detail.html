@@ -1,0 +1,53 @@
+<{include file="block/small-header.html"}>
+<!--面包屑导航开始-->
+<div class="mb10 subwd sub_topnav">
+	<p><span class="ico_list breadna"></span>您的位置：<a href="<{link ctl='index'}>"><{$CONFIG.site.title}></a>
+		><a href="<{link ctl='supervist'}>">找监工</a>
+		><a href="<{link ctl='supervist:detail' arg0=$detail.supervist_id}>"><{$detail.name}></a>
+	</p>
+</div>
+<!--面包屑导航结束-->
+<!--找工长头部开始-->
+<div class="sub_designer_top mb20">
+	<div class="subwd">
+		<img src="<{$pager.img}>/<{$detail.thumb}>" class="lt pic" />
+		<div class="sub_designer_top_lt lt">
+			<h1><{$detail.name}></h1>
+			<p class="list"><span>浏览量：<b><{$detail.views}></b></span><span>所在地区：<b><{$city_list[$detail.city_id].city_name}><{$area_list[$detail.area_id].area_name}></b></span>
+            <span>联系方式：<b><{$detail.mobile}></b></span>
+            </p>
+		</div>
+		
+		<div class="cl"></div>
+	</div>
+</div>
+<!--找工长头部结束-->
+<div class="subwd mb20">
+	<!--主体左边内容开始-->
+	<div class="sub_designer_lt lt">
+		<div class="cl"></div>
+		<div class="area pding sub_designer">
+			<div class="mb10 designer_inrto">
+				<p class="title"><span class="lt">个人简介</span></p>
+				<p><{$detail.about}></p>
+			</div>
+			
+		</div>
+	</div>
+	<div class="sub_designer_rt rt">
+		<div class="mb10 area">
+			<h3 class="side_tit">监理浏览量排行榜</h3>
+			<ul class="pding paihang">
+            	<{calldata mdl="supervist/supervist" city_id=$request.city_id order="views:DESC" limit=10}>
+                    <li>
+                        <span class="lt"><font class="paihang_num<{if $iteration<=3}> ph_num_cl<{/if}>"><{$iteration}></font><a href="<{link ctl='supervist:detail' arg0=$item.supervist_id}>"><{$item.name}></a></span>
+                        <span class="rt">浏览量：<font class="fontcl2"><{$item.views}></font></span>
+                    </li>
+                 <{/calldata}>
+			</ul>
+		</div>
+   
+</div>
+	<div class="cl"></div>
+</div>
+<{include file="block/small-footer.html"}>

@@ -1,0 +1,36 @@
+<{include file="scenter/block/header.html"}>
+<div class="ucenter_t">
+    <ul><li class="on">分销任务管理</li></ul>
+    <span class="r">
+        <a href="<{link ctl='scenter/upm/task:create' }>" class="pbtn">添加任务</a>
+    </span>
+
+</div>
+<div class="ucenter_c">
+    <table width="100%" border="0" cellspacing="0" class="table">
+    <tr>
+        <th class="w-50">ID</th>
+        <th>标题</th><th class="w-100">预约数</th><th class="w-100">量房数</th><th class="w-100">签单数</th>
+        <th class="w-50">状态</th><th class="w-150">有效时间</th>
+        <th class="w-200">操作</th>
+    </tr>
+
+    <{foreach $items as $item}>
+    <tr>
+        <td><{$item.task_id}></td><td><{$item.title}></td>
+        <td><{$item.yuyue_count}></td><td><{$item.liangfang_count}></td><td><{$item.qiandan_count}></td>
+        <td><{if $item.audit}><b class="blue">上线</b><{else}><b>下线</b><{/if}></td>
+        <td><{$item.status_title}></td>
+        <td>
+            <a href="<{link ctl='scenter/upm/task:detail' arg0=$item.task_id}>"  class="pbtn">查看</a>
+            <a href="<{link ctl='scenter/upm/task:edit' arg0=$item.task_id}>"  class="pbtn">修改</a>
+            <a href="<{link ctl='scenter/upm/task:detail' arg0=$item.task_id}>"  class="pbtn">删除</a>
+        </td>
+    </tr>
+     <{foreachelse}>
+     <tr><td colspan="11"><p class="tips"><span class="notice">没有数据</span></p></td></tr>
+    <{/foreach}>
+    </table>
+	<div class="page"><{$pager.pagebar}></div>
+</div>
+<{include file="scenter/block/footer.html"}>

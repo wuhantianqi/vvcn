@@ -2,7 +2,7 @@
 /**
  * Copy Right IJH.CC
  * Each engineer has a duty to keep the code elegant
- * $Id: home_site.php 9786 2015-04-21 11:24:03Z wanglei $
+ * $Id$
  */
 
 if(!defined('__CORE_DIR')){
@@ -34,7 +34,7 @@ return array (
     'add' => true,
     'edit' => true,
     'html' => false,
-    'empty' => true,
+    'empty' => false,
     'show' => true,
     'list' => true,
     'type' => 'text',
@@ -151,6 +151,22 @@ return array (
     'list' => false,
     'type' => 'int',
     'comment' => '',
+    'default' => '',
+    'SO' => false,
+  ),
+  'zxpm_id' => 
+  array (
+    'field' => 'zxpm_id',
+    'label' => '项目监理',
+    'pk' => false,
+    'add' => true,
+    'edit' => true,
+    'html' => false,
+    'empty' => true,
+    'show' => true,
+    'list' => false,
+    'type' => 'int',
+    'comment' => '项目监理',
     'default' => '',
     'SO' => false,
   ),

@@ -1,0 +1,35 @@
+<{assign var="tpl_page_title" value="积分列表"}>
+<{include file="mobile/block/header.html"}>
+<header class="control">
+	<i class="left"><a href="<{if $pager.backurl}><{$pager.backurl}><{else}><{link ctl='mobile/index'}><{/if}>" id="gobackIco"></a></i>
+    <div class="title">积分列表</div>
+    <i class="right"></i>
+</header>
+<div id="htSearch-bar">
+    <ul>
+        <li class="list <{if empty($pager.type)}>on<{/if}>"><a href="<{link ctl='mobile/ucenter/jifen:index'}>"><i>积分日志</i></a></li>
+        <li class="list <{if $pager.type=='in'}> on<{/if}>"><a href="<{link ctl='mobile/ucenter/jifen:index' arg0='in'}>"><i>充值记录</i></a></li>
+        <li class="list <{if $pager.type=='out'}> on<{/if}>"><a href="<{link ctl='mobile/ucenter/jifen:index' arg0='out'}>"><i>消费记录</i></a></li>
+    </ul>
+</div>
+<section id="" class="page_center_box">
+ <div class="mb10 center_tenders jifen_center_tenders">
+   <table width="100%" cellpadding="0" cellspacing="0">
+    <tr><th>类型</th><th>收支</th><th>日志</th><th>时间</th></tr>
+    <{foreach $items as $item}>
+    <tr>
+        <td><{if $item.from==2 }>开支<{else}>收入<{/if}></td>
+        <td><b<{if $item.number<0}> class="red"<{/if}>><{$item.number}></b></td>        
+        <td><{$item.log}></td>
+        <td><{$item.dateline|format}></td>
+    </tr>
+    <{foreachelse}>
+    <tr><td colspan="4"><p class="text-align tip-notice">没有数据</p></td></tr>
+    <{/foreach}>
+    <tr>
+    </table>
+    <div class="page"><{$pager.pagebar}></div>
+</div>
+</section>
+
+<{include file="mobile/block/footer.html"}> 

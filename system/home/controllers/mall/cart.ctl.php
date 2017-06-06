@@ -2,7 +2,7 @@
 /**
  * Copy Right IJH.CC
  * Each engineer has a duty to keep the code elegant
- * $Id: cart.ctl.php 9372 2015-03-26 06:32:36Z youyi $
+ * $Id: cart.ctl.php 6378 2014-09-28 02:25:09Z youyi $
  */
 
 class Ctl_Mall_Cart extends Ctl 

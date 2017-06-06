@@ -1,0 +1,95 @@
+<{assign var="tpl_page_title" value="商品详情"}>
+<{include file="mobile/block/header.html"}>
+<div class="subwd">
+    <form action="<{link ctl='mobile/jforder:save' http='base'}>"  id="order-form">
+    <input type="hidden" name="data[product_id]" value="<{$product.product_id}>">
+    <input type="hidden" name="data[product_num]" value="<{$product.num}>">
+    <div class="receiv_infor mb10">    
+		<h2 class="side_tit">
+			选择收货地址
+			<a class="rt" style=" color:#F00; margin-top:0px;" href="<{link ctl='ucenter/member/order-address'}>">管理收货地址</a>
+		</h2>
+		<div  class="xiugai_add">
+        <ul id="ul">
+        	<{foreach $items as $item}>
+        		<li id="li_<{$item.addr_id}>" class="<{if $item.default == '1'}>chosen<{/if}>" >
+        			<label class="user-address"><input type="radio" onclick="radio_click(<{$item.addr_id}>)" title="<{$item.title}>" contact="<{$item.contact}>" phone="<{$item.phone}>" addr="<{$item.addr}>" name="data[addr_id]" value="<{$item.addr_id}>" checked="<{if $item.default == '1'}>checked<{/if}>">
+        			<{$item.addr}> (<{$item.contact}> 收)<em><{$item.phone}></em></label>
+        			<a class="change" style="float:right;<{if $item.default != '1'}>display:none<{/if}>" onclick="update_address(<{$item.addr_id}>)">修改当前地址</a>
+        		</li>
+			<{/foreach}>
+				
+        </ul>
+		<a class="btn" onclick="create_address()">新增收货地址</a>
+		</div>
+	</div>
+	<h2>商品信息</h2>
+	<div class="area mb20">
+		<table class="shop_car" cellpadding="0" cellspacing="0">
+			<tr class="title"><td class="first">商品信息</td><td>商品价格</td><td>运费</td><td>数量</td><td>扣除积分</td></tr>
+			<tr>
+				<td class="first">
+					<a class="lt" href="<{link ctl='mobile/jfproduct:detail' arg0=$product.product_id arg1=1}>"><img src="<{$pager.img}>/<{$product.photo}>" /></a>
+					<p class="rt"><a href="<{link ctl='mobile/jfproduct:detail' arg0=$product.product_id arg1=1}>"><{$product.name}></a><{if $product.spec}>【<{$product.spec.spec_name}>】<{/if}></p>
+				</td>
+				<td><b class="fontcl2"><font class="pointcl"><{$product.jfprice}>积分</font></b></td><td><b class="fontcl2">包邮</b></td>
+				<td><{$product.num}></td>				
+				<td><b class="fontcl2"><{$product.jfprice*$product.num}>积分</b></b></td>
+			</tr>
+			<tr class="last">
+				<td colspan="6">
+				    <p class="rt">
+                    <span>实付金额（含运费）：<b class="fontcl2"><{$product.jfprice*$product.num}>积分</b></span>
+                    <a mini-submit="#order-form" class=" btn btn_sub_big">确认提交订单</a>
+                    </p>
+				</td>
+			</tr>
+		</table>
+	</div>
+    </form>
+</div>
+<div class="receiv_infor receiv_infor_add mb10" id="address" style="display:none; position: fixed; left:50%; top: 200px; z-index: 2020; height: 350px; width:500px; margin-left:-250px;background:#FFFFFF">
+	<h2 class="side_tit hoverno" >
+	填写收货信息
+	<a href="javascript:;" onclick="close_address()" style="display:block;float:right; color:#333; font-size:24px; margin:5px 5px 0px 0px;">×</a>
+	</h2>
+	<form id="data-form">
+        <table>
+        	<tr><td class="title"><font class="pointcl">*</font>标题 :</td><td><input id="title" type="text" name="data[title]" class="text all" /></td></tr>
+            <tr><td class="title"><font class="pointcl">*</font>收货人 :</td><td><input id="contact" type="text" name="data[contact]" class="text all" /></td></tr>
+            <tr><td class="title"><font class="pointcl">*</font>联系电话 :</td><td><input id="phone" type="text" name="data[phone]" class="text all" /></td></tr>
+            <tr><td class="title"><font class="pointcl">*</font>地址 :</td><td><input id="addr" type="text" name="data[addr]" class="text all" /></td></tr>
+            <!--tr><td class="title">备注 :</td><td><textarea class="text all" name="data[note]"></textarea></td></tr-->
+            <tr>
+				<th></th>
+				<td><input id="submit_btn" action="" mini-submit="#data-form" type="button" value="提交数据" class="green_btn" /></td>
+			</tr>
+        </table>
+    </form>
+</div>
+<!--购物流程图结束-->
+<script>
+function create_address(){
+	$("#address").css('display','block');
+	$("#submit_btn").attr('action','<{link ctl="ucenter/member/order:create_addr" http="ajax"}>');
+}
+function update_address(id){
+	$("#address").css('display','block'); 
+	$("#submit_btn").attr('action','<{link ctl="ucenter/member/order:update_addr" arg0="'+id+'" http="ajax"}>');
+	var li = $("#li_"+id).find('input');
+	$("#title").attr('value',li.attr('title'));
+	$("#contact").attr('value',li.attr('contact'));
+	$("#phone").attr('value',li.attr('phone'));
+	$("#addr").attr('value',li.attr('addr'));
+}
+function close_address(){
+	$("#address").css('display','none');
+}
+function radio_click(id){
+	$(".chosen").removeClass("chosen");
+	$(".change").css('display','none');
+	$("#li_"+id).addClass("chosen");
+	$("#li_"+id).find("a").css('display','block');
+}
+</script> 
+<{include file="mobile/block/footer.html"}>

@@ -1,4 +1,17 @@
-<{assign var="tpl_page_title" value="完善招标信息"}>
+<{assign var="tpl_page_title" value="完善装修保信息"}>
 <{include file="mobile/block/header.html"}>
-	<div class="no_record">请到电脑版去完善招标信息</div>
+<div class="pading admin_banner">
+	<a href="<{link ctl='mobile/ucenter:info'}>" style="display:block;">
+	<div class="admin_intro"><img src="<{$pager.img}>/<{$MEMBER.face}>" class="lt" />
+		<div class="lt">
+			<p><{$MEMBER.uname}></p>
+			<p>账户类型：<u><{$MEMBER.from_title}></u> </p>
+			<p>我的金币：<u><{$MEMBER.gold}></u></p>
+		</div>
+		<div class="cl"></div>
+	</div>
+	</a>
+</div>
+
+	<div class="no_record">请到电脑版去完善装修保信息</div>
 <{include file="mobile/block/footer.html"}>

@@ -3,7 +3,7 @@
  * Copy Right IJH.CC
  * Each engineer has a duty to keep the code elegant
  * Author @shzhrui<Anhuike@gmail.com>
- * $Id: widget.php 9378 2015-03-27 02:07:36Z youyi $
+ * $Id: widget.php 3129 2014-01-20 01:18:18Z youyi $
  */
 
 class Widget_Article extends Model

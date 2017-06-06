@@ -2,7 +2,7 @@
 /**
  * Copy Right IJH.CC
  * Each engineer has a duty to keep the code elegant
- * $Id: systmpl.php 9378 2015-03-27 02:07:36Z youyi $
+ * $Id: systmpl.php 3153 2014-01-21 10:45:56Z youyi $
  */
 
 if(!defined('__CORE_DIR')){

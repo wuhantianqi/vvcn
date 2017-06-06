@@ -46,8 +46,8 @@ window.onload = function(){
 		document.getElementById('notice-msg').innerHTML = '';
 		return;
 	}
-	window.setInterval(function(){
-		if(timer<1){window.clearInterval();
+	window.autoLink_Inter = window.setInterval(function(){
+		if(timer<1){window.clearInterval(window.autoLink_Inter);
 			window.location.href = link;
 			return ;
 		}

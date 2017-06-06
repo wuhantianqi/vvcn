@@ -2,7 +2,7 @@
 /**
  * Copy Right IJH.CC
  * Each engineer has a duty to keep the code elegant
- * $Id: qqlogin.mdl.php 10290 2015-05-16 09:41:00Z maoge $
+ * $Id$
  */
 class Mdl_Member_Qqlogin extends Model
 {
@@ -115,37 +115,48 @@ class Mdl_Member_Qqlogin extends Model
             }
             return true; 
         }else{
-            $graph_url = 'https://graph.qq.com/user/get_user_info?access_token='.$user["access_token"].'&oauth_consumer_key='.$user['qq_app_id'].'&openid='.$user['openid'];
-            $str = K::M('net/http')->http($graph_url, array(), 'GET');
-            $info = json_decode($str,true);
-            if((int)$info['ret'] !== 0){
-                $this->err->add($info['msg'], 501);
-                return false;
-            }
-            $uinqid = 'QQ'.rand(10000000,99999999);
-            if(!$uname = K::M('member/account')->check_uname($info['nickname'])){
-                if(!$uname = K::M('member/account')->check_uname('QQ'.$info['nickname'])){
-                    $uname = $uinqid;
-                }
-                $this->err->clean();
-            }
-            $realname = trim($info['nickname']);
-            $a = array(
-                'uname'       => $uname,
-                'mail'        => $uinqid.'@qq.com',
-                'passwd'      => substr(md5($uinqid),rand(5, 20),7),
-                'realname'    => $realname
-            );
-            if($uid = K::M('member/account')->create($a)){
-                K::M('connect/connect')->update($connect['connect_id'],array('uid'=>$uid), true);
-                K::M('member/member')->update($uid, array('realname'=>$info['nickname']), true);
-                if($face = file_get_contents($info['figureurl_qq_2'])){
-                    K::M('member/face')->update_face($uid, '', $face);
-                }
-                K::M('member/auth')->manager($uid);
-                return true;
-            }
+			if(defined('IN_MOBILE')){
+				$url = K::M('helper/link')->mklink('mobile/passport:qqreg',array($user["access_token"], $user['qq_app_id'], $user['openid']));
+			}else{
+				$url = K::M('helper/link')->mklink('qqreg',array($user["access_token"], $user['qq_app_id'], $user['openid']));
+			}
+			
+            header("Location: {$url}");
         }
         return false;
     }
+
+	public function qqreg($access_token,$qq_app_id,$openid,$uname,$passwd)
+	{
+		if(!$connect = K::M('connect/connect')->detail_by_openid($this->_type_id,$openid)){
+            $connect['connect_id'] = K::M('connect/connect')->create(array('type'=> $this->_type_id,'open_id'=> $openid));
+        }
+		$graph_url = 'https://graph.qq.com/user/get_user_info?access_token='.$access_token.'&oauth_consumer_key='.$qq_app_id.'&openid='.$openid;
+		$str = K::M('net/http')->http($graph_url, array(), 'GET');
+		$info = json_decode($str,true);
+		if((int)$info['ret'] !== 0){
+			$this->err->add($info['msg'], 501);
+			return false;
+		}
+		if(!$uname = K::M('member/account')->check_uname($uname)){
+			 $this->err->add('该用户名已经存在', 201);
+		}else{
+			$realname = trim($info['nickname']);
+			$a = array(
+				'uname'       => $uname,
+				'mail'        => $uname.'@qq.com',
+				'passwd'      => $passwd,
+				'realname'    => $realname
+			);
+			if($uid = K::M('member/account')->create($a)){
+				K::M('connect/connect')->update($connect['connect_id'],array('uid'=>$uid), true);
+				K::M('member/member')->update($uid, array('realname'=>$info['nickname']), true);
+				if($face = file_get_contents($info['figureurl_qq_2'])){
+					K::M('member/face')->update_face($uid, '', $face);
+				}
+				K::M('member/auth')->manager($uid);
+				return true;
+			}
+		}
+	}
 }

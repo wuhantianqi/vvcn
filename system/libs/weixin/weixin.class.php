@@ -56,9 +56,11 @@ class WeChatServer {
         if (!isset($this->classes[$hook['class']])) {
             $this->classes[$hook['class']] = new $hook['class'];
         }
+
         if (!method_exists($this->classes[$hook['class']], $hook['method'])) {
             return null;
         }
+
         $param = func_get_args();
         array_shift($param);
         return $this->classes[$hook['class']]->$hook['method']($param);
@@ -455,7 +457,7 @@ class WeChatClient {
 
         curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, FALSE);
         curl_setopt($ch, CURLOPT_SSL_VERIFYHOST, FALSE);
-
+		
         if (!curl_exec($ch)) {
             error_log(curl_error($ch));
             $data = '';
@@ -559,7 +561,6 @@ class WeChatClient {
     public function download($mid) {
         $access_token = $this->getAccessToken();
         $url = self::$_URL_FILE_API_ROOT . "/cgi-bin/media/get?access_token=$access_token&media_id=$mid";
-
         return self::get($url);
     }
 

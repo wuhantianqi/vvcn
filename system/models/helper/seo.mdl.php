@@ -3,7 +3,7 @@
  * Copy Right IJH.CC
  * Each engineer has a duty to keep the code elegant
  * Author @shzhrui<Anhuike@gmail.com>
- * $Id: seo.mdl.php 9378 2015-03-27 02:07:36Z youyi $
+ * $Id: seo.mdl.php 6035 2014-08-06 15:29:10Z youyi $
  */
 
 class Mdl_Helper_Seo

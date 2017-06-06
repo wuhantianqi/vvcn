@@ -1,0 +1,102 @@
+<{include file="block/header.html"}>
+<link href="/themes/default/topics/static/style/topics.css" rel="stylesheet" type="text/css">
+<div class="subwd">
+	<div class="topics_date">
+		<div class="dateTit">
+			<h2>填写申请资料</h2>
+		</div>
+		<div class="date_step"><img src="%THEME%/topics/static/images/ed-4.png"></div>
+		<div class="date_cont">
+			<form action="<{link ctl='topics:reg4' http='base'}>" method="post"  ENCTYPE="multipart/form-data"  onsubmit="return check()">
+            <input type="hidden" name="topics_id" value="<{$topics_id}>">
+				<div class="info job_info">
+					
+					<dl class="phone-no">
+						<dt>开户银行：</dt>
+						<dd>
+							<select name="data[bank]" class="select text normal" >
+                            	<{foreach $bank as $k => $item}>
+                                	<option <{if $topics.bank == $k}>  selected="selected" <{/if}> value="<{$k}>"><{$item.title}></option>
+                                <{/foreach}>
+								
+							</select>
+						</dd>
+					</dl>
+					<dl>
+						<dt>银行卡号：</dt>
+						<dd>
+							<input class="input text normal" placeholder="请输入您的银行卡号" id='bank_card'  name="data[bank_card]" value="<{$topics.bank_card}>" type="text">
+						</dd>
+					</dl>
+					<dl>
+						<dt>银行预留手机号：</dt>
+						<dd>
+							<input class="input text normal"  id='phone' placeholder="请填写您在银行预留的手机号码" name="data[mobile]" value="<{$topics.mobile}>" type="text">
+						</dd>
+					</dl>
+					<dl>
+						<dt>验证码：</dt>
+						<dd>
+							<input class="input text normal lt" placeholder="请输入短信验证码" name="data[code]" type="text">
+                            <div  id='code' class="hqyz"><a id='show_loading' class="none"></a><a login="passport:sendsms" class="pink_but">获取验证码</a></div>
+						</dd>
+					</dl>
+					
+				</div>
+				<div class="btnbar">  <input class="btn btn_sub_big" type="submit" value="下一步" /><a href="<{link ctl='topics:reg3' http='base'}>" class="btn btn_sub_big btn_fanhui">返回</a></div>
+			</form>
+		</div>
+	</div>
+</div>
+<script type="text/javascript" src="<{$pager.res}>/script/cloud-zoom.js"></script>
+<script type="text/javascript" src="<{$pager.res}>/script/raty/jquery.raty.js"></script>
+<script>
+	(function(K, $){
+		 $("[login]").click(function(e){
+			var link = "<{link ctl='topics/sendsms'  arg0='#phone#' http='base'}>";
+			var phone = $("#phone").val();
+			
+			var last_time = 60;
+			var __interval = null;
+			$.getJSON(link.replace("#phone#", phone), function(ret){
+				if(ret.error){
+					Widget.MsgBox.error(ret.message.join(""));
+				}else{
+					__interval = setInterval(function(){
+						last_time --;
+						if(last_time >0){
+							$("#show_loading").html("重新获取（"+last_time+"）秒").show();
+							$("[login]").hide();
+						}else{
+							clearInterval(__interval);
+							last_time = 60;
+							$("#show_loading").hide();
+							$("[login]").show();
+						}
+					}, 1000);
+				}
+			});
+		});
+	})(window.KT, window.jQuery);
+</script>
+<script language="javascript" type="text/javascript">
+	function check() {
+		var bank_card = $("#bank_card").val();
+		var phone = $("#phone").val();
+		var isMobile = /^(((13[0-9]{1})|(15[0-9]{1})|(18[0-9]{1})|(17[0-9]{1})|(14[0-9]{1}))+\d{8})$/;  
+        var isPhone = /^(?:(?:0\d{2,3})-)?(?:\d{7,8})(-(?:\d{3,}))?$/;
+       
+		if ((isMobile.test(phone) && phone.length == 11)||(isPhone.test(phone))) {
+		}else{
+			Widget.MsgBox.error("电话号码有误");
+			return false; 	
+		}
+		var isbank = /^(\d+)$/;
+		if(!isbank.exec(bank_card)){
+			Widget.MsgBox.error("银行卡有误");
+			return false;  	
+		}
+        return true;  
+    }  
+</script>
+<{include file="block/small-footer.html"}> 

@@ -3,7 +3,7 @@
  * Copy Right IJH.CC
  * Each engineer has a duty to keep the code elegant
  * Author shzhrui<anhuike@gmail.com>
- * $Id: index.ctl.php 9378 2015-03-27 02:07:36Z youyi $
+ * $Id: index.ctl.php 6068 2014-08-11 07:39:50Z youyi $
  */
 
 if(!defined('__CORE_DIR')){
@@ -103,10 +103,10 @@ class Ctl_Index extends Ctl
             }
             $this->err->show("?index-login.html");
         }else{
-            $this->pagedata['admin'] = $access['verifycode']['admin'];
+			$this->pagedata['admin'] = $access['verifycode']['admin'];
             $this->tmpl = 'admin:page/login.html';
             $this->output();
-        }
+        }        
     }
 
     public function loginout()

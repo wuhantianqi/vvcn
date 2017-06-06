@@ -3,19 +3,109 @@
 <{include file="mobile/block/sheader.html"}>
 <body>
 <iframe id="miniframe" name="miniframe" style="display:none;"></iframe>
-<div class="top nowrap">
-    <div class="sub_top">
-        <{if !$is_index_home}>
-        <a href="<{if $pager.backurl}><{$pager.backurl}><{else}><{link ctl='mobile/index'}><{/if}>" class="lt app_ico top_lt"></a>
-        <{elseif $CONFIG.site.multi_city}>
-        <a href="<{link ctl='mobile/city'}>" class="lt city_link"><span class="app_ico city_ico"></span><{$request.city.city_name}>切换</a>
-        <{/if}>
-        <{$tpl_page_title|default:$pager.title|default:$CONFIG.mobile.title}>
-        <p class="rt"><a href="<{link ctl='mobile/ucenter/index'}>" class="app_ico login_ico"></a>
-        <{if !$is_index_home}><a href="#" class="app_ico top_rt" id="dt-hd-nav"></a><{/if}>
-        </p>
-        <{include file="mobile/block/nav.html"}>
-    </div>
-</div>
-<div class="mb10"></div>
-<div class="content">
+
+<header>
+	<{if !$is_index_home}>
+	<i class="left"><a href="<{if $pager.backurl}><{$pager.backurl}><{else}><{link ctl='mobile/index'}><{/if}>" id="gobackIco"></a></i>
+    <{elseif $CONFIG.site.multi_city}>
+    <i class="left"><a href="<{link ctl='mobile/city'}>" id="logoIco"></a><a href="<{link ctl='mobile/city'}>" class="city"><{$request.city.city_name}>切换</a></i>
+    <{/if}>
+    <div class="title"><{$tpl_page_title|default:$pager.title|default:$CONFIG.mobile.title}></div>
+    <i class="right"><a href="<{link ctl='mobile/ucenter/index'}>" id="loginIco"></a><a href="#" class="menuIco" id="dt-hd-nav"></a></i>
+    <{include file="mobile/block/nav.html"}>
+</header>
+
+
+<script type="text/javascript">
+$(document).ready(function () {
+	/*轮播幻灯图开始*/
+	$('.flexslider').flexslider({
+		directionNav: true,
+		pauseOnAction: false,
+		/*slideshow: false,*/
+		/*touch:true,*/
+	});
+	/*轮播幻灯图结束*/
+	
+	/*首页效果图切换效果开始*/	
+	TouchSlide({ 
+		slideCell:"#effectImg",
+		effect:"leftLoop" ,
+	});
+	/*首页效果图切换效果结束*/
+});
+
+/*首页最新招标内容滚动开始*/
+(function($){
+	$.fn.myScroll = function(options){
+	//默认配置
+	var defaults = {
+		speed:40,  //滚动速度,值越大速度越慢
+		rowHeight:24 //每行的高度
+	};
+	var opts = $.extend({}, defaults, options),intId = [];
+	function marquee(obj, step){
+	
+		obj.find("ul").animate({
+			marginTop: '-=1'
+		},0,function(){
+				var s = Math.abs(parseInt($(this).css("margin-top")));
+				if(s >= step){
+					$(this).find("li").slice(0, 1).appendTo($(this));
+					$(this).css("margin-top", 0);
+				}
+			});
+		}
+		
+		this.each(function(i){
+			var sh = opts["rowHeight"],speed = opts["speed"],_this = $(this);
+			intId[i] = setInterval(function(){
+				if(_this.find("ul").height()<=_this.height()){
+					clearInterval(intId[i]);
+				}else{
+					marquee(_this, sh);
+				}
+			}, speed);
+
+			_this.hover(function(){
+				clearInterval(intId[i]);
+			},function(){
+				intId[i] = setInterval(function(){
+					if(_this.find("ul").height()<=_this.height()){
+						clearInterval(intId[i]);
+					}else{
+						marquee(_this, sh);
+					}
+				}, speed);
+			});
+		
+		});
+
+	}
+
+})(jQuery);
+$(".index_nwod_box li:odd").addClass('grayBg');	
+
+/*首页最新招标内容滚动结束*/
+
+/*首页装修服务表单消息开始*/
+$(function(){
+	var scrtime;
+	$(".form_news").hover(function(){
+		clearInterval(scrtime);
+	},function(){
+	scrtime = setInterval(function(){
+		var $ul = $(".form_news ul");
+		var liHeight = $ul.find("li:last").height();
+		$ul.animate({marginTop : liHeight + 0.3 + "rem"},500,function(){
+		
+		$ul.find("li:last").prependTo($ul)
+		$ul.find("li:first").hide();
+		$ul.css({marginTop:0});
+		$ul.find("li:first").fadeIn(800);
+		});
+	},2000);
+	}).trigger("mouseleave");
+});
+/*首页装修服务表单消息结束*/	
+</script>

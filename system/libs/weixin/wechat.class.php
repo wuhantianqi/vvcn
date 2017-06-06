@@ -2,7 +2,7 @@
 /**
  * Copy Right IJH.CC
  * Each engineer has a duty to keep the code elegant
- * $Id: wechat.class.php 9378 2015-03-27 02:07:36Z youyi $
+ * $Id$
  */
 
 class WeixinWechat
@@ -50,7 +50,7 @@ class WeixinWechat
     {
         $msg ['Voice'] ['MediaId'] = $media_id;
         $msg ['Voice'] ['MediaId'] = $media_id;
-        $this->_replyData ( $msg, 'voice' );
+        $this->_replyData ( $msg,'voice');
     }
     /* 回复视频消息 */
     public function replyVideo($media_id, $title = '', $description = '')
@@ -58,7 +58,7 @@ class WeixinWechat
         $msg ['Video'] ['MediaId'] = $media_id;
         $msg ['Video'] ['Title'] = $title;
         $msg ['Video'] ['Description'] = $description;
-        $this->_replyData ( $msg, 'video' );
+        $this->_replyData ($msg,'video');
     }
     /* 回复音乐消息 */
     public function replyMusic($media_id, $title = '', $description = '', $music_url, $HQ_music_url)
@@ -432,6 +432,9 @@ class WeChatClient {
         }
     }
 
+
+	
+
     // *************** media file upload/download ************
     public function upload($type, $file_path, $mediaidOnly = 1) {
         $access_token = $this->getAccessToken();
@@ -769,6 +772,131 @@ class WeChatClient {
         return $res;
     }
 
+	public function getShopToken($shop,$tokenOnly = 1, $nocache = 0) {
+        global $_G;
+        $myTokenInfo = null;
+        $appid = $shop['appid'];
+        $appsecret = $shop['secret'];
+        $cachename = 'wechatat_' . $appid;
+
+        if ($nocache || empty(self::$_accessTokenCache[$appid])) {
+            self::$_accessTokenCache[$appid] = K::M('cache/cache')->get($cachename);
+        }
+
+        // check cache
+        if (!empty(self::$_accessTokenCache[$appid])) {
+            $myTokenInfo = self::$_accessTokenCache[$appid];
+            if (time() < $myTokenInfo['expiration']) {
+                return $tokenOnly ? $myTokenInfo['token'] : $myTokenInfo;
+            }
+        }
+
+        // get new token
+        $url = self::$_URL_API_ROOT . "/cgi-bin/token?grant_type=client_credential&appid=$appid&secret=$appsecret";
+
+        $json = self::get($url);
+        $res = json_decode($json, true);
+        if (self::checkIsSuc($res)) {
+            // update cache
+            self::$_accessTokenCache[$appid] = $myTokenInfo = array(
+                'token' => $res['access_token'],
+                'expiration' => time() + (int) $res['expires_in']
+            );
+            K::M('cache/cache')->get($cachename, $myTokenInfo, $res['expires_in']);
+        }
+        return $tokenOnly ? $myTokenInfo['token'] : $myTokenInfo;
+    }
+
+	//卡卷
+
+	public function getcardlist($shop)
+	{
+		$access_token = $this->getShopToken($shop);
+		$url = "https://api.weixin.qq.com/card/batchget?access_token=$access_token";
+		$data['offset'] = 0;
+		$data['count'] = 50;
+        $data = json_encode($data);
+        $res = self::post($url, $data);
+        return $res;
+	}
+
+	//获取我的详情
+
+	public function getmycarddetail($shop,$openid)
+	{
+		$access_token = $this->getShopToken($shop);
+		$url = "https://api.weixin.qq.com/card/user/getcardlist?access_token=$access_token";
+		$data['openid'] = $openid;
+        $data = json_encode($data);
+        $res = self::post($url, $data);
+        return $res;
+	}
+
+	//获取卡券详情
+	public function getcarddetail($shop,$card_id)
+	{
+		$access_token = $this->getShopToken($shop);
+		$url = "https://api.weixin.qq.com/card/get?access_token=$access_token";
+		$data['card_id'] = $card_id;
+        $data = json_encode($data);
+        $res = self::post($url, $data);
+        return $res;
+	}
+
+	//投放
+
+	public function get_card($shop,$id)
+	{
+		$access_token = $this->getShopToken($shop);
+		$url = "https://api.weixin.qq.com/card/qrcode/create?access_token=$access_token";
+		
+		$data['action_name'] = "QR_CARD";
+		$data['expire_seconds'] = 1800;
+		$data['action_info']['card']['card_id'] = $id;
+		$data['action_info']['card']['outer_id'] = 1;
+		$data = json_encode($data);
+        $res = self::post($url, $data);
+        return $res;
+	}
+
+	//查询Code接口
+
+	public function get_code($shop,$id,$code)
+	{
+		$access_token = $this->getShopToken($shop);
+		$url = "https://api.weixin.qq.com/card/code/get?access_token=$access_token";
+		$data['card_id'] = $id;
+		$data['code'] = $code;
+		$data = json_encode($data);
+        $res = self::post($url, $data);
+        return $res;
+	}
+
+	//审消卡劵接口 线下核销 
+
+	public function consume($shop,$id,$code)
+	{
+		$access_token = $this->getAccessToken($shop);
+		$url = "https://api.weixin.qq.com/card/code/consume?access_token=$access_token";
+		$data['card_id'] = $id;
+		$data['code'] = $code;
+		$data = json_encode($data);
+        $res = self::post($url, $data);
+        return $res;
+	}
+
+	//删除卡劵接口 
+
+	public function delete_card($shop,$id)
+	{
+		$access_token = $this->getAccessToken();
+		$url = "https://api.weixin.qq.com/card/delete?access_token=$access_token";
+		$data['card_id'] = $id;
+		$data = json_encode($data);
+        $res = self::post($url, $data);
+        return $res;
+	}
+
     // ************************** qr code *****************
     public static function getQrcodeImgByTicket($ticket) {
         return self::get($this->getQrcodeImgUrlByTicket($ticket));
@@ -816,6 +944,21 @@ class WeChatClient {
             );
         }
         return null;
+    }
+
+    public function getJsApiTicket()
+    {
+        $access_token = $this->getAccessToken();
+        $url = self::$_URL_API_ROOT . "/cgi-bin/ticket/getticket?type=jsapi&access_token=$access_token";
+        $res = self::post($url, $data);
+        $res = json_decode($res, true);
+
+        if (self::checkIsSuc($res)) {
+            return $ticketOnly ? $res['ticket'] : array(
+                'ticket' => $res['ticket'],
+                'expires_in' => $res['expires_in']
+            );
+        }        
     }
 
     public function sendTempMsg($openid, $template_id, $url, $params)

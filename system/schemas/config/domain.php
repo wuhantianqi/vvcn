@@ -70,4 +70,24 @@ return array (
     'html' => false,
     'empty' => false,
   ),
+  'company' => 
+  array (
+    'label' => '公司主页',
+    'field' => 'company',
+    'type' => 'text',
+    'default' => '',
+    'comment' => '开启后公司可以绑定子域名',
+    'html' => false,
+    'empty' => false,
+  ),
+  'shop' => 
+  array (
+    'label' => '商家主页',
+    'field' => 'shop',
+    'type' => 'text',
+    'default' => '',
+    'comment' => '开启后商铺可以绑定子域名',
+    'html' => false,
+    'empty' => false,
+  ),
 );

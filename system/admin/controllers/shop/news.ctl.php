@@ -2,7 +2,7 @@
 /**
  * Copy Right IJH.CC
  * Each engineer has a duty to keep the code elegant
- * $Id: news.ctl.php 9378 2015-03-27 02:07:36Z youyi $
+ * $Id: news.ctl.php 5867 2014-07-12 02:04:39Z youyi $
  */
 
 if(!defined('__CORE_DIR')){
@@ -25,7 +25,9 @@ class Ctl_Shop_News extends Ctl
             if(is_numeric($SO['audit'])){$filter['audit'] = $SO['audit'];}
             if($SO['title']){$filter['title'] = "LIKE:%".$SO['title']."%";}
         }
-		
+		if(CITY_ID){
+			$filter['city_id'] = CITY_ID;
+		}
         if($items = K::M('shop/news')->items($filter, null, $page, $limit, $count)){
         	$pager['count'] = $count;
         	$pager['pagebar'] = $this->mkpage($count, $limit, $page, $this->mklink(null, array('{page}')), array('SO'=>$SO));
@@ -56,7 +58,9 @@ class Ctl_Shop_News extends Ctl
             if(!$data = $this->GP('data')){
                 $this->err->add('非法的数据提交', 201);
             }else{
-				
+				if(CITY_ID){
+					$data['city_id'] = CITY_ID;
+				}
                 if($news_id = K::M('shop/news')->create($data)){
                     $this->err->add('添加内容成功');
                     $this->err->set_data('forward', '?shop/news-index.html');

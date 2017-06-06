@@ -1,44 +1,55 @@
 <{assign var="tpl_page_title" value="商品详情"}>
 <{include file="mobile/block/header.html"}>
-<div class="pding banner" style="padding:0px;">
-    <ul>
-        <{foreach $product_photo_list as $v}>
-        <li><img src="<{$pager.img}>/<{$v.photo}>"/></li>
-     <{/foreach}>
-    </ul>
-    <span class="identify"><{foreach $product_photo_list as $v}><em></em><{/foreach}></span>
+<section id="" class="page_center_box">
+<div class="banner" style="padding:0px;">
+	<ul>
+		<{foreach $product_photo_list as $v}>
+		<li><img src="<{$pager.img}>/<{$v.photo}>"/></li>
+		<{/foreach}>
+	</ul>
+	<span class="identify"><{foreach $product_photo_list as $v}><em></em><{/foreach}></span> </div>
+<div class="zxCompany_intro">
+	<div class="nrBox mb10">
+		<div class="nr lh30">
+			<h1><{$detail.title}></h1>
+			<p><b class="fontcl2" id="product_spec_price">￥<{$detail.price}></b>&nbsp;<del class="black9">￥<{$detail.market_price}></del></p>
+			<a href="<{link ctl='mobile/shop' arg0=$detail.shop_id}>" class="long_btn">进入店铺</a> </div>
+	</div>
+	<div class="nrBox mb10">
+		<div class="nr lh30">
+			<input type="hidden" id="product_spec_id" value="0" />
+			<{if $detail.sale_type == 1}>
+			<p>库存：<font class="pointcl" id="product_sale_sku"><{$detail.sale_sku-$detail.sale_count|default:'缺货'}></font></p>
+			<{else}>
+			<p>库存：<font class="pointcl" id="product_sale_sku"><{$detail.store|default:'缺货'}></font></p>
+			<{/if}>
+			<p>分类：<{$detail.cate_name}></p>
+			<{if $product_spec_list}>
+			<p class="goods_guig" id="product_spec_list">规格：<{foreach $product_spec_list as $v}><a href="javascript:;" spec_id="<{$v.spec_id}>"><{$v.spec_name}> <i class="app_ico"></i></a><{/foreach}></p
+    >
+			<{/if}>
+			<p>数量：<a class="jian count_ico" quantity="-"></a>
+				<input type="text" id="cart_product_num" class="buy_count_text" value="1" />
+				<a class="jia count_ico" quantity="+"></a></p>
+		</div>
+	</div>
+	<div class="applyDesign"> <{if $detail.onsale == 'Y' && $detail.onpayment}> <a href="javascript:;" cart="buy:<{$detail.product_id}>" id='sku_show' class="btn">立即购买</a> <{/if}> <a href="<{link ctl='mobile/product:yuyue' arg0=$detail.product_id}>"  class="btn">预约购买</a></div>
+	<div class="nrBox mb10">
+		<div class="nr lh30">
+			<h2><{$detail.name}></h2>
+			<p><span class="fl"><b class="fontcl2">￥<{$detail.price}></b>&nbsp;<del class="black9">￥<{$detail.market_price}></del></span><a href="#" class="fr btn pdBtn">预约购买</a></p>
+			<div class="clear"></div>
+		</div>
+	</div>
+	<div class="nrBox mb10">
+		<h3>商品详情</h3>
+		<div class="nr">
+			<div class="article"><{$fields.info}></div>
+		</div>
+	</div>
 </div>
-<div class="pding sub_goods_intro mb10">
-    <h2><{$detail.title}></h2>
-    <p><b class="fontcl2" id="product_spec_price">￥<{$detail.price}></b></span><del>￥<{$detail.market_price}></del></p>
-    <a href="<{link ctl='mobile/shop' arg0=$detail.shop_id}>" class="btn dim_btn">进入店铺</a>
-</div>
-<div class="pding sub_goods_intro sub_goods_gm mb10">
-    <input type="hidden" id="product_spec_id" value="0" />
-    <{if $detail.sale_type == 1}>
-    <p>库存：<font class="pointcl" id="product_sale_sku"><{$detail.sale_sku-$detail.sale_count|default:'缺货'}></font></p>
-    <{else}>
-    <p>库存：<font class="pointcl" id="product_sale_sku"><{$detail.store|default:'缺货'}></font></p>
-    <{/if}>
-    <p>分类：<{$detail.cate_name}></p>
-    <{if $product_spec_list}>
-    <p class="goods_guig" id="product_spec_list">规格：<{foreach $product_spec_list as $v}><a href="javascript:;" spec_id="<{$v.spec_id}>"><{$v.spec_name}> <i class="app_ico"></i></a><{/foreach}></p
-    ><{/if}>
-    <p>数量：<a class="jian count_ico" quantity="-"></a><input type="text" id="cart_product_num" class="buy_count_text" value="1" /><a class="jia count_ico" quantity="+"></a></p>
-    <{if $detail.onsale == 'Y' && $detail.onpayment}>
-     <a href="javascript:;" cart="buy:<{$detail.product_id}>" id='sku_show' class="btn mainbtn_full lt">立即购买</a>
-    <{/if}>   
-    <a href="<{link ctl='mobile/product:yuyue' arg0=$detail.product_id}>"  class="btn subbtn_full rt">预约购买</a>
-    <div class="cl"></div>
-</div>
-<div class="pding sub_goods_intro mb10">
-	<h2><{$detail.name}></h2>
-	<p><span class="lt"><b class="fontcl2"><del>￥<{$detail.market_price}></del></b></span>￥<{$detail.price}></span><a href="#" class="rt btn mainbtn">预约购买</a></p>
-</div>
-<p class="pub_tit">商品详情</p>
-<div class="pding content"><{$fields.info}></div>
-<script type="text/javascript" src="%THEME%/mobile/static/script/flipsnap.min.js"></script>
-<script type="text/javascript" src="%THEME%/mobile/static/script/banner.js"></script>
+<script type="text/javascript" src="%THEME%/mobile/static/script/flipsnap.min.js"></script> 
+<script type="text/javascript" src="%THEME%/mobile/static/script/banner.js"></script> 
 <script type="text/javascript">
 var product_sale_sku = <{if $detail.sale_type==1}><{$detail.sale_sku-$detail.sale_count}><{else}><{$detail.store|default:0}><{/if}>;
 $(document).ready(function(){
@@ -123,7 +134,5 @@ $("[cart]").click(function(e){
 
     });
 });
-</script>
-
-
-<{include file="mobile/block/footer.html"}>
+</script> 
+<{include file="mobile/block/footer.html"}> 

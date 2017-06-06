@@ -3,7 +3,7 @@
  * Copy Right Anuike.com
  * Each engineer has a duty to keep the code elegant
  * Author @shzhrui<Anhuike@gmail.com>
- * $Id: widget.php 9378 2015-03-27 02:07:36Z youyi $
+ * $Id: widget.php 5605 2014-06-23 11:04:22Z youyi $
  */
 
 class Widget_Product extends Model

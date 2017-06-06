@@ -1,0 +1,68 @@
+<{assign var="tpl_page_title" value="装修保报名"}>
+<{include file="mobile/block/header.html"}>
+<header class="control">
+	<i class="left"><a href="<{if $pager.backurl}><{$pager.backurl}><{else}><{link ctl='mobile/index'}><{/if}>" id="gobackIco"></a></i>
+    <div class="title">装修保报名</div>
+    <i class="right"></i>
+</header>
+
+<section id="" class="page_center_box">
+	<{if !$items}><div class="pding"><div class="no_record">暂无记录信息</div></div><{/if}>
+    
+    <{foreach $items as $item}>
+    <div class="mb10 loginInfor_mtn">
+		<div class="loginInfor">
+			<div class="loginIf_list">
+				<div class="fl ifIco"><i class="icco icco1"></i> </div>
+				<div class="ifInput">
+					姓名：<{$item.contact}>
+				</div>
+				<div class="clear"></div>
+			</div>
+			<div class="loginIf_list">
+				<div class="fl ifIco"><i class="icco icco2"></i> </div>
+				<div class="ifInput">
+					电话：<{$item.mobile}>
+				</div>
+				<div class="clear"></div>
+			</div>
+            <div class="loginIf_list">
+				<div class="fl ifIco"><i class="icco icco10"></i> </div>
+				<div class="ifInput">
+					当前状态：<{$status[$item.status]}>
+				</div>
+				<div class="clear"></div>
+			</div>
+            
+             <{if $item.status>=2}>
+            <div class="loginIf_list">
+				<div class="fl ifIco"><i class="icco icco4"></i> </div>
+				<div class="ifInput">
+					公司名称：<{$company_list[$item.company_id].name|default:'--'}>
+				</div>
+				<div class="clear"></div>
+			</div>
+            <{/if}>
+			<div class="loginIf_list">
+				<div class="fl ifIco"><i class="icco icco3"></i> </div>
+				<div class="ifInput">
+					报名时间：<{$item.dateline|format}>
+				</div>
+				<div class="clear"></div>
+			</div>
+			<div class="loginIf_list">
+				<div class="fl ifIco"><i class="icco icco5"></i> </div>
+				<div class="ifInput">
+					备注说明：<{$item.comment|default:'--'}>
+				</div>
+				<div class="clear"></div>
+			</div>
+            <div class="yuee_btn"> <a href="<{link ctl='mobile/ucenter/member:zxb_lists' arg0=$item.zxb_id}>" class="btn">查看详情</a></div>
+		</div>
+	</div>
+    <{/foreach}>
+</section>
+
+</body>
+</html>
+

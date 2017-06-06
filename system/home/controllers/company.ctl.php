@@ -2,7 +2,7 @@
 /**
  * Copy Right IJH.CC
  * Each engineer has a duty to keep the code elegant
- * $Id: company.ctl.php 10596 2015-06-02 09:37:54Z wanglei $
+ * $Id$
  */
 
 class Ctl_Company extends Ctl
@@ -28,7 +28,7 @@ class Ctl_Company extends Ctl
         $company = $this->check_company($company_id);
         $company['desc'] = K::M('content/html')->text($company['info']);
         $this->pagedata['company'] = $company;
-		$comment_list = K::M('company/comment')->items(array('company_id'=>$company_id,'audit'=>'1'),null, 1, 4);
+		$comment_list = K::M('company/comment')->items(array('company_id'=>$company_id,'audit'=>'1'), null, 1, 4);
 		
 		$uids = array();
 		foreach($comment_list as $k => $v){
@@ -37,21 +37,16 @@ class Ctl_Company extends Ctl
 		if($uids){
 			$this->pagedata['member_list'] = K::M('member/member')->items_by_ids($uids);
 		}
+		$this->pagedata['mobile_url'] = $this->mklink('mobile/company', array($company_id));
 		$this->pagedata['comment_list'] = $comment_list;        
         $this->seo->set_company($company);
         $this->seo->init('company');
-        $this->tmpl = 'company/index.html';
+		if($company['skin'] == 'default'){
+			$this->tmpl = 'company/index.html';
+		}else{
+			$this->tmpl = 'company/'.$company['skin'].'/index.html';
+		}
     }
-
-	public function detail_c($company_id)
-	{
-		$company = $this->check_company($company_id);
-        $company['desc'] = K::M('content/html')->text($company['info']);
-        $this->pagedata['company'] = $company;
-		$case = K::M('case/case')->items(array('company_id'=>$company_id),null, 1, 4);
-		$this->pagedata['case'] = $case;
-		$this->tmpl = 'company/detail_c.html';
-	}
 
     public function about($company_id)
     {
@@ -59,7 +54,11 @@ class Ctl_Company extends Ctl
         $this->pagedata['photo_list'] = K::M('company/photo')->items_by_company($company_id);
         $this->seo->set_company($company);
         $this->seo->init('company');
-        $this->tmpl = 'company/about.html';
+		if($company['skin'] == 'default'){
+			$this->tmpl = 'company/about.html';
+		}else{
+			$this->tmpl = 'company/'.$company['skin'].'/about.html';
+		}
     }
 
     public function youhui($company_id, $page=1)
@@ -79,7 +78,11 @@ class Ctl_Company extends Ctl
         $this->pagedata['pager'] = $pager;
         $this->seo->set_company($company);
         $this->seo->init('company');
-        $this->tmpl = 'company/youhui.html';
+		if($company['skin'] == 'default'){
+			$this->tmpl = 'company/youhui.html';
+		}else{
+			$this->tmpl = 'company/'.$company['skin'].'/youhui.html';
+		}
     }
 
     public function news($company_id, $page=1)
@@ -96,8 +99,12 @@ class Ctl_Company extends Ctl
         }
         $this->pagedata['pager'] = $pager;
         $this->seo->set_company($company); 
-        $this->seo->init('company');  
-        $this->tmpl = 'company/news.html';
+        $this->seo->init('company');
+		if($company['skin'] == 'default'){
+			$this->tmpl = 'company/news.html';
+		}else{
+			$this->tmpl = 'company/'.$company['skin'].'/news.html';
+		}
     }
 
     public function cases($company_id, $page=1)
@@ -108,7 +115,7 @@ class Ctl_Company extends Ctl
         $pager['limit'] = $limit = 12;
         $pager['count'] = $count = 0;
         $filter = array('audit'=>1, 'closed'=>0);
-        $filter['company_id'] = $company_id;
+        $filter['company_id'] = $company_id;        
         if($items = K::M('case/case')->items($filter, null, $page, $limit, $count)){
             $pager['count'] = $count;
             $pager['pagebar'] = $this->mkpage($count, $limit, $page, $this->mklink(null, array($company_id, '{page}')));
@@ -116,8 +123,12 @@ class Ctl_Company extends Ctl
         }
         $this->pagedata['pager'] = $pager;
         $this->seo->set_company($company);
-        $this->seo->init('company');
-        $this->tmpl = 'company/cases.html';
+        $this->seo->init('company');       
+		if($company['skin'] == 'default'){
+			$this->tmpl = 'company/cases.html';
+		}else{
+			$this->tmpl = 'company/'.$company['skin'].'/cases.html';
+		}
     }
 
     public function site($company_id, $page=1)
@@ -128,7 +139,7 @@ class Ctl_Company extends Ctl
         $pager['limit'] = $limit = 9;
         $pager['count'] = $count = 0;
         $filter = array('audit'=>1);
-        $filter['company_id'] = $company_id;     
+        $filter['company_id'] = $company_id;
         if($items = K::M('home/site')->items($filter, null, $page, $limit, $count)){
             $pager['count'] = $count;
             $pager['pagebar'] = $this->mkpage($count, $limit, $page, $this->mklink(null, array($company_id, '{page}')));
@@ -137,7 +148,11 @@ class Ctl_Company extends Ctl
         }
         $this->seo->set_company($company);
         $this->seo->init('company');
-        $this->tmpl = 'company/site.html';
+		if($company['skin'] == 'default'){
+			$this->tmpl = 'company/site.html';
+		}else{
+			$this->tmpl = 'company/'.$company['skin'].'/site.html';
+		}
     }
 
     public function team($company_id, $page=1)
@@ -156,7 +171,11 @@ class Ctl_Company extends Ctl
         $this->pagedata['pager'] = $pager;
         $this->seo->set_company($company);
         $this->seo->init('company');
-        $this->tmpl = 'company/team.html';
+		if($company['skin'] == 'default'){
+			$this->tmpl = 'company/team.html';
+		}else{
+			$this->tmpl = 'company/'.$company['skin'].'/team.html';
+		}
     }
 
     public function comment($company_id, $page=1)
@@ -183,8 +202,20 @@ class Ctl_Company extends Ctl
 		$this->pagedata['comment_yz'] = $access['verifycode']['comment'];
         $this->seo->set_company($company);
         $this->seo->init('company');
-        $this->tmpl = 'company/comment.html';
+		if($company['skin'] == 'default'){
+			$this->tmpl = 'company/comment.html';
+		}else{
+			$this->tmpl = 'company/'.$company['skin'].'/comment.html';
+		}
     }
+
+	public function detail_c($company_id)
+	{
+		$company = $this->check_company($company_id);
+        $company['desc'] = K::M('content/html')->text($company['info']);
+        $this->pagedata['company'] = $company;
+		$this->tmpl = 'company/detail_c.html';
+	}
 
     public function savecomment($company_id=null)
     {
@@ -193,7 +224,7 @@ class Ctl_Company extends Ctl
             $this->error(404);
         }
         $company = $this->check_company($company_id);
-        $allow_comment = K::M('member/group')->check_priv($this->MEMBER['group_id'], 'allow_comment');
+        $allow_comment = K::M('member/group')->check_priv($this->MEMBER['group_id'], 'allow_score');
         if($allow_comment < 0){
             $this->err->add('您是【'.$this->MEMBER['group_name'].'】没有权限发表点评', 333);
         }else if(!$data = $this->checksubmit('data')){

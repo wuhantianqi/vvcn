@@ -2,7 +2,7 @@
 /**
  * Copy Right IJH.CC
  * Each engineer has a duty to keep the code elegant
- * $Id: api.ctl.php 9372 2015-03-26 06:32:36Z youyi $
+ * $Id$
  */
 
 if(!defined('__CORE_DIR')){
@@ -62,18 +62,16 @@ class Ctl_Weixin_Api extends Ctl
                 }else if($content = $weixin['addon']['welcome']['content']){
                     $wechat->replyText($content);
                 }
-            }else if('unsubscribe' == $event){ //取消关注
-
             }else if('scan' == $event){ //二难码                
                 if($openid = $data['FromUserName']){                    
                     if($scene_id = (int)$data['EventKey']){                        
-                        if($row = K::M('weixin/authcode')->detail($scene_id)){               
+                        if($row = K::M('weixin/authcode')->detail($scene_id)){
                             if($row['type'] == 'tenders'){ //关注投标
                                 //$wechat->replyText('发布招标成功:'.$row['addon']['tenders_id']);
                                 if($tenders_id = (int)$row['addon']['tenders_id']){
                                     if($tenders = K::M('tenders/tenders')->detail($tenders_id)){
                                         //更新招标信息，有更进微信通知业主
-                                        K::M('weixin/tenders')->update_openid($tenders_id,$openid);
+                                        K::M('weixin/tenders')->update_openid($tenders_id, $openid);
                                         $CFG = K::$system->_CFG;
                                         $wx_tenders_url = 'weixin/tenders-detail-'.$tenders_id.'.html';
                                         if($CFG['site']['rewrite']){
@@ -85,20 +83,33 @@ class Ctl_Weixin_Api extends Ctl
                                     }
                                 }
                             }else if($row['type'] == 'login'){ //微信登录
-
+                                if($a = K::M('member/weixin')->detail_by_openid($openid)){
+                                    K::M('weixin/authcode')->update($row['id'], array('uid'=>$a['uid'], 'status'=>1, 'addon'=>array('openid'=>$openid)));
+                                }else{
+                                    K::M('weixin/authcode')->update($row['id'], array('status'=>1, 'addon'=>array('openid'=>$openid)));
+                                }
+                                $CFG = K::$system->_CFG;
+                                $wx_login_url = 'weixin/account-login-'.$row['id'].'.html';
+                                if($CFG['site']['rewrite']){
+                                    $wx_login_url = $CFG['site']['siteurl'].'/'.$wx_login_url;
+                                }else{
+                                    $wx_login_url = $CFG['sute']['siteurl'].'/index.php?'.$wx_login_url;
+                                }
+                                $wechat->replyText('<a href="'.$wx_login_url.'">点击立即登录网页</a>');
                             }
-                            if($row['uid']){ //绑定用户
+                            if($row['uid'] && $row['type'] == 'bind'){ //绑定用户
                                 if($member = K::M('member/member')->member($row['uid'])){
                                     if($mwechat = K::M('member/weixin')->detail($row['uid'])){
                                         if($mwechat['openid'] != $openid){
                                             K::M('member/weixin')->update($row['uid'], array('openid'=>$openid, 'dateline'=>__TIME, 'info'=>''));
                                         }
+                                    }else if($wxm = K::M('member/weixin')->detail_by_openid($openid)){
+                                        K::M('member/weixin')->delete($wxm['uid']);
+                                        K::M('member/weixin')->create(array('uid'=>$row['uid'],'openid'=>$openid));
                                     }else{
                                         K::M('member/weixin')->create(array('uid'=>$row['uid'],'openid'=>$openid));
                                     }
-                                    if($row['type'] == 'bind'){ //当是绑定
-                                        $wechat->replyText('绑定微信帐号成功');
-                                    }
+                                    $wechat->replyText('绑定微信帐号成功');
                                 }
                             }
                         }
@@ -123,7 +134,14 @@ class Ctl_Weixin_Api extends Ctl
             if($keywordArr = K::M('weixin/keyword')->detail_by_keyword($key, $weixin['wx_id'])){
                 if($reply_id = (int)$keywordArr['reply_id']){
                     $wechat->replyId($reply_id);
-                }else{
+                }else if($keywordArr['plugin']){ //判断是插件，那个插件，
+					$plugin_arr = explode(':',$keywordArr['plugin']);
+					$plugin = $plugin_arr[0];
+					$plugin_id = $plugin_arr[1];
+					if($news = K::M('weixin/'.$plugin)->format_reply($plugin_id)){
+						$wechat->replyNews($news);
+					}					
+				}else{
                     $wechat->replyText($keywordArr['content']);
                 }
             }else if(!$this->sys_reply($key, $weixin, $wechat)){
@@ -139,6 +157,16 @@ class Ctl_Weixin_Api extends Ctl
     protected function sys_reply($key, $weixin, $wechat)
     {
         //$wechat->replyText('执行这里了:'.$key);exit;
+        if($key == '微官网'){//微信官网
+            //$wechat->replyText('执行这里了143');exit;
+            if($msite = K::M('weixin/msite')->detail($weixin['wx_id'])){
+                $a = array('Title'=>$msite['title'], 'Description'=>$msite['intro']);
+                $a['PicUrl'] =  Mdl_System_Config::$_CFG['attach']['attachurl'].'/'.$msite['photo'];
+                $a['Url'] = Mdl_System_Config::$_CFG['site']['siteurl'].'/index.php?/weixin/msite-'.$msite['wx_id'].'.html';
+                $wechat->replyNews(array($a));
+                return true;
+            }
+        }
         return false;
     }
 

@@ -1771,7 +1771,7 @@ body.preview.install {
 	overflow: hidden;
 }
 #homescreen {
-	background: url(icon@2x.png);
+	background: url(/themes/default/mobile/static/images/apple114.png);
 	background-size: 114px 114px;
 	border-radius: 20px;
 	height: 114px;

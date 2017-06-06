@@ -2,7 +2,7 @@
 /**
  * Copy Right IJH.CC
  * Each engineer has a duty to keep the code elegant
- * $Id: passport.ctl.php 10098 2015-05-06 14:44:00Z youyi $
+ * $Id$
  */
 
 if(!defined('__CORE_DIR')){
@@ -14,9 +14,89 @@ class Ctl_Passport extends Ctl
     
     public function index()
     {
+		
+		
         $this->seo->init('index');
+        $cfg = $this->system->config->get('connect');
+        if($cfg['weixin_is_open']){
+            $this->pagedata['wxlogin_jsqr'] = K::M('member/wxlogin')->wxlogin_jsqr();
+        }
         $this->tmpl = 'passport/login.html';
     }
+
+	public function byphone($from)
+	{
+		if($from == 'member'){
+			if($data = $this->checksubmit('data')){
+				$session =K::M('system/session')->start();
+				if($code = $session->get('code_'.$data['phone'])){
+					if($data['code'] == $code){
+						if($items = K::M('member/member')->items(array('uname'=>$data['phone']),array('uid'=>'desc'),1,1)){
+							foreach($items as $k => $v){
+								$passwd = $v['passwd'];
+							}
+							if($member = $this->auth->login($data['phone'], $passwd, 'uname', true, false)){
+								$this->err->add("{$member[uname]}，欢迎您回来!");
+								if(!$forward = $this->request['forward']){
+									$forward = K::M('helper/link')->mklink('index', array(), array(), 'base');
+								}else if(strpos($forward, 'passport') !== false){
+									$forward = K::M('helper/link')->mklink('ucenter/member:index', array(), array(), 'base');
+								}
+								if(substr($forward, 0, 7) != 'http://'){
+									$forward = '/'.trim($forward, '/');
+								}
+								$this->err->set_data('forward', $forward);
+							}
+					
+						}else{
+							$data['uname'] = $data['phone'];
+							$data['mail'] = $data['phone'].'@qq.com';
+							$data['passwd'] = rand(1000000,9999999);
+							$data['mobile'] = $data['phone'];
+							$data['verify'] = '2';
+							if($detail = K::M('member/member')->items(array('mobile'=>$data['phone']))){
+								$this->err->add('该手机号码已经被注册', 213);
+							}else if($uid = K::M('member/account')->create($data)){
+								K::M('member/magic')->reg_jifen($uid);
+								$this->err->add('恭喜您，注册会员成功');
+								$from_list = K::M('member/member')->from_list();
+								$account_from = $account['from'];
+								if(!$from_list[$account_from]){
+									$account_from = 'member';
+								}
+								$forward = K::M('helper/link')->mklink('ucenter/'.$account_from.':index', array(), array(), 'base');
+								$this->err->set_data('forward', $forward);
+							}
+						}
+					}else{
+						$this->err->add('验证码错误或者已经过期'.$code, 212);
+					}
+					
+				}else{
+						$this->err->add('请获取验证码或手机号码有误', 215);
+				}
+			}else{
+				$this->tmpl = 'passport/byphone.html';
+			}
+		}else{
+			header('Location:'.K::M('helper/link')->mklink('passport-signup:'.$from));
+		}
+	}
+
+	public function sendsms($phone)
+	{
+		if(!$a = K::M('verify/check')->mobile($phone)){
+			$this->err->add('电话号码有误', 212);
+		}else{
+			$code = rand(100000,999999);
+			$session =K::M('system/session')->start();
+            $session->set('code_'.$phone, $code,900); //15分钟缓存
+			$smsdata =  array('code'=>$code);
+			if(K::M('sms/sms')->send($phone, 'login', $smsdata)){
+				$this->err->add('信息发送成功');
+			}
+		}
+	}
 
     public function login()
     {
@@ -49,7 +129,13 @@ class Ctl_Passport extends Ctl
                     if(!$forward = $this->request['forward']){
                         $forward = K::M('helper/link')->mklink('index', array(), array(), 'base');
                     }else if(strpos($forward, 'passport') !== false){
-                        $forward = K::M('helper/link')->mklink('ucenter/member:index', array(), array(), 'base');
+                       if($member['from'] == 'shop' || $member['from'] == 'company'){
+                          $forward = K::M('helper/link')->mklink('scenter/'.$member['from'].':index', array(), array(), 'base');
+                        }else if($member['from'] == 'gz' || $member['from'] == 'designer' || $member['from'] == 'mechanic'){
+                          $forward = K::M('helper/link')->mklink('dcenter/'.$member['from'].':index', array(), array(), 'base');
+                        }else{
+                          $forward = K::M('helper/link')->mklink('ucenter/'.$member['from'].':index', array(), array(), 'base');
+                        }
                     }
                     if(substr($forward, 0, 7) != 'http://'){
                         $forward = '/'.trim($forward, '/');
@@ -96,6 +182,8 @@ class Ctl_Passport extends Ctl
             $from = 'member';
         }
         $pager = array('from'=>$from, 'from_title'=>$from_title);
+        $cfg = K::$system->config->get('sms');
+        $this->pagedata['short_msg'] = $cfg['short_msg'];
         $this->pagedata['pager'] = $pager;
         $this->seo->init('index');
         $this->tmpl = 'passport/signup.html';
@@ -157,6 +245,7 @@ class Ctl_Passport extends Ctl
             }else{
                 $this->error(404);
             }
+			
         }else if($this->checksubmit()){
             if(!$mail = $this->GP('forgotmail')){
                 $this->err->add('找回密码邮箱不正确', 211);
@@ -181,28 +270,39 @@ class Ctl_Passport extends Ctl
             $this->err->add('两次输入的密码不相同', 213);
         }else{
             $access = $this->system->config->get('access');
-            $verifycode_success = true;
-            if($access['verifycode']['signup']){
-                if(!$verifycode = $this->GP('verifycode')){
-                    $verifycode_success = false;
-                    $this->err->add('验证码不正确', 212);
-                }else if(!K::M('magic/verify')->check($verifycode)){
-                    $verifycode_success = false;
-                    $this->err->add('验证码不正确', 212);
-                }
-            }
-            if($verifycode_success){
-                if($uid = K::M('member/account')->create($account)){
-                    $this->err->add('恭喜您，注册会员成功');
-                    $from_list = K::M('member/member')->from_list();
-                    $account_from = $account['from'];
-                    if(!$from_list[$account_from]){
-                        $account_from = 'member';
+            if(!in_array($account['from'], $access['signup_type'])){
+                $this->err->add('不允许注册的用户类型', 213);
+            }else{
+                $verifycode_success = true;
+                if($access['verifycode']['signup']){
+                    if(!$verifycode = $this->GP('verifycode')){
+                        $verifycode_success = false;
+                        $this->err->add('验证码不正确', 212);
+                    }else if(!K::M('magic/verify')->check($verifycode)){
+                        $verifycode_success = false;
+                        $this->err->add('验证码不正确', 212);
                     }
-                    $forward = K::M('helper/link')->mklink('ucenter/'.$account_from.':index', array(), array(), 'base');
-                    $this->err->set_data('forward', $forward);
+                }
+                if($verifycode_success){
+                    if($uid = K::M('member/account')->create($account)){
+                        $this->err->add('恭喜您，注册会员成功');
+                        $from_list = K::M('member/member')->from_list();
+                        $account_from = $account['from'];
+                        if(!$from_list[$account_from]){
+                            $account_from = 'member';
+                        }
+                        if($account_from == 'shop' || $account_from == 'company'){
+                          $forward = K::M('helper/link')->mklink('scenter/'.$account_from.':index', array(), array(), 'base');
+                        }else if($account_from == 'gz' || $account_from == 'designer' || $account_from == 'mechanic'){
+                          $forward = K::M('helper/link')->mklink('dcenter/'.$account_from.':index', array(), array(), 'base');
+                        }else{
+                        $forward = K::M('helper/link')->mklink('ucenter/'.$account_from.':index', array(), array(), 'base');
+                        }
+                        $this->err->set_data('forward', $forward);
+                    }
                 }
             }
+
         }
         K::M('magic/verify')->reset();
     }
@@ -232,13 +332,29 @@ class Ctl_Passport extends Ctl
             die('回传地址有问题2');
         }elseif(!$state = $this->GP('state')){
             die('回传地址有问题1');
-        }elseif(true == K::M('member/qqlogin')->qqcallback($code,$state)){        
+        }elseif(true == K::M('member/qqlogin')->qqcallback($code, $state)){        
             $forward = K::M('helper/link')->mklink('ucenter/member:index', array(), array(), 'base');
             header("Location: {$forward}");
             die;
         }     
-    }
-    
+    }  
+	
+	public function qqreg($access_token,$qq_app_id,$openid)
+	{
+		if($account = $this->GP('account')){
+			 if(K::M('member/qqlogin')->qqreg($this->GP('access_token'),$this->GP('qq_app_id'),$this->GP('openid'),$account['uname'],$account['passwd'])){
+				$this->err->add('恭喜您，注册会员成功');
+				$forward = K::M('helper/link')->mklink('ucenter/member:index', array(), array(), 'base');
+				$this->err->set_data('forward', $forward);
+			 }
+        }else{
+			$this->pagedata['title'] = 'QQ第三方登录';
+            $this->pagedata['access_token'] = $access_token;
+			$this->pagedata['qq_app_id'] = $qq_app_id;
+			$this->pagedata['openid'] = $openid;
+            $this->tmpl = 'passport/thirdreg.html';
+        }
+	}
     
     public function weibo($type=null)
     {
@@ -246,6 +362,7 @@ class Ctl_Passport extends Ctl
             header("Location: {$url}");
             die;
         }
+
     }
     
     public function weibocallback()
@@ -257,6 +374,98 @@ class Ctl_Passport extends Ctl
             header("Location: {$forward}");
            die;
         }     
+    }
+
+	public function weiboreg($openid,$access_token)
+	{
+		if($account = $this->GP('account')){
+			 if(K::M('member/weibo')->weiboreg($this->GP('openid'),$this->GP('access_token'),$account['uname'],$account['passwd'])){
+				$this->err->add('恭喜您，注册会员成功');
+				$forward = K::M('helper/link')->mklink('ucenter/member:index', array(), array(), 'base');
+				$this->err->set_data('forward', $forward);
+			 }
+        }else{
+			$this->pagedata['title'] = '微博第三方登录';
+			$this->pagedata['openid'] = $openid;
+			$this->pagedata['access_token'] = $access_token;
+            $this->tmpl = 'passport/thirdreg2.html';
+        }
+	}
+
+     //WEIXIN 联合登录
+    public function wxlogin($type=null)
+    {
+        if($url = K::M('member/wxlogin')->wxlogin_url($type)){
+            header("Location: {$url}");
+            die;
+        }
+        
+    }
+
+    public function wxcallback()
+    {
+        if(!$code = $this->GP('code')){
+            die('回传地址有问题2');
+        }elseif(!$state = $this->GP('state')){
+            die('回传地址有问题1');
+        }elseif(true == K::M('member/wxlogin')->wxcallback($code, $state)){
+            $forward = K::M('helper/link')->mklink('ucenter/member:index', array(), array(), 'base');
+            header("Location: {$forward}");
+            die;
+        }     
+    }
+
+
+	public function weixinreg($access_token,$openid)
+	{
+		if($account = $this->GP('account')){
+			 if(K::M('member/wxlogin')->weixinreg($this->GP('access_token'),$this->GP('openid'),$account['uname'],$account['passwd'])){
+				$this->err->add('恭喜您，注册会员成功');
+				$forward = K::M('helper/link')->mklink('ucenter/member:index', array(), array(), 'base');
+				$this->err->set_data('forward', $forward);
+			 }
+        }else{
+			$this->pagedata['title'] = '微信第三方登录';
+			$this->pagedata['openid'] = $openid;
+			$this->pagedata['access_token'] = $access_token;
+            $this->tmpl = 'passport/thirdreg3.html';
+        }
+	}
+
+    public function weixin()
+    {
+        if($wechatCfg = $this->system->config->get('wechat')){
+            if($client = K::M('weixin/weixin')->admin_wechat_client()){
+                if($client->weixin_type == 1){
+                    $data = array('uid'=>$uid, 'type'=>'login', 'addon'=>array('tenders_id'=>$tenders_id));
+                    if($scene_id = K::M('weixin/authcode')->create($data)){
+                        if($ticket = $client->getQrcodeTicket(array('scene_id'=>$scene_id, 'expire'=>1800))){
+                            $wx_login_qr = $client->getQrcodeImgUrlByTicket($ticket);
+                            $this->pagedata['wx_login_qr'] = $wx_login_qr;
+                        }
+                        $this->pagedata['qrcode_id'] = $scene_id;
+                    }
+                }
+            }
+            $this->tmpl = 'passport/weixin.html';
+        }        
+    }
+
+    public function wxscanqr($scene_id)
+    {
+        $status = 0;
+        if($row = K::M('weixin/authcode')->detail($scene_id)){
+            if($row['status'] == 1){
+                $status = 'scanqr';
+            }else if($row['status'] == 2){
+                if(K::M('member/auth')->manager($row['uid'])){
+
+                }
+                $status = 'login';
+            }
+        }
+        echo '{"status":"'.$status.'"}';
+        exit;
     }
 
     public function verfiy($type = 'mail',$uid = 0 ,$token = null)

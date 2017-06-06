@@ -3,7 +3,7 @@
  * Copy Right IJH.CC
  * Each engineer has a duty to keep the code elegant
  * Author @shzhrui<Anhuike@gmail.com>
- * $Id: cate.mdl.php 9378 2015-03-27 02:07:36Z youyi $
+ * $Id: cate.mdl.php 2108 2013-12-11 11:21:31Z youyi $
  */
 
 if(!defined('__CORE_DIR')){
@@ -15,7 +15,7 @@ class Mdl_Article_Cate extends Mdl_Table
   
     protected $_table = 'article_cate';
     protected $_pk = 'cat_id';
-    protected $_cols = 'cat_id,parent_id,title,pname,level,from,seo_title,seo_keywords,seo_description,orderby,hidden,dateline';
+    protected $_cols = 'cat_id,parent_id,title,level,from,seo_title,seo_keywords,seo_description,orderby,hidden,dateline';
     protected $_orderby = array('parent_id'=>'ASC','orderby'=>'ASC','cat_id'=>'ASC');
     protected $_pre_cache_key = 'article-cate-list';
 
@@ -70,12 +70,12 @@ class Mdl_Article_Cate extends Mdl_Table
             foreach($class_list as $k=>$v){
                 if(in_array($v['parent_id'], $pids)){
                     $pids[] = $v['cat_id'];
-                } 
+                }
             }
         }
         return implode(',', $pids);
     }
-
+	
     public function create($data)
     {
         if(!$data = $this->_check($data)){

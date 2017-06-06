@@ -2,7 +2,7 @@
 /**
  * Copy Right IJH.CC
  * Each engineer has a duty to keep the code elegant
- * $Id: shop_money.php 9378 2015-03-27 02:07:36Z youyi $
+ * $Id: shop_money.php 3053 2014-01-15 02:00:13Z youyi $
  */
 
 if(!defined('__CORE_DIR')){
@@ -34,10 +34,26 @@ return array (
     'add' => true,
     'edit' => false,
     'html' => false,
-    'empty' => false,
+    'empty' => true,
     'show' => false,
     'list' => true,
     'type' => 'shop',
+    'comment' => '',
+    'default' => '',
+    'SO' => '=',
+  ),
+  'uid' => 
+  array (
+    'field' => 'uid',
+    'label' => '用户',
+    'pk' => false,
+    'add' => true,
+    'edit' => false,
+    'html' => false,
+    'empty' => false,
+    'show' => false,
+    'list' => true,
+    'type' => 'int',
     'comment' => '',
     'default' => '',
     'SO' => '=',

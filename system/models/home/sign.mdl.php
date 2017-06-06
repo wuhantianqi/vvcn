@@ -2,7 +2,7 @@
 /**
  * Copy Right IJH.CC
  * Each engineer has a duty to keep the code elegant
- * $Id: sign.mdl.php 9378 2015-03-27 02:07:36Z youyi $
+ * $Id: sign.mdl.php 5695 2014-06-27 04:38:29Z youyi $
  */
 
 if(!defined('__CORE_DIR')){
@@ -15,7 +15,6 @@ class Mdl_Home_Sign extends Mdl_Table
     protected $_table = 'home_tuan_sign';
     protected $_pk = 'sign_id';
     protected $_cols = 'sign_id,tuan_id,package_id,uid,mobile,contact,status,remark,dateline,clientip';
-
     protected $_orderby = array('sign_id'=>'DESC');
     public function create($data, $checked=false)
     {

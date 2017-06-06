@@ -2,7 +2,7 @@
 /**
  * Copy Right IJH.CC
  * Each engineer has a duty to keep the code elegant
- * $Id: comment.mdl.php 14858 2015-08-05 14:39:40Z maoge $
+ * $Id: dianping.mdl.php 5885 2014-07-18 15:54:33Z youyi $
  */
 
 if(!defined('__CORE_DIR')){
@@ -41,7 +41,7 @@ class Mdl_Company_Comment extends Mdl_Table
 
     public function comment_count($val)
     {
-        $count = 0;
+         $count = 0;
         if(!$ids = K::M('verify/check')->ids($val)){
             return false;
         }
@@ -114,7 +114,7 @@ class Mdl_Company_Comment extends Mdl_Table
             K::M('company/company')->update($data['company_id'], $update, true);
         }
     }
-
+    
     public function items_by_company($company_id, $p=1, $l=50, &$count=0)
     {
         if(!$company_id = (int)$company_id){

@@ -93,3 +93,11 @@
         <label><input type="radio" name="priv[allow_news]" <{if $priv.allow_news > 0}>checked="checked"<{/if}> value="1"/>直接发布</label>
     </td>
 </tr>
+<tr>
+    <th>门店展示：</th>
+    <td>
+        <label><input type="radio" name="priv[allow_mendian]" <{if $priv.allow_mendian < 0}>checked="checked"<{/if}> value="-1"/>禁止发布</label>&nbsp;&nbsp;
+        <label><input type="radio" name="priv[allow_mendian]" <{if empty($priv.allow_mendian)}>checked="checked"<{/if}> value="0"/>需要审核</label>&nbsp;&nbsp;
+        <label><input type="radio" name="priv[allow_mendian]" <{if $priv.allow_mendian > 0}>checked="checked"<{/if}> value="1"/>直接发布</label>
+    </td>
+</tr>

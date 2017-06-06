@@ -2,7 +2,7 @@
 /**
  * Copy Right IJH.CC
  * Each engineer has a duty to keep the code elegant
- * $Id: site.ctl.php 9378 2015-03-27 02:07:36Z youyi $
+ * $Id$
  */
 
 if(!defined('__CORE_DIR')){
@@ -20,13 +20,12 @@ class Ctl_Home_Site extends Ctl
         if($SO = $this->GP('SO')){
             $pager['SO'] = $SO;
             if($SO['site_id']){$filter['site_id'] = $SO['site_id'];}
-        if($SO['city_id']){$filter['city_id'] = $SO['city_id'];}
-        if($SO['area_id']){$filter['area_id'] = $SO['area_id'];}
-        if($SO['home_id']){$filter['home_id'] = $SO['home_id'];}
-        if($SO['company_id']){$filter['company_id'] = $SO['company_id'];}
-        if($SO['status']){$filter['status'] = $SO['status'];}
+            if($SO['city_id']){$filter['city_id'] = $SO['city_id'];}
+            if($SO['area_id']){$filter['area_id'] = $SO['area_id'];}
+            if($SO['home_id']){$filter['home_id'] = $SO['home_id'];}
+            if($SO['company_id']){$filter['company_id'] = $SO['company_id'];}
+            if($SO['status']){$filter['status'] = $SO['status'];}
         }
-		
         if($items = K::M('home/site')->items($filter, null, $page, $limit, $count)){
             $home_ids = $company_ids = array();
              foreach($items as $k=>$v){
@@ -101,7 +100,9 @@ class Ctl_Home_Site extends Ctl
 						}
 					}
 				}
-				
+				if(CITY_ID){
+                    $data['city_id'] = CITY_ID;
+                }
 				$data['lat'] = trim($data['lat']);
                 if($site_id = K::M('home/site')->create($data)){
 					K::M('home/site')->site_count($site_id);
@@ -190,7 +191,9 @@ class Ctl_Home_Site extends Ctl
             if($items = K::M('home/site')->items_by_ids($ids)){
                 $aids  = array();
                 foreach($items as $v){
-                    
+                    if(CITY_ID && CITY_ID != $v['city_id']){
+                        continue;
+                    }
                     $aids[$v['site_id']] = $v['site_id'];
                 }
                 if($aids && K::M('home/site')->delete($aids)){

@@ -25,7 +25,9 @@ class Ctl_Shop_mendian extends Ctl
             if(is_numeric($SO['audit'])){$filter['audit'] = $SO['audit'];}
             if($SO['title']){$filter['title'] = "LIKE:%".$SO['title']."%";}
         }
-		
+		if(CITY_ID){
+			$filter['city_id'] = CITY_ID;
+		}
         if($items = K::M('shop/mendian')->items($filter, null, $page, $limit, $count)){
         	$pager['count'] = $count;
         	$pager['pagebar'] = $this->mkpage($count, $limit, $page, $this->mklink(null, array('{page}')), array('SO'=>$SO));
@@ -56,7 +58,9 @@ class Ctl_Shop_mendian extends Ctl
             if(!$data = $this->GP('data')){
                 $this->err->add('非法的数据提交', 201);
             }else{
-				
+				if(CITY_ID){
+					$data['city_id'] = CITY_ID;
+				}
                 if($_FILES['data']){
                     foreach ($_FILES['data'] as $k => $v) {
                         foreach ($v as $kk => $vv) {

@@ -1,44 +1,29 @@
-<{assign var="tpl_page_title" value="修改邮箱"}>
+<{assign var="tpl_page_title" value="管理中心首页"}>
 <{include file="mobile/block/header.html"}>
-<div class="pding admin_cont">
-	<form id='login-form'>
-		<table cellpadding="0" cellspacing="0">
-			<tr>
-				<td class="title">用户名</td>
-				<td><{$MEMBER.uname}></td>
-			</tr>
-			<tr>
-				<td class="title">原邮箱</td>
-				<td><{$MEMBER.mail}><{if $MEMBER.verify_mail}><font class="yz_color">已验证</font><{/if}></td>
-			</tr>
-			<tr>
-				<td class="title">新邮箱</td>
-				<td><input value="" type="text" name="account[new_mail]" class="text full" /></td>
-			</tr>
-			<tr>
-				<td class="title">登录密码</td>
-				<td ><input value="" type="password" name="account[passwd]" class="text full" /></td>
-			</tr>
-		</table>
-		<input type="button" id='login-btn' class="btn subbtn_full" value="修改邮箱" />
+<header class="control"> <i class="left"><a href="<{if $pager.backurl}><{$pager.backurl}><{else}><{link ctl='mobile/index'}><{/if}>" id="gobackIco"></a></i>
+	<div class="title">修改邮箱</div>
+	<i class="right"></i> </header>
+<section id="" class="page_center_box">
+	<form class="login-form" action="<{link ctl='mobile/ucenter:mail'}>" mini-form="login-form" method="post">
+		<div class="loginInfor">
+			<div class="loginIf_list">
+				<div class="fl ifIco"><i class="icco icco7"></i> </div>
+				<div class="ifInput">
+					<input type="text" name="account[new_mail]" placeholder="新邮箱" />
+				</div>
+				<div class="clear"></div>
+			</div>
+			<div class="loginIf_list">
+				<div class="fl ifIco"><i class="icco icco9"></i> </div>
+				<div class="ifInput">
+					<input type="password" name="account[passwd]" placeholder="登录密码" />
+				</div>
+				<div class="clear"></div>
+			</div>
+			<div class="yuee_btn">
+				<input type="submit" class="btn" value="修改邮箱 " />
+			</div>
+		</div>
 	</form>
-</div>
-
- <script>
-        $(document).ready(function() {
-            function showmsg(message) {
-                 $("#showErr").show();$("#showTxt").html(message);
-            }
-            $("#login-btn").click(function() {
-                $.post('<{link ctl="mobile/ucenter:mail"}>', $("#login-form").serialize(), function(data) {
-                    if (data.error) {
-                        showmsg(data.message);
-                    } else {
-                        window.location = "<{link ctl='mobile/ucenter:mail'}>";
-                    }
-                }, 'json');
-            });
-
-        });
- </script>
-<{include file="mobile/block/footer.html"}>
+</section>
+</body></html>

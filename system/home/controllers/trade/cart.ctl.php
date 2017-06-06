@@ -2,7 +2,7 @@
 /**
  * Copy Right IJH.CC
  * Each engineer has a duty to keep the code elegant
- * $Id: cart.ctl.php 9372 2015-03-26 06:32:36Z youyi $
+ * $Id: cart.ctl.php 6378 2014-09-28 02:25:09Z youyi $
  */
 
 class Ctl_Trade_Cart extends Ctl 
@@ -25,8 +25,12 @@ class Ctl_Trade_Cart extends Ctl
         if($shop_ids = $cart['shop_ids']){
             $this->pagedata['shop_list'] = K::M('shop/shop')->items_by_ids($shop_ids);
         }
-        //print_r($cart);echo 'FILE:',__FILE__,'LINE:',__LINE__;exit();
         $this->pagedata['cart'] = $cart;
+        $filter['uid'] = $this->uid;;
+        $filter['closed'] = 0;
+        if ($items = K::M('order/address')->items($filter, null, $count)) {
+            $this->pagedata['items'] = $items;
+        }
         $this->tmpl = 'trade/order/checkout.html';
     }    
 

@@ -2,7 +2,7 @@
 /**
  * Copy Right IJH.CC
  * Each engineer has a duty to keep the code elegant
- * $Id: tenders.mdl.php 9378 2015-03-27 02:07:36Z youyi $
+ * $Id$
  */
 
 if(!defined('__CORE_DIR')){
@@ -14,10 +14,10 @@ class Mdl_Tenders_Tenders extends Mdl_Table
   
     protected $_table = 'tenders';
     protected $_pk = 'tenders_id';
-    protected $_cols = 'tenders_id,from,city_id,area_id,zxb_id,allow_looks,title,uid,contact,mobile,home_id,home_name,way_id,type_id,style_id,budget_id,service_id,house_type_id,house_mj,huxing,addr,comment,zx_time,tx_time,gold,max_look,looks,views,tracks,new_track,sign_uid,sign_time,sign_company_id,sign_info,status,remark,audit,clientip,dateline';
+    protected $_cols = 'tenders_id,from,allow_looks,city_id,area_id,fenxiaoid,zxb_id,title,uid,contact,mobile,home_id,home_name,way_id,type_id,style_id,budget_id,service_id,house_type_id,house_mj,huxing,addr,comment,zx_time,tx_time,gold,max_look,looks,views,tracks,new_track,sign_uid,sign_time,sign_company_id,sign_info,status,remark,audit,clientip,dateline,level';
     protected $_orderby = array('tenders_id'=>'DESC');
 
-    protected $_from_list = array('TZX'=>'招标','TBJ'=>'报价','TLF'=>'量房','TSJ'=>'设计','TJC'=>'建材');
+    protected $_from_list = array('TZX'=>'招标','TBJ'=>'报价','TLF'=>'量房','TSJ'=>'设计','TJC'=>'建材','TBJ'=>'报价');
 
     public function create($data, $checked=false)
     {
@@ -73,7 +73,12 @@ class Mdl_Tenders_Tenders extends Mdl_Table
         if($member['from'] == 'company'){
             if($company = K::M('company/company')->company_by_uid($uid)){
                 $info['name'] = $company['name'];
-                $info['company_id'] = $company['company_id'];
+                $info['company_id'] = $company_id = $company['company_id'];
+            }
+        }else if('gz' == $member['from']){
+            if($gz = K::M('gz/gz')->detail($uid)){
+                $info['name'] = $gz['name'];
+                $info['gz_id'] = $gz['uid'];
             }
         }else if('designer' == $member['from']){
             if($designer = K::M('designer/designer')->detail($uid)){
@@ -159,4 +164,28 @@ class Mdl_Tenders_Tenders extends Mdl_Table
         }
         return parent::_check($data, $tenders_id);        
     }
+
+    public function format_items_ext($items)
+    {
+        if(empty($items)){
+            return false;
+        }
+        $company_ids = array();
+        foreach((array)$items as $k=>$v){
+            $company_ids[$v['sign_company_id']] = $v['sign_company_id'];
+        }
+        $company_list = $tenders_list = array();
+        if($company_ids){
+            $company_list = K::M('company/company')->items_by_ids($company_ids);
+        }        
+        foreach((array)$items as $k=>$v){
+            if(!$company = $company_list[$v['sign_company_id']]){
+                $company = array();
+            }
+            $v['ext'] = array('company'=>$company);
+            $items[$k] = $v;
+        }
+        return $items;
+    } 
+
 }

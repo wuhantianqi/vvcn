@@ -2,7 +2,7 @@
 /**
  * Copy Right IJH.CC
  * Each engineer has a duty to keep the code elegant
- * $Id: spec.ctl.php 9763 2015-04-20 12:28:42Z youyi $
+ * $Id$
  */
 
 if(!defined('__CORE_DIR')){
@@ -34,22 +34,22 @@ class Ctl_Product_Spec extends Ctl
     public function create()
     {
         if($data = $this->checksubmit('data')){
-                    if($_FILES['data']){
-            foreach($_FILES['data'] as $k=>$v){
-                foreach($v as $kk=>$vv){
-                    $attachs[$kk][$k] = $vv;
-                }
-            }
-            $upload = K::M('magic/upload');
-            foreach($attachs as $k=>$attach){
-                if($attach['error'] == UPLOAD_ERR_OK){
-                    if($a = $upload->upload($attach, 'product')){
-                        $data[$k] = $a['photo'];
-                    }
-                }
-            }
-        }
-
+			if($_FILES['data']){
+				foreach($_FILES['data'] as $k=>$v){
+					foreach($v as $kk=>$vv){
+						$attachs[$kk][$k] = $vv;
+					}
+				}
+				$upload = K::M('magic/upload');
+				foreach($attachs as $k=>$attach){
+					if($attach['error'] == UPLOAD_ERR_OK){
+						if($a = $upload->upload($attach, 'product')){
+							$data[$k] = $a['photo'];
+						}
+					}
+				}
+			}
+			
             if($spec_id = K::M('product/spec')->create($data)){
                 $this->err->add('添加内容成功');
                 $this->err->set_data('forward', '?product/spec-index.html');

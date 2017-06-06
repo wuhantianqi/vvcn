@@ -4,8 +4,8 @@
 	<!--主体内容开始-->
 	<div class="login_box">
 		<div class="login_lt lt">
-		<h2>会员登录</h2>
-		<form action="<{link ctl='passport:login'}>" method="post" mini-form="login">
+		<h2><font id='form' class="on">会员登录</font><font id='form2'>业主手机登录</font></h2>
+		<form  id="account-form" action="<{link ctl='passport:login' http='ajax'}>" method="post" mini-form="login">
 			<table>
 				<tr>
 					<td class="title">用户名</td>
@@ -42,7 +42,7 @@
 					<td></td>
 					<td class="middle">
 						<label class="lt">
-						<input type="checkbox" class="check" />
+						<input type="checkbox" name="keep" value="1" class="check" />
 						30天之内自动登录</label>
 						<a class="fontcl2 rt"  href="<{link ctl='passport:forgot'}>">忘记密码？</a>
 					</td>
@@ -50,32 +50,101 @@
 				</tr>
 				<tr>
 					<td></td>
-					<td class="middle">
-						<input type="submit" class="btn" value="立即登录" />
-					</td>
+					<td class="middle"><input type="submit" class="btn" value="立即登录" /></td>
 					<td></td>
 				</tr>
 			</table>
 		</form>
+        
+         <form id="account-form2" style="display:none">
+            <input type="hidden" name="account[from]" value="<{$pager.from}>" />
+			<table>
+				<tr>
+					<td class="title">手机号码</td>
+					<td class="middle"><p class="input"><span class="new_icon tel_ico lt"></span><input class="input text" name="data[phone]" type="text" id="phone" placeholder="请输入您的手机号码"/></p></td>
+					<td><div id="unameTip" style="width:240px;margin-top:-18px;"></div></td>
+				</tr>
+				
+				<tr>
+					<td class="title">验证码</td>
+					<td class="middle">
+                    <p class="input short lt" style="width:160px;"><span class="ico_list yanzheng_ico"></span><input class="text short"  style="width:100px;" name="data[code]" type="text" placeholder="请输入验证码"/></p>
+                     <span id='code'  class="goYz"><a id='show_loading' class="none pointcl">...</a><a login="passport:sendsms" class="pointcl">发送验证码</a></span>
+                    </td>
+					
+				</tr>
+               
+				<tr>
+					<td></td>
+					<td class="middle"><input type="submit" action="<{link ctl='passport:byphone' arg0='member' http='ajax'}>" mini-submit="#account-form2" class="btn" value="立即注册" /></td>
+					<td></td>
+				</tr>
+			</table>
+			</form>
 	</div>
 	<div class="login_rt rt">
-		<h2>没有账号？<a href="<{link ctl='passport:reg'}>" class="fontcl2">立即注册</a>
-		</h2>
+
+		<h2>没有账号？<a href="<{link ctl='passport:reg'}>" class="fontcl2">立即注册</a></h2>
+		<{if false &&  $wxlogin_jsqr}>
+		<div id="wxlogin_jsqr" style="width:240px;height:240px;background-color:#DDD;"></div>
+		<script src="http://res.wx.qq.com/connect/zh_CN/htmledition/js/wxLogin.js"></script>
+		<{$wxlogin_jsqr}>
+		<{else}>
 		<img src="%THEME%/static/images/login_img.jpg" />
+		<{/if}>
 		<h3>第三方账号登录：</h3>
-		<p><a href="<{link ctl='passport:weibo'}>" class="ico_list weibo_login"></a>
-		</p>
-		<p><a href="<{link ctl='passport:qqlogin'}>" class="ico_list qq_login"></a>
-		</p>
+		<a href="<{link ctl='passport:qqlogin'}>" class="login_qq hl_icon" title="QQ登录"></a>
+		<a href="<{link ctl='passport:weibo'}>" class="login_weibo hl_icon" title="微博登录"></a>
+		<!--<a href="<{link ctl='passport:weixin' http='ajax'}>" mini-width="350" mini-load="请使用微信扫描二维码登录" class="login_weixin hl_icon"  title="微信登录"></a>-->
+		<a href="<{link ctl='passport:wxlogin'}>"class="login_weixin hl_icon"  title="微信登录"></a>
 	</div>
 	<div class="cl"></div>
 </div>
 <!--主体内容结束-->
 </div>
 <!--底边内容开始-->
+
 <script>
+(function(K,$){
 $("[verify]").click(function(){
 	$($(this).attr("verify")).attr("src", "<{link ctl='magic:verify' http='ajax'}>&_"+Math.random());
+});		 
+ $("#form").click(function(){
+		$(this).addClass('on'); ;	
+		$("#form2").removeClass('on');				   
+		$("#account-form2").hide();
+		$("#account-form").show();
+ });
+  $("#form2").click(function(){
+		$(this).addClass('on'); ;	
+		$("#form").removeClass('on');
+		$("#account-form").hide();
+		$("#account-form2").show();
+ });
+ $("[login]").click(function(e){
+	var link = "<{link ctl='passport/sendsms'  arg0='#phone#' http='base'}>";
+	var phone = $("#phone").val();
+	var last_time = 60;
+	var __interval = null;
+	$.getJSON(link.replace("#phone#", phone), function(ret){
+		if(ret.error){
+			Widget.MsgBox.error(ret.message.join(""));
+		}else{
+			__interval = setInterval(function(){
+				last_time --;
+				if(last_time >0){
+					$("#show_loading").html("重新获取（"+last_time+"）秒").show();
+					$("[login]").hide();
+				}else{
+					clearInterval(__interval);
+					last_time = 60;
+					$("#show_loading").hide();
+					$("[login]").show();
+				}
+			}, 1000);
+		}
+	});
 });
+})(window.KT, window.jQuery);
 </script>
 <{include file="block/small-footer.html"}>

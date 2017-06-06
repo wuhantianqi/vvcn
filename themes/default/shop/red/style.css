@@ -1,0 +1,9 @@
+/*商铺红色模板样式开始*/
+.shop_nav{ background:url(navBg.jpg) repeat-x;}
+.shop_nav a.current, .shop_nav a:hover{ background:url(navCut.jpg) repeat-x;}
+.redShop_tit{ background:url(spTit.jpg) repeat-x;}
+.shop_intro{ background:#fff;}
+.org_shop_list li{ margin:10px 14px 0px;}
+.shop_news li { height:32px; line-height:32px; overflow:hidden; border-bottom:1px dashed #ccc;}
+.shop_intro img.pic{ width:160px; height:80px;}
+/*商铺红色模板样式结束*/

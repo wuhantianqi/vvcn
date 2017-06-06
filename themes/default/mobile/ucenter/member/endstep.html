@@ -1,0 +1,162 @@
+<{assign var="tpl_page_title" value="装修保详情"}>
+<{include file="mobile/block/header.html"}>
+<header class="control">
+	<i class="left"><a href="<{if $pager.backurl}><{$pager.backurl}><{else}><{link ctl='mobile/index'}><{/if}>" id="gobackIco"></a></i>
+    <div class="title"><{$status[$item.status]}></div>
+    <i class="right"></i>
+</header>
+
+
+<section id="" class="page_center_box">
+		<div class="loginInfor mb10">
+        	<{if $now_status==7}>
+                <div class="loginIf_list loginIf_list_ct">
+                    <div class="fl ctIco"><i class="icco icco1"></i> </div>
+                    <div class="ifInput">
+                    <{if $step.yezhu_status == 1}>用户<i class="ctenIco"></i><{else}>用户<i class="ctenIco gray_ctenIco"></i><{/if}>
+                    </div>
+                    <div class="clear"></div>
+                </div>
+                
+                <div class="loginIf_list loginIf_list_ct">
+                    <div class="fl ctIco"><i class="icco icco10"></i> </div>
+                    <div class="ifInput">
+                         <{if $step.status == 1}>平台<i class="ctenIco"></i><{else}>平台<i class="ctenIco gray_ctenIco"></i><{/if}>
+                    </div>
+                    <div class="clear"></div>
+                </div>
+             <{else}>
+                    <div class="loginIf_list loginIf_list_ct">
+                        <div class="fl ctIco"><i class="icco icco10"></i> </div>
+                        <div class="ifInput">
+                             平台<i class="ctenIco"></i>
+                        </div>
+                        <div class="clear"></div>
+                    </div>
+             <{/if}>
+             
+			<div class="loginIf_list">
+				<div class="fl ctIco"></div>
+				<div class="ifInput">
+                	 <{if $step.yezhu_status == 0 && $step.status == 0}>
+                        请尽快支付尾款
+                    <{elseif $step.yezhu_status == 1 && $step.status == 0}>
+                        请等待平台确认
+                    <{else}>
+                        交易已结束
+                    <{/if}>
+                </div>
+				<div class="clear"></div>
+			</div>
+		</div>
+		<div class="mb10 ten_detail">
+           <form action="<{link ctl='mobile/ucenter/member:zxb_detail' arg0=$item.zxb_id arg1=$item.status+1}>" mini-form="zxb"   method="post"  onsubmit="return check()" ENCTYPE="multipart/form-data">
+     		<input type="hidden" name="step_id" value="<{$step.step_id}>" >
+
+            <{if $step.status == 0  && $step.company_status == 0 && $step.uid && $now_status==7}>
+             <table width="100%" cellpadding="0" cellspacing="0">
+            
+            <tr>
+                <th>
+                上传打款证据
+                </th>
+                <td>
+                 <label class="pubInt_file">上传文件<input type="file" name="data[yezhu_photo]"  value=""></label>
+                </td>
+            </tr>
+            <tr>
+                <th>
+                内容
+                </th>
+                <td>
+                 <textarea name="data[yezhu_content]"><{$step.yezhu_content}></textarea>
+                </td>
+            </tr>
+            
+            </table>
+			</div>		
+            <div class="yuee_btn"> <input class="btn"  type="submit" value="修改提交" /></div>
+            
+           
+       	<{elseif $step.status == 0  && $step.company_status == 0 && !$step.uid && $now_status==7}>
+             <table width="100%" cellpadding="0" cellspacing="0">
+                
+                <tr>
+                    <th>
+                    上传打款证据
+                    </th>
+                    <td>
+                     <label class="pubInt_file">上传文件<input type="file" name="data[yezhu_photo]"  value=""></label>
+                    </td>
+                </tr>
+                <tr>
+                    <th>
+                    内容
+                    </th>
+                    <td>
+                     <textarea name="data[yezhu_content]"><{$step.yezhu_content}></textarea>
+                    </td>
+                </tr>
+                <tr>
+            </tr>
+                 
+                </table>
+                </div>		
+                <div class="yuee_btn"> <input class="btn"  type="submit" value="确认提交" /></div>
+              
+          
+       <{elseif $step.status == 1 && $step.yezhu_status == 1   && $now_status==7}>
+        	<div class="add_moren"> 
+                    
+                    <div class="add_jia">
+                      
+                        <p>业主打款证据： <{if $step.yezhu_photo}><img src="<{$pager.img}>/<{$step.yezhu_photo}>" photo="<{$pager.img}>/<{$step.yezhu_photo}>"/><{/if}></p>
+                        <p>业主描述内容： <{$step.yezhu_content}></p>
+                      
+                        <p>平台审核内容： <{$step.content}></p>
+                       
+                    </div>
+                  
+            </div>
+           
+          <{/if}>
+             
+            
+			
+	</form>	
+</section>
+
+
+<script>
+	jQuery(window).load(function () {
+			var width = document.body.clientWidth;
+            jQuery("img").each(function () {
+                DrawImage(this,width,1000);
+            });
+        });
+        function DrawImage(ImgD, FitWidth, FitHeight) {
+            var image = new Image();
+            image.src = ImgD.src;
+            if (image.width > 0 && image.height > 0) {
+                if (image.width / image.height >= FitWidth / FitHeight) {
+                    if (image.width > FitWidth) {
+                        ImgD.width = FitWidth;
+                        ImgD.height = (image.height * FitWidth) / image.width;
+                    } else {
+                        ImgD.width = image.width;
+                        ImgD.height = image.height;
+                    }
+                } else {
+                    if (image.height > FitHeight) {
+                        ImgD.height = FitHeight;
+                        ImgD.width = (image.width * FitHeight) / image.height;
+                    } else {
+                        ImgD.width = image.width;
+                        ImgD.height = image.height;
+                    }
+                }
+            }
+        }
+</script>
+</body>
+</html>

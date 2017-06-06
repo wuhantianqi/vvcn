@@ -1,38 +1,20 @@
 <{assign var="tpl_page_title" value="报名管理"}>
 <{include file="mobile/block/header.html"}>
-<div class="pading admin_banner">
-	<img src="/themes/default/mobile/static/images/adminBg.jpg" class="bg" />
-	<div class="admin_intro">
-		<img src="<{$pager.img}>/<{$MEMBER.face_80}>" class="lt" />
-		<div class="lt">
-		<p><{$MEMBER.uname}></p>
-		<p>账户类型：<u><{$MEMBER.from_title}></u> </p>
-		<p>我的金币：<u><{$MEMBER.gold}></u></p>
-		</div>
+<header class="control">
+	<i class="left"><a href="<{if $pager.backurl}><{$pager.backurl}><{else}><{link ctl='mobile/index'}><{/if}>" id="gobackIco"></a></i>
+    <div class="title">报名管理</div>
+    <i class="right"></i>
+</header>
+
+<section id="" class="page_center_box">
+	<div class="loginList">
+		<ul>
+			<li> <a href="<{link ctl='mobile/ucenter/sign:signYouhui'}>">优惠信息</a></li>
+			<li> <a href="<{link ctl='mobile/ucenter/sign:signActivity'}>">优惠活动</a> </li>
+			<li> <a href="<{link ctl='mobile/ucenter/member:zxb'}>">装修保</a></li>
+            <li> <a href="<{link ctl='mobile/ucenter/sign:coupon'}>">我的优惠券</a></li>
+		</ul>
 	</div>
-</div>
-<div class="pding">
-<h1><a href="<{link ctl='mobile/ucenter'}>">管理中心</a> >> 报名管理</h1>
-<ul class="admin_menu">
-	<li>
-		<a href="<{link ctl='mobile/ucenter/sign:signYouhui'}>">
-			<span class="lt">优惠信息</span><span class="rt">></span>
-			<p class="cl"></p>
-		</a>
-	</li>
-	<li>
-		<a href="<{link ctl='mobile/ucenter/sign:signActivity'}>">
-			<span class="lt">优惠活动</span><span class="rt">></span>
-			<p class="cl"></p>
-		</a>
-	</li>
-	
-    <li>
-		<a href="<{link ctl='mobile/ucenter/sign:coupon'}>">
-			<span class="lt">我的优惠券</span><span class="rt">></span>
-			<p class="cl"></p>
-		</a>
-	</li>
-</ul>
-</div>
-<{include file="mobile/block/footer.html"}>
+</section>
+
+<{include file="mobile/block/footer.html"}> 

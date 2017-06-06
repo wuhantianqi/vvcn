@@ -3,15 +3,11 @@
 <form action="<{link ctl='ucenter/misc/select:company'}>" method="post" id="so-home-form">
 <input type="hidden" name="multi" value="<{$pager.multi}>" />
 <div style="margin:10px 5px;">
-    <{if $pager.city_id}>
     <input type="hidden" name="city_id" value="<{$pager.city_id}>" />
-    <label><b>城市：</b><{$city_list[$pager.city_id].city_name}></label>&nbsp;&nbsp;&nbsp;
-    <{else}>
-    <label><b>城市：</b><select name="SO[city_id]" class="select w-100"><option value="">-全部-</option><{widget id="data/city" value="<{$pager.SO.city_id}>"}></select></label>&nbsp;&nbsp;&nbsp;
-    <{/if}>
-    <label><b>地区：</b><select name="SO[area_id]" class="select w-100"><option value="">-全部-</option><{if $pager.city_id}><{widget id="data/area" city_id=$pager.city_id value="<{$pager.SO.area_id}>"}><{elseif $pager.SO.city_id}><{widget id="data/area" city_id=$pager.SO.city_id value="<{$pager.SO.area_id}>"}><{/if}></select></label>&nbsp;&nbsp;&nbsp;
+    <label><b>地区：</b><{$pager.city.city_name}>&nbsp;&nbsp;&nbsp;
+        <select name="SO[area_id]" class="input w-100"><option value="">-全部-</option><{widget id="data/area" city_id=$pager.city.city_id value="<{$pager.SO.area_id}>"}></select></label>&nbsp;&nbsp;&nbsp;
     <label><b>标题：</b><input type="text" name="SO[name]" value="<{$pager.SO.name}>" class="input w-150"/></label>&nbsp;&nbsp;&nbsp;
-    <label><input type="submit" class="yzmbtn" value="搜索公司"/></label>
+    <label><input type="submit" class="pbtn" value="搜索公司"/></label>
 </div>
 </form>
 <table width="100%" border="0" cellspacing="0" class="list">

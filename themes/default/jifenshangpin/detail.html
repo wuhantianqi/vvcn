@@ -1,0 +1,114 @@
+<{include file="block/small-header.html"}>
+<!--面包屑导航开始-->
+<div class="mb10 subwd sub_topnav">
+	<p><span class="ico_list breadna"></span>您的位置： <a href="<{link ctl='index'}>"><{$CONFIG.site.title}></a>
+		&gt;
+		<a href="<{link ctl='jifenshangpin'}>">积分商城</a>
+		&gt;
+		<a href="<{link ctl='youhui:detail' arg0=$detail.youhui_id}>"><{$detail.title}></a>
+	</p>
+</div>
+<!--面包屑导航结束-->
+<div class="subwd mb20">
+	<!--左边内容开始-->
+	<div class="sub_activity_lt lt">
+		<div class="mb10 area sub_activity pding">
+			<h2 class="title"><b>糕点礼盒正品三禾稻香村京八件北京传</b></h2>
+			<div class="sub_activity">
+				<a class="lt pic"><img src="<{$pager.img}>/<{$detail.photo}>" /></a>
+				<div class="sub_activity_rt  rt">
+					<p>参考价：<del class="graycl">￥56389</del></p>
+					<p>积分价：<b class="pointcl">50积分+￥5360.0</b></p>
+					<p>运费：<font class="pointcl"><{if $detail.freight}>￥<{$detail.freight}><{else}>包邮<{/if}></font></p>
+					<p class=" jf_kucun"><span>库存：<font class="pointcl">3</font>件</span><span>已兑换：<font class="pointcl">2</font>件</span></p>
+					<div class="goods_buy_cont jifen_buy_cont">
+						<!-- 商品规格值 -->
+						<div class="jh-key">
+							<!-- //商品规格值 -->
+							<p class="goods_buy_count jifen_buy_count"><font class="lt">购买数量： </font>
+								<a class="jian" href="javascript:;" quantity="-">▁</a>
+								<input type="text" id="cart_product_num" class="buy_count_text" value="1" />
+								<a class="jia" href="javascript:;"  quantity="+">+</a>
+							</p>
+							<a href="#" class="btn btn_sub_sm">加入购物车</a>
+						</div>
+						<h2>
+					</h2>
+					</div>
+				</div>
+			</div>
+			<div class="cl"></div>
+		</div>
+		<div class="mb20 area">
+			<h3 class="side_tit">礼品详情</h3>
+			<div class="article"><{$detail.content}></div>
+		</div>
+	</div>
+	<!--左边内容结束-->
+	<!--右边内容开始-->
+	<div class="side_content rt">
+		<div class="area pding sub_activity_qita">
+			<h3><span class="lt">其他积分商品</span><a href="<{link ctl='youhui:items'}>" class="rt">更多>></a>
+			</h3>
+			<div class="cl"></div>
+			<ul>
+				<{calldata mdl="company/company" order="score:DESC" city_id=$request.city_id limit=5}>
+				<li>
+					<a href="<{$item.company_url}>">
+					<img src="<{$pager.img}>/<{$home_list[$item.home_id].thumb}>" />
+					<p class="nowrap"><a href="#">
+						糕点礼盒正品三禾稻香村京八件北京传统糕点件北京传统糕点礼盒正品三禾稻香村京八件北京传统</a>
+					</p>
+					<p class="nowrap">积分价：<font class="pointcl">50积分</font><font class="fontcl2">+￥5360.0</font></p>
+				</li>
+				<{/calldata}>
+			</ul>
+		</div>
+	</div>
+	<!--右边内容结束-->
+	<div class="cl"></div>
+</div>
+<script type="text/javascript" src="<{$pager.res}>/script/cloud-zoom.js"></script>
+<script type="text/javascript" src="<{$pager.res}>/script/raty/jquery.raty.js"></script>
+<script type="text/javascript">
+(function(K, $){
+    $(function(){
+    var dateTime = new Date();
+    var difference = dateTime.getTime() - <{$pager.dateline}>*1000;	
+    setInterval(function(){
+      $("[remaintime]").each(function(){
+        var obj = $(this);
+        var endTime = new Date(parseInt(obj.attr('remaintime')) * 1000);
+        var nowTime = new Date();
+        var nMS=endTime.getTime() - nowTime.getTime() + difference;
+        var myD=Math.floor(nMS/(1000 * 60 * 60 * 24));
+        var myH=Math.floor(nMS/(1000*60*60)) % 24;
+        var myM=Math.floor(nMS/(1000*60)) % 60;
+        var myS=Math.floor(nMS/1000) % 60;
+        var myMS=Math.floor(nMS/100) % 10;
+        if(myD>= 0){
+			var str = myD+"天"+myH+"小时"+myM+"分"+myS+"."+myMS+"秒";
+        }else{
+			var str = "真遗憾您来晚了，抢购已经结束。";	
+		}
+		obj.html(str);
+      });
+    }, 100);
+});
+//商铺商品数量加减
+$("[quantity]").click(function(){
+var quantity = parseInt($("#cart_product_num").val(), 10);
+if($(this).attr("quantity") == '+'){
+    quantity += 1;
+}else{
+    quantity -= 1;
+}
+if(quantity < 1){
+    quantity = 1;
+}
+$("#cart_product_num").val(quantity);
+});
+
+})(window.KT, window.jQuery);
+</script>
+<{include file="block/small-footer.html"}>

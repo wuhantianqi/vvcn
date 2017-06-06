@@ -2,7 +2,7 @@
 /**
  * Copy Right IJH.CC
  * Each engineer has a duty to keep the code elegant
- * $Id: comment.ctl.php 14858 2015-08-05 14:39:40Z maoge $
+ * $Id: comment.ctl.php 6077 2014-08-13 13:48:56Z youyi $
  */
 
 if(!defined('__CORE_DIR')){
@@ -25,7 +25,9 @@ class Ctl_Company_Comment extends Ctl
         }
         $uids = $companyIds = array();
 		$filter['closed'] = 0;
-		
+		if(CITY_ID){
+            $filter['city_id'] = CITY_ID;
+        }
         if($items = K::M('company/comment')->items($filter, null, $page, $limit, $count)){
             foreach($items as $k=>$v){
                if(!empty($v['uid'])) $uids[$v['uid']] = $v['uid'];
@@ -62,7 +64,9 @@ class Ctl_Company_Comment extends Ctl
             }else{
                 $data['replytime'] = __TIME + rand(1000,86400);
                 $data['replyip']   = __IP;
-				
+				if(CITY_ID){
+                    $data['city_id'] = CITY_ID;
+                }
                 if($id = K::M('company/comment')->create($data)){
                     K::M('company/comment')->comment_count($company['company_id']);
 					K::M('company/comment')->comment($data);
@@ -122,7 +126,9 @@ class Ctl_Company_Comment extends Ctl
 			if($items = K::M('company/comment')->items_by_ids($ids)){
                 $aids = $company_ids = array();
                 foreach($items as $v){
-                    
+                    if(CITY_ID && CITY_ID != $v['city_id']){
+                        continue;
+                    }
                     $aids[$v['comment_id']] = $v['comment_id'];
                     $company_ids[$v['company_id']] = $v['company_id'];
                 }
@@ -151,7 +157,9 @@ class Ctl_Company_Comment extends Ctl
 			if($items = K::M('company/comment')->items_by_ids($ids)){
                 $aids = $company_ids = array();
                 foreach($items as $v){
-                    
+                    if(CITY_ID && CITY_ID != $v['city_id']){
+                        continue;
+                    }
                     $aids[$v['comment_id']] = $v['comment_id'];
                     $company_ids[$v['company_id']] = $v['company_id'];
                     K::M('company/comment')->comment_del($v);

@@ -2,7 +2,7 @@
 /**
  * Copy Right IJH.CC
  * Each engineer has a duty to keep the code elegant
- * $Id: tuan.ctl.php 9378 2015-03-27 02:07:36Z youyi $
+ * $Id: tuan.ctl.php 3053 2014-01-15 02:00:13Z youyi $
  */
 
 if(!defined('__CORE_DIR')){
@@ -69,7 +69,9 @@ class Ctl_Home_Tuan extends Ctl
             }else if(!$this->check_city($company['city_id'])){
                 $this->err->add('不可越权操作', 403);
             }else{
-				
+				if(CITY_ID){
+                    $data['city_id'] = CITY_ID;
+                }
                 if($tuan_id = K::M('home/tuan')->create($data)){
                     $this->err->add('添加内容成功');
                     $this->err->set_data('forward', '?home/tuan-index.html');
@@ -139,7 +141,9 @@ class Ctl_Home_Tuan extends Ctl
             if($items = K::M('home/tuan')->items_by_ids($ids)){
                 $aids  = array();
                 foreach($items as $v){
-                    
+                    if(CITY_ID && CITY_ID != $v['city_id']){
+                        continue;
+                    }
                     $aids[$v['tuan_id']] = $v['tuan_id'];
                 }
                 if($aids && K::M('home/tuan')->delete($aids)){
@@ -150,5 +154,4 @@ class Ctl_Home_Tuan extends Ctl
             $this->err->add('未指定要删除的内容ID', 401);
         }
     }
-
 }

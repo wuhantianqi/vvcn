@@ -2,7 +2,7 @@
 /**
  * Copy Right IJH.CC
  * Each engineer has a duty to keep the code elegant
- * $Id: product.ctl.php 10710 2015-06-08 14:46:37Z xiaorui $
+ * $Id$
  */
 
 if(!defined('__CORE_DIR')){
@@ -69,7 +69,7 @@ class Ctl_Mall_Product extends Ctl
         $params = array();
         if ($kw = $this->GP('kw')) {
             $pager['sokw'] = $kw = htmlspecialchars($kw);
-            $filter[':OR'] = array('title'=>"LIKE:%{$kw}%", 'name'=>"LIKE:%{$kw}%");  
+            $filter[':OR'] = array('title'=>"LIKE:%{$kw}%", 'name'=>"LIKE:%{$kw}%");          
         }
         //order {0:默认,1:价格, 2:销量}
         $orderby = null;
@@ -137,8 +137,9 @@ class Ctl_Mall_Product extends Ctl
             $pager = array();
             $pager['page'] = $page = max((int)$page, 1);
             $pager['limit'] = $limit = 10;
-            $pager['count'] = $count = 0;            
-            if($comments = K::M('product/comment')->items(array('product_id'=>$product_id, 'closed'=>0), $page, $limit, $count)){
+            $pager['count'] = $count = 0;
+            $filter = array('product_id'=>$product_id, 'closed'=>0,'audit'=>1);           
+            if($comments = K::M('product/comment')->items($filter,null, $page, $limit, $count)){
                 $pager['count'] = $count;
                 $pager['pagebar'] = $this->mkpage($count, $limit, $page, $this->mklink(null, array($product_id, '{page}')));
                 $uids = array();
@@ -150,6 +151,7 @@ class Ctl_Mall_Product extends Ctl
                 }
                 $this->pagedata['comments'] = $comments;
             }
+
 			if($attrs = K::M('product/attr')->attrs_by_product($product_id)){
                 $this->pagedata['attrs'] = $attrs;
                 $detail['attrvalues'] = array_keys($attrs);
@@ -170,6 +172,8 @@ class Ctl_Mall_Product extends Ctl
             if($seo_keywords = $detail['seo_keywords']){
                 $this->seo->set_keywords($seo_keywords);
             }
+            $this->pagedata['mobile_url'] = $this->mklink('mobile/shop', array($detail['shop_id']));
+            $this->pagedata['mobile_buy_url'] = $this->mklink('mobile/product:detail', array($product_id));
             $this->tmpl = 'mall/product/detail.html';
         }
     }

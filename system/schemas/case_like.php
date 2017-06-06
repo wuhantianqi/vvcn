@@ -2,7 +2,7 @@
 /**
  * Copy Right IJH.CC
  * Each engineer has a duty to keep the code elegant
- * $Id: case_like.php 9378 2015-03-27 02:07:36Z youyi $
+ * $Id: case_like.php 2216 2013-12-16 06:39:13Z $
  */
 
 if(!defined('__CORE_DIR')){

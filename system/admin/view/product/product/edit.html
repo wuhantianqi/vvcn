@@ -65,7 +65,7 @@
 <tr id="tr_sale_time" class="hide"><th class="red">限时：</th><td><input type="text" name="data[sale_time]" value="<{if $detail.sale_time}><{$detail.sale_time|format:'Y-m-d H:i:s'}><{/if}>" datetime="sale_time" class="input w-150"/><span class="tip-comment">只有在类型为"限时"时有效</span></td></tr>
 <tbody id="tr_sale_sku" class="hide">
 <tr><th>抢购数：</th><td><input type="text" name="data[sale_sku]" value="<{$detail.sale_sku|default:''}>" class="input w-100"/></td></tr>
-<tr><th>已抢购数量：</th><td><input type="text" name="data[sale_count]" value="<{$detail.sale_count|default:''}>" class="input w-100"/></td></tr>
+<tr><th>已抢购数：</th><td><input type="text" name="data[sale_count]" value="<{$detail.sale_count|default:''}>" class="input w-100"/></td></tr>
 </tbody>
 <tr>
     <th>促销：</th>

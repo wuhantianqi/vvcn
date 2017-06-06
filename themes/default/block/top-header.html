@@ -4,16 +4,19 @@
             <{if $MEMBER.uid}>
             <ul class="top_nav_login hoverno">
                 <li>
-                    <a href="<{link ctl='ucenter/member:index'}>"><span class="login_ico denglu_ico"></span>个人中心<span class="ico_list login_litico"></span></a>
+                    <a href="<{$MEMBER.ucenter_url}>"><span class="login_ico denglu_ico"></span>个人中心<span class="ico_list login_litico"></span></a>
                     <div class="top_nav_login_son">
-                        <a href="<{link ctl='ucenter/member:index'}>">个人中心</a>
+                        <a href="<{$MEMBER.ucenter_url}>">个人中心</a>
+                        <!--
                         <a href="<{link ctl='ucenter/member/diary:index'}>">装修日记</a>
                         <a href="<{link ctl='ucenter/member/ask:index'}>">装修问答</a>
                         <a href="<{link ctl='ucenter/member/yuyue:tenders'}>">我的招标</a>
                         <a href="<{link ctl='ucenter/member/yuyue:company'}>">我的预约</a>
+                        -->
                         <a href="<{link ctl='passport:loginout'}>">退出</a>
                     </div>
                 </li>
+                <!--
                 <{if $MEMBER.from == 'company'}>
                 <li>
                     <a href="<{link ctl='ucenter/company:index'}>"><span class="ico_list in_t_s_ico"></span>公司管理<span class="ico_list login_litico"></span></a>
@@ -35,6 +38,7 @@
                 </li>
                 <{/if}>
                 <li><a href="<{link ctl='passport:loginout'}>">退出</a></li>
+                -->
             </ul>
             <{else}>
             <div>
@@ -58,6 +62,7 @@
             </div>
             </font>|
             <{/if}>
+			<a href="<{link ctl='price'}>">在线报价</a>|
             <a href="<{link ctl='trade/cart'}>"><span class="login_ico shipCar_ico"></span>购物车<{if $COOKIE.CART_NUMBER}>(<font class="fontcl2"><{$COOKIE.CART_NUMBER}></font>)<{/if}></a>|
              <font  class="tp_contactus"><a href="javascript:void(0)" class="over ">客户服务<span class="login_ico con_ico"></span></a>
                 <div class="tp_contactus_box">
@@ -88,20 +93,21 @@
     </div>
 </div>
 <script type="text/javascript">
-$(document).ready(function() {  
+$(document).ready(function() {	
     //头部登录后效果
     $(".top_nav_login li").mouseover(function(){
         $(this).find('.top_nav_login_son').show();
     }).mouseout(function(){
         $(this).find('.top_nav_login_son').hide();
-    });    
-    $("font.tpApp ").mouseover(function(){
+    }); 
+     $("font.tpApp ").mouseover(function(){
         $(this).find('a.appLink').addClass('on');
         $('font.tpApp ').find('.tpApp_box').show();
     }).mouseout(function(){
         $(this).find('a.appLink').removeClass('on');
         $('font.tpApp ').find('.tpApp_box').hide();
     });
+	
     $("font.tp_contactus ").mouseover(function(){
         $(this).find('a.over').addClass('on');
         $('font.tp_contactus ').find('.tp_contactus_box').show();

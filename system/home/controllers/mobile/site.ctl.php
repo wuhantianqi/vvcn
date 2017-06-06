@@ -2,7 +2,7 @@
 /**
  * Copy Right IJH.CC
  * Each engineer has a duty to keep the code elegant
- * $Id: site.ctl.php 10160 2015-05-09 09:39:48Z wanglei $
+ * $Id$
  */
 
 if(!defined('__CORE_DIR')){
@@ -42,22 +42,32 @@ class Ctl_Mobile_Site extends Ctl_Mobile
                 $this->pagedata['company_list'] = K::M('company/company')->items_by_ids($company_ids);
 			}
 			if($member_list = K::M('member/member')->items_by_ids($uids)){
-                $designer_ids  = array();
+                $designer_ids = $gz_ids = array();
                 foreach($member_list as $v){
                     if($v['from'] == 'designer'){
                         $designer_ids[$v['uid']] = $v['uid'];
                     }
+                    if($v['from'] == 'gz'){
+                        $gz_ids[$v['uid']] = $v['uid'];
+                    }
                 }
                 if($designer_ids){
                     $this->pagedata['designer_list'] = K::M('designer/designer')->items_by_ids($designer_ids);
-                }			
+                }				
+                if($gz_ids){
+                    $this->pagedata['gz_list'] = K::M('gz/gz')->items_by_ids($gz_ids);
+                } 				
                 $pager['pagebar'] = $this->mkpage($count, $limit,$page,$this->mklink('mobile/site:index',array('{page}')));
             }
 		}
 		$this->pagedata['items'] = $items;
         $this->pagedata['pager'] = $pager;
-		$this->tmpl = 'mobile/site/items.html';
-        
+        $seo = array('area_name'=>'', 'page'=>($page > 1) ? $page : '');
+        if($area_id){
+            $seo['area_name'] = $area_list[$area_id]['area_name'];
+        }
+        $this->seo->init('site_items', $seo);        
+		$this->tmpl = 'mobile/site/items.html';        
     }
 
 	 public function detail($site_id)
@@ -73,7 +83,9 @@ class Ctl_Mobile_Site extends Ctl_Mobile
                 $this->pagedata['company'] = K::M('company/company')->detail($site['company_id']);
             }else if($site['uid']){
                 if($member = K::M('member/member')->member($site['uid'])){
-                    if($member['from'] == 'designer'){
+                    if($member['from'] == 'gz'){
+                        $this->pagedata['gz'] = K::M('gz/gz')->detail($site['uid']);
+                    }else if($member['from'] == 'designer'){
                         $this->pagedata['designer'] = K::M('designer/designer')->detail($site['uid']);
                     }
                     $this->pagedata['member'] = $member;
@@ -90,6 +102,7 @@ class Ctl_Mobile_Site extends Ctl_Mobile
             $this->pagedata['site'] = $site;
 			$pager['backurl'] = $this->mklink('mobile/site');
 			$this->pagedata['pager'] = $pager;
+            $this->seo->init('site_detail',array('title'=>$site['title'], 'home_name'=>$detail['home_name'], 'company_name'=>''));
             $this->tmpl = 'mobile/site/detail.html';  
         }        
     }
@@ -120,30 +133,46 @@ class Ctl_Mobile_Site extends Ctl_Mobile
                         K::M('helper/mail')->sendcompany($company, 'company_site', $maildata);
                     }
                 }else if($member = K::M('member/member')->detail($site['uid'])){
-					if($member['from'] == 'designer'){
-						if($designer = K::M('designer/designer')->detail($member['uid'])){
-							$data['designer_id'] = $member['uid'];
-							$data['company_id'] = $designer['company_id'];
-							if($yuyue_id = K::M('designer/yuyue')->create($data)){
-								$yuyue_result = true;
-								K::M('designer/designer')->update($site['uid'], 'yuyue_num');
-								K::M('sms/sms')->send($data['mobile'], 'designer_yuyue', $smsdata);
-								if($designer['verify_mobile'] && K::M('verify/check')->mobile($designer['mobile'])){
-									K::M('sms/sms')->send($designer['mobile'], 'designer_tongzhi', $smsdata);
-								}
-								if($designer['verify_mail'] && K::M('verify/check')->mail($designer['mail'])){
-									K::M('helper/mail')->sendmail($designer['mail'], 'designer_yuyue', $maildata);
-								}
-							}
-						}                        
-					}
-				}
+                    if($member['from'] == 'gz'){
+                        if($gz = K::M('gz/gz')->detail($member['uid'])){
+                            $data['gz_id'] = $member['uid'];
+                            if($yuyue_id = K::M('gz/yuyue')->create($data)){
+                                $yuyue_result = true;
+                                K::M('gz/gz')->update_count($site['uid'], 'yuyue_num');
+                                K::M('sms/sms')->send($data['mobile'], 'site_yuyue', $smsdata);
+                                if($gz['verify_mobile'] && K::M('verify/check')->mobile($gz['mobile'])){
+                                    K::M('sms/sms')->send($site['mobile'], 'designer_tongzhi', $smsdata);
+                                }
+                                if($gz['verify_mail'] && K::M('verify/check')->mail($gz['mail'])){
+                                    K::M('helper/mail')->sendmail($member['mail'], 'gz_site', $maildata); 
+                                }                               
+                            }
+                        }                        
+                    }else if($member['from'] == 'designer'){
+                        if($designer = K::M('designer/designer')->detail($member['uid'])){
+                            $data['designer_id'] = $member['uid'];
+                            $data['company_id'] = $designer['company_id'];
+                            if($yuyue_id = K::M('designer/yuyue')->create($data)){
+                                $yuyue_result = true;
+                                K::M('designer/designer')->update($site['uid'], 'yuyue_num');
+                                K::M('sms/sms')->send($data['mobile'], 'designer_yuyue', $smsdata);
+                                if($designer['verify_mobile'] && K::M('verify/check')->mobile($designer['mobile'])){
+                                    K::M('sms/sms')->send($designer['mobile'], 'designer_tongzhi', $smsdata);
+                                }
+                                if($designer['verify_mail'] && K::M('verify/check')->mail($designer['mail'])){
+                                    K::M('helper/mail')->sendmail($designer['mail'], 'designer_yuyue', $maildata);
+                                }
+                            }
+                        }                        
+                    }
+                }
                 if($yuyue_result){
                     $this->err->add('预约参观成功！');
                     $this->err->set_data('forward', $this->mklink('mobile/site:detail', array($site_id)));
                 }
             }
         }else{
+			
 			$pager['tender_hide'] = 1;
             $pager['backurl'] = $this->mklink('mobile/site:detail',array($site_id));
             $this->pagedata['pager'] = $pager;

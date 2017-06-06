@@ -2,7 +2,7 @@
 /**
  * Copy Right IJH.CC
  * Each engineer has a duty to keep the code elegant
- * $Id: photo.mdl.php 10181 2015-05-11 11:46:04Z maoge $
+ * $Id$
  */
 
 if(!defined('__CORE_DIR')){

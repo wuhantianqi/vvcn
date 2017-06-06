@@ -1,0 +1,89 @@
+<{assign var="tpl_page_title" value="商品详情"}>
+<{include file="mobile/block/header.html"}>
+<section id="" class="page_center_box">
+<!--面包屑导航结束-->
+<div class="banner" style="padding:0px;">
+	<ul>
+		<{foreach $product_photo_list as $v}>
+		<li><img src="<{$pager.img}>/<{$detail.photo}>" /></li>
+		<{/foreach}>
+	</ul>
+	<span class="identify"><{foreach $product_photo_list as $v}><em></em><{/foreach}></span> </div>
+<div class="zxCompany_intro">
+<div class="nrBox mb10">
+	<div class="nr lh30">
+		<h1><{$detail.name}></h1>
+		<p>积分价：<b class="fontcl2"><{$detail.jfprice}>积分</b></p>
+	</div>
+</div>
+<form action="<{link ctl='mobile/jforder:create' arg0=$detail.product_id}>"  method="post" id="order-form">
+<div class="nrBox mb10">
+	<div class="nr lh30">
+		<input type="hidden" id="product_spec_id" value="0" />
+		<p>库存剩余：<font class="pointcl"><{$detail.kucun}></font></p>
+		<p>运费：<font class="pointcl">包邮</font></p>
+		<p>已兑换：<font class="pointcl"><{$detail.buys}></font>件</p>
+		<p>数量：<a class="jian count_ico" quantity="-"></a>
+			<input type="text" id="cart_product_num" class="buy_count_text" value="1" />
+			<a class="jia count_ico" quantity="+"></a></p>
+	</div>
+</div>
+<div class="applyDesign">
+	<input type="submit" class=" btn subbtn_full" value="立即兑换">
+</div>
+<form>
+<div class="nrBox mb10">
+	<h3>商品详情</h3>
+	<div class="nr">
+		<div class="article"><{$detail.info}></div>
+	</div>
+</div>
+<script type="text/javascript" src="<{$pager.res}>/script/cloud-zoom.js"></script> 
+<script type="text/javascript" src="<{$pager.res}>/script/raty/jquery.raty.js"></script> 
+<script type="text/javascript">
+(function(K, $){
+    $(function(){
+    var dateTime = new Date();
+    var difference = dateTime.getTime() - <{$pager.dateline}>*1000; 
+    setInterval(function(){
+      $("[remaintime]").each(function(){
+        var obj = $(this);
+        var endTime = new Date(parseInt(obj.attr('remaintime')) * 1000);
+        var nowTime = new Date();
+        var nMS=endTime.getTime() - nowTime.getTime() + difference;
+        var myD=Math.floor(nMS/(1000 * 60 * 60 * 24));
+        var myH=Math.floor(nMS/(1000*60*60)) % 24;
+        var myM=Math.floor(nMS/(1000*60)) % 60;
+        var myS=Math.floor(nMS/1000) % 60;
+        var myMS=Math.floor(nMS/100) % 10;
+        if(myD>= 0){
+            var str = myD+"天"+myH+"小时"+myM+"分"+myS+"."+myMS+"秒";
+        }else{
+            var str = "真遗憾您来晚了，抢购已经结束。";    
+        }
+        obj.html(str);
+      });
+    }, 100);
+});
+//商铺商品数量加减
+$("[quantity]").click(function(){
+var quantity = parseInt($("#cart_product_num").val(), 10);
+var kucun = <{$detail.kucun}> ;
+if($(this).attr("quantity") == '+'){
+    quantity += 1;
+    if(quantity > kucun){
+        quantity = kucun;
+        alert('库存不足！');
+    }
+}else{
+    quantity -= 1;
+}
+if(quantity < 1){
+    quantity = 1;
+}
+$("#cart_product_num").val(quantity);
+});
+
+})(window.KT, window.jQuery);
+</script> 
+<{include file="mobile/block/footer.html"}> 

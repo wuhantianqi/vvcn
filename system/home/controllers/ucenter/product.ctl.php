@@ -2,7 +2,7 @@
 /**
  * Copy Right IJH.CC
  * Each engineer has a duty to keep the code elegant
- * $Id: product.ctl.php 12719 2015-07-02 10:47:00Z maoge $
+ * $Id$
  */
 
 class Ctl_Ucenter_Product extends Ctl_Ucenter
@@ -40,7 +40,6 @@ class Ctl_Ucenter_Product extends Ctl_Ucenter
             }else{
                 $data['shop_id'] = $shop['shop_id'];
                 $data['city_id'] = $shop['city_id'];
-                $data['audit'] = $allow_product;
                 if($data['onpayment']){
                     if($product_payment < 0){  //不可发布在线销售商品
                         $data['onpayment'] = 0;

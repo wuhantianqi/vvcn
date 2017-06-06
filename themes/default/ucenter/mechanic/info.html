@@ -14,7 +14,7 @@
         <td><{if $mechanic.city_id}><b class="blue"><{$mechanic.city_name}></b>&nbsp;&nbsp;&nbsp;
             <select name="data[area_id]" class="select w-150"><{widget id="data/area" value=$mechanic.area_id city_id=$mechanic.city_id}></select>
             <{else}>
-            <{widget id="data/region" city_id=$mechanic.city_id area_id=$mechanic.area_id class="select w-150"}>
+            <{widget id="data/region" city_id=$MEMBER.city_id|default:$request.city_id class="select w-150"}>
             <{/if}>
         </td>        
     </tr>

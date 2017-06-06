@@ -92,22 +92,22 @@ form.floor_width.value=192;
 </SCRIPT>
 
 <div class="mb10 subwd sub_topnav">
-	<p><span class="ico_list breadna"></span>您的位置：<a href="<{link ctl='index'}>"><{$CONFIG.site.title}></a>
-    	><a href="<{link ctl='tools'  arg0=items}>">工具箱</a>
-			><a href="<{link ctl='tools'  arg0=$tool}>"><{$tools_array[$tool]}></a>
-		</p>
+    <p><span class="ico_list breadna"></span>您的位置：<a href="<{link ctl='index'}>"><{$CONFIG.site.title}></a>
+        &gt;<a href="<{link ctl='tools'  arg0=items http='www'}>">工具箱</a>
+        &gt;<a href="<{link ctl='tools'  arg0=$tool http='www'}>"><{$tools_array[$tool]}></a>
+    </p>
 </div>
 
 <!--面包屑导航结束-->
 <div class="subwd mb20">
 	<!--主体左边内容开始-->
-	<div class="about_lt lt">
-		<ul>
-             <{foreach $tools_array as $k => $item}>
-                     <li><a <{if $tool == $k}> class="current" <{/if}> href="<{link ctl='tools' arg0=$k}>"><{$item}></a></li>
+    <div class="about_lt lt">
+        <ul>
+            <{foreach $tools_array as $k => $item}>
+            <li><a <{if $tool == $k}> class="current" <{/if}> href="<{link ctl='tools' arg0=$k http='www'}>"><{$item}></a></li>
             <{/foreach}>
-		</ul>
-	</div>
+        </ul>
+    </div>
 	<!--主体左边内容结束-->
 	<!--主体右边内容开始-->
 	<div class="about_rt rt">

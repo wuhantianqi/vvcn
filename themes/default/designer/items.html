@@ -61,7 +61,9 @@
                             <div class="main_designer main_list">
                                 <a href="<{link ctl='blog' arg0=$item.uid}>" class="lt pic"  target="_blank"><img src="<{$pager.img}>/<{$item.face}>" /></a>
                                 <div class="main_designer_rt main_list_rt rt">
-                                    <h3><p class="lt"><b><a href="<{link ctl='blog' arg0=$item.uid}>"  target="_blank"><{$item.name}></a></b></p><a href="http://wpa.qq.com/msgrd?v=3&amp;uin=<{$item.qq}>&amp;site=qq&amp;menu=yes" class="ico_list qq_ico rt"></a></h3>
+                                    <h3><p class="lt"><b><a href="<{link ctl='blog' arg0=$item.uid}>"  target="_blank"><{$item.name}></a></b>
+									<{if $item.verify_name}><span class="ps_rz_ico ico_list"></span><{/if}>
+									</p><a href="http://wpa.qq.com/msgrd?v=3&amp;uin=<{$item.qq}>&amp;site=qq&amp;menu=yes" class="ico_list qq_ico rt"></a></h3>
                                     <div class="lt">
                                         <p><span class="ico_list jiuzhi_ico"></span>毕业院校<{$designers.avg_score}>：<{$item.school}></p>
                                         <p><span class="ico_list case_ico"></span>案例数：<{$item.case_num}>套</p>
@@ -89,32 +91,41 @@
 			</div>
 		</div>
 	</div>
-	<div class="side_content rt">	
-    <{widget id="tenders/fast" title="免费装修设计" from="TSJ"}>	
+	<div class="side_content rt">
+    	<{widget id="tenders/fast" title="免费装修设计" from="TSJ"}>	
 		<div class="mb10 area">
-            <h3 class="side_tit">设计师排行榜</h3>
-            <ul class="pding paihang">
-                <{calldata mdl="designer/designer" city_id=$request.city_id limit=8}>
-                <li>
-                    <span class="lt"><font class="paihang_num<{if $iteration<=3}> ph_num_cl<{/if}>"><{$iteration}></font><a href="<{link ctl='blog'  arg0=$item.uid}>"><{$item.name|cutstr:35}></a>
-                    </span>
-                    <span class="rt">已投标：<font class="fontcl2"><{$item.tenders_num}></font></span>
-                </li>
-                <{/calldata}>
-            </ul>
-        </div>
+			<h3 class="side_tit">设计师排行</h3>
+			<ul class="pding paihang">
+            	<{calldata mdl="designer/designer" city_id=$request.city_id limit=8}>
+                    <li>
+                        <span class="lt"><font class="paihang_num<{if $iteration<=3}> ph_num_cl<{/if}>"><{$iteration}></font><a href="<{link ctl='blog' arg0=$item.uid}>"><{$item.name|cutstr:35}></a></span>
+                        <span class="rt">已投标：<font class="fontcl2"><{$item.tenders_num}></font></span>
+                    </li>
+                 <{/calldata}> 
+			</ul>
+		</div>
         <div class="mb10 area">
-            <h3 class="side_tit">装修公司排行榜</h3>
-            <ul class="pding paihang">
+			<h3 class="side_tit">装修公司排行榜</h3>
+			<ul class="pding paihang">
                 <{calldata mdl="company/company"  city_id=$request.city_id limit=5}>
-                <li>
-                    <span class="lt"><font class="paihang_num<{if $iteration<=3}> ph_num_cl<{/if}>"><{$iteration}></font><a href="<{$item.company_url}>"><{$item.name|cutstr:35}></a>
-                    </span>
+				<li>
+                    <span class="lt"><font class="paihang_num<{if $iteration<=3}> ph_num_cl<{/if}>"><{$iteration}></font><a href="<{$item.company_url}>"><{$item.name|cutstr:35}></a></span>
                     <span class="rt">已投标：<font class="fontcl2"><{$item.tenders_num}></font></span>
                 </li>
                 <{/calldata}>
-            </ul>
-        </div>
+			</ul>
+		</div>
+        <div class="mb10 area">
+			<h3 class="side_tit">工长排行榜</h3>
+			<ul class="pding paihang">
+                <{calldata mdl="gz/gz" city_id=$request.city_id limit=5}>
+				<li>
+                    <span class="lt"><font class="paihang_num<{if $iteration<=3}> ph_num_cl<{/if}>"><{$iteration}></font><a href="<{link ctl='gz-detail'  arg0=$item.uid}>"><{$item.name|cutstr:35}></a></span>
+                    <span class="rt">已投标：<font class="fontcl2"><{$item.tenders_num}></font></span>
+                </li>
+                <{/calldata}>
+			</ul>
+		</div>
 		<div class="mb20 "><{adv id="10" name="全站右侧招商图片广告" city_id=$request.city_id}></div>
 	</div>
 	<div class="cl"></div>

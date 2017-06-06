@@ -3,7 +3,7 @@
  * Copy Right IJH.CC
  * Each engineer has a duty to keep the code elegant
  * Author shzhrui<anhuike@gmail.com>
- * $Id: modifier.qq.php 9378 2015-03-27 02:07:36Z youyi $
+ * $Id: modifier.qq.php 5379 2014-05-30 10:17:21Z youyi $
  */
 
 if(!defined('__CORE_DIR')){

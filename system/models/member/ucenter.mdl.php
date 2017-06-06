@@ -3,7 +3,7 @@
  * Copy Right IJH.CC
  * Each engineer has a duty to keep the code elegant
  * Author @shzhrui<Anhuike@gmail.com>
- * $Id: ucenter.mdl.php 9378 2015-03-27 02:07:36Z youyi $
+ * $Id: ucenter.mdl.php 5969 2014-07-30 13:04:57Z youyi $
  */
 
 class Mdl_Member_Ucenter extends Model

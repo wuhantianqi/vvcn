@@ -31,6 +31,7 @@ a:active  { color: #157C10; }
 .orange { color:#D96D03; }
 .blue { color:#014CCC; }
 .green { color:#157c10; }
+.none{ display:none;}
 .copyright { width:98%; margin:15px auto 0 auto; padding:7px 0 15px 0; border-top:1px solid #c0c0c0; text-align:center; font-size:11px; line-height:15px; color:#999; }
 .copyright a:link,.copyright a:visited { color: #999; text-decoration: underline; }
 .copyright a:hover,.copyright a:active { color: #555; text-decoration: underline; }

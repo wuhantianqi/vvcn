@@ -68,19 +68,20 @@ Cookie.remove = function(key){
 
 Widget.Dialog = Widget.Dialog || {};
 
-Widget.Dialog.Load = function(link,title,width,handler){
+Widget.Dialog.Load = function(link,title,width,handler,params){
 	var option = {width:500,autoOpen:false,modal:true,dialogClass:'ui-hack-widget-dialog',position:{my: "center top",at: "center top+120px",of: window},maxHeight:($(window).height()-100),maxWidth:($(window).width()-100)};
 	var opt = $.extend({},option);
 	handler = handler || function(){};
+	params = params || {};
 	title = title || "";
 	opt.width = width || opt.width;	
-	Widget.MsgBox.load("数据努力加载中。。。", 5000);	
+	Widget.MsgBox.load("数据努力加载中。。。");	
 	if(link.indexOf("?")<0){
 		link += "?MINI=load";
 	}else{
 		link += "&MINI=load";
 	}
-	$('<div title="'+title+'" id="widget-dialog-load-content">数据努力加载中。。。</div>').dialog($.extend({create:function(event,ui){$("#widget-dialog-load-content").load(link,function(){
+	$('<div title="'+title+'" id="widget-dialog-load-content">数据努力加载中。。。</div>').dialog($.extend({create:function(event,ui){$("#widget-dialog-load-content").load(link,params,function(){
 		if(!$(this).dialog("isOpen")){$(this).dialog("open");}Widget.MsgBox.hide();handler();
 	});},close:function(event,ui){
 		$(this).dialog("destroy");
@@ -216,6 +217,7 @@ $(document).ready(function(){
 		if(!__MINI_CONFIRM(this)){
 			return false;
 		}
+		var params = null;
 		var link = $(this).attr("action") || $(this).attr("href");
 		if($(this).attr("mini-batch")){
 			var batch = $(this).attr("mini-batch");
@@ -231,10 +233,13 @@ $(document).ready(function(){
 			}else{
 				link += "?itemIds="+itemIds.join(',');
 			}
+		}else if($(this).attr("mini-form")){
+			params = $($(this).attr("mini-form")).serialize();
+			console.log(params);
 		}
 		var title = $(this).attr("mini-title") || ($(this).attr("mini-load") || "");
 		var width = $(this).attr("mini-width") || 600;
-		Widget.Dialog.Load(link,title,width);
+		Widget.Dialog.Load(link, title, width, function(){}, params);
 	});
 	$("form[mini-form]").die("submit").live("submit",function(){
 		window.__MINI_LOAD = window.__MINI_LOAD || false;
@@ -281,6 +286,25 @@ $(document).ready(function(){
 		}
 		$(form).trigger("submit");
 		return true;	
+	});
+	$("[mini-submit]").each(function(){
+		var elm = $(this).attr("mini-submit")
+		$(elm).find("input:text,input:password").click(function(e){
+		    if(e.keyCode == 13){
+		        e.stopPropagation();e.preventDefault();
+		        $(elm).trigger("submit");
+		        return false;
+		    }
+		});
+	});
+	$("form[mini-form]").each(function(){
+		$(this).find("input:text,input:password").click(function(e){
+		    if(e.keyCode == 13){
+		        e.stopPropagation();e.preventDefault();
+		        $(this).trigger("submit");
+		        return false;
+		    }
+		});
 	});
 	$("[mini-iframe]").die("click").live("click",function(e){
 		e.stopPropagation();e.preventDefault();

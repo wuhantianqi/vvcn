@@ -2,7 +2,7 @@
 /**
  * Copy Right IJH.CC
  * Each engineer has a duty to keep the code elegant
- * $Id: photo.ctl.php 9378 2015-03-27 02:07:36Z youyi $
+ * $Id: photo.ctl.php 5610 2014-06-23 16:47:52Z youyi $
  */
 
 if(!defined('__CORE_DIR')){

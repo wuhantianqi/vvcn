@@ -30,6 +30,16 @@ return array (
     'html' => false,
     'empty' => true,
   ),
+  'gz' => 
+  array (
+    'label' => '工长',
+    'field' => 'gz',
+    'type' => 'text',
+    'default' => '',
+    'comment' => '',
+    'html' => false,
+    'empty' => true,
+  ),
   'designer' => 
   array (
     'label' => '设计师',
@@ -160,7 +170,16 @@ return array (
     'html' => false,
     'empty' => true,
   ),
-  
+  'zxb' => 
+  array (
+    'label' => '装修保',
+    'field' => 'zxb',
+    'type' => 'text',
+    'default' => '',
+    'comment' => '',
+    'html' => false,
+    'empty' => true,
+  ),
   'case' => 
   array (
     'label' => '案例',

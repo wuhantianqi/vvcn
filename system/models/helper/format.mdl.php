@@ -23,7 +23,7 @@ class Mdl_Helper_Format
 		} else {
 			$size = $size . ' Bytes';
 		}
-		return $size;		
+		return $size;
 	}
 
 	static public function price($price)

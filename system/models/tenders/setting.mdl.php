@@ -2,7 +2,7 @@
 /**
  * Copy Right IJH.CC
  * Each engineer has a duty to keep the code elegant
- * $Id: setting.mdl.php 9507 2015-04-01 05:47:59Z wanglei $
+ * $Id: setting.mdl.php 5839 2014-07-09 03:03:50Z $
  */
 
 if(!defined('__CORE_DIR')){
@@ -17,8 +17,8 @@ class Mdl_Tenders_Setting extends Mdl_Table
     protected $_cols = 'setting_id,type,name,orderby';
     protected $_orderby = array('type'=>'ASC', 'orderby'=>'ASC');
     protected $_pre_cache_key = 'tenders_setting';
-    protected $_type_means = array(1 => '招标类型', 2 => '喜欢风格', 3 => '预算范围', 4 => '服务需求',5 => '空间户型', 6 => '装修方式');    
-    protected $_type = array( 'type' => 1,'style'=> 2, 'budget'=>3, 'service'=>4, 'house_type' => 5, 'way'=>6);    
+    protected $_type_means = array(1 => '招标类型', 2 => '装修风格', 3 => '预算范围', 4 => '服务需求',5 => '空间户型', 6 => '装修方式', 7 => '维修分类');    
+    protected $_type = array( 'type' => 1,'style'=> 2, 'budget'=>3, 'service'=>4, 'house_type' => 5, 'way'=>6, 'cate'=>7);    
     
     public function get_type_means()
     {        

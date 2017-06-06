@@ -1,4 +1,4 @@
-<{include file="company/block/header.html"}>
+<{include file="$skin_theme/block/header.html"}>
 <!--装修公司头部结束-->
 <div class="subwd">
 	<!--主体左边内容开始-->
@@ -72,14 +72,14 @@
 		<div class="mb10">
 			<table cellpadding="0" cellspacing="0" class="sub_com_list">
 				<tr>
-					<td><p><b><{$company.case_num|default:'0'}></b></p><p>图库案例</p></td>
-					<td><p><b><{$company.tenders_num|default:'0'}></b></p><p>签约数</p></td>
-					<td><p><b><{$company.site_num|default:'0'}></b></p><p>在建工地</p></td>
+					<td><p><b><{$company.case_num}></b></p><p>图库案例</p></td>
+					<td><p><b><{$company.tenders_num}></b></p><p>签约数</p></td>
+					<td><p><b><{$company.site_num}></b></p><p>在建工地</p></td>
 				</tr>
 				<tr>
-					<td><p><b><{$company.news_num|default:'0'}></b></p><p>企业新闻</p></td>
-					<td><p><b><{$company.yuyue_num|default:'0'}></b></p><p>预约数</p></td>
-					<td><p><b><{$company.comments|default:'0'}></b></p><p>业主评价</p></td>
+					<td><p><b><{$company.news_num}></b></p><p>企业新闻</p></td>
+					<td><p><b><{$company.yuyue_num}></b></p><p>预约数</p></td>
+					<td><p><b><{$company.comments}></b></p><p>业主评价</p></td>
 				</tr>
 			</table>
 		</div>
@@ -91,7 +91,7 @@
 			<{if $company.group.allow_yuyue > 0}>
 			<a href="<{link ctl='gs:yuyue' arg0=$company.company_id http='ajax'}>" mini-load="免费预约装修公司" mini-width="400" class="btn_sub_tuan btn">免费预约</a>
 			<{else}>
-			<a href="<{link ctl='tenders:fast' http='ajax'}>" mini-load="免费发布装修招标" mini-width="500"  class="btn_sub_tuan btn">免费招标</a>
+			<a href="<{link ctl='tenders:fast' http='ajax'}>" mini-load="免费发布装修招标" mini-width="500" class="btn_sub_tuan btn">免费招标</a>
 			<{/if}>
 			您是<font class="fontcl2"><{$company.views}></font>位访客</p>
 		<div class="mb10">
@@ -114,12 +114,12 @@
 				<div class="cl"></div>
 			</div>
 		</div>
-        <{if $company.video}>
+       
 		<div class="mb10">
 			<h3><b>视频简介</b></h3>
-			<div class="video"><embed src="<{$company.video}>" quality="high" width="260" height="200" align="middle" allowScriptAccess="always" allowFullScreen="true" mode="transparent" type="application/x-shockwave-flash"></embed></div>
+			<div class="video"> <{if $company.video}><embed src="<{$company.video}>" quality="high" width="260" height="200" align="middle" allowScriptAccess="always" allowFullScreen="true" mode="transparent" type="application/x-shockwave-flash"></embed><{/if}></div>
 		</div>
-        <{/if}>
+        
 		<div class="mb10">
 			<h3 class="com_title"><b class="lt">最新预约</b></a>
 			</h3>

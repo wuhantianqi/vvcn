@@ -2,6 +2,19 @@
 <{include file="mobile/block/header.html"}>
 <!--头部内容结束-->
 <!--购物流程图开始-->
+<div class="pading admin_banner">
+	<a href="<{link ctl='mobile/ucenter:info'}>" style="display:block;">
+	<div class="admin_intro"><img src="<{$pager.img}>/<{$MEMBER.face}>" class="lt" />
+		<div class="lt">
+			<p><{$MEMBER.uname}></p>
+			<p>账户类型：<u><{$MEMBER.from_title}></u> </p>
+			<p>我的金币：<u><{$MEMBER.gold}></u></p>
+		</div>
+		<div class="cl"></div>
+	</div>
+	</a>
+</div>
+
 <div class="subwd">
 	<div class="pding shop_apply_top">
 		<p><span class="lt">订单提交成功，请您尽快付款！ 订单号：<font class="pointcl"><{$order.order_no}></font></span><span class="rt">应付金额<font class="pointcl"><{$order.amount}></font>元</span></p>

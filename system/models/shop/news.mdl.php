@@ -2,7 +2,7 @@
 /**
  * Copy Right IJH.CC
  * Each engineer has a duty to keep the code elegant
- * $Id: news.mdl.php 9378 2015-03-27 02:07:36Z youyi $
+ * $Id: news.mdl.php 2414 2013-12-20 11:04:25Z youyi $
  */
 
 if(!defined('__CORE_DIR')){

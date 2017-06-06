@@ -2,7 +2,7 @@
 /**
  * Copy Right IJH.CC
  * Each engineer has a duty to keep the code elegant
- * $Id: designer.ctl.php 10340 2015-05-20 06:07:09Z maoge $
+ * $Id$
  */
 
 class Ctl_Designer extends Ctl
@@ -17,7 +17,7 @@ class Ctl_Designer extends Ctl
         $area_id = $group_id = $order = 0;
         $attr_values = K::M('data/attr')->attrs_by_from('zx:designer', true);
         $uri = $this->request['uri'];
-        if(preg_match('/items-([\d\-]+)?\-(\d+).html/i', $uri, $m)){
+        if(preg_match('/items-([\d\-]+)?(\d+).html/i', $uri, $m)){
             $page = (int)$m[2];
             if($m[1]){
                 $attr_vids = explode('-', trim($m[1], '-'));

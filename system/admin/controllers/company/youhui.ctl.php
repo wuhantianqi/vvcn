@@ -3,7 +3,7 @@
 /**
  * Copy Right IJH.CC
  * Each engineer has a duty to keep the code elegant
- * $Id: youhui.ctl.php 9378 2015-03-27 02:07:36Z youyi $
+ * $Id: youhui.ctl.php 5867 2014-07-12 02:04:39Z youyi $
  */
 if (!defined('__CORE_DIR')) {
     exit("Access Denied");
@@ -51,7 +51,9 @@ class Ctl_Company_Youhui extends Ctl {
             if(is_numeric($SO['audit'])){$filter['audit'] = $SO['audit'];}
         }
         $companyIds = array();
-		
+		if(CITY_ID){
+            $filter['city_id'] = CITY_ID;
+        }
         if ($items = K::M('company/youhui')->items($filter, null, $page, $limit, $count)) {
             foreach ($items as $k => $v) {
 
@@ -91,7 +93,9 @@ class Ctl_Company_Youhui extends Ctl {
 			 if($items = K::M('company/youhui')->items_by_ids($ids)){
                 $aids = array();
                 foreach($items as $v){
-                    
+                    if(CITY_ID && CITY_ID != $v['city_id']){
+                        continue;
+                    }
                     $aids[$v['youhui_id']] = $v['youhui_id'];
                 }
                 if($aids && K::M('company/youhui')->batch($aids,array('audit'=>1))){
@@ -133,7 +137,9 @@ class Ctl_Company_Youhui extends Ctl {
                         }
                     }
                 }
-				
+				if(CITY_ID){
+                    $data['city_id'] = CITY_ID;
+                }
                 if ($youhui_id = K::M('company/youhui')->create($data)) {
 					K::M('company/youhui')->youhui_count($company['company_id']);
                     $this->err->add('添加内容成功');
@@ -217,7 +223,9 @@ class Ctl_Company_Youhui extends Ctl {
             if($items = K::M('company/youhui')->items_by_ids($ids)){
                 $aids = $company_ids = array();
                 foreach($items as $v){
-                   
+                    if(CITY_ID && CITY_ID != $v['city_id']){
+                        continue;
+                    }
                     $aids[$v['youhui_id']] = $v['youhui_id'];
                     $company_ids[$v['company_id']] = $v['company_id'];
                 }

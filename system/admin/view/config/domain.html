@@ -59,6 +59,27 @@
         <span class="tip-comment">留空表示不启用， 填写的域名必须是网站设置的根域名的子域名</span>
     </td>
 </tr>
+<tr>
+    <th>公司主页：</th>
+    <td>
+        <input type="text" name="config[company]" value="<{$config.company|default:''}>" class="input w-300"/>
+        <span class="tip-comment">留空表示不启用,如公司的个性域名是"test.ijh.cc", 则要填写"ijh.cc"，支持三域名域名</span>
+    </td>
+</tr>
+<tr>
+    <th>商家主页：</th>
+    <td>
+        <input type="text" name="config[shop]" value="<{$config.shop|default:''}>" class="input w-300"/>
+         <span class="tip-comment">留空表示不启用,如商铺的个性域名是"test.ijh.cc", 则要填写"ijh.cc"，支持三域名域名</span>
+    </td>
+</tr>
+<tr>
+    <th>保留域名：</th>
+    <td>
+        <input type="text" name="config[holddomain]" value="<{$config.holddomain|default:'www|*admin*|shop|company|mall|*blog*|*space*|*bbs*'}>" class="input w-500"/>
+        <span class="tip-comment">多个之间用 | 隔开，可以使用通配符*</span>
+    </td>
+</tr>
 <tr><th class="clear-th-bottom"></th><td class="clear-td-bottom" colspan="10"><input type="submit" class="bt-big" value="提交数据" /></td></tr>
 </table>
 </form></div>

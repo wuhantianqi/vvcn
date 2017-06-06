@@ -1,0 +1,32 @@
+<{assign var="tpl_page_title" value="手机支付"}>
+<{include file="mobile/block/header.html"}>
+<!--头部内容结束-->
+<!--购物流程图开始-->
+<div class="pading admin_banner">
+	<a href="<{link ctl='mobile/ucenter:info'}>" style="display:block;">
+	<div class="admin_intro"><img src="<{$pager.img}>/<{$MEMBER.face}>" class="lt" />
+		<div class="lt">
+			<p><{$MEMBER.uname}></p>
+			<p>我的积分：<u><{$MEMBER.jifen}></u></p>
+		</div>
+		<div class="cl"></div>
+	</div>
+	</a>
+</div>
+
+<div class="subwd">
+	<div class="pding shop_apply_top">
+		<p><span class="lt">订单提交成功，请您尽快付款！ 订单号：<font class="pointcl"><{$order.order_no}></font></span><span class="rt">应付金额<font class="pointcl"><{$order.jfamount}></font>积分</span></p>
+        <p class="cl"></p>
+        <p>请您在提交订单后24小时内完成支付，否则订单会自动取消。</p>
+	</div>
+	<div class="shop_apply_bottom">
+        <form action="<{link ctl='mobile/jfproduct:detail' arg0=$order.product_id}>" id="payment-form" method="post">
+        <input type="hidden" name="order_no" value="<{$order.order_no}>" />
+		
+		<p class="bt"><b>应付<font class="pointcl"><{$order.jfamount}></font>积分</b><button class="btn subbtn">立即兑换</button></a></p>
+		
+        </form>
+	</div>	
+</div>
+<{include file="mobile/block/footer.html"}>

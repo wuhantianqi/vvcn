@@ -12,6 +12,20 @@ window.MessageBox = function(msg,type,opt,callback){
 		callback = opt;
 		opt = {};
 	}
+	var options = $.extend({mask:false,opacity:0.3,delay:2,showDuration:100,hideDuration:100,extendedTimeOut:100,positionClass:"toast-top-full-width",onHidden:function(){}},opt||{});
+	options.timeOut = options.delay * 1000;
+	if(typeof(callback) == 'function'){
+		options.onHidden = callback;		
+	}
+	if(type == 'success'){
+		return toastr.success(msg, "", options);
+	}else if(type == 'error'){
+		return toastr.error(msg, "", options);
+	}else if(type == 'info' || type == 'notice' || type == 'note'){
+		return toastr.info(msg, "", options);
+	}else if(type == 'load'){
+		return toastr.info(msg, "", options);
+	}
 	var options = $.extend({mask:false,opacity:0.3,delay:2},opt||{});
 	var $box = $("#MessageBox");
 	var $mask = $("#MessageMask");
@@ -70,37 +84,29 @@ window.NoticeBox = function(elm,msg,type,opt){
 }
 
 MsgBox.success=function(msg,options, callback){
+	MsgBox.hide();	
     return new MessageBox(msg||"操作成功!",'success',options,callback);
 };
 MsgBox.error=function(msg,options,callback){
+	MsgBox.hide();
     return new MessageBox(msg||"操作失败!",'error',options,callback);
 };
-MsgBox.notice=function(msg,options){
-	toastr.options = {
-	  "closeButton": false,
-	  "debug": false,
-	  "positionClass": "toast-top-full-width",
-	  "onclick": null,
-	  "showDuration": "300",
-	  "hideDuration": "1000",
-	  "timeOut": "5000",
-	  "extendedTimeOut": "1000",
-	  "showEasing": "swing",
-	  "hideEasing": "linear",
-	  "showMethod": "fadeIn",
-	  "hideMethod": "fadeOut"
-	}
-	toastr.warning(msg);
+MsgBox.notice=function(msg,options, callback){
+	MsgBox.hide();
+	return new MessageBox(msg||"Notice",'error',options,callback);
 };
 MsgBox.load=function(msg,options, callback){
+	MsgBox.hide();
 	options = $.extend({delay:120,callback:function(){MsgBox.error("很抱歉,操作失败!!");}},options||{});
 	return new MessageBox(msg||"数据处理中..",'load',options,callback);   
 };
 MsgBox.show=function(msg,type,options,callback){
+	MsgBox.hide();
 	type = type || "notice";
 	return new MessageBox(msg||"操作成功!",type,options,callback);   
 };
 MsgBox.hide=function(msg, callback){
+	$("#toast-container").empty();
 	msg = msg || "";
 	return new MessageBox(msg,"hide", callback);
 };

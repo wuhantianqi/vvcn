@@ -1,0 +1,137 @@
+<{include file="block/header.html"}>
+<div class="mb20"></div>
+<div class="mainwd"> 
+	<!--主体左边内容开始-->
+	<div class="main_content lt">
+		<div class="mb20 pding area choose_option">
+			<table>
+				<tr>
+					<td class="tit" style="width:80px;">项目模式：</td>
+					<td>
+						<a href="<{$all_parent_cat_link}>" <{if $data.cat_id == 0}>class="current"<{/if}>>不限</a>
+						<{foreach $parents as $item}>
+	                        <{if $item.parent_id == 0}>
+								<a href="<{$item.link}>" <{if $data.top_cate.cat_id==$item.cat_id}>class="current"<{/if}> ><{$item.title}></a>
+							<{/if}>
+						<{/foreach}>
+					</td>
+				</tr>
+				<{if $cates}>
+				<tr>
+					<td class="tit" style="width:80px;">子模式：</td>
+
+					<td>
+						<a href="<{$cate_link}>" <{if $data.cateids ==0}>class="current"<{/if}> >不限</a>
+						<{foreach $cates as $v}>
+							<a href="<{$v.link}>" <{if $data.cat_id==$v.cat_id}>class="current"<{/if}> ><{$v.title}></a>
+						<{/foreach}>
+					</td>
+				</tr>
+				<{/if}>
+			</table>
+		</div>
+		<div class="mb20">
+			<div class="wxzb_change">
+				<ul>
+					<li><a href="<{$a_link}>" <{if $data.status==0}>class="current"<{/if}> >所有项目</a></li>
+					<li><a href="<{$b_link}>" <{if $data.status==1}>class="current"<{/if}>>进行中</a></li>
+					<li><a href="<{$c_link}>" <{if $data.status==2}>class="current"<{/if}>>已结束</a></li>
+				</ul>
+			</div>
+			<div class="sort_box">
+				<div class="lt">
+					<p class="sort_list hoverno"> 
+						<a href="<{$order_alink}>" >排序方式<span <{if $data.order==0}>class="sort_ico ico_list sort_on_ico" <{else}>class="sort_ico ico_list"<{/if}> ></span></a>
+						<a href="<{$order_blink}>" >最新<span <{if $data.order==1}>class="sort_ico ico_list sort_on_ico" <{else}>class="sort_ico ico_list"<{/if}>></span></a> 
+						<a href="<{$order_clink}>" >最热<span <{if $data.order==2}>class="sort_ico ico_list sort_on_ico" <{else}>class="sort_ico ico_list"<{/if}>></span></a> 
+					</p>
+				</div>
+				<div class="rt">
+					<form action="<{$price_link}>" method="post">
+						<div class="js_range_input">
+
+							<div class="lt"><font> ￥</font>
+								<input  class="text"  type="text" name='data[min]' value="<{$data.min}>" />
+								至
+								<input class="text" type="text" name='data[max]' value="<{$data.max}>" />
+							</div>
+							<div class="lt">
+								<input class="btn qued"  type='submit' value="确定" />
+							</div>
+							<div class="cl"></div>
+						</div>
+					</form>
+				</div>
+				<div class="cl"></div>
+			</div>
+			<div class="area">
+				<ul class="block_type">
+					<{foreach $items as $v}>
+						<li>
+							<div class="xm_money_lt lt">
+							<div class="task_title"><{if $v.status == 2}>
+										<font class="graycl">【已结束】</font>
+									<{elseif $v.status != 2 && $v.sign_uid != 0}>
+										<font class="fontcl1">【已签单】</font>
+									<{else}>
+										<font class="fontcl2">【进行中】</font>
+									<{/if}><{$v.title}></div>
+									<div class="task_small">预算金额 &nbsp;<font class="pointcl"> ￥<{$v.budget}></font></div>
+						</div>
+						 <div class="xm_money_mdlt lt">
+						 <{if $v.is_pay}>
+									<p class="yitg"><i></i> <a href='#' class='tuog_icon hh' target='_blank'>已托管</a></p>
+								<{else}>
+									<p class="weitg"><i></i> <a href='#' class='tuog_icon hh' target='_blank'>未托管</a></p>
+								<{/if}>
+						 </div>
+
+						<div class="xm_money_mid lt">
+							<p> <font class="fontcl1"><{$v.looks}></font> 人投标</p>
+							<p><font class="fontcl2"><{$v.views}></font> 人浏览</p>
+						</div>
+						<div class="xm_money_rt rt">
+						<a class="btn btn_sub_sm" href="<{link ctl='zbdt:detail' arg0=$v.truste_id}>" target="_blank" >查看详情</a>
+						 </div>
+						<div class="cl"></div>
+						</li>
+					<{/foreach}>
+				</ul>
+				<{if $pager.pagebar}>
+				<div class="page hoverno"><{$pager.pagebar}></div>
+				<{/if}> </div>
+		</div>
+	</div>
+	<!--主体左边内容结束--> 
+	<!--主体右边内容开始-->
+	<div class="side_content rt"> <{widget id="tenders/fast" title="免费装修设计" from="TSJ"}>
+		<div class="mb10 area">
+			<h3 class="side_tit">装修公司排行榜</h3>
+			<ul class="pding paihang">
+				<{calldata mdl="company/company"  city_id=$request.city_id limit=8}>
+				<li> <span class="lt"><font class="paihang_num<{if $iteration<=3}> ph_num_cl<{/if}>"><{$iteration}></font><a href="<{$item.company_url}>"><{$item.name|cutstr:35}></a></span> <span class="rt">已投标：<font class="fontcl2"><{$item.tenders_num}></font></span> </li>
+				<{/calldata}>
+			</ul>
+		</div>
+		<div class="mb10 area">
+			<h3 class="side_tit">设计师排行榜</h3>
+			<ul class="pding paihang">
+				<{calldata mdl="designer/designer" city_id=$request.city_id limit=5}>
+				<li> <span class="lt"><font class="paihang_num<{if $iteration<=3}> ph_num_cl<{/if}>"><{$iteration}></font><a href="<{link ctl='blog'  arg0=$item.uid}>"><{$item.name|cutstr:35}></a></span> <span class="rt">已投标：<font class="fontcl2"><{$item.tenders_num}></font></span> </li>
+				<{/calldata}>
+			</ul>
+		</div>
+		<div class="mb10 area">
+			<h3 class="side_tit">工长排行榜</h3>
+			<ul class="pding paihang">
+				<{calldata mdl="gz/gz" city_id=$request.city_id limit=5}>
+				<li> <span class="lt"><font class="paihang_num<{if $iteration<=3}> ph_num_cl<{/if}>"><{$iteration}></font><a href="<{link ctl='gz-detail'  arg0=$item.uid}>"><{$item.name|cutstr:35}></a></span> <span class="rt">已投标：<font class="fontcl2"><{$item.tenders_num}></font></span> </li>
+				<{/calldata}>
+			</ul>
+		</div>
+		<div class="mb20"><{adv id="10" name="全站右侧招商图片广告" city_id=$request.city_id}></div>
+	</div>
+	<div class="cl"></div>
+	<!--主体右边内容结束--> 
+</div>
+<{include file="block/footer.html"}> 

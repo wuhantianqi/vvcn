@@ -2,7 +2,7 @@
 /**
  * Copy Right IJH.CC
  * Each engineer has a duty to keep the code elegant
- * $Id: theme.mdl.php 9378 2015-03-27 02:07:36Z youyi $
+ * $Id: theme.mdl.php 6072 2014-08-12 12:23:29Z youyi $
  */
 
 if(!defined('__CORE_DIR')){
@@ -212,6 +212,9 @@ class Mdl_System_Theme extends Mdl_Table
 
     public function load_tmpls($path)
     {
+        if(!preg_match('/[a-z0-9\_\-\/]+$/i', $path)){
+            exit(0);
+        }
         $dir = __TPL_DIR.trim($path, '/').'/';
         if(!is_dir($dir)){
             return false;
@@ -276,6 +279,9 @@ class Mdl_System_Theme extends Mdl_Table
 
     public function tmplsave($admin, $content, $tmpl)
     {
+        if(!preg_match('/[a-z0-9\_\-\/]+\.html$/i', $tmpl)){
+            exit(0);
+        }
         $file = __TPL_DIR . str_replace(':', '/', $tmpl);
 	   
         if(!file_exists($file)){
@@ -302,7 +308,9 @@ class Mdl_System_Theme extends Mdl_Table
 
 	public function bak_tmpls($tmpl)
 	{
-
+        if(!preg_match('/[a-z0-9\_\-\/]+\.html$/i', $tmpl)){
+            exit(0);
+        }
 		$filter = array('tmpl'=>$tmpl);
 		$orderby = array('bak_id'=>'desc');
 		$detail = K::M('system/themebak')->items($filter, $orderby);
@@ -314,6 +322,9 @@ class Mdl_System_Theme extends Mdl_Table
 	public  function restore_bak($bak_id)
     {
 		$detail = K::M('system/themebak')->detail($bak_id);
+        if(!preg_match('/[a-z0-9\_\-\/]+\.html$/i', $detail['tmpl'])){
+            exit(0);
+        }
 		$file = __TPL_DIR . str_replace(':', '/', $detail['tmpl']);
 
 		if(!file_exists($file)){

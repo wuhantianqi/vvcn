@@ -2,7 +2,7 @@
 /**
  * Copy Right IJH.CC
  * Each engineer has a duty to keep the code elegant
- * $Id: payment.ctl.php 9372 2015-03-26 06:32:36Z youyi $
+ * $Id$
  */
 
 class Ctl_Mobile_Trade_Payment extends Ctl
@@ -12,7 +12,7 @@ class Ctl_Mobile_Trade_Payment extends Ctl
     {
         parent::__construct($system);
         $uri = $this->request['uri'];
-        if(preg_match('/payment-(return|notify)-(\w+)\.html/i', $uri, $match)){
+        if(preg_match('/(return|notify)-(\w+)\.html/i', $uri, $match)){
             $system->request['act'] = $match[1].'_verify';
             $system->request['args'] = array($match[2]);
         }
@@ -25,17 +25,21 @@ class Ctl_Mobile_Trade_Payment extends Ctl
             if($trade = $obj->return_verify()){
                 if(!$log = K::M('payment/log')->log_by_no($trade['trade_no'])){
                     $this->err->add('支付的订单不存在', 211);
-                }else if($trade['amount'] != $log['amount']){
-                    $this->err->add('支付金额非法', 212);
                 }else if(K::M('payment/log')->set_payed($trade['trade_no'])){
                     if($log['from'] == 'order'){ //订单支付
                         K::M('trade/payment')->payed_order($log, $trade);
                         $this->pagedata['order'] = K::M('trade/order')->detail_by_no($trade['trade_no']);
+						$fenxiao = $this->system->config->get('fenxiao');
+						K::M('member/member')->update_count($this->uid,'jifen',$fenxiao['pay']*$log['amount']);
+						K::M('fenxiao/log')->log($this->uid,0, 1,$fenxiao['pay']*$log['amount'], '订单支付获取积分');
                         $this->tmpl = 'mobile/trade/payment/success.html';
                         //$this->err->add('支付订单成功');                      
                         //$forward = $this->mklink('mall/order:detail', array($trade['trade_no']));
                     }else if($log['from'] == 'gold'){ //金币充值
                         K::M('trade/payment')->payed_gold($log, $trade);
+						$fenxiao = $this->system->config->get('fenxiao');
+						K::M('member/member')->update_count($this->uid,'jifen',$fenxiao['pay']*$log['amount']);
+						K::M('fenxiao/log')->log($this->uid,0, 1,$fenxiao['pay']*$log['amount'], '充值金币获取积分');
                         $this->err->add('充值金币成功');
                     }
                 }else{
@@ -59,15 +63,19 @@ class Ctl_Mobile_Trade_Payment extends Ctl
             if($trade = $obj->notify_verify()){
                 if(!$log = K::M('payment/log')->log_by_no($trade['trade_no'])){
                     $this->err->add('支付的订单不存在', 211);
-                }else if($trade['amount'] != $log['amount']){
-                    $this->err->add('支付金额非法', 212);
                 }else if(K::M('payment/log')->set_payed($trade['trade_no'])){
                     if($log['from'] == 'order'){ //订单支付
                         if(K::M('trade/payment')->payed_order($log, $trade)){
+							$fenxiao = $this->system->config->get('fenxiao');
+							K::M('member/member')->update_count($this->uid,'jifen',$fenxiao['pay']*$log['amount']);
+							K::M('fenxiao/log')->log($this->uid,0, 1,$fenxiao['pay']*$log['amount'], '订单支付获取积分');
                             $success = true;
                         }
                     }else if($log['from'] == 'gold'){ //金币充值
                         if(K::M('trade/payment')->payed_gold($log, $trade)){
+							$fenxiao = $this->system->config->get('fenxiao');
+							K::M('member/member')->update_count($this->uid,'jifen',$fenxiao['pay']*$log['amount']);
+							K::M('fenxiao/log')->log($this->uid,0, 1,$fenxiao['pay']*$log['amount'], '充值金币获取积分');
                             $success = true;
                         }
                     }
@@ -77,8 +85,11 @@ class Ctl_Mobile_Trade_Payment extends Ctl
         }
     }
 
-    public function order($code=null, $order_no=null)
+    public function order($code=null, $order_no=null,$packet=0)
     {
+		if(!$packet){
+			$packet = $this->GP('packet');
+		}
         if(!is_numeric($order_no) && !($order_no = (int)$this->GP('order_no'))){
             $this->error(404);
         }else if(empty($code) && !($code = $this->GP('code'))){
@@ -92,11 +103,40 @@ class Ctl_Mobile_Trade_Payment extends Ctl
                 $this->err->add('订单已经完成不可支付', 213);
             }else if($order['pay_status']){
                 $this->err->add('该订单已经支付过了,不需要重复支付', 212);
-            }else if($url = K::M('trade/payment')->order($code, $order)){
-                header("Location:{$url}");
+            }else if($url = K::M('trade/payment')->order($code, $order,$packet)){
+				
+				if($packet>0){
+					$p = K::M('member/packet')->detail($packet);
+				}else{
+					$p['price'] = 0;
+				}
+                if(strpos($_SERVER["HTTP_USER_AGENT"], 'MicroMessenger') === false && strpos($url,'wxpay')){
+                    $qrurl = $this->mklink('mobile/trade/payment:wxqrcode', array(), array('codeurl'=>$url, 'amount'=>$order['amount']-$p['price'],'order_no'=>$order['order_no']));
+                    header("Location:{$qrurl}");
+                }else{
+                    header("Location:{$url}");
+                }
                 exit;
             }
         }
+    }
+
+	public function wxqrcode()
+    {
+        if(!$codeurl = $this->GP('codeurl')){
+            exit('params error');
+        }
+        if(!$amount = $this->GP('amount')){
+            exit('params error');
+        }
+		if(!$order_no = $this->GP('order_no')){
+            exit('params error');
+        }
+        $amount = sprintf("%.2f", $amount);
+        $this->pagedata['codeurl'] = $codeurl;
+        $this->pagedata['amount'] = $amount;
+		$this->pagedata['order_no'] = $order_no;
+        $this->tmpl = 'mobile/trade/payment/wxqrcode.html';
     }
 
     public function gold($code=null, $amount=null)
@@ -107,7 +147,11 @@ class Ctl_Mobile_Trade_Payment extends Ctl
             $this->err->add('充值金额不合法', 211);
         }else if($this->check_login()){
             if($url = K::M('trade/payment')->gold($this->uid, $code, $amount)){
-                header("Location:{$url}");
+                if(strpos($_SERVER["HTTP_USER_AGENT"], 'MicroMessenger') === false && strpos($url,'wxpay')){
+					echo '<img alt="模式一扫码支付" src="http://paysdk.weixin.qq.com/example/qrcode.php?data='.urlencode($url).'" style="width:150px;height:150px;"/>';
+				}else{
+					header("Location:{$url}");
+				}
                 exit;
             }
         }

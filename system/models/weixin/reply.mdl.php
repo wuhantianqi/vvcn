@@ -2,7 +2,7 @@
 /**
  * Copy Right IJH.CC
  * Each engineer has a duty to keep the code elegant
- * $Id: reply.mdl.php 9378 2015-03-27 02:07:36Z youyi $
+ * $Id$
  */
 
 if(!defined('__CORE_DIR')){
@@ -41,7 +41,7 @@ class Mdl_Weixin_Reply extends Mdl_Table
     public function format_wechat($row)
     {
         $article = array();
-        $article['title'] = $row['title'];
+        $article['Title'] = $row['title'];
         $article['Description'] = $row['intro'];
         $article['PicUrl'] = Mdl_System_Config::$_CFG['attach']['attachurl'].'/'.$row['photo'];
         if($row['jumpurl'] && K::M('verify/check')->url($row['jumpurl'])){

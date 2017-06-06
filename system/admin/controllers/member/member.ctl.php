@@ -3,7 +3,7 @@
  * Copy Right IJH.CC
  * Each engineer has a duty to keep the code elegant
  * Author @shzhrui<Anhuike@gmail.com>
- * $Id: member.ctl.php 9378 2015-03-27 02:07:36Z youyi $
+ * $Id: member.ctl.php 5610 2014-06-23 16:47:52Z youyi $
  */
 
 if(!defined('__CORE_DIR')){
@@ -87,7 +87,9 @@ class Ctl_Member_Member extends Ctl
         $from_list = K::M('member/member')->from_list();
 		if($from_list[$from]){
             $pager['from'] = $filter['from'] = $from;
-        }else if($from == 'cydr'){
+        }else if($from == 'cygz'){
+			$pager['from'] = $filter['from'] = array('company','gz');
+		}else if($from == 'cydr'){
 			$pager['from'] = $filter['from'] = array('company','designer');
 		}
         if($items = K::M('member/member')->items($filter, null, $page, $limit, $count)){
@@ -98,6 +100,8 @@ class Ctl_Member_Member extends Ctl
         $this->pagedata['pager'] = $pager;
         $this->tmpl = 'admin:member/member/dialog.html';   
     }
+
+	
 
     public function ucard($uid=null)
     {
@@ -118,12 +122,20 @@ class Ctl_Member_Member extends Ctl
     
     public function manager($uid)
     {
-        if(K::M('member/auth')->manager($uid)) {
+       if(K::M('member/auth')->manager($uid)) {
             $cfg = $this->system->config->get('site');
-            $link = $cfg['siteurl'].'/index.php?ucenter/member-index.html';
+            $member = K::M('member/member')->detail($uid);
+            if($member['from'] == 'shop' || $member['from'] == 'company'){
+                 $link = $cfg['siteurl'].'/index.php?scenter/'.$member['from'].'-index.html';
+            }else if($member['from'] == 'gz' || $member['from'] == 'designer' || $member['from'] == 'mechanic'){
+                 $link = $cfg['siteurl'].'/index.php?dcenter/'.$member['from'].'-index.html';
+            }else{
+                 $link = $cfg['siteurl'].'/index.php?ucenter/member-index.html';
+            }
+           
             header("Location: {$link}");
             exit();
-        }        
+        }
     }  
 
     public function ulock($page=1)
@@ -239,7 +251,7 @@ class Ctl_Member_Member extends Ctl
                 if(K::M('member/member')->update($uid, $data)){
                     $this->err->add('修改内容成功');
                 }
-            }
+            } 
         }else{
         	$this->pagedata['detail'] = $detail;
         	$this->tmpl = 'admin:member/member/edit.html';

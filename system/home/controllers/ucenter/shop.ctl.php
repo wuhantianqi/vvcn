@@ -2,7 +2,7 @@
 /**
  * Copy Right IJH.CC
  * Each engineer has a duty to keep the code elegant
- * $Id: shop.ctl.php 9941 2015-04-28 13:13:58Z youyi $
+ * $Id$
  */
 
 if(!defined('__CORE_DIR')){
@@ -109,6 +109,36 @@ class Ctl_Ucenter_Shop extends Ctl_Ucenter
         }else{
             $this->pagedata['shop'] = $shop;
             $this->tmpl = 'ucenter/shop/info.html';
+        }
+    }
+
+    public function domain()
+    {
+        $shop = $this->ucenter_shop();
+        $CFG = $this->system->_CFG;
+        if(!$CFG['domain']['shop']){
+            $this->err->add('网站未开启商铺个性域名功能', 211);
+        }else if($domain = $this->checksubmit('domain')){            
+            if($shop['group']['priv']['allow_domain'] < 0){
+                $this->err->add('您没有权限设置个性域名', 212);
+            }else if($shop['domain']){
+                $this->err->add('您已经设置了个性域名不可修改', 213);
+            }else{
+                $ret = true;
+                if($CFG['domain']['company'] == $CFG['domain']['shop']){ //当与公司公司设置相同时判断公司是否占用了
+                    if($company = K::M('company/company')->company_by_domain($domain)){
+                        $this->err->add('您选域名太好已经被人抢注了', 213);
+                        $ret = false;
+                    }
+                }
+                if($ret){
+                    if(K::M('shop/shop')->update_domain($shop['shop_id'], $domain)){
+                        $this->err->add('设置个性域名成功');
+                    }
+                }
+            } 
+        }else{
+            $this->tmpl = 'ucenter/shop/domain.html';
         }
     }
 

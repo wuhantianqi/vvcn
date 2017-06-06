@@ -2,7 +2,7 @@
 /**
  * Copy Right IJH.CC
  * Each engineer has a duty to keep the code elegant
- * $Id: order.ctl.php 9372 2015-03-26 06:32:36Z youyi $
+ * $Id$
  */
 
 if(!defined('__CORE_DIR')){
@@ -107,7 +107,7 @@ class Ctl_Ucenter_Shop_Order extends Ctl_Ucenter
             }else if(empty($order['order_status'])){
                 if(K::M('trade/order')->update($order['order_id'], array('order_status'=>1), true)){
                     $member = K::M('member/member')->member($order['uid']);
-					$smsdata = $maildata = array('order_no'=>$order['order_no'], 'order_amount'=>$order['amount'], 'contact'=>$order['contact'], 'shop_name'=>$shop['name'], 'shop_phone'=>$shop['phone']);
+                    $smsdata = $maildata = array('order_no'=>$order['order_no'], 'order_amount'=>$order['amount'], 'contact'=>$order['contact'], 'shop_name'=>$shop['name'], 'shop_phone'=>$shop['phone']);
                     if($mobile = K::M('verify/check')->mobile($order['mobile'])){
                         K::M('sms/sms')->send($order['mobile'], 'order_ship_buyer', $smsdata);
                     }else if($member['verify_mobile'] && K::M('verify/check')->mobile($member['mobile'])){

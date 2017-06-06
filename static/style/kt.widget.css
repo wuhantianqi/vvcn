@@ -14,6 +14,7 @@ a{cursor:pointer;cursor:hand;}
 #MessageBox.success{ background:#fcfdf3; color:#333333; border-color: #D3E399; }
 #MessageBox.load{ background:#fcfdf3; color:#333333; border-color: #D3E399; }
 
+
 /*设置不同提示信息内的链接的样式*/
 #MessageBox.error a    { color: #8a1f11; }
 #MessageBox.notice a   { color: #514721; }
@@ -22,11 +23,11 @@ a{cursor:pointer;cursor:hand;}
 
 /*带图标的提示信息样式*/
 #MessageBox .icon { width:16px; height:16px; line-height:16px; margin-top:3px; display:inline-block;background:no-repeat left center; float:left }
-#MessageBox.error .icon   { background: url(../images/icon/error-small.gif); }
-#MessageBox.notice .icon  { background: url(../images/icon/notice-small.gif); }
-#MessageBox.note .icon    { background: url(../images/icon/note-small.gif); }
-#MessageBox.success .icon { background: url(../images/icon/success-small.gif); }
-#MessageBox.load .icon {background: url(../images/icon/load-small.gif);}
+#MessageBox .error .icon   { background: url(../images/icon/error-small.gif); }
+#MessageBox .notice .icon  { background: url(../images/icon/notice-small.gif); }
+#MessageBox .note .icon    { background: url(../images/icon/note-small.gif); }
+#MessageBox .success .icon { background: url(../images/icon/success-small.gif); }
+#MessageBox .load .icon {background: url(../images/icon/load-small.gif);}
 
 .transparent{filter:alpha(opacity=0);-moz-opacity:0;-khtml-opacity:0;opacity:0;}
 

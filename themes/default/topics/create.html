@@ -1,0 +1,10 @@
+<{assign var="min_ititle" value="兑换码"}>
+<{include file="block/mini-header.html"}>
+<form action="<{link ctl='topics:create' arg0=$type http='empty'}>" mini-form="sign-form" method="post" >
+<input name="order_no" type="hidden" class="input" value="<{$order_no}>" />
+<table border="0" cellspacing="0" cellpadding="0" class="book">
+	<tr><th style="width:50px;">兑换码:</th><td><input name="data[ticket]" type="text" class="input" value="" /></td></tr>
+	<tr><th style="width:50px;"></th><td><input type="submit" value="立即提交" class="btn btn_sub_tuan" /></td></tr>
+</table>
+</form>
+<{include file="block/mini-footer.html"}>

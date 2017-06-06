@@ -1,0 +1,72 @@
+<{assign var="tpl_page_title" value="我的竞标"}>
+<{include file="mobile/block/header.html"}>
+<header class="control">
+	<i class="left"><a href="<{if $pager.backurl}><{$pager.backurl}><{else}><{link ctl='mobile/index'}><{/if}>" id="gobackIco"></a></i>
+    <div class="title">我的竞标</div>
+    <i class="right"></i>
+</header>
+
+
+<section id="" class="page_center_box">
+	<div class="order_top">
+		<div class="order_chose"> <a href="<{link ctl="mobile/scenter/tenders:tendered" arg0=1}>" <{if $type == 1}> class="current"<{/if}>> 已签单 </a> 
+        
+        <a href="<{link ctl="mobile/scenter/tenders:tendered" arg0=2}>" <{if $type == 2}> class="current"<{/if}>> 竞标中 </a> </div>
+	</div>
+    <{if !$items}> <div class="loginInfor_tishi">暂无记录信息</div><{/if}>
+    
+    <{foreach $items as $item}>
+    	<div class="mb10 loginInfor_mtn">
+            <div class="public_firstit">
+                <{$tenders_list[$item.tenders_id].title|default:'--'}>
+                 <span class="right"><a class="btn pdBtn" href="<{link ctl='mobile/scenter/tenders:tenderDetail' arg0=$item.tenders_id}>">查看详情</a></span>
+            </div>
+            <div class="loginInfor">
+                <div class="loginIf_list">
+                    <div class="fl ifIco"><i class="icco icco1"></i> </div>
+                    <div class="ifInput">
+                        姓名：<{$tenders_list[$item.tenders_id].contact}>
+                    </div>
+                    <div class="clear"></div>
+                </div>
+                <div class="loginIf_list">
+                    <div class="fl ifIco"><i class="icco icco2"></i> </div>
+                    <div class="ifInput">
+                        电话：<{$tenders_list[$item.tenders_id].mobile}>
+                    </div>
+                    <div class="clear"></div>
+                </div>
+                <div class="loginIf_list">
+                    <div class="fl ifIco"><i class="icco icco3"></i> </div>
+                    <div class="ifInput">
+                        竞标时间：<{$item.dateline|format}>
+                    </div>
+                    <div class="clear"></div>
+                </div>
+                <div class="loginIf_list">
+                    <div class="fl ifIco"><i class="icco icco5"></i> </div>
+                    <div class="ifInput">
+                        状态：<{if $item.is_signed}>
+                            <b class="blue">恭喜签单</b>
+                            <{elseif $tenders_list[$item.tenders_id].sign_uid > 1}>
+                            <b>他人签单</b>
+                            <{elseif $tenders_list[$item.tenders_id].status < 0}>
+                            <b>已失效</b>
+                            <{else}>
+                            <b class="red">竞标中</b>
+                            
+                            <{/if}>
+                    </div>
+                    <div class="clear"></div>
+                </div>
+                
+            </div>
+        </div>
+	 <{/foreach}>
+	
+	
+</section>
+
+</body>
+</html>
+

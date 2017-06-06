@@ -19,7 +19,7 @@
             <a href="<{link ctl='ucenter/company/youhui:youhuiSign' arg0=$item.youhui_id}>" class="pbtn">查看报名</a>
             <a href="<{link ctl='ucenter/company/youhui:edit' arg0=$item.youhui_id}>" class="pbtn">修改</a>
            	<a href="<{link ctl='ucenter/company/youhui:refresh' arg0=$item.youhui_id http='ajax'}>" mini-load="刷新"  mini-width="400" class="pbtn red">刷新</a></span>
-            <a href="<{link ctl='ucenter/company/youhui:delete' arg0=$item.youhui_id http='ajax'}>" mini-act="删除" mini-confirm="确定要删除吗？" class="pbtn red">删除</a>
+            <a href="<{link ctl='ucenter/company/youhui:delete' arg0=$item.youhui_id}>" mini-act="删除" mini-confirm="确定要删除吗？" class="pbtn red">删除</a>
         </td>
     </tr>
     <{foreachelse}>

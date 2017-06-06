@@ -2,7 +2,7 @@
 /**
  * Copy Right IJH.CC
  * Each engineer has a duty to keep the code elegant
- * $Id: company_comment.php 9378 2015-03-27 02:07:36Z youyi $
+ * $Id: company_dianping.php 2311 2013-12-18 07:48:39Z $
  */
 
 if(!defined('__CORE_DIR')){

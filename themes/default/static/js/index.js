@@ -16,7 +16,7 @@ $(".index_banner_lt p.index_banner_tit a").mouseover(function(){
 $(".index_banner_lt p.index_banner_tit a").eq(0).mouseover();
  
  
-
+ 
 //首页热门案例切换
 $('ul.index_case_list li').mouseover(function(){
     $('ul.index_case_list li').siblings().find('p').hide();

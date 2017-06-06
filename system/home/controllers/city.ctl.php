@@ -3,7 +3,7 @@
 /**
  * Copy Right IJH.CC
  * Each engineer has a duty to keep the code elegant
- * $Id: city.ctl.php 9372 2015-03-26 06:32:36Z youyi $
+ * $Id: city.ctl.php 3407 2014-02-21 06:37:45Z $
  */
 class Ctl_City extends Ctl
 {
@@ -19,11 +19,25 @@ class Ctl_City extends Ctl
             if($v['pinyin']){
                 $py = strtoupper(substr($v['pinyin'], 0, 1));
                 $v['py'] = $py;
-                $city_list[$k] = $v;
+                $city[$py][] = $v;
             }
         }
-        $this->pagedata['city_list']  = $city_list;
+        
+		$c = ksort($city);
+		$this->pagedata['city_list']  = $city_list;
+		$this->pagedata['city'] = $city;
         $this->pagedata['province_list']  =  K::M('data/province')->fetch_all();
+
+
+
+		//Ñb¶È
+		$this->pagedata['member'] = K::M('member/member')->count();
+        $this->pagedata['company'] = K::M('company/company')->count();
+       
+		
+
+
+
         $this->seo->init('city');
         $this->tmpl = 'city/city.html';
     }    

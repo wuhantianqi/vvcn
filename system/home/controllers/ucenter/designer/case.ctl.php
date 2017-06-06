@@ -2,7 +2,7 @@
 /**
  * Copy Right IJH.CC
  * Each engineer has a duty to keep the code elegant
- * $Id: case.ctl.php 10120 2015-05-07 11:18:05Z maoge $
+ * $Id$
  */
 
 class Ctl_Ucenter_Designer_Case extends Ctl_Ucenter
@@ -83,6 +83,7 @@ class Ctl_Ucenter_Designer_Case extends Ctl_Ucenter
                 }
             }
         } else {
+			$pager['city_id'] = $designer['city_id'];
             $this->pagedata['pager'] = $pager;
             $this->tmpl = 'ucenter/designer/case/create.html';
         }
@@ -154,6 +155,8 @@ class Ctl_Ucenter_Designer_Case extends Ctl_Ucenter
                 $this->pagedata['huxing'] = K::M('home/photo')->detail($huxing_id);
             }
             $this->pagedata['detail'] = $detail;
+			$pager['city_id'] = $designer['city_id'];
+            $this->pagedata['pager'] = $pager;
             $this->tmpl = 'ucenter/designer/case/edit.html';
         }
     }

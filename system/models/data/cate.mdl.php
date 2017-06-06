@@ -2,7 +2,7 @@
 /**
  * Copy Right IJH.CC
  * Each engineer has a duty to keep the code elegant
- * $Id: cate.mdl.php 9378 2015-03-27 02:07:36Z youyi $
+ * $Id$
  */
 
 if(!defined('__CORE_DIR')){
@@ -17,7 +17,7 @@ class Mdl_Data_Cate extends Mdl_Table
     protected $_cols = 'cate_id,from,title,orderby';
     protected $_orderby = array('from'=>'ASC', 'orderby'=>'DESC');
      protected $_pre_cache_key = 'data-cate-list';
-    protected $_from_list = array('company'=>'公司', 'mechanic'=>'工人', 'designer'=>'设计师');
+    protected $_from_list = array('company'=>'公司', 'gz'=>'工长', 'mechanic'=>'工人', 'designer'=>'设计师');
 
     public function from_list()
     {

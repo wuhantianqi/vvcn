@@ -2,7 +2,7 @@
 /**
  * Copy Right IJH.CC
  * Each engineer has a duty to keep the code elegant
- * $Id: data_city.php 9378 2015-03-27 02:07:36Z youyi $
+ * $Id: data_city.php 3159 2014-01-22 01:54:39Z youyi $
  */
 return array (
   'city_id' => 
@@ -21,6 +21,22 @@ return array (
     'default' => '',
     'SO' => '=',
   ),
+  'province_id' => 
+  array (
+    'field' => 'province_id',
+    'label' => '省份',
+    'pk' => false,
+    'add' => true,
+    'edit' => true,
+    'html' => false,
+    'empty' => true,
+    'show' => true,
+    'list' => true,
+    'type' => 'number',
+    'comment' => '',
+    'default' => '',
+    'SO' => '=',
+  ),  
   'city_name' => 
   array (
     'field' => 'city_name',
@@ -69,7 +85,102 @@ return array (
     'default' => '',
     'SO' => false,
   ),
-  
+'logo' => 
+  array (
+    'field' => 'logo',
+    'label' => 'LOGO',
+    'pk' => false,
+    'add' => true,
+    'edit' => true,
+    'html' => false,
+    'empty' => true,
+    'show' => false,
+    'list' => true,
+    'type' => 'photo',
+    'comment' => '',
+    'default' => '',
+    'SO' => 'like',
+  ),
+'weixinqr' => 
+  array (
+    'field' => 'weixinqr',
+    'label' => '微信',
+    'pk' => false,
+    'add' => true,
+    'edit' => true,
+    'html' => false,
+    'empty' => true,
+    'show' => false,
+    'list' => true,
+    'type' => 'photo',
+    'comment' => '',
+    'default' => '',
+    'SO' => 'like',
+  ),    
+'kfqq' => 
+  array (
+    'field' => 'kfqq',
+    'label' => '客服QQ',
+    'pk' => false,
+    'add' => true,
+    'edit' => true,
+    'html' => false,
+    'empty' => true,
+    'show' => false,
+    'list' => true,
+    'type' => 'qq',
+    'comment' => '',
+    'default' => '',
+    'SO' => 'like',
+  ),
+'phone' => 
+  array (
+    'field' => 'phone',
+    'label' => '电话',
+    'pk' => false,
+    'add' => true,
+    'edit' => true,
+    'html' => false,
+    'empty' => true,
+    'show' => false,
+    'list' => true,
+    'type' => 'phone',
+    'comment' => '',
+    'default' => '',
+    'SO' => 'like',
+  ),   
+'mobile' => 
+  array (
+    'field' => 'mobile',
+    'label' => '手机',
+    'pk' => false,
+    'add' => true,
+    'edit' => true,
+    'html' => false,
+    'empty' => true,
+    'show' => false,
+    'list' => true,
+    'type' => 'mobile',
+    'comment' => '',
+    'default' => '',
+    'SO' => 'like',
+  ),
+'mail' => 
+  array (
+    'field' => 'mail',
+    'label' => '邮箱',
+    'pk' => false,
+    'add' => true,
+    'edit' => true,
+    'html' => false,
+    'empty' => true,
+    'show' => true,
+    'list' => true,
+    'type' => 'mail',
+    'comment' => '',
+    'default' => '',
+    'SO' => 'like',
+  ),   
   'seo_title' => 
   array (
     'field' => 'seo_title',

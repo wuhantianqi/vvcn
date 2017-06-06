@@ -3,7 +3,7 @@
  * Copy Right IJH.CC
  * Each engineer has a duty to keep the code elegant
  * Author shzhrui<anhuike@gmail.com>
- * $Id: http.mdl.php 14743 2015-07-30 14:25:08Z maoge $
+ * $Id: http.mdl.php 9941 2015-04-28 13:13:58Z youyi $
  */
 
 if(!defined('__CORE_DIR')){
@@ -159,6 +159,8 @@ class Mdl_Net_Http
             return $return;
         }        
     }
+
+	
 
     public function get($url,$params=array())
     {

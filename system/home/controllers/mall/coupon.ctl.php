@@ -2,7 +2,7 @@
 /**
  * Copy Right IJH.CC
  * Each engineer has a duty to keep the code elegant
- * $Id: coupon.ctl.php 14743 2015-07-30 14:25:08Z maoge $
+ * $Id$
  */
 
 if(!defined('__CORE_DIR')){

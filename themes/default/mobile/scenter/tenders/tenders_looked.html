@@ -1,0 +1,45 @@
+<{assign var="tpl_page_title" value="我要竞标"}>
+<{include file="mobile/block/header.html"}>
+<header class="control">
+	<i class="left"><a href="<{if $pager.backurl}><{$pager.backurl}><{else}><{link ctl='mobile/index'}><{/if}>" id="gobackIco"></a></i>
+    <div class="title">我要竞标</div>
+    <i class="right"></i>
+</header>
+
+
+<section id="" class="page_center_box">
+	
+    <{if !$items}> <div class="loginInfor_tishi">暂无记录信息</div><{/if}>
+    
+    <{foreach $items as $item}>
+    	<div class="mb10 loginInfor_mtn">
+      
+               
+            <div class="loginInfor">
+                <div class="loginIf_list add_loginIf_list">
+                        标题：<{$item.title}>
+                </div>
+                <div class="loginIf_list add_loginIf_list">
+                        地区：<{$item.area_name}>
+                </div>
+                <div class="loginIf_list add_loginIf_list">
+                        预算：<{$item.budget_title|default:'--'}>
+                </div>
+                 <div class="loginIf_list add_loginIf_list">
+                        售价：<{$item.gold}>金币
+                </div>
+                <div class="loginIf_list add_loginIf_list">
+                       状态：<{if $item.sign_uid}><b>已签单</b><{else}><b class="blue">招标中</b><{/if}><div class="ifInput right"><a class="maincl" href="<{link ctl='mobile/scenter/tenders:tenderDetail' arg0=$item.tenders_id}>">查看详情</a></div>
+                </div>
+               
+            </div>
+        </div>
+	 <{/foreach}>
+	
+	
+</section>
+
+</body>
+</html>
+
+

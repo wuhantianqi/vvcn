@@ -2,7 +2,7 @@
  * Copy Right IJH.CC
  * Each engineer has a duty to keep the code elegant
  * Author @shzhrui<Anhuike@gmail.com>
- * $Id: widget.avatar.js 9378 2015-03-27 02:07:36Z youyi $
+ * $Id: widget.avatar.js 2034 2013-12-07 03:08:33Z langzhong $
  */
 /**
  * Flash 掉用接口
@@ -18,7 +18,7 @@ Avatar.Option = {
 	uid : "0",
 	width : 680,
 	height : 450,
-	psize : "300|300|180|180|80|80|32|32",
+	psize : "300|300|280|280|80|80|32|32",
 	upload : "/member-face.html",	
 	auth : null,
 	complete : null,

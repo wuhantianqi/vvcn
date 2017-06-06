@@ -40,7 +40,7 @@
 		</div>
 	</div>
 	<ul class="line_type case_zhuanji">
-    	 <{foreach $items as $item}>          
+    	<{foreach $items as $item}>          
         <li <{if $item@index%5 == 0}>class="first"<{/if}>>           
             <{if $item.lastphotos}>
                  <{foreach from=$item.lastphotos key=key item=item2}>
@@ -61,6 +61,6 @@
         <{/foreach}>
 	</ul>
 	<div class="cl"></div>
-     <{if $pager.pagebar}><div class="page hoverno"><{$pager.pagebar}></div><{/if}>
+    <{if $pager.pagebar}><div class="page hoverno"><{$pager.pagebar}></div><{/if}>
 </div>
 <{include file="block/footer.html"}>

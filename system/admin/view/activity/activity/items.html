@@ -29,6 +29,7 @@
         <td><{$item.sign_num}></td><td><{$item.views}></td><td><{if $item.audit}>正常<{else}><b class="red">待审</b><{/if}></td>
         <td><{$item.clientip}>(<{$item.clientip|iplocal}>)</td><td><{$item.dateline|format}></td>
         <td>
+            <{link ctl="block/item:push" arg0='activity' arg1=$item.activity_id title="推送" load="mini:推送活动" class="button"}>
             <{link ctl="activity/sign:activity" args=$item.activity_id class="button" title="报名管理"}>
             <{link ctl="activity/shop:activity" args=$item.activity_id class="button" title="商铺"}>
             <{link ctl="activity/tuan:activity" args=$item.activity_id class="button" title="商品"}>

@@ -1,0 +1,232 @@
+<{assign var="tpl_page_title" value="装修保详情"}>
+<{include file="mobile/block/header.html"}>
+<header class="control">
+	<i class="left"><a href="<{if $pager.backurl}><{$pager.backurl}><{else}><{link ctl='mobile/index'}><{/if}>" id="gobackIco"></a></i>
+    <div class="title">装修保合同签订</div>
+    <i class="right"></i>
+</header>
+
+<section id="" class="page_center_box">
+		<div class="loginInfor mb10">
+			<div class="loginIf_list loginIf_list_ct">
+				<div class="fl ctIco"><i class="icco icco1"></i> </div>
+				<div class="ifInput">
+                <{if $hetong.yezhu_status == 1}>用户<i class="ctenIco"></i><{else}>用户<i class="ctenIco gray_ctenIco"></i><{/if}>
+                </div>
+				<div class="clear"></div>
+			</div>
+			<div class="loginIf_list loginIf_list_ct">
+				<div class="fl ctIco"><i class="icco icco4"></i> </div>
+				<div class="ifInput">
+                	 <{if $hetong.company_status == 1}>公司<i class="ctenIco"></i><{else}>公司<i class="ctenIco gray_ctenIco"></i><{/if}>
+                </div>
+				<div class="clear"></div>
+			</div>
+			<div class="loginIf_list loginIf_list_ct">
+				<div class="fl ctIco"><i class="icco icco10"></i> </div>
+				<div class="ifInput">
+                	 <{if $step.status == 1}>平台<i class="ctenIco"></i><{else}>平台<i class="ctenIco gray_ctenIco"></i><{/if}>
+                </div>
+				<div class="clear"></div>
+			</div>
+			<div class="loginIf_list">
+				<div class="fl ctIco"></div>
+				<div class="ifInput">
+                	<{if $hetong.company_status == 0 }>
+                        请等待公司上传合同
+                    <{elseif $hetong.company_status == 1 && $hetong.yezhu_status == 0 && $step.status == 0}>
+                       上传您的确认信息
+                    <{elseif $hetong.company_status == 1 && $hetong.yezhu_status == 1 && $step.status == 0}>
+                        请等待平台确认
+                    <{else}>
+                  
+                            <{if $item.status < '7' && $item.status > '1'}>
+                             <a href="<{link ctl='mobile/ucenter/member:zxb_detail' arg0=$item.zxb_id arg1=$item.status+1}>"><{$status[$item.status+1]}></a>
+                            <{else}>
+                            交易已结束
+                            <{/if}>
+
+                    <{/if}>
+                </div>
+				<div class="clear"></div>
+			</div>
+		</div>
+		<div class="mb10 ten_detail">
+        <form action="<{link ctl='mobile/ucenter/member:hetong' arg0=$item.zxb_id}>" mini-form="zxb" onsubmit="return check()"  method="post"  ENCTYPE="multipart/form-data">
+			 <input type="hidden" name="hetong_id" value="<{$hetong.hetong_id}>" >
+            <{if $hetong.hetong && $hetong.company_status == 1 && $step.status == 0 && $hetong.uid}>
+            <table width="100%" cellpadding="0" cellspacing="0">
+            <tr>
+                <th>
+                电话
+                </th>
+                <td>
+                <input id ='phone' type="text" name="data[yezhu_phone]" value="<{$hetong.yezhu_phone|default:''}>" class="text">
+                </td>
+            </tr>
+            
+            <tr>
+                <th>
+                银行卡号
+                </th>
+                <td>
+                <input id ='bank' type="text" name="data[yezhu_bank]" value="<{$hetong.yezhu_bank|default:''}>" class="text">
+                </td>
+            </tr>
+            <tr>
+                <th>
+                上传打款证据
+                </th>
+                <td>
+                 <label class="pubInt_file">上传文件<input type="file" name="step[yezhu_photo]"  value=""></label>
+                </td>
+            </tr>
+            <tr>
+                <th>
+                内容
+                </th>
+                <td>
+                 <textarea name="content"   class="text"><{$step.yezhu_content}></textarea>
+                </td>
+            </tr>
+             <tr>
+                <th>
+                合同下载
+                </th>
+                <td>
+                <a href="<{$pager.img}>/<{$hetong.hetong}>">公司已上传合同请下载</a>
+                </td>
+            </tr>
+            </table>
+			</div>		
+            <div class="yuee_btn"> <input class="btn"  type="submit" value="修改提交" /></div>
+		
+        <{elseif $hetong.hetong && $hetong.company_status == 1 && $step.status == 0 && !$hetong.uid}>
+        <table width="100%" cellpadding="0" cellspacing="0">
+        	 <tr>
+                <th>
+                电话
+                </th>
+                <td>
+                <input id ='phone' type="text" name="data[yezhu_phone]" value="<{$hetong.yezhu_phone|default:''}>" class="text">
+                </td>
+            </tr>
+            
+            <tr>
+                <th>
+                银行卡号
+                </th>
+                <td>
+                <input id ='bank' type="text" name="data[yezhu_bank]" value="<{$hetong.yezhu_bank|default:''}>" class="text">
+                </td>
+            </tr>
+            <tr>
+                <th>
+                上传打款证据
+                </th>
+                <td>
+                 <label class="pubInt_file">上传文件<input type="file" name="step[yezhu_photo]"  value=""></label>
+                </td>
+            </tr>
+            <tr>
+                <th>
+                内容
+                </th>
+                <td>
+                 <textarea name="content"><{$step.yezhu_content}></textarea>
+                </td>
+            </tr>
+             <tr>
+                <th>
+                合同下载
+                </th>
+                <td>
+                <a href="<{$pager.img}>/<{$hetong.hetong}>">公司已上传合同请下载</a>
+                </td>
+            </tr>
+                    </table>
+                    
+            </div>		
+             <div class="yuee_btn"> <input class="btn" id='login-btn' type="submit" value="确认提交" /></div>
+			
+        <{else if  $hetong.company_status == 1 && $hetong.yezhu_status == 1 && $step.status == 1}>
+				<div class="add_moren"> 
+                    
+                        <div class="add_jia">
+                            <p>业主电话:<{$hetong.yezhu_phone|default:''}></p>
+                            <p>业主卡号： <{$hetong.yezhu_bank|default:''}></p>
+                            <p>公司电话： <{$hetong.company_phone|default:''}></p>
+                            <p>公司卡号：<{$hetong.company_bank|default:''}></p>
+                            <p>业主打款证据： <{if $step.yezhu_photo}><img src="<{$pager.img}>/<{$step.yezhu_photo}>" photo="<{$pager.img}>/<{$step.yezhu_photo}>"/><{/if}></p>
+                            <p>业主描述内容： <{$step.yezhu_content}></p>
+                            <p>平台审核内容： <{$step.content}></p>
+                            <p>合同下载： <a href="<{$pager.img}>/<{$hetong.hetong}>">公司已上传合同请下载</a></p>
+                        </div>
+                      
+                </div>
+              
+          <{/if}>
+			
+	</form>	
+</section>
+
+
+<script language="javascript" type="text/javascript">
+	function check() {
+        var mobile = $("#phone").val();
+		var bank = $("#bank").val();
+		var price = $("#price").val();
+        var isMobile = /^(((13[0-9]{1})|(15[0-9]{1})|(18[0-9]{1})|(17[0-9]{1})|(14[0-9]{1}))+\d{8})$/;  
+        var isPhone = /^(?:(?:0\d{2,3})-)?(?:\d{7,8})(-(?:\d{3,}))?$/;
+        if (mobile.substring(0, 1) == 1 || mobile.substring(0, 1) == 0) {  
+            if ((isMobile.test(mobile) && mobile.length == 11)||(isPhone.test(mobile))) {
+            }else{
+				Widget.MsgBox.error("电话号码有误");
+			    return false; 	
+			}
+        }else {
+			Widget.MsgBox.error("电话号码有误");
+            return false;  
+        }
+		var isbank = /^(\d+)$/;
+		var isprice = /^(\d+)$/;
+		if(!isbank.exec(bank)){
+			Widget.MsgBox.error("银行卡有误");
+			return false;  	
+		}
+        return true;  
+    }  
+</script>
+<script>
+	jQuery(window).load(function () {
+			var width = document.body.clientWidth;
+            jQuery("img").each(function () {
+                DrawImage(this,width,1000);
+            });
+        });
+        function DrawImage(ImgD, FitWidth, FitHeight) {
+            var image = new Image();
+            image.src = ImgD.src;
+            if (image.width > 0 && image.height > 0) {
+                if (image.width / image.height >= FitWidth / FitHeight) {
+                    if (image.width > FitWidth) {
+                        ImgD.width = FitWidth;
+                        ImgD.height = (image.height * FitWidth) / image.width;
+                    } else {
+                        ImgD.width = image.width;
+                        ImgD.height = image.height;
+                    }
+                } else {
+                    if (image.height > FitHeight) {
+                        ImgD.height = FitHeight;
+                        ImgD.width = (image.width * FitHeight) / image.height;
+                    } else {
+                        ImgD.width = image.width;
+                        ImgD.height = image.height;
+                    }
+                }
+            }
+        }
+</script>
+</body>
+</html>

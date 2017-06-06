@@ -3,7 +3,7 @@
  * Copy Right IJH.CC
  * Each engineer has a duty to keep the code elegant
  * Author @shzhrui<Anhuike@gmail.com>
- * $Id: article.mdl.php 10599 2015-06-02 11:46:57Z maoge $
+ * $Id: view.mdl.php 3436 2014-10-27 10:32:44Z youyi $
  */
 
 if(!defined('__CORE_DIR')){
@@ -15,7 +15,7 @@ class Mdl_Article_Article extends Mdl_Table
 
     protected $_table = 'article';
     protected $_pk = 'article_id';
-    protected $_cols = 'article_id,cat_id,from,page,title,thumb,desc,views,favorites,allow_comment,comments,linkurl,photos,hidden,orderby,audit,closed,dateline';
+    protected $_cols = 'article_id,city_id,cat_id,from,page,title,thumb,desc,linkurl,views,favorites,allow_comment,comments,photos,hidden,orderby,audit,closed,dateline';
     protected $_orderby = array('orderby'=>'ASC', 'article_id'=>'DESC');
 
     protected $_hot_orderby = array('views'=>'DESC', 'orderby'=>'ASC');
@@ -95,7 +95,7 @@ class Mdl_Article_Article extends Mdl_Table
         }
         $sql = "SELECT * FROM ".$this->table($this->_table)." WHERE $where article_id<$article_id AND `from`='article' AND closed=0 ORDER BY article_id DESC LIMIT 1";
         $row = $this->db->GetRow($sql);  
-        return $this->_format_row($row);  
+        return $this->_format_row($row);
     }
 
     public function next_item($article_id, $cat_id=0)
@@ -119,6 +119,9 @@ class Mdl_Article_Article extends Mdl_Table
             return false;
         }
         $where = "a.page='{$page}' AND a.closed='0'";
+        if($city_id){
+            $where .= " AND a.city_id='{$city_id}'";
+        }
         $sql = "SELECT c.*,a.* FROM ".$this->table($this->_table)." a  LEFT JOIN ".$this->table('article_content')." c ON a.article_id=c.article_id  WHERE $where";
         if($row = $this->db->GetRow($sql)){
             $row = $this->_format_row($row);
@@ -159,13 +162,30 @@ class Mdl_Article_Article extends Mdl_Table
         static $mdllink = null;
         if($mdllink === null){
             $mdllink = K::M('helper/link');
-        }
+        }        
         if($cate = K::M('article/cate')->cate($row['cat_id'])){
             $row['cat_title'] = $cate['title'];
         }
         if(empty($row['thumb'])){
             $row['thumb'] = 'default/article_thumb.jpg';
         }
+        if($row['linkurl']){
+            $row['link'] = $row['linkurl'];
+        }else if($row['from'] == 'help'){
+            $row['link'] = $mdllink->mklink('help:'.$row['page'], array(), array(), 'www');
+        }else if($row['from'] == 'about' || $row['from'] == 'page'){
+            if(empty($row['city_id'])){
+                $row['link'] = $mdllink->mklink($row['from'].':'.$row['page'], array(), array(), 'www');
+            }else{
+                $row['link'] = $mdllink->mklink($row['from'].':'.$row['page'], array(), array(), $row['city_id']);
+            }
+        }else{
+            if(empty($row['city_id'])){
+                $row['link'] = $mdllink->mklink('article:detail', array($row['article_id'], 1), array(), 'www');
+            }else{
+                $row['link'] = $mdllink->mklink('article:detail', array($row['article_id'], 1), array(), $row['city_id']);
+            }
+        }        
         return $row;
     }
 

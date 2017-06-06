@@ -1,0 +1,50 @@
+<{assign var="tpl_page_title" value="商家中心"}>
+<{include file="mobile/block/header.html"}>
+<header class="control">
+	<i class="left"><a href="<{if $pager.backurl}><{$pager.backurl}><{else}><{link ctl='mobile/index'}><{/if}>" id="gobackIco"></a></i>
+    <div class="title">商家中心</div>
+    <i class="right"></i>
+</header>
+
+<section id="" class="page_center_box">
+	<div class="center_top">
+		<div class="pic fl">
+			<img src="<{$pager.img}>/<{$MEMBER.face}>">
+		</div>
+		<div class="text">
+			<h4><{$MEMBER.uname}></h4>
+			<p>我的金币 <b><{$MEMBER.gold}></b></p>
+            <{if $MEMBER.from == 'company'}>
+			<p>我的装修保 <b><{$count.count2}>单</b></p>
+            <{else}>
+            <p>我的订单 <b><{$count.count1+$count.count2+$count.count3+$count.count4}>单</b></p>
+            <{/if}>
+			<p>我的预约  <b><{$count.count4}>单</b></p>
+		</div>
+	</div>
+	<div class="loginList">
+		<ul>
+        	<{if $MEMBER.from == 'shop' }>
+            	<li> <a href="<{link ctl='mobile/scenter/order:shop_index'}>"><i class="cenIc cenIc1"></i>商品订单</a></li>
+            	<li> <a href="<{link ctl='mobile/scenter/coupon:coupon_list'}>"><i class="cenIc cenIc2"></i>优惠劵下载日记</a></li>
+                <li> <a href="<{link ctl='mobile/scenter/packet:items'}>"><i class="cenIc cenIc2"></i>红包日志</a></li>
+            <{/if}>
+            <{if $MEMBER.from != 'member' }>
+            <li> <a href="<{link ctl='mobile/scenter/tenders:tendered'}>"><i class="cenIc cenIc1"></i>我的竞标</a></li>
+			<li> <a href="<{link ctl='mobile/scenter/tenders:tenders_looked'}>"><i class="cenIc cenIc2"></i>我要竞标</a></li>
+            <li> <a href="<{link ctl='mobile/scenter/truste:truste'}>"><i class="cenIc cenIc1"></i>我的维修</a></li>
+            <li> <a href="<{link ctl='mobile/scenter/truste:truste_looked'}>"><i class="cenIc cenIc2"></i>维修竞标</a></li>
+			<li> <a href="<{link ctl='mobile/scenter:appointment'}>"><i class="cenIc cenIc3"></i>预约管理</a></li>
+            <{/if}>
+            <{if $MEMBER.from == 'company' }>
+            	<li> <a href="<{link ctl='mobile/scenter/company:zxb'}>"><i class="cenIc cenIc4"></i>装修保管理</a></li>
+                <li> <a href="<{link ctl='mobile/scenter/company:youhuiSign'}>"><i class="cenIc cenIc5"></i>优惠信息报名</a></li>
+            <{/if}>
+			
+		
+		</ul>
+	</div>
+	 <div class="yuee_btn"> <a href="<{link ctl='mobile/passport:loginout'}>" class="btn">退出登录</a></div>
+</section>
+</body>
+</html>

@@ -2,13 +2,13 @@
 /**
  * Copy Right IJH.CC
  * Each engineer has a duty to keep the code elegant
- * $Id: market.ctl.php 9372 2015-03-26 06:32:36Z youyi $
+ * $Id$
  */
 
 if(!defined('__CORE_DIR')){
     exit("Access Denied");
 }
-
+require(IN_DIR.'system/plugins/smarty/block.KT.php');
 class Ctl_Market extends Ctl 
 {
     
@@ -29,5 +29,15 @@ class Ctl_Market extends Ctl
             $this->error(404);
         }
     }
-
+    
+    public function block($block_id,$city_id=0)
+    {
+        $smarty = K::M('system/frontend');
+        if($content = K::M('block/block')->block(array('id'=>$block_id,'city_id'=>$city_id), null, $smarty)){
+            $content =  addslashes(preg_replace('/[\r\n]+/', ' ', $content));
+            echo 'document.write("'.$content.'")';
+        }
+        exit;
+    }
+    
 }

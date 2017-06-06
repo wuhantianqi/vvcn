@@ -2,7 +2,7 @@
 /**
  * Copy Right IJH.CC
  * Each engineer has a duty to keep the code elegant
- * $Id: couponDownload.mdl.php 9378 2015-03-27 02:07:36Z youyi $
+ * $Id: couponDownload.mdl.php 6093 2014-08-15 11:58:57Z youyi $
  */
 
 if(!defined('__CORE_DIR')){

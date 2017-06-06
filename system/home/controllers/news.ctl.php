@@ -2,7 +2,7 @@
 /**
  * Copy Right IJH.CC
  * Each engineer has a duty to keep the code elegant
- * $Id: news.ctl.php 10736 2015-06-10 12:39:11Z maoge $
+ * $Id$
  */
 
 if(!defined('__CORE_DIR')){
@@ -52,6 +52,7 @@ class Ctl_News extends Ctl
             $seo = array('title'=>$detail['title'], 'company_name'=>$company['name'], 'news_desc'=>'');
             $seo['news_desc'] = K::M('content/text')->substr(K::M('content/html')->text($detail['content'], true), 0, 200);
             $this->seo->init('news_detail', $seo);
+            $this->pagedata['mobile_url'] = $this->mklink('mobile/company', array($detail['company_id']));
             $this->tmpl = 'news/detail.html';
         }
     }

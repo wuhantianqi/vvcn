@@ -1,0 +1,137 @@
+<{assign var="tpl_page_title" value="装修保详情"}>
+<{include file="mobile/block/header.html"}>
+<header class="control">
+	<i class="left"><a href="<{if $pager.backurl}><{$pager.backurl}><{else}><{link ctl='mobile/index'}><{/if}>" id="gobackIco"></a></i>
+    <div class="title">装修保详情</div>
+    <i class="right"></i>
+</header>
+<section id="" class="page_center_box">
+	<div class="mb10 loginInfor_mtn">
+		<div class="loginInfor ">
+			
+			<div class="loginIf_list">
+				<div class="fl ifIco"><i class="icco icco1"></i> </div>
+				<div class="ifInput"> 业主姓名：<{$item.contact}> </div>
+				<div class="clear"></div>
+			</div>
+			<div class="loginIf_list">
+				<div class="fl ifIco"><i class="icco icco2"></i> </div>
+				<div class="ifInput">业主电话：<{$item.mobile}> </div>
+				<div class="clear"></div>
+			</div>
+			
+			<div class="loginIf_list">
+				<div class="fl ifIco"><i class="icco icco4"></i> </div>
+				<div class="ifInput"> 公司：<{$company.title}> </div>
+				<div class="clear"></div>
+			</div>
+			<div class="loginIf_list">
+				<div class="fl ifIco"><i class="icco icco2"></i> </div>
+				<div class="ifInput">公司电话：<{$company.mobile}> </div>
+				<div class="clear"></div>
+			</div>
+			<div class="loginIf_list">
+				<div class="fl ifIco"><i class="icco icco11"></i> </div>
+				<div class="ifInput">合同总价：<{$total_price}>元 </div>
+				<div class="clear"></div>
+			</div>
+            <div class="loginIf_list">
+				<div class="fl ifIco"><i class="icco icco5"></i> </div>
+				<div class="ifInput">业主备注：<{$item.comment}></div>
+				<div class="clear"></div>
+			</div>
+			<div class="loginIf_list">
+				&nbsp;当前状态：<font class="maincl"><{$status[$item.status]}><i class="ctenIco"></i></font>
+			</div>
+		</div>
+		<div class="yuee_btn">
+        	
+            <{if $item.status < '7' && $item.status > '1'}>
+            <a href="<{link ctl='mobile/scenter/company:zxb_detail' arg0=$item.zxb_id arg1=$item.status+1}>" class="btn subbtn_full"><{$status[$item.status+1]}></a>
+            <{/if}>
+            
+            </div>
+	</div>
+   
+	<div class="zbIcon">
+		<ul>
+        	<li>
+				<i class="ico1"></i>
+				<p><a href="<{link ctl='mobile/zxb:index'}>" >发布装修保</a></p>
+			</li>
+			<li>
+				<i class="ico2"></i>
+				<p>
+                	
+                        确认公司
+                     
+                </p>
+			</li>
+			
+			<li>
+				<i class="ico3"></i>
+				<p>
+                	<{if $item.status+1<3}>
+                        合同签订
+                     <{else}>
+                         <a href="<{link ctl='mobile/scenter/company:zxb_detail' arg0=$item.zxb_id arg1=3}>">合同签订</a>
+                     <{/if}>
+                </p>
+			</li>
+			<li>
+				<i class="ico4"></i>
+				<p>
+                	 <{if $item.status+1<4}>
+                        水电验收
+                     <{else}>
+                         <a href="<{link ctl='mobile/scenter/company:zxb_detail' arg0=$item.zxb_id arg1=4}>">水电验收</a>
+                     <{/if}>
+                </p>
+			</li>
+			<li>
+				<i class="ico5"></i>
+				<p>
+                	<{if $item.status+1<5}>
+                        泥木验收
+                     <{else}>
+                         <a href="<{link ctl='mobile/scenter/company:zxb_detail' arg0=$item.zxb_id arg1=5}>">泥木验收</a>
+                     <{/if}>
+                </p>
+			</li>
+			<li>
+				<i class="ico6"></i>
+				<p>
+                	<{if $item.status+1<6}>
+                        油漆验收
+                     <{else}>
+                         <a href="<{link ctl='mobile/scenter/company:zxb_detail' arg0=$item.zxb_id arg1=6}>">油漆验收</a>
+                     <{/if}>
+                </p>
+			</li>
+			<li>
+				<i class="ico7"></i>
+				<p>
+                	<{if $item.status+1<7}>
+                        竣工后30天
+                     <{else}>
+                         <a href="<{link ctl='mobile/scenter/company:zxb_detail' arg0=$item.zxb_id arg1=7}>">竣工后30天</a>
+                     <{/if}> 
+                </p>
+			</li>
+			<li>
+				<i class="ico8"></i>
+				<p>
+                	<{if $item.status+1<8}>
+                        交易结束
+                     <{else}>
+                         <a href="<{link ctl='mobile/scenter/company:zxb_detail' arg0=$item.zxb_id arg1=8}>">交易结束</a>
+                     <{/if}> 
+                </p>
+			</li>
+		</ul>
+	</div>
+</section>
+
+
+</body>
+</html>

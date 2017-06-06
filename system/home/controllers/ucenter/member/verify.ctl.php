@@ -2,7 +2,7 @@
 /**
  * Copy Right IJH.CC
  * Each engineer has a duty to keep the code elegant
- * $Id: verify.ctl.php 9372 2015-03-26 06:32:36Z youyi $
+ * $Id$
  */
 
 class Ctl_Ucenter_Member_Verify extends Ctl_Ucenter
@@ -38,6 +38,8 @@ class Ctl_Ucenter_Member_Verify extends Ctl_Ucenter
                 }
             }
         } else {
+            $cfg = K::$system->config->get('sms');
+            $this->pagedata['short_msg'] = $cfg['short_msg'];
             $this->pagedata['detail'] = $detail;
             $this->tmpl = 'ucenter/member/verify/name.html';
         }
@@ -52,6 +54,8 @@ class Ctl_Ucenter_Member_Verify extends Ctl_Ucenter
         }else if($data = $this->checksubmit('data')){
             if(!$data['code']) {
                 $this->err->add('验证码不能为空', 201);
+            }else if ($verify = K::M('member/member')->items(array('mobile'=>$this->MEMBER['mobile'],'verify'=>'>=:2'))) {
+				$this->err->add('该号码已经被验证', 202);
             }else if (K::M('member/magic')->verify_mobile($this->uid,$data['code'])) {
                 K::M('system/integral')->commit('mobile', $this->MEMBER, '手机验证通过');
                 $this->err->add('恭喜您，验证手机成功');

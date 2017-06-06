@@ -1,7 +1,7 @@
 /**
  * Copy	Right IJH.CC
  * Each engineer has a duty to keep the code elegant
- * $Id: widget.bmap.js 9928 2015-04-28 06:13:59Z wanglei $
+ * $Id: widget.bmap.js 9926 2015-04-28 06:09:32Z youyi $
  */
 window.KT = window.KT || { "verison" : "1.0a" };
 window.Widget  = window.Widget || {};
@@ -15,7 +15,7 @@ window.Widget  = window.Widget || {};
 						 if(point.lenght<2){
 							alert("未选择坐标");return ;
 						 }
-						 handler({"lng":$.trim(point[0]), "lat":$.trim(point[1])});
+						 handler({"lng":$.trim(point[0]),"lat":$.trim(point[1])});
 						 $(this).dialog("destroy");
 					}
 				}

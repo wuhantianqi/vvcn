@@ -2,7 +2,7 @@
 /**
  * Copy Right IJH.CC
  * Each engineer has a duty to keep the code elegant
- * $Id: tenders.ctl.php 9372 2015-03-26 06:32:36Z youyi $
+ * $Id$
  */
 
 if(!defined('__CORE_DIR')){
@@ -247,16 +247,16 @@ class Ctl_Ucenter_Misc_Tenders extends Ctl_Ucenter
             if(!$content = $data['content']){
                 $this->err->add('给业主留言不能为空', 216);
             }else{
-                if($tenders['gold'] > 0){
-                    if(!K::M('member/gold')->update($this->uid, -$tenders['gold'], "看标：".$tenders['title']."(ID:{$tenders_id})")){
-                        $this->err->add('扣费失败', 201)->response();
-                    }
-                }
 				$datas = K::M('tenders/look')->getdata($this->uid);
 				$datas['tenders_id'] = $tenders_id;
 				$datas['uid'] = $this->uid;
 				$datas['content'] = $content;
                 if($look_id = K::M('tenders/look')->create($datas)){
+                    if($tenders['gold'] > 0){
+                        if(!K::M('member/gold')->update($this->uid, -$tenders['gold'], "看标：".$tenders['title']."(ID:{$tenders_id})")){
+                            $this->err->add('扣费失败', 201)->response();
+                        }
+                    }                    
                     K::M('tenders/tenders')->update_count($tenders_id, 'looks');
                     switch ($this->MEMBER['from']) {
                         case 'gz':

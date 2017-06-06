@@ -3,7 +3,7 @@
  * Copy Right IJH.CC
  * Each engineer has a duty to keep the code elegant
  * Author @shzhrui<Anhuike@gmail.com>
- * $Id: gold.mdl.php 9378 2015-03-27 02:07:36Z youyi $
+ * $Id: gold.mdl.php 5610 2014-06-23 16:47:52Z youyi $
  */
 
 Import::M('member/member');

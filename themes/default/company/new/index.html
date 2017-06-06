@@ -1,0 +1,195 @@
+<{include file="$skin_theme/block/header.html"}> 
+<!--装修公司头部结束-->
+<div class="subwd"> 
+	<!--主体左边内容开始-->
+	<div class="mb10 com_banner">
+		<div bxSlider="company_banner"> <{calldata mdl="company/banner" company_id=$company.company_id limit="5" nocache=true}>
+			<div class="slider"><a href="<{$item.link}>" title="<{$item.title}>" target="_blank"><img src="<{$pager.img}>/<{$item.photo}>" width="1000" height="400"></a></div>
+			<{/calldata}>
+			<{if $calldata_count<1}>
+			<div class="slider"><a><img src="<{$pager.img}>/default/company_banner.jpg" width="1000" height="400"></a></div>
+			<{/if}> </div>
+	</div>
+	<div class="mb10">
+		<div class="sub_com_rt lt">
+			<div class="mb10 shopList">
+				<ul>
+					<li>
+						<p><b><{$company.case_num}></b></p>
+						<p>图库案例</p>
+					</li>
+					<li>
+						<p><b><{$company.tenders_num}></b></p>
+						<p>签约数</p>
+					</li>
+					<li>
+						<p><b><{$company.site_num}></b></p>
+						<p>在建工地</p>
+					</li>
+					<li>
+						<p><b><{$company.news_num}></b></p>
+						<p>企业新闻</p>
+					</li>
+					<li>
+						<p><b><{$company.yuyue_num}></b></p>
+						<p>预约数</p>
+					</li>
+					<li>
+						<p><b><{$company.comments}></b></p>
+						<p>业主评价</p>
+					</li>
+				</ul>
+				<div class="cl"></div>
+			</div>
+			<div class="mb10 sub_com_add">
+				<p><span class="com_ico com_add"></span><b class="tit">公司地址:</b></p>
+				<p><{$company.addr|cutstr:60}></p>
+			</div>
+			<p class="sub_com_tpbt"> <{if $company.group.allow_yuyue > 0}> <a href="<{link ctl='gs:yuyue' arg0=$company.company_id http='ajax'}>" mini-load="免费预约装修公司" mini-width="400" class="btn_sub_tuan btn">免费预约</a> <{else}> <a href="<{link ctl='tenders:fast' http='ajax'}>" mini-load="免费发布装修招标" mini-width="500" class="btn_sub_tuan btn">免费招标</a> <{/if}>
+				您是<font class="fontcl2"><{$company.views}></font>位访客</p>
+		</div>
+		<div class="sub_com_lt rt">
+			<div class="area pding nw_com_intro">
+				<h3 class="com_title"><b class="lt">公司简介</b><a href="<{link ctl='company:about' arg0=$company.company_id company=$company}>" class="rt">详情</a></h3>
+				<p class="cl"></p>
+				<div class="com_box pding"><a href="<{link ctl='company:about' arg0=$company.company_id company=$company}>"><{$company.desc|cutstr:260}></a></div>
+			</div>
+		</div>
+		<div class="cl"></div>
+	</div>
+	<div class="mb10">
+		<h3 class="com_title"><b class="lt">装修案例<small>为您推荐的每套案例均来源于设计师实地测量、精心设计</small></b><a href="<{link ctl='company:cases' arg0=$company.company_id}>" class="rt">更多</a></h3>
+		<p class="cl"></p>
+		<div class="com_box">
+			
+			<ul class="nw_com_case">
+				<div class="bf">
+				<{calldata mdl='case/case' company_id=$company.company_id limit=4 noext=true nocache=true}>
+				
+				<{if $index<3}>
+				<li class="before"> <a href="<{link ctl='case:detail' arg0=$item.case_id arg1=1}>"><img src="<{$pager.img}>/<{$item.photo}>_thumb.jpg" /></a></li>
+				<{else}>
+				</div>
+				<li class="after">
+				 <a href="<{link ctl='case:detail' arg0=$item.case_id arg1=1}>"><img src="<{$pager.img}>/<{$item.photo}>_thumb.jpg" /></a>
+				</li>
+				<{/if}>
+				<{/calldata}>
+			</ul>
+			
+			<div class="cl"></div>
+		</div>
+	</div>
+	<div class="mb10 ">
+		<h3 class="com_title"><b class="lt">设计团队<small>大牌设计师一对一服务，同您一起装点美好之家</small></b><a href="<{link ctl='company:team' arg0=$company.company_id company=$company}>" class="rt">更多</a></h3>
+		<p class="cl"></p>
+		<div class="com_box pding">
+			<ul class="sub_com_design nw_sub_com_design">
+				<{calldata mdl='designer/designer' company_id=$company.company_id limit=4 nocache=true}>
+				<li> <a href="<{link ctl='blog' arg0=$item.uid}>"><img src="<{$pager.img}>/<{$item.face}>" /></a> </li>
+				<{/calldata}>
+			</ul>
+			<div class="cl"></div>
+		</div>
+	</div>
+	<div class="mb20">
+		<h3 class="com_title"><b class="lt">在建工地</b><a href="<{link ctl='company:site' arg0=$company.company_id company=$company}>" class="rt">更多</a></h3>
+		<p class="cl"></p>
+		<div class="com_box site_com_box">
+			<ul class="com_site">
+				<{calldata mdl='home/site' company_id=$company.company_id limit=3 noext=true nocache=true}>
+				<li>
+					<div class="main_site main_list"> <a href="<{link ctl='site:detail' arg0=$item.site_id}>" class="lt pic"><img src="<{$pager.img}>/<{$item.thumb}>" /></a>
+						<div class="main_site_rt main_list_rt rt">
+							<h3>
+								<p class="lt"><b><a <{if $item.home_id}>href="<{link ctl='home:detail' arg0=$item.home_id}>"<{/if}>><{$item.home_name}></a></b></p>
+							</h3>
+							<div class="main_site_rt_top">
+								<div class="lt">
+									<p><span class="ico_list fengge_ico"></span>价格：<{$item.price}>万元</p>
+									<p><span class="ico_list company_ico"></span>小区：<{$item.home_name}></p>
+								</div>
+								<a href="<{link ctl='site:yuyue' arg0=$item.site_id}>" mini-width='500' mini-load="我要参观工地" class="btn_sub_sm btn rt">我要参观</a> </div>
+							<div class="cl"></div>
+							<div class="site_step">
+								<p class="step bar"><span class="bar step_color step<{$item.status}>"></span></p>
+								<p><span class="step">开工大吉</span><span class="step">水电改造</span><span class="step">泥瓦阶段</span><span class="step">木工阶段</span><span class="step">油漆阶段</span><span class="step">安装阶段</span><span class="step">验收完成</span></p>
+							</div>
+						</div>
+						<div class="cl"></div>
+					</div>
+				</li>
+				<{/calldata}>
+			</ul>
+		</div>
+	</div>
+	<div class="mb20">
+		<div class="nw_show_box nw_show_box_first">
+			<h3 class="org"><span class="lt">企业新闻</span><a href="<{link ctl='company:news' arg0=$company.company_id company=$company}>" class="rt">更多</a></h3>
+			<div class="cl"></div>
+			<div class="com_box pding">
+				<ul>
+					<{calldata mdl='company/news' company_id=$company.company_id limit=6 noext=true nocache=true}>
+					<li><span class="ico_list news_ico"></span><a href="<{link ctl='news:detail' arg0=$item.news_id}>"><{$item.title|cutstr:50}></a></li>
+					<{/calldata}>
+				</ul>
+			</div>
+		</div>
+		<div class="nw_show_box">
+			<h3 class="gre"><span class="lt">业主评价</span><a href="<{link ctl='company:comment' arg0=$company.company_id company=$company}>" class="rt">更多</a></h3>
+			<div class="cl"></div>
+			<div class="new_pinglun com_box com_pinglun nw_com_pinglun">
+				<ul>
+					<{foreach $comment_list as $item}>
+					<li>
+						<div class="lt"><img src="<{$pager.img}>/<{$member_list[$item.uid].face_80}>" class="lt" /><br />
+						</div>
+						<div class="rt">
+							<p class="graycl"><{$member_list[$item.uid].uname}></p>
+							<p><{$item.content}> </p>
+						</div>
+					</li>
+					<{/foreach}>
+				</ul>
+			</div>
+		</div>
+		<div class="nw_show_video rt">
+			<h3 class="blu"><span class="lt">视频简介</span></h3>
+			<div class="cl"></div>
+			<div class="video">
+			<{if $company.video}>
+				<embed src="<{$company.video}>" quality="high" width="260" height="200" align="middle" allowScriptAccess="always" allowFullScreen="true" mode="transparent" type="application/x-shockwave-flash"></embed>
+			<{/if}>
+			</div>
+		</div>
+		<div class="cl"></div>
+	</div>
+</div>
+<script type="text/javascript">
+(function(K, $){
+    $(function(){
+    var dateTime = new Date();
+    var difference = dateTime.getTime() - <{$pager.dateline}>*1000;	
+    setInterval(function(){
+      $("[remaintime]").each(function(){
+        var obj = $(this);
+        var endTime = new Date(parseInt(obj.attr('remaintime')) * 1000);
+        var nowTime = new Date();
+        var nMS=endTime.getTime() - nowTime.getTime() + difference;
+        var myD=Math.floor(nMS/(1000 * 60 * 60 * 24));
+        var myH=Math.floor(nMS/(1000*60*60)) % 24;
+        var myM=Math.floor(nMS/(1000*60)) % 60;
+        var myS=Math.floor(nMS/1000) % 60;
+        var myMS=Math.floor(nMS/100) % 10;
+        if(myD>= 0){
+			var str = myD+"天"+myH+"小时"+myM+"分"+myS+"."+myMS+"秒";
+        }else{
+			var str = "真遗憾您来晚了，抢购已经结束。";	
+		}
+		obj.html(str);
+      });
+    }, 100);
+});
+})(window.KT, window.jQuery);
+</script> 
+<{include file="company/block/footer.html"}>

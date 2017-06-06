@@ -2,7 +2,7 @@
 /**
  * Copy Right IJH.CC
  * Each engineer has a duty to keep the code elegant
- * $Id: comment.ctl.php 14858 2015-08-05 14:39:40Z maoge $
+ * $Id$
  */
 
 if(!defined('__CORE_DIR')){
@@ -25,6 +25,9 @@ class Ctl_Designer_Comment extends Ctl
             if($SO['reply']){$filter['reply'] = "LIKE:%".$SO['reply']."%";}
             if(is_array($SO['reply_time'])){if($SO['reply_time'][0] && $SO['reply_time'][1]){$a = strtotime($SO['reply_time'][0]); $b = strtotime($SO['reply_time'][1])+86400;$filter['reply_time'] = $a."~".$b;}}
             if(is_array($SO['dateline'])){if($SO['dateline'][0] && $SO['dateline'][1]){$a = strtotime($SO['dateline'][0]); $b = strtotime($SO['dateline'][1])+86400;$filter['dateline'] = $a."~".$b;}}
+        }
+        if(CITY_ID){
+            $filter['city_id'] = CITY_ID;
         }
         $filter['closed'] = 0;
         if($items = K::M('designer/comment')->items($filter, null, $page, $limit, $count)){
@@ -114,7 +117,9 @@ class Ctl_Designer_Comment extends Ctl
             if(!$data = $this->GP('data')){
                 $this->err->add('非法的数据提交', 201);
             }else{
-                
+                if(CITY_ID){
+                    unset($data['designer_id'], $data['city_id']);
+                }
                 if(K::M('designer/comment')->update($comment_id, $data)){
                     $this->err->add('修改内容成功');
                 }  
@@ -160,7 +165,9 @@ class Ctl_Designer_Comment extends Ctl
             if($items = K::M('designer/comment')->items_by_ids($ids)){
                 $aids = $designer_ids = array();
                 foreach($items as $v){
-                   
+                    if(CITY_ID && CITY_ID != $v['city_id']){
+                        continue;
+                    }
                     $aids[$v['comment_id']] = $v['comment_id'];
                     $designer_ids[$v['designer_id']] = $v['designer_id'];
                     K::M('designer/comment')->comment_del($v);

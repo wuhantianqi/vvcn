@@ -1,0 +1,76 @@
+<{assign var="tpl_page_title" value="管理中心首页"}>
+<{include file="mobile/block/header.html"}>
+<header class="control"> <i class="left"><a href="<{if $pager.backurl}><{$pager.backurl}><{else}><{link ctl='mobile/index'}><{/if}>" id="gobackIco"></a></i>
+	<div class="title">手机认证</div>
+	<i class="right"></i> </header>
+<section id="" class="page_center_box"> <{if $MEMBER.verify_mobile}>
+	<div class="tips"><span class="success">您的手机【<{$MEMBER.mobile}>】已经通过认证</span></div>
+	<{else}>
+	<form class="login-form" action="<{link ctl='mobile/ucenter:mobile'}>" mini-form="uenter" method="post">
+		<div class="loginInfor">
+			<div class="loginIf_list">
+				<div class="fl ifIco"><i class="icco icco1"></i> </div>
+				<div class="ifInput"><b><{$MEMBER.uname}></b> </div>
+				<div class="clear"></div>
+			</div>
+			<{if $MEMBER.mobile}>
+			<div class="loginIf_list loginIf_list_po">
+				<div class="fl ifIco"><i class="icco icco2"></i> </div>
+				<div class="ifInput"> <{$MEMBER.mobile}> </div>
+				<div class="rt yanzh">
+					<button type="button" id="jq_send_verify" class="pbtn">获取验证码</button>
+				</div>
+				<div class="clear"></div>
+			</div>
+			<div class="loginIf_list">
+				<div class="fl ifIco"><i class="icco icco9"></i> </div>
+				<div class="ifInput">
+					<input type="text" name="data[code]" value="" placeholder="验证码"/>
+				</div>
+				<div class="clear"></div>
+			</div>
+		</div>
+		<div class="yuee_btn">
+			<input type="submit" class="btn" value="立即验证 " />
+		</div>
+		<{else}>
+		<div class="loginInfor">
+			<div class="loginIf_list loginIf_list_po">
+				<div class="fl ifIco"><i class="icco icco2"></i> </div>
+				<div class="ifInput"> 您还没有设置手机号，不能验证手机. </div>
+				<div class="rt yanzh"> <a href="<{link ctl='ucenter/member:info'}>" value="" class="pdBtn btn">立即设置</a> </div>
+				<div class="clear"></div>
+			</div>
+		</div>
+		<{/if}>
+		</div>
+	</form>
+	<{/if}> </section>
+</body></html><script type="text/javascript">
+(function(K, $){
+var _Time_count = 100;
+var _Timer = null;
+$("#jq_send_verify").click(function(){
+	Widget.MsgBox.load("验证短信发送中...");
+	$.getJSON("<{link ctl='mobile/ucenter:mobile' arg0='send'}>", function(ret){
+		if(ret.error){
+			Widget.MsgBox.error(ret.message.join(","));
+		}else{
+			Widget.MsgBox.success(ret.message.join(",")||"验证短信发送成功");
+			$("#jq_send_verify").attr("disabled", "disabled");
+			_Timer = setInterval(function(){
+				_Time_count --;
+				if(_Time_count < 1){					
+					_Time_count = 100;
+					$("#jq_send_verify").attr("disabled", false);
+					$("#jq_send_verify").text("重新发送");
+					clearInterval(_Timer);
+				}else{
+					$("#jq_send_verify").text(_Time_count+"秒可重发");
+				}
+			}, 1000);
+		}
+	});
+});
+})(window.KT, window.jQuery);
+</script>

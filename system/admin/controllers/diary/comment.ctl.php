@@ -3,7 +3,7 @@
 /**
  * Copy Right IJH.CC
  * Each engineer has a duty to keep the code elegant
- * $Id: comment.ctl.php 9378 2015-03-27 02:07:36Z youyi $
+ * $Id: comment.ctl.php 3053 2014-01-15 02:00:13Z youyi $
  */
 if (!defined('__CORE_DIR')) {
     exit("Access Denied");
@@ -28,7 +28,9 @@ class Ctl_Diary_Comment extends Ctl {
                 $filter['content'] = "LIKE:%" . $SO['content'] . "%";
             }
         }
-		
+		if(CITY_ID){
+            $filter['city_id'] = CITY_ID;
+        }
         if ($items = K::M('diary/comment')->items($filter, null, $page, $limit, $count)) {
             $uids = $diaryids = array();
             foreach ($items as $k => $v) {
@@ -64,7 +66,9 @@ class Ctl_Diary_Comment extends Ctl {
             }else if(!$this->check_city($diary['city_id'])){
                 $this->err->add('不可越权操作', 403);
             }else {
-				
+				if(CITY_ID){
+                    $data['city_id'] = CITY_ID;
+                }
                 if ($comment_id = K::M('diary/comment')->create($data)) {
 					K::M('diary/comment')->comment_count($diary['diary_id']);
                     $this->err->add('添加内容成功');
@@ -144,7 +148,9 @@ class Ctl_Diary_Comment extends Ctl {
             if($items = K::M('diary/comment')->items_by_ids($ids)){
                 $aids = $company_ids = array();
                 foreach($items as $v){
-                    
+                    if(CITY_ID && CITY_ID != $v['city_id']){
+                        continue;
+                    }
                     $aids[$v['comment_id']] = $v['comment_id'];
                     $company_ids[$v['diary_id']] = $v['diary_id'];
                 }

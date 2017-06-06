@@ -2,7 +2,7 @@
 /**
  * Copy Right IJH.CC
  * Each engineer has a duty to keep the code elegant
- * $Id: activity.ctl.php 10255 2015-05-15 10:26:32Z maoge $
+ * $Id$
  */
 
 class Ctl_Activity extends Ctl
@@ -10,6 +10,7 @@ class Ctl_Activity extends Ctl
     
     public function index($cat_id = 0, $page = 1)
     {
+
         $this->items();
     }
 	public function items($cat_id = 0, $page = 1)
@@ -28,6 +29,7 @@ class Ctl_Activity extends Ctl
                 break;
             }
         }
+		
         $pager['cat_id'] = $cat_id;
         if ($cat_id = (int) $cat_id) {
             $filter['cate_id'] = $cat_id;
@@ -37,10 +39,11 @@ class Ctl_Activity extends Ctl
             $pager['pagebar'] = $this->mkpage($count, $limit, $page, $this->mklink('activity:items', array($cat_id, '{page}')));
             $this->pagedata['items'] = $items;
         }
+		
         $this->pagedata['cate'] = $cate;
         $this->pagedata['pager'] = $pager;
         $this->pagedata['cate_list'] = $cate_list = K::M("activity/cate")->fetch_all();
-        $this->seo->init('activity', array('cate_title' => $cate['title'],
+        $this->seo->init('activity', array('cate_name' => $cate['title'],
             'cate_seo_title' => $cate['seo_title'],
             'cate_seo_keywords' => $cate['seo_keywords'],
             'cate_seo_description' => $cate['seo_description'],
@@ -62,8 +65,9 @@ class Ctl_Activity extends Ctl
 				$detail_lanmu[$k]['num'] = $num+1;
 				$num++;
 			}
-            $this->pagedata['sign'] = K::M('activity/sign')->items(array('activity_id'=>$activity_id),array('dateline'=>'desc'),1,10);
+			$this->pagedata['sign'] = K::M('activity/sign')->items(array('activity_id'=>$activity_id),array('dateline'=>'desc'),1,10);
 			$this->pagedata['detail_lanmu'] = $detail_lanmu;
+			$this->pagedata['mobile_url'] = $this->mklink('mobile/activity:detail', array($activity_id));
             $seo = array('title' => $detail['title'], 'cate_name'=>$cate['title'], 'intro'=>'');
             $seo['intro'] = K::M('content/text')->substr(K::M('content/html')->text($detail['intro'], true), 0, 200);
             $this->seo->init('activity_detail', $seo);
@@ -117,6 +121,9 @@ class Ctl_Activity extends Ctl
 						$data['uid'] = $this->uid;
 						if($sign_id = K::M('activity/sign')->create($data)){
 							K::M('activity/activity')->update($activity_id,array('sign_num'=>$detail['sign_num']+1));
+                            $smsdata = array('contact'=>$data['contact'],'mobile'=>$data['mobile'],'activity'=>$detail['title']);
+                            K::M('sms/sms')->send($data['mobile'],'activity_yezhu',$smsdata);
+                            K::M('sms/sms')->admin('admin_activity',$smsdata);
 							$this->err->add('报名成功！');
 						}
 					}

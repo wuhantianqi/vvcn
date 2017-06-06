@@ -2,7 +2,7 @@
 /**
  * Copy Right IJH.CC
  * Each engineer has a duty to keep the code elegant
- * $Id: coupon.ctl.php 10353 2015-05-20 14:58:12Z xiaorui $
+ * $Id$
  */
 
 if(!defined('__CORE_DIR')){
@@ -28,6 +28,10 @@ class Ctl_Mobile_Coupon extends Ctl_Mobile
 			$this->pagedata['detail'] = $detail;
 			$pager['backurl'] = $this->mklink('mobile');
 			$this->pagedata['pager'] = $pager;
+            $this->seo->set_shop($shop);
+            $seo = array('title'=>$detail['title'], 'coupon_desc'=>'');
+            $seo['coupon_desc'] = K::M('content/text')->substr(K::M('content/html')->text($detail['content'], true), 0, 200);
+            $this->seo->init('coupon_detail', $seo);            
 			$this->tmpl = 'mobile/coupon/detail.html'; 
 		}
     }
@@ -49,7 +53,8 @@ class Ctl_Mobile_Coupon extends Ctl_Mobile
 					$this->system->cookie->set('LAST_Contact', $data['contact']);
 					$this->err->set_data('forward', $this->mklink('mobile/ucenter/sign:coupon'));
 				}
-			}else{				
+			}else{
+				
 				$pager['tender_hide'] = 1;
 				$shop = $this->check_shop($coupon['shop_id']);
 				if(!$mobile = $this->system->cookie->get('LAST_Mobile')){
@@ -59,7 +64,7 @@ class Ctl_Mobile_Coupon extends Ctl_Mobile
 				if($contact = $this->system->cookie->get('LAST_Contact')){
 					$pager['contact'] = $contact;
 				}
-				$pager['backurl'] = $this->mklink('mobile/coupon:detail',array($coupon_id));
+				$pager['backurl'] = $this->mklink('mobile/coupon-detail',array($coupon_id));
 				$this->pagedata['pager'] = $pager;
 				$this->pagedata['coupon_id'] = $coupon_id;
 				$this->tmpl = 'mobile/coupon/download.html';

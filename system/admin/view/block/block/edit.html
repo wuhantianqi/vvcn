@@ -31,13 +31,30 @@
     <td><select name="data[type]" class="w-150">
         <option value="default">默认排序</option>
         <option value="hot" <{if $detail.type=='hot'}>selected="selected"<{/if}>>热度优先</option>
-        <option value="new" <{if $detail.type=='new'}>selected="selected"<{/if}>>最新有限</option>
-        <option value="only" <{if $detail.type=='only'}>selected="selected"<{/if}>>只接受推荐位</option>
+        <option value="new" <{if $detail.type=='new'}>selected="selected"<{/if}>>最新优先</option>
+        <option value="zhanwei" <{if $detail.type=='zhanwei'}>selected="selected"<{/if}>>占位符补充</option>
+        <option value="only" <{if $detail.type=='only'}>selected="selected"<{/if}>>只接受推荐位</option>        
         </select>
         <span class="tip-comment">当推荐的数据不够时，补充数据方式</span>
     </td>
 </tr>
-<tbody id="type-only"<{if $detail.type == 'only'}> style="dispaly:none;"<{/if}>>
+<tbody id="type-zhanwei"<{if $detail.type !== 'zhanwei'}> style="display:none;"<{/if}>>
+<tr><th>占位标题：</th><td><input type="text" name="zhanwei[title]" value="<{$detail.config.zhanwei.title}>" class="input w-300"/></td></tr>
+<tr><th>占位链接：</th>
+    <td>
+        <input type="text" name="zhanwei[link]" value="<{$detail.config.zhanwei.link}>" class="input w-300"/>
+        <span class="tip-comment">链接可为空</span>
+    </td>
+</tr>
+<tr>
+    <th>占位图片：</th>
+    <td>
+        <input type="text" name="zhanwei[thumb]" value="<{$detail.config.zhanwei.thumb}>" class="input w-200" />&nbsp;&nbsp;&nbsp;
+        <input type="file" name="zhanwei_thumb" class="input w-100" />
+    </td>
+</tr>
+</tbody>
+<tbody id="type-only"<{if $detail.type == 'only' || $detail.type == 'zhanwei'}> style="display:none;"<{/if}>>
 <{if $detail.from == 'article'}>
 <tr><th>分类：</th>
     <td>
@@ -87,7 +104,7 @@
     </td>
 </tr>
 <{/if}>
-<{if $detail.from == 'company' || $detail.from == 'shop' || $detail.from == 'designer'}>
+<{if $detail.from == 'company' || $detail.from == 'shop' || $detail.from == 'designer' || $detail.from == 'gz'}>
 <tr><th>等级：</th>
     <td>
         <select name="data[config][group_id][]" class="w-200" multiple="multiple" style="height:auto" size="8">
@@ -122,6 +139,10 @@
     $("[name='data[type]']").change(function(){
         if($(this).val() == 'only'){
             $("#type-only").hide();
+            $("#type-zhanwei").hide();
+        }else if($(this).val() == 'zhanwei'){
+            $("#type-only").hide();
+            $("#type-zhanwei").show();           
         }else{
             $("#type-only").show();
         }

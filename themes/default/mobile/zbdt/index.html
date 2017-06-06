@@ -1,0 +1,128 @@
+<{assign var="tpl_page_title" value="招标大厅"}>
+<{include file="mobile/block/header.html"}>
+<div id="search-bar">
+	<ul class="search-bar_list">
+		<li class="list"><a href="#"><{if $title1}><{$title1}><{else}>项目模式<{/if}><em></em></a></li>
+		<li class="list"><a href="#"><{if $title2}><{$title2}><{else}>子模式<{/if}><em></em></a></li>
+		<li class="list"><a href="#"><{if $title3}><{$title3}><{else}>所有项目<{/if}><em></em></a></li>
+		<li class="list"><a href="#"><{if $title4}><{$title4}><{else}>排序方式<{/if}><em></em></a></li>
+	</ul>
+	<div class="search-bar_pull">
+		<div class="list_box">
+			<ul>
+				<{foreach $parents as $item}>
+				<{if $item.parent_id == 0}>
+				<li> <a href="<{$item.link}>" ><{$item.title}></a> </li>
+				<{/if}>
+				<{/foreach}>
+			</ul>
+		</div>
+		<div class="list_box">
+			<ul>
+				<{foreach $cates as $v}>
+				<{if $it2.parent_id ==  $cat_id1}>
+				<li> <a href="<{$v.link}>" ><{$v.title}></a> </li>
+				<{/if}>
+				<{/foreach}>
+			</ul>
+		</div>
+		<div class="list_box">
+			<ul>
+				<li><a href="<{$a_link}>" >所有项目</a></li>
+				<li><a href="<{$b_link}>" >进行中</a></li>
+				<li><a href="<{$c_link}>" >已结束</a></li>
+			</ul>
+		</div>
+		<div class="list_box">
+			<ul>
+				<li><a href="<{$order_alink}>" >排序方式</a></li>
+				<li><a href="<{$order_blink}>" >最新</a></li>
+				<li><a href="<{$order_clink}>" >最热</a></li>
+			</ul>
+		</div>
+		<div class="mask_bg"></div>
+	</div>
+</div>
+<section id="" class="page_center_box">
+<div class="price_sx">
+	<form action="<{$price_link}>" method="post">
+		<font class="pointcl"> ￥</font>
+		<input  class="text" type="text" name='data[min]' value="<{$max}>" />
+		至
+		<input class="text" type="text" name='data[max]' value="<{$min}>" />
+		<input class="btn" type='submit' value="确定" />
+	</form>
+</div>
+<ul class="decorator_list_box mt10">
+	<{foreach $items as $v}>
+	<li class="decorator_list truste_list">
+	<a href="<{link ctl='mobile/zbdt:detail' arg0=$v.truste_id}>">
+		<h3 class="overflow_clear"><font class="maincl"><{$v.title}></font></h3>
+		<p class="black9">预算：￥<{$v.budget}></p>
+		<div class="fr black9"> <font class="fontcl2"><{$v.views}></font> 人参与</div>
+		<div class="fl black9">
+			<{if $v.is_pay}>
+				以托管：<font class="fontcl2">￥<{$v.truste}></font>
+			<{/if}> 
+		</div>
+		<div class="clear"></div>
+		</a> </li>
+	<{/foreach}>
+</ul>
+<div class="page"><{$pager.pagebar}></div>
+<script type="text/javascript">
+$(document).ready(function () {
+	/*轮播幻灯图开始*/
+	$('.flexslider').flexslider({
+		directionNav: true,
+		pauseOnAction: false,
+		/*slideshow: false,*/
+		/*touch:true,*/
+	});
+	/*轮播幻灯图结束*/
+	/*瀑布流效果开始*/
+	(function(K, $){
+	  var $container = $('#xgtContainer');
+		  $container.imagesLoaded(function(){
+			$container.masonry({itemSelector: '.case_aterfall_li'});
+		}); 
+	})(window.KT, window.jQuery);
+	/*瀑布流效果结束*/
+	/*头部下来分类开始*/
+	$("#search-bar .search-bar_list .list").each(function(e){
+		$(this).click(function(){
+			if($(this).hasClass("on")){
+				$(this).parent().find(".list").removeClass("on");
+				$(this).removeClass("on");
+				$(".mask_bg").hide();
+				$("#search-bar .search-bar_pull").hide();
+			}
+			else{
+				$(this).parent().find(".list").removeClass("on");
+				$(this).addClass("on");
+				$(".mask_bg").show();
+				$("#search-bar .search-bar_pull").show();
+			}
+			$("#search-bar .search-bar_pull .list_box").each(function(i){
+				if(e==i){
+					$(this).parent().find(".list_box").hide();
+					$(this).show();
+				}
+				else{
+					$(this).hide();
+				}
+				$(this).find("li").click(function(){
+					$(this).parent().find("li").removeClass("on");
+					$(this).addClass("on");
+					$(".mask_bg").hide();
+					$("#search-bar .search-bar_pull").hide();
+					$("#search-bar .search-bar_list .list").removeClass("on");
+				});
+			});
+		});
+	});
+	/*头部下来分类开始*/
+});
+</script> 
+<script type="text/javascript" src="<{$pager.res}>/script/jquery.masonry.min.js"></script> 
+<{include file="mobile/block/footer.html"}>

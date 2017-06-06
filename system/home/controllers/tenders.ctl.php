@@ -2,7 +2,7 @@
 /**
  * Copy Right IJH.CC
  * Each engineer has a duty to keep the code elegant
- * $Id: tenders.ctl.php 10736 2015-06-10 12:39:11Z maoge $
+ * $Id$
  */
 
 if(!defined('__CORE_DIR')){
@@ -14,8 +14,10 @@ class Ctl_Tenders extends Ctl
     private  $_tenders_allow_fields ='from,city_id,area_id,contact,mobile,home_name,way_id,style_id,budget_id,service_id,house_type_id,house_mj,addr,comment,zx_time';
     public function index()
     {
+		
 		$access = $this->system->config->get('access');
 		$this->pagedata['tender_yz'] = $access['verifycode']['tender'];
+		
         $this->seo->init('tenders');
         $this->tmpl = 'tenders/index.html';
     }
@@ -35,13 +37,15 @@ class Ctl_Tenders extends Ctl
                     $uids[$v['uid']] = $v['uid'];
                 }
                 if($member_list = K::M('member/member')->items_by_ids($uids)){
-                    $company_uids = $shop_uids =  $designer_uids = array();
+                    $company_uids = $shop_uids = $gz_uids = $designer_uids = array();
                     foreach($member_list as $v){
                         switch ($v['from']) {
                             case 'company':
                                 $company_uids[$v['uid']] = $v['uid']; break;
                             case 'shop':
                                 $shop_uids[$v['uid']] = $v['uid']; break; 
+                            case 'gz':
+                                $gz_uids[$v['uid']] = $v['uid']; break;
                             case 'designer':
                                 $designer_uids[$v['uid']] = $v['uid']; break;
                         }
@@ -51,6 +55,9 @@ class Ctl_Tenders extends Ctl
                     }
                     if($shop_uids){
                         $this->pagedata['shop_list'] = K::M('shop/shop')->items_by_uids($shop_uids);
+                    }
+                    if($gz_uids){
+                        $this->pagedata['gz_list'] = K::M('gz/gz')->items_by_ids($gz_uids);
                     }
                     if($designer_uids){
                         $this->pagedata['designer_list'] = K::M('designer/designer')->items_by_ids($designer_uids);
@@ -137,14 +144,17 @@ class Ctl_Tenders extends Ctl
                 if($look_id = K::M('tenders/look')->create($data)){
                     K::M('tenders/tenders')->update_count($tenders_id, 'looks');
                     switch ($this->MEMBER['from']) {
+                        case 'gz':
+                            K::M('gz/gz')->update_count($this->uid, 'tenders_num'); break;
                         case 'designer':
-                            K::M('designer/designer')->update_count($this->uid, 'tenders'); break;
+                            K::M('designer/designer')->update_count($this->uid, 'tenders_num'); break;
                         case 'mechanic':
-                            K::M('mechanic/mechanic')->update_count($this->uid, 'tenders'); break;
+                            K::M('mechanic/mechanic')->update_count($this->uid, 'tenders_num'); break;
                         case 'company':
-                            K::M('company/company')->update_count($this->company['company_id'], 'tenders'); break;
+                            $company = K::M('company/company')->company_by_uid($this->uid);
+                            K::M('company/company')->update_count($company['company_id'], 'tenders_num'); break;
                         case 'shop':
-                            K::M('shop/shop')->update_count($this->shop['shop_id'], 'tenders'); break;
+                            K::M('shop/shop')->update_count($this->shop['shop_id'], 'tenders_num'); break;
                     }
                     $this->err->add('参加竞标成功！');
                 }
@@ -188,6 +198,9 @@ class Ctl_Tenders extends Ctl
 						}
 					}
 					$data['city_id'] = empty($data['city_id']) ? $this->request['city_id'] : $data['city_id'];
+					if($fenxiaoid = $this->cookie->get('fenxiaoid')){
+						$data['fenxiaoid'] = $fenxiaoid;
+					}
 					if($tenders_id = K::M('tenders/tenders')->create($data)){
 						if($attr = $this->GP('attr')){
 							K::M('tenders/attr')->update($tenders_id, $attr);
@@ -199,6 +212,19 @@ class Ctl_Tenders extends Ctl
 						K::M('helper/mail')->sendadmin('admin_tenders',$maildata);
                         $this->tmpl = 'tenders/success.html';
                         $wx_tenders_qr = false;
+                        if($wechatCfg = $this->system->config->get('wechat')){
+                            if($client = K::M('weixin/weixin')->admin_wechat_client()){
+                                if($client->weixin_type == 1){
+                                    $data = array('uid'=>$uid, 'type'=>'tenders', 'addon'=>array('tenders_id'=>$tenders_id));
+                                    if($scene_id = K::M('weixin/authcode')->create($data)){
+                                        if($ticket = $client->getQrcodeTicket(array('scene_id'=>$scene_id, 'expire'=>1800))){
+                                            $wx_tenders_qr = $client->getQrcodeImgUrlByTicket($ticket);
+                                            $this->pagedata['wx_tenders_qr'] = $wx_tenders_qr;
+                                        }
+                                    }
+                                }
+                            }
+                        }
                         $this->err->set_data('tenders_id', $tenders_id);
                         $this->err->set_data('wx_tenders_qr', $wx_tenders_qr);
                         $this->err->set_data('show_content', $this->output(true));
@@ -214,5 +240,16 @@ class Ctl_Tenders extends Ctl
             $this->err->add('非法的数据提交', 201); 
         }          
     }
+
+
+
+
+
+
+
+
+
+
+
 
 }

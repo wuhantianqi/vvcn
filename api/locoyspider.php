@@ -3,7 +3,7 @@
  * Copy Right IJH.CC
  * Each engineer has a duty to keep the code elegant
  * Author @shzhrui<Anhuike@gmail.com>
- * $Id: locoyspider.php 9378 2015-03-27 02:07:36Z youyi $
+ * $Id: locoyspider.php 6233 2014-09-05 11:45:55Z youyi $
  */
 require('../system/home/index.php');
 $K = new Index('magic-shell');

@@ -2,7 +2,7 @@
 <div class="ucenter_t">
 	<ul>
 		<li class="on"><a>基本信息</a></li>
-		<li><a href="<{link ctl='ucenter/member:passwd'}>">修改密码</a></li>
+		<li><a href="<{link ctl='ucenter/member:passwds'}>">修改密码</a></li>
 		<li><a href="<{link ctl='ucenter/member:mail'}>">更换邮箱</a></li>
 		<li><a href="<{link ctl='ucenter/member:face'}>">修改头像</a></li>
 	</ul>
@@ -41,7 +41,8 @@
                 业主可以选择更换用户类型！更换后不能变更回来！
             </td>
         </tr>
-        <{/if}>        
+        <{/if}>  
+        <tr><th>性别：</th><td><select name="account[gender]" class="select w-100"><option <{if $MEMBER.gender == 'man'}>selected="selected"<{/if}> value="man">男</option><option <{if $MEMBER.gender == 'woman'}>selected="selected"<{/if}> value="woman">女</option></select></tr>
         <tr><th>真实姓名：</th><td><input type="text" name="account[realname]" class="input"  value="<{$MEMBER.realname}>"/></td></tr>
 		<tr><th>生日：</th><td><{YMD Y=$MEMBER.Y M=$MEMBER.M D=$MEMBER.D  name="account" class="select"}></td></tr>  
 		<tr><th>城市：</th><td><select name="account[city_id]" class="select w-100"><{widget id="data/city" value=$MEMBER.city_id}></select></td></tr>  

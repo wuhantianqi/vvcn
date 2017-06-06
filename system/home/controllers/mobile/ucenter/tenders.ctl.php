@@ -2,20 +2,22 @@
 /**
  * Copy Right IJH.CC
  * Each engineer has a duty to keep the code elegant
- * $Id: tenders.ctl.php 10021 2015-05-05 11:34:09Z maoge $
+ * $Id$
  */
 
 class Ctl_Mobile_Ucenter_Tenders extends Ctl_Mobile_Ucenter
 {
 	
-	public function tender()
+	public function tender($audit=1)
 	{
 		$filter['uid'] = $this->uid;
+		$filter['audit'] = $audit;
 		if($items = K::M('tenders/tenders')->items($filter)){
 			$this->pagedata['items'] = $items;
 		}
 		$pager['backurl'] = $this->mklink('mobile/ucenter');
 		$this->pagedata['pager'] = $pager;
+		$this->pagedata['audit'] = $audit;
 		$this->tmpl = 'mobile/ucenter/tenders/tender.html';
 	}
 
@@ -51,8 +53,7 @@ class Ctl_Mobile_Ucenter_Tenders extends Ctl_Mobile_Ucenter
 		}else{
 			$filter = $pager = array();
 			$filter['city_id'] = $form['city_id'];
-			$filter['audit'] = 1;
-			$filter['status'] = '<:0';
+			$filter['audit'] = 1;$filter['status'] = 0;
 			$tenders_ids =  array();
 			if($items = K::M('tenders/tenders')->items($filter)){
 				$this->pagedata['items'] = $items;
@@ -145,6 +146,8 @@ class Ctl_Mobile_Ucenter_Tenders extends Ctl_Mobile_Ucenter
                 if($look_id = K::M('tenders/look')->create($data)){
                     K::M('tenders/tenders')->update_count($tenders_id, 'looks');
                     switch ($this->MEMBER['from']) {
+                        case 'gz':
+                            K::M('gz/gz')->update_count($this->uid, 'tenders'); break;
                         case 'designer':
                             K::M('designer/designer')->update_count($this->uid, 'tenders'); break;
                         case 'mechanic':

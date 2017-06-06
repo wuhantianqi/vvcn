@@ -2,7 +2,7 @@
 /**
  * Copy Right IJH.CC
  * Each engineer has a duty to keep the code elegant
- * $Id: seotmpl.ctl.php 9378 2015-03-27 02:07:36Z youyi $
+ * $Id: seotmpl.ctl.php 3413 2014-02-21 09:10:43Z youyi $
  */
 
 if(!defined('__CORE_DIR')){

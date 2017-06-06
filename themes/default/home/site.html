@@ -11,6 +11,8 @@
                         <p><span class="ico_list company_ico"></span>
                         <{if $company_list}>
                         承接公司：<a href="<{$company_list[$item.company_id].company_url}>"><font class="fontcl2"> <{$company_list[$item.company_id].name}> </font></a>
+                        <{elseif $gz_list}>
+                        承接工长：<a href="<{link ctl='gz:detail' arg0=$item.uid}>"><font class="fontcl2"> <{$gz_list[$item.uid].name}> </font></a>
                         <{elseif $designer_list}>
                         承接设计师：<a href="<{link ctl='blog' arg0=$item.uid}>" ><font class="fontcl2"> <{$designer_list[$item.uid].name}> </font></a>
                         <{/if}>

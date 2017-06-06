@@ -3,7 +3,7 @@
  * Copy Right IJH.CC
  * Each engineer has a duty to keep the code elegant
  * Author shzhrui<anhuike@gmail.com>
- * $Id: widget.php 9378 2015-03-27 02:07:36Z youyi $
+ * $Id: widget.php 6072 2014-08-12 12:23:29Z youyi $
  */
 
 class Widget_Adv extends Model
@@ -69,5 +69,25 @@ class Widget_Adv extends Model
             $data['items'] = $item_list;
         }
         return $data;
+    }
+
+    public function option(&$params)
+    {
+        if(!$params['tpl']){
+            if(!in_array($params['type'], array('label', 'checkbox', 'radio', 'option'))){
+                $params['type'] = 'option';
+            }
+            $params['tpl'] = 'widget:default/'.$params['type'].'.html';
+        }        
+        $data['value'] = $params['value'] ? $params['value'] : 0;
+        $data['from'] = $params['from'] ? $params['from'] : null;
+        $options = array();
+        if($items = K::M('adv/adv')->items(array('audit'=>1,'closed'=>0))){
+            foreach($items as $k=>$v){
+                $options[$v['adv_id']] = $v['title'];
+            }
+        }
+        $data['options'] = $options;
+        return $data;       
     }
 }

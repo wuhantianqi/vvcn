@@ -1,0 +1,99 @@
+<{assign var="is_index_home" value="登录页"}>
+<{include file="mobile/block/header.html"}>
+<body>
+<header class="control">
+	<i class="left"><a href="<{if $pager.backurl}><{$pager.backurl}><{else}><{link ctl='mobile/index'}><{/if}>" id="gobackIco"></a></i>
+    <div class="title">注册</div>
+    <i class="right"></i>
+</header>
+<section id="" class="page_center_box">
+	<form id='login-form'>
+	<div class="loginInfor">
+    
+    	<div class="loginIf_list">
+			<div class="fl ifIco"><i class="icco icco1"></i>
+			</div>
+			<div class="ifInput">
+				<select name='data[from]'  class="text" >
+                    <{foreach from=$fromlist key=key item=item}>
+                    	<{if $key != 'shop' && $key != 'company' && $key != 'member'}>
+							<option value="<{$key}>"  ><{$item}></option>
+						<{/if}>
+                    <{/foreach}>
+                </select>
+			</div>
+			<div class="clear"></div>
+		</div>
+        
+        <div class="loginIf_list">
+			<div class="fl ifIco"><i class="icco icco2"></i>
+			</div>
+			<div class="ifInput">
+				<input type="text" name="data[uname]" placeholder="手机号/用户名">
+			</div>
+			<div class="clear"></div>
+		</div>
+        
+        <div class="loginIf_list">
+			<div class="fl ifIco"><i class="icco icco7"></i>
+			</div>
+			<div class="ifInput">
+				<input type="text" name="data[mail]" placeholder="邮箱">
+			</div>
+			<div class="clear"></div>
+		</div>
+		
+		 <div class="loginIf_list">
+			<div class="fl ifIco"><i class="icco icco9"></i>
+			</div>
+			<div class="ifInput">
+				<input type="password" name="data[passwd]" placeholder="密码">
+			</div>
+			<div class="clear"></div>
+		</div>
+		 <div class="loginIf_list">
+			<div class="fl ifIco"><i class="icco icco9"></i>
+			</div>
+			<div class="ifInput">
+				<input type="password" name="confirmpasswd" placeholder="再次输入密码">
+			</div>
+			<div class="clear"></div>
+		</div>
+        <{if $CONFIG.access.verifycode.signup}>
+        <div class="loginIf_list loginIf_pot">
+			<div class="fl ifIco"><i class="icco icco9"></i>
+			</div>
+			<div class="ifInput">
+				<input type="text" name="verifycode" placeholder="请输入验证码">
+			</div>
+			<div class="ifPost"><img verify="#pass-verify" src="<{link ctl='mobile/magic:verify' http='ajax'}>&_=<{$pager.dateline}>" id="pass-verify"/></div>
+			<div class="clear"></div>
+		</div>
+        <{/if}>
+     </div>
+    <div class="yuee_btn"> <a href="#" id='login-btn' class="btn">注册</a>
+    </div>
+	</form>
+</section>
+<script>
+        $(document).ready(function(){
+            function showmsg(message){
+                $("#showErr").show().html(message);
+            }
+            $("#login-btn").click(function(){
+                $.post('<{link ctl="mobile/passport:create"}>',$("#login-form").serialize(),function(data){alert(data.message);
+                    if(data.error){
+                         showmsg(data.message);
+                    }else{
+                        window.location="<{link ctl='mobile/ucenter'}>";
+                    }
+                },'json');
+            });
+        });
+    </script>
+<script>
+$("[verify]").click(function(){
+	$($(this).attr("verify")).attr("src", "<{link ctl='mobile/magic:verify' http='ajax'}>&_"+Math.random());
+});
+</script>
+

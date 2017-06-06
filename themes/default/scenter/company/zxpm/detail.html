@@ -1,0 +1,72 @@
+<{include file="scenter/block/header.html"}>
+<div class="ucenter_t">
+    <ul><li class="on">项目进度</li></ul>
+    <span class="r"><a href="<{link ctl='scenter/company/zxpm:index'}>" class="pbtn">项目管理</a></span>
+</div>
+
+<div class="ucenter_c">
+    <div class="alert alert-info"><{$detail['title']}></div>    
+    <table width="100%" border="0" cellspacing="0" class="info"> 
+        <tbody>
+            <tr>
+                <th>工程名称：</th><td colspan="5"><{$detail['title']}></td>
+            </tr>
+            <tr>
+                <th>工程类型：</th><td colspan="5"><{$pm_type[$detail['type_id']]}></td>
+            </tr>
+             <tr>
+                <th>工程阶段：</th><td colspan="5" ><span class="orange"><{$steps[$detail['status']]}></span></td>
+            </tr>
+            <tr>
+                <th>施工小区：</th><td colspan="5"><{$detail['home_name']}></td>
+            </tr>
+            <tr><th>施工地址：</th>
+                <td colspan="5"><{$detail['city_name']}><{$detail['addr']}></td>
+            </tr>
+             <tr><th>施工面积：</th>
+                <td colspan="5"><{$detail['house_mj']}>&nbsp;m<sup>2</sup></td>
+            </tr>
+            <tr><th>工程造价：</th><td colspan="5"><{$detail['price']}>&nbsp;元</td></tr>
+            <tr><th>项目负责人：</th>
+                <td colspan="5"><{$supervist[$detail['zxpm_id']]}>   </td>
+            </tr>    
+            <tr><th>业主姓名：</th><td colspan="5"><{$member[$detail['custom_id']]}></td></tr>
+            <tr><th>开工时间：</th>
+                <td colspan="5"><span class="orange"><{$detail['dateline']|format:'Y年m月d日 H:i:s'}></span></td>
+            </tr>
+            <tr><th>负责公司：</th>
+                <td colspan="5"><{$detail['company']}></td>
+            </tr>
+            <tr><td colspan="10" style="height:10px;"></td></tr>
+        </tbody>
+        </table>    
+    <div class="alert alert-info">施工进度 </div>
+    <table width="100%" border="0" cellspacing="0" class="table">
+        <tbody>
+            <tr>
+                <th class="w-50">序号</th><th class="w-100">现场截图</th><th class="w-180">发布时间</th><th class="w-800">施工描述</th>
+            </tr>
+            <{foreach $progress as $pro}>
+            <tr>
+                <td class="w-100"><{$pro['progress_id']}></td>
+                <td class="w-100">
+                    <{if $pro['attach']}>
+                    <img src="<{$pro['attach']}>" width='120' height='60'/>
+                    <{else}>
+                        ------
+                    <{/if}>
+                </td>
+                <td class="w-200"><{$pro['dateline']|format:'Y年m月d日 H:i:s'}></td>
+                <td class="w-400"><{$pro['content']}></td>
+            </tr>
+            <{foreachelse}>
+                <tr><td colspan="4"><p class="tips"><span class="notice">没有数据</span></p></td></tr>
+            <{/foreach}>
+
+        </tbody>
+    </table>
+    <div class="page"></div>
+</div>
+</div>
+<script type="text/javascript" src="<{$pager.res}>/script/widget.bmap.js"></script>
+<{include file="scenter/block/footer.html"}>

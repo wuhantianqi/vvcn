@@ -1,0 +1,28 @@
+<{assign var="tpl_page_title" value="工长详情"}>
+<{include file="mobile/block/header.html"}>
+<section id="" class="page_center_box">
+<ul class="decorator_list_box">
+	<li class="decorator_list">
+		<div class="fl img"><img src="<{$pager.img}>/<{$gz.face_80}>" /></div>
+		<div class="wz">
+			<p class="black3"><{$gz.name}></p>
+			<p class="black3"><{$gz.group.group_name}></p>
+			<p class="black3">设计理念：<span class="black9"><{$gz.slogan}></span></p>
+		</div>
+		<div class="clear"></div>
+	</li>
+</ul>
+<div class="designerDetails">
+	<h1>工长简介</h1>
+	<div class="nr mb10">
+		<p class="black3">所在地区：<{$gz.city_name}><{$gz.area_name}></p>
+		<p class="black3">联系方式：<{$gz.show_phone}></p>
+		<div class="article"><{$gz.about}></div>
+	</div>
+	<h1>案例展示</h1>
+	<div class="nr mb10">
+		<p> <img src="<{$pager.img}>/<{$item.photo}>_thumb.jpg" /></p>
+	</div>
+</div>
+<{if $gz.group.allow_yuyue < 0}> <a href="<{link ctl='mobile/tenders:fast'}>" class="long_btn">立即招标</a> <{else}> <a href="<{link ctl='mobile/gz:yuyue' arg0=$gz.uid}>" class="long_btn">预约装修</a> <{/if}>
+<{include file="mobile/block/footer.html"}>

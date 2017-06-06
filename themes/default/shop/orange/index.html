@@ -1,0 +1,41 @@
+<{include file="$skin_theme/block/header.html"}>
+<script type="text/javascript" src="<{$pager.res}>/script/jquery.qrcode.min.js"></script>
+<!--左边主体内容开始-->
+<div class="rt shop_rt mb20">
+    <div class="mb10">
+        <p class="org_tit"><b class="lt">所有商品</b><a href="<{link ctl='mall/shop:product' arg0=$shop.shop_id shop=$shop}>" class="rt">更多</a></p>
+        <ul class="mall_ul org_shop_list shop_list">
+            <{calldata mdl="product/product" shop_id=$shop.shop_id limit=3 noext=true nocache=true}>
+            <li <{if $index==0}>style=" margin-left:0px;"<{/if}>>
+                <a href="<{link ctl='mall/product:detail' arg0=$item.product_id}>" class="pic"><img src="<{$pager.img}>/<{$item.photo}>_thumb.jpg" /></a>
+                <p class="sp"><a href="<{link ctl='mall/product:detail' arg0=$item.product_id}>"><{$item.name}></a></p>
+                <p class="price"><b class="fontcl2">￥<{$item.price}></b><span>￥<{$item.market_price}></span></p>
+            </li>
+            <{/calldata}>					
+        </ul>
+        <div class="cl"></div>
+    </div>
+	<div class="mb10">
+        <div class="shop_box pding lt">
+            <p class="shop_tit"><b class="lt">商家介绍</b><a href="<{link ctl='mall/shop:info' arg0=$shop.shop_id shop=$shop}>" class="rt">更多</a></p>
+            <div class="cl"></div>
+            <p>商家名称：<{$shop.title}></p>
+            <p>联系人：<{$shop.contact}></p>
+            <p>联系方式：<{$shop.show_phone}></p>
+            <p>主营行业：<{$shop.cat_title}></p>
+            <p>所在地点：<{$shop.addr}></p>
+        </div>
+        <div class="shop_box pding rt">
+            <p class="shop_tit"><b class="lt">活动资讯</b><a href="<{link ctl='mall/shop:news' arg0=$shop.shop_id shop=$shop}>" class="rt">更多</a></p>
+             <ul class="content_list shop_news">
+                <{calldata mdl="shop/news" shop_id=$shop.shop_id limit="5" nocache=true noext=true}>
+                <li>
+                    <a href="<{link ctl='mall/shop:newsdetail' arg0=$item.news_id shop=$shop}>"><span class="liIco"></span><{$item.title|cutstr:35}></a>
+                </li>
+                <{/calldata}>
+            </ul>
+        </div>
+        <div class="cl"></div>
+    </div>
+</div>
+<{include file="shop/block/footer.html"}>

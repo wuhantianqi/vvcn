@@ -2,7 +2,7 @@
 /**
  * Copy Right IJH.CC
  * Each engineer has a duty to keep the code elegant
- * $Id: smstmpl.ctl.php 9378 2015-03-27 02:07:36Z youyi $
+ * $Id: smstmpl.ctl.php 4465 2014-04-11 12:15:34Z youyi $
  */
 
 if(!defined('__CORE_DIR')){

@@ -3,7 +3,7 @@
  * Copy Right IJH.CC
  * Each engineer has a duty to keep the code elegant
  * Author @shzhrui<Anhuike@gmail.com>
- * $Id: 56dxw.mdl.php 9378 2015-03-27 02:07:36Z youyi $
+ * $Id: 56dxw.mdl.php 3350 2014-02-18 01:33:22Z youyi $
  */
 
 Import::I('sms');

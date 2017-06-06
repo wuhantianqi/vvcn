@@ -1,0 +1,77 @@
+<{include file="dcenter/block/header.html"}>
+<div class="ucenter_t">
+    <ul>
+        <li><a href="<{link ctl='dcenter/misc/truste:index'}>">预约招标</a></li>
+        <li class="on">招标详情</li>
+    </ul>
+</div>
+<div class="ucenter_c">
+    <table width="100%" border="0" cellspacing="0" class="info">
+    <tr><th>标题：</th>
+        <td colspan="5"><{$detail.title|default:'--'}></td>
+    </tr>        
+    <tr>
+        <th>ID：</th><td><{$detail.uid|default:'--'}></td>
+        <th>会员：</th><td class="w-200"><{$member.uname|default:'--'}></td>        
+    </tr>
+    </tr>
+    <tr><th>售价/金币：</th><td><{$detail.gold}></td><th>托管金额：</th><td><{$detail.truste}>&nbsp;&nbsp;&nbsp;<{if $detail.is_pay == 1}><b class="green">已支付</b><{else}><b class="red">未支付</<{/if}></td></tr>
+    <tr><th>最大投标数：</th><td><{$detail.max_look}></td><th>已投标数：</th><td><{$detail.looks}></td></tr>
+    <tr>
+        <th>发布时间：</th><td><{$detail.dateline|format}></td>
+        <th>发布IP：</th><td><b class="red"><{$detail.clientip|cutstr:6:"******"}></b>(<{$detail.clientip|iplocal}>)</td>        
+    </tr>
+    <tr><th>联系人：</th><td><{$detail.contact|default:'--'}></td>
+        <th>状态：</th><td><{if $detail.sign_uid}><b>已签单</b><{else}><b class="blue">招标中</b><{/if}></td>
+    </tr>
+    <tr><th>地址：</th>
+        <td colspan="5"><{$detail.city_name|default:'--'}>  <{$detail.area_name|default:'--'}>  
+            <{if $detail.looked}><{$detail.addr|default:'--'}><{else}><b class="red">* * * * * *</b><{/if}>
+        </td>
+    </tr>
+    <tr><th>电话：</th>
+        <td colspan="5">
+        	<{$pager.audit_truste}>
+            <{if $detail.gold <= 0 && $group.priv.truste_look > 0}><{$detail.mobile}><{elseif $detail.looked}><{$detail.mobile}> &nbsp;&nbsp;[<strong class="red">已购买</strong>]<{else}><b class="red"><{$detail.mobile|cutstr:6:'* * * * * *'}></b>&nbsp;&nbsp;&nbsp;
+            <a href="<{link ctl='dcenter/misc/truste:look' arg0=$detail.truste_id http='ajax'}>"  mini-load="立即投标" mini-width="400" class="pbtn"/>购买后可以查看联系方式</a>
+            <{/if}>
+        </td>
+    </tr>
+    <tr><td colspan="10" style="height:10px;"></td></tr>
+     <tr><th>分类：</th><td><{$cates[$detail.cate_id].title|default:'--'}></td><th>预算：</th><td><{$detail.budget}></td></tr>
+
+   
+    <{if $detail.photo}><tr><th>效果图：</th><td colspan="10"><a href="<{$pager.img}>/<{$detail.photo}>" target="_blank"><img src="<{$pager.img}>/<{$detail.photo}>" photo="<{$pager.img}>/<{$detail.photo}>" class="wh-30" style="vertical-align:middle;display:inline;"/></a></td></tr><{/if}>    
+    <{widget id="attr/info" from=$detail.from_attr_key value=$detail.attrvalues}>         
+    <tr><th>业主要求：</th><td colspan="10"><{$detail.comment|default:'--'}></td></tr>
+    <tr><td colspan="10" style="height:5px;"></td></tr>
+    </table>
+    <h4 class="tips">已经参于竞标公司</h4>
+    <table width="100%" border="0" cellspacing="0" class="table">
+    <tr>
+        <th class="w-80">ID</th><th>商家</th><th class="w-150">竞标时间</th><th class="w-100">状态</th>
+    </tr>
+    <{foreach $look_list as $item}>
+    <tr>
+        <td class="left"><label><{$item.look_id}><label></td>
+        <td>
+        <{if $member_list[$item.uid].from == 'company'}>
+        公司：<{$company_list[$item.uid].name|default:'--'}>
+        <{elseif $member_list[$item.uid].from == 'designer'}>
+        设计师：<{$designer_list[$item.uid].name|default:'--'}>
+        <{elseif $member_list[$item.uid].from == 'mechanic'}>
+        技工<{$mechanic_list[$item.uid].name|default:'--'}>
+        <{elseif $member_list[$item.uid].from == 'gz'}>
+        工长：<{$gz_list[$item.uid].name|default:'--'}>
+        <{elseif $member_list[$item.uid].from == 'shop'}>
+        商家：<{$shop_list[$item.uid].name|default:'--'}>
+        <{/if}>
+        </td>
+        <td><{$item.dateline|format}></td><td><{if $item.is_signed}><b class="blue">已签单</b><{else}><b>未签单</b><{/if}></td>
+    </tr>
+    <{foreachelse}>
+     <tr><td colspan="20"><p class="text-align">还没有公司投标</p></td></tr>
+    <{/foreach}>
+    </table>
+</div>
+<{include file="dcenter/block/footer.html"}>

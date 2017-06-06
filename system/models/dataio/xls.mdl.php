@@ -3,7 +3,7 @@
  * Copy Right IJH.CC
  * Each engineer has a duty to keep the code elegant
  * Author shzhrui<anhuike@gmail.com>
- * $Id: xls.mdl.php 9378 2015-03-27 02:07:36Z youyi $
+ * $Id: xls.mdl.php 2034 2013-12-07 03:08:33Z $
  */
 class Mdl_Dataio_Xls{
 

@@ -2,7 +2,7 @@
 /**
  * Copy Right IJH.CC
  * Each engineer has a duty to keep the code elegant
- * $Id: sign.ctl.php 9378 2015-03-27 02:07:36Z youyi $
+ * $Id$
  */
 
 if(!defined('__CORE_DIR')){
@@ -27,7 +27,9 @@ class Ctl_Activity_Sign extends Ctl
             if(is_numeric($SO['status'])){$filter['status'] = $SO['status'];}
             if(is_array($SO['dateline'])){if($SO['dateline'][0] && $SO['dateline'][1]){$a = strtotime($SO['dateline'][0]); $b = strtotime($SO['dateline'][1])+86400;$filter['dateline'] = $a."~".$b;}}
         }
-		
+		if(CITY_ID){
+            $filter['city_id'] = CITY_ID;
+        }
         if($items = K::M('activity/sign')->items($filter, null, $page, $limit, $count)){
         	$pager['count'] = $count;
         	$pager['pagebar'] = $this->mkpage($count, $limit, $page, $this->mklink(null, array('{page}')), array('SO'=>$SO));
@@ -75,7 +77,9 @@ class Ctl_Activity_Sign extends Ctl
                 if($SO['mobile']){$filter['mobile'] = "LIKE:%".$SO['mobile']."%";}
                 if(is_array($SO['dateline'])){if($SO['dateline'][0] && $SO['dateline'][1]){$a = strtotime($SO['dateline'][0]); $b = strtotime($SO['dateline'][1])+86400;$filter['dateline'] = $a."~".$b;}}
             }
-			
+			if(CITY_ID){
+				$filter['city_id'] = CITY_ID;
+			}
             if($items = K::M('activity/sign')->items($filter, null, $page, $limit, $count)){
                 $pager['count'] = $count;
                 $pager['pagebar'] = $this->mkpage($count, $limit, $page, $this->mklink(null, array('{page}')), array('SO'=>$SO));                
@@ -209,7 +213,9 @@ class Ctl_Activity_Sign extends Ctl
             if($items = K::M('activity/sign')->items_by_ids($ids)){
                 $aids = $activity_ids = array();
                 foreach($items as $v){
-                   
+                    if(CITY_ID && CITY_ID != $v['city_id']){
+                        continue;
+                    }
                     $aids[$v['sign_id']] = $v['sign_id'];
                     $activity_ids[$v['activity_id']] = $v['activity_id'];
                 }

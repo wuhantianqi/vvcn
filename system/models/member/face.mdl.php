@@ -3,7 +3,7 @@
  * Copy Right IJH.CC
  * Each engineer has a duty to keep the code elegant
  * Author @shzhrui<Anhuike@gmail.com>
- * $Id: face.mdl.php 9590 2015-04-09 06:28:37Z maoge $
+ * $Id: face.mdl.php 3419 2014-02-21 09:42:53Z youyi $
  */
 
 Import::M('member/member');

@@ -2,7 +2,7 @@
 /**
  * Copy Right IJH.CC
  * Each engineer has a duty to keep the code elegant
- * $Id: order.ctl.php 9372 2015-03-26 06:32:36Z youyi $
+ * $Id$
  */
 
 class Ctl_Mobile_Trade_Order extends Ctl_Mobile
@@ -74,6 +74,67 @@ class Ctl_Mobile_Trade_Order extends Ctl_Mobile
             }else if($order['pay_status']){
                 $this->err->add('该订单已经支付过了,不需要重复支付', 212);
             }else{
+				$log = K::M('payment/log')->log_by_no($order_no);
+				if($log['packet']){
+					$detail = K::M('member/packet')->detail($log['packet']);
+				}
+
+				$filter['is_use'] = 1;
+				$filter['uid'] = $this->uid;
+				$filter['ltime'] = '>:'.time();
+				$filter['shop_id'] = array('0',$order['shop_id']);
+				$c =  array();
+				$cat[0] = 0;
+				foreach($order["products"] as $k => $v)
+				{
+					if($c[$v["cat_id"]]){
+						$c[$v["cat_id"]] += $v['product_price']*$v["number"];
+					}else{
+						$c[$v["cat_id"]] = $v['product_price']*$v["number"];
+					}
+					$cat[]= $v["cat_id"];
+				}
+
+				$filter['cate_id'] = $cat;
+				
+				$packet = K::M('member/packet')->items($filter,array('price'=>'desc'));
+				
+				foreach($packet as $k => $v){
+					if($v['cate_id']){
+						if($c[$v['cate_id']]<$v['man']){
+							unset($packet[$k]);
+						}
+					}
+
+					if($order['product_amount'] < $v['man']){
+						unset($packet[$k]);
+					}
+				}
+				if($detail){
+					$packet[$log['packet']] = $detail;
+				}
+				if($packet_id){
+					$max_packet = $packet[$packet_id];
+				}elseif($detail){
+					$max_packet = $detail;
+				}else{
+					$max_packet = reset($packet);
+				}
+				$this->pagedata['max_packet'] = $max_packet;
+				$order['amount'] = $order['amount']-$max_packet['price'];
+				$this->pagedata['packet'] = $packet;
+				if(!$packet_id){
+					$packet_id = $max_packet['id'];
+				}else{
+					if(!$packet[$packet_id]){
+						if($log['packet']){
+							$packet_id = $log['packet'];
+						}else{
+							$packet_id = 0;
+						}
+					}
+				}
+				$this->pagedata['packet_id'] = $packet_id;
                 $pager = array();
                 $pager['backurl'] = $this->mklink('mobile/trade/order:detail', array($order_no));
                 $htis->pagedata['pager'] = $pager;

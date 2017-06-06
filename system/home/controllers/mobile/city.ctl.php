@@ -2,7 +2,7 @@
 /**
  * Copy Right IJH.CC
  * Each engineer has a duty to keep the code elegant
- * $Id: city.ctl.php 9372 2015-03-26 06:32:36Z youyi $
+ * $Id: city.ctl.php 3053 2014-01-15 02:00:13Z youyi $
  */
 
 class Ctl_Mobile_City extends Ctl_Mobile
@@ -15,6 +15,9 @@ class Ctl_Mobile_City extends Ctl_Mobile
             $data['citys'] = $city_list;
             $py_list = array();
             foreach($city_list as $k=>$v){
+                if(!$v['audit']){
+                    unset($city_list[$k]);
+                }
                 if($v['pinyin']){
                     $py = strtoupper(substr($v['pinyin'], 0, 1));
                     $py_list[$py][$k] = $v;
@@ -22,10 +25,11 @@ class Ctl_Mobile_City extends Ctl_Mobile
             }
             ksort($py_list);
             $this->pagedata['py_city'] = $py_list;
-            $this->pagedata['city_list'] = $city_list;
+			$this->pagedata['city_list'] = $city_list;
         }
-        $pager['backurl'] = $this->mklink('mobile');
-        $this->pagedata['pager'] = $pager;
+		$pager['backurl'] = $this->mklink('mobile');
+		$this->pagedata['pager'] = $pager;
+        $this->seo->init('city');
        $this->tmpl = 'mobile/city/index.html'; 
     }
 
@@ -36,6 +40,7 @@ class Ctl_Mobile_City extends Ctl_Mobile
         if($city_id = $city_id){
             $city = K::M('data/city')->city($city_id);
         }
+		
         if(empty($city) && !($city = $oCity->city((int)$site['city_id']))){
             exit('没有开通城市站点');
         }
@@ -43,7 +48,15 @@ class Ctl_Mobile_City extends Ctl_Mobile
             $this->cookie->delete('curr_city_id');
             $this->cookie->set('curr_city_id', $city['city_id']);
         }
-        header("Location:{$mobile['url']}");
+        $url = $mobile['url'];
+        if($site['multi_city']){
+            if(substr($mobile['url'], -7) == '/mobile'){
+                $url = $city['siteurl'].'/mobile';
+            }else{
+                $url = $mobile['url'].'/'.$city['pinyin'];
+            }
+        }
+        header("Location:{$url}");
         exit();
     }
 }

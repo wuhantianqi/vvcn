@@ -2,7 +2,7 @@
 /**
  * Copy Right IJH.CC
  * Each engineer has a duty to keep the code elegant
- * $Id: keyword.ctl.php 9372 2015-03-26 06:32:36Z youyi $
+ * $Id$
  */
 
 class Ctl_Ucenter_Weixin_Keyword extends Ctl_Ucenter

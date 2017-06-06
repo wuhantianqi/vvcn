@@ -1,0 +1,151 @@
+<{include file="block/header.html"}>
+<link href="/themes/default/topics/static/style/topics.css" rel="stylesheet" type="text/css">
+<div class="subwd">
+	<div class="topics_date">
+		<div class="dateTit">
+			<h2>填写申请资料</h2>
+		</div>
+		<div class="date_step"><img src="%THEME%/topics/static/images/ed-2.png"></div>
+		<div class="date_cont">
+			<form action="<{link ctl='topics:reg2' http='base'}>" method="post" onsubmit="return check()">
+            	<input type="hidden" name="topics_id" value="<{$topics_id}>">
+				<div class="info job_info">
+					<dl>
+						<dt><em class="pointcl">*</em>工作单位名称：</dt>
+						<dd>
+							<input class="input text normal" id='work' placeholder="请输入您的工作单位全称" name="data[work]" value="<{$topics.work}>" type="text">
+						</dd>
+					</dl>
+					<dl>
+						<dt><em class="pointcl">*</em>单位地址：</dt>
+						<dd>
+							<input class="input text normal" id='c_addr' placeholder="请输入您的工作单位完整地址" name="data[c_addr]" value="<{$topics.c_addr}>"  type="text">
+						</dd>
+					</dl>
+					<dl class="phone-no">
+						<dt><em class="pointcl">*</em>单位电话：</dt>
+						<dd>
+							<input class="input text normal"  id='c_mobile'   placeholder="电话号码"  name="data[c_mobile]" value="<{$topics.c_mobile}>"  type="text">
+						</dd>
+					</dl>
+					<dl>
+						<dt><em class="pointcl change_text">*</em>担任职务：</dt>
+						<dd>
+							<input class="input text normal" id='position'  placeholder="请输入您担任的职务"   name="data[position]" value="<{$topics.position}>"  type="text">
+						</dd>
+					</dl>
+				</div>
+				<h3 class="qt_h3"></h3>
+				<div class="info">
+					<dl>
+						<dt><em class="pointcl">*</em>家庭联系人：</dt>
+						<dd>
+							<input class="input text normal" id='home_person' placeholder="请输入家庭联系人姓名" name="data[home_person]" value="<{$topics.home_person}>"  type="text">
+						</dd>
+					</dl>
+					<dl>
+						<dt><em class="pointcl">*</em>关系：</dt>
+						<dd>
+							<select name="data[home_relationship]" class="select text normal" >
+                            	<{foreach $home as $k => $item}>
+                                	<option <{if $topics.home_relationship == $k}>  selected="selected" <{/if}> value="<{$k}>"><{$item.title}></option>
+                                <{/foreach}>
+								
+							</select>
+						</dd>
+					</dl>
+					<dl>
+						<dt><em class="pointcl">*</em>联系手机：</dt>
+						<dd>
+							<input class="input text normal"  id='home_phone'  placeholder="请输入联系人手机号码" name="data[home_phone]" value="<{$topics.home_phone}>" type="text">
+						</dd>
+					</dl>
+					<dl>
+						<dt><em class="pointcl">*</em>其他联系人：</dt>
+						<dd>
+							<input class="input text normal" id='orter_person' placeholder="请输入其他联系人姓名"  name="data[orter_person]" value="<{$topics.orter_person}>" type="text">
+						</dd>
+					</dl>
+					<dl>
+						<dt><em class="pointcl">*</em>关系：</dt>
+						<dd>
+							<select name="data[orter_relationship]" class="select text normal" >
+                            	<{foreach $other as $k => $item}>
+                                	<option <{if $topics.orter_relationship == $k}>  selected="selected" <{/if}> value="<{$k}>"><{$item.title}></option>
+                                <{/foreach}>
+								
+							</select>
+						</dd>
+					</dl>
+					<dl>
+						<dt><em class="pointcl">*</em>联系手机：</dt>
+						<dd>
+							<input class="input text normal" id='orter_phone'  placeholder="请输入联系人手机号码"  name="data[orter_phone]" value="<{$topics.orter_phone}>"   type="text">
+						</dd>
+					</dl>
+				</div>
+				<div class="btnbar">  <input class="btn btn_sub_big" type="submit" value="下一步" /><a href="<{link ctl='topics:reg1' http='base'}>" class="btn btn_sub_big btn_fanhui">返回</a></div>
+			</form>
+		</div>
+	</div>
+</div>
+
+<script language="javascript" type="text/javascript">
+	function check() {
+        var c_mobile = $("#c_mobile").val();
+		var home_phone = $("#home_phone").val();
+		var orter_phone = $("#orter_phone").val();
+		
+		var isMobile = /^(((13[0-9]{1})|(15[0-9]{1})|(18[0-9]{1})|(17[0-9]{1})|(14[0-9]{1}))+\d{8})$/;  
+        var isPhone = /^(?:(?:0\d{2,3})-)?(?:\d{7,8})(-(?:\d{3,}))?$/;
+		
+		if ((isMobile.test(c_mobile) && c_mobile.length == 11)||(isPhone.test(c_mobile))) {
+		}else{
+			Widget.MsgBox.error("单位电话有误");
+			return false; 	
+		}
+		if ((isMobile.test(home_phone) && home_phone.length == 11)||(isPhone.test(home_phone))) {
+		}else{
+			Widget.MsgBox.error("家庭联系人电话有误");
+			return false; 	
+		}
+		if ((isMobile.test(orter_phone) && orter_phone.length == 11)||(isPhone.test(orter_phone))) {
+		}else{
+			Widget.MsgBox.error("其他联系人电话有误");
+			return false; 	
+		}
+       
+		
+		
+		
+		var work = $("#work").val();
+		var c_addr = $("#c_addr").val();
+		var position = $("#position").val();
+		var home_person = $("#home_person").val();
+		var orter_person = $("#orter_person").val();
+		
+		var isaddr = /^([\S\s]{3,180})$/;
+		if(!isaddr.exec(work)){
+			Widget.MsgBox.error("工作单位名称填写有误");
+			return false;  	
+		}
+		if(!isaddr.exec(c_addr)){
+			Widget.MsgBox.error("工作单位地址填写有误");
+			return false;  	
+		}
+		if(!isaddr.exec(position)){
+			Widget.MsgBox.error("担任职务填写有误");
+			return false;  	
+		}
+		if(!isaddr.exec(home_person)){
+			Widget.MsgBox.error("家庭联系人填写有误");
+			return false;  	
+		}
+		if(!isaddr.exec(orter_person)){
+			Widget.MsgBox.error("其他联系人填写有误");
+			return false;  	
+		}
+        return true;  
+    }  
+</script>
+<{include file="block/small-footer.html"}> 

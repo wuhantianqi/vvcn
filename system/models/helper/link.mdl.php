@@ -3,7 +3,7 @@
  * Copy Right IJH.CC
  * Each engineer has a duty to keep the code elegant
  * Author shzhrui<anhuike@gmail.com>
- * $Id: link.mdl.php 10470 2015-05-26 01:29:55Z xiaorui $
+ * $Id: link.mdl.php 3224 2014-01-28 13:10:06Z youyi $
  */
 
 if(!defined('__CORE_DIR')){
@@ -12,8 +12,7 @@ if(!defined('__CORE_DIR')){
 
 class Mdl_Helper_Link extends Model
 {
-    private  $_rootctl = array('article', 'ask', 'tools', 'page', 'help', 'about');
-    
+    private  $_rootctl = array('ask', 'tools', 'page', 'help');
     public function mklink($ctl, $args=array(), $params=array(), $http=false, $rewrite=true, $ext='.html')
     {
         static $_CFG = null;
@@ -34,12 +33,40 @@ class Mdl_Helper_Link extends Model
         }
         $ctl_domain = null;
         if($ctl == 'mall/shop'){
+            if($_CFG['domain']['shop'] && ($shop = $params['shop'])){
+                if($shop['domain']){
+                    $shop_url = $shop['shop_url'];
+                }
+            }
             unset($params['shop']);
-        }else if($ctl == 'company'){         
+        }else if($ctl == 'company'){
+            if($_CFG['domain']['company'] && ($company = $params['company'])){
+                if($company['domain']){
+                    $company_url = $company['company_url'];
+                }
+            }            
             unset($params['company']);
         }
         $rewrite = $rewrite && $_CFG['site']['rewrite'];
         $link = $this->_parse_rewrite($route_ctl, $act, $args, $rewrite, $ext);
+        if($company_url){
+            if(preg_match('/^company(\-|\/)(.*)$/i', $link, $m)){
+                if(is_numeric($m[2])){
+                    return $company_url;
+                }else{
+                    return $company_url.'/'.$m[2];
+                }
+            }
+        }
+        if($shop_url){
+            if(preg_match('/^mall\/shop(\-|\/)(.*)$/i', $link, $m)){
+                if(is_numeric($m[2])){
+                    return $shop_url;
+                }else{
+                    return $shop_url.'/'.$m[2];
+                }
+            }
+        }
         if(in_array($ctl, array('article', 'home', 'ask', 'case'))){
             if($domain = $_CFG['domain'][$ctl]){
                 $link = in_array($link, array("{$ctl}", "{$ctl}/", "{$ctl}/index.html", "{$ctl}.html", "{$ctl}.html")) ? '' : $link;         
@@ -88,6 +115,14 @@ class Mdl_Helper_Link extends Model
                         $link = substr($link, 7);
                     }
                     $prefix = $mobile['url'];
+                    if($_CFG['site']['multi_city']){
+                        $city = $request['city'];
+                        if(substr($mobile['url'], -7) == '/mobile'){
+                            $prefix = $city['siteurl'].'/mobile';
+                        }else{
+                            $prefix = $mobile['url'].'/'.$city['pinyin'];
+                        }
+                    }                    
                 }
             }else if($_CFG['site']['multi_city'] && $http && is_numeric($http)){
                 if($city_id = (int)$http){
@@ -117,18 +152,96 @@ class Mdl_Helper_Link extends Model
             }else if('mobile' === $http){
                 $mobile = K::$system->config->get('mobile');
                 $prefix = $mobile['url'];
+                if($_CFG['site']['multi_city']){
+                    $city = $request['city'];
+                    if(substr($mobile['url'], -7) == '/mobile'){
+                        $prefix = $city['siteurl'].'/mobile';
+                    }else{
+                        $prefix = $mobile['url'].'/'.$city['pinyin'];
+                    }
+                } 
             }else if('base' === $http || 'empty' === $http || 'ajax' === $http){
                 $prefix = '';
             }else if($ctl_domain){
                 $prefix = 'http://'.$ctl_domain;
-            }else if($_CFG['site']['multi_city'] && !in_array($ctl, $this->_rootctl)){
-                $city = $request['city'];
-                $prefix = $city['siteurl'];
+            }else if($_CFG['site']['multi_city']){
+                if(!in_array($ctl, $this->_rootctl)){
+                    $city = $request['city'];
+                    $prefix = $city['siteurl'];
+                }
             }
             $link = $prefix.'/'.$link;
         }        
         return $link;
     }
+
+	public function mobilelink($url)
+	{
+		static $_CFG = null;
+        if($_CFG === null){
+            $_CFG = K::$system->_CFG;
+        }
+		$request = K::$system->request;
+		if(strpos($url,'mobile') !== false){
+			$url = str_replace('/mobile','',$url);
+		}
+		$mobile = K::$system->config->get('mobile');
+		if($_CFG['site']['multi_city'] && preg_match('/http\:\/\/(\w+)/', $url, $match)){
+			
+			
+			$city = K::M('data/city')->city_by_pinyin($match[1]);
+			
+			if(empty($city)){
+				$city = $request['city'];
+			}
+			$prefix = $city['siteurl'];
+		}
+		if(!$city['siteurl']){
+			$city['siteurl'] = 'http://'.$_SERVER['HTTP_HOST'];
+		}
+		
+		
+		$ss = str_replace('http://','',substr($city['siteurl'],0,strpos($city['siteurl'],'.')));
+		$city_list = K::M('data/city')->items(array('audit'=>1));
+		$citys_list = array();
+		foreach($city_list as $k=> $v){
+			$citys_list[] = $v['pinyin'];
+		}
+
+		if(in_array($ss, $citys_list)){
+			$mobile["url"] = $mobile["url"].'/'.$ss;
+		}
+		if(strpos(substr($url,strlen($city['siteurl'])),'/gs') !== false){
+			$link = $mobile["url"].'/company.html';
+		}else if(strpos(substr($url,strlen($city['siteurl'])),'blog') !== false){
+			if(strpos(substr($url,strlen($city['siteurl'])),'showinfo') !== false){
+				$link = $mobile["url"].str_replace('blog/showinfo','designer-articleinfo',substr($url,strlen($city['siteurl'])));
+			}else{
+				$link = $mobile["url"].str_replace('blog','designer',substr($url,strlen($city['siteurl'])));
+			}
+		}else if(strpos(substr($url,strlen($city['siteurl'])),'mall') !== false){
+			if(strpos(substr($url,strlen($city['siteurl'])),'mall.html')!== false){
+				$link = $mobile["url"].str_replace('mall','product',substr($url,strlen($city['siteurl'])));
+			}else{
+				$link = $mobile["url"].str_replace('mall/','',substr($url,strlen($city['siteurl'])));
+			}
+		}else if(strpos(substr($url,strlen($city['siteurl'])),'ucenter') !== false){
+
+			if((strpos(substr($url,strlen($city['siteurl'])),'company') !== false)||(strpos(substr($url,strlen($city['siteurl'])),'shop') !== false)||(strpos(substr($url,strlen($city['siteurl'])),'weixin') !== false)){
+				$link = substr($url,0,strlen($city['siteurl'])).'/mobile/scenter.html';
+
+			}else if((strpos(substr($url,strlen($city['siteurl'])),'designer') !== false)||(strpos(substr($url,strlen($city['siteurl'])),'mechanic') !== false)||(strpos(substr($url,strlen($city['siteurl'])),'gz') !== false)){
+				$link = substr($url,0,strlen($city['siteurl'])).'/mobile/dcenter.html';
+
+			}else{
+				$link = substr($url,0,strlen($city['siteurl'])).'/mobile/ucenter.html';
+			}
+		}else{
+			$link = $mobile["url"].substr($url,strlen($city['siteurl']));
+		}
+		
+			return $link;
+	}
 
     public function mkctl($ctl, $type='button', $args=null, $extname='.html', $attrs=array())
     {
@@ -232,7 +345,7 @@ class Mdl_Helper_Link extends Model
             $route_type = 0;
         }else{
             $route_type = K::$system->_CFG['routeurl']['route_type'];
-        }       
+        }
         if($route_type){
             $link = $ctl ? $ctl.'/' : '';
             if((!empty($act) && $act != 'index') || !empty($args)){

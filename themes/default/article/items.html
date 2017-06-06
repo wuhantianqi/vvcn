@@ -4,7 +4,10 @@
 	<div class="mainwd">
 		<p><span class="ico_list breadna"></span>您的位置：<a href="<{link ctl='index'}>"><{$CONFIG.site.title}></a>
 			&gt;<a href="<{link ctl='article'}>">学装修</a>
+			&gt;<a href="<{link ctl='article:items' arg0=$top_cate.cat_id}>"><{$top_cate.title}></a>
+			<{if $top_cate.cat_id != $cate.cat_id}>
 			&gt;<a href="<{link ctl='article:items' arg0=$cate.cat_id}>"><{$cate.title}></a>
+			<{/if}>
 		</p>
 	</div>
 </div>
@@ -24,8 +27,8 @@
 				<li>
 					<img src="<{$pager.img}>/<{$item.thumb}>"  class="lt"/>
 					<div class="rt cont_item_text">
-						<h2><a href="<{link ctl='article:detail' arg0=$item.article_id}>"><{$item.title}></a></h2>
-						<p><a href="<{link ctl='article:detail' arg0=$item.article_id}>"><{$item.desc}></a></p>
+						<h2><a href="<{$item.link}>"><{$item.title}></a></h2>
+						<p><a href="<{$item.link}>"><{$item.desc}></a></p>
 						<p class="graycl"><span class="lt">发布日期：<{$item.dateline|format}></span><span class="rt">已被阅读：<font class="fontcl2"><{$item.views}></font>次</span></p>
 					</div>
 				</li>

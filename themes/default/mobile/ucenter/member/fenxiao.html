@@ -1,0 +1,18 @@
+<{assign var="tpl_page_title" value="分销链接"}>
+<{include file="mobile/block/header.html"}>
+<header class="control">
+	<i class="left"><a href="<{if $pager.backurl}><{$pager.backurl}><{else}><{link ctl='mobile/ucenter:index'}><{/if}>" id="gobackIco"></a></i>
+    <div class="title">分销链接</div>
+    <i class="right"></i>
+</header>
+<section id="" class="page_center_box">
+	<div class="zxCompany_disct">
+    	<h1>把下面的地址发送给好友，返利多多多。</h1>
+        <div class="nr">
+        	<p>分销地址：<{$url}></p>
+           
+        </div>
+    </div>
+</section>
+
+<{include file="mobile/block/footer.html"}>

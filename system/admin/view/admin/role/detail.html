@@ -21,6 +21,7 @@
 				系统管理员
 				<{else}>
 				<select name="data[role]">
+				<option value="fenzhan" <{if $detail.role=='fenzhan'}>selected="selected"<{/if}>>fenzhan</option>
 				<option value="admin" <{if $detail.role=='admin'}>selected="selected"<{/if}>>admin</option>
 				<option value="editor" <{if $detail.role=='editor'}>selected="selected"<{/if}>>editor</option>
 				</select>

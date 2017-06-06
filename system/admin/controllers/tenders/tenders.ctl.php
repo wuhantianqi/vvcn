@@ -2,7 +2,7 @@
 /**
  * Copy Right IJH.CC
  * Each engineer has a duty to keep the code elegant
- * $Id: tenders.ctl.php 10515 2015-05-27 09:21:13Z maoge $
+ * $Id$
  */
 
 if(!defined('__CORE_DIR')){
@@ -48,7 +48,7 @@ class Ctl_Tenders_Tenders extends Ctl
 
     public function detail($tenders_id = null)
     {
-         if(!$tenders_id = (int)$tenders_id){
+        if(!$tenders_id = (int)$tenders_id){
             $this->err->add('未指定要查看内容的ID', 211);
         }else if(!$detail = K::M('tenders/tenders')->detail($tenders_id)){
             $this->err->add('您要查看的内容不存在或已经删除', 212);
@@ -118,12 +118,42 @@ class Ctl_Tenders_Tenders extends Ctl
                         }
                     }
                 }
-                if($allow_looks = implode(',',$data['allow_looks'])){
-                    $data['allow_looks']  = $allow_looks;
-                }
+				if($detail['audit'] == 0){
+					$add = 1;
+				}
                 if(K::M('tenders/tenders')->update($tenders_id, $data)){
-					if($attr = $this->GP('attr')){
+					$member = K::M('member/member')->detail($detail['uid']);
+					
+					if($add == 1 && $detail['fenxiaoid'] > '0' && $data['audit']==1){
+						$fenxiao_money = $this->system->config->get('fenxiao');
+						K::M('member/member')->update_count($detail['fenxiaoid'],'jifen',$fenxiao_money['audit']);
+						K::M('fenxiao/log')->log($detail['fenxiaoid'],$detail['tenders_id'], 1,$fenxiao_money['audit'], '招标审核通过返利');
+					}
+					if($detail['from'] == 'ZXB'){
+						K::M('zxb/zxb')->update($detail['zxb_id'],array('audit'=>$data['audit']));
+					}                    
+                    if($attr = $this->GP('attr')){
                         K::M('tenders/attr')->update($tenders_id,$attr);
+                    }
+                    if($detail['openid']){
+                        if($wechatCfg = $this->system->config->get('wechat')){
+                            if($client = K::M('weixin/weixin')->admin_wechat_client()){
+                                if($client->weixin_type == 1){
+                                    //模板消息
+                                    $params = array();
+                                    $params['title'] = '您的装修招标有了新消息';
+                                    $params['items'] = array($detail['from_title'], date('Y-m-d'));
+                                    $CFG = $this->system->_CFG;
+                                    $wx_tenders_url = 'weixin/tenders-detail-'.$tenders_id.'.html';
+                                    if($CFG['site']['rewrite']){
+                                        $wx_tenders_url = $CFG['site']['siteurl'].'/'.$wx_tenders_url;
+                                    }else{
+                                        $wx_tenders_url = $CFG['sute']['siteurl'].'/index.php?'.$wx_tenders_url;
+                                    }    
+                                    $client->sendTempMsg($detail['openid'], 'DGU3xtbiBDqRcwkUHBhOzIZVL9HlqPDJqjZQlRk7tb8', $wx_tenders_url, $params);
+                                }
+                            }
+                        }                        
                     }
                     $this->err->add('修改内容成功');
                 }  
@@ -135,7 +165,7 @@ class Ctl_Tenders_Tenders extends Ctl
             if(!$attrs = K::M('tenders/attr')->attrs_by_tenders($tenders_id)){
                 $attrs = array();
             }
-            $detail['attrvalues'] = array_keys($attrs);
+            $detail['attrvalues'] = array_keys($attrs); 
         	$this->pagedata['detail'] = $detail;
         	$this->tmpl = 'admin:tenders/tenders/edit.html';
         }

@@ -2,7 +2,7 @@
 /**
  * Copy Right IJH.CC
  * Each engineer has a duty to keep the code elegant
- * $Id: youhui.ctl.php 9941 2015-04-28 13:13:58Z youyi $
+ * $Id$
  */
 
 if(!defined('__CORE_DIR')){
@@ -72,7 +72,7 @@ class Ctl_Ucenter_Company_Youhui extends Ctl_Ucenter
 		$company = $this->ucenter_company();
 		$integral = K::$system->config->get('integral');
 		$counts = K::M('member/flush')->flushs($this->uid);
-		$is_gold = abs($integral['gold']);
+		$is_gold = $integral['gold']*-1;
 		if($counts >= $company["group"]["priv"]["day_free_count"]){
 			$this->pagedata['gold'] = $is_gold;
 		}
@@ -90,7 +90,7 @@ class Ctl_Ucenter_Company_Youhui extends Ctl_Ucenter
 			if($isrefresh && $counts >= $company["group"]["priv"]["day_free_count"]){
 				$data['gold'] = $is_gold;
 				if($is_gold > 0){
-                    if(!K::M('member/gold')->update($this->uid, -$is_gold, "刷新公司")){
+                    if(!K::M('member/gold')->update($this->uid, $integral['gold'], "刷新公司")){
                         $this->err->add('扣费失败', 201)->response();
                     }
                 }

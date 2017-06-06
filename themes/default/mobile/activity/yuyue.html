@@ -1,0 +1,12 @@
+<{assign var="tpl_page_title" value="报名活动"}>
+<{include file="mobile/block/header.html"}>
+<section id="" class="page_center_box">
+<div class="pd10">
+	<form class="tenders" action="<{link ctl='mobile/activity:yuyue'}>" mini-form='yuyue' method="post">
+    	<input name="activity_id" type="hidden" value="<{$activity_id}>" />
+		<input type="text" name="data[contact]" class="text full" placeholder="您的姓名" />
+		<input type="text" name="data[mobile]" class="text full" placeholder="联系方式" />
+		<input type="submit" value="立即报名" class="long_btn" />
+	</form>
+</div>
+<{include file="mobile/block/footer.html"}>

@@ -1,0 +1,64 @@
+<{include file="ucenter/block/header.html"}>
+<script type="text/javascript"  src="<{$pager.res}>/layer/layer.js?<{$VER}>"></script>
+<div class="ucenter_t">
+	<ul><li class="on">托管充值</li></ul>
+	<span class="r"><a href="<{link ctl='ucenter/member:trustelogs'}>" class="pbtn">托管日志</a></span>
+</div>
+<div class="ucenter_c">
+<form  target="_blank" action="<{link ctl='trade/payment:truste'}>"  method="post" >
+<table cellspacing="0" cellpadding="0" class="form">
+    <tr>
+        <th>充值金额：</th>
+        <td>
+            <input readonly="readonly" type="text" name="amount" class="input w-100" value="<{$truste}>" />
+           <input type="hidden" name="truste_id" value="<{$truste_id}>">
+        </td>
+    </tr>
+    <tr><th>支付平台：</th>
+        <td style="padding:10px">
+            <{foreach $pay_list as $pay}>
+            <{if $pay.status==1}>
+            <label><input type="radio" name="code" value="<{$pay.payment}>" <{if $pay@first}>checked<{/if}>/><img src="<{$pager.img}>/<{$pay.logo}>" style="width:135px;height:45px;vertical-align:middle;"/></label>
+            <{/if}>
+            <{/foreach}>
+        </td>
+    </tr>
+    <tr>
+        <th></th><td><input  id="payment_btn" type="submit" value="提交数据" class="green_btn" /></td>
+    </tr>
+</table>
+</form>
+</div>
+
+<script type="text/tmpl" id="payment_notice">
+	<div style="font-size:14px;padding:10px;height:130px;">
+    <h4 style="color:#AA6708;margin:10px;">支付小提示</h4>
+    <p style="margin:10px 5px;font-size:14px;line-height:28px;">请在新打开的支付页面上完成付款，付款完成前请不要关闭此窗口。<br />如您在支付过程中遇到问题，请联系客服：<{$CONFIG.site.phone}></p>
+  </div>
+	<div style="text-align:center;">
+		<a href="<{link ctl='ucenter/member/order:index'}>" class="btn btn-success">已完成付款</a>&nbsp;&nbsp;&nbsp;
+		<button id="close_notice" class="btn-default"><span>重新支付</span></button>
+	</div>
+</script>
+<script type="text/javascript">
+(function(K, $){
+	$("#payment_btn").click(function(){
+		var html = $("#payment_notice").html();
+        layer.open({
+            type: 1,
+            skin: 'layui-layer-rim',
+            closeBtn: true,
+            area: ['450px', '240px'],
+            shift: 2,
+            shadeClose: true,
+            title: '支付小提示',
+            content: html,
+            success:function(index){
+            	$("#close_notice").click(function(){layer.closeAll();});
+            }
+        });
+    });
+})(window.KT, window.jQuery);
+</script> 
+
+<{include file="ucenter/block/footer.html"}>

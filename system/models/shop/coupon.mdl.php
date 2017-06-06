@@ -2,7 +2,7 @@
 /**
  * Copy Right IJH.CC
  * Each engineer has a duty to keep the code elegant
- * $Id: coupon.mdl.php 9378 2015-03-27 02:07:36Z youyi $
+ * $Id: coupon.mdl.php 5748 2014-07-01 04:29:08Z youyi $
  */
 
 if(!defined('__CORE_DIR')){
@@ -97,7 +97,7 @@ class Mdl_Shop_Coupon extends Mdl_Table
                 $smsdata['number'] = $number;
                 $smsdata['coupon'] = $coupon['title'];
                 $smsdata['shop_title'] = $shop['title'];
-                $smsdata['shop_name'] = $shop['shop_name'];
+                $smsdata['shop_name'] = $shop['name'];
                 $smsdata['expire_time'] = $coupon['ltime'] ? date('Y-m-d', $coupon['ltime']) : '不限时间';;
                 $smsdata['contact'] = $contact;
                 $smsdata['mobile'] = $mobile;                

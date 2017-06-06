@@ -3,7 +3,7 @@
     <ul><li class="on">预约管理</li></ul>
 </div>
 <div class="ucenter_c">
-    <{if $group.priv.show_yuyue_mobile}><p class="tips"><span class="lock">您是【<b class="red"><{$group.group_name}></b>】预约手机号不可见</span></p><{/if}>
+    <{if $group.priv.show_yuyue_mobile <= 0}><p class="tips"><span class="lock">您是【<b class="red"><{$group.group_name}></b>】预约手机号不可见</span></p><{/if}>
     <table width="100%" border="0" cellspacing="0" class="table">
     <tr>
         <th class="w-80">ID</th><th>商品</th><th class="w-150">联系人</th><th class="w-150">手机号</th>

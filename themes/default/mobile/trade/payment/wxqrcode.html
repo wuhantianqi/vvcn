@@ -1,0 +1,35 @@
+<{include file="mobile/block/header.html"}>
+<section id="" class="page_center_box">
+	<input type="hidden" id="order_no" value="<{$order_no}>">
+	<div class="wrap">
+		<div class="tips text_center" id="tip">支付金额<font class="pointcl">￥</font><font class="pointcl" id="ordermoney"><{$amount}></font>, 
+			请使用微信扫描下方二维码完成支付 </div>
+		<div class="text_center"> <img src="/qrcode?data=<{$codeurl}>&size=8" id="wxpay_qrcode" height="300"/> </div>
+	</div>
+	<div class="text_center farial forg" id='show' style="display:none;font-size:16px;"><b>订单已支付成功</b></div>
+	<div class="wrap footer"><{$CONFIG.site.title}></div>
+	<script type="text/javascript">
+(function(K, $){
+	setInterval(function(){
+		var order_no = $('#order_no').val();
+     	var link = "<{link ctl='trade/payment:is_pay' arg0='#order_no' http='base'}>";
+		$.getJSON(link.replace("#order_no", order_no), function(ret){			
+           if(ret.status == 'order'){
+			    $('#show').css("display","block"); 
+				 var location =  "<{link ctl='trade/order:detail' arg0='#order_no' http='base'}>";
+				 window.location=location.replace("#order_no", order_no);   
+			}else if(ret.status == 'glod'){
+				$('#show').css("display","block"); 
+				var location =  "<{link ctl='ucenter/member:logs' arg0='in'}>";
+				window.location=location; 
+			}
+        });
+    }, 3000);
+})(window.KT, window.jQuery);
+</script>
+<style>
+	.tips{ font-size:0.16rem;}
+</style>
+</section>
+<{include file="mobile/block/sheader.html"}>
+</body></html>

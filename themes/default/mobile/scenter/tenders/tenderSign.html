@@ -1,0 +1,23 @@
+<{assign var="tpl_page_title" value="我要竞标"}>
+<{include file="mobile/block/header.html"}>
+<header class="control">
+	<i class="left"><a href="<{if $pager.backurl}><{$pager.backurl}><{else}><{link ctl='mobile/index'}><{/if}>" id="gobackIco"></a></i>
+    <div class="title">我要竞标</div>
+    <i class="right"></i>
+</header>
+
+<section id="" class="page_center_box">
+	
+    <div class="loginInfor_tishi">投标后查看业主联系方式，消耗金币:<{$tenders.gold}></div>
+    
+    <form action="<{link ctl='mobile/scenter/tenders-tenders_look' http='base'}>" mini-form="look-form" method="post" >
+        <input type="hidden" name="tenders_id" value="<{$tenders.tenders_id}>" />
+        <textarea name="data[content]" placeholder="给业主留言"></textarea>
+         <div class="yuee_btn"> <input class="btn" type="submit" value="立即投标" /></div>
+    </form>
+	
+	
+</section>
+
+</body>
+</html>

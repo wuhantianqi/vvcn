@@ -2,7 +2,7 @@
 /**
  * Copy Right IJH.CC
  * Each engineer has a duty to keep the code elegant
- * $Id: blog.ctl.php 14858 2015-08-05 14:39:40Z maoge $
+ * $Id$
  */
 
 class Ctl_Blog extends Ctl
@@ -35,6 +35,7 @@ class Ctl_Blog extends Ctl
 		if(!empty($uids)){
 			$this->pagedata['member_list'] = K::M('member/member')->items_by_ids($uids);
 		}
+		$this->pagedata['mobile_url'] = $this->mklink('mobile/designer', array($uid));
 		$this->pagedata['comment_list'] = $comment_info;
 		$this->pagedata['designer'] = $designer;
 		$this->tmpl = 'blog/detail.html';
@@ -188,7 +189,7 @@ class Ctl_Blog extends Ctl
             $this->error(404);
         }
         $this->pagedata['designer'] = $designer;
-        $seo = array('designer_name'=>$designer['name'], 'designer_school'=>$designer['school'], 'designer_slogan'=>$designer['slogan'], 'designer_desc'=>'');
+        $seo = array('designer_name'=>$designer['name'], 'uname'=>$designer['name'], 'designer_school'=>$designer['school'], 'designer_slogan'=>$designer['slogan'], 'designer_desc'=>'');
         $seo['designer_desc'] = K::M('content/text')->substr(K::M('content/html')->text($designer['about'], true), 0, 200);
         $this->seo->init('designer_detail', $seo);
         return $designer;

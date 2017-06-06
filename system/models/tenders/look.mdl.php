@@ -2,7 +2,7 @@
 /**
  * Copy Right IJH.CC
  * Each engineer has a duty to keep the code elegant
- * $Id: look.mdl.php 9378 2015-03-27 02:07:36Z youyi $
+ * $Id: look.mdl.php 5402 2014-06-03 10:17:57Z youyi $
  */
 
 if(!defined('__CORE_DIR')){
@@ -80,6 +80,13 @@ class Mdl_Tenders_Look extends Mdl_Table
 				$data['from'] = 'company';
 				$info['name'] = $company['name'];
                 $info['company_id'] = $company['company_id'];
+            }
+        }else if('gz' == $member['from']){
+            if($gz = K::M('gz/gz')->detail($uid)){
+                $data['city_id'] = $gz['city_id'];
+                $data['from'] = 'gz';
+				$info['name'] = $gz['name'];
+                $info['gz_id'] = $gz['uid'];
             }
         }else if('designer' == $member['from']){
             if($designer = K::M('designer/designer')->detail($uid)){

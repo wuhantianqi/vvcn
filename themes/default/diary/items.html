@@ -46,9 +46,9 @@
 			<h2>装修日记</h2>
 			<div class="sort_box">
 				<p class="sort_list hoverno">
-                        <a href="<{link ctl='diary:items' arg0=$pager.status arg1=$pager.type_id arg2=$pager.way_id arg3=1}>">默认  <span <{if $pager.orderby != 2 && $pager.orderby != 3}>class="sort_ico ico_list sort_on_ico"<{else}>class="sort_ico ico_list"<{/if}>></span></a>
-                        <a href="<{link ctl='diary:items' arg0=$pager.status arg1=$pager.type_id arg2=$pager.way_id arg3=2}>">浏览量<span <{if $pager.orderby == 2}>class="sort_ico ico_list sort_on_ico"<{else}>class="sort_ico ico_list"<{/if}>></span></a>
-                        <a href="<{link ctl='diary:items' arg0=$pager.status arg1=$pager.type_id arg2=$pager.way_id arg3=3}>">评论量<span <{if $pager.orderby == 3}>class="sort_ico ico_list sort_on_ico"<{else}>class="sort_ico ico_list"<{/if}>></span></a> 
+                    <{foreach $order_list as $k=>$v}>
+                    <a href="<{$v.link}>"><{$v.title}><span <{if $pager.order == $k}>class="sort_ico ico_list sort_on_ico"<{else}>class="sort_ico ico_list"<{/if}>></span></a>
+                    <{/foreach}>
 				</p>
 			</div>
 			<div class="area">
@@ -84,29 +84,27 @@
 		</div>
 	<{widget id="tenders/fast" title="免费装修设计" from="TSJ"}>
 		<div class="mb10 area">
-            <h3 class="side_tit">装修公司排行榜</h3>
-            <ul class="pding paihang">
+			<h3 class="side_tit">装修公司排行榜</h3>
+			<ul class="pding paihang">
                 <{calldata mdl="company/company"  city_id=$request.city_id limit=8}>
-                <li>
-                    <span class="lt"><font class="paihang_num<{if $iteration<=3}> ph_num_cl<{/if}>"><{$iteration}></font><a href="<{$item.company_url}>"><{$item.name|cutstr:35}></a>
-                    </span>
+				<li>
+                    <span class="lt"><font class="paihang_num<{if $iteration<=3}> ph_num_cl<{/if}>"><{$iteration}></font><a href="<{$item.company_url}>"><{$item.name|cutstr:35}></a></span>
                     <span class="rt">已投标：<font class="fontcl2"><{$item.tenders_num}></font></span>
                 </li>
                 <{/calldata}>
-            </ul>
-        </div>
+			</ul>
+		</div>
         <div class="mb10 area">
-            <h3 class="side_tit">设计师排行榜</h3>
-            <ul class="pding paihang">
+			<h3 class="side_tit">设计师排行榜</h3>
+			<ul class="pding paihang">
                 <{calldata mdl="designer/designer" city_id=$request.city_id limit=5}>
-                <li>
-                    <span class="lt"><font class="paihang_num<{if $iteration<=3}> ph_num_cl<{/if}>"><{$iteration}></font><a href="<{link ctl='blog'  arg0=$item.uid}>"><{$item.name|cutstr:35}></a>
-                    </span>
+				<li>
+                    <span class="lt"><font class="paihang_num<{if $iteration<=3}> ph_num_cl<{/if}>"><{$iteration}></font><a href="<{link ctl='blog'  arg0=$item.uid}>"><{$item.name|cutstr:35}></a></span>
                     <span class="rt">已投标：<font class="fontcl2"><{$item.tenders_num}></font></span>
                 </li>
                 <{/calldata}>
-            </ul>
-        </div>
+			</ul>
+		</div>
 		<div class="mb20"><{adv id="10" name="全站右侧招商图片广告" city_id=$request.city_id}></div>
 	</div>
 	<div class="cl"></div>

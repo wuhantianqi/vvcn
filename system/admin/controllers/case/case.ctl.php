@@ -3,7 +3,7 @@
  * Copy Right IJH.CC
  * Each engineer has a duty to keep the code elegant
  * Author @shzhrui<Anhuike@gmail.com>
- * $Id: case.ctl.php 10490 2015-05-26 07:58:14Z fengnannan $
+ * $Id: case.ctl.php 6077 2014-08-13 13:48:56Z youyi $
  */
 
 if(!defined('__CORE_DIR')){
@@ -28,7 +28,9 @@ class Ctl_Case_Case extends Ctl
             if(is_array($SO['dateline'])){if($SO['dateline'][0] && $SO['dateline'][1]){$a = strtotime($SO['dateline'][0]); $b = strtotime($SO['dateline'][1])+86400;$filter['dateline'] = $a."~".$b;}}
         }
         $filter['closed'] = 0 ;
-		
+		if(CITY_ID){
+            $filter['city_id'] = CITY_ID;
+        }
         if($items = K::M('case/case')->items($filter, array('case_id'=>'desc'), $page, $limit, $count)){
         	$pager['count'] = $count;
             $home_ids = $company_ids = $designer_ids = array();
@@ -77,7 +79,9 @@ class Ctl_Case_Case extends Ctl
             if(is_array($SO['lng'])){$a = intval($SO['lng'][0]);$b=intval($SO['lng'][1]);if($a && $b){$filter['lng'] = $a."~".$b;}}
             if(is_array($SO['lat'])){$a = intval($SO['lat'][0]);$b=intval($SO['lat'][1]);if($a && $b){$filter['lat'] = $a."~".$b;}}
         }
-		
+		if(CITY_ID){
+            $filter['city_id'] = CITY_ID;
+        }
         if($items = K::M('case/case')->items($filter, null, $page, $limit, $count)){
             $pager['count'] = $count;
             $pager['pagebar'] = $this->mkpage($count, $limit, $page, $this->mklink(null, array('{page}')), array('SO'=>$SO, 'multi'=>$multi));
@@ -96,7 +100,9 @@ class Ctl_Case_Case extends Ctl
         $pager['page'] = max(intval($page), 1);
         $pager['limit'] = $limit = 50;
         $filter = array('audit'=>0, 'closed'=>0); 
-		
+		if(CITY_ID){
+            $filter['city_id'] = CITY_ID;
+        }
         if($items = K::M('case/case')->items($filter, null, $page, $limit, $count)){
             $pager['count'] = $count;
             $pager['pagebar'] = $this->mkpage($count, $limit, $page, $this->mklink(null, array('{page}')), array('SO'=>$SO));
@@ -185,8 +191,11 @@ class Ctl_Case_Case extends Ctl
 					$data['home_name'] = $home['name'];
 				}
 				$data['company_id'] = $company_id;
-				$data['city_id'] = $city_id;
-				
+				if(CITY_ID){
+					$data['city_id'] = CITY_ID;
+				}else{
+					$data['city_id'] = $city_id;
+				}
 				$data['lasttime'] = __TIME;
 				if($photo = K::M('home/photo')->detail($data['huxing_id'])){
 					$data['huxing'] = $photo['photo'];
@@ -306,7 +315,9 @@ class Ctl_Case_Case extends Ctl
             if($items = K::M('case/case')->items_by_ids($ids)){
                 $aids = $company_ids = $homes_id = $uids = array();
                 foreach($items as $v){
-                   
+                    if(CITY_ID && CITY_ID != $v['city_id']){
+                        continue;
+                    }
                     $aids[$v['case_id']] = $v['case_id'];
                 }
                 if($aids && K::M('case/case')->delete($aids)){

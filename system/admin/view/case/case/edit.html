@@ -22,7 +22,7 @@
 <tr><th class="w-100">城市：</th><td><{widget id="data/region" level=2 value=$detail.city_id}></td></tr>
 <tr><th>小区：</th>
     <td>
-        <input type="hidden" name="data[home_id]" id="select_home_id" value="<{$detail.home_id}>" />
+        <input type="hidden" name="data[home_id]" id="case_home_id" value="<{$detail.home_id}>" />
         <input type="text" id="case_home_name" name="data[home_name]" value="<{$detail.home_name}>" class="input w-200"/>
         <{link ctl="home/home:dialog" select="mini:#case_home_id,#case_home_name/N/选择小区" class="button"}>
     </td>
@@ -31,7 +31,7 @@
     <th>户型图：</th>
     <td>
         <input type="text" name="data[huxing_id]" value="<{$detail.huxing_id}>" <{if $detail.huxing_id}>photo="<{$pager.img}>/<{$huxing.photo}>_thumb.jpg"<{/if}> id="case_huxing_id" class="input w-100" />
-        <{link ctl="home/photo:dialog" args=$detail.home_id class="button" id="select_huxing_btn"}>
+        <{link ctl="home/photo:dialog" class="button" id="select_huxing_btn"}>
     </td>
 </tr>
 <tr>

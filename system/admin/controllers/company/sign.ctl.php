@@ -2,7 +2,7 @@
 /**
  * Copy Right IJH.CC
  * Each engineer has a duty to keep the code elegant
- * $Id: sign.ctl.php 9378 2015-03-27 02:07:36Z youyi $
+ * $Id: sign.ctl.php 5681 2014-06-26 11:33:16Z youyi $
  */
 
 if(!defined('__CORE_DIR')){
@@ -25,7 +25,9 @@ class Ctl_Company_Sign extends Ctl
             if($SO['clientip']){$filter['clientip'] = "LIKE:%".$SO['clientip']."%";}
             if(is_numeric($SO['status'])){$filter['status'] = $SO['status'];}
         }
-		
+		if(CITY_ID){
+            $filter['city_id'] = CITY_ID;
+        }
         if($items = K::M('company/sign')->items($filter, null, $page, $limit, $count)){
             $pager['count'] = $count;
             $pager['pagebar'] = $this->mkpage($count, $limit, $page, $this->mklink(null, array($youhui_id,'{page}')), array('SO'=>$SO));
@@ -62,7 +64,9 @@ class Ctl_Company_Sign extends Ctl
             $pager['page'] = max(intval($page), 1);
             $pager['limit'] = $limit = 50;
             $filter['youhui_id'] = $youhui_id;
-			
+			if(CITY_ID){
+				$filter['city_id'] = CITY_ID;
+			}
             if($items = K::M('company/sign')->items($filter, null, $page, $limit, $count)){
                 $pager['count'] = $count;
                 $pager['pagebar'] = $this->mkpage($count, $limit, $page, $this->mklink(null, array($youhui_id,'{page}')), array('SO'=>$SO));
@@ -107,7 +111,9 @@ class Ctl_Company_Sign extends Ctl
                     $data['youhui_id'] = $youhui_id;
                     $data['dateline'] = __TIME;
                     $data['clientip'] = __IP;
-					
+					if(CITY_ID){
+						$data['city_id'] = CITY_ID;
+					}
                     if($sign_id = K::M('company/sign')->create($data)){
 						K::M('company/sign')->youhui_count($youhui['youhui_id']);
                         $this->err->add('添加内容成功');
@@ -185,7 +191,9 @@ class Ctl_Company_Sign extends Ctl
             if($sign = K::M('company/sign')->items_by_ids($ids)){
                 $aids = $youhui_ids = array();
                 foreach($sign as $v){
-                    
+                    if(CITY_ID && CITY_ID != $v['city_id']){
+                        continue;
+                    }
                     $aids[$v['sign_id']] = $v['sign_id'];
                     $youhui_ids[$v['youhui_id']] = $v['youhui_id'];
                 }

@@ -1,36 +1,103 @@
-<{include file="block/small-header.html"}>
-<!--头部内容结束-->
+<{include file="block/small-header.html"}> 
+<script type="text/javascript"  src="<{$pager.res}>/layer/layer.js?<{$VER}>"></script> 
+<!--头部内容结束--> 
 <!--购物流程图开始-->
 <div class="subwd">
 	<div class="pding shop_apply_top">
 		<p><span class="lt">订单提交成功，请您尽快付款！ 订单号：<font class="pointcl"><{$order.order_no}></font></span><span class="rt">应付金额<font class="pointcl"><{$order.amount}></font>元</span></p>
-        <p class="cl"></p>
-        <p>请您在提交订单后24小时内完成支付，否则订单会自动取消。</p>
+		<p class="cl"></p>
+		<p>请您在提交订单后24小时内完成支付，否则订单会自动取消。</p>
 	</div>
 	<div class="shop_apply_bottom">
-        <form action="<{link ctl='trade/payment:order'}>" id="payment-form" method="post">
-        <input type="hidden" name="order_no" value="<{$order.order_no}>" />
-		<div class="shop_apply_bt_cont pding mb20">
-			<h2>在线支付</h2>
-            <{foreach $pay_list as $pay}>
-            <{if $pay.status==1}>
-            <label><input type="radio" name="code" value="<{$pay.payment}>" <{if $pay@first}>checked<{/if}> title="<{$pay.title}>"/><img src="<{$pager.img}>/<{$pay.logo}>" style="width:135px;height:45px;" title="<{$pay.title}>"/></label>
-            <{/if}>
-            <{/foreach}>
-		</div>
-		<p class="bt"><b>应付<font class="pointcl"><{$order.amount}></font>元</b><button class="btn btn_sub_big">立即付款</button></a></p>
-        </form>
-	</div>	
+		<form action="<{link ctl='trade/payment:order'}>" target="_blank" id="payment-form" method="post">
+			<input type="hidden" id='order_no' name="order_no" value="<{$order.order_no}>" />
+			<input type="hidden" id='packet' name="packet" value="<{$max_packet['id']}>" />
+			<div class="shop_apply_bt_cont pding mb20">
+				<h2>在线支付</h2>
+				<{foreach $pay_list as $pay}>
+				<{if $pay.status==1}>
+				<label><input type="radio" name="code" value="<{$pay.payment}>" <{if $pay@first}>checked<{/if}> title="<{$pay.title}>"/><img src="<{$pager.img}>/<{$pay.logo}>" style="width:135px;height:45px;" title="<{$pay.title}>"/></label>
+				<{/if}>
+				<{/foreach}> </div>
+			<{if $max_packet}>
+			<div class="order_youhuiquan">
+				<div class="lt">
+					<select onchange="chang(this.value)" class="text">
+						<{foreach $packet as $item}> <option  value="<{$item.id}>" <{if $packet_id == $item.id}> selected="selected" <{/if}> >满<{$item['man']}>元，减<{$item['price']}>元
+						</option>
+						<{/foreach}>
+					</select>
+				</div>
+				<div class="rt"> 满<b class="pointcl"><{$max_packet['man']}></b>元，减<b class="pointcl"><{$max_packet['price']}></b>元 </div>
+				<div class="cl"></div>
+			</div>
+			<{/if}>
+			<p class="bt"><b>应付<font class="pointcl"><{$order.amount}></font>元</b>
+				<button class="btn btn_sub_big" id="payment_btn">立即付款</button>
+				</a></p>
+		</form>
+	</div>
 </div>
-<!--购物流程图结束-->
+<!--购物流程图结束--> 
+<script type="text/tmpl" id="payment_notice">
+	<div style="font-size:14px;padding:10px;height:130px;">
+    <h4 style="color:#AA6708;margin:10px;">支付小提示</h4>
+    <p style="margin:10px 5px;font-size:14px;line-height:28px;">请在新打开的支付页面上完成付款，付款完成前请不要关闭此窗口。<br />如您在支付过程中遇到问题，请联系客服：<{$CONFIG.site.phone}></p>
+  </div>
+	<div style="text-align:center;">
+		<a href="<{link ctl='ucenter/member/order:index'}>" class="btn btn-success">已完成付款</a>&nbsp;&nbsp;&nbsp;
+		<button id="close_notice" class="btn-default"><span>重新支付</span></button>
+	</div>
+</script> 
+<script type="text/javascript">
+	function chang(val)
+	{
+		var url = "<{link ctl='trade/order:payment'  arg0=$order.order_no arg1='#val#' http='base'}>";
+		window.location.href = url.replace("#val#", val);
+	}
+</script> 
 <script type="text/javascript">
 (function(K, $){
+	$("#payment_btn").click(function(){
+		var html = $("#payment_notice").html();
+        layer.open({
+            type: 1,
+            skin: 'layui-layer-rim',
+            closeBtn: true,
+            area: ['450px', '240px'],
+            shift: 2,
+            shadeClose: true,
+            title: '支付小提示',
+            content: html,
+            success:function(index){
+            	$("#close_notice").click(function(){layer.closeAll();});
+            }
+        });
+    });
+	/*
     //购物车支付页面效果
-     $(".shop_apply_bt_cont label").click(function(){
+	 $(".template_select label").click(function(){
          $('.shop_apply_bt_cont label').find('img').removeClass('current');
          $(this).find('img').addClass('current');
+		var code = $("input[name='type_code']:checked").val();
+	 if(code == 'wxpay'){
+		$("#wxpay").css('display','block'); 
+		$("#pay").css('display','none');
+	 }else{
+		$("#wxpay").css('display','none'); 
+		$("#pay").css('display','block');
+	 }
     });
+ 	var code = $("input[name='type_code']:checked").val();
+	 if(code == 'wxpay'){
+		$("#wxpay").css('display','block'); 
+		$("#pay").css('display','none');
+	 }else{
+		$("#wxpay").css('display','none'); 
+		$("#pay").css('display','block');
+	 }
     //$(".shop_apply_bt_cont label").eq(0).click();
+*/
 })(window.KT, window.jQuery);
-</script>
+</script> 
 <{include file="block/small-footer.html"}>

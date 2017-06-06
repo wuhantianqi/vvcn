@@ -15,6 +15,14 @@
 <input type="hidden" name="K" value="sms" />
 <table width="100%" border="0" cellspacing="0" class="table-data form">
 <tr>
+    <th>短信开关：</th>
+    <td>
+        <label><input type="radio" name="config[short_msg]" <{if $config.short_msg}>checked="checked"<{/if}> value="1"/>开启</label>&nbsp;&nbsp;
+        <label><input type="radio" name="config[short_msg]" <{if empty($config.short_msg)}>checked="checked"<{/if}> value="0"/>关闭</label>
+        <span class="tip-comment">关闭后将关闭所有短信业务</span>
+    </td>
+</tr>
+<tr>
     <th>显示错误提示：</th>
     <td>
         <label><input type="radio" name="config[show_error]" <{if $config.show_error}>checked="checked"<{/if}> value="1"/>开启</label>&nbsp;&nbsp;

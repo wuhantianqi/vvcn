@@ -2,7 +2,7 @@
 /**
  * Copy Right IJH.CC
  * Each engineer has a duty to keep the code elegant
- * $Id: yuyue.ctl.php 9372 2015-03-26 06:32:36Z youyi $
+ * $Id$
  */
 
 if(!defined('__CORE_DIR')){
@@ -38,6 +38,7 @@ class Ctl_Ucenter_Member_Yuyue extends Ctl_Ucenter
         }else if($detail['uid'] != $this->uid){
             $this->err->add('您没有权限查看该招标', 212);
         }else{
+
             if($look_list = K::M('tenders/look')->items_by_tenders($tenders_id)){
                 $uids = array();
                 foreach($look_list as $k=>$v){
@@ -46,14 +47,18 @@ class Ctl_Ucenter_Member_Yuyue extends Ctl_Ucenter
                 $this->pagedata['look_list'] = $look_list;
                 if($uids){
                     if($member_list = K::M('member/member')->items_by_ids($uids)){
-                        $designer_uids = $mechanic_uids = $company_uids = $shop_uids = array();
+                        $gz_uids = $designer_uids = $mechanic_uids = $company_uids = $shop_uids = array();
                         foreach($member_list as $v){
                             switch($v['from']){
                                 case 'company'  : $company_uids[$v['uid']]  = $v['uid']; break;
                                 case 'designer' : $designer_uids[$v['uid']] = $v['uid']; break;
+                                case 'gz'       : $gz_uids[$v['uid']]       = $v['uid']; break;
                                 case 'mechanic' : $mechanic_uids[$v['uid']] = $v['uid']; break;
                                 case 'shop'     : $shop_uids[$v['uid']]     = $v['uid']; break;
                             }
+                        }
+                        if($gz_uids){
+                            $this->pagedata['gz_list'] = K::M('gz/gz')->items_by_ids($gz_uids);
                         }
                         if($designer_uids){
                             $this->pagedata['designer_list'] = K::M('designer/designer')->items_by_ids($designer_uids);
@@ -101,6 +106,7 @@ class Ctl_Ucenter_Member_Yuyue extends Ctl_Ucenter
                 $this->err->add('完善招标信息成功');
             }
         }else{
+			$this->pagedata['cates'] = K::M('tenders/cate')->items(array('closed'=>'0','audit'=>'1'));
             $this->pagedata['detail'] = $detail;
             $this->tmpl = 'ucenter/member/yuyue/tendersEdit.html';
         }        
@@ -124,6 +130,8 @@ class Ctl_Ucenter_Member_Yuyue extends Ctl_Ucenter
 			$this->err->add('该投标用户不存在', 216);
 		}else if(K::M('tenders/look')->sign($look_id)){
 			 switch ($member['from']) {
+				case 'gz':
+					K::M('gz/gz')->update_count($look['uid'], 'tenders_sign'); break;
 				case 'designer':
 					K::M('designer/designer')->update_count($look['uid'], 'tenders_sign'); break;
 				case 'mechanic':
@@ -141,7 +149,20 @@ class Ctl_Ucenter_Member_Yuyue extends Ctl_Ucenter
 					}
 					K::M('shop/shop')->update_count($this->shop['shop_id'], 'tenders_sign'); break;
 			}
-            
+            if($zxb_id = (int)$tenders['zxb_id']){
+                if(!$company = K::M('company/company')->company_by_uid($look['uid'])){
+                    $this->err->add('只装修公司才能参加装修保', 216);
+                }else{
+                    K::M('zxb/zxb')->sign_company($zxb_id, $company['company_id']);
+                }
+            }
+			$fenxiao_money = $this->system->config->get('fenxiao');
+			if($tenders['fenxiaoid'] > '0'){
+				K::M('member/member')->update_count($tenders['fenxiaoid'],'jifen',$fenxiao_money['sign']);
+				K::M('fenxiao/log')->log($tenders['fenxiaoid'],$tenders['tenders_id'], 1,$fenxiao_money['sign'], '分销签单获得');
+			}
+			K::M('member/member')->update_count($tenders['uid'],'jifen',$fenxiao_money['signtender']);
+			K::M('fenxiao/log')->log($tenders['uid'],$tenders['tenders_id'], 1,$fenxiao_money['signtender'], '用户签单获得');
             $this->err->add('设置中标成功');
         }
     }
@@ -223,6 +244,47 @@ class Ctl_Ucenter_Member_Yuyue extends Ctl_Ucenter
             }
             $this->pagedata['detail'] = $detail;
             $this->tmpl = 'ucenter/member/yuyue/designerDetail.html';
+        }
+    }
+
+	public function gz($page=1)
+    {
+        $pager = $filter = array();
+        $pager['page'] = $page = max((int)$page, 1);
+        $pager['limit'] = $limit = 20;
+        $pager['count'] = $count = 0;
+        $filter['uid'] = $this->uid;
+        if($items = K::M('gz/yuyue')->items($filter, $page, $limit, $count)){
+            $pager['count'] = $count;
+            $pager['pagebar'] = $this->mkpage($count, $limit, $page, $this->mklink(null, array('{page}')));
+            $gz_ids = array();
+            foreach($items as $k=>$v){
+                $gz_ids[$v['gz_id']] = $v['gz_id'];
+            }
+            if($gz_ids){
+                $this->pagedata['gz_list'] = K::M('gz/gz')->items_by_ids($gz_ids);
+            }
+            $this->pagedata['items'] = $items;
+        }
+        $this->pagedata['pager'] = $pager;        
+        $this->tmpl = 'ucenter/member/yuyue/gz.html';
+    }
+
+    public function gzDetail($yuyue_id=null)
+    {
+        if(!$yuyue_id = (int)$yuyue_id){
+            $this->error(404);
+        }else if(!$detail = K::M('gz/yuyue')->detail($yuyue_id)){
+            $this->err->add('您要查看的预约不存在或已经删除', 212);
+        }else if($detail['uid'] != $this->uid){
+            $this->err->add('您没有权限查看该预约', 213);
+        }else{
+            if($detail['gz_id']){
+                $this->pagedata['gz'] = K::M('gz/gz')->detail($detail['gz_id']);
+            }
+			
+            $this->pagedata['detail'] = $detail;
+            $this->tmpl = 'ucenter/member/yuyue/gzDetail.html';
         }
     }
 

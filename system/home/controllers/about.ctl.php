@@ -3,7 +3,7 @@
 /**
  * Copy Right IJH.CC
  * Each engineer has a duty to keep the code elegant
- * $Id: about.ctl.php 14858 2015-08-05 14:39:40Z maoge $
+ * $Id: help.ctl.php 5400 2014-06-03 09:49:17Z $
  */
 
 class Ctl_About extends Ctl 
@@ -15,10 +15,15 @@ class Ctl_About extends Ctl
      {         
         $page = htmlspecialchars($page);
         //$city_id = $this->request['city_id'];
-        $this->pagedata['info'] =  K::M('article/article')->item_by_page($page);
+        $this->pagedata['info'] = $detail = K::M('article/article')->item_by_page($page);
+        if($detail['linkurl']){
+            header("Location:".$detail['linkurl']);
+            exit;
+        }
         if(empty($this->pagedata['info'])){
             $this->err->add('没有您要查看的内容', 211);
         }else{
+			$city_id = $this->system->request['city_id'];
             $items =  K::M('article/article')->items(array('from'=>'about','closed'=>0,'city_id'=>$city_id),array('article_id'=>'ASC'),1,50); 
             $article_id = $this->pagedata['info']['article_id'];            
             $detail = K::M('article/article')->detail($article_id,$city_id,false);

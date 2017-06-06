@@ -18,15 +18,15 @@
     <td>
         <input type="hidden" name="data[uid]" value="0" id="site_member_id" />
         <input type="text" value="" id="site_member_uname" class="input w-300"/>
-        <{link ctl="member/member:dialog" arg0="company" select="mini:#site_member_id,#site_member_uname/N/选择用户" title="选择用户" class="button"}>
+        <{link ctl="member/member:dialog" arg0="cygz" select="mini:#site_member_id,#site_member_uname/N/选择用户" title="选择用户" class="button"}>
     </td>
 </tr>
 <tr><th>小区：</th>
-	<td>
-		<input type="hidden" name="data[home_id]" value="0" id="case_home_id"/>
-		<input type="text" name="data[home_name]" value="" id="case_home_name" class="input w-300"/>
+    <td>
+        <input type="hidden" name="data[home_id]" value="0" id="case_home_id"/>
+        <input type="text" name="data[home_name]"  value="" id="case_home_name" class="input w-300"/>
         <{link ctl="home/home:dialog" select="mini:#case_home_id,#case_home_name/N/选择小区" class="button"}>
-	</td>
+    </td>
 </tr>
 <tr><th>装修公司：</th>
     <td>

@@ -1,0 +1,94 @@
+<{include file="scenter/block/header.html"}>
+<div class="ucenter_t">
+    <ul>
+        <li class="on"><a href="<{link ctl='scenter/member/order:address'}>" >我的地址</a></li>
+        <span class="r"><a class="pbtn" onclick="create()">新建地址</a></span>
+    </ul>
+</div>
+<div class="ucenter_c">
+<table width="100%" border="0" cellspacing="0" cellpadding="0" class="table">
+	<tr>
+        <th class="w-100">ID</th><th>标题</th><th class="w-100">电话号码</th><th class="w-150">收件人</th><th class="w-100">默认</th><th class="w-200"></th>
+    </tr>
+    <{foreach $items as $item}>
+    <tr id="tr_<{$item.addr_id}>" style="text-align:center">
+        <td class="left"><label><{$item.id}><label></td>
+        <td><{$item.title}></td>
+        <td><{$item.phone}></td>
+        <td><{$item.contact}></td>
+        <td><{if $item.default == '1'}><b class="blue">√</b><{else}><b class="red">×</b><{/if}></td>
+        <td>
+        	<p title="<{$item.title}>" contact="<{$item.contact}>" phone="<{$item.phone}>" addr="<{$item.addr}>" hidden></p>
+        	<{if $item.default == '1'}>
+        	<a class="pbtn" style="text-decoration:none;background:#ffffff;border:0px;">当前默认</a>
+        	<{else}>
+        	<a href="<{link ctl='scenter/member/order:default_addr' arg0=$item.addr_id}>" mini-act="设为默认" mini-confirm="确定要设为默认？" class="pbtn">设为默认</a>
+        	<{/if}>
+            <a class="pbtn" onclick="update(<{$item.addr_id}>)">修改</a>
+            <a href="<{link ctl='scenter/member/order:delete_addr' arg0=$item.addr_id}>" mini-act="删除" mini-confirm="确定要删除吗？" class="pbtn red">删除</a>
+        </td>
+    </tr>
+    <tr><td colspan="10" style="border:none;height:5px">&nbsp;</td></tr>
+	<{foreachelse}>
+    <tr><td colspan="10"><p class="tips"><span class="notice">您还没有设置订单地址</span></p></td></tr>
+    <{/foreach}>
+</table>
+<p class="page"><{$pager.pagebar}></p>
+<div id="address" class="ui-widget-content" style="display:none; position: fixed; left: 50%; top: 200px; z-index: 2020; height:350px; width:500px; margin-left:-250px">
+	<div class="personal_center_menu nav hoverno" style="text-align: right;">
+		<a href="javascript:;" onclick="close_address()"  style="display:block;float:right; color:#fff; font-size:24px; margin:5px 5px 0px 0px;">×</a>
+	</div>
+	<h3 style="text-align: center;">请填写订单地址</h3>
+	<form id="data-form">
+    	<table cellspacing="0" cellpadding="0" class="form" width="100%">
+    		<tr>
+    			<th>标   题   ：</th>
+    			<td>
+					<input id="title" type="text" name="data[title]" class="input">
+				</td>
+    		</tr>
+			<tr>
+				<th>电话号码：</th>
+				<td>
+					<input id="phone" type="text" name="data[phone]" class="input">
+				</td>
+			</tr>
+			<tr>
+				<th>详细地址 ：</th>
+				<td>
+					<input id="addr" type="text" name="data[addr]" class="input">
+				</td>
+			</tr>
+			<tr>
+				<th> 联  系  人 ：</th>
+				<td>
+					<input id="contact" type="text" name="data[contact]" class="input">
+				</td>
+			</tr>
+			<tr>
+				<th></th>
+				<td><input id="submit_btn" action="" mini-submit="#data-form" type="button" value="提交数据" class="green_btn" /></td>
+			</tr>
+		</table>
+	</form>
+</div>
+</div>
+<script>
+function create(){
+	$("#address").css('display','block'); 
+	$("#submit_btn").attr('action','<{link ctl="scenter/member/order:create_addr"}>');
+}
+function update(id){
+	$("#address").css('display','block'); 
+	$("#submit_btn").attr('action','<{link ctl="scenter/member/order:update_addr" arg0="'+id+'"}>');
+	var mes = $("#tr_"+id).find('p');
+	$("#title").attr('value',mes.attr('title'));
+	$("#contact").attr('value',mes.attr('contact'));
+	$("#phone").attr('value',mes.attr('phone'));
+	$("#addr").attr('value',mes.attr('addr'));
+}
+function close_address(){
+	$("#address").css('display','none');
+}
+</script>
+<{include file="scenter/block/footer.html"}>

@@ -24,7 +24,7 @@
  * 02110-1301  USA
  *
  * @Author	Konstantin Riabitsev <icon@linux.duke.edu>
- * @Version 1.1 ($Date: 2015-03-27 10:07:36 +0800 (周五, 2015-03-27) $)
+ * @Version 1.1 ($Date: 2013-12-07 11:08:33 +0800 (周六, 2013-12-07) $)
  */
 
 /**

@@ -1,0 +1,28 @@
+<{include file="block/small-header.html"}>
+<!--头部内容结束-->
+<!--购物流程图开始-->
+<div class="subwd">
+	<div class="pding shop_apply_top">
+		<p><span class="lt">订单提交成功，请您尽快付款！ 订单号：<font class="pointcl"><{$order.order_no}></font></span><span class="rt">应付积分<font class="pointcl"><{$order.jfamount}></font>积分</span></p>
+        <p class="cl"></p>
+        <p>请您在提交订单后24小时内完成支付，否则订单会自动取消。</p>
+	</div>
+	<div class="shop_apply_bottom">
+        <form action="<{link ctl='trade/payment:jforder'}>" id="payment-form" method="post">
+        <input type="hidden" name="order_no" value="<{$order.order_no}>" />
+		<p class="bt"><b>应付<font class="pointcl"><{$order.jfamount}></font>积分</b><button class="btn btn_sub_big">立即兑换</button></a></p>
+        </form>
+	</div>	
+</div>
+<!--购物流程图结束-->
+<script type="text/javascript">
+(function(K, $){
+    //购物车支付页面效果
+     $(".shop_apply_bt_cont label").click(function(){
+         $('.shop_apply_bt_cont label').find('img').removeClass('current');
+         $(this).find('img').addClass('current');
+    });
+    //$(".shop_apply_bt_cont label").eq(0).click();
+})(window.KT, window.jQuery);
+</script>
+<{include file="block/small-footer.html"}>

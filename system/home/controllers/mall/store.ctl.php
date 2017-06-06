@@ -2,7 +2,7 @@
 /**
  * Copy Right IJH.CC
  * Each engineer has a duty to keep the code elegant
- * $Id: store.ctl.php 12719 2015-07-02 10:47:00Z maoge $
+ * $Id$
  */
 
 if(!defined('__CORE_DIR')){
@@ -60,7 +60,7 @@ class Ctl_Mall_Store extends Ctl
         if($kw = trim($this->GP('kw'))){
             $pager['sokw'] = $kw = htmlspecialchars($kw);
             $SO['kw'] = $kw;
-            $filter[':OR'] = array('title'=>"LIKE:%{$kw}%", 'name'=>"LIKE:%{$kw}%");  
+            $filter[':OR'] = array('title'=>"LIKE:%{$kw}%", 'name'=>"LIKE:%{$kw}%");
         }
         $pager['order'] = $order;
         $pager['cat_id'] = $cat_id;        

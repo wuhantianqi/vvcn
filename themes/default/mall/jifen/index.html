@@ -1,0 +1,86 @@
+<{include file="block/header.html"}>
+<!--面包屑导航开始-->
+<div class="main_topnav mb20">
+	<div class="mainwd">
+		<p><span class="ico_list breadna"></span>您的位置：<a href="<{link ctl='index'}>"><{$CONFIG.site.title}></a>
+			&gt;<a href="<{link ctl='jifenshangpin'}>">积分商城</a>
+		</p>
+	</div>
+</div>
+<!--面包屑导航结束-->
+<div class="mainwd">
+	<!--主体左边内容开始-->
+	<div class="main_content lt">
+		<div class="mb10 pding area choose_option">
+			<table>
+				<tr>
+                    <td class="tit">分类：</td>
+                    <td>
+                        <a href="<{$area_all_link}>" <{if empty($pager.area_id)}>class="current"<{/if}>>不限</a>
+                       
+                    </td>
+                </tr> 
+                <tr>
+                    <td class="tit">区域：</td>
+                    <td>
+                        <a href="<{$area_all_link}>" <{if empty($pager.area_id)}>class="current"<{/if}>>不限</a>
+                        <{foreach $area_list  as $v}>
+                        <a href="<{$v.link}>" <{if $v.area_id==$pager.area_id}>class="current"<{/if}>><{$v.area_name}></a>
+                        <{/foreach}>
+                    </td>
+                </tr> 
+			</table>
+		</div>
+		<div class="mb20">
+			<h2><font>积分商品列表</font></h2>
+			<div class="cl"></div>
+			<div class="sort_box">
+				<p class="sort_list hoverno">
+					<{foreach $order_list  as $k=>$v}>
+                    <a href="<{$v.link}>"><{$v.title}><span <{if $k == $pager.order}>class="sort_ico ico_list sort_on_ico"<{else}>class="sort_ico ico_list"<{/if}>></span></a>
+                    <{/foreach}> 
+				</p>               
+			</div>
+			<div class="area">
+			<ul class="line_type main_jifen">
+				<{foreach $items as $item}>
+                <li>
+                    <div><a href="<{link ctl='jifenshangcheng/shangpin:detail' arg0=$item.product_id}>">
+                        <img src="<{$pager.img}>/<{$item.photo}>" /></a>
+                    </div>
+                    <div class="index_tuanz_btm">
+						<p class="tit nowrap"><a href="<{link ctl='jifenshangcheng/shangpin:detail' arg0=$item.product_id}>"><{$item.name}></a></h3>
+                       	<p class="graycl">参考价：<del>￥<{$item.market_price}></del></p>
+						<p class="nowrap">积分价：<b class="tit"><{if $item.jfprice > 0}><font class="pointcl"><{$item.jfprice}>积分</font><{/if}><{if $item.price > 0}><font class="fontcl2">+￥<{$item.price}></font><{/if}></b></p>
+                    </div>
+                </li>
+                <{/foreach}>
+			</ul>
+			<div class="cl"></div>
+			<div class="page hoverno"><{$pager.pagebar}></div>
+		</div>
+		</div>
+	</div>
+	<!--主体左边内容结束-->
+	<!--主体右边内容开始-->
+	<div class="side_content rt">
+		<div class="mb10 area">
+			<h3 class="side_tit">兑换排行榜</h3>
+			<ul class="pding paihang jifenph">
+				<{calldata mdl="company/company" order="score:DESC" city_id=$request.city_id limit=10}>
+                <li>
+                    <div class="lt"><font class="paihang_num<{if $iteration<=3}> ph_num_cl<{/if}>"><{$iteration}></font><a href="<{$item.company_url}>"><img src="<{$pager.img}>/<{$home_list[$item.home_id].thumb}>" /></a></div>
+                    <div class="rt"><p class="nowrap"><a href="#">糕点礼盒正品三禾稻香村京八件北京传统糕点件北京传统糕点礼盒正品三禾稻香村京八件北京传统</a></p>
+					<p class="nowrap"><font class="pointcl">50积分</font><font class="fontcl2">+￥5360.0</font></p>
+					</div>
+                </li>
+                <{/calldata}>
+			</ul>
+		</div>
+		<div class="mb20 "><{adv id="10" name="全站右侧招商图片广告" city_id=$request.city_id}></div>
+	</div>
+	<div class="cl"></div>
+	<!--主体右边内容结束-->
+</div>
+<!--底边内容开始-->
+<{include file="block/footer.html"}>

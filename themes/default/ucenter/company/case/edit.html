@@ -62,7 +62,7 @@
     $("#select_home_btn").click(function(e) {
         e.stopPropagation();
         e.preventDefault();
-        var link = "<{link ctl='ucenter/misc/select:home' arg=$pager.city.city_id}>";
+        var link = "<{link ctl='ucenter/misc/select:home' arg0=$pager.city_id}>";
         Widget.Dialog.Select(link, "N", function(ret) {
             $("#select_home_id").val(ret[0]);
             $("#select_home_name").val(ret[1].title);

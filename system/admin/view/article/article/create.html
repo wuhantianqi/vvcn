@@ -27,9 +27,10 @@
 <{if $pager.from == 'article'}>
 <tr><th>缩略图：</th><td><input type="file" name="data[thumb]" class="input w-300" /></td></tr>
 <{else}>
-<tr><th>页面名：</th><td><input type="text" name="data[page]" value="<{$detail.page}>" class="input w-200"/>
-    <span class="tip-comment">只支持字母数字，不可与其它页面名重复</span>
-</td></tr>
+<tr><th>页面名：</th><td><input type="text" name="data[page]" value="<{$detail.page}>" class="input w-200"/><span class="tip-comment">只支持字字母和数字</span></td></tr>
+<{if $pager.from == 'about'}>
+<tr><th>城市：</th><td><{widget id="data/region" level=2}></td></tr>
+<{/if}>
 <{/if}>
 <tr><th>描述：</th><td><textarea name="data[desc]" class="textarea"><{$detail.desc}></textarea><span class="tip-comment">不填写将截取文章开头200字</span></td></tr>
 <tr><th>跳转：</th>

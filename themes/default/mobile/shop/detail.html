@@ -1,34 +1,35 @@
 <{assign var="tpl_page_title" value=$shop.name}>
 <{include file="mobile/block/header.html"}>
-
-<div class="mb10"></div>
-<div class="swiper-container">
-<ul class="app_menu company_menu">
-	<li class="noline">
-		<img src="<{$pager.img}>/<{$shop.logo}>" class="lt pic" />
-		<h2><{$shop.name}></h2>
-		<p class="nowrap">口碑：<{$shop.score}></p>
-		<p class="nowrap">电话：<a  href="tel:<{$shop.show_phone}>"><{$shop.show_phone}></a></p>
-		<div class="cl"></div>
+<section id="" class="page_center_box">
+<ul class="decorator_list_box">
+	<li class="decorator_list">
+		<div class="fl img"><img src="<{$pager.img}>/<{$shop.logo}>" /></div>
+		<div class="wz">
+			<p class="black3"><{$shop.name}></p>
+			<p class="black3">口碑：<{$shop.score}></p>
+			<p class="black3">电话：<a class="maincl"  href="tel:<{$shop.show_phone}>"><{$shop.show_phone}></a></p>
+		</div>
+		<div class="clear"></div>
 	</li>
 </ul>
-<div class="shop_nav">
-	<ul>
-		<li><a href="<{link ctl='mobile/shop' arg0=$shop.shop_id}>" class="current">商家简介</a></li>
+<div class="zxCompany_details">
+	<ul class="navList">
+		<li><a href="<{link ctl='mobile/shop' arg0=$shop.shop_id}>" class="on">商家简介</a></li>
 		<li><a href="<{link ctl='mobile/shop:product' arg0=$shop.shop_id arg1=0}>">所有商品</a></li>
 		<li><a href="<{link ctl='mobile/shop:coupon' arg0=$shop.shop_id arg1=1}>">优惠券</a></li>
 		<li><a href="<{link ctl='mobile/shop:news' arg0=$shop.shop_id arg1=1}>">活动资讯</a></li>
 	</ul>
-	<div class="cl"></div>
 </div>
-<div class="pding">
-	<p>商铺：<{$shop.title}></p>
-	<p>地址：<{$shop.city_name}> <{$shop.area_name}> <{$shop.addr}></p>
-	<p></p>
-    <div class="content"><{$shop.info}></div>
+<div class="zxCompany_intro">
+<div class="nrBox mb10">
+		<h3>商铺简介</h3>
+		<div class="nr">
+			<p>地址：<{$shop.city_name}> <{$shop.area_name}> <{$shop.addr}></p>
+			<div class="article"><{$shop.info}></div>
+		</div>
+	</div>
 </div>
-</div>
-<script src="%THEME%/mobile/static/swiper/swiper.js"></script>
+<script src="%THEME%/mobile/static/swiper/swiper.js"></script> 
 <script type="text/javascript">
 $(document).ready(function(){
      var WW = $(".pding").width();
@@ -77,5 +78,5 @@ $(window).resize(function(){
     });
 });
 });
-</script>
-<{include file="mobile/block/footer.html"}>
+</script> 
+<{include file="mobile/block/footer.html"}> 

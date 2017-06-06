@@ -2,6 +2,9 @@
 <div class="ucenter_t">
     <ul>
         <li><a href="<{link ctl='ucenter/company:info'}>">公司设置</a></li>
+        <{if $CONFIG.domain.company}>
+        <li><a href="<{link ctl='ucenter/company:domain'}>">个性域名</a></li>
+        <{/if}>
         <li><a href="<{link ctl='ucenter/company/banner:index'}>">轮转广告</a></li>
         <li class="on"><a href="<{link ctl='ucenter/company:skin'}>">公司模板</a></li>  
     </ul>

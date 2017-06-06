@@ -1,0 +1,61 @@
+<{include file="block/header.html"}>
+<div class="mainwd">
+	<div class="priceBanner"><img src="<{$pager.theme}>/default/static/images/pricead.jpg" /></div>
+	<div class="priceForm">
+		<h1><{$CONFIG.site.title}>在线报价</h1>
+		<form id="index-book-form">
+		<input type="hidden" name="data[from]" value="TBJ" /> 
+			<div class="fmDiv"><big>建筑面积：</big><input type="text" id='mj' class="text area" name="data[mj]" value=""/>
+			<span style="margin-left:80px;"><big>装修风格：</big>
+			<select name="data[style_id]"  class="text">
+				<{foreach from=$setting[$type['style']] item=item key=key}>
+                        <option <{if $detail.style_id == $key}> selected="selected" <{/if}> value="<{$key}>"><{$item}></option>
+                <{/foreach}>
+			</select></span>
+			</div>
+			<div class="fmDiv"><big>小区名称：</big><input type="text" id='home_name' class="text area" name="data[home_name]" value=""/>
+			<span style="margin-left:80px;"><big>装修档次:</big><input type="radio" class="radio" name="data[level]" value="1"/><i>简装</i><input type="radio" class="radio" name="data[level]" value="2"/><i>精装</i><input type="radio" class="radio" name="data[level]" value="3"/><i>豪装</i></span>
+			</div>
+			<div class="fmDiv"><big class="lt">户型结构：</big>
+			<select name="data[house_type_id]"  class="text">
+				<{foreach from=$setting[$type['house_type']] item=item key=key}>
+                     <option <{if $detail.house_type_id == $key}> selected="selected" <{/if}> value="<{$key}>"><{$item}></option>
+                <{/foreach}>
+			</select>
+			<span style="margin-left:80px;"><big>装修城市：</big><{widget id="data/region" province_id=$detail.province_id city_id=$detail.city_id area_id=$detail.area_id class="text cy"}></span>
+			<a id="price_reload" onclick="getResult()" class="btn btn_sub_big rt" <{if $is_show!=1}> style="display:none;" <{/if}>>重新估价</a>		
+			<a id="price_first" href="<{link ctl='price:yuyue' http='ajax'}>" mini-load="手机验证" mini-form="#index-book-form" mini-width="450" class="btn btn_sub_big rt" <{if $is_show==1}>style="display:none;" <{/if}>>估算报价</a>
+			</div>			
+		</form>
+	</div>
+	<div class="priceAdv">
+	<{adv name="网站在线报价页通栏广告" city_id=$request.city_id}>
+	</div>
+	<div id='show_result'></div>
+</div>
+<script>
+//商铺商品数量加减
+$("[quantity]").click(function(){
+var quantity = parseInt($("#cart_product_num").val(), 10);
+if($(this).attr("quantity") == '+'){
+    quantity += 1;
+}else{
+    quantity -= 1;
+}
+if(quantity < 1){
+    quantity = 1;
+}
+$("#cart_product_num").val(quantity);
+});
+function getResult(){
+	var mj = $('#mj').val();
+	if(mj){
+		Widget.MsgBox.load("正在为您计算中...")
+		var link = "<{link ctl='price:get_price' arg0='#mj'}>";
+		$("#show_result").load(link.replace("#mj", mj), function(){Widget.MsgBox.hide();});
+	}else{
+		Widget.MsgBox.load("请填写建筑面积");
+	}
+}
+</script> 
+<{include file="block/footer.html"}>

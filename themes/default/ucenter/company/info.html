@@ -1,7 +1,10 @@
 <{include file="ucenter/block/header.html"}>
 <div class="ucenter_t">
     <ul>
-        <li class="on"><a href="<{link ctl='ucenter/company:info'}>">公司设置</a></li>        
+        <li class="on"><a href="<{link ctl='ucenter/company:info'}>">公司设置</a></li>
+        <{if $CONFIG.domain.company}>
+        <li><a href="<{link ctl='ucenter/company:domain'}>">个性域名</a></li>
+        <{/if}>        
         <li><a href="<{link ctl='ucenter/company/banner:index'}>">轮转广告</a></li>
         <li><a href="<{link ctl='ucenter/company:skin'}>">公司模板</a></li>  
     </ul>
@@ -24,17 +27,20 @@
     <{else}>
     <tr>
         <th class="w-100"><span class="red">*</span>地区：</th>
-        <td><{widget id="data/region" city_id=$request.city_id class="select w-150"}></td>
+        <td><{widget id="data/region" city_id=$MEMBER.city_id|default:$request.city_id class="select w-150"}></td>
     </tr>
     <{/if}>
-    <tr><th><span class="red">*</span>长方形LOGO：</th>
+    
+    <tr><th>公司banner：</th><td><input type="file" name="data[banner]" class="input w-300" />
+ <{if $company.banner}><img src="<{$pager.img}>/<{$company.banner}>" photo="<{$pager.img}>/<{$company.banner}>" class="wh-30" style="vertical-align:middle;display:inline;"/><{/if}></td></tr>
+   <tr><th>长方形LOGO：</th>
         <td>
             <input type="file" name="data[logo]" class="input w-300" style="vertical-align:middle;display:inline;"/>
             <{if $company.logo}><img src="<{$pager.img}>/<{$company.logo}>" photo="<{$pager.img}>/<{$company.logo}>" class="wh-30" style="vertical-align:middle;display:inline;"/><{/if}>
             <span class="tip-comment">尺寸大小：<{$CONFIG.attach.company.logo|default:'200X100'}></span>
         </td>
     </tr>
-    <tr><th><span class="red">*</span>正方形LOGO：</th>
+    <tr><th>正方形LOGO：</th>
         <td>
             <input type="file" name="data[thumb]" class="input w-300" style="vertical-align:middle;display:inline;"/>
             <{if $company.thumb}><img src="<{$pager.img}>/<{$company.thumb}>" photo="<{$pager.img}>/<{$company.thumb}>" class="wh-30" style="vertical-align:middle;display:inline;"/><{/if}>
@@ -56,7 +62,7 @@
     <{widget id="attr/form" from="zx:company" value=$attr_values}>
     
 	<tr><th>视频地址：</th><td><input type="text" name="data[video]" value="<{$company.video|default:''}>" class="input w-500"/></td></tr>
-    <tr><th><span class="red">*</span>公司介绍：</th><td><textarea name="fields[info]" kindeditor="simple" style="width:550px;height:350px;"><{$company.info}></textarea></td></tr>
+    <tr><th>公司简介：</th><td><textarea name="fields[info]" kindeditor="simple" style="width:550px;height:350px;"><{$company.info}></textarea></td></tr>
     <tr><th></th><td><input type="submit" value="保存" class="green_btn" /></td></tr>
 </table>
 </form>

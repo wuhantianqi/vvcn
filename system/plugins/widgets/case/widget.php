@@ -3,7 +3,7 @@
  * Copy Right IJH.CC
  * Each engineer has a duty to keep the code elegant
  * Author @shzhrui<Anhuike@gmail.com>
- * $Id: widget.php 10504 2015-05-27 02:24:20Z wanglei $
+ * $Id: widget.php 6097 2014-08-15 12:55:34Z youyi $
  */
 
 class Widget_Case extends Model
@@ -61,35 +61,14 @@ class Widget_Case extends Model
         }
 		shuffle($url);
         $data['url'] = $url;
-        $params['tpl'] = $params['tpl'] ? $params['tpl'] :  'cate.html';
+        $params['tpl'] = $params['tpl'] ? $params['tpl'] :  'cate.html'; 
         return $data;
 	}
 
-	public function attr(&$params)
+	public function caseindex()
 	{
-		$attr_values = K::M('data/attr')->attrs_by_from('zx:case');
-		$items = K::M('case/attr')->items(array('case_id'=>$params['case_id']));
-		foreach($items as $k => $v){
-			$data[] = $attr_values[$v['attr_id']]["values"][$v['attr_value_id']]["title"];
-		}
+		$data = K::M('data/attr')->attrs_by_from('zx:case');
 		return $data;
-	}
-
-	public function cate_list (&$params)
-    {
-		$attr_values = K::M('data/attr')->attrs_by_from('zx:case');
-		$attr_keys = array();
-        foreach ($attr_values as $key => $value) {
-            $http_key['attr' . $key] = 0;
-        }
-        
-        foreach ($attr_values as $key => $value) {
-            foreach ($value['values'] as $k => $v) {
-                $attr_values[$key]['values'][$k]['link'] = K::M('helper/link')->mklink('case:album', array_merge($http_key, array('attr' . $key => $k)), array(), true);
-            }
-        }
-        $data = $attr_values;
-        return $data;
 	}
 		
 	

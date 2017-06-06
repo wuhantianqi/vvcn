@@ -2,14 +2,14 @@
 /**
  * Copy Right IJH.CC
  * Each engineer has a duty to keep the code elegant
- * $Id: mail.mdl.php 9378 2015-03-27 02:07:36Z youyi $
+ * $Id$
  */
 
 Import::L('phpmailer/class.phpmailer.php');
 class Mdl_Helper_Mail extends PHPMailer
 {
     
-    protected $from_mail = 'anhuike@qq.com';
+    protected $from_mail = 'ijianghu@qq.com';
     protected $from_name = '合肥江湖信息科技';
     
     protected  $_datetime = null;
@@ -36,8 +36,10 @@ class Mdl_Helper_Mail extends PHPMailer
         }
         $this->from_mail = $cfg['sender'];
         $this->from_name = $site['title'];
-  
-        $this->_adminmail = $cfg['email'];
+        $this->_adminmail = $system->request['city']['mail'];
+        if(empty($this->_adminmail)){
+            $this->_adminmail = $cfg['email'];
+        }
         $this->_datetime = date('Y-m-d H:i:s',__TIME);
         
         $this->SetFrom($this->from_mail, $this->from_name); 

@@ -1,0 +1,175 @@
+<{include file="block/header.html"}>
+<div class="mb20"></div>
+<div class="mainwd">
+	<div class="bidding_box">
+		<div class="bidding_box_lt lt">
+			<h3>维修招标</h3>
+			<form action="<{link ctl='truste:save' http='base'}>" mini-form='tenders_tzx' id="tenders-tzx" method="post">
+				<table>
+					<tr>
+						<th> 选择您的需求类别： </th>
+						<td>
+							<div class="box">
+								<select class="text"  id='cate_select' onchange="change(this.value)" >
+									<option value="cat_all" id='cat_all' selected="selected">--全部--</option>
+									<{foreach $cates as $item}> <{if $item.parent_id == 0}>
+									<option value='<{$item.cat_id}>'><{$item.title}></option>
+									<{/if}> <{/foreach}>
+								</select>
+								<{foreach $cates as $item}>
+								<{if $item.parent_id == 0}>
+								<select class="text" id = '<{$item.cat_id}>' onchange = "changes(this.value)" style="display:none">
+									<option  value="parent_all">--全部--</option>
+									<{foreach $cates as $it2}> <{if $it2.parent_id == $item.cat_id}>
+									<option  value='<{$it2.cat_id}>'><{$it2.title}></option>
+									<{/if}> <{/foreach}>
+								</select>
+								<{/if}>
+								<{/foreach}> </div>
+							<input type="hidden" id='cat_value' name="data[cate_id]" value="0" />
+						</td>
+					</tr>
+					<tr>
+						<th>用一句话来描述您的需求：</th>
+						<td>
+							<div class="box">
+								<input type="text" name="data[title]" class="text" />
+							</div>
+						</td>
+					</tr>
+					<tr>
+						<th>请描述您的具体需求：</th>
+						<td>
+							<div class="box">
+								<textarea name="data[comment]"  class="text"></textarea>
+							</div>
+						</td>
+					</tr>
+					<tr>
+						<th> 上传照片： </th>
+						<td>
+							<div class="box">
+								<label class="filelab">
+									<input type="file" class="file" name="photo">
+									<span class="filespan"></span></label>
+								<p>必须使用能够清晰展示个人维修问题的图片，图片请小于2M。</p>
+							</div>
+						</td>
+					</tr>
+					<tr>
+						<th>请输入您的需求的预算金额：</th>
+						<td>
+							<div class="box">
+								<input type="text" name="data[budget]" class="text" />
+							</div>
+						</td>
+					</tr>
+					<tr>
+						<th> 联系人： </th>
+						<td>
+							<div class="box">
+								<input name="data[contact]" type="text" class="text" />
+							</div>
+						</td>
+					</tr>
+					<tr>
+						<th> 联系电话： </th>
+						<td>
+							<div class="box">
+								<input name="data[mobile]" type="text" class="text" />
+							</div>
+						</td>
+					</tr>
+					<tr>
+						<th> 联系地址： </th>
+						<td>
+							<div class="box"> <{widget id="data/region" city_id=$request.city_id class="text short"}> </div>
+						</td>
+					</tr>
+					<tr>
+						<th> 详细地址： </th>
+						<td>
+							<div class="box">
+								<input type="text" name="data[addr]" class="text"   />
+							</div>
+						</td>
+					</tr>
+					<tr>
+						<th> 托管服务费： </th>
+						<td>
+							<div class="box">
+								<input type="text" name="data[truste]" class="text"   />
+								元 </div>
+						</td>
+					</tr>
+					<tr>
+						<th></th>
+						<td>
+							<div class="box">
+								<input type="submit" class="btn_sub_big btn" value="发布需求">
+							</div>
+						</td>
+					</tr>
+				</table>
+			</form>
+		</div>
+		<div class="bidding_box_rt rt">
+			<h3>马上发布，马上解决</h3>
+			<dl class="tasksideinfo">
+				<dd class="task1"> <span>需求发布后</span>
+					<p>一个小时内收到服务商响应</p>
+				</dd>
+				<dd class="task2"> <span>每个需求</span>
+					<p>平均有2个以上服务商参与</p>
+				</dd>
+				<dd class="task3"> <span>95%以上的需求</span>
+					<p>都得到了圆满解决</p>
+				</dd>
+			</dl>
+			<h3>快速 便捷 省钱 安全</h3>
+			<dl class="taskviewsideinfo">
+				<dd class="task11"> <span>快&emsp;速</span>
+					<p>需求一旦发布，商家快速响应。</p>
+				</dd>
+				<dd class="task12"> <span>便&emsp;捷</span>
+					<p>敲几个键，维修安装全搞定。</p>
+				</dd>
+				<dd class="task13"> <span>实&emsp;惠</span>
+					<p>合理的价格，高标准的服务。</p>
+				</dd>
+				<dd class="task14"> <span>安&emsp;全</span>
+					<p>平台担保服务质量。</p>
+				</dd>
+			</dl>
+		</div>
+		<div class="cl"></div>
+	</div>
+</div>
+<script>
+	$(document).ready(function(){
+	   $("#cat_all").attr("selected",true);
+	   $('#cat_value').val(0);
+	});
+	
+	function change(cat_id){
+		<{foreach $cates as $item}>
+			<{if $item.parent_id == 0}>
+				   if(cat_id == <{$item.cat_id}>){
+						 $("#"+<{$item.cat_id}>).show();  
+				   }else{
+						 $("#"+<{$item.cat_id}>).hide();  
+				   }
+			<{/if}>
+		<{/foreach}>
+		$(".parent_all").attr("selected",true);
+		$('#cat_value').val(cat_id);
+	}
+	
+	function changes(val){
+		if(isNaN(val)){
+			val = 	$('#cate_select option:selected').val();
+		}
+		$('#cat_value').val(val);
+	}
+	</script> 
+<{include file="block/footer.html"}> 

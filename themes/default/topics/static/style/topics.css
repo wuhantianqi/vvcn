@@ -1,0 +1,106 @@
+/*装修贷款专题样式*/
+.loan_banner { width:100%; margin:0px auto; background:url(../images/loan_banner.jpg) 50% 50% no-repeat; height:550px; overflow:hidden;}
+.loan_top_text{ width:600px; height:200px; margin:285px 0px 0px 135px; position:relative;}
+.loan_top_text p{ font-size:36px; color:#fff; line-height:52px;}
+.loan_top_text a{ display:inline-block; width:120px; height:40px; position:absolute; right:17px;top:125px;}
+
+.loan_content{ width:100%; background:#ffe29c;}
+.loan_content h1{ color:#b55d02; font-size:30px; font-weight:bold; line-height:80px;}
+.loan_youshi{ padding-bottom:50px; overflow:hidden;}
+.loan_youshi li{ float:left; width:185px; height:95px; background:url(../images/loan_ico1.png) no-repeat; margin-right:18px; color:#fff; padding:90px 0px 0px 0px; text-align:center;}
+.loan_youshi li:last-child{ margin-right:0px;}
+.loan_youshi li h2{ font-size:30px; font-weight:bold; color:#fff; line-height:50px;}
+.loan_youshi li p{ font-size:18px;}
+.loan_youshi li.list1{ background-position:0px 0px;}
+.loan_youshi li.list2{ background-position:-186px 0px;}
+.loan_youshi li.list3{ background-position:-372px 0px;}
+.loan_youshi li.list4{ background-position:-558px 0px;}
+.loan_youshi li.list5{ background-position:-754px 0px;}
+
+.loan_liucheng{ width:910px; height:120px; margin:0px 45px; background:url(../images/loan_ico2.png) no-repeat; padding-bottom:50px;}
+.loan_liucheng li{ width:120px; float:left; text-align:center; margin-right:142px;}
+.loan_liucheng li:last-child{ margin-right:0px;} 
+.loan_liucheng li h2{ font-size:48px; font-weight:bold; color:#fff; padding-top:10px;}
+.loan_liucheng li p{ font-size:18px; color:#fff; font-weight:bold; padding-top:10px;}
+.loan_question{ padding-bottom:20px;}
+.loan_ico{ display:inline-block; width:25px; height:25px; background:url(../images/loan_ico.png) no-repeat; margin-right:5px; vertical-align:middle;}
+.loan_qu_ico{ background-position:0px 0px;}
+.loan_an_ico{ background-position:0px -35px;}
+.loan_question li{ margin-bottom:30px;}
+.loan_question li h2{ color:#b55d02; font-weight:bold; font-size:18px; margin-bottom:8px;}
+.loan_question li p{ color:#b55d02; font-size:16px;}
+.loan_apply{ width:100%;background:#f0f0f0; padding:40px 0px;}
+
+.loan_apply_text{ padding:25px 25px 0px 25px;}
+.loan_apply_text table{ width:100%;}
+.loan_apply_text table input.text,.loan_apply_text table textarea.text{ width:98%; height:28px; line-height:28px;}
+.loan_apply_text table select.text{ height:34px; line-height:34px; width:40%; float:left; margin-right:3%;}
+.loan_apply_text table select.full{width:99%;}
+.loan_apply_text table td.city select{ height:34px; line-height:34px; width:40%; float:left; margin-right:3%;}
+.loan_apply_text table tr td{ vertical-align:top;}
+.loan_apply_text table tr{height:50px;}
+.loan_apply_text table tr th{ color:#fff; font-size:16px; vertical-align:top;}
+.loan_apply_text table textarea.text{ height:75px; overflow:hidden;}
+.loan_apply_text table input.btn{ width:40%; background:#e3a102; border-radius:0px; height:42px; line-height:42px; border:none; margin:10px auto; font-size:18px;}
+.loan_apply_text table input.yanz{ width:175px;}
+
+.zxd_calculator_form {width: 330px;}
+.zxd_calculator_form h3 {margin-bottom: 7px;font-size: 22px;color: #FF433F;font-weight: normal;}
+.zxd_calculator_form h3 .fs14{font-size: 14px;}
+.zxd_calculator_form li {float: left;width: 330px;height: 64px;}
+.zxd_calculator_form li span {float: left;display: block;width: 75px;font-size: 14px;line-height: 34px;color: #333;}
+.zxd_calculator_form li .element {position: relative;float: left;width: 255px;}
+.zxd_calculator_form li em {position: absolute;top: 8px;right: 10px;color: #333; font-style:normal;}
+.zxd_calculator_form li input {width: 230px;height: 32px;padding: 0 10px;line-height: 32px;color: #333;border: 1px solid #ccc;}
+.zxd_calculator_form li select {width: 255px;height: 34px;padding-left: 10px;line-height: 34px;color: #333;border: 1px solid #ccc;}
+.zxd_calculator_result .zxd_calculator_hd .btn_f25618{width: 280px; margin-top:30px;height: 40px;display: none;background: #f25618;line-height: 40px;text-align: center;font-size: 14px;font-weight: bold;color: #fff;}
+.ielt9 .zxd_calculator_form li select {padding-top: 5px;padding-bottom: 5px;}
+.ielt8 .zxd_calculator_form li select {margin-top: 6px;height: 24px;}
+.zxd_calculator_form li a {display: block;width: 255px;height: 40px;margin-left: 75px;font-size: 14px;line-height: 40px;color: #fff;text-align: center;background-color: #FF433F;}
+.zxd_calculator_result { position:relative;width: 630px;height: 215px;background-color: #fff;}
+.zxd_calculator_result .zxd_calculator_hd {width: 320px; height: 62px;line-height: 62px; margin:80px auto 0 30px;    font-size: 16px;    color: #333; }
+.zxd_calculator_result2 .zxd_calculator_hd {width: 356px;}
+.zxd_calculator_result .zxd_calculator_hd span {display: inline-block;vertical-align: middle;margin-top: -4px;font-size: 60px;font-family: "Arial";*display: inline;*zoom: 1;*margin-top: 0;}
+.zxd_calculator_result .zxd_calculator_bd {  position: relative;border-left: 1px solid #e3e3e3;padding-left: 40px;width: 205px;margin-top: 32px;font-size: 16px;line-height: 50px;color: #33}
+.zxd_calculator_result2 .zxd_calculator_bd {margin-left: 0;width: 235px;}
+.zxd_calculator_result .zxd_calculator_hd span,
+.zxd_calculator_result .zxd_calculator_bd span {color: #FF433F;}
+.zxd_calculator_result .zxd_calculator_bd i {font-size: 12px;color: #666;font-style: normal;padding-left: 5px;text-decoration:line-through;display: none;}
+.zxd_calculator_result .zxd_calculator_bd p {position: absolute;top: 121px;left: 34px;color: #f25618;font-size: 12px;}
+/*装修贷款专题样式*/
+
+/*申请资料样式*/
+.topics_date{ margin:30px 0px;}
+.topics_date .dateTit h2{font-size:22px; border-bottom: 1px solid #e6e6e6; margin-bottom:80px; line-height:40px;}
+.topics_date .date_step{ margin-bottom:30px;}
+.topics_date .date_step span{ font-size:22px;}
+
+.date_cont {border:1px solid #ddd; padding:60px 55px 120px;overflow:hidden; border-radius:3px; *zoom:1;}
+.date_cont .btnbar{ text-align:center;}
+.date_cont .btnbar .btn_fanhui{ background:#fff; border:1px solid #ccc; color:#333;}
+.date_cont .btnbar a{ margin:0px 10px;}
+.date_cont .info dl {height:34px; margin-bottom:20px;}
+.date_cont .info dt, .date_cont .info dd {height:32px; line-height:32px; font-size:16px; float:left; display:inline; position:relative;}
+.date_cont .info dt {width:300px; margin-right:10px; text-align:right;}
+.date_cont .info dd {width:500px;}
+.date_cont .info dd select{ height:34px; line-height:34px;}
+.date_cont .info dd .normal{ width:260px;}
+.date_cont .info dd select.normal{ width:265px;}
+.date_cont .info dd span {padding:0 10px;}
+.date_cont .info dt em, .date_cont .job_info dt em, .contact_box dt em { margin-right:5px;font-style: normal;}
+.date_cont h3 {height:34px; line-height:34px; padding-left:10px; font-size:18px; color:#333; border-bottom:1px solid #e6e6e6; position:relative;   margin: 26px 0 60px;clear:both;}
+.date_cont .info dd .hqyz{ float:left; background:#f36f20; width:160px; text-align:center; color:#fff; margin-left:10px;}
+.date_cont .info dd .hqyz a{ display:block; color:#fff;}
+
+.date_cont .picpic{ font-size:14px;  padding-left: 150px; margin-top: -30px;}
+.date_cont .picpic .picUl ul li{float:left; margin-right:18px;}
+.date_cont .picpic .picUl ul{ margin-top:30px;}
+.date_cont .picpic .picUl ul a{width:152px; height:102px;  display: table-cell;   vertical-align: middle;}
+.date_cont .picpic .picUl .imgPlus{  border: 1px solid #f0f0f0;  text-align: center; width: 152px; height: 110px;  margin: 0px auto;}
+.date_cont .picpic .picUl .upimg{ width:154px; margin-top:5px; height:35px; line-height:35px; overflow:hidden; position:relative;}
+.date_cont .picpic .picUl .inFile{position: absolute; left: 0px; top: 0px; font-family: Arial; font-size: 118px; margin: 0px; padding: 0px; cursor: pointer; opacity: 0;}
+.date_cont .picpic .picUl .fileBtn{ background:#00AF63; color:#fff; text-align:center;}
+.date_cont .picpic .picUl { display:inline-block;  position: relative; margin-bottom:20px;}
+.date_cont .picpic .picUl li.text{ margin-left:44px;}
+/*申请资料样式*/
+

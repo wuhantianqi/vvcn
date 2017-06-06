@@ -1,19 +1,16 @@
-</div>
-<div class="footer">
-    <div class="footer_cont">
-        <p><font class="on">触屏版</font><font class="bgray">|</font><a href="<{link ctl='mobile/index:force' arg0=web}>" >电脑版</a></p>
-        <p><font class="f12">手机版<{$CONFIG.site.title}></font><font class="f12"><{$CONFIG.site.icp}></font></p>
-    </div>
-</div>
+
 <{include file="mobile/block/sfooter.html"}>
-<{if substr($request.ctl, 0, 14) != 'mobile/ucenter' && !$pager['tender_hide'] && substr($request.ctl, 0, 11) != 'mobile/shop'}>
-<div class="h40"></div>
-<div class="tender">
-    <div class="tender_cont">
-        <h2 class="lt"><span class="app_ico tel_ico"></span><b><a href="tel:<{$CONFIG.site.phone}>"><{$CONFIG.site.phone}></a></b></h2>
-        <a href="<{link ctl='mobile/tenders'}>" class="rt mainbtn btn">立即招标</a>
+ <div class="footer">
+        <p class="ft14"><font class="maincl">触屏版</font><font class="black9">|</font><a href="<{link ctl='mobile/index:force' arg0=web}>">电脑版</a></p>
+        <p class="black9"><font>手机版<{$CONFIG.site.title}></font><font><{$CONFIG.site.icp}></font></p>
     </div>
+    <!--footer底部结束-->
+</section>
+<!--底部浮动招标开始-->
+<div class="tender">
+    <h2 class="fl"><a href="tel:<{$CONFIG.site.phone}>"><i id="telIco"></i><{$CONFIG.site.phone}></a></h2>
+    <a href="<{link ctl='mobile/tenders'}>" class="fr btn">立即招标</a>
 </div>
-<{/if}>
+<!--底部浮动招标结束-->
 </body>
 </html>

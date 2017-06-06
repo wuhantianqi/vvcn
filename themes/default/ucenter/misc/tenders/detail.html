@@ -13,15 +13,15 @@
         <td colspan="5"><{$detail.title|default:'--'}></td>
     </tr>        
     <tr>
-        <th>ID：</th><td><{$detail.uid}></td>
-        <th>会员：</th><td class="w-200"><{if $detail.uid}><{$member.uname}>(UID:<{$detail.uid}>)<{else}>--<{/if}></td>        
+        <th>ID：</th><td><{$detail.uid|default:'--'}></td>
+        <th>会员：</th><td class="w-200"><{$member.uname|default:'--'}></td>        
     </tr>
     </tr>
-    <tr><th>装修时间：</th><td><{$detail.zx_time|default:'--'}></td><th>售价/金币：</th><td><{$detail.gold}></td></tr>
+    <tr><th>装修时间：</th><td><{$detail.zx_time|format:'Y-m-d'|default:'--'}></td><th>售价/金币：</th><td><{$detail.gold}></td></tr>
     <tr><th>最大投标数：</th><td><{$detail.max_look}></td><th>已投标数：</th><td><{$detail.looks}></td></tr>
     <tr>
         <th>发布时间：</th><td><{$detail.dateline|format}></td>
-        <th>发布IP：</th><td><b class="red"><{$item.clientip|cutstr:6:"******"}></b>(<{$item.clientip|iplocal}>)</td>        
+        <th>发布IP：</th><td><b class="red"><{$detail.clientip|cutstr:6:"******"}></b>(<{$detail.clientip|iplocal}>)</td>        
     </tr>
     <tr><th>联系人：</th><td><{$detail.contact|default:'--'}></td>
         <th>状态：</th><td><{if $detail.sign_uid}><b>已签单</b><{else}><b class="blue">招标中</b><{/if}></td>
@@ -33,6 +33,7 @@
     </tr>
     <tr><th>电话：</th>
         <td colspan="5">
+        	<{$pager.audit_tenders}>
             <{if $detail.gold <= 0 && $group.priv.tenders_look > 0}><{$detail.mobile}><{elseif $detail.looked}><{$detail.mobile}> &nbsp;&nbsp;[<strong class="red">已购买</strong>]<{else}><b class="red"><{$detail.mobile|cutstr:6:'* * * * * *'}></b>&nbsp;&nbsp;&nbsp;
             <{if $group.priv.tenders_look <= 0}>
             <input type="button" class="pbtn" value="您没有权限投标" disabled="disabled"/>
@@ -47,7 +48,7 @@
     <tr><th>招标类型：</th><td><{$detail.type_title|default:'--'}></td><th>喜欢风格：</th><td><{$detail.style_title|default:'--'}></td></tr>
     <tr><th>预算范围：</th><td><{$detail.budget_title|default:'--'}></td><th>服务需求：</th><td><{$detail.service_title|default:'--'}></td></tr>
     <tr><th>空间户型：</th><td><{$detail.house_type_title|default:'--'}></td><th>装修方式：</th><td><{$detail.way_title|default:'--'}></td></tr>
-    <{if $detail.huxing}><tr><th>户型图：</th><td colspan="10"><a href="<{$pager.img}>/<{$detail.huxing}>" target="_blank"><img src="<{$pager.img}>/<{$detail.huxing}>" photo="<{$pager.img}>/<{$detail.huxing}>" class="wh-30" style="vertical-align:middle;display:inline;"/></a></td></tr><{/if}>
+    <{if $detail.huxing}><tr><th>户型图：</th><td colspan="10"><a href="<{$pager.img}>/<{$detail.huxing}>" target="_blank"><img src="<{$pager.img}>/<{$detail.huxing}>" photo="<{$pager.img}>/<{$detail.huxing}>" class="wh-30" style="vertical-align:middle;display:inline;"/></a></td></tr><{/if}>    
     <{widget id="attr/info" from=$detail.from_attr_key value=$detail.attrvalues}>         
     <tr><th>业主要求：</th><td colspan="10"><{$detail.comment|default:'--'}></td></tr>
     <tr><td colspan="10" style="height:5px;"></td></tr>

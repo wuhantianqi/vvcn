@@ -46,12 +46,6 @@ Widget.Dialog.Load = function(link,title,width,handler){
 	});},close:function(event,ui){
 		$(this).dialog("destroy");
 	}},opt));
-	/*
-	$.get(link,{MINI:"load"},function(content){
-		var params = $.extend({create:function(){Widget.MsgBox.hide();},close:function(event,ui){$(this).dialog("destroy");}},opt);
-		console.log(params);
-		$('<div title="'+title+'">'+content+'</div>').dialog(params);
-	});*/
 };
 window.__MINI_CONFIRM = window.__MINI_CONFIRM || function(elm){
 	var cfm = null;

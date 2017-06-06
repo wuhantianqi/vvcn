@@ -1,0 +1,63 @@
+<{assign var="tpl_page_title" value="我的地址"}>
+<{include file="mobile/block/header.html"}>
+<header class="control"> <i class="left"><a href="<{if $pager.backurl}><{$pager.backurl}><{else}><{link ctl='mobile/index'}><{/if}>" id="gobackIco"></a></i>
+	<div class="title">我的地址</div>
+	<i class="right"></i> </header>
+<section id="tb" class="page_center_box">
+	<div class="mb10 center_tenders">
+		<div class="add_moren"> <{foreach $items as $item}>
+			<{if $item.default == '1'}>
+			<p class="graycl">默认地址</p>
+			<{/if}> <a href="<{link ctl='mobile/ucenter/order:address_detail' arg0=$item.addr_id}>">
+			<div class="add_jia">
+				<p>联系人：<{$item.contact}></p>
+				<p>电话：<{$item.phone}></p>
+				<p>收货地址：<{$item.title}>&nbsp;&nbsp;<{$item.addr}></p>
+			</div>
+			</a> <{/foreach}>
+			<div class="add_jia">
+				<p><a onclick="create()" class="tj">添加新地址</a></p>
+			</div>
+		</div>
+	</div>
+</section>
+<section id="create" class="page_center_box" style="display:none;">
+<form id="data-form">
+<div class="loginInfor">
+	<div class="loginIf_list">
+		<div class="fl ifIco"><i class="icco icco1"></i> </div>
+		<div class="ifInput">
+			<input type="text" name='data[contact]' value='<{$data.contact}>' placeholder="请输入收件人">
+		</div>
+		<div class="clear"></div>
+	</div>
+</div>
+<div class="loginInfor">
+	<div class="loginIf_list">
+		<div class="fl ifIco"><i class="icco icco2"></i> </div>
+		<div class="ifInput">
+			<input type="text" name='data[phone]' value='<{$data.phone}>' placeholder="请输入联系电话">
+		</div>
+		<div class="clear"></div>
+	</div>
+</div>
+<div class="loginInfor">
+	<div class="loginIf_list">
+		<div class="fl ifIco"><i class="icco icco4"></i> </div>
+		<div class="ifInput">
+			<input type="text" name='data[addr]' value='<{$data.addr}>' placeholder="请输入详细地址">
+		</div>
+		<div class="clear"></div>
+	</div>
+</div>
+<div class="yuee_btn"> <a id='button'  class="btn" action="<{link ctl='ucenter/order:create_addr'}>" mini-submit="#data-form">确认添加</a></div>
+</section>
+<script>
+function create(){
+	$("#create").css('display','block');
+	$("#tb").css('display','none');
+	
+}
+</script>
+</body>
+</html>

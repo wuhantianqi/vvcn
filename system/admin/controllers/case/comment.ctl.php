@@ -3,7 +3,7 @@
 /**
  * Copy Right IJH.CC
  * Each engineer has a duty to keep the code elegant
- * $Id: comment.ctl.php 9378 2015-03-27 02:07:36Z youyi $
+ * $Id: comment.ctl.php 2335 2013-12-18 17:15:56Z youyi $
  */
 if (!defined('__CORE_DIR')) {
     exit("Access Denied");
@@ -31,7 +31,9 @@ class Ctl_Case_Comment extends Ctl {
                 $filter['audit'] = $SO['audit'];
             }
         }
-		
+		if(CITY_ID){
+            $filter['city_id'] = CITY_ID;
+        }
         if ($items = K::M('case/comment')->items($filter, null, $page, $limit, $count)) {
             $uids = $caseids = array();
             foreach ($items as $k => $v) {
@@ -122,7 +124,9 @@ class Ctl_Case_Comment extends Ctl {
             if($items = K::M('case/comment')->items_by_ids($ids)){
                 $aids  = array();
                 foreach($items as $v){
-                   
+                    if(CITY_ID && CITY_ID != $v['city_id']){
+                        continue;
+                    }
                     $aids[$v['comment_id']] = $v['comment_id']; 
                 }
                 if($aids && K::M('case/comment')->batch($ids, array('audit' => 1))){
@@ -149,7 +153,9 @@ class Ctl_Case_Comment extends Ctl {
             if($items = K::M('case/comment')->items_by_ids($ids)){
                 $aids  = array();
                 foreach($items as $v){
-                    
+                    if(CITY_ID && CITY_ID != $v['city_id']){
+                        continue;
+                    }
                     $aids[$v['comment_id']] = $v['comment_id']; 
                 }
                 if($aids && K::M('case/comment')->delete($aids)){

@@ -2,7 +2,7 @@
 /**
  * Copy Right IJH.CC
  * Each engineer has a duty to keep the code elegant
- * $Id: coupon.ctl.php 9372 2015-03-26 06:32:36Z youyi $
+ * $Id$
  */
 
 if(!defined('__CORE_DIR')){
@@ -31,6 +31,7 @@ class Ctl_Mobile_Ucenter_Coupon extends Ctl_Mobile_Ucenter
         }
         $pager['backurl'] = $this->mklink('mobile/ucenter');
 		$this->pagedata['pager'] = $pager;
-        $this->tmpl = 'mobile/ucenter/sign/coupon_list.html';
+        $this->tmpl = 'mobile/ucent	er/sign/coupon_list.html';
 	}
 }
+?>

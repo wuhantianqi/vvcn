@@ -3,7 +3,7 @@
  * Copy Right IJH.CC
  * Each engineer has a duty to keep the code elegant
  * Author @shzhrui<Anhuike@gmail.com>
- * $Id: item.mdl.php 9378 2015-03-27 02:07:36Z youyi $
+ * $Id: item.mdl.php 6081 2014-08-13 15:29:49Z youyi $
  */
 
 if(!defined('__CORE_DIR')){

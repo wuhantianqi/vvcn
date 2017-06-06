@@ -12,7 +12,7 @@
 	<div class="main_content lt">
 		<div class="main_activity_choose hoverno mb10">
      		<{foreach $cate_list as $item}>
-            <a title="<{$item.title}>" href="<{link ctl='activity:items' arg0=$item.cat_id arg1=1}>" <{if $pager.cat_id == $item.cat_id}> class="current"<{/if}> ><{$item.title}><span class="sort_ico ico_list"></span></a>
+            <a title="<{$item.title}>" href="<{link ctl='activity:items' arg0=$item.cat_id arg1=1}>"  <{if $pager.cat_id == $item.cat_id}> class="current"<{/if}> ><{$item.title}><span class="sort_ico     	  ico_list"></span></a>
             <{/foreach}>
 		</div>
 		<div class="area mb20">
@@ -41,34 +41,40 @@
 	</div>
 	<div class="side_content rt">
 		<{widget id="tenders/fast" title="免费装修设计" from="TSJ"}>
-		<div class="mb10 area">
-            <h3 class="side_tit">装修公司排行榜</h3>
-            <ul class="pding paihang">
-                <{calldata mdl="company/company"  city_id=$request.city_id limit=8}>
-                <li>
-                    <span class="lt"><font class="paihang_num<{if $iteration<=3}> ph_num_cl<{/if}>"><{$iteration}></font><a href="<{$item.company_url}>"><{$item.name|cutstr:35}></a>
-                    </span>
-                    <span class="rt">已投标：<font class="fontcl2"><{$item.tenders_num}></font></span>
-                </li>
-                <{/calldata}>
-            </ul>
-        </div>
         <div class="mb10 area">
-            <h3 class="side_tit">设计师排行榜</h3>
-            <ul class="pding paihang">
-                <{calldata mdl="designer/designer" city_id=$request.city_id limit=5}>
-                <li>
-                    <span class="lt"><font class="paihang_num<{if $iteration<=3}> ph_num_cl<{/if}>"><{$iteration}></font><a href="<{link ctl='blog'  arg0=$item.uid}>"><{$item.name|cutstr:35}></a>
-                    </span>
+			<h3 class="side_tit">装修公司排行榜</h3>
+			<ul class="pding paihang">
+                <{calldata mdl="company/company"  city_id=$request.city_id limit=8}>
+				<li>
+                    <span class="lt"><font class="paihang_num<{if $iteration<=3}> ph_num_cl<{/if}>"><{$iteration}></font><a href="<{$item.company_url}>"><{$item.name|cutstr:35}></a></span>
                     <span class="rt">已投标：<font class="fontcl2"><{$item.tenders_num}></font></span>
                 </li>
                 <{/calldata}>
-            </ul>
-        </div>
-        
-        <div class="mb10 personAd">
-            <{adv id="31" name="用户详情页面广告位" city_id=$request.city_id}>
-        </div>
+			</ul>
+		</div>
+        <div class="mb10 area">
+			<h3 class="side_tit">设计师排行榜</h3>
+			<ul class="pding paihang">
+                <{calldata mdl="designer/designer" city_id=$request.city_id limit=5}>
+				<li>
+                    <span class="lt"><font class="paihang_num<{if $iteration<=3}> ph_num_cl<{/if}>"><{$iteration}></font><a href="<{link ctl='blog'  arg0=$item.uid}>"><{$item.name|cutstr:35}></a></span>
+                    <span class="rt">已投标：<font class="fontcl2"><{$item.tenders_num}></font></span>
+                </li>
+                <{/calldata}>
+			</ul>
+		</div>
+        <div class="mb10 area">
+			<h3 class="side_tit">工长排行榜</h3>
+			<ul class="pding paihang">
+                <{calldata mdl="gz/gz" city_id=$request.city_id limit=5}>
+				<li>
+                    <span class="lt"><font class="paihang_num<{if $iteration<=3}> ph_num_cl<{/if}>"><{$iteration}></font><a href="<{link ctl='gz-detail'  arg0=$item.uid}>"><{$item.name|cutstr:35}></a></span>
+                    <span class="rt">已投标：<font class="fontcl2"><{$item.tenders_num}></font></span>
+                </li>
+                <{/calldata}>
+			</ul>
+		</div>
+		<div class="mb20 "><{adv id="10" name="全站右侧招商图片广告" city_id=$request.city_id}></div>
 	</div>
 	<div class="cl"></div>
 </div>
@@ -76,7 +82,7 @@
 (function(K, $){
     //活动列表页头部切换
     $(".main_activity_choose a").click(function(){
-        $(".main_activity_choose a").siblings().removeClass('current');
+         $(".main_activity_choose a").siblings().removeClass('current');
          $(this).addClass('current');
     });
 })(window.KT, window.jQuery);

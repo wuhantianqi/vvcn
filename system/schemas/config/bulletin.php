@@ -3,7 +3,7 @@
  * Copy Right IJH.CC
  * Each engineer has a duty to keep the code elegant
  * Author @shzhrui<Anhuike@gmail.com>
- * $Id: bulletin.php 9378 2015-03-27 02:07:36Z youyi $
+ * $Id: bulletin.php 5739 2014-06-30 08:26:09Z youyi $
  */
 
 if(!defined('__CORE_DIR')){

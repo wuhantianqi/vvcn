@@ -2,7 +2,7 @@
 /**
  * Copy Right IJH.CC
  * Each engineer has a duty to keep the code elegant
- * $Id: tenpay.php 9378 2015-03-27 02:07:36Z youyi $
+ * $Id: tenpay.php 3053 2014-01-15 02:00:13Z youyi $
  */
 
 class Payment_Tenpay
@@ -73,21 +73,21 @@ class Payment_Tenpay
     {
         if(empty($_GET)){   //判断GET来的数组是否为空
             return false;
-        }else if($_GET['trade_status'] != 'TRADE_FINISHED' && $_GET['trade_status'] != 'TRADE_SUCCESS'){
-            return false;
         }else{
             //判断veryfy_result是否为ture，生成的签名结果mysign与获得的签名结果sign是否一致
             //$veryfy_result的结果不是true，与服务器设置问题、合作身份者ID、notify_id一分钟失效有关
             //mysign与sign不等，与安全校验码、请求时的参数格式（如：带自定义参数等）、编码格式有关            
             $notify = $this->_filter_params($_GET);
             $mysign = $this->create_sign($notify);
-            $veryfy_result = $this->verify_notify($_GET["notify_id"]);
+
+            //$veryfy_result = $this->verify_notify($_GET["trade_state"]);
+			$trade_state = $_GET["trade_state"];
             //写日志记录
-            $log  = "veryfy_result:{$veryfy_result}\n\n";
+            $log  = "trade_state:{$trade_state}\n\n";
             $log .= "return_url_log:sign={$_GET[_filter_params]}&mysign={$mysign}&".$this->_build_query($notify);
             $this->_logs($log);
-            if (preg_match("/true$/i",$veryfy_result) && $mysign == $_GET["sign"]){
-                return array('trade_no'=>$notify['out_trade_no'], 'pay_trade_no'=>$notify['trade_no'], 'amount'=>$notify['total_fee'], 'extra_param'=>$this->_decode_params($notify['extra_common_param']));
+            if ("0" == $trade_state && $mysign == $_GET["sign"]){
+                return array('trade_no'=>$notify['out_trade_no'], 'pay_trade_no'=>$notify['trade_no'], 'amount'=>$notify['total_fee']/100, 'extra_param'=>$this->_decode_params($notify['extra_common_param']));
             }
             return false;
         }
@@ -98,21 +98,20 @@ class Payment_Tenpay
     {
         if(empty($_POST)){//判断POST来的数组是否为空
             return false;
-        }else if($_POST['trade_status'] != 'TRADE_FINISHED' && $_POST['trade_status'] != 'TRADE_SUCCESS'){
-            return false;
         }else{
             //判断veryfy_result是否为ture，生成的签名结果mysign与获得的签名结果sign是否一致
             //$veryfy_result的结果不是true，与服务器设置问题、合作身份者ID、notify_id一分钟失效有关
             //mysign与sign不等，与安全校验码、请求时的参数格式（如：带自定义参数等）、编码格式有关            
             $notify = $this->_filter_params($_POST);
             $mysign = $this->create_sign($notify);
-            $veryfy_result = $this->verify_notify($_POST["notify_id"]); 
+            //$veryfy_result = $this->verify_notify($_POST["notify_id"]); 
+			$trade_state = $_GET["trade_state"];
             //写日志记录
-            $log  = "veryfy_result:{$veryfy_result}\n\n";
+            $log  = "trade_state:{$trade_state}\n\n";
             $log .= "notify_url_log:sign={$_POST[sign]}&mysign={$mysign}&".$this->_build_query($notify);
             $this->_logs($log);
-            if (preg_match("/true$/i",$veryfy_result) && $mysign == $_POST["sign"]){
-                return array('trade_no'=>$notify['out_trade_no'], 'amount'=>$notify['total_fee'], 'extra_param'=>$this->_decode_params($notify['extra_common_param']));
+            if ("0" == $trade_state && $mysign == $_POST["sign"]){
+                return array('trade_no'=>$notify['out_trade_no'], 'amount'=>$notify['total_fee']/100, 'extra_param'=>$this->_decode_params($notify['extra_common_param']));
             }
             return false;
         }
@@ -125,17 +124,6 @@ class Payment_Tenpay
         }else{
             echo "fail";exit;
         }
-    }
-
-    public function verify_notify($notify_id)
-    {
-        //获取远程服务器ATN结果，验证是否是支付宝服务器发来的请求
-        if($this->transport == "https") {
-            $veryfy_url = $this->https_verify_url. "partner=" .$this->config['tenpay_partner']. "&notify_id=".$notify_id;
-        } else {
-            $veryfy_url = $this->http_verify_url. "partner=".$this->config['tenpay_partner']."&notify_id=".$notify_id;
-        }
-        return $this->http($veryfy_url, null, 'GET');
     }
 
     public function http($url, $params=array(), $mothed='POST')
@@ -154,9 +142,16 @@ class Payment_Tenpay
         }else if(!empty($params)){ // get传输数据
             $url .= $this->build_query($params);
         }
+		
         curl_setopt($ci, CURLOPT_URL, $url );
         curl_setopt($ci, CURLINFO_HEADER_OUT, TRUE);
         $res = curl_exec($ci);
+		var_dump($code);
+        $info = curl_getinfo($ci);
+		var_dump($info);
+		var_dump($res);
+		print_r($params);
+		echo "File:", __FILE__, ',Line:',__LINE__;exit;
         curl_close($ci);
         return $res;
     }
@@ -233,7 +228,7 @@ class Payment_Tenpay
 
         $prestr = $this->_build_query($params, false);  //把数组所有元素，按照“参数=参数值”的模式用“&”字符拼接成字符串
 
-		$mysgin = strtolower(md5($prestr.'&key='.$this->config['tenpay_key']));
+		$mysgin = strtoupper(md5($prestr.'&key='.$this->config['tenpay_key']));
 		
         return $mysgin;
     }

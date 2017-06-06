@@ -2,7 +2,7 @@
 /**
  * Copy Right IJH.CC
  * Each engineer has a duty to keep the code elegant
- * $Id: order.ctl.php 9372 2015-03-26 06:32:36Z youyi $
+ * $Id$
  */
 
 if(!defined('__CORE_DIR')){
@@ -60,7 +60,8 @@ class Ctl_Mobile_Ucenter_Order extends Ctl_Mobile_Ucenter
             }
             $this->pagedata['items'] = $items;
         }
-        $pager['backurl'] = $this->mklink('mobile/ucenter/order-orders');
+		$pager['type'] = $type;
+        $pager['backurl'] = $this->mklink('mobile/ucenter');
 		$this->pagedata['pager'] = $pager;
         $this->tmpl = 'mobile/ucenter/order/items.html';
 	}
@@ -94,6 +95,10 @@ class Ctl_Mobile_Ucenter_Order extends Ctl_Mobile_Ucenter
                 $this->err->add('订单已支付，不可取消', 216);
             }else{
                 if(K::M('trade/order')->update($order['order_id'], array('order_status'=>-1), true)){
+					$log = K::M('payment/log')->log_by_no($order['order_no']);
+					if($log['packet']){
+						K::M('member/packet')->update($log['packet'], array('is_use'=>'1','desc'=>''),  true);
+					}
                     $this->err->add('取消订单成功');
                 }
             }
@@ -249,6 +254,10 @@ class Ctl_Mobile_Ucenter_Order extends Ctl_Mobile_Ucenter
                 $this->err->add('订单已发货不可取消', 215);
             }else {
                 if(K::M('trade/order')->update($order['order_id'], array('order_status'=>-2), true)){
+					$log = K::M('payment/log')->log_by_no($order['order_no']);
+					if($log['packet']){
+						K::M('member/packet')->update($log['packet'], array('is_use'=>'1','desc'=>''),  true);
+					}
                     $this->err->add('取消订单成功');
                 }
             }
@@ -291,6 +300,91 @@ class Ctl_Mobile_Ucenter_Order extends Ctl_Mobile_Ucenter
 				$pager['backurl'] = $this->mklink('mobile/ucenter/order-shop_index');
 				$this->pagedata['pager'] = $pager;
                 $this->tmpl = 'mobile/ucenter/order/detail.html';
+            }
+        }
+    }
+    
+    public function address()
+    {
+        $pager = $filter = array();
+        if(is_numeric($type)){
+            $page = $type;
+            $type = 'all';
+        }
+        $pager['type'] = $type;
+        $pager['page'] = $page = max((int)$page, 1);
+        $pager['limit'] = $limit = 10;
+        $pager['count'] = $count = 0;
+        $filter['uid'] = $this->uid;;
+        $filter['closed'] = 0;
+        if ($items = K::M('order/address')->items($filter, null, $page, $limit, $count)) {
+            $i = 1;
+            foreach($items as $k=>$v){
+                $items[$k]['id'] = $i++;
+            }
+            $pager['count'] = $count;
+            $pager['pagebar'] = $this->mkpage($count, $limit, $page, $this->mklink(null, array($type, '{page}')));
+            $this->pagedata['items'] = $items;
+        }
+        $this->tmpl = 'mobile/ucenter/order/address.html';
+    }
+    
+    public function address_detail($addr_id=null)
+    {
+        if(!$addr_id){
+            $this->err->add('非法的数据提交', 211);
+        }else{
+            if(!$data = K::M('order/address')->detail($addr_id)){
+				$this->err->add('该数据不存在', 212);
+			}elseif($data['uid'] != $this->uid){
+				$this->err->add('没权限', 214);
+			}else{
+				$this->pagedata['data'] = $data;
+				$this->tmpl = 'mobile/ucenter/order/address_detail.html';
+			}
+        }
+    }
+    
+    public function create_addr()
+    {
+        if($data = $this->checksubmit('data')) {
+            $data['uid'] = $this->uid;
+            if (K::M('order/address')->create($data,true)) {
+                $this->err->add('添加地址成功');
+            }
+        }
+        $this->tmpl = 'mobile/ucenter/order/address.html';
+    }
+    
+    public function update_addr($addr_id=null)
+    {
+        if($addr_id && $data = $this->checksubmit('data')) {
+            if (K::M('order/address')->update($addr_id,$data)) {
+                $this->err->add('修改地址成功');
+				$this->err->set_data('forward', $this->mklink('mobile/ucenter/order:address'));
+            }
+        }
+    }
+    
+    public function delete_addr($addr_id=null)
+    {
+        K::M('order/address')->delete($addr_id);
+        $this->err->add('删除地址成功');
+		$this->err->set_data('forward', $this->mklink('mobile/ucenter/order:address'));
+    }
+    
+    public function default_addr($addr_id=null)
+    {
+        if(!$addr_id){
+            $this->err->add('设置失败',215);
+        }else{
+            $uid = $this->uid;
+            $attr['default'] = '0';
+            K::M('order/address')->set_default($uid,$attr);
+            $attr['default'] = '1';
+            if (K::M('order/address')->update($addr_id,$attr)) {
+                $this->err->add('设置默认成功');
+				$this->err->set_data('forward', $this->mklink('mobile/ucenter/order:address'));
             }
         }
     }

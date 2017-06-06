@@ -11,15 +11,13 @@
 	<div class="help_lt lt">
 		<h2>帮助中心</h2>
         
-        <{foreach from=$cate_list item=item}>   
-            <{if $item.from=='help' && $item.parent_id!=0}>
+        <{foreach $cate_list as $cate}>   
+            <{if $cate.from=='help' && $cate.parent_id>0}>
                 <ul class="help_list">
-                    <li class="title"><span class="help_list_ico ico_list"></span><{$item.title}></li>
-                    <{foreach from=$items item=it}>
-                        <{if $it.cat_id == $item.cat_id}>
-                        <li>
-                             <a <{if $it.page == $page}>class="current"<{/if}>  href="<{link ctl='help' arg0=$it.page}>"><{$it.title}></a>
-                        </li>
+                    <li class="title"><span class="help_list_ico ico_list"></span><{$cate.title}></li>
+                    <{foreach $items as $item}>
+                        <{if $item.cat_id == $cate.cat_id}>
+                        <li><a <{if $item.page == $detail.page}>class="current"<{/if}>  href="<{$item.link}>"><{$item.title}></a></li>
                         <{/if}>
                     <{/foreach}>
                 </ul>

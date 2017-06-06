@@ -3,7 +3,7 @@
  * Copy Right IJH.CC
  * Each engineer has a duty to keep the code elegant
  * Author @shzhrui<Anhuike@gmail.com>
- * $Id: block.mdl.php 10613 2015-06-03 06:55:09Z maoge $
+ * $Id: block.mdl.php 6092 2014-08-15 11:29:42Z youyi $
  */
 
 if(!defined('__CORE_DIR')){
@@ -19,7 +19,7 @@ class Mdl_Block_Block extends Mdl_Table
     protected $_orderby = array('orderby'=>'ASC', 'block_id'=>'ASC');
     protected $_pre_cache_key = 'block-block-list';
 
-    protected static $_allow_from = array('mechanic'=>'技工', 'designer'=>'设计师','company'=>'公司', 'shop'=>'商家','youhui'=>'优惠信息','news'=>'公司新闻','product'=>'商品','coupon'=>'优惠券','home'=>'小区','tuan'=>'小区团装','site'=>'工地','case'=>'案例','diary'=>'日记','ask'=>'问答','article'=>'文章','activity'=>'活动');
+    protected static $_allow_from = array('mechanic'=>'技工','gz'=>'工长', 'designer'=>'设计师','company'=>'公司', 'shop'=>'商家','youhui'=>'优惠信息','news'=>'公司新闻','product'=>'商品','coupon'=>'优惠券','home'=>'小区','tuan'=>'小区团装','site'=>'工地','case'=>'案例','diary'=>'日记','ask'=>'问答','article'=>'文章','activity'=>'活动');
 
 
     public function create($data, $checked=false)
@@ -50,7 +50,7 @@ class Mdl_Block_Block extends Mdl_Table
     public function _format_row($row)
     {
         static $page_list = null;
-        static $type_list = array('default'=>'默认优先', 'new'=>'最新优先', 'hot'=>'最热有限', 'only'=>'只接受推荐');
+        static $type_list = array('default'=>'默认优先', 'new'=>'最新优先', 'hot'=>'最热有限', 'zhanwei'=>'占位补充', 'only'=>'只接受推荐');
         if($page_list === null){
             $page_list = K::M('block/page')->fetch_all();
         }
@@ -128,11 +128,11 @@ class Mdl_Block_Block extends Mdl_Table
     public function load_mdl($from)
     {
         static $_allow_mdl = array(
-            'designer'=>'designer/designer',
+            'designer'=>'designer/designer','gz'=>'gz/gz',
             'mechanic'=>'mechanic/mechanic','company'=>'company/company',
             'shop'=>'shop/shop', 'product'=>'product/product', 'coupon'=>'shop/coupon',
             'home'=>'home/home', 'site'=>'home/site', 'case'=>'case/case', 'tuan'=>'home/tuan',
-            'youhui'=>'company/youhui', 'news'=>'company/news','activity'=>'activity/activity',
+            'youhui'=>'company/youhui', 'news'=>'company/news', 'activity'=>'activity/activity',
             'article'=>'article/article','diary'=>'diary/diary','ask'=>'ask/ask');
         if($mdl = $_allow_mdl[$from]){
             return K::M($mdl);
@@ -152,7 +152,7 @@ class Mdl_Block_Block extends Mdl_Table
             $attach = K::$system->config->get('attach');
             $attachurl = $attach['attachurl'];
         }
-        if(in_array($from, array('mechanic', 'designer'))){
+        if(in_array($from, array('mechanic', 'gz', 'designer'))){
             $row['itemId'] = $row['uid'];
             $row['title'] = $row['name'];
             $row['thumb'] = $row['face'];
@@ -183,9 +183,10 @@ class Mdl_Block_Block extends Mdl_Table
         }else if('tuan' == $from){
             $row['itemId'] = $row['tuan_id'];
             //$row['thumb'] = $row['thumb'];
-        }else if('site' == $from){
-            $row['itemId'] = $row['site_id'];
-            //$row['thumb'] = $row['thumb'];
+        }else if('diary' == $from){
+            $row['itemId'] = $row['diary_id'];
+        }else if('activity' == $from){
+            $row['itemId'] = $row['activity_id'];
         }
         //$link todo
         //$row['link'] = '';
@@ -256,12 +257,9 @@ class Mdl_Block_Block extends Mdl_Table
                 $iids = array();
                 $time = __CFG::TIME - 86400;
                 $has_expire = false;
-                $count = 0;
+                $count = 0;                
                 foreach($items as $k=>$v){
                     if(empty($v['expire_time']) || $v['expire_time'] > $time){
-                        if(empty($v['link'])){
-                            $v['link'] = $this->_format_link($v, $block);
-                        }
                         if($city_id){
                             if($city_id == $v['city_id']){
                                 $iids[$v['itemId']] = $v['itemId'];
@@ -272,7 +270,7 @@ class Mdl_Block_Block extends Mdl_Table
                             }
                         }else{
                             $iids[$v['itemId']] = $v['itemId'];
-                            $block_items[$k] = $v;
+                            $block_items[$v['itemId']] = $v;
                             if( ++$count >= $limit){
                                 break;
                             }                           
@@ -307,7 +305,18 @@ class Mdl_Block_Block extends Mdl_Table
                 }
             }
             $count = count($block_items);
-            if($block['type'] != 'only' && $limit > $count){
+            if($block['type'] == 'zhanwei' && $limit > $count){
+                $zhanwei = $block['config']['zhanwei'];
+                if(empty($zhanwei['link'])){
+                    $zhanwei['link'] = 'javascript:;';
+                }
+                $zhanwei['zhanwei'] = 'zhanwei';
+                $zhanwei['logo'] = $zhanwei['thumb'];
+                $zhanwei['name'] = $zhanwei['title'];
+                for(; $count<$limit; $count++){
+                    $block_items['zhanwei_'.$count] = $zhanwei;
+                }
+            }else if($block['type'] != 'only' && $limit > $count){
                 $filter = $city_id ? array('city_id'=>$city_id) : array();
                 switch (strtolower($block['order'])) {
                     case 'hot':
@@ -322,6 +331,7 @@ class Mdl_Block_Block extends Mdl_Table
                 }                
                 if($block['from'] == 'article'){
                     $filter['from'] = empty($filter['from']) ? 'article' : $filter['from'];
+                    $filter['ontime'] = '<:'.__TIME;
                     if($cat_ids = K::M('verify/check')->ids($block['config']['cat_id'])){
                         if(is_numeric($cat_ids)){
                             $filter['cat_id'] = $cat_ids;
@@ -329,7 +339,7 @@ class Mdl_Block_Block extends Mdl_Table
                             $filter['cat_id'] = explode(',', $cat_ids);
                         }                        
                     }
-                }else if(in_array($block['from'], array('company', 'designer', 'mechanic', 'shop'))){
+                }else if(in_array($block['from'], array('company', 'gz', 'designer', 'mechanic', 'shop'))){
                     if($group_ids = K::M('verify/check')->ids($block['config']['group_id'])){
                         if(is_numeric($group_ids)){
                             $filter['group_id'] = $group_ids;
@@ -376,6 +386,8 @@ class Mdl_Block_Block extends Mdl_Table
                     $filter['city_id'] = array('0', $city_id);
                 }
                 if($bfilter = $this->_block_filter($block)){
+                    unset($bfilter['group_id'], $bfilter['cat_id'], $bfilter['sale_tuijian'], $bfilter['sale_remai'], $bfilter['sale_youhui'], $bfilter['onpayment'], $bfilter['score']);
+                    unset($bfilter['xiaobao'], $bfilter['verify_name'], $bfilter['is_vip']);
                     $filter = array_merge($filter, $bfilter);
                 }
                 if($mothed == 'items'){
@@ -390,7 +402,7 @@ class Mdl_Block_Block extends Mdl_Table
                             continue;
                         }else if($count >= $limit){
                             break;
-                        }                        
+                        }                      
                         $v = $this->format_item($v, $block['from']);
                         $v['link'] = $this->_format_link($v, $block);
                         $block_items[$k] = $v;
@@ -479,6 +491,7 @@ class Mdl_Block_Block extends Mdl_Table
         if(!$nocache && !$items = $this->cache->get($hash)){
             $limit = $params['limit'] ? $params['limit'] : 10;
             $filter = $params;
+			
             unset($filter['mdl'], $filter['order'], $filter['limit'], $filter['hash'], $filter['ttl'], $filter['nocache']);
             if($params['mdl'] == 'article/article'){
                 $filter['from'] = empty($filter['from']) ? 'article' : $filter['from'];
@@ -537,7 +550,7 @@ class Mdl_Block_Block extends Mdl_Table
     protected function _block_filter($block)
     {
         $filter = $block['config'];
-        if(in_array($block['from'], array('company','designer','shop'))){
+        if(in_array($block['from'], array('company','designer','shop','gz'))){
             if($score = (int)$filter['score']){
                 $filter['score'] = '>=:'.$score;
             }else{
@@ -566,6 +579,9 @@ class Mdl_Block_Block extends Mdl_Table
             case 'designer':
                 $link = $oLink->mklink('blog', array($row['itemId']), array(), $http);
                 break;
+            case 'gz':
+                $link = $oLink->mklink('gz:detail', array($row['itemId']), array(), $http);
+                break;
             case 'mechanic':
                 $link = $oLink->mklink('mechanic:detail', array($row['itemId']), array(), $http);
                 break;    
@@ -582,9 +598,7 @@ class Mdl_Block_Block extends Mdl_Table
                 $link = $oLink->mklink('case:detail', array($row['itemId']), array(), $http);
                 break;
             case 'company': 
-                if(!$link = $row['company_url']){
-                    $link = $oLink->mklink('company', array($row['itemId']), array(), $http);
-                }
+                $link = $row['company_url'];
                 break;
             case 'news':
                 $link = $oLink->mklink('news:detail', array($row['itemId']), array(), $http);
@@ -605,8 +619,8 @@ class Mdl_Block_Block extends Mdl_Table
                 $link = $oLink->mklink('activity:detail', array($row['itemId']), array(), $http);
                 break;
             case 'article':
-                if($row['linkurl']){
-                    $link = $row['linkurl'];
+                if($row['link']){
+                    $link = $row['link'];
                 }else{
                     $link = $oLink->mklink('article:detail', array($row['itemId']), array(), $http);
                 }
@@ -615,7 +629,7 @@ class Mdl_Block_Block extends Mdl_Table
                 $link = $oLink->mklink('diary:detail', array($row['itemId']), array(), $http);
                 break;
             case 'ask':
-                $link = $oLink->mklink('ask:detail', array($row['itemId']), array(), 'www');
+                $link = $oLink->mklink('ask:detail', array($row['itemId']), array(), $http);
                 break;
         }
         return $link;
@@ -640,5 +654,14 @@ class Mdl_Block_Block extends Mdl_Table
         }
         return $orderby;      
     }
-
+    
+    public function block_detail($block_id)
+    {
+        if(!$block_id = intval($block_id)){
+            return false;
+        }else if($items = $this->fetch_all()){
+            return $items[$block_id];
+        }
+        return false;
+    }
 }

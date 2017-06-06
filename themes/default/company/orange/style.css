@@ -1,0 +1,24 @@
+.company_nav{ background:url(navBg.jpg) repeat-x; height:40px;}
+.companyBanner{ width:1000px; height:200px; overflow:hidden;}
+.company_nav ul a{ padding:0px 20px; height:40px; line-height:40px;}
+.company_nav ul a.current, .company_nav ul a:hover{ background:url(navCut.jpg) repeat-x;}
+.company_nav_rt{ background:url(navCut.jpg) repeat-x; padding:0px 20px; height:40px; line-height:40px;}
+.shopList{ background:#f3eae1;}
+.shopList ul li{ float:left; margin:5px 0px 5px 8px;; background:#fff; text-align:center; width:76px; font-size:14px;}
+.shopList ul li b{ font-size:16px; font-weight:bold;}
+.sub_com_add{ padding:0px; overflow:hidden;}
+.com_box{ border-top:2px solid #cccccc; background:#fff;}
+.orgYouhui .list{ border:1px solid #ddd; width:480px; float:left; height:180px;}
+.orgYouhui .list img{ width:180px; height:180px;}
+.orgYouhui .list .intro{ width:280px; padding:10px; text-align:center;}
+.orgYouhui .list .intro h3{ font-size:24px; color:#666;}
+.orgYouhui .list .intro .btn{ margin:10px 0px; background:#fba51a; border:none;}
+ul.org_com_case li{ margin-left:0px;}
+ul.org_com_case li img{ width:235px;}
+.org_sub_com_design li{ margin:10px 0px 0px 12px; width:170px;}
+.org_sub_com_design li img{width:170px; height:170px;}
+.org_new_pinglun ul li div.lt img{ width:50px; height:50px; border-radius:30px;}
+.org_new_pinglun ul li div.rt{ width:90%;}
+.org_main_list_rt{ width:470px;}
+.org_main_list_rt .site_step{ display:inline-block; background:#fba51a; color:#fff; padding:0px 10px;}
+.addIco{ display:inline-block; width:12px; height:18px; background:url(addIco.png) no-repeat; vertical-align:middle; margin-right:5px;}

@@ -3,7 +3,7 @@
  * Copy Right IJH.CC
  * Each engineer has a duty to keep the code elegant
  * Author @shzhrui<Anhuike@gmail.com>
- * $Id: widget.php 9378 2015-03-27 02:07:36Z youyi $
+ * $Id: widget.php 6072 2014-08-12 12:23:29Z youyi $
  */
 
 class Widget_Member extends Model
@@ -55,19 +55,4 @@ class Widget_Member extends Model
         return $data;
     }
 
-    public function tendersfrom(&$params)
-    {
-        if(!$params['tpl']){
-            if(!in_array($params['type'], array('label', 'checkbox', 'radio', 'option'))){
-                $params['type'] = 'option';
-            }
-            $params['tpl'] = 'widget:default/'.$params['type'].'.html';
-        }
-        $data['name'] = $params['name'];        
-        $data['value'] = $params['value'] ? explode(',', $params['value']) : '';
-        $data['all'] = $params['value'] ? 0:1;
-        $data['options'] = K::M('member/member')->from_list();
-        unset($data['options'][array_search('业主', $data['options'])]);
-        return $data;        
-    }
 }

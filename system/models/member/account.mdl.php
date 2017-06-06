@@ -3,7 +3,7 @@
  * Copy Right IJH.CC
  * Each engineer has a duty to keep the code elegant
  * Author @shzhrui<Anhuike@gmail.com>
- * $Id: account.mdl.php 9378 2015-03-27 02:07:36Z youyi $
+ * $Id: account.mdl.php 5618 2014-06-24 03:27:46Z youyi $
  */
 
 if(!defined('__CORE_DIR')){
@@ -12,7 +12,6 @@ if(!defined('__CORE_DIR')){
 
 class Mdl_Member_Account extends Model
 {   
-
     public function create($data)
     {
 		if(!defined('IN_ADMIN')){
@@ -28,13 +27,17 @@ class Mdl_Member_Account extends Model
             return false;
         }
         $gender = strtolower($data['gender']) == 'man' ? 'man' : 'woman';
-        $a = array('uname'=>$uname, 'mail'=>$mail, 'passwd'=>md5($passwd), 'gender'=>$gender);    
-        $a['from'] = in_array($data['from'], array('member', 'designer', 'company', 'shop','mechanic')) ? $data['from'] : 'member';
+        $a = array('uname'=>$uname, 'mail'=>$mail, 'passwd'=>md5($passwd), 'gender'=>$gender, 'mobile'=>$data['mobile'], 'verify'=>$data['verify']);  
+        $a['from'] = in_array($data['from'], array('member', 'designer', 'company', 'shop','mechanic', 'gz')) ? $data['from'] : 'member';
         if($data['city_id']){
             $a['city_id'] = intval($data['city_id']);
         }else{
-            $site = K::$system->config->get('site');
-            $a['city_id'] = (int)$site['city_id'];
+            if(K::$system->request['city_id']){
+                $a['city_id'] = (int)K::$system->request['city_id'];
+            }else{
+                $site = K::$system->config->get('site');
+                $a['city_id'] = (int)$site['city_id'];
+            }
         }
         if(defined('UC_OPEN') && UC_OPEN){
             if($uid = K::M('member/ucenter')->create($uname, $passwd, $mail)){
@@ -52,11 +55,13 @@ class Mdl_Member_Account extends Model
     	if(!$uid = K::M('member/member')->create($a, true)){
     		return false;
     	}
-		$b = array('uid'=>$uid,'group_id'=>$a['group_id']);
+		$b = array('uid'=>$uid,'group_id'=>$a['group_id'], 'city_id'=>$a['city_id']);
         if($a['from'] == 'designer'){//初始设计师表
             K::M('designer/designer')->create($b, null, true);
         }else if($a['from'] == 'mechanic'){//初始技工表
             K::M('mechanic/mechanic')->create($b, null, true);
+        }else if($a['from'] == 'gz'){
+             K::M('gz/gz')->create($b, null, true);
         }
         if(!defined('IN_ADMIN')){
            K::$system->auth->login($uname, $passwd, 'uname');

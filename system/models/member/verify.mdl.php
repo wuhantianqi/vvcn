@@ -2,7 +2,7 @@
 /**
  * Copy Right IJH.CC
  * Each engineer has a duty to keep the code elegant
- * $Id: verify.mdl.php 9378 2015-03-27 02:07:36Z youyi $
+ * $Id: verify.mdl.php 5610 2014-06-23 16:47:52Z youyi $
  */
 
 if(!defined('__CORE_DIR')){
@@ -33,6 +33,7 @@ class Mdl_Member_Verify extends Mdl_Table
         if(!$checked && !$data = $this->_check($data,  $uid)){
             return false;
         }
+        $data['verify'] = 0;
         return $this->db->update($this->_table, $data, $this->field($this->_pk, $uid));
     }
 
@@ -52,15 +53,40 @@ class Mdl_Member_Verify extends Mdl_Table
         return false;
     }
 
+	public function items_by_city($filter=array(), $orderby=null, $p=1, $l=20, &$count=0)
+    {
+        $where = $this->where($filter, 'd.');
+        $orderby = $this->order($orderby, null, 'd.');
+        $limit = $this->limit($p, $l);
+        $items = array();
+        $sql = "SELECT SQL_CALC_FOUND_ROWS m.*,d.* FROM ".$this->table($this->_table)." d LEFT JOIN ".$this->table('member')." m ON m.uid=d.uid WHERE $where and m.city_id=".CITY_ID." $orderby $limit";
+        if($rs = $this->db->query($sql)){
+            $count = $this->db->GetOne("SELECT FOUND_ROWS()");
+            while($row = $rs->fetch()){
+                $row = $this->_format_row($row);
+                if($this->_pk){
+                    $items[$row[$this->_pk]] = $row;
+                }else{
+                    $items[] = $row;
+                }
+            }
+        }
+        return $items;
+    }
+
     public function update_verify($uids, $verify='pass', $refuse='')
     {
         if(!$uids = K::M('verify/check')->ids($uids)){
             return false;
         }else if($verify == 'refuse'){
             $refuse = K::M('content/html')->encode($refuse);
-            if($this->db->update($this->_table, array('refuse'=>$refuse, 'verify'=>2), self::field($this->_pk, $uids))){
-                K::M('member/magic')->verify_name($uids, false);
-            }
+			$uid_arr = explode(',',$uids);
+			foreach($uid_arr as $k => $v){
+				if($this->db->update($this->_table, array('refuse'=>$refuse, 'verify'=>2), self::field($this->_pk, $v))){
+					K::M('member/magic')->verify_name($v, false);
+				}
+			}
+           
         }else if($verify == 'pass'){            
             if($items = $this->items_by_ids($uids)){
                 $ids = array();

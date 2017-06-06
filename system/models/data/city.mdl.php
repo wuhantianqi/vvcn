@@ -3,7 +3,7 @@
  * Copy Right IJH.CC
  * Each engineer has a duty to keep the code elegant
  * Author @shzhrui<Anhuike@gmail.com>
- * $Id: city.mdl.php 9378 2015-03-27 02:07:36Z youyi $
+ * $Id: city.mdl.php 3159 2014-01-22 01:54:39Z youyi $
  */
 
 class Mdl_Data_City extends Mdl_Table
@@ -11,7 +11,7 @@ class Mdl_Data_City extends Mdl_Table
   
     protected $_table = 'data_city';
     protected $_pk = 'city_id';
-    protected $_cols = 'city_id,city_name,province_id,pinyin,theme_id,seo_title,seo_keywords,seo_description,orderby,audit,dateline';
+    protected $_cols = 'city_id,city_name,province_id,pinyin,theme_id,logo,weixinqr,phone,mobile,mail,kfqq,seo_title,seo_keywords,seo_description,tongji,orderby,audit,dateline';
     protected $_orderby = array('province_id'=>'ASC', 'orderby'=>'ASC', 'city_id'=>'ASC');
     protected $_pre_cache_key = 'data-city-list';
     

@@ -4,14 +4,14 @@
 			<{calldata mdl="article/cate" parent_id="2" limit=10}>
 			<ul>
 				<li><span><{$item.title}></span></li>
-				<{calldata mdl='article/article' from="help" city_id=$request.city_id cat_id=$item.cat_id}>
-				<li><a href="<{link ctl='help' arg0=$item.page}>"><{$item.title}></a></li>
+				<{calldata mdl='article/article' from="help" hidden="0" cat_id=$item.cat_id}>
+				<li><a href="<{$item.link}>"><{$item.title}></a></li>
 				<{/calldata}>
 			</ul>
 			<{/calldata}>
 			<ul>
 				<li><span>手机客户端</span></li>
-				<li><a href="<{link ctl='app'}>" class="index_ico dowload_ico"></a>
+				<li><a href="<{link ctl="app"}>" class="index_ico dowload_ico"></a>
 				</li>
 			</ul>
 			<ul class="main_footer_weixin">

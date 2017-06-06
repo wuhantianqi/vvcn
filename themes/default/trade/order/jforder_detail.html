@@ -1,0 +1,62 @@
+<{include file="block/small-header.html"}>
+<!--购物流程图开始-->
+<div class="subwd">
+	<div class="shop_liuch">
+		<p class="liuch_intro"><span class="first">选购商品</span><span>填写核对订单信息</span><span>成功提交订单</span><span>等待付款</span><span>等待发货</span><span class="last">订单已完成</span></p>
+		<{if $order.pay_status == 0}>
+			<p class="sp_liuch shop3"></p>
+		<{else}>
+			<p class="sp_liuch shop4"></p>
+		<{/if}>
+	</div>
+	
+    <h2>订单详情</h2>
+	<div class="area pding order_xiqing">
+		<p> 收货人：<{$order.contact}></p>
+		<p> 联系电话：<{$order.mobile}></p>
+		<p> 联系地址：<{$order.addr}></p>
+	</div>
+	<div class="area mb20">
+		<table class="shop_car" cellpadding="0" cellspacing="0">
+			<tr class="title">
+				<td class="first">商品信息</td><td>积分价格</td><td>数量</td><td>运费</td><td>积分扣除</td>
+			</tr>
+			<tr>
+				<td class="first">
+                    <p><a href="<{link ctl='jfproduct/jfproduct:detail' arg0=$order.product_id arg1=1}>" target="_blank"><{$order.product_name}></a></p>
+				</td>
+				<td><b class="fontcl2"><font class="pointcl"><{$order.product_jfprice}>积分</font></b></td>
+                <td><{$order.product_num}></td> 
+				<td><b class="fontcl2">包邮</b></td>
+				<td><b class="fontcl2"><{$order.jfamount}></b></td>                
+			</tr>
+			<tr class="last">
+				<td colspan="6"><p class="rt"><span>实付金额（含运费）：<b class="fontcl2"><{$order.jfamount}>积分</b></span></p></td>
+			</tr>
+		</table>
+	</div>
+	<div class="area tips">
+        <{if $order.order_status == 2}><p class="side_tit"><span class="ico_list order_apply"></span>订单状态： 交易成功</p><{/if}>
+		<p> 订单号：<{$order.order_no}></p>
+        <p> 订单状态：
+        <{if $order.order_status < 0}>已取消
+        <{elseif $order.order_status == 2}>完成
+        <{elseif $order.order_status == 1}>已发货 
+            <{if empty($order.pay_status) && ($MEMBER.uid == $order.uid)}>
+            <a style="float:right" href="<{link ctl='jfproduct/order:payment' arg0=$order.order_no}>" class="btn_pay">立即兑换&nbsp;&gt;</a><{/if}>
+        <{elseif $order.pay_status==1}>已兑换
+        <{else}>
+           未兑换<a style="float:right" href="<{link ctl='jfproduct/order:payment' arg0=$order.order_no}>" class="btn btn_sub_sm">立即兑换</a>            
+        <{/if}>
+         </p>
+         <p>
+            <{if $order.order_status == 2}>
+            订单已经完成，感谢您在<{$CONFIG.site.title}>购物。
+            <{elseif $order.order_status == 1}>
+            卖家已经发货，收到货品后，核对商品正确后及时确认收货。
+            <{/if}>
+        </p>
+	</div>
+</div>
+<!--购物流程图结束-->
+<{include file="block/small-footer.html"}>

@@ -2,7 +2,7 @@
 /**
  * Copy Right IJH.CC
  * Each engineer has a duty to keep the code elegant
- * $Id: case.mdl.php 10498 2015-05-26 11:13:55Z maoge $
+ * $Id: case.mdl.php 6093 2014-08-15 11:58:57Z youyi $
  */
 
 if(!defined('__CORE_DIR')){
@@ -84,7 +84,7 @@ class Mdl_Case_Case extends Mdl_Table
 			}
 			if($uid = (int)$case['uid']){
 				$member = K::M('member/member')->detail($uid);
-				if($member['from'] == 'designer'){
+				if($member['from'] == 'gz' ||  $member['from'] == 'designer'){
 					$this->uid_count($uid,$member['from']);
 				}
 			}
@@ -101,7 +101,7 @@ class Mdl_Case_Case extends Mdl_Table
 		}
 		if($uid = (int)$case['uid']){
 			$member = K::M('member/member')->detail($uid);
-			if($member['from'] == 'designer'){
+			if($member['from'] == 'gz' ||  $member['from'] == 'designer'){
 				$this->uid_count($uid,$member['from']);
 			}
 		}
@@ -127,13 +127,17 @@ class Mdl_Case_Case extends Mdl_Table
 		}
 		if($uids){
 			$member = K::M('member/member')->items_by_ids($uids);
-			$designers = array();
+			$gzs = $designers = array();
 			foreach($member as $k => $v){
-				if($v['from'] == 'designer'){
+				if($v['from'] == 'gz'){
+					$gzs[$v['uid']] = $v['uid'];
+				}elseif($v['from'] == 'designer'){
 					$designers[$v['uid']] = $v['uid'];
 				}
 			}
-			if(!empty($designers)){
+			if(!empty($gzs)){
+				$this->uid_count($gzs,'gz');
+			}elseif(!empty($designers)){
 				$this->uid_count($designers,'designer');
 			}			
 		}
@@ -298,12 +302,6 @@ class Mdl_Case_Case extends Mdl_Table
 
     public function update_ext_count($data, $case=array())
     {
-        if(isset($data['uid'])){
-            $member = K::M('member/member')->detail($data['uid']);
-            if($member['from'] == 'designer'){
-                $data['designer_id'] = $member['uid'];
-            }
-        }
         if(isset($data['home_id']) || isset($data['company_id']) || isset($data['designer_id'])){
             if(isset($data['home_id'])){
                 if($case['home_id'] != $data['home_id']){
@@ -326,9 +324,9 @@ class Mdl_Case_Case extends Mdl_Table
                 }
             }
             if(isset($data['designer_id'])){
-                if($case['uid'] != $data['designer_id']){
-                    if($case['uid']){
-                        K::M('designer/designer')->update_count($case['uid'], 'case_num', -1);
+                if($case['designer_id'] != $data['designer_id']){
+                    if($case['designer_id']){
+                        K::M('designer/designer')->update_count($case['designer_id'], 'case_num', -1);
                     }
                     if($data['designer_id']){
                         K::M('designer/designer')->update_count($data['designer_id'], 'case_num', 1);
@@ -392,8 +390,8 @@ class Mdl_Case_Case extends Mdl_Table
             if($v['home_id']){
                 $home_ids[$v['home_id']] = $v['home_id'];
             }
-            if($v['uid']){
-                $designer_ids[$v['designer_id']] = $v['uid'];
+            if($v['designer_id']){
+                $designer_ids[$v['designer_id']] = $v['designer_id'];
             }
             if($v['company_id']){
                 $company_ids[$v['company_id']] = $v['company_id'];

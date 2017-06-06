@@ -3,7 +3,7 @@
  * Copy Right IJH.CC
  * Each engineer has a duty to keep the code elegant
  * Author @shzhrui<Anhuike@gmail.com>
- * $Id: item.ctl.php 9378 2015-03-27 02:07:36Z youyi $
+ * $Id: item.ctl.php 6080 2014-08-13 15:20:01Z youyi $
  */
 
 if(!defined('__CORE_DIR')){
@@ -12,6 +12,27 @@ if(!defined('__CORE_DIR')){
 
 class Ctl_Adv_Item extends Ctl
 {
+
+    public function index($page=1)
+    {
+        $filter = $pager = array();
+        $pager['page'] = max(intval($page), 1);
+        $pager['limit'] = $limit = 50;
+        if($SO = $this->GP('SO')){
+            $pager['SO'] = $SO;
+            if($SO['allcity'] != 'on' && $SO['city_id']){$filter['city_id'] = $SO['city_id'];}
+            if($SO['adv_id']){$filter['adv_id'] = $SO['adv_id'];}
+            if($SO['title']){$filter['title'] = "LIKE:%".$SO['title']."%";}
+        }
+        if($items = K::M('adv/item')->items($filter, null, $page, $limit, $count)){
+            $pager['count'] = $count;
+            $pager['pagebar'] = $this->mkpage($count, $limit, $page, $this->mklink(null, array('{page}')), array('SO'=>$SO));
+            $this->pagedata['adv_list'] = K::M('adv/adv')->fetch_all();
+        }
+        $this->pagedata['items'] = $items;
+        $this->pagedata['pager'] = $pager;
+        $this->tmpl = 'admin:adv/item/index.html';
+    }
     
     public function create($adv_id=null)
     {
@@ -49,6 +70,11 @@ class Ctl_Adv_Item extends Ctl
             $this->pagedata['adv'] = $adv;
             $this->tmpl = 'admin:adv/item/create.html';
         }
+    }
+
+    public function so()
+    {
+        $this->tmpl = 'admin:adv/item/so.html';
     }
 
     public function edit($item_id=null)
@@ -137,7 +163,7 @@ class Ctl_Adv_Item extends Ctl
             $upload = K::M('magic/upload');
             foreach($attachs as $k=>$attach){
                 if($attach['error'] == UPLOAD_ERR_OK){
-                    if($a = $upload->upload($attach, 'adv', $item[$k])){
+                    if($a = $upload->upload($attach, 'adv', null)){
                         $photos[$k] = $a['photo'];
                     }
                 }

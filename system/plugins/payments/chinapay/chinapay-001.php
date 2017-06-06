@@ -2,7 +2,7 @@
 /**
  * Copy Right IJH.CC
  * Each engineer has a duty to keep the code elegant
- * $Id: chinapay-001.php 9378 2015-03-27 02:07:36Z youyi $
+ * $Id: chinapay.php 5379 2014-05-30 10:17:21Z youyi $
  */
 
 include(dirname(__FILE__).'/netpayclient.php');

@@ -1,0 +1,63 @@
+<{include file="scenter/block/header.html"}>
+<div class="ucenter_t">
+    <ul>
+        <li class="on">分销任务</li>
+     </ul>
+</div>
+<div class="ucenter_c">
+    <div class="alert alert-info">全名分销任务</div>
+    <table width="100%" border="0" cellspacing="0" class="info">
+        <tr>
+            <th>标题：</th><td><{$detail.title|default:'--'}></td>
+            <th>推广时间：</th><td><{if $detail.stime}><{$detail.stime|format:"Y-m-d H:i:s"}>~<{/if}><{if $detail.ltime}><{$detail.ltime|format:"Y-m-d H:i:s"}><{else}>永久有效<{/if}></td>
+        </tr>
+        <{if $detail.photo}>
+        <tr><th>推广图片：</th><td colspan="3"><img src="<{$pager.img}>/<{$detail.photo}>" class="wh-100"/></td></tr>
+        <{/if}>
+        <tr><th>推广描述：</th><td colspan="3"><{$detail.content}></td></tr>
+        <tr>
+            <th>UV推广奖励：</th><td>UV指标：<{$detail.uv_num}>，金币：<{$detail.uv_credits}>, 现金：<{$detail.uv_money}></td>
+            <th>UV推广成果：</th><td><{$detail.uv_count}></td>
+        </tr>
+        <tr>
+            <th>预约奖励：</th><td>金币：<{$detail.yuyue_credits}>, 现金：<{$detail.yuyue_money}></td>
+            <th>预约推广成果：</th><td><{$detail.yuyue_count}></td>
+        </tr>
+        <tr>
+            <th>有效预约奖励：</th><td>金币：<{$detail.youxiao_credits}>, 现金：<{$detail.youxiao_money}></td>
+            <th>有效预约成果：</th><td><{$detail.youxiao_count}></td>
+        </tr>
+        <tr>
+            <th>量房奖励：</th><td>金币：<{$detail.liangfang_credits}>, 现金：<{$detail.liangfang_credits}></td>
+            <th>已成功量房：</th><td><{$detail.liangfang_count}></td>
+        </tr>
+        <tr>
+            <th>签单奖励：</th><td>金币：<{$detail.qiandan_credits}>, 现金：<{$detail.qiandan_money}></td>
+            <th>已成功量房：</th><td><{$detail.qiandan_count}></td>
+        </tr>
+    </table>
+    <table width="100%" border="0" cellspacing="0" class="table">
+    <tr>
+        <th class="w-50">ID</th>
+        <th class="w-100">推广员</th>
+        <th class="w-100">推广码</th>
+        <th class="w-100">是否预约</th>
+        <th class="w-100">预约状态</th>
+        <th class="w-100">来源</th>
+        <th class="w-150">来访时间</th>
+    </tr>
+    <{foreach $items as $item}>
+    <tr>
+       <td><{$item.log_id}></td><td><{$sales_list[$item.sale_id].name}></td>
+        <td><{$item.pmid}></td><td><{if $item.yuyue_id}><a href="###">查看</a><{else}>--<{/if}></td>
+        <td><{$item.yuyue_status_title}></td>
+        <td><{if $item.wx_openid}>微信<{else}>其它<{/if}></td>
+        <td><{$detail.dateline|format:"Y-m-d H:i:s"}></td>
+    </tr>
+     <{foreachelse}>
+     <tr><td colspan="11"><p class="tips"><span class="notice">没有签到推广</span></p></td></tr>
+    <{/foreach}>
+    </table>
+	<div class="page"><{$pager.pagebar}></div>
+</div>
+<{include file="scenter/block/footer.html"}>

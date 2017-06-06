@@ -3,7 +3,7 @@
  * Copy Right IJH.CC
  * Each engineer has a duty to keep the code elegant
  * Author shzhrui<anhuike@gmail.com>
- * $Id: auth.mdl.php 9378 2015-03-27 02:07:36Z youyi $
+ * $Id: auth.mdl.php 5969 2014-07-30 13:04:57Z youyi $
  */
 
 if(!defined('__CORE_DIR')){
@@ -35,7 +35,7 @@ class Mdl_Member_Auth extends Model
      * @param   $u  用户名/邮箱
      * @param   $p  密码{明文密码}
      */
-    public function login($u, $p, $l=null, $ismd5=false, $keep=false)
+    public function login($u, $p, $l=null, $ismd5=false, $keep=false,$type=0)
     {
         $passwd =$ismd5 ? $p : md5($p);
         if($l === null){
@@ -57,7 +57,7 @@ class Mdl_Member_Auth extends Model
                     }
                     $m = $uc;
                     K::M('member/member')->create($uc, true);
-                }else if(($uc['passwd'] != $passwd) || ($m['uc_uid'] != $uc['uid'])){
+                }else if(($m['passwd'] != $passwd) || ($m['uc_uid'] != $uc['uid'])){
                     $m['passwd'] = $uc['passwd'];
                     $m['uc_uid'] = $uc['uid'];
                     K::M('member/member')->update($m['uid'], array('passwd'=>$passwd, 'uc_uid'=>$uc['uid']), true);
@@ -71,7 +71,8 @@ class Mdl_Member_Auth extends Model
                 $token = $this->create_token($this->uid, $passwd);
                 $this->cookie->delete('TOKEN');
                 $this->cookie->delete('UNAME');
-                $this->cookie->set('TOKEN', $token, 0);
+                $expire = $keep ? 2592000 : 0;
+                $this->cookie->set('TOKEN', $token, $expire);
                 $this->cookie->set('UNAME', $this->uname, NULL);
                 K::M('member/member')->update($m['uid'], array('lastlogin'=>__CFG::TIME, 'loginip'=>__IP), true);
                 if($m['uc_uid']){
@@ -108,22 +109,241 @@ class Mdl_Member_Auth extends Model
             $m['group'] = $this->group;
             $m['group_name'] = $this->group['group_name'];
             $this->member = $m;
-            $expire = $keep ? 2592000 : 0;
-            $token = $this->create_token($this->uid, $passwd);
-            $this->cookie->delete('TOKEN');
-            $this->cookie->delete('UNAME');            
-            $this->cookie->set('TOKEN', $token, $expire);
-            $this->cookie->set('UNAME', $this->uname, NULL);
-            K::M('member/member')->update($m['uid'], array('lastlogin'=>__CFG::TIME, 'loginip'=>__IP), true);
-            return $m;
+			if($type == 1){
+				if($m['from'] != 'company' && $m['from'] != 'shop'){
+					$this->err->add('该账号不是商家账号',113);
+					$this->cookie->delete('TOKEN');
+					$this->cookie->delete('UNAME'); 
+					return false;
+				}     
+			}else if($type==2){
+				if($m['from'] != 'gz' && $m['from'] != 'designer' && $m['from'] != 'mechanic'){
+					$this->err->add('该账号不是服务商账号',113);
+					$this->cookie->delete('TOKEN');
+					$this->cookie->delete('UNAME');  
+					return false;
+				}
+				
+			}
+			$expire = $keep ? 2592000 : 0;
+			$token = $this->create_token($this->uid, $passwd);
+			$this->cookie->delete('TOKEN');
+			$this->cookie->delete('UNAME');            
+			$this->cookie->set('TOKEN', $token, $expire);
+			$this->cookie->set('UNAME', $this->uname, NULL);
+			K::M('member/member')->update($m['uid'], array('lastlogin'=>__CFG::TIME, 'loginip'=>__IP), true);
+			return $m;
+			
         }
         return false;       
     }
 
+	//商家和装修公司登陆
+
+	 public function loginshop($u, $p, $l=null, $ismd5=false, $keep=false)
+    {
+        $passwd =$ismd5 ? $p : md5($p);
+        if($l === null){
+            if(K::M('verify/check')->mail($u)){
+                $l = 'mail';
+            }else{
+                $l = 'uname';
+            }
+        }
+        if(defined('UC_OPEN') && UC_OPEN){
+            $isuid = ($l == 'uid' ? 1 : (($l == 'mail' || $l == 'email') ? 2 : 3));
+            $uc = K::M('member/ucenter')->login($u, $passwd, $isuid);
+            if($uc['uid'] > 0){
+                if(!$m = K::M('member/member')->member($uc['uname'], 'uname')){
+                    $uc['uc_uid'] = $uc['uid'];
+                    $max_uid = K::M('member/member')->max_uid();
+                    if($max_uid >= $m['uid']){
+                        $uc['uid'] = $max_uid + 1;
+                    }
+                    $m = $uc;
+                    K::M('member/member')->create($uc, true);
+                }else if(($m['passwd'] != $passwd) || ($m['uc_uid'] != $uc['uid'])){
+                    $m['passwd'] = $uc['passwd'];
+                    $m['uc_uid'] = $uc['uid'];
+                    K::M('member/member')->update($m['uid'], array('passwd'=>$passwd, 'uc_uid'=>$uc['uid']), true);
+                }
+                $this->uid = $m['uid'];
+                $this->uname = $m['uname'];
+                $this->group = K::M('member/group')->group($m['group_id']);
+                $m['group'] = $this->group;
+                $m['group_name'] = $this->group['group_name'];
+                $this->member = $m;
+				if($m['from'] == 'company' || $m['from'] == 'shop'){
+					$token = $this->create_token($this->uid, $passwd);
+					$this->cookie->delete('TOKEN');
+					$this->cookie->delete('UNAME');
+                    $expire = $keep ? 2592000 : 0;
+					$this->cookie->set('TOKEN', $token, $expire);
+					$this->cookie->set('UNAME', $this->uname, NULL);
+					K::M('member/member')->update($m['uid'], array('lastlogin'=>__CFG::TIME, 'loginip'=>__IP), true);
+					if($m['uc_uid']){
+						if($synlogin = K::M('member/ucenter')->synlogin($m['uc_uid'])){
+							$this->err->set_js($synlogin);
+						}
+					}
+					return $m;          
+				}else{
+					 $this->err->add('很抱歉,该用户不是商家类型',114);
+				}
+
+                
+            }else if($uc['uid'] != -1){
+                $this->err->add('登录名或密码不正确!!', 121);
+                return false;
+            }
+        }
+        if(!$m = K::M('member/member')->member($u, $l)){
+            $this->err->add('登录名或密码不正确!!',111);
+        }else if($m['passwd'] != $passwd){
+            $this->err->add('登录名或密码不正确!!',112);
+        }else if($m['closed'] == 3){
+            $this->err->add('很抱歉,访用户已经删除!!',112);
+        }else if($m['closed'] == 2){
+            $this->err->add('很抱歉,该用户已锁定不能登录',113);
+        }else{
+            if(defined('UC_OPEN') && UC_OPEN){
+                if($uc_uid = K::M('member/ucenter')->create($m['uname'], $p, $m['mail'])){
+                    K::M('member/member')->update($m['uid'], array('uc_uid'=>$uc_uid));
+                    if($synlogin = K::M('member/ucenter')->synlogin($uc_uid)){
+                        $this->err->set_js($synlogin);
+                    }
+                }
+            }
+            $this->uid = $m['uid'];
+            $this->uname = $m['uname'];
+            $this->group = K::M('member/group')->group($m['group_id']);
+            $m['group'] = $this->group;
+            $m['group_name'] = $this->group['group_name'];
+            $this->member = $m;
+			if($m['from'] == 'company' || $m['from'] == 'shop'){
+				$expire = $keep ? 2592000 : 0;
+				$token = $this->create_token($this->uid, $passwd);
+				$this->cookie->delete('TOKEN');
+				$this->cookie->delete('UNAME');            
+				$this->cookie->set('TOKEN', $token, $expire);
+				$this->cookie->set('UNAME', $this->uname, NULL);
+				K::M('member/member')->update($m['uid'], array('lastlogin'=>__CFG::TIME, 'loginip'=>__IP), true);
+				return $m;
+			}else{
+				 $this->err->add('很抱歉,该用户不是商家类型',114);
+			}
+        }
+        return false;       
+    }
+
+	//技工 设计师 工长登陆
+
+	 public function logindmember($u, $p, $l=null, $ismd5=false, $keep=false)
+    {
+        $passwd =$ismd5 ? $p : md5($p);
+        if($l === null){
+            if(K::M('verify/check')->mail($u)){
+                $l = 'mail';
+            }else{
+                $l = 'uname';
+            }
+        }
+        if(defined('UC_OPEN') && UC_OPEN){
+            $isuid = ($l == 'uid' ? 1 : (($l == 'mail' || $l == 'email') ? 2 : 3));
+            $uc = K::M('member/ucenter')->login($u, $passwd, $isuid);
+            if($uc['uid'] > 0){
+                if(!$m = K::M('member/member')->member($uc['uname'], 'uname')){
+                    $uc['uc_uid'] = $uc['uid'];
+                    $max_uid = K::M('member/member')->max_uid();
+                    if($max_uid >= $m['uid']){
+                        $uc['uid'] = $max_uid + 1;
+                    }
+                    $m = $uc;
+                    K::M('member/member')->create($uc, true);
+                }else if(($m['passwd'] != $passwd) || ($m['uc_uid'] != $uc['uid'])){
+                    $m['passwd'] = $uc['passwd'];
+                    $m['uc_uid'] = $uc['uid'];
+                    K::M('member/member')->update($m['uid'], array('passwd'=>$passwd, 'uc_uid'=>$uc['uid']), true);
+                }
+                $this->uid = $m['uid'];
+                $this->uname = $m['uname'];
+                $this->group = K::M('member/group')->group($m['group_id']);
+                $m['group'] = $this->group;
+                $m['group_name'] = $this->group['group_name'];
+                $this->member = $m;
+				if($m['from'] == 'gz' || $m['from'] == 'mechanic' || $m['from'] == 'designer'){
+					$token = $this->create_token($this->uid, $passwd);
+					$this->cookie->delete('TOKEN');
+					$this->cookie->delete('UNAME');
+                    $expire = $keep ? 2592000 : 0;
+					$this->cookie->set('TOKEN', $token, $expire);
+					$this->cookie->set('UNAME', $this->uname, NULL);
+					K::M('member/member')->update($m['uid'], array('lastlogin'=>__CFG::TIME, 'loginip'=>__IP), true);
+					if($m['uc_uid']){
+						if($synlogin = K::M('member/ucenter')->synlogin($m['uc_uid'])){
+							$this->err->set_js($synlogin);
+						}
+					}
+					return $m;          
+				}else{
+					 $this->err->add('很抱歉,该用户不是服务人员类型',114);
+				}
+
+                
+            }else if($uc['uid'] != -1){
+                $this->err->add('登录名或密码不正确!!', 121);
+                return false;
+            }
+        }
+        if(!$m = K::M('member/member')->member($u, $l)){
+            $this->err->add('登录名或密码不正确!!',111);
+        }else if($m['passwd'] != $passwd){
+            $this->err->add('登录名或密码不正确!!',112);
+        }else if($m['closed'] == 3){
+            $this->err->add('很抱歉,访用户已经删除!!',112);
+        }else if($m['closed'] == 2){
+            $this->err->add('很抱歉,该用户已锁定不能登录',113);
+        }else{
+            if(defined('UC_OPEN') && UC_OPEN){
+                if($uc_uid = K::M('member/ucenter')->create($m['uname'], $p, $m['mail'])){
+                    K::M('member/member')->update($m['uid'], array('uc_uid'=>$uc_uid));
+                    if($synlogin = K::M('member/ucenter')->synlogin($uc_uid)){
+                        $this->err->set_js($synlogin);
+                    }
+                }
+            }
+            $this->uid = $m['uid'];
+            $this->uname = $m['uname'];
+            $this->group = K::M('member/group')->group($m['group_id']);
+            $m['group'] = $this->group;
+            $m['group_name'] = $this->group['group_name'];
+            $this->member = $m;
+			if($m['from'] == 'gz' || $m['from'] == 'mechanic' || $m['from'] == 'designer'){
+				$expire = $keep ? 2592000 : 0;
+				$token = $this->create_token($this->uid, $passwd);
+				$this->cookie->delete('TOKEN');
+				$this->cookie->delete('UNAME');            
+				$this->cookie->set('TOKEN', $token, $expire);
+				$this->cookie->set('UNAME', $this->uname, NULL);
+				K::M('member/member')->update($m['uid'], array('lastlogin'=>__CFG::TIME, 'loginip'=>__IP), true);
+				return $m;
+			}else{
+				 $this->err->add('很抱歉,该用户不是服务人员类型',114);
+			}
+        }
+        return false;       
+    }
+
+
+	
+
     public function loginout()
     {
         $this->cookie->delete('TOKEN');
-        return true;            
+        if(defined('UC_OPEN') && UC_OPEN){
+            $this->err->set_js(K::M('member/ucenter')->synlogout($this->member['uc_uid']));
+        }
+        return true;
     }
     
     public function manager($uid){

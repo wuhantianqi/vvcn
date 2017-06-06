@@ -2,7 +2,7 @@
 /**
  * Copy Right IJH.CC
  * Each engineer has a duty to keep the code elegant
- * $Id: case.ctl.php 12909 2015-07-03 10:09:32Z maoge $
+ * $Id$
  */
 
 if(!defined('__CORE_DIR')){
@@ -14,13 +14,40 @@ class Ctl_Mobile_Case extends Ctl_Mobile
 
     public function index()
     {
-        $this->items();
+		$attr_values = K::M('data/attr')->attrs_by_from('zx:case', true);
+		foreach($attr_values as $k=>$v){
+            $attr_value_ids[$k] = 0;
+            foreach($attr_vids as $vv){
+                if($v['values'][$vv]){
+                    $attr_value_ids[$k] = $vv;
+                    $attr_ids[$k] = $vv;
+                    $attrs[$k] = $v['values'][$vv];
+                    $attr_value_titles[$k] = $v['values'][$vv]['title'];
+                }
+            }
+        }
+        $attr_vids = $attr_ids;    
+        foreach($attr_values as $k=>$v){
+            $vids = $attr_value_ids;
+            $vids[$k] = 0;
+            $vids['page'] = 1;
+            $v['link'] = $this->mklink('mobile/case:items', $vids);
+            foreach($v['values'] as $kk=>$vv){
+                $vids[$k] = $kk;
+                $vv['link'] = $this->mklink('mobile/case:items', $vids);
+                $v['values'][$kk] = $vv;
+            }
+            $attr_values[$k] = $v;
+        }
+
+		$this->pagedata['attr_values'] = $attr_values;
+        $this->tmpl = 'mobile/case/index.html';
     }
 
     public function items($page=1)
     {
-        $pager = $filter = $attrs = $attr_ids = $attr_vids = $attr_value_ids= array();
-        $attr_values = K::M('data/attr')->attrs_by_from('zx:case');
+        $pager = $filter = $attrs = $attr_ids = $attr_vids = $attr_value_ids = $attr_value_titles = array();
+        $attr_values = K::M('data/attr')->attrs_by_from('zx:case', true);
         $uri = $this->request['uri'];
         if(preg_match('/case-items-([\d\-]+).html/i', $uri, $m)){
             if($m[1]){
@@ -36,6 +63,7 @@ class Ctl_Mobile_Case extends Ctl_Mobile
                     $attr_value_ids[$k] = $vv;
                     $attr_ids[$k] = $vv;
                     $attrs[$k] = $v['values'][$vv];
+                    $attr_value_titles[$k] = $v['values'][$vv]['title'];
                 }
             }
         }
@@ -56,7 +84,7 @@ class Ctl_Mobile_Case extends Ctl_Mobile
         $pager['page'] = $page = max((int)$page, 1);
         $pager['limit'] = $limit = 20;
         $pager['count'] = $count = 0;
-        //$filter['city_id'] = array($this->request['city_id'], '0');
+        $filter['city_id'] = array($this->request['city_id'], '0');
         $filter['closed'] = 0;
         $filter['audit'] = 1;
         if($attr_ids){
@@ -76,6 +104,14 @@ class Ctl_Mobile_Case extends Ctl_Mobile
         $this->pagedata['attr_values'] = $attr_values;
         $this->pagedata['attrs'] = $attrs;
         $this->pagedata['pager'] = $pager;
+        $seo = array('attr'=>'', 'page'=>'');
+        if($attr_value_titles){
+            $seo['attr'] = implode('_', $attr_value_titles);
+        }
+        if($page > 1){
+            $seo['page'] = $page;
+        }    
+        $this->seo->init('case', $seo);        
         $this->tmpl = 'mobile/case/items.html';
     }
 
@@ -92,6 +128,13 @@ class Ctl_Mobile_Case extends Ctl_Mobile
 		$this->pagedata['case'] = $case;
 		$pager['backurl'] = $this->mklink('mobile/case');
 		$this->pagedata['pager'] = $pager;
+        $this->seo->init('case_detail',array(
+            'title' => $case['title'],
+            'home_name'=>$detail['home_name'],
+            'seo_title' => $case['seo_title'],
+            'seo_keywords' => $case['seo_keywords'],
+            'seo_description' => $case['seo_description'],
+        ));        
 		$this->tmpl = 'mobile/case/detail.html';
 	}
 }

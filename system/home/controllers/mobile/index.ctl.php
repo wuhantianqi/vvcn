@@ -2,7 +2,7 @@
 /**
  * Copy Right IJH.CC
  * Each engineer has a duty to keep the code elegant
- * $Id: index.ctl.php 9372 2015-03-26 06:32:36Z youyi $
+ * $Id$
  */
 
 if(!defined('__CORE_DIR')){
@@ -12,9 +12,14 @@ if(!defined('__CORE_DIR')){
 class Ctl_Mobile_Index extends Ctl_Mobile
 {
     
-    public function index()
+    public function index($id=null)
     {
+		$attr_values = K::M('data/attr')->attrs_by_from('zx:case');
+		$this->pagedata['attr_values'] = $attr_values;
         $this->seo->init('mobile');
+		if($id && $id != $this->uid){
+			$this->cookie->set('fenxiaoid', $id);
+		}
         $this->tmpl = 'mobile/index.html';
     }
 
@@ -32,9 +37,19 @@ class Ctl_Mobile_Index extends Ctl_Mobile
             $this->system->cookie->delete('force_web');
             $this->system->cookie->delete('force_mobile');
             $this->system->cookie->set('force_mobile', 1);
-            header('Location:'.$mobile['url']);
+
+            $url = $mobile['url'];
+            if($site['multi_city']){
+                $city = $this->request['city'];
+                if(substr($mobile['url'], -7) == '/mobile'){
+                    $url = $city['siteurl'].'/mobile';
+                }else{
+                    $url = $mobile['url'].'/'.$city['py'];
+                }
+            }
+            header("Location:{$url}");
             exit;            
         }
     } 
-    
+
 }

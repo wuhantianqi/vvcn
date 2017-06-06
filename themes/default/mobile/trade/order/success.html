@@ -1,10 +1,12 @@
 <{include file="mobile/block/header.html"}>
-<div class="tips"><span class="success">您的订单提交成功！</span></div>
-<div class="pding fuk_btn">
+<section id="" class="page_center_box">
+<div class="pd10 fuk_btn">
+	<h2 class="pd_lt pointcl">您的订单提交成功！</h2>
 	<div class="all_price mb10">订单号：<{$order.order_no}></div>
-	<a href="<{link ctl='mobile/trade/order:detail' arg0=$order.order_no}>" class="btn fukbtn_full">查看订单</a>
-	<a href="<{link ctl='mobile/trade/order:payment' arg0=$order.order_no}>" class="btn subbtn_full">立即支付</a>
+	<a href="<{link ctl='mobile/trade/order:detail' arg0=$order.order_no}>" class="long_btn mb10 overbtn">查看订单</a>
+	<a href="<{link ctl='mobile/trade/order:payment' arg0=$order.order_no}>" class="long_btn">立即支付</a>
 </div>
+</section>
 
 <{include file="mobile/block/sfooter.html"}>
 </body>

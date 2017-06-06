@@ -12,30 +12,24 @@
 		<div class="mb20">
 			<h2>优惠信息</h2>
 			<ul class="line_type main_youhui">
-            	<{foreach from=$items item=item}>
-                	<{if $item@index%3 == 0}>
-                		<li class="first">
-                    <{else}>
-                    	<li>
-                    <{/if}>
+            	<{foreach from=$items item=item}>                	
+                <li<{if $item@index%3 == 0}> class="first"<{/if}>>
                     <{if $item.ltime>time() && $item.stime<time()}>
-                        <span class="ico_list be_paint"></span>
+                    <span class="ico_list be_paint"></span>
                     <{else}>
-                    	<span class="ico_list over_paint"></span>
+                    <span class="ico_list over_paint"></span>
                     <{/if}>
-                        <a href="<{link ctl='youhui:detail' arg0=$item.youhui_id}>"  target="_blank"><img src="<{$pager.img}>/<{$item.photo}>" /></a>
-                        <h3><a href="<{link ctl='youhui:detail' arg0=$item.youhui_id}>"  target="_blank"><{$item.title|cutstr:25}></a></h3>
-                       
-                            <p class="colorbg"><span class="lt tit"><font class="youhui_time ico_list"></font><span remaintime="<{$item.ltime}>"></span></span>
-                                <{if $item.ltime>time() && $item.stime<time()}>
-                                <a href="<{link ctl='youhui:detail' arg0=$item.youhui_id}>" class="btn_sub_sm rt btn">立即参团</a>
-                                <{else}>
-                                <a href="<{link ctl='youhui:detail' arg0=$item.youhui_id}>" class="youhui_over_btn rt btn">已结束</a></p>
-                                <{/if}>
-                            </p>
-                    </li>
-                <{/foreach}>
-                
+                    <a href="<{link ctl='youhui:detail' arg0=$item.youhui_id}>"  target="_blank"><img src="<{$pager.img}>/<{$item.photo}>" /></a>
+                    <h3><a href="<{link ctl='youhui:detail' arg0=$item.youhui_id}>"  target="_blank"><{$item.title|cutstr:25}></a></h3>                   
+                    <p class="colorbg"><span class="lt tit"><font class="youhui_time ico_list"></font><span remaintime="<{$item.ltime}>"></span></span>
+                        <{if $item.ltime>time() && $item.stime<time()}>
+                        <a href="<{link ctl='youhui:detail' arg0=$item.youhui_id}>" class="btn_sub_sm rt btn">立即参团</a>
+                        <{else}>
+                        <a href="<{link ctl='youhui:detail' arg0=$item.youhui_id}>" class="youhui_over_btn rt btn">已结束</a></p>
+                        <{/if}>
+                    </p>
+                </li>
+                <{/foreach}>                
 			</ul>
 			<div class="cl"></div>
 			<{if $pager.pagebar}><div class="page hoverno"><{$pager.pagebar}></div><{/if}>
@@ -43,14 +37,37 @@
 	</div>
 	
 	<div class="side_content rt">
-		<div class="mb10 area">
-			<h3 class="side_tit">推荐装修公司</h3>
+		<{widget id="tenders/fast" title="免费装修设计" from="TSJ"}>
+        <div class="mb10 area">
+			<h3 class="side_tit">装修公司排行榜</h3>
 			<ul class="pding paihang">
-            	<{calldata mdl="company/company" order="score:DESC" city_id=$request.city_id limit=10}>
-                    <li>
-                        <span class="lt"><font class="paihang_num<{if $iteration<=3}> ph_num_cl<{/if}>"><{$iteration}></font><a href="<{$item.company_url}>"><{$item.name|cutstr:35}></a></span>
-                        <span class="rt">信誉度：<font class="fontcl2"><{$item.score}></font></span>
-                    </li>
+                <{calldata mdl="company/company"  city_id=$request.city_id limit=8}>
+				<li>
+                    <span class="lt"><font class="paihang_num<{if $iteration<=3}> ph_num_cl<{/if}>"><{$iteration}></font><a href="<{$item.company_url}>"><{$item.name|cutstr:35}></a></span>
+                    <span class="rt">已投标：<font class="fontcl2"><{$item.tenders_num}></font></span>
+                </li>
+                <{/calldata}>
+			</ul>
+		</div>
+        <div class="mb10 area">
+			<h3 class="side_tit">设计师排行榜</h3>
+			<ul class="pding paihang">
+                <{calldata mdl="designer/designer" city_id=$request.city_id limit=5}>
+				<li>
+                    <span class="lt"><font class="paihang_num<{if $iteration<=3}> ph_num_cl<{/if}>"><{$iteration}></font><a href="<{link ctl='blog'  arg0=$item.uid}>"><{$item.name|cutstr:35}></a></span>
+                    <span class="rt">已投标：<font class="fontcl2"><{$item.tenders_num}></font></span>
+                </li>
+                <{/calldata}>
+			</ul>
+		</div>
+        <div class="mb10 area">
+			<h3 class="side_tit">工长排行榜</h3>
+			<ul class="pding paihang">
+                <{calldata mdl="gz/gz" city_id=$request.city_id limit=5}>
+				<li>
+                    <span class="lt"><font class="paihang_num<{if $iteration<=3}> ph_num_cl<{/if}>"><{$iteration}></font><a href="<{link ctl='gz-detail'  arg0=$item.uid}>"><{$item.name|cutstr:35}></a></span>
+                    <span class="rt">已投标：<font class="fontcl2"><{$item.tenders_num}></font></span>
+                </li>
                 <{/calldata}>
 			</ul>
 		</div>

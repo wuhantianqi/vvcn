@@ -1,0 +1,71 @@
+<{include file="scenter/block/header.html"}>
+<div class="ucenter_t">
+	<ul>
+		<li<{if $pager.type=='1'}> class="on"<{/if}>><a href="<{link ctl='scenter/member/packet:items' arg0='1'}>" >未使用</a>
+		</li>
+		<li<{if $pager.type=='2'}> class="on"<{/if}>><a href="<{link ctl='scenter/member/packet:items' arg0='2'}>">已使用</a>
+		</li>
+		<li<{if $pager.type=='3'}> class="on"<{/if}>><a href="<{link ctl='scenter/member/packet:items' arg0='3'}>">已过期</a>
+		</li>
+		<span class="r"><a class="pbtn" onclick="create()">领取红包</a></span>
+	</ul>
+</div>
+<div class="ucenter_c">
+	<table width="100%" border="0" cellspacing="0" cellpadding="0" class="table">
+		<tr>
+			<th class="w-100">ID</th>
+			<th>标题</th>
+			<th class="w-100">类型</th>
+			<th class="w-100">可用范围</th>
+			<th class="w-100">最低消费</th>
+			<th class="w-100">价格</th>
+			<th class="w-100">过期时间</th>
+			
+				</th>
+		</tr>
+		<{foreach $items as $item}>
+		<tr style="text-align:center">
+			<td><{$item.id}></td>
+			<td><{$item.title}></td>
+			<td><{if $item.type == 1}>平台红包<{else}>店铺红包<{/if}></td>
+			<td><{if $item.type == 1}><{if $item.cate_id == 0}>平台通用<{else}><{$cate[$item.cate_id].title}><{/if}><{else}><a href="<{link ctl='mall/shop' arg0=$item.shop_id}>" target="_blank"><{$shop[$item.shop_id].title}></a><{/if}></td>
+			<td><{$item.man}></td>
+			<td><{$item.price}></td>
+			<td><{$item.ltime|format:'Y-m-d'}></td>
+		</tr>
+		<{foreachelse}>
+		<tr>
+			<td colspan="10">
+				<p class="tips"><span class="notice">没有您的红包</span></p>
+			</td>
+		</tr>
+		<{/foreach}>
+	</table>
+	<p class="page"><{$pager.pagebar}></p>
+	<div id="packet" class="ui-widget-content-packed" >
+		<div class="ui-widget-title">
+			<h3 class="lt maincl">请填写code码</h3>
+			<a href="javascript:;" onclick="close_packet()" class="rt close">×</a>
+			<div class="cl"></div>
+		</div>
+		<form id="data-form">
+			<div class="codetext"><span>code码</span>
+				<input id="title" type="text" name="data[code]" class="input">
+			</div>
+			<div class="codebtn">
+				<input id="submit_btn" action="" mini-submit="#data-form" type="button" value="提交数据" class="btn green_btn" />
+			</div>
+		</form>
+	</div>
+</div>
+<script>
+	function create(){
+		$("#packet").css('display','block'); 
+		$("#submit_btn").attr('action','<{link ctl="scenter/member/packet:create"}>');
+	}
+	
+	function close_packet(){
+		$("#packet").css('display','none');
+	}
+</script> 
+<{include file="scenter/block/footer.html"}>

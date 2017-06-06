@@ -1,0 +1,51 @@
+<{include file="block/header.html"}>
+<link href="/themes/default/topics/static/style/topics.css" rel="stylesheet" type="text/css">
+<div class="subwd">
+	<div class="topics_date">
+		<div class="date_step"><span>装修贷计算器，算算更放心</span></div>
+		<div class="date_cont">
+			<div class="info">
+				<form action="<{link ctl='topics:reg5' http='base'}>" method="post"  ENCTYPE="multipart/form-data" onsubmit="return check()">
+					<input type="hidden" name="topics_id" value="<{$topics_id}>">
+					<dl>
+						<dt><em class="pointcl">*</em>贷款金额：</dt>
+						<dd>
+							<input class="input text normal" id='money'  name="data[money]" value="<{$topics.money}>"  placeholder="请输入贷款金额" type="text">
+						</dd>
+					</dl>
+					<dl>
+						<dt><em class="pointcl">*</em>贷款周期：</dt>
+						<dd>
+							<select name="data[zq]" class="select text normal" >
+								<{foreach $zq as $k => $item}> <option <{if $topics.zq == $k}>  selected="selected" <{/if}> value="<{$k}>"><{$item.title}>
+								</option>
+								<{/foreach}>
+							</select>
+						</dd>
+					</dl>
+					<!---新增---->
+					
+					<div class="btnbar">
+						<input class="btn btn_sub_big" type="submit" value="立刻申请" />
+					</div>
+				</form>
+			</div>
+		</div>
+	</div>
+</div>
+<script language="javascript" type="text/javascript">
+	function check() {
+        var money = $("#money").val();
+		if(isNaN(money)){
+			Widget.MsgBox.error("贷款金额有误");
+			return false; 	
+		}
+		
+		if(money<1000 || money>200000){
+			Widget.MsgBox.error("贷款金额有误");
+			return false; 	
+		}
+        return true;  
+    }  
+</script> 
+<{include file="block/small-footer.html"}> 

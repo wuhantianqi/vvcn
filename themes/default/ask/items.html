@@ -40,7 +40,6 @@
                     <{foreach $items as $item}> 
                     <li><a href="<{link ctl='ask:detail' arg0=$item.ask_id}>" class="lt"><{$item.title|cutstr:100}></a>
                     <p class="rt graycl"><span>回答(<font class="fontcl2"><{$item.answer_num}></font>)</span><span><{$item.dateline|format}></span></p>
-					</li>
                     <{/foreach}>
 				</ul>
 				<{if $pager.pagebar}><div class="page hoverno"><{$pager.pagebar}></div><{/if}>

@@ -2,7 +2,7 @@
 /**
  * Copy Right IJH.CC
  * Each engineer has a duty to keep the code elegant
- * $Id: home.mdl.php 9378 2015-03-27 02:07:36Z youyi $
+ * $Id$
  */
 
 if(!defined('__CORE_DIR')){
@@ -27,6 +27,9 @@ class Mdl_Home_Home extends Mdl_Table
     {
         if($city = K::M('data/city')->city($row['city_id'])){
             $row['city_name'] = $city['city_name'];
+        }
+        if($area = K::M('data/area')->area($row['area_id'])){
+            $row['area_name'] = $area['area_name'];
         }
         $row['status_title'] = $this->_status[$row['status']];
         return $row;

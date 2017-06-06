@@ -1,0 +1,193 @@
+<{assign var="tpl_page_title" value="招标详情"}>
+<{include file="mobile/block/header.html"}>
+<header class="control">
+	<i class="left"><a href="<{if $pager.backurl}><{$pager.backurl}><{else}><{link ctl='mobile/index'}><{/if}>" id="gobackIco"></a></i>
+    <div class="title">招标详情</div>
+    <i class="right"></i>
+</header>
+
+
+<section id="" class="page_center_box">
+<{if $detail.zxb_id}> <div class="loginInfor_tishi">该业主报名参加了装修保服务，只允许装修公司进投标</div><{/if}>
+<{if $group.priv.tenders_look <= 0}> <div class="loginInfor_tishi">您是【<b class="pointcl"><{$pager.audit_title}></b>】不能进行投标</div><{/if}>
+	<div class="mb10 center_tenders">
+		<table width="100%" cellpadding="0" cellspacing="0">
+       
+			<tr>
+				<th>
+				标题
+				</th>
+				<td>
+				<{$detail.title|default:'--'}>
+				</td>
+			</tr>
+            <tr>
+				<th>
+				会员
+				</th>
+				<td>
+				<{if $detail.uid}><{$member.uname}>(UID:<{$detail.uid}>)<{else}>--<{/if}>
+				</td>
+			</tr>
+            	<th>
+				装修时间
+				</th>
+				<td>
+				<{$detail.zx_time|default:'--'}>
+				</td>
+			</tr>
+			<tr>
+				<th>
+				看标所需金币
+				</th>
+				<td>
+				<{$detail.gold}>
+				</td>
+			</tr>
+            <tr>
+				<th>
+				最大投标数
+				</th>
+				<td>
+				<{$detail.max_look}>
+				</td>
+			</tr>
+			<tr>
+				<th>
+				看标的企业数
+				</th>
+				<td>
+				<{$detail.looks}>
+				</td>
+			</tr>
+			<tr>
+				<th>
+				IP
+				</th>
+				<td>
+				<{if $detail.gold <= 0 && $pager.audit_tenders >=0}><{$detail.clientip}></b>(<{$detail.clientip|iplocal}>)<{elseif $detail.looked}><{$detail.clientip}></b>(<{$detail.clientip|iplocal}>)<{else}><{$detail.clientip|cutstr:6:"******"}></b>(<{$detail.clientip|iplocal}>)<{/if}>
+				</td>
+			</tr>
+			<tr>
+				<th>
+				创建时间
+				</th>
+				<td>
+				<{$detail.dateline|format}>
+				</td>
+			</tr>
+            <tr>
+				<th>
+				联系人
+				</th>
+				<td>
+				<{$detail.contact|default:'--'}>
+				</td>
+			</tr>
+            
+             <tr>
+				<th>
+				状态
+				</th>
+				<td>
+				<{if $detail.status}><b>已签单</b><{else}><b class="blue">招标中</b><{/if}>
+				</td>
+			</tr>
+            <tr>
+				<th>
+				地址
+				</th>
+				<td>
+				<{$detail.city_name|default:'--'}>  <{$detail.area_name|default:'--'}>  
+            <{if $detail.gold <= 0 && $pager.audit_tenders >=0}><{$detail.addr|default:'--'}><{elseif $detail.looked}><{$detail.addr|default:'--'}><{else}><b class="pointcl">* * * * * *</b><{/if}>
+				</td>
+			</tr>
+            <tr>
+				<th>
+				电话
+				</th>
+				<td>
+				 <{if $detail.gold <= 0 && $pager.audit_tenders >=0}><{$detail.mobile}><{elseif $detail.looked}><{$detail.mobile}> &nbsp;&nbsp;[<strong class="pointcl">已购买</strong>]<{else}><b class="pointcl"><{$detail.mobile|cutstr:6}></b>&nbsp;&nbsp;&nbsp;
+                        <{if $group.priv.tenders_look <= 0}>
+                        <input type="button" class="pbtn fontcl2" value="您没有权限投标" disabled="disabled"/>
+                        <{elseif $detail.zxb_id}>
+                         <input type="button" class="pbtn fontcl2" value="您没有权限投标" disabled="disabled"/>
+                        <{else}>
+                        <a href="<{link ctl='mobile/dcenter/tenders-tenders_look' arg0=$detail.tenders_id http='ajax'}>"  mini-load="立即投标" mini-width="400" class="pbtn fontcl2"/>购买后可以查看联系方式</a>
+                        <{/if}>
+                        <{/if}>
+				</td>
+			</tr>
+            <tr>
+				<th>
+				小区名称
+				</th>
+				<td>
+				<{$detail.home_name|default:'--'}>
+				</td>
+			</tr>
+            <tr>
+				<th>
+				房屋面积
+				</th>
+				<td>
+				<{$detail.area|default:'--'}>㎡
+				</td>
+			</tr>
+            <tr>
+				<th>
+				招标类型
+				</th>
+				<td>
+				<{$detail.type_title|default:'--'}>
+				</td>
+			</tr>
+               
+            <tr>
+				<th>
+				预算范围
+				</th>
+				<td>
+				<{$detail.budget_title|default:'--'}>
+				</td>
+			</tr>
+            <tr>
+				<th>
+				服务需求
+				</th>
+				<td>
+				<{$detail.service_title|default:'--'}>
+				</td>
+			</tr>
+             <tr>
+				<th>
+				空间户型
+				</th>
+				<td>
+				<{$detail.house_type_title|default:'--'}>
+				</td>
+			</tr>
+             <tr>
+				<th>
+				装修方式
+				</th>
+				<td>
+				<{$detail.way_title|default:'--'}>
+				</td>
+			</tr>
+             <tr>
+				<th>
+				备注
+				</th>
+				<td>
+				<{$detail.remark|default:'--'}>
+				</td>
+			</tr>
+		</table>
+		
+	</div>
+</section>
+
+</body>
+</html>
+

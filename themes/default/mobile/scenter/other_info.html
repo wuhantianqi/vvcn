@@ -1,0 +1,13 @@
+
+<{assign var="tpl_page_title" value="请填写<{$MEMBER.from_title}>资料"}>
+<{include file="mobile/block/header.html"}>
+<header class="control">
+	<i class="left"><a href="<{if $pager.backurl}><{$pager.backurl}><{else}><{link ctl='mobile/index'}><{/if}>" id="gobackIco"></a></i>
+    <div class="title">资料填写</div>
+    <i class="right"></i>
+</header>
+<section id="" class="page_center_box">
+	<div class="no_record">请到电脑版去完善<{$MEMBER.from_title}>资料</div>
+</section>
+</body>
+</html>

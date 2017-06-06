@@ -42,6 +42,7 @@
     $("[quantity]").click(function(e){
         e.stopPropagation();e.preventDefault();
         var a = $(this).attr("quantity").split("/");
+
         var number = parseInt($("#product_number_"+a[1]).val(), 10);
         Widget.MsgBox.success("正在更新购物车");
         Widget.MsgBox.load("正在更新购物车");

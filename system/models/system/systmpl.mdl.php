@@ -2,7 +2,7 @@
 /**
  * Copy Right IJH.CC
  * Each engineer has a duty to keep the code elegant
- * $Id: systmpl.mdl.php 9378 2015-03-27 02:07:36Z youyi $
+ * $Id: systmpl.mdl.php 5581 2014-06-21 10:42:25Z youyi $
  */
 
 if(!defined('__CORE_DIR')){
@@ -15,6 +15,7 @@ class Mdl_System_Systmpl extends Mdl_Table
     protected $_table = 'systmpl';
     protected $_pk = 'systmpl_id';
     protected $_cols = 'systmpl_id,is_open,title,intro,from,key,tmpl,tmpl1,tmpl2,dateline';
+    protected $_orderby = array('systmpl_id'=>'ASC');
 
     protected $_pre_cache_key = 'system_systmpl_list';    
     

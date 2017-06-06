@@ -1,0 +1,68 @@
+<{assign var="tpl_page_title" value="订单列表"}>
+<{include file="mobile/block/header.html"}>
+<header class="control"> <i class="left"><a href="<{if $pager.backurl}><{$pager.backurl}><{else}><{link ctl='mobile/index'}><{/if}>" id="gobackIco"></a></i>
+	<div class="title">订单列表</div>
+	<i class="right"><a onclick="create()"  class="signupIco">领取红包</a></i> </header>
+<div id="htSearch-bar">
+	<ul>
+		<li class="list <{if $pager.type=='1'}> on<{/if}>"><a href="<{link ctl='ucenter/packet:items' arg0='1'}>" >未使用</a> </li>
+		<li class="list <{if $pager.type=='2'}>on<{/if}>"><a href="<{link ctl='ucenter/packet:items' arg0='2'}>">已使用</a> </li>
+		<li class="list <{if $pager.type=='3'}>on<{/if}>"><a href="<{link ctl='ucenter/packet:items' arg0='3'}>">已过期</a> </li>
+	</ul>
+</div>
+<section id="" class="page_center_box">
+	<div class="mt10"> <{foreach $items as $item}>
+		<div class="redbag_cont">
+			<div class="redbag_box redbag_clbox">
+				<h4 class="pointcl overflow_clear"><small>￥</small><{$item.price}></h4>
+				<ul>
+					<li class="overflow_clear">
+						<p><{$item.title}></p>
+					</li>
+					<li class="overflow_clear">
+						<p><{if $item.type == 1}>平台红包<{else}>店铺红包<{/if}></p>
+					</li>
+					<li class="overflow_clear">
+						<p><{if $item.type == 1}><{if $item.cate_id == 0}>平台通用<{else}><{$cate[$item.cate_id].title}><{/if}><{else}><a href="<{link ctl='mall/shop' arg0=$item.shop_id}>" target="_blank"><{$shop[$item.shop_id].title}></a><{/if}></p>
+					</li>
+					<li class="overflow_clear">
+						<p>满<{$item.man}>元可用</p>
+					</li>
+				</ul>
+				<p class="overflow_clear txtRt">过期时间：<{$item.ltime|format:'Y-m-d'}></p>
+			</div>
+		</div>
+		<{foreachelse}>
+		<p class="tips"><span class="pointcl">没有您的红包</span></p>
+		<{/foreach}> </div>
+	<p class="page"><{$pager.pagebar}></p>
+	<div id="packet" class="ui-widget-content">
+		<div class="ui-widget-title">
+			<h3 class="fl maincl">请填写code码</h3>
+			<a href="javascript:;" onclick="close_packet()" class="fr close">×</a>
+			<div class="clear"></div>
+		</div>
+		<form id="data-form">
+			<div class="codetext"><span>code码</span>
+				<input id="title" type="text" name="data[code]" class="input">
+			</div>
+			<div class="codebtn">
+				<input id="submit_btn" action="" mini-submit="#data-form" type="button" value="提交数据" class="btn green_btn" />
+			</div>
+		</form>
+	</div>
+	<div class="ui-widget-content-bg"></div>
+</section>
+<script>
+	function create(){
+		$("#packet").css('display','block'); 
+		$(".ui-widget-content-bg").css('display','block'); 
+		$("#submit_btn").attr('action','<{link ctl="ucenter/packet:create"}>');
+	}
+	
+	function close_packet(){
+		$("#packet").css('display','none');
+		$(".ui-widget-content-bg").css('display','none'); 
+	}
+</script>
+</body></html>

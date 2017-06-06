@@ -2,7 +2,7 @@
 /**
  * Copy Right IJH.CC
  * Each engineer has a duty to keep the code elegant
- * $Id: site.ctl.php 10941 2015-06-19 14:43:01Z maoge $
+ * $Id$
  */
 
 if(!defined('__CORE_DIR')){
@@ -42,7 +42,7 @@ class Ctl_Ucenter_Company_Site extends Ctl_Ucenter
     public function create()
     {
         $company = $this->ucenter_company();
-        $allow_site = K::M('member/group')->check_priv($company['group_id'], 'allow_site');
+        $allow_site = K::M('member/group')->check_priv($company['group_id'], 'site');
         if(K::M('member/integral')->check('site',  $this->MEMBER) === false){
             $this->err->add('很抱歉您的账户余额不足！', 201);
         }else if($data = $this->checksubmit('data')) {
@@ -98,6 +98,8 @@ class Ctl_Ucenter_Company_Site extends Ctl_Ucenter
                 }               
             }
         } else {
+			$pager['city_id'] = $company['city_id'];
+			$this->pagedata['pager'] = $pager;
             $this->tmpl = 'ucenter/company/site/create.html';
         }        
     }
@@ -163,6 +165,8 @@ class Ctl_Ucenter_Company_Site extends Ctl_Ucenter
                 $this->pagedata['case'] = K::M('case/case')->detail($case_id);
             }
             $this->pagedata['detail'] = $detail;
+			$pager['city_id'] = $company['city_id'];
+			$this->pagedata['pager'] = $pager;
             $this->tmpl = 'ucenter/company/site/edit.html';            
         }
     }

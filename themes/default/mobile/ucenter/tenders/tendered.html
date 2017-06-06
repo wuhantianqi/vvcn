@@ -1,10 +1,24 @@
 <{assign var="tpl_page_title" value="我的招标信息"}>
 <{include file="mobile/block/header.html"}>
-<div class="pding">
-	 <{if !$items}><div class="no_record">暂无记录信息</div><{/if}>
+<div class="pading admin_banner">
+	<a href="<{link ctl='mobile/ucenter:info'}>" style="display:block;">
+	<div class="admin_intro"><img src="<{$pager.img}>/<{$MEMBER.face}>" class="lt" />
+		<div class="lt">
+			<p><{$MEMBER.uname}></p>
+			<p>账户类型：<u><{$MEMBER.from_title}></u> </p>
+			<p>我的金币：<u><{$MEMBER.gold}></u></p>
+		</div>
+		<div class="cl"></div>
+	</div>
+	</a>
+</div>
+
+<div class="yuyue_list">
+	 <{if !$items}><div class="pding"><div class="no_record">暂无记录信息</div></div><{/if}>
+	  <{foreach $items as $item}>
      <div class="yuyue_box zbiao_manage">
      <table cellpadding="0" cellspacing="0">
-	 <{foreach $items as $item}>
+	
                 <tr>
                     <td class="title secend">标题</td>
                     <td><{$item.title}></td>
@@ -29,8 +43,9 @@
                     <td class="title secend">操作</td>
                     <td><a  href="<{link ctl='mobile/ucenter/tenders:tenderDetail' arg0=$item.tenders_id}>" class="btn subbtn_full">查看</a></td>
                 </tr>
-    <{/foreach}>
+   
     </table>
     </div>
+	 <{/foreach}>
 </div>
 <{include file="mobile/block/footer.html"}>

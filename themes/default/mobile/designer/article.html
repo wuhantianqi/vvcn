@@ -1,4 +1,5 @@
-<{assign var="tpl_page_title" value="设计师<{$detail.name}>文章列表"}>
+<{assign var="tpl_page_title" value="设计师"|cat:$detail.name|cat:"文章列表"}>
+<{assign var="seo_sub_title" value="我的文章"}>
 <{include file="mobile/designer/block/header.html"}>
 <div class="pding">
 	<ul class="article_menu">

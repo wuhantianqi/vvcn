@@ -1,16 +1,51 @@
 <{assign var="tpl_page_title" value="预约管理信息"}>
 <{include file="mobile/block/header.html"}>
-<div class="pding">
-<{if !$items}><div class="no_record">暂无记录信息</div><{/if}>
+<header class="control">
+	<i class="left"><a href="<{if $pager.backurl}><{$pager.backurl}><{else}><{link ctl='mobile/index'}><{/if}>" id="gobackIco"></a></i>
+    <div class="title">预约管理信息</div>
+    <i class="right"></i>
+</header>
+
+
+<section id="" class="page_center_box">
+	 <{if !$items}> <div class="loginInfor_tishi">暂无记录信息</div><{/if}>
+    
     <{foreach $items as $item}>
-	<div class="yuyue_box">
-		<table cellpadding="0" cellspacing="0">
-			<tr><td>姓名：<{$item.contact}></td></tr>
-            <tr><td>电话：<b class="pointcl"><{$item.mobile|cutstr:6}></b></td></tr>
-			<tr><td>预约状态：<{$item.status_title}></td></tr>
-            <tr><td>预约时间：<{$item.dateline|format}></td></tr>
-		</table>
+    <div class="mb10 loginInfor_mtn">
+		<div class="loginInfor">
+			<div class="loginIf_list">
+				<div class="fl ifIco"><i class="icco icco1"></i> </div>
+				<div class="ifInput">
+					姓名：<{$item.contact}>
+				</div>
+				<div class="clear"></div>
+			</div>
+			<div class="loginIf_list">
+				<div class="fl ifIco"><i class="icco icco2"></i> </div>
+				<div class="ifInput">
+					电话：<{if $gz.priv.show_yuyue_mobile>0}><{$item.mobile}><{else}><b class="pointcl"><{$item.mobile|cutstr:6}></b><{/if}>
+				</div>
+				<div class="clear"></div>
+			</div>
+			<div class="loginIf_list">
+				<div class="fl ifIco"><i class="icco icco3"></i> </div>
+				<div class="ifInput">
+					预约时间：<{$item.dateline|format}>
+				</div>
+				<div class="clear"></div>
+			</div>
+			<div class="loginIf_list">
+				<div class="fl ifIco"><i class="icco icco5"></i> </div>
+				<div class="ifInput">
+					预约状态：：<{$item.status_title}>
+				</div>
+				<div class="clear"></div>
+			</div>
+		</div>
 	</div>
     <{/foreach}>
-</div>
-<{include file="mobile/block/footer.html"}>
+</section>
+
+</body>
+</html>
+

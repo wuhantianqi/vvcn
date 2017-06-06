@@ -2,7 +2,7 @@
 /**
  * Copy Right IJH.CC
  * Each engineer has a duty to keep the code elegant
- * $Id: company.ctl.php 10346 2015-05-20 11:01:02Z xiaorui $
+ * $Id$
  */
 
 if(!defined('__CORE_DIR')){
@@ -12,7 +12,7 @@ if(!defined('__CORE_DIR')){
 class Ctl_Ucenter_Company extends Ctl_Ucenter 
 {
 
-    protected $_allow_fields = 'city_id,area_id,title,name,slogan,contact,phone,addr,qq,mobile,lng,lat,video';   
+    protected $_allow_fields = 'city_id,area_id,title,name,slogan,contact,phone,addr,qq,mobile,lng,lat,video,banner';   
     public function index()
     {
         $company = $this->ucenter_company();
@@ -26,7 +26,7 @@ class Ctl_Ucenter_Company extends Ctl_Ucenter
 		$company = $this->ucenter_company();
 		$integral = K::$system->config->get('integral');
 		$counts = K::M('member/flush')->flushs($this->uid);
-		$is_gold = abs($integral['gold']);
+        $is_gold = abs($integral['gold']);
 		if($counts >= $company["group"]["priv"]["day_free_count"]){
 			$this->pagedata['gold'] = $is_gold;
 		}
@@ -40,11 +40,11 @@ class Ctl_Ucenter_Company extends Ctl_Ucenter
 					$this->err->add('您的金币余额不足，请先充值', 215);
 				}
 			}
-			$data['gold'] = '0';
+			$data['gold'] = 0;
 			if($isrefresh && $counts >= $company["group"]["priv"]["day_free_count"]){
 				$data['gold'] = $is_gold;
 				if($is_gold > 0){
-                    if(!K::M('member/gold')->update($this->uid, -$is_gold, "刷新公司")){
+                    if(!K::M('member/gold')->update($this->uid, -$is_gold, "刷新排名")){
 						$isrefresh = false;
                         $this->err->add('扣费失败', 201)->response();
                     }
@@ -83,15 +83,17 @@ class Ctl_Ucenter_Company extends Ctl_Ucenter
                             if ($a = $upload->upload($attach, 'company')) {
                                 $data[$k] = $a['photo'];
                                 if ($k === 'logo') {
-                                    $size['photo'] = $cfg['company']['logo'] ? $cfg['company']['logo'] : '200X100';
-                                } else {
-                                    $size['photo'] = $cfg['company']['thumb'] ? $cfg['company']['thumb'] : '300X300';
-                                }
+                                    $size['photo'] = $cfg['companydecorate1'] ? $cfg['companydecorate1'] : '200X100';
+                                } else if($k === 'thumb') {
+                                    $size['photo'] = $cfg['companydecorate2'] ? $cfg['companydecorate2'] : '300X300';
+                                }else{
+									$size['photo'] = '1000X200';
+								}
                                 $oImg->thumbs($a['file'], array($size['photo'] => $a['file']));
                             }
                         }
                     }
-                }
+				}
                 if(!$company['company_id']){
                     $data['uid'] = $this->uid;
                     if($group = K::M('member/group')->default_group('company')){
@@ -119,13 +121,34 @@ class Ctl_Ucenter_Company extends Ctl_Ucenter
                         }
                     }
                     $this->err->add('设置公司资料成功');
-                }                
+                }
             }
         }else{
             if($attrs = K::M('company/attr')->attrs_by_company($company['company_id'])){
                 $this->pagedata['attr_values'] = array_keys($attrs);
             }
             $this->tmpl = 'ucenter/company/info.html';
+        }
+    }
+	
+
+    public function domain()
+    {
+        $company = $this->ucenter_company();
+        $CFG = $this->system->_CFG;
+        if($CFG['domian']['company']){
+                $this->err->add('网站未开启公司个性域名功能', 211);
+        }else if($domain = $this->checksubmit('domain')){
+            if(!$company['group']['priv']['allow_domain']){
+                $this->err->add('您没有权限设置个性域名', 212);
+            }else if($company['domain']){
+                $this->err->add('您已经设置了个性域名不可修改', 213);
+            }else if(K::M('company/company')->update_domain($company['company_id'], $domain)){
+                $this->err->add('设置个性域名成功');
+            }
+        }else{	
+            $this->pagedata['domain_company'] = $CFG['domain']['company'].'.'.$CFG['site']['domain'];
+            $this->tmpl = 'ucenter/company/domain.html';
         }
     }
 	
@@ -147,7 +170,6 @@ class Ctl_Ucenter_Company extends Ctl_Ucenter
             $this->pagedata['pager'] = $pager;
             $this->pagedata['skins'] = $skins;
             $this->tmpl = 'ucenter/company/skin.html';
-        }    
+        }
     }
-
 }

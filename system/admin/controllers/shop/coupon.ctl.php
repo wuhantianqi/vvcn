@@ -2,7 +2,7 @@
 /**
  * Copy Right IJH.CC
  * Each engineer has a duty to keep the code elegant
- * $Id: coupon.ctl.php 10299 2015-05-16 11:19:38Z wanglei $
+ * $Id: coupon.ctl.php 6097 2014-08-15 12:55:34Z youyi $
  */
 
 if(!defined('__CORE_DIR')){
@@ -72,6 +72,7 @@ class Ctl_Shop_Coupon extends Ctl
                         }
                     }
                 }
+				
 				if($shop = K::M('shop/shop')->detail($data['shop_id'])){
 					$data['city_id'] = $shop['city_id'];
 				}

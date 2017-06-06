@@ -62,11 +62,7 @@
                             <a href="<{link ctl='mechanic:detail' arg0=$item.uid}>" class="pic"><img src="<{$pager.img}>/<{$item.face}>" /></a>
                             <p><b class="tit"><a href="<{link ctl='mechanic:detail' arg0=$item.uid}>"><{$item.name}></a></b></p>
                             <p><span class="lt">预约数<font class="fontcl2"><{$item.yuyue_num}></font></span>|
-                            <{if $item.group.priv.allow_yuyue<0}>
-                             <a href="<{link ctl='tenders:fast' arg0=$item.uid http='ajax'}>" mini-width='500' mini-load="立即招标" class="rt btn_sub_smler btn">立即招标</a>
-                            <{else}>
-                            <a href="<{link ctl='mechanic:yuyue' arg0=$item.uid http='ajax'}>" mini-width='500' mini-load="在线预约" class="rt btn_sub_smler btn">在线预约</a>
-                            <{/if}>
+                            <a href="<{link ctl='mechanic:detail' arg0=$item.uid}>" class="rt btn_sub_smler btn">在线预约</a>
                             </p>
                         </div>
                     </li>
@@ -78,31 +74,40 @@
 </div>
 	<div class="side_content rt">
 		<{widget id="tenders/fast" title="免费装修设计" from="TSJ"}>
-		 <div class="mb10 area">
-            <h3 class="side_tit">技工排行榜</h3>
+		<div class="mb10 area">
+			<h3 class="side_tit">技工排行榜</h3>
             <ul class="pding paihang">
                 <{calldata mdl="mechanic/mechanic" city_id=$request.city_id limit=8}>
-                <li>
-                    <span class="lt"><font class="paihang_num<{if $iteration<=3}> ph_num_cl<{/if}>"><{$iteration}></font><a href="<{link ctl='mechanic:detail'  arg0=$item.uid}>"><{$item.name|cutstr:35}></a>
-                    </span>
+				<li>
+                    <span class="lt"><font class="paihang_num<{if $iteration<=3}> ph_num_cl<{/if}>"><{$iteration}></font><a href="<{link ctl='mechanic:detail' arg0=$item.uid}>"><{$item.name|cutstr:35}></a></span>
                     <span class="rt">已投标：<font class="fontcl2"><{$item.tenders_num}></font></span>
                 </li>
                 <{/calldata}>
-            </ul>
-        </div> 
-       <div class="mb10 area">
-            <h3 class="side_tit">装修公司排行榜</h3>
-            <ul class="pding paihang">
+			</ul>
+		</div>
+        <div class="mb10 area">
+			<h3 class="side_tit">装修公司排行榜</h3>
+			<ul class="pding paihang">
                 <{calldata mdl="company/company"  city_id=$request.city_id limit=5}>
-                <li>
-                    <span class="lt"><font class="paihang_num<{if $iteration<=3}> ph_num_cl<{/if}>"><{$iteration}></font><a href="<{$item.company_url}>"><{$item.name|cutstr:35}></a>
-                    </span>
+				<li>
+                    <span class="lt"><font class="paihang_num<{if $iteration<=3}> ph_num_cl<{/if}>"><{$iteration}></font><a href="<{$item.company_url}>"><{$item.name|cutstr:35}></a></span>
                     <span class="rt">已投标：<font class="fontcl2"><{$item.tenders_num}></font></span>
                 </li>
                 <{/calldata}>
-            </ul>
-        </div>
-       
+			</ul>
+		</div>   
+      	<div class="mb10 area">
+			<h3 class="side_tit">设计师排行</h3>
+			<ul class="pding paihang">
+            	<{calldata mdl="designer/designer" city_id=$request.city_id limit=5}>
+                    <li>
+                        <span class="lt"><font class="paihang_num<{if $iteration<=3}> ph_num_cl<{/if}>"><{$iteration}></font><a href="<{link ctl='blog' arg0=$item.uid}>"><{$item.name|cutstr:35}></a></span>
+                        <span class="rt">已投标：<font class="fontcl2"><{$item.tenders_num}></font></span>
+                    </li>
+                 <{/calldata}> 
+			</ul>
+		</div>
+        
 		 <div class="mb20 "><{adv id="10" name="全站右侧招商图片广告" city_id=$request.city_id}></div>
 	</div>
 	<div class="cl"></div>

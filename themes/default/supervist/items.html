@@ -1,0 +1,124 @@
+<{include file="block/header.html"}>
+<!--面包屑导航开始-->
+<div class="main_topnav mb20">
+	<div class="mainwd">
+		<p><span class="ico_list breadna"></span>您的位置：<a href="<{link ctl='index'}>"><{$CONFIG.site.title}></a>
+			><a href="<{link ctl='gz'}>">找工长</a>
+		</p>
+	</div>
+</div>
+<!--面包屑导航结束-->
+<div class="mainwd">
+	<!--主体左边内容开始-->
+	<div class="main_content lt">
+		<div class="mb10 pding area choose_option">
+			<table>
+				<tr>
+					<td class="tit">区域：</td>
+					<td>
+                     	 <a  href="<{$area_url}>" <{if empty($url_data.area_id)}>class="current"<{/if}>>不限</a>
+						 <{foreach $area_list  as $v}>
+                            <a href="<{$v.link}>" <{if $v.checked}>class="current"<{/if}>><{$v.area_name}></a>
+                         <{/foreach}>
+					</td>
+				</tr>
+                 <{foreach $attr_values as $item}>
+                        <tr>
+                            <td  class="tit"><{$item.title}>&nbsp;:&nbsp;</span></td>
+                            <td ><a  title="<{$item.title}>工长" href="<{$item.link}>"  <{if $item.checked}>class="current"<{/if}>>不限</a>
+                            <{foreach $item.values as $it2}>
+                            <a  title="<{$it2.title}>工长" href="<{$it2.link}>"  <{if $it2.checked}>class="current"<{/if}>><{$it2.title}></a>
+                            <{/foreach}>
+            				</td>
+                        </tr>
+                <{/foreach}>
+			</table>
+		</div>
+		<div class="mb20">
+			<h2><font class="lt">监理列表</font><span class="rt tit">共有<font class="fontcl2"><{$pager.count|default:'0'}></font>位监工</span></h2>
+			<div class="cl"></div>
+			<div class="sort_box">
+				<p class="sort_list hoverno">
+					<{foreach $order  as $v}>
+                        <a href="<{$v.link}>"><{$v.title}><span <{if $v.checked}>class="sort_ico ico_list sort_on_ico"<{else}>class="sort_ico ico_list"<{/if}>></span></a>
+                    <{/foreach}> 
+				</p>
+			</div>
+			<div class="area">
+				<ul class="block_type main_foreman_ul">
+                <{foreach $supervist  as $item}>
+                		<li>
+                            <div class="main_foreman main_list">
+                                <a href="<{link ctl='supervist:detail' arg0=$item.supervist_id}>" class="pic lt"  target="_blank"><img src="<{$pager.img}>/<{$item.thumb}>" /></a>
+                                <div class="main_foreman_rt main_list_rt rt">
+                                    <h3>
+                                        <p class="lt"><b><a href="<{link ctl='supervist:detail' arg0=$item.supervist_id}>"  target="_blank"><{$item.name}></a>
+                                            </b><span style="color:#F90;">(浏览数：<{$item.views}>)</span></p>
+                                        <a href="http://wpa.qq.com/msgrd?v=3&amp;uin=<{$item.qq}>&amp;site=qq&amp;menu=yes" class="ico_list qq_ico rt"></a>
+                                    </h3>
+                                    <div class="lt" style="overflow:hidden">
+                                        <{$item.about|cutstr:150}>
+                                       
+                                    </div>
+                                    
+                                </div>
+                                <div class="cl"></div>
+                            </div>
+                        </li>
+                 <{/foreach}>
+				</ul>
+				<div class="page hoverno"><{$pager.pagebar}></div>
+			</div>
+		</div>
+	</div>
+	<div class="side_content rt">
+    <{widget id="tenders/fast" title="免费装修设计" from="TSJ"}>
+		<div class="mb10 area">
+			<h3 class="side_tit">监理浏览量排行榜</h3>
+			<ul class="pding paihang">
+            	<{calldata mdl="supervist/supervist" order="views:DESC" city_id=$request.city_id limit=10}>
+                    <li>
+                        <span class="lt"><font class="paihang_num<{if $iteration<=3}> ph_num_cl<{/if}>"><{$iteration}></font><a href="<{link ctl='supervist:detail' arg0=$item.supervist_id}>"><{$item.name}></a></span>
+                        <span class="rt">浏览量：<font class="fontcl2"><{$item.views}></font></span>
+                    </li>
+                 <{/calldata}>
+			</ul>
+		</div>
+         <div class="mb10 area">
+            <h3 class="side_tit">装修公司排行榜</h3>
+            <ul class="pding paihang">
+                <{calldata mdl="company/company" city_id=$request.city_id limit=5}>
+                <li>
+                    <span class="lt"><font class="paihang_num<{if $iteration<=3}> ph_num_cl<{/if}>"><{$iteration}></font><a href="<{$item.company_url}>"><{$item.name|cutstr:35}></a></span>
+                    <span class="rt">签单数：<font class="fontcl2"><{$item.tenders_num}></font></span>
+                </li>
+                <{/calldata}>
+            </ul>
+        </div>
+        <div class="mb10 area">
+            <h3 class="side_tit">工长排行榜</h3>
+            <ul class="pding paihang">
+                <{calldata mdl="gz/gz" city_id=$request.city_id limit=5}>
+                    <li>
+                        <span class="lt"><font class="paihang_num<{if $iteration<=3}> ph_num_cl<{/if}>"><{$iteration}></font><a href="<{link ctl='gz:detail' arg0=$item.uid}>"><{$item.name}></a></span>
+                        <span class="rt">浏览量：<font class="fontcl2"><{$item.views}></font></span>
+                    </li>
+                 <{/calldata}>
+            </ul>
+        </div>         
+        <div class="mb10 area">
+            <h3 class="side_tit">设计师排行</h3>
+            <ul class="pding paihang">
+                <{calldata mdl="designer/designer" city_id=$request.city_id limit=5}>
+                    <li>
+                        <span class="lt"><font class="paihang_num<{if $iteration<=3}> ph_num_cl<{/if}>"><{$iteration}></font><a href="<{link ctl='blog' arg0=$item.uid}>"><{$item.name|cutstr:35}></a></span>
+                        <span class="rt">浏览量：<font class="fontcl2"><{$item.views}></font></span>
+                    </li>
+                 <{/calldata}> 
+            </ul>
+        </div>
+   
+</div>
+	<div class="cl"></div>
+</div>
+<{include file="block/footer.html"}>

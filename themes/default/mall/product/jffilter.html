@@ -1,0 +1,5 @@
+<div class=" area mall_option hoverno">
+	全部：
+    <{foreach $data.parents as $v}><a href="<{link ctl='jfproduct/jfproduct' arg0=$v.cat_id arg1=1}>"<{if $v.cat_id == $data.top_cate.cat_id}> class="current"<{/if}>><{$v.title}></a><{/foreach}>
+</div>
+

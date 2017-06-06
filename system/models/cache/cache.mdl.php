@@ -3,7 +3,7 @@
  * Copy Right IJH.CC
  * Each engineer has a duty to keep the code elegant
  * Author shzhrui<anhuike@gmail.com>
- * $Id: cache.mdl.php 9863 2015-04-23 09:49:29Z youyi $
+ * $Id: cache.mdl.php 2073 2013-12-09 10:28:22Z youyi $
  */
 
 if(!defined('__CORE_DIR')){
@@ -18,11 +18,7 @@ class Mdl_Cache_Cache
 	public function __construct()
 	{
         Import::M('cache/file');
-        if(defined('__CFG::CACHE_FILE_SIZE')){
-            $this->cache = new Mdl_Cache_File(array('CACHE_SIZE'=>__CFG::CACHE_FILE_SIZE));
-        }else{
-            $this->cache = new Mdl_Cache_File(array('CACHE_SIZE'=>'32M'));
-        }
+		$this->cache = new Mdl_Cache_File(array('CACHE_SIZE'=>__CFG::CACHE_FILE_SIZE));
 	}
     
     public function set($key, $val, $ttl=0)

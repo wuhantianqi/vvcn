@@ -3,7 +3,7 @@
  * Copy Right IJH.CC
  * Each engineer has a duty to keep the code elegant
  * Author @shzhrui<Anhuike@gmail.com>
- * $Id: province.ctl.php 9378 2015-03-27 02:07:36Z youyi $
+ * $Id: province.ctl.php 3159 2014-01-22 01:54:39Z youyi $
  */
 
 class Ctl_Data_Province extends Ctl

@@ -2,7 +2,7 @@
 /**
  * Copy Right IJH.CC
  * Each engineer has a duty to keep the code elegant
- * $Id: money.mdl.php 9378 2015-03-27 02:07:36Z youyi $
+ * $Id: money.mdl.php 6177 2014-08-28 02:57:24Z youyi $
  */
 
 if(!defined('__CORE_DIR')){
@@ -14,7 +14,7 @@ class Mdl_Shop_Money extends Mdl_Table
   
     protected $_table = 'shop_money';
     protected $_pk = 'id';
-    protected $_cols = 'id,shop_id,money,log,audit,clientip,dateline';
+    protected $_cols = 'id,shop_id,money,log,audit,clientip,dateline,uid';
     protected $_orderby = array('id'=>'DESC');
 
     public function create($data, $checked=false)
@@ -41,12 +41,12 @@ class Mdl_Shop_Money extends Mdl_Table
     }
 
     //申请提现
-    public function request_tixian($shop_id, $money, $log='')
+    public function request_tixian($uid, $money, $log='商家申请提现')
     {
-        if(!$shop_id = (int)$shop_id){
+        if(!$uid = (int)$uid){
             return false;
         }
-        $a = array('shop_id'=>$shop_id, 'money'=>$money, 'log'=>$log, 'audit'=>0);
+        $a = array('uid'=>$uid, 'money'=>$money, 'log'=>$log, 'audit'=>0);
         $a['dateline'] = __CFG::TIME;
         $a['clientip'] = __IP;
         return $this->db->insert($this->_table, $a, true);

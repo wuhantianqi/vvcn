@@ -3,7 +3,7 @@
  * Copy Right IJH.CC
  * Each engineer has a duty to keep the code elegant
  * Author @shzhrui<Anhuike@gmail.com>
- * $Id: config.mdl.php 9378 2015-03-27 02:07:36Z youyi $
+ * $Id: config.mdl.php 5379 2014-05-30 10:17:21Z youyi $
  */
 
 class Mdl_System_Config extends Mdl_Table
@@ -215,6 +215,26 @@ class Mdl_System_Config extends Mdl_Table
                 include_once(__CFG::DIR.'uc_config.php');
             }
         }
+    }
+
+    public function fenzhan_config($city_id=null)
+    {
+        $site = $this->get('site');
+        if(!$city_id = (int)$city_id){
+            $city_id = CITY_ID;
+        }
+        if($city_id && $site['multi_city']){
+            if($city = K::M('data/city')->city($city_id)){                
+                $site['kfqq'] = $city['kfqq'] ? $city['kfqq'] : $site['kfqq'];
+                $site['phone'] = $city['phone'] ? $city['phone'] : $site['phone'];
+                $site['mail'] = $city['mail'] ? $city['mail'] : $site['mail'];
+                $site['mobile'] = $city['mobile'] ? $city['mobile'] : $site['mobile'];
+                $site['logo'] = $city['logo'] ? $city['logo'] : $site['logo'];
+                $site['weixinqr'] = $city['weixinqr'] ? $city['weixinqr'] : $site['weixinqr'];
+                self::$_CFG['site'] = $site;
+            }
+        }
+        return $site;
     }
 
 }

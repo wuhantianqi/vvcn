@@ -1,0 +1,204 @@
+<{assign var="tpl_page_title" value="维修详情"}>
+<{include file="mobile/block/header.html"}>
+<header class="control">
+	<i class="left"><a href="<{if $pager.backurl}><{$pager.backurl}><{else}><{link ctl='mobile/index'}><{/if}>" id="gobackIco"></a></i>
+    <div class="title">维修详情</div>
+    <i class="right"></i>
+</header>
+
+
+<section id="" class="page_center_box">
+	<div class="mb10 center_tenders">
+		<table width="100%" cellpadding="0" cellspacing="0">
+       
+			<tr>
+				<th>
+				标题
+				</th>
+				<td>
+				<{$detail.title|default:'--'}>
+				</td>
+			</tr>
+            <tr>
+				<th>
+				会员
+				</th>
+				<td>
+				<{if $detail.uid}><{$member.uname}>(UID:<{$detail.uid}>)<{else}>--<{/if}>
+				</td>
+			</tr>
+			<tr>
+				<th>
+				看标所需金币
+				</th>
+				<td>
+				<{$detail.gold}>
+				</td>
+			</tr>
+            <tr>
+				<th>
+				最大投标数
+				</th>
+				<td>
+				<{$detail.max_look}>
+				</td>
+			</tr>
+			<tr>
+				<th>
+				看标的企业数
+				</th>
+				<td>
+				<{$detail.looks}>
+				</td>
+			</tr>
+			<tr>
+				<th>
+				IP
+				</th>
+				<td>
+				<{if $detail.gold <= 0 && $pager.audit_tenders >=0}><{$detail.clientip}></b>(<{$detail.clientip|iplocal}>)<{elseif $detail.looked}><{$detail.clientip}></b>(<{$detail.clientip|iplocal}>)<{else}><{$detail.clientip|cutstr:6:"******"}></b>(<{$detail.clientip|iplocal}>)<{/if}>
+				</td>
+			</tr>
+			<tr>
+				<th>
+				创建时间
+				</th>
+				<td>
+				<{$detail.dateline|format}>
+				</td>
+			</tr>
+            <tr>
+				<th>
+				联系人
+				</th>
+				<td>
+				<{$detail.contact|default:'--'}>
+				</td>
+			</tr>
+            
+             <tr>
+				<th>
+				状态
+				</th>
+				<td>
+				<{if $item.sign_uid}><{if $item.status == 2}>已完工<{else}><b class="green">已签</b><{/if}><{else class="blue"}><b>招标中</b><{/if}>
+				</td>
+			</tr>
+            <tr>
+				<th>
+				地址
+				</th>
+				<td>
+				<{$detail.city_name|default:'--'}>  <{$detail.area_name|default:'--'}>  
+           		<{$detail.addr|default:'--'}>
+				</td>
+			</tr>
+            <tr>
+				<th>
+				电话
+				</th>
+				<td>
+				<{$detail.mobile}>
+				</td>
+			</tr>
+            
+            <tr>
+				<th>
+				分类
+				</th>
+				<td>
+				<{$cates[$detail.cate_id].title|default:'--'}>
+				</td>
+			</tr>
+            <tr>
+				<th>
+				预算
+				</th>
+				<td>
+				<{$detail.budget}>
+				</td>
+			</tr>
+            <tr>
+				<th>
+				托管金额
+				</th>
+				<td><{$detail.truste}>元
+				<{if $detail.is_pay == 1}><b class="green">已支付</b><{else}><b class="red">未支付</b><{/if}>
+				</td>
+			</tr>
+             <tr>
+				<th>
+				备注
+				</th>
+				<td>
+				<{$detail.remark|default:'--'}>
+				</td>
+			</tr>
+		</table>
+		<div class="public_firstit public_firstit_tpno"><h4>已经参与的竞标</h4></div>
+       
+         <{foreach $look_list as $item}>
+            <table width="100%" cellpadding="0" cellspacing="0">
+                <tr>
+                    <th width="30%">
+                    竞标
+                    </th>
+                    <td>
+                     <{if $member_list[$item.uid].from == 'company'}>
+                    公司：<{$company_list[$item.uid].name|default:'--'}>
+                    <{elseif $member_list[$item.uid].from == 'designer'}>
+                    设计师：<{$designer_list[$item.uid].name|default:'--'}>
+                    <{elseif $member_list[$item.uid].from == 'mechanic'}>
+                    技工：<{$mechanic_list[$item.uid].name|default:'--'}>
+                    <{elseif $member_list[$item.uid].from == 'gz'}>
+                    工长：<{$gz_list[$item.uid].name|default:'--'}>
+                    <{elseif $member_list[$item.uid].from == 'shop'}>
+                    商家：<{$shop_list[$item.uid].name|default:'--'}>
+                    <{/if}>
+                    </td>
+                </tr>
+                <tr>
+                    <th width="40%">
+                    留言
+                    </th>
+                    <td>
+                    <{$item.content|default:'--'}>
+                    </td>
+                </tr>
+                <tr>
+                    <th width="10%">
+                    竞标时间
+                    </th>
+                    <td>
+                    <{$item.dateline|format}>
+                    </td>
+                </tr>
+                <tr>
+                    <th width="20%">
+                    状态
+                    </th>
+                    <td >
+                    <{if $detail.sign_uid}>
+                    <{if $item.is_signed}><b class="blue">中标</b>
+                    <{if $detail.status >= 2}>
+                    <b class="blue">已完工</b>
+                    <{else}>
+                     <a href="<{link ctl='mobile/ucenter/truste:ended' arg0=$detail.truste_id}>" mini-act="设为完工" mini-confrim="确定设置设为完工" class="pbtn">设为完工</a>
+                    <{/if}>
+                    
+                    
+                    <{else}><b>淘汰</b><{/if}>
+                    <{else}>
+                    <a href="<{link ctl='mobile/ucenter/truste:signLook' arg0=$item.look_id}>" mini-act="设为中标" mini-confrim="确定设置该投标中标" class="pbtn">设为中标</a>
+                    <{/if}>
+                    </td>
+                </tr>
+            </table>
+        <{foreachelse}>
+        <div class="loginInfor_tishi">还没有公司投标</div>
+        <{/foreach}>
+	</div>
+</section>
+
+<{include file="mobile/block/footer.html"}>
+

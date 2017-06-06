@@ -15,7 +15,7 @@
         <td>
             <input type="hidden" name="data[home_id]" id="select_home_id" value="<{$detail.home_id}>" />
             <input type="text" name="data[home_name]" id="select_home_name" value="<{$home.name}>" class="input w-300"/>
-            <a class="pbtn" action="<{link ctl='ucenter/misc/select:home'}>" mini-select="#select_home_id,#select_home_name/N/<{$member.city_id}>/选择小区"/>选择小区</a><br />
+            <a class="pbtn" action="<{link ctl='ucenter/misc/select:home' arg0=$pager.city_id}>" mini-select="#select_home_id,#select_home_name/N/<{$member.city_id}>/选择小区"/>选择小区</a><br />
         </td>
     </tr>    
      <tr><th><span class="red">*</span>缩略图：</th>
@@ -25,7 +25,7 @@
         <td>
             <input type="hidden" id="select_company_id" name="data[company_id]" value="<{$detail.company_id}>" class="input"/>
             <input type="text" id="select_company_name" value="<{$company.name}>" class="input w-300"/>
-            <a class="pbtn" action="<{link ctl='ucenter/misc/select:company'}>" mini-select="#select_company_id,#select_company_name/N/<{$member.city_id}>/选择公司"/>选择公司</a>
+            <a class="pbtn" action="<{link ctl='ucenter/misc/select:company' arg0=$pager.city_id}>" mini-select="#select_company_id,#select_company_name/N/<{$member.city_id}>/选择公司"/>选择公司</a>
         </td>
     </tr>
     <tr><th>空间户型：</th>

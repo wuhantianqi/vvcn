@@ -16,7 +16,7 @@
 				<li>
 					<h2><a href="<{link ctl='news:detail' arg0=$item.news_id}>"><{$item.title}></a></h2>
 					<p class="graycl indent"><{$item.desc}></p>
-					<p><span class="lt graycl"><{$item.dateline|format}></span><span class="rt graycl">浏览<font class="fontcl2">2</font>次</span></p>
+					<p><span class="lt graycl"><{$item.dateline|format}></span><span class="rt graycl">浏览<font class="fontcl2"><{$item.views}></font>次</span></p>
 					<div class="cl"></div>
 				</li>
 				<{/foreach}>

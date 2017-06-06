@@ -2,7 +2,7 @@
 /**
  * Copy Right IJH.CC
  * Each engineer has a duty to keep the code elegant
- * $Id: fields.mdl.php 9378 2015-03-27 02:07:36Z youyi $
+ * $Id: fields.mdl.php 2466 2013-12-23 11:13:30Z youyi $
  */
 
 if(!defined('__CORE_DIR')){

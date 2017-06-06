@@ -2,7 +2,7 @@
 /**
  * Copy Right IJH.CC
  * Each engineer has a duty to keep the code elegant
- * $Id: company.mdl.php 9378 2015-03-27 02:07:36Z youyi $
+ * $Id: company.mdl.php 6074 2014-08-12 17:10:33Z youyi $
  */
 
 if(!defined('__CORE_DIR')){
@@ -14,7 +14,7 @@ class Mdl_Company_Company extends Mdl_Table
   
     protected $_table = 'company';
     protected $_pk = 'company_id';
-    protected $_cols = 'company_id,uid,group_id,city_id,area_id,domain,title,name,thumb,logo,slogan,contact,phone,mobile,qq,addr,name,addr,xiaobao,lng,lat,score,score1,score2,score3,score4,score5,comments,tenders_num,tenders_sign,case_num,news_num,youhui_num,yuyue_num,last_case,site_num,last_site,views,verify_name,is_vip,orderby,audit,video,closed,flushtime,clientip,dateline';
+    protected $_cols = 'company_id,uid,group_id,city_id,area_id,domain,title,name,thumb,logo,slogan,contact,phone,mobile,qq,addr,name,addr,xiaobao,lng,lat,score,score1,score2,score3,score4,score5,comments,tenders_num,tenders_sign,case_num,news_num,youhui_num,yuyue_num,last_case,site_num,last_site,views,verify_name,banner,is_vip,orderby,audit,video,closed,flushtime,clientip,dateline';
     protected $_orderby = array('orderby'=>'ASC','flushtime'=>'DESC','company_id'=>'DESC');
 
     protected $_hot_orderby = array('score'=>'DESC','orderby'=>'ASC');

@@ -1,19 +1,32 @@
 <{assign var="tpl_page_title" value="我的优惠券信息"}>
 <{include file="mobile/block/header.html"}>
-<div class="pding">
-<{if !$items}><div class="no_record">暂无记录信息</div><{/if}>
+<header class="control">
+	<i class="left"><a href="<{if $pager.backurl}><{$pager.backurl}><{else}><{link ctl='mobile/index'}><{/if}>" id="gobackIco"></a></i>
+    <div class="title">我的优惠券信息</div>
+    <i class="right"></i>
+</header>
+<section id="" class="page_center_box">
+	<ul class="mineOrder_box mt10">
+   
+    <{if !$items}> <div class="loginInfor_tishi">暂无记录信息</div><{/if}>
     <{foreach $items as $item}>
-	<div class="yuyue_box">
-		<table cellpadding="0" cellspacing="0">
-			<tr><td>姓名：<{$item.contact}></td></tr>
-            <tr><td>电话：<{$item.mobile}></td></tr>
-			<tr><td>优惠券：<a href="<{link ctl='mobile/coupon:index' arg0=$coupon_list[$item.coupon_id].coupon_id}>"><{$coupon_list[$item.coupon_id].title|default:'--'}></a></td></tr>
-            <tr><td>商家：<{$shop_list[$item.shop_id].name|default:'--'}></td></tr>
-            <tr><td>优惠码：<{$item.number}></td></tr>
-            <tr><td>状态：<{if $item.use_time}><b tips="使用时间:<{$item.use_time|format}>">已使用</b><{else}><b class="pointcl">未使用</b><{/if}></td></tr>
-			<tr><td>下载时间：<{$item.dateline|format}></td></tr>
-		</table>
-	</div>
-    <{/foreach}>
-</div>
-<{include file="mobile/block/footer.html"}>
+	    <li class="mineOrder_list">
+        	<div class="title">
+            	<p class="fl">优惠码：<{$item.number}></p>
+                <!--<a href="<{link ctl='mobile/ucenter/sign:index' arg0=$coupon_list[$item.coupon_id].coupon_id}>" class="fr closs"></a>-->
+            </div>
+            <div class="nr"><img src="<{$pager.img}>/<{$shop_list[$item.shop_id].thumb}>" photo="<{$pager.img}>/<{$shop_list[$item.shop_id].thumb}>"/>
+                <div class="wz">
+                	<p class="bt"><a href="<{link ctl='mobile/coupon:index' arg0=$coupon_list[$item.coupon_id].coupon_id}>"><{$coupon_list[$item.coupon_id].title|default:'--'}></a></p>
+                    <p class="black9">状态：<{if $item.use_time}><b tips="使用时间:<{$item.use_time|format}>">已使用</b><{else}><b class="pointcl">未使用</b><{/if}></p>
+                    <!--<div class="state_box"><{if !$item.use_time}><a href="<{link ctl='mobile/ucenter/coupon:index' arg0=$coupon_list[$item.coupon_id].coupon_id}>" class="state bg_1">去抵用</a><{/if}></div>-->
+                </div>
+                <div class="clear"></div>
+            </div>
+        </li>
+        <{/foreach}>
+        
+    </ul>
+</section>
+</body>
+</html>

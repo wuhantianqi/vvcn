@@ -2,7 +2,7 @@
 /**
  * Copy Right IJH.CC
  * Each engineer has a duty to keep the code elegant
- * $Id: youhui.ctl.php 12952 2015-07-03 11:39:20Z maoge $
+ * $Id$
  */
 
 if(!defined('__CORE_DIR')){
@@ -37,6 +37,7 @@ class Ctl_Mobile_Youhui extends Ctl_Mobile
         $this->pagedata['items'] = $items;
         $pager['backurl'] = $this->mklink('mobile');
         $this->pagedata['pager'] = $pager;
+        $this->seo->init('youhui',array('page'=> ($page > 1) ? $page : ''));
         $this->tmpl = 'mobile/youhui/items.html';
     }
 
@@ -54,6 +55,9 @@ class Ctl_Mobile_Youhui extends Ctl_Mobile
             $this->pagedata['detail'] = $detail;
             $pager['backurl'] = $this->mklink('mobile/company:youhui', array($detail['company_id']));
             $this->pagedata['pager'] = $pager;
+            $seo = array('title'=>$detail['title'], 'company_name'=>$company['name'], 'youhui_desc'=>'');
+            $seo['youhui_desc'] = K::M('content/text')->substr(K::M('content/html')->text($detail['content'], true), 0, 200);
+            $this->seo->init('youhui_detail', $seo);            
             $this->tmpl = 'mobile/youhui/detail.html';
         }
     }

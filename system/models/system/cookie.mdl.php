@@ -3,7 +3,7 @@
  * Copy Right IJH.CC
  * Each engineer has a duty to keep the code elegant
  * Author shzhrui<anhuike@gmail.com>
- * $Id: cookie.mdl.php 9378 2015-03-27 02:07:36Z youyi $
+ * $Id: cookie.mdl.php 5880 2014-07-16 04:19:41Z youyi $
  */
 
 if(!defined('__CORE_DIR')){

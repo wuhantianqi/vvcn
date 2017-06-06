@@ -2,7 +2,7 @@
 /**
  * Copy Right IJH.CC
  * Each engineer has a duty to keep the code elegant
- * $Id: tenders_setting.php 9507 2015-04-01 05:47:59Z wanglei $
+ * $Id: tenders_setting.php 2034 2013-12-07 03:08:33Z $
  */
 
 if(!defined('__CORE_DIR')){

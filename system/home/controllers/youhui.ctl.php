@@ -2,14 +2,14 @@
 /**
  * Copy Right IJH.CC
  * Each engineer has a duty to keep the code elegant
- * $Id: youhui.ctl.php 14743 2015-07-30 14:25:08Z maoge $
+ * $Id$
  */
 
 class Ctl_Youhui extends Ctl
 {
 	public function index($page = 1)
 	{
-		$this->items(null,$page);
+		$this->items(null, $page);
 	}
 
 	public function items($company_id, $page = 1)
@@ -52,6 +52,7 @@ class Ctl_Youhui extends Ctl
             $seo = array('title'=>$detail['title'], 'company_name'=>$company['name'], 'youhui_desc'=>'');
             $seo['youhui_desc'] = K::M('content/text')->substr(K::M('content/html')->text($detail['content'], true), 0, 200);
             $this->seo->init('youhui_detail', $seo);
+            $this->pagedata['mobile_url'] = $this->mklink('mobile/youhui:detail', array($youhui_id));
 			$this->tmpl = 'youhui/detail.html';
 		}
 	}
@@ -82,11 +83,13 @@ class Ctl_Youhui extends Ctl
 				if($verifycode_success){
 					$data['uid'] = (int)$this->uid;
 					$data['company_id'] = $detail['company_id'];
+					$data['company_id'] = $detail['company_id'];
+					$company = K::M('company/company')->detail($data['company_id']);
 					$data['youhui_id'] = $youhui_id;
 					$data['city_id'] = $this->request['city_id'];
 					if($id = K::M('company/sign')->create($data)){
 						K::M('company/youhui')->update_count($youhui_id, 'sign_num', 1);
-						$smsdata = $maildata = array('contact'=>$data['contact'] ? $data['contact'] : '业主','mobile'=>$data['mobile'],'youhui'=>$detail['title']);
+						$smsdata = $maildata = array('contact'=>$data['contact'] ? $data['contact'] : '业主','mobile'=>$data['mobile'],'youhui'=>$detail['title'],'company_name'=>$data['company_name']);
 						K::M('sms/sms')->send($data['mobile'], 'youhui_yuyue', $smsdata);
 						K::M('sms/sms')->company('youhui_tongzhi', $smsdata);
 						K::M('helper/mail')->sendmail($detail['mail'], 'youhui_yuyue', $maildata);

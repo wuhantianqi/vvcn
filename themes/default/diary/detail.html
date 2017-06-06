@@ -28,7 +28,7 @@
                     <span>开工时间 ：<{$detail.start_date}></span><span>竣工时间：<{$detail.end_date}></span>
                 </p>
 				<p>
-					 	施工单位：<a href="<{$company.company_url}>"><font class="fontcl2"> <{$company.name}> </font></a>
+					施工单位：<a href="<{$company.company_url}>"><font class="fontcl2"> <{$company.name}> </font></a>
 					
 				</p>
 			</div>
@@ -39,7 +39,7 @@
                  <h3><{$item.status}>、<{$cfg_status[$item.status]}></h3>
                	 <span class="graycl">发表于<{$item.dateline|format}></span>
                 <p class="cl"></p>
-                <p><{$item.content}></p>
+                <p class="photowidth"><{$item.content}></p>
             </div>   
         <{/foreach}>
         <{if $CONFIG.comment.diary_type == 'sns'}>
@@ -54,7 +54,7 @@
 					 <{if $comment_yz}>
                         验证码：
                                 <input style="margin-left:30px;" class="text short" type="text" name="verifycode" placeholder="请输入验证码"/>
-                                <img verify="#pass-verify" src="<{link ctl='magic:verify' http='ajax'}>&_=<{$pager.dateline}>" id="pass-verify"/>
+                               <img verify="#comment-verify" src="<{link ctl='magic:verify' http='ajax'}>&_=<{$pager.dateline}>" id="comment-verify"/><a verify="#comment-verify">点击刷新验证码</a>
                             
                     <{/if}>
                     <input type="submit" mini-submit='#comment_form' action="<{link ctl='diary:comment' arg0=$detail.diary_id}>" name="fbpl" value="发表评论" class="text btn rt pinglun_btn"/>
@@ -88,31 +88,57 @@
 		</div>
 		<{widget id="tenders/fast" title="免费装修设计" from="TSJ"}>
 		<div class="mb10 area">
-            <h3 class="side_tit">装修公司排行榜</h3>
-            <ul class="pding paihang">
+			<h3 class="side_tit">装修公司排行榜</h3>
+			<ul class="pding paihang">
                 <{calldata mdl="company/company"  city_id=$request.city_id limit=8}>
-                <li>
-                    <span class="lt"><font class="paihang_num<{if $iteration<=3}> ph_num_cl<{/if}>"><{$iteration}></font><a href="<{$item.company_url}>"><{$item.name|cutstr:35}></a>
-                    </span>
+				<li>
+                    <span class="lt"><font class="paihang_num<{if $iteration<=3}> ph_num_cl<{/if}>"><{$iteration}></font><a href="<{$item.company_url}>"><{$item.name|cutstr:35}></a></span>
                     <span class="rt">已投标：<font class="fontcl2"><{$item.tenders_num}></font></span>
                 </li>
                 <{/calldata}>
-            </ul>
-        </div>
+			</ul>
+		</div>
         <div class="mb10 area">
-            <h3 class="side_tit">设计师排行榜</h3>
-            <ul class="pding paihang">
+			<h3 class="side_tit">设计师排行榜</h3>
+			<ul class="pding paihang">
                 <{calldata mdl="designer/designer" city_id=$request.city_id limit=5}>
-                <li>
-                    <span class="lt"><font class="paihang_num<{if $iteration<=3}> ph_num_cl<{/if}>"><{$iteration}></font><a href="<{link ctl='blog'  arg0=$item.uid}>"><{$item.name|cutstr:35}></a>
-                    </span>
+				<li>
+                    <span class="lt"><font class="paihang_num<{if $iteration<=3}> ph_num_cl<{/if}>"><{$iteration}></font><a href="<{link ctl='blog'  arg0=$item.uid}>"><{$item.name|cutstr:35}></a></span>
                     <span class="rt">已投标：<font class="fontcl2"><{$item.tenders_num}></font></span>
                 </li>
                 <{/calldata}>
-            </ul>
-        </div>
+			</ul>
+		</div>
 		<div class="mb20"><{adv id="10" name="全站右侧招商图片广告" city_id=$request.city_id}></div>
 	</div>
 	<div class="cl"></div>
 </div>
+
+<script>
+	$(document).ready(function() {
+		 $('.photowidth img').each(function() {
+			 var maxWidth = 350; // 图片最大宽度
+			 var maxHeight = 350;    // 图片最大高度
+			 var ratio = 0;  // 缩放比例
+			 var width = $(this).width();    // 图片实际宽度
+			 var height = $(this).height();  // 图片实际高度
+		   
+			 // 检查图片是否超宽
+			 if(width > maxWidth){
+				 ratio = maxWidth / width;
+				 $(this).css("width", maxWidth); // 设定实际显示宽度
+				 height = height * ratio;    // 计算等比例缩放后的高度
+				 $(this).css("height", height);  // 设定等比例缩放后的高度
+			 }
+		   
+			 // 检查图片是否超高
+			 if(height > maxHeight){
+				 ratio = maxHeight / height;
+				 $(this).css("height", maxHeight);   // 设定实际显示高度
+				 width = width * ratio;    // 计算等比例缩放后的高度
+				 $(this).css("width", width * ratio);    // 设定等比例缩放后的高度
+			 }
+		 });
+	 });
+</script>
 <{include file="block/footer.html"}>

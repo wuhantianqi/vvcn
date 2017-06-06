@@ -1,4 +1,5 @@
 <{include file="block/small-header.html"}>
+<script type="text/javascript" src="<{$pager.res}>/script/jquery.qrcode.min.js"></script>
 <!--头部内容结束-->
 <div class="aczt_banner" style="display: block; z-index: 2;background: url(<{$pager.img}>/<{$detail.banner}>) 50% 50% no-repeat;">
 </div>
@@ -16,7 +17,10 @@
 	<div class="aczt_top mb10">
 		<a href="#" class="lt pic"><img src="<{$pager.img}>/<{$detail.thumb}>" /></a>
 		<div class="aczt_list_rt pding  rt">
-			<h1><{$detail.title}></h1>
+			<h1><{$detail.title}><div class="coDe">
+			<div class="pic">[ 手机扫码 ]<img src="%THEME%/static/images/codeico.jpg" /></div>
+			<div class="show" id="QRimg" style="padding:5px;height:80px;" val="<{$mobile_url}>"></div>
+			</div></h1>
 			<p>活动开始时间 ：<{$detail.bg_time|format:'Y-m-d'}></p>
             <p>活动结束时间 ： <{$detail.end_time|format:'Y-m-d'}></p>
             <p>活动地点： <{$detail.addr}></p>
@@ -48,7 +52,7 @@
                     <td class="title">验证码</td>
                     <td>
                         <input class="text short" style="width:80px;" type="text" name="verifycode" placeholder="请输入验证码"/>
-                        <img verify="#pass-verify" src="<{link ctl='magic:verify' http='ajax'}>&_=<{$pager.dateline}>" id="pass-verify"/>
+                        <img title="点击刷新验证码" verify="#pass-verify" src="<{link ctl='magic:verify' http='ajax'}>&_=<{$pager.dateline}>" id="pass-verify"/>
                     </td>
                 </tr>
                 <{else}>
@@ -74,9 +78,9 @@
 				<p class="tit"><span>姓名</span><span>手机</span><span>报名时间</span></p>
 				<div class="aczt_table">
 				<ul>
-                    <{foreach $sign as $item}>
+                    <{calldata mdl="activity/sign" acitivity_id=$detail.activity_id limit=7}>
                     <li><span><{$item.contact|cutstr:3:'**'}></span><span><{$item.mobile|cutstr:5:'**'}></span><span><{$item.dateline|format:'Y-m-d'}></span></li>
-                    <{/foreach}>
+                    <{/calldata}>
 				</ul>
 				</div>
 		</div>
@@ -102,9 +106,16 @@
 	<!--主体内容结束-->
 </div>
 <script type="text/javascript">
+$(".coDe ").mouseover(function(){
+	$(this).find(".show").show();
+}).mouseleave(function(){
+	$(this).find(".show").hide();
+});
+
 (function(K, $){
+	$("#QRimg").qrcode({width:80,height:80,correctLevel:0,text:"<{$mobile_url}>"}); 
     $("[verify]").click(function(){
-    	$($(this).attr("verify")).attr("src", "<{link ctl='magic:verify' http='ajax'}>&_"+Math.random());
+        $($(this).attr("verify")).attr("src", "/index.php?magic-verify&_"+Math.random());
     });
     //活动专题页面 最新报名文字无缝滚动效果
     $(function(){

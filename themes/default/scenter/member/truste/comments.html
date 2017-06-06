@@ -1,0 +1,29 @@
+<{assign var="min_ititle" value="装修评论"}>
+<{include file="block/mini2-header.html"}>
+<form action="<{link ctl='scenter/member/truste:comments' http='base'}>" method="post" >
+<input type="hidden" name="truste_id" value="<{$truste_id}>" />
+<p class="tips"><span class="notice">完成后可对服务人员进行评论</span></p>
+ <{foreach $CONFIG.score.designer as $k=>$v}>
+                <{if $v}>
+                <span  class="pf"><{$v}>：<input type="hidden" name="data[<{$k}>]" id="comment-<{$k}>" value="3" /><b comment-score="<{$k}>" data-score="3"></b></span>
+                <{/if}>
+                <{/foreach}>
+<p><textarea name="data[content]" class="textarea" style="width:412px;" placeholder="立刻评论"></textarea></p>
+<p><input type="submit" value="立即评论" class="btn btn_sub_tuan" /></p>
+</form>
+<script type="text/javascript" src="<{$pager.res}>/script/cloud-zoom.js"></script>
+<script type="text/javascript" src="<{$pager.res}>/script/raty/jquery.raty.js"></script>
+<script type="text/javascript">
+(function(K, $){
+	$('b[comment-score]').raty({
+		path: "/static/script/raty/img/",
+		score: function() {return $(this).attr('data-score');},
+		hints: ["差","还行","好","很好","非常好"],
+		click: function(score, evt) {$("#comment-"+$(this).attr("comment-score")).val(score);}
+	});
+    $("[verify]").click(function(){
+        $($(this).attr("verify")).attr("src", "<{link ctl='magic:verify' http='ajax'}>&_"+Math.random());
+    });
+})(window.KT, window.jQuery);
+</script>
+<{include file="block/mini-footer.html"}>

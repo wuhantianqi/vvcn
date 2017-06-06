@@ -1,0 +1,58 @@
+	<div class="priceGjia">
+		装修总价 <b class="fontcl2"><{$last_price}>元</b> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;材料总价 <b class="fontcl2"><{$cailiao_price}>元</b>
+	</div>
+	<div  class="pricePro" >
+	<h1>项目清单</h1>
+	<table class="box" cellpadding="0" cellspacing="0">
+		<tr>
+			<th colspan="2"> 项目名称 </th>
+			<th> 工程量 </th>
+			<th style="border-bottom:none;border-right:none;" colspan="3">
+				<table cellpadding="0" cellspacing="0" width="100%">
+					<tr>
+						<th  colspan="3">单价</th>
+					</tr>
+					<tr>
+						<th>主材</th>
+						<th>辅材</th>
+						<th>人工</th>
+					</tr>
+				</table>
+			</th>
+			<th> 金额 </th>
+			<th> 制作工艺 </th>
+		</tr>
+		<tr>
+			<th colspan="6" style="border-right:none;"></th>
+			<th class="fontcl2" style="border-right:none;">金额</th>
+			<th></th>
+		</tr>
+		<{foreach $arr as $k =>$v }>
+			<{foreach $v as $item name='i'}>
+				<{if $smarty.foreach.i.index == 0}>
+					<tr>
+						<td rowspan='<{$v|@count}>'><{$from[$item.pricefrom_id].title}></td>
+						<td><{$item.title}></td>
+						<td><{$item.mj}>㎡</td>
+						<td><{$item.zhucai}></td>
+						<td><{$item.fucai}></td>
+						<td><{$item.rengong}></td>
+						<td class="fontcl2"><{$item.price}>元</td>
+						<td><{$item.content}></td>
+					</tr>
+				<{else}>
+					<tr>
+						<td><{$item.title}></td>
+						<td><{$item.mj}>㎡</td>
+						<td><{$item.zhucai}></td>
+						<td><{$item.fucai}></td>
+						<td><{$item.rengong}></td>
+						<td class="fontcl2"><{$item.price}>元</td>
+						<td><{$item.content}></td>
+					</tr>
+
+				<{/if}>
+				<{/foreach}>
+		<{/foreach}>
+	</table>
+	</div>

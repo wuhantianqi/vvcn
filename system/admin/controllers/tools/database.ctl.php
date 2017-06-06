@@ -3,7 +3,7 @@
  * Copy Right IJH.CC
  * Each engineer has a duty to keep the code elegant
  * Author @shzhrui<Anhuike@gmail.com>
- * $Id: database.ctl.php 10030 2015-05-05 12:24:19Z youyi $
+ * $Id: database.ctl.php 10028 2015-05-05 12:15:23Z youyi $
  */
 
 class Ctl_Tools_Database extends Ctl

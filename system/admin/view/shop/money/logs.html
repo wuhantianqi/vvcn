@@ -9,14 +9,20 @@
 </div>
 <div class="page-data">	
     <table width="100%" border="0" cellspacing="0" class="table-data table">
-    <tr><th class="w-100">ID</th><th class="w-150">商铺</th><th class="w-50">类型</th><th class="w-150">金额</th><th>日志</th><th class="w-100">IP来源</th><th class="w-100">时间</th></tr>
+    <tr><th class="w-100">ID</th><th class="w-150">用户</th><th class="w-50">类型</th><th class="w-150">金额</th><th>日志</th><th class="w-100">审核</th><th class="w-100">时间</th><th class="w-150">操作</th></tr>
     <{foreach $items as $item}>
     <tr>
         <td><label><input type="checkbox" value="<{$item.id}>" name="id[]" CK="PRI"/><{$item.id}><label></td>
-        <td><a href="?shop/money-shop-<{$item.shop_id}>.html"><{$shop_list[$item.shop_id].name|default:'--'}>(<{$item.shop_id}>)</a></td>
+        <td><{$uids[$item.uid].uname}></td>
         <td><{if $item.money < 0}><b class="red">提现</b><{else}><b class="green">收入</b><{/if}></td>
         <td><b <{if $item.money < 0}>class="red"<{else}>class="green"<{/if}>>￥<{$item.money}></b></td>
-        <td><{$item.log}></td><td><{$item.clientip}>（<{$item.clientip|iplocal}>）</td><td><{$item.dateline|format}></td>
+        <td><{$item.log}></td><td><{if $item.audit}><b class="blue">已审核</b><{else}>未审核<{/if}></td><td><{$item.dateline|format}></td>
+        <td>
+             <{if empty($item.audit)}>
+             <{link ctl="shop/money:audit" act="mini:设为已审核" args=$item.id title="设为已审核" class="button"}>
+            
+             <{/if}>        
+        </td>
      </tr>
     <{foreachelse}>
      <tr><td colspan="20"><p class="text-align tip-notice">没有数据</p></td></tr>

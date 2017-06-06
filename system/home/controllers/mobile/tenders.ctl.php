@@ -2,7 +2,7 @@
 /**
  * Copy Right IJH.CC
  * Each engineer has a duty to keep the code elegant
- * $Id: tenders.ctl.php 10160 2015-05-09 09:39:48Z wanglei $
+ * $Id$
  */
 
 class Ctl_Mobile_Tenders extends Ctl_Mobile
@@ -12,6 +12,8 @@ class Ctl_Mobile_Tenders extends Ctl_Mobile
     {
 		$pager['tender_hide'] = 1;
 		$this->pagedata['pager'] = $pager;
+        $this->seo->init('tenders');
+		
         $this->tmpl = 'mobile/tenders.html';    
     }
 
@@ -29,6 +31,9 @@ class Ctl_Mobile_Tenders extends Ctl_Mobile
                     $data['name'] = $this->MEMBER['uname'];
                 }
                 $data['city_id'] = empty($data['city_id']) ? $this->request['city_id'] : $data['city_id'];
+				if($fenxiaoid = $this->cookie->get('fenxiaoid')){
+					$data['fenxiaoid'] = $fenxiaoid;
+				}
                 if($tenders_id = K::M('tenders/tenders')->create($data)){
                     if($attr = $this->GP('attr')){
                         K::M('tenders/attr')->update($tenders_id, $attr);
@@ -38,7 +43,7 @@ class Ctl_Mobile_Tenders extends Ctl_Mobile
                     K::M('sms/sms')->admin('admin_tenders', $smsdata);
                     K::M('helper/mail')->sendadmin('admin_tenders',$maildata);
                     if($this->uid){
-                        $this->err->set_data('forward',  $this->mklink('mobile/ucenter/member:tendersDetail',array($tenders_id)));
+                        $this->err->set_data('forward',  $this->mklink('mobile/ucenter/member:tenderDetail',array($tenders_id)));
                     }
                     $this->err->add('恭喜您发布招标成功！');
                 }

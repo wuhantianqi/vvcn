@@ -1,17 +1,16 @@
 <{assign var="tpl_page_title" value="优惠信息"}>
+<{assign var="seo_sub_title" value="优惠信息"}>
 <{include file="mobile/company/block/header.html"}>
-<ul class="sub_youhui">
-    <{foreach $items as $item}>
-    <li>
-        <a href="<{link ctl='mobile/youhui:detail' arg0=$item.youhui_id}>">
-            <div class="sub_youhui_cont">
-                <img src="<{$pager.img}>/<{$item.photo}>" title="<{$item.title}>"/>
-                <h2 class="nowrap"><b class="fontcl2" title="<{$item.title}>"><{$item.title}></b></h2>
-                <p class="nowrap">活动时间 ： <{$item.stime|format:"Y-m-d"}> 至 <{$item.ltime|format:"Y-m-d"}></p>
-            </div>
-        </a>
-    </li>
-    <{/foreach}>
-</ul>
+ <{foreach $items as $item}>
+	<div class="zxCompany_disct"> <a href="<{link ctl='mobile/youhui:detail' arg0=$item.youhui_id}>">
+		<div class="nr">
+		<p><{$item.title}></p>
+		<div class="img"><img src="<{$pager.img}>/<{$item.photo}>" title="<{$item.title}>" width="100%"></div>
+		<p class="pointcl">活动时间：<{$item.stime|format:"Y-m-d"}> 至 <{$item.ltime|format:"Y-m-d"}><br>
+				活动地点：<{$item.addr}></p>
+	</div>
+		</a>
+</div>
+<{/foreach}>
 <div class="page"><{$pager.pagebar}></div>
 <{include file="mobile/block/footer.html"}>

@@ -2,7 +2,7 @@
 /**
  * Copy Right IJH.CC
  * Each engineer has a duty to keep the code elegant
- * $Id: weixin_keyword.php 9378 2015-03-27 02:07:36Z youyi $
+ * $Id$
  */
 
 if(!defined('__CORE_DIR')){
@@ -42,6 +42,22 @@ return array (
     'default' => '',
     'SO' => false,
   ),
+   'wx_sid' => 
+  array (
+    'field' => 'wx_sid',
+    'label' => '微信SID',
+    'pk' => false,
+    'add' => true,
+    'edit' => true,
+    'html' => false,
+    'empty' => true,
+    'show' => false,
+    'list' => true,
+    'type' => 'int',
+    'comment' => '',
+    'default' => '',
+    'SO' => false,
+  ),
   'keyword' => 
   array (
     'field' => 'keyword',
@@ -70,6 +86,23 @@ return array (
     'show' => false,
     'list' => true,
     'type' => 'int',
+    'comment' => '',
+    'default' => '',
+    'SO' => false,
+  ),
+
+  'plugin' => 
+  array (
+    'field' => 'plugin',
+    'label' => '插件',
+    'pk' => false,
+    'add' => true,
+    'edit' => true,
+    'html' => false,
+    'empty' => false,
+    'show' => false,
+    'list' => true,
+    'type' => 'text',
     'comment' => '',
     'default' => '',
     'SO' => false,

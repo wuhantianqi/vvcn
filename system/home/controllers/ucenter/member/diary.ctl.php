@@ -2,7 +2,7 @@
 /**
  * Copy Right IJH.CC
  * Each engineer has a duty to keep the code elegant
- * $Id: diary.ctl.php 9372 2015-03-26 06:32:36Z youyi $
+ * $Id$
  */
 
 if(!defined('__CORE_DIR')){
@@ -81,6 +81,8 @@ class Ctl_Ucenter_Member_Diary extends Ctl_Ucenter
             $this->pagedata['status'] = K::M('home/site')->get_status();
             $this->pagedata['setting'] = K::M('tenders/setting')->fetch_all_setting();
             $this->pagedata['type'] = K::M('tenders/setting')->get_type();
+			$pager['city_id'] = $member['city_id'];
+			$this->pagedata['pager'] = $pager;
             $this->tmpl = 'ucenter/member/diary/create.html';
         }
     }
@@ -123,7 +125,9 @@ class Ctl_Ucenter_Member_Diary extends Ctl_Ucenter
             $this->pagedata['detail'] = $detail;
             $this->pagedata['status'] = K::M('home/site')->get_status();
             $this->pagedata['setting'] = K::M('tenders/setting')->fetch_all_setting();
-            $this->pagedata['type'] = K::M('tenders/setting')->get_type();            
+            $this->pagedata['type'] = K::M('tenders/setting')->get_type();
+			$pager['city_id'] = $member['city_id'];
+			$this->pagedata['pager'] = $pager;
             $this->tmpl = 'ucenter/member/diary/edit.html';
         }
     }

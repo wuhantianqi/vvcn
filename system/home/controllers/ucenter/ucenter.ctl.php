@@ -3,7 +3,7 @@
  * Copy Right IJH.CC
  * Each engineer has a duty to keep the code elegant
  * Author @shzhrui<Anhuike@gmail.com>
- * $Id: ucenter.ctl.php 10604 2015-06-03 02:38:05Z wanglei $
+ * $Id: ucenter.ctl.php 5808 2014-07-05 07:00:20Z youyi $
  */
 
 class Ctl_Ucenter extends Ctl 
@@ -20,7 +20,10 @@ class Ctl_Ucenter extends Ctl
         $this->pagedata['ctlgroup'] = $this->ctlgroup;
         $this->pagedata['menu_list'] = $this->_parse_menu($this->MEMBER['from']);
         $this->ucenter_city_id = $this->MEMBER['city_id'];
-
+        $this->ucenter_city = K::M('data/city')->city($this->ucenter_city_id);
+        if($this->MEMBER['from'] == 'company'){
+            $this->company = K::M('company/company')->company_by_uid($this->MEMBER['uid']);
+        }
     }
 
     protected function ucenter_company()
@@ -120,7 +123,33 @@ class Ctl_Ucenter extends Ctl
             $this->response();             
         }   
     }
-   
+    
+	public function ucenter_gz()
+    {
+        if($this->MEMBER['from'] != 'gz'){
+            $this->err->add('您的帐号不是工长类型', 211);
+			$this->response();
+        }else{
+			$this->gz = K::M('gz/gz')->detail($this->uid);
+			if(!empty($this->gz['gz_id'])){
+				$group = K::M('member/group')->group($this->gz['group_id']);
+				$this->gz['group'] = $this->MEMBER['group'] = $group;
+				$this->gz['group_name'] = $group['group_name'];
+				$this->pagedata['group'] = $group;               
+				$this->pagedata['gz'] = $this->gz;
+                $this->ucenter_city_id = $this->gz['city_id'];
+				return $this->gz;
+			}else if($this->request['ctl'] == 'ucenter/gz' && $this->request['act'] == 'info'){
+				$this->pagedata['gz_no_open'] = true;
+				return false;
+			}else{
+				$this->pagedata['gz_no_open'] = true;
+				$this->tmpl = 'ucenter/gz/info.html';
+			}
+			$this->response();     
+		}   
+    }
+
     public function ucenter_weixin()
     {
         if($this->MEMBER['from'] == 'company'){
@@ -152,7 +181,7 @@ class Ctl_Ucenter extends Ctl
             $this->tmpl = 'ucenter/weixin/info.html';            
         }
         $this->response();
-    }
+    } 
 
     protected function _check_priv($from='member')
     {
@@ -170,6 +199,7 @@ class Ctl_Ucenter extends Ctl
                     if($vv['ctl'] == $request['ctl'].':'.$request['act']){
                         if($vv['priv']){
                             if(!in_array($from, explode(',', $vv['priv']))){
+                                $ctlmap = array();
                                 break;
                             }
                         }

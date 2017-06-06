@@ -1,0 +1,138 @@
+<{include file="block/small-header.html"}>
+<link href="/themes/default/topics/static/style/topics.css" rel="stylesheet" type="text/css">
+<div class="loan_banner">
+	<div class="subwd ">
+		<div class="loan_top_text">
+			<p>最低月供999元  最高贷款额20万 </p>
+			<p>最长可贷5年  30分钟内快速审合</p>
+			<a href="<{link ctl='topics/reg1'}>" title="立即申请"></a> </div>
+	</div>
+</div>
+<div class="loan_content">
+	<div class="subwd ">
+		<h1>产品优势</h1>
+		<ul class="loan_youshi">
+			<li class="list1">
+				<h2>额度高</h2>
+				<p>最高额度20万</p>
+			</li>
+			<li class="list2">
+				<h2>利率低</h2>
+				<p>月供999元起</p>
+			</li>
+			<li class="list3">
+				<h2>随借随还</h2>
+				<p>最长可贷5年</p>
+			</li>
+			<li class="list4">
+				<h2>到账快</h2>
+				<p>在线申请，快速审核</p>
+			</li>
+			<li class="list5">
+				<h2>门槛低</h2>
+				<p>无需抵押担保</p>
+			</li>
+		</ul>
+		<div class="cl"></div>
+		<h1>申请流程</h1>
+		<ul class="loan_liucheng">
+			<li>
+				<h2>1</h2>
+				<p>提交贷款申请</p>
+			</li>
+			<li>
+				<h2>2</h2>
+				<p>审批通过</p>
+			</li>
+			<li>
+				<h2>3</h2>
+				<p>选择放款日期</p>
+			</li>
+			<li>
+				<h2>4</h2>
+				<p>放款</p>
+			</li>
+		</ul>
+		<div class="cl"></div>
+		<h1>常见问题</h1>
+		<ul class="loan_question">
+			<li>
+				<h2><span class="loan_ico loan_qu_ico"></span>我可以申请多少额度？</h2>
+				<p><span class="loan_ico loan_an_ico"></span> 您好！本产品可贷款额度范围1万元-20万元，您也可点击"马上评估"按钮，初步了解您的可申请额度。</p>
+			</li>
+			<li>
+				<h2><span class="loan_ico loan_qu_ico"></span>我可以申请多少额度？</h2>
+				<p><span class="loan_ico loan_an_ico"></span> 您好！审批通过后的贷款会打入您的 贷款账户，通过"钱包" 任意支付<{$CONFIG.site.title}>的订单(装修、建材、家居)。您好！本产品是全在线申请模式，通
+					过在<{$CONFIG.site.title}>填写申请问卷，上传申请材料，让您"足不出户"就能把贷款办下来。</p>
+			</li>
+			<li>
+				<h2><span class="loan_ico loan_qu_ico"></span>我可以申请多少额度？</h2>
+				<p><span class="loan_ico loan_an_ico"></span> 您好！本产品可贷款额度范围1万元-20万元，您也可点击"马上评估"按钮，初步了解您的可申请额度。</p>
+			</li>
+			<li>
+				<h2><span class="loan_ico loan_qu_ico"></span>我可以申请多少额度？</h2>
+				<p><span class="loan_ico loan_an_ico"></span> 您好！本产品可贷款额度范围1万元-20万元，您也可点击"马上评估"按钮，初步了解您的可申请额度。</p>
+			</li>
+			<li>
+				<h2><span class="loan_ico loan_qu_ico"></span>我可以申请多少额度？</h2>
+				<p><span class="loan_ico loan_an_ico"></span> 您好！本产品可贷款额度范围1万元-20万元，您也可点击"马上评估"按钮，初步了解您的可申请额度。</p>
+			</li>
+		</ul>
+		<div class="cl"></div>
+	</div>
+	<div class="loan_apply">
+		<div class="subwd ">
+				<div class="content clear">
+					<div class="zxd_calculator_form mod_form lt">
+						<h3><i class="sjybj_ico_money"></i>月费率低至<{$topics}><span class="fs14"></span></h3>
+						<ul class="cl">
+							<li> <span>贷款金额：</span>
+								<div class="element">
+									<input class="input text normal" id='money'  name="data[money]" value="<{$topics.money}>"  placeholder="请输入贷款金额" type="text">
+									<em>元</em> </div>
+							</li>
+							<li> <span>贷款周期：</span>
+								<div class="element">
+									<select name="data[zq]" id='zq' class="select text normal" >
+                                        <{foreach $zq as $k => $item}> <option <{if $topics.zq == $k}>  selected="selected" <{/if}> value="<{$k}>"><{$item.title}>
+                                        </option>
+                                        <{/foreach}>
+                                    </select>
+								</div>
+							</li>
+							<li> <a onclick="getResult();" >计算还款金额</a></li>
+						</ul>
+					</div>
+					<div class="zxd_calculator_result rt" id='show'>
+						<div class="zxd_calculator_hd lt"> 每月还款&nbsp;<span>0.00</span>&nbsp;元 </div>
+						<div class="zxd_calculator_bd lt">
+							<ul>
+								<li>贷款金额：&nbsp;<span>0</span>&nbsp;元</li>
+								<li>贷款周期：&nbsp;<span>0</span>&nbsp;</li>
+								<li>本息合计：&nbsp;<span>0</span></li>
+							</ul>
+						</div>
+					</div>
+					<div class="cl"></div>
+			</div>
+		</div>
+	</div>
+</div>
+<script>
+function getResult(){
+	var money = $("#money").val();
+	if(isNaN(money)){
+		Widget.MsgBox.error("贷款金额有误");
+		return false; 	
+	}
+	
+	if(money<1000 || money>200000){
+		Widget.MsgBox.error("贷款金额有误");
+		return false; 	
+	}
+	var zq = $("#zq").val();
+	var link = "<{link ctl='topics:get_money' arg0='#m' arg1='#t'}>";
+	$("#show").load(link.replace("#m", money).replace("#t", zq));
+}
+</script> 
+<{include file="block/small-footer.html"}> 

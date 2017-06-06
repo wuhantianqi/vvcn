@@ -1,0 +1,87 @@
+<{include file="scenter/block/header.html"}>
+<div class="ucenter_t">
+	<ul>
+		<li<{if $pager.type=='1'}> class="on"<{/if}>><a href="<{link ctl='scenter/shop/packet:items' arg0='1'}>" >未领取</a>
+		</li>
+		<li<{if $pager.type=='2'}> class="on"<{/if}>><a href="<{link ctl='scenter/shop/packet:items' arg0='2'}>">已领取</a>
+		</li>
+		<li<{if $pager.type=='3'}> class="on"<{/if}>><a href="<{link ctl='scenter/shop/packet:items' arg0='3'}>">已使用</a>
+		</li>
+		<li<{if $pager.type=='4'}> class="on"<{/if}>><a href="<{link ctl='scenter/shop/packet:items' arg0='4'}>">已过期</a>
+		</li>
+		<span class="r"><a class="pbtn" onclick="create()">生成红包</a></span>
+	</ul>
+</div>
+<div class="ucenter_c">
+	<table width="100%" border="0" cellspacing="0" cellpadding="0" class="table">
+		<tr>
+			<th class="w-100">ID</th>
+			<th>标题</th>
+			<th class="w-100">类型</th>
+			<th class="w-100">code码</th>
+			<th class="w-100">领取用户</th>
+			<th class="w-100">最低消费</th>
+			<th class="w-100">价格</th>
+			<th class="w-100">过期时间</th>
+			
+				</th>
+		</tr>
+		<{foreach $items as $item}>
+		<tr style="text-align:center">
+			<td><{$item.id}></td>
+			<td><{$item.title}></td>
+			<td><{if $item.type == 1}>平台红包<{else}>店铺红包<{/if}></td>
+			<td><{$item.code}></td>
+			<td><{if $item.uid}><{$member[$item.uid].uname}><{else}>未领取<{/if}></td>
+			<td><{$item.man}></td>
+			<td><{$item.price}></td>
+			<td><{if $item.ltime}><{$item.ltime|format:'Y-m-d'}><{else}>未领取<{/if}></td>
+		</tr>
+		<{foreachelse}>
+		<tr>
+			<td colspan="10">
+				<p class="tips"><span class="notice">没有您的红包</span></p>
+			</td>
+		</tr>
+		<{/foreach}>
+	</table>
+	<p class="page"><{$pager.pagebar}></p>
+	<div id="packet" class="ui-widget-content-packed" >
+		<div class="ui-widget-title">
+			<h3 class="lt maincl">生成红包</h3>
+			<a href="javascript:;" onclick="close_packet()" class="rt close">×</a>
+			<div class="cl"></div>
+		</div>
+		<form id="data-form">
+			<div class="codetext"><span>标题</span>
+				<input type="text" name="data[title]" value="<{$detail.title|default:''}>" class="input "/>
+			</div>
+			<div class="codetext"><span>价格</span>
+				<input type="text" name="data[price]" value="<{$detail.price|default:''}>" class="input"/>
+			</div>
+			<div class="codetext"><span>最低消费</span>
+				<input type="text" name="data[man]" value="<{$detail.man|default:''}>" class="input"/>
+			</div>
+			<div class="codetext"><span>有效期</span>
+				<input type="text" name="data[time]" value="<{$detail.time|default:''}>" class="input"/>
+			</div>
+			<div class="codetext"><span>红包个数</span>
+				<input type="text" name="data[number]" value="<{$detail.number|default:''}>" class="input"/>
+			</div>
+			<div class="codebtn">
+				<input id="submit_btn" action="" mini-submit="#data-form" type="button" value="提交数据" class="btn green_btn" />
+			</div>
+		</form>
+	</div>
+</div>
+<script>
+	function create(){
+		$("#packet").css('display','block'); 
+		$("#submit_btn").attr('action','<{link ctl="scenter/shop/packet:create"}>');
+	}
+	
+	function close_packet(){
+		$("#packet").css('display','none');
+	}
+</script> 
+<{include file="scenter/block/footer.html"}>

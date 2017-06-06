@@ -2,7 +2,7 @@
 /**
  * Project:     Smarty: the PHP compiling template engine
  * File:        smarty_internal_utility.php
- * SVN:         $Id: smarty_internal_utility.php 9378 2015-03-27 02:07:36Z youyi $
+ * SVN:         $Id: smarty_internal_utility.php 2034 2013-12-07 03:08:33Z $
  *
  * This library is free software; you can redistribute it and/or
  * modify it under the terms of the GNU Lesser General Public
@@ -28,7 +28,7 @@
  * @author Uwe Tews
  * @package Smarty
  * @subpackage PluginsInternal
- * @version 3-SVN$Rev: 9378 $
+ * @version 3-SVN$Rev: 2034 $
  */
 
 

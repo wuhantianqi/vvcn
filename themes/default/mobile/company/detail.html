@@ -1,8 +1,48 @@
 <{assign var="tpl_page_title" value="公司详情"}>
 <{include file="mobile/company/block/header.html"}>
-<div class="pding">
-	<p>联系电话：<{$company.show_phone}></p>
-	<p>联系地址：<{$company.addr}></p>
-    <div><{$company.info}></div>
+<div class="zxCompany_intro">
+	<div class="evaluate">
+		<div class="fl">
+			<p>综合评价</p>
+			<p class="fen pointcl"><{$company.avg_score}></p>
+		</div>
+		<div class="fr"> <{foreach $CONFIG.score.company as $k=>$v}>
+			<{if $v}>
+			<p><{$v}><span class="starswx" style="margin:0px 5px; vertical-align:middle;"><em style="width:<{($company.avg_score*20)}>%;"></em></span><{$company.avg_scores[$k]}></p>
+			<{/if}>
+			<{/foreach}> </div>
+		<div class="clear"></div>
+	</div>
+	<ul class="bao mb10">
+		<li class="black6"><i class="ico_1"></i>支持免费量房</li>
+		<li class="black6"><i class="ico_2"></i>支持满意后付款</li>
+		<li class="black6"><i class="ico_3"></i>支持先行赔付</li>
+	</ul>
+	<div class="applyDesign"> <{if $company.group.priv.allow_yuyue}> <a href="<{link ctl='mobile/company:yuyue' arg0=$company.company_id}>" class="btn">立即预约</a> <{else}> <a href="<{link ctl='mobile/tenders'}>" class="btn">发布招标</a> <{/if}> <a href="<{link ctl='mobile/zxb'}>" class="btn">申请装修保障</a> </div>
+	<div class="nrBox mb10">
+		<div class="nr"><i id="telIco"></i><{$company.show_phone}></div>
+	</div>
+	<div class="nrBox mb10">
+		<div class="nr"><i id="addrIco"></i><{$company.addr}></div>
+	</div>
+	<div class="nrBox mb10">
+		<h3>公司简介</h3>
+		<div class="nr">
+			<div class="article"><{$company.info}></div>
+		</div>
+	</div>
+	<div class="nrBox mb10">
+		<h3>企业证书</h3>
+		<div class="nr"><img src="pic/pic3.png"><img src="pic/pic2.png"></div>
+	</div>
+	<div class="nrBox mb10">
+		<h3>工商注册信息</h3>
+		<div class="nr">
+			<p>成立时间：2013-09-29<br>
+				注册资金：0万元<br>
+				登记机关：上海市工商行政管理局奉贤分局<br>
+			</p>
+		</div>
+	</div>
 </div>
-<{include file="mobile/block/footer.html"}>
+<{include file="mobile/block/footer.html"}> 

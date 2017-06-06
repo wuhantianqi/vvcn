@@ -1,4 +1,5 @@
 <{assign var="curr_comment" value=true}>
+<{assign var="seo_sub_title" value="TA的评价"}>
 <{include file="blog/block/header.html"}>
 <div class="area pding sub_designer">
 	<div class="new_pinglun disigner_pinglun mb10">
@@ -6,8 +7,8 @@
     	  <{foreach $comment_info as $item}>
         	<li>
                 <div class="lt">
-                <img src="<{$pager.img}>/<{$designer.face}>" class="lt" /><br />
-                <{$user_list[$item.uid].uname|cutstr:6:''}>
+                <img src="<{$pager.img}>/<{$member_list[$item.uid].face}>" class="lt" /><br />
+                <{$member_list[$item.uid].uname|cutstr:6:''}>
                 </div>
                 <div class="rt">
                     <p class="graycl">

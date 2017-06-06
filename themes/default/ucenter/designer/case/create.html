@@ -55,7 +55,7 @@
 	$("#select_home_btn").click(function(e) {
 		e.stopPropagation();
 		e.preventDefault();
-		var link = "<{link ctl='ucenter/misc/select:home' arg=$pager.city.city_id}>";
+		var link = "<{link ctl='ucenter/misc/select:home' arg0=$pager.city_id}>";
 		Widget.Dialog.Select(link, "N", function(ret) {
 			$("#select_home_id").val(ret[0]);
 			$("#select_home_name").val(ret[1].title);
@@ -69,7 +69,7 @@
 			Widget.MsgBox.error("请先选择小区");
 			return false;
 		}
-		var link = "<{link ctl='ucenter/misc/select:huxing' arg0='#home_id#' arg1='1'}>";
+		var link = "<{link ctl='ucenter/misc/select:huxing' arg0='#home_id#' arg1='1' http='base'}>";
 		Widget.Dialog.Select(link.replace("#home_id#", home_id), "N", function(ret) {
 			$("#select_huxing_id").val(ret[0]);
 			$("#select_huxing_name").val(ret[1].title);

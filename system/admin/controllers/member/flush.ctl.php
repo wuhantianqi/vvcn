@@ -2,7 +2,7 @@
 /**
  * Copy Right IJH.CC
  * Each engineer has a duty to keep the code elegant
- * $Id: flush.ctl.php 9763 2015-04-20 12:28:42Z youyi $
+ * $Id$
  */
 
 if(!defined('__CORE_DIR')){

@@ -2,7 +2,7 @@
 /**
  * Copy Right IJH.CC
  * Each engineer has a duty to keep the code elegant
- * $Id: order.ctl.php 9372 2015-03-26 06:32:36Z youyi $
+ * $Id: order.ctl.php 3053 2014-01-15 02:00:13Z youyi $
  */
 
 class Ctl_Trade_Order extends Ctl 
@@ -14,6 +14,7 @@ class Ctl_Trade_Order extends Ctl
         if(!$data = $this->checksubmit('data')){
             $this->err->add('非法的数据提交', 211);
         }else{
+            $data = K::M('order/address')->detail($data['addr_id']);
             $data['uid'] = $this->uid;
             $cart = K::M('trade/cart')->detail();
             if(empty($cart['product_count'])){
@@ -60,7 +61,7 @@ class Ctl_Trade_Order extends Ctl
         }
     }
 
-    public function payment($order_no=null)
+    public function payment($order_no=null,$packet_id=null)
     {
         if(!is_numeric($order_no) && !($order_no = (int)$this->GP('order_no'))){
             $this->error(404);
@@ -74,6 +75,67 @@ class Ctl_Trade_Order extends Ctl
             }else if($order['pay_status']){
                 $this->err->add('该订单已经支付过了,不需要重复支付', 212);
             }else{
+				$log = K::M('payment/log')->log_by_no($order_no);
+				if($log['packet']){
+					$detail = K::M('member/packet')->detail($log['packet']);
+				}
+
+				$filter['is_use'] = 1;
+				$filter['uid'] = $this->uid;
+				$filter['ltime'] = '>:'.time();
+				$filter['shop_id'] = array('0',$order['shop_id']);
+				$c =  array();
+				$cat[0] = 0;
+				foreach($order["products"] as $k => $v)
+				{
+					if($c[$v["cat_id"]]){
+						$c[$v["cat_id"]] += $v['product_price']*$v["number"];
+					}else{
+						$c[$v["cat_id"]] = $v['product_price']*$v["number"];
+					}
+					$cat[]= $v["cat_id"];
+				}
+
+				$filter['cate_id'] = $cat;
+				
+				$packet = K::M('member/packet')->items($filter,array('price'=>'desc'));
+				
+				foreach($packet as $k => $v){
+					if($v['cate_id']){
+						if($c[$v['cate_id']]<$v['man']){
+							unset($packet[$k]);
+						}
+					}
+
+					if($order['product_amount'] < $v['man']){
+						unset($packet[$k]);
+					}
+				}
+				if($detail){
+					$packet[$log['packet']] = $detail;
+				}
+				if($packet_id){
+					$max_packet = $packet[$packet_id];
+				}elseif($detail){
+					$max_packet = $detail;
+				}else{
+					$max_packet = reset($packet);
+				}
+				$this->pagedata['max_packet'] = $max_packet;
+				$order['amount'] = $order['amount']-$max_packet['price'];
+				$this->pagedata['packet'] = $packet;
+				if(!$packet_id){
+					$packet_id = $max_packet['id'];
+				}else{
+					if(!$packet[$packet_id]){
+						if($log['packet']){
+							$packet_id = $log['packet'];
+						}else{
+							$packet_id = 0;
+						}
+					}
+				}
+				$this->pagedata['packet_id'] = $packet_id;
                 $this->pagedata['order'] = $order;
                 $this->pagedata['pay_list'] = K::M('payment/payment')->fetch_all();
                 $this->tmpl = 'trade/payment/payment.html';

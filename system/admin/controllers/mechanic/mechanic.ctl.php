@@ -2,7 +2,7 @@
 /**
  * Copy Right IJH.CC
  * Each engineer has a duty to keep the code elegant
- * $Id: mechanic.ctl.php 10519 2015-05-27 12:48:27Z xiaorui $
+ * $Id: mechanic.ctl.php 3304 2014-02-14 11:01:43Z youyi $
  */
 
 if(!defined('__CORE_DIR')){
@@ -26,7 +26,9 @@ class Ctl_Mechanic_Mechanic extends Ctl
             if(is_numeric($SO['audit'])){$filter['audit'] = $SO['audit'];}
         }
         $filter['closed'] = 0;
-          
+        if(CITY_ID){
+            $filter['city_id'] = CITY_ID;
+        }    
         if($items = K::M('mechanic/mechanic')->items($filter, null, $page, $limit, $count)){
             $pager['count'] = $count;
             $pager['pagebar'] = $this->mkpage($count, $limit, $page, $this->mklink(null, array('{page}')), array('SO'=>$SO));
@@ -58,7 +60,9 @@ class Ctl_Mechanic_Mechanic extends Ctl
             }else if(!$account = $this->GP('account')){
                 $this->err->add('非法的数据提交', 201);
             }else{
-                
+                if(CITY_ID){
+                    $data['city_id'] = CITY_ID;
+                }  
 				$account['city_id'] = $data['city_id'];           
                 if($mechanic_id = K::M('mechanic/mechanic')->create($data, $account)){
 					if($mechanic_id && isset($data['group_id'])){
@@ -88,12 +92,16 @@ class Ctl_Mechanic_Mechanic extends Ctl
             if(!$data = $this->GP('data')){
                 $this->err->add('非法的数据提交', 201);
             }else{
-                              
+                if(CITY_ID){
+                    unset($data['city_id']);
+                }                
                 if(K::M('mechanic/mechanic')->update($uid, $data)){
-                    if(!$attr =  $this->GP('attr')){
-                        $attr = array();
-                    }                    
-                    K::M('mechanic/attr')->update($uid, $attr);
+                    if(isset($data['group_id'])){
+                        K::M('member/member')->update($uid, array('group_id'=>(int)$data['group_id']), true);
+                    }
+                    if($attr=  $this->GP('attr')){
+                        K::M('mechanic/attr')->update($uid,$attr);       
+                    }
                     $this->err->add('修改内容成功');
                 }  
             }

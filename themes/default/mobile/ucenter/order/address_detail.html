@@ -1,0 +1,38 @@
+<{assign var="tpl_page_title" value="地址详情"}>
+<{include file="mobile/block/header.html"}>
+<header class="control"> <i class="left"><a href="<{if $pager.backurl}><{$pager.backurl}><{else}><{link ctl='mobile/index'}><{/if}>" id="gobackIco"></a></i>
+	<div class="title">地址详情</div>
+	<i class="right"> <{if $data.default != 1}><a href="<{link ctl='ucenter/order:default_addr' arg0=$data.addr_id}>" class="signupIco"  mini-act="设为默认" mini-confirm="确定要设为默认吗？">设为默认</a><{/if}></i> </header>
+<section id="" class="page_center_box">
+	<form id="data-form">
+		<div class="loginInfor">
+			<div class="loginIf_list">
+				<div class="fl ifIco"><i class="icco icco1"></i> </div>
+				<div class="ifInput">
+					<input id='contact' class="text"  name='data[contact]' value='<{$data.contact}>' readonly="true">
+				</div>
+				<div class="clear"></div>
+			</div>
+		</div>
+		<div class="loginInfor">
+			<div class="loginIf_list">
+				<div class="fl ifIco"><i class="icco icco2"></i> </div>
+				<div class="ifInput">
+					<input id='phone' class="text"  name='data[phone]' value='<{$data.phone}>' readonly="true">
+				</div>
+				<div class="clear"></div>
+			</div>
+		</div>
+		<div class="loginInfor">
+			<div class="loginIf_list">
+				<div class="fl ifIco"><i class="icco icco4"></i> </div>
+				<div class="ifInput">
+					<input id='addr' class="text"  name='data[addr]' value='<{$data.addr}>' readonly="true">
+				</div>
+				<div class="clear"></div>
+			</div>
+		</div>
+		<div class="yuee_btn"><a id='delete' class="btn" href="<{link ctl='ucenter/order:delete_addr' arg0=$data.addr_id}>" mini-act="删除" mini-confirm="确定要删除吗？">删除收货地址</a></div>
+	</form>
+</section>
+</body></html>

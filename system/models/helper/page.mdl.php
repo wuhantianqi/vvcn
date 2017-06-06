@@ -78,7 +78,7 @@ class Mdl_Helper_Page
 				$goto = sprintf($goto, $curpage, $prefix, $ext, $params, $pages, $pages);
 				$multipage = $multipage ? ('<label><em>&nbsp;'.$num.'条记录&nbsp;</em></label>'.$multipage.$goto) : '';
 			}else if(defined('IN_MOBILE')){
-				$multipage = $multipage ? ('<em>&nbsp;'.$curpage.'/'.$num.'&nbsp;</em>'.$multipage):'';
+				$multipage = $multipage ? ('<em>&nbsp;'.$curpage.'/'.$pages.'&nbsp;</em>'.$multipage):'';
 			}else{
 				$multipage = $multipage ? ('<em>&nbsp;'.$num.'条记录&nbsp;</em>'.$multipage):'';
 			}
@@ -175,7 +175,7 @@ class Mdl_Helper_Page
 				$goto = sprintf($goto, $curpage, $golink, '{page}', $pages, $pages);
 				$multipage = $multipage ? ('<label><em>&nbsp;'.$count.'条记录&nbsp;</em></label>'.$multipage.$goto) : '';
 			}else if(defined('IN_MOBILE')){
-				$multipage = $multipage ? ('<em>&nbsp;'.$curpage.'/'.$pages.'&nbsp;</em>'.$multipage):'';
+				$multipage = $multipage ? ('<em>&nbsp;'.$curpage.'/'.$count.'&nbsp;</em>'.$multipage):'';
 			}else{
 				$multipage = $multipage ? ('<em>&nbsp;'.$count.'条记录&nbsp;</em>'.$multipage):'';
 			}

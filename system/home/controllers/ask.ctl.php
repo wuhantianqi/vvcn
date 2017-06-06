@@ -2,7 +2,7 @@
 /**
  * Copy Right IJH.CC
  * Each engineer has a duty to keep the code elegant
- * $Id: ask.ctl.php 9372 2015-03-26 06:32:36Z youyi $
+ * $Id: ask.ctl.php 5605 2014-06-23 11:04:22Z youyi $
  */
 class Ctl_Ask extends Ctl
 {
@@ -75,8 +75,8 @@ class Ctl_Ask extends Ctl
     public function save()
     {
         if (!$this->check_login()) {
-            $this->err->add('请登录', 101);
-        }else if (($audit = K::M('member/group')->check_priv($this->MEMBER['group_id'],'allow_ask')) == -1) {
+            $this->err->add('登录后才能发布问题', 101);
+        }else if (($audit = K::M('member/group')->check_priv($this->MEMBER['group_id'], 'allow_ask')) == -1) {
             $this->err->add('很抱歉您所在的用户组没有权限操作', 201);
         }else if ($data = $this->checksubmit('data')) {
 			$verifycode_success = true;
@@ -175,12 +175,12 @@ class Ctl_Ask extends Ctl
             $this->pagedata['member_list'] = K::M('member/view')->items_by_ids($uids);
             $this->pagedata['cate_list'] = $cate_list = K::M('ask/cate')->fetch_all();
             $this->pagedata['detail'] = $detail;
-            $this->pagedata['uid'] = $this->uid;
+			$this->pagedata['uid'] = $this->uid;
             $seo = array('title'=>$detail['title'], 'cate_name'=>'', 'intro'=>$detail['intro']);
             if($cate = $cate_list[$detail['cat_id']]){
                 $seo['cate_name'] = $cate['title'];
             }
-            $this->seo->init('ask_detail',$seo);
+            $this->seo->init('ask_detail', $seo);
             if($seo_title = $detail['seo_title']){
                 $this->seo->set_title($seo_title);
             }

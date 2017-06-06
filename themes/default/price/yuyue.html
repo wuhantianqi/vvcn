@@ -1,0 +1,97 @@
+<{assign var="min_ititle" value="报名公司设计"}>
+<{include file="block/mini-header.html"}>
+<form id="price-yuyue-form">
+	<input type="hidden" name="data[from]" value="TBJ" />
+	<input type="hidden" name="data[mj]" value="<{$data.mj}>" />
+	<input type="hidden" name="data[home_name]" value="<{$data.home_name}>" />
+	<input type="hidden" name="data[house_type_id]" value="<{$data.house_type_id}>" />
+	<input type="hidden" name="data[way_id]" value="<{$data.way_id}>" />
+	<input type="hidden" name="data[level]" value="<{$data.level}>" />
+	<input type="hidden" name="data[style_id]" value="<{$data.style_id}>" />
+	<div class="yuyBook">
+		<div class="yuyTxt">为了给您提供更快速高效的服务、我们会给您手机免费发送短信、其中包括一个6位纯数字的验证信息、请您在页面填写。</div>
+		<dl>
+			<dt class="name">称呼</dt>
+			<dd>
+				<input name="data[contact]" type="text" id="contact" class="text w-200" value=""  placeholder="请输入您的称呼"/>
+			</dd>
+		</dl>
+		<dl>
+			<dt class="tel">手机号码</dt>
+			<dd>
+				<input name="data[mobile]" type="text" id="mobile" class="text w-200" value=""  placeholder="请输入手机号码"/>
+			</dd>
+		</dl>
+		<dl>
+			<dt class="yzm">验证码</dt>
+			<dd class="short">
+				<input name="data[code]" type="text" class="text "  value=""  placeholder="验证码"/>
+			</dd>
+			<span id='code' class="goYz"><a id='show_sms_loading' class="none pointcl">...</a><a sendsms="price:sendsms" >发送验证码</a></span>
+			</dd>
+		</dl>
+		<div class="yuyue_bottom bjBtn">
+			<input type="button" action="<{link ctl='price:byphone' http='ajax'}>" id="price-yuyue-button" class="btn btn_sub_big" value="立即获取报价" />
+		</div>
+	</div>
+</form>
+<script>
+function CheckMobile(mobile) {
+    if (/^1\d{10}$/.test(mobile)) {
+        return mobile;
+    } else {
+        return false;
+    }
+}
+(function(K, $){
+$("#price-yuyue-button").click(function(){
+	if(!CheckMobile($("[name='data[mobile]']").val())){
+		Widget.MsgBox.error('手机号码不正确');
+		return false;
+	}else if($("[name='data[code]']").val()<3){
+		Widget.MsgBox.error('验证码不正确');
+		return false;		
+	}else if(!window.__MINI_LOAD){
+		window.__MINI_LOAD = true;
+		Widget.MsgBox.load('正在为您计算结果...');
+		$.post("<{link ctl='price:byphone' http='ajax'}>", $("#price-yuyue-form").serialize(), function(ret){
+			if(ret.error>0){
+				Widget.MsgBox.error(ret.message.join(""));
+			}else{
+				$("#show_result").html(ret.html);
+				Widget.MsgBox.hide();
+				$("#widget-dialog-load-content").dialog("close");
+				$("#price_first").hide();
+				$("#price_reload").show();
+			}
+			window.__MINI_LOAD = false;
+		}, "json");
+	}
+});
+	$("[sendsms]").click(function(e){
+		var link = "<{link ctl='price/sendsms'  arg0='#mobile#' http='ajax'}>";
+		var mobile = $("#mobile").val();
+		var last_time = 60;
+		var price__interval = null;
+		$.getJSON(link.replace("#mobile#", mobile), function(ret){
+			if(ret.error){
+				Widget.MsgBox.error(ret.message.join(""));
+			}else{
+				price__interval = setInterval(function(){
+					last_time --;
+					if(last_time >0){
+						$("#show_sms_loading").html("重新获取（"+last_time+"）秒").show();
+						$("[sendsms]").hide();
+					}else{
+						clearInterval(price__interval);
+						last_time = 60;
+						$("#show_sms_loading").hide();
+						$("[sendsms]").show();
+					}
+				}, 1000);
+			}
+		});
+	});
+})(window.KT, window.jQuery);
+</script> 
+<{include file="block/mini-footer.html"}>

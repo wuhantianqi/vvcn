@@ -2,7 +2,7 @@
 /**
  * Copy Right IJH.CC
  * Each engineer has a duty to keep the code elegant
- * $Id: log.ctl.php 9847 2015-04-23 05:30:45Z maoge $
+ * $Id$
  */
 
 if(!defined('__CORE_DIR')){

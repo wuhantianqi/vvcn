@@ -1,15 +1,28 @@
 <{assign var="tpl_page_title" value="我的投标"}>
 <{include file="mobile/block/header.html"}>
-<div class="pding">
-	<{if !$items}><div class="no_record">暂无记录信息</div><{/if}>
+<div class="pading admin_banner">
+	<a href="<{link ctl='mobile/ucenter:info'}>" style="display:block;">
+	<div class="admin_intro"><img src="<{$pager.img}>/<{$MEMBER.face}>" class="lt" />
+		<div class="lt">
+			<p><{$MEMBER.uname}></p>
+			<p>账户类型：<u><{$MEMBER.from_title}></u> </p>
+			<p>我的金币：<u><{$MEMBER.gold}></u></p>
+		</div>
+		<div class="cl"></div>
+	</div>
+	</a>
+</div>
+
+<div class="yuyue_list">
+	<{if !$items}><div class="pding"><div class="no_record">暂无记录信息</div></div><{/if}>
     <{foreach $items as $item}>
 	<div class="yuyue_box">
-		<table cellpadding="0" cellspacing="0">
-        	<tr><td>招标：<{$tenders_list[$item.tenders_id].title|default:'--'}></td></tr>
-            <tr><td>联系人：<{$tenders_list[$item.tenders_id].contact}></td></tr>
-			<tr><td>电话：<{$tenders_list[$item.tenders_id].mobile}></td></tr>
-            <tr><td>竞标时间：<{$item.dateline|format}></td></tr>
-			<tr><td>
+        	<h3>招标：<font class="fontcl2"><{$tenders_list[$item.tenders_id].title|default:'--'}></font></h3>
+			<div class="yuyue_box_in">
+            <p>联系人：<{$tenders_list[$item.tenders_id].contact}></p>
+			<p>电话：<{$tenders_list[$item.tenders_id].mobile}></p>
+            <p>竞标时间：<{$item.dateline|format}></p>
+			<p>
 				状态：
                  <{if $item.is_signed}>
                 <b>恭喜签单</b>
@@ -20,7 +33,7 @@
                 <{/if}>
 				</td>
 			</tr>
-		</table>
+			</div>
 	</div>
     <{/foreach}>
 </div>

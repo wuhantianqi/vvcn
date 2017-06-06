@@ -2,7 +2,7 @@
 /**
  * Copy Right IJH.CC
  * Each engineer has a duty to keep the code elegant
- * $Id: money.ctl.php 9378 2015-03-27 02:07:36Z youyi $
+ * $Id: money.ctl.php 4168 2014-03-26 06:19:32Z youyi $
  */
 
 if(!defined('__CORE_DIR')){
@@ -57,9 +57,15 @@ class Ctl_Shop_Money extends Ctl
                 if($shop_id = $v['shop_id']){
                     $shop_ids[$shop_id] = $shop_id;
                 }
+				if($uid = $v['uid']){
+                    $uids[$uid] = $uid;
+                }
             }
             if($shop_ids){
                 $this->pagedata['shop_list'] = K::M('shop/shop')->items_by_ids($shop_ids);
+            }
+			if($uids){
+                $this->pagedata['uids'] = K::M('member/member')->items_by_ids($uids);
             }
         }            
         $this->pagedata['pager'] = $pager;
@@ -167,18 +173,22 @@ class Ctl_Shop_Money extends Ctl
         }
     }
 
-    public function doaudit($id=null)
+    public function audit($id=null)
     {
         if($id = (int)$id){
-            if(K::M('shop/money')->batch($id, array('audit'=>1))){
-                $this->err->add('审核内容成功');
-            }
-        }else if($ids = $this->GP('id')){
-            if(K::M('shop/money')->batch($ids, array('audit'=>1))){
-                $this->err->add('批量审核内容成功');
-            }
-        }else{
-            $this->err->add('未指定要审核的内容', 401);
+			if(!$detail = K::M('shop/money')->detail($id)){
+				 $this->err->add('该提现日志不存在', 213);
+			}elseif(!$member = K::M('member/member')->detail($detail['uid'])){
+				 $this->err->add('该用户不存在', 214);
+			}else if(abs($detail['money']) > $member['truste_money']){
+                $this->err->add('提现金额不能大于你的账户余额', 215);
+            }else{
+				if(K::M('shop/money')->batch($id, array('audit'=>1))){
+					K::M('member/member')->update_count($detail['uid'], 'truste_money', $detail['money']);
+					$this->err->add('审核内容成功');
+				}
+			}
+            
         }
     }
 

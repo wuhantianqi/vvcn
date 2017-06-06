@@ -1,59 +1,108 @@
+<{assign var="tpl_page_title" value="商家列表"}>
 <{include file="mobile/block/header.html"}>
-<div class="choose_menu">
-    <ul>
-        <li>
-            <div class="choose_menu_cont">
-                <aa href="#"><{if $pager.cat_id}><{$cate_list[$pager.cat_id].title}><{else}>全部分类<{/if}><span class="app_ico"></span></aa>
-                <div class="sub_choose_menu" id='sub_choose_menu1'>
-                    <ul>
-                        <li><a href="<{link ctl='mobile/store' arg0=0 arg1=$pager.group_id arg2=$pager.order arg3=1}>">全部分类</a></li>
+<div id="search-bar">
+	<ul class="search-bar_list">
+		<li class="list"><a href="#"><{if $pager.cat_id}><{$cate_list[$pager.cat_id].title}><{else}>全部分类<{/if}><em></em></a></li>
+		<li class="list"><a href="#"><{if $pager.group_id}><{$group_list[$pager.group_id]}><{else}>全部类型<{/if}><em></em></a></li>
+		<li class="list"><a href="#"><{if $pager.order}><{$order_list[$pager.order]}><{else}>默认排序<{/if}><em></em></a></li>
+	</ul>
+	<div class="search-bar_pull">
+		<div class="list_box">
+			<ul>
+				  <li><a href="<{link ctl='mobile/store' arg0=0 arg1=$pager.group_id arg2=$pager.order arg3=1}>">全部分类</a></li>
 						<{foreach $cate_list as $v}>
 						<li><a href="<{link ctl='mobile/store' arg0=$v.cat_id arg1=$pager.group_id arg2=$pager.order arg3=1}>"><{$v.title}></a></li>
 						<{/foreach}>
-                    </ul>
-                </div>
-            </div>
-        </li>
-        <li>
-            <div class="choose_menu_cont">
-                <aa href="#"><{if $pager.group_id}><{$group_list[$pager.group_id]}><{else}>全部类型<{/if}><span class="app_ico"></span></aa>
-                <div class="sub_choose_menu" id='sub_choose_menu2'>
-                    <ul>
-                        <li><a  href="<{link ctl='mobile/store' arg0=$pager.cat_id arg1=0 arg2=$pager.order arg3=1}>">全部类型</a></li>
+			</ul>
+		</div>
+		<div class="list_box">
+			<ul>
+				  <li><a  href="<{link ctl='mobile/store' arg0=$pager.cat_id arg1=0 arg2=$pager.order arg3=1}>">全部类型</a></li>
                          <{foreach $group_list  as $k=>$v}>
                         <li><a href="<{link ctl='mobile/store' arg0=$pager.cat_id arg1=$k arg2=$pager.order arg3=1}>"><{$v}></a></li>
                          <{/foreach}>
-                    </ul>
-                </div>
-            </div>
-        </li>       
-        <li>
-            <div class="choose_menu_cont">
-                <aa href="#"><{if $pager.order}><{$order_list[$pager.order]}><{else}>默认排序<{/if}><span class="app_ico"></span></aa>
-                <div class="sub_choose_menu">
-                    <ul>
-                        <{foreach $order_list as $k=>$v}>
+			</ul>
+		</div>
+		<div class="list_box">
+			<ul>
+				 <{foreach $order_list as $k=>$v}>
                         <li><a  href="<{link ctl='mobile/store' arg0=$pager.cat_id arg1=$pager.group_id arg2=$k arg3=1}>"><{$v}></a></li>
                         <{/foreach}>
-                    </ul>
-                </div>
-            </div>
-        </li>
-    </ul>
-    <div class="cl"></div>
+			</ul>
+		</div>
+		<div class="mask_bg"></div>
+	</div>
 </div>
-<ul class="app_menu">
-    <{foreach $items as $item}>
-	<li>
-		<a href="<{link ctl='mobile/shop' arg0=$item.shop_id}>">
-		<img src="<{$pager.img}>/<{$item.logo}>" class="lt pic" />
-		<h2><{$item.name}><span class="taobao_credit" style="margin-top:10px;"><span><{$shop.credit|shoprank}></span></h2>
-		<p class="nowrap">指数：<{$item.credit}></p>
-		<p class="nowrap">电话：<{$item.show_phone}></p>
-		<div class="cl"></div>
-		</a>
-	</li>
-    <{/foreach}>
+<section id="" class="page_center_box">
+<ul class="decorator_list_box mt10">
+	<{foreach $items as $item}>
+	<li class="decorator_list"><a href="<{link ctl='mobile/shop' arg0=$item.shop_id}>">
+		<div class="fl img"><img src="<{$pager.img}>/<{$item.logo}>" />
+		</div>
+			<div class="wz">
+			<p><{$item.name}></p>
+			<p class="black9">指数：<{$item.credit}></p>
+			<p class="black9">电话：<{$item.show_phone}></p>
+		</div>
+		<div class="clear"></div>
+		</a> </li>
+	 <{/foreach}>
 </ul>
 <div class="page"><{$pager.pagebar}></div>
+<script type="text/javascript">
+$(document).ready(function () {
+	/*轮播幻灯图开始*/
+	$('.flexslider').flexslider({
+		directionNav: true,
+		pauseOnAction: false,
+		/*slideshow: false,*/
+		/*touch:true,*/
+	});
+	/*轮播幻灯图结束*/
+	/*瀑布流效果开始*/
+	(function(K, $){
+	  var $container = $('#xgtContainer');
+		  $container.imagesLoaded(function(){
+			$container.masonry({itemSelector: '.case_aterfall_li'});
+		}); 
+	})(window.KT, window.jQuery);
+	/*瀑布流效果结束*/
+	/*头部下来分类开始*/
+	$("#search-bar .search-bar_list .list").each(function(e){
+		$(this).click(function(){
+			if($(this).hasClass("on")){
+				$(this).parent().find(".list").removeClass("on");
+				$(this).removeClass("on");
+				$(".mask_bg").hide();
+				$("#search-bar .search-bar_pull").hide();
+			}
+			else{
+				$(this).parent().find(".list").removeClass("on");
+				$(this).addClass("on");
+				$(".mask_bg").show();
+				$("#search-bar .search-bar_pull").show();
+			}
+			$("#search-bar .search-bar_pull .list_box").each(function(i){
+				if(e==i){
+					$(this).parent().find(".list_box").hide();
+					$(this).show();
+				}
+				else{
+					$(this).hide();
+				}
+				$(this).find("li").click(function(){
+					$(this).parent().find("li").removeClass("on");
+					$(this).addClass("on");
+					$(".mask_bg").hide();
+					$("#search-bar .search-bar_pull").hide();
+					$("#search-bar .search-bar_list .list").removeClass("on");
+				});
+			});
+		});
+	});
+	/*头部下来分类开始*/
+});
+</script> 
+<script type="text/javascript" src="<{$pager.res}>/script/jquery.masonry.min.js"></script> 
+
 <{include file="mobile/block/footer.html"}>

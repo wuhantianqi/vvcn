@@ -3,7 +3,7 @@
  * Copy Right IJH.CC
  * Each engineer has a duty to keep the code elegant
  * Author shzhrui<anhuike@gmail.com>
- * $Id: listion.mdl.php 9378 2015-03-27 02:07:36Z youyi $
+ * $Id: listion.mdl.php 3524 2014-03-01 02:34:17Z $
  */
 
 class Mdl_Service_Listion

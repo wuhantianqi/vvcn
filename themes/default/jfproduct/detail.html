@@ -1,0 +1,113 @@
+<{include file="block/small-header.html"}>
+<!--面包屑导航开始-->
+<div class="mb10 subwd sub_topnav">
+	<p><span class="ico_list breadna"></span>您的位置： <a href="<{link ctl='index'}>"><{$CONFIG.site.title}></a>
+		&gt;
+		<a href="<{link ctl='jfproduct/jfproduct'}>">积分商城</a>
+		&gt;
+		<a href="<{link ctl='jfproduct/jfproduct:detail' arg0=$detail.product_id}>"><{$detail.name}></a>
+	</p>
+</div>
+<!--面包屑导航结束-->
+<div class="subwd mb20">
+	<!--左边内容开始-->
+	<div class="sub_activity_lt lt">
+		<div class="mb10 area sub_activity pding">
+			<h2 class="title"><b><{$detail.name}></b></h2>
+			<div class="sub_activity">
+				<a class="lt pic"><img src="<{$pager.img}>/<{$detail.photo}>" /></a>
+				<form action="<{link ctl='jfproduct/order:create' arg0=$detail.product_id}>"  method="post" id="order-form">
+				<div class="sub_activity_rt  rt">
+					<p>积分价：<b class="pointcl"><font class="pointcl"><{$detail.jfprice}>积分</font></b></p>
+					<p>库存剩余：<font class="pointcl"><{$detail.kucun}></font></p>
+					<p>运费：<font class="pointcl">包邮</font></p>
+					<p class=" jf_kucun"><span>已兑换：<font class="pointcl"><{$detail.buys}></font>件</span></p>
+					
+					<p class="goods_buy_count jifen_buy_count"><font class="lt">购买数量： </font>
+						<a class="jian" href="javascript:;" quantity="-">-</a>
+						<input type="text" id="cart_product_num" name="data[num]" class="buy_count_text" value="1" />
+						<a class="jia" href="javascript:;"  quantity="+">+</a>
+					</p>
+					<div class="cl"></div>
+					<input type="submit" class=" btn btn_sub_big" value="立即兑换">
+				</div>
+				</form>
+			</div>
+			<div class="cl"></div>
+		</div>
+		<div class="mb20 area">
+			<h3 class="side_tit">商品详情</h3>
+			<div class="article pding"><{$detail.info}></div>
+		</div>
+	</div>
+	<!--左边内容结束-->
+	<!--右边内容开始-->
+	<div class="side_content rt">
+		<div class="area pding sub_activity_qita">
+			<h3><span class="lt">其他积分商品</span><a href="<{link ctl='jfproduct/jfproduct:index'}>" class="rt">更多>></a>
+			</h3>
+			<div class="cl"></div>
+			<ul>
+				<{calldata mdl="jfproduct/jfproduct" order="score:DESC" city_id=$request.city_id limit=10}>
+				<li>
+					<a href="<{link ctl='jfproduct/jfproduct' arg0=$item.product_id}>">
+					<img src="<{$pager.img}>/<{$item.photo}>" />
+					<p class="nowrap"><a href="<{link ctl='jfproduct/jfproduct' arg0=$item.product_id}>"><{$item.name}></a></p>
+					<p class="nowrap">积分价：<font class="pointcl"><{$item.jfprice}>积分</font></p>
+				</li>
+				<{/calldata}>
+			</ul>
+		</div>
+	</div>
+	<!--右边内容结束-->
+	<div class="cl"></div>
+</div>
+<script type="text/javascript" src="<{$pager.res}>/script/cloud-zoom.js"></script>
+<script type="text/javascript" src="<{$pager.res}>/script/raty/jquery.raty.js"></script>
+<script type="text/javascript">
+(function(K, $){
+    $(function(){
+    var dateTime = new Date();
+    var difference = dateTime.getTime() - <{$pager.dateline}>*1000;	
+    setInterval(function(){
+      $("[remaintime]").each(function(){
+        var obj = $(this);
+        var endTime = new Date(parseInt(obj.attr('remaintime')) * 1000);
+        var nowTime = new Date();
+        var nMS=endTime.getTime() - nowTime.getTime() + difference;
+        var myD=Math.floor(nMS/(1000 * 60 * 60 * 24));
+        var myH=Math.floor(nMS/(1000*60*60)) % 24;
+        var myM=Math.floor(nMS/(1000*60)) % 60;
+        var myS=Math.floor(nMS/1000) % 60;
+        var myMS=Math.floor(nMS/100) % 10;
+        if(myD>= 0){
+			var str = myD+"天"+myH+"小时"+myM+"分"+myS+"."+myMS+"秒";
+        }else{
+			var str = "真遗憾您来晚了，抢购已经结束。";	
+		}
+		obj.html(str);
+      });
+    }, 100);
+});
+//商铺商品数量加减
+$("[quantity]").click(function(){
+var quantity = parseInt($("#cart_product_num").val(), 10);
+var kucun = <{$detail.kucun}> ;
+if($(this).attr("quantity") == '+'){
+    quantity += 1;
+    if(quantity > kucun){
+    	quantity = kucun;
+    	alert('库存不足！');
+    }
+}else{
+    quantity -= 1;
+}
+if(quantity < 1){
+    quantity = 1;
+}
+$("#cart_product_num").val(quantity);
+});
+
+})(window.KT, window.jQuery);
+</script>
+<{include file="block/small-footer.html"}>

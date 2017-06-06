@@ -2,7 +2,7 @@
 /**
  * Copy Right IJH.CC
  * Each engineer has a duty to keep the code elegant
- * $Id: emailtmpl.ctl.php 9378 2015-03-27 02:07:36Z youyi $
+ * $Id: emailtmpl.ctl.php 5258 2014-05-23 01:32:02Z youyi $
  */
 
 if(!defined('__CORE_DIR')){

@@ -1,4 +1,5 @@
 <{include file="block/small-header.html"}>
+<script type="text/javascript" src="<{$pager.res}>/script/jquery.qrcode.min.js"></script>
 <!--面包屑导航开始-->
 <div class="mb10 subwd sub_topnav">
 	<p><span class="ico_list breadna"></span>您的位置：<a href="<{link ctl='index'}>">江湖家居</a>
@@ -11,7 +12,10 @@
 	<!--主体左边内容开始-->
 	<div class="sub_content lt">
 		<div class="mb10 pding area sub_site_top">
-			<h1><span class="lt"><{$site.title}></span><a mini-load='我要报名' mini-width='500'  href="<{link ctl='site:yuyue' arg0=$site.site_id http='ajax'}>" mini-width='500' mini-load="免费预约参观"  class="rt btn btn_main_big">免费预约参观</a>
+			<h1><span class="lt"><{$site.title}><div class="coDe">
+			<div class="pic"><a id="weixin" href="javascript:;" val="<{$mobile_url}>">[ 手机扫码 ]<img src="%THEME%/static/images/codeico.jpg" /></a></div>
+			<div class="show" id="QRimg" style="padding:5px;height:150px;width:150px;" val="<{$mobile_url}>"></div>
+			</div></span><a mini-load='我要报名' mini-width='500'  href="<{link ctl='site:yuyue' arg0=$site.site_id}>" mini-width='500' mini-load="免费预约参观"  class="rt btn btn_main_big">免费预约参观</a>
 			</h1>
            		<span>小区名称：<{$site.home_name}></span>
 			 	<span>面积：<{$site.house_mj}>平米</span>
@@ -19,6 +23,8 @@
                 <span>
                 <{if $company}>
                 承接公司：<a href="<{$company.company_url}>"><font class="fontcl2"> <{$company.name}> </font></a>
+                <{elseif $gz}>
+                承接工长：<a href="<{link ctl='gz:detail' arg0=$item.uid}>"><font class="fontcl2"> <{$gz.name}> </font></a>
                 <{elseif $designer}>
                 承接设计师：<a href="<{link ctl='blog' arg0=$designer.uid}>" ><font class="fontcl2"> <{$designer.name}> </font></a>
                 <{/if}>
@@ -42,64 +48,79 @@
 	<div class="side_content rt">
         <{widget id="tenders/fast" title="免费装修设计" from="TSJ"}>
 		<div class="mb10 area">
-            <h3 class="side_tit">装修公司排行榜</h3>
-            <ul class="pding paihang">
+			<h3 class="side_tit">装修公司排行榜</h3>
+			<ul class="pding paihang">
                 <{calldata mdl="company/company"  city_id=$request.city_id limit=8}>
-                <li>
-                    <span class="lt"><font class="paihang_num<{if $iteration<=3}> ph_num_cl<{/if}>"><{$iteration}></font><a href="<{$item.company_url}>"><{$item.name|cutstr:35}></a>
-                    </span>
+				<li>
+                    <span class="lt"><font class="paihang_num<{if $iteration<=3}> ph_num_cl<{/if}>"><{$iteration}></font><a href="<{$item.company_url}>"><{$item.name|cutstr:35}></a></span>
                     <span class="rt">已投标：<font class="fontcl2"><{$item.tenders_num}></font></span>
                 </li>
                 <{/calldata}>
-            </ul>
-        </div>
+			</ul>
+		</div>
         <div class="mb10 area">
-            <h3 class="side_tit">设计师排行榜</h3>
-            <ul class="pding paihang">
+			<h3 class="side_tit">设计师排行榜</h3>
+			<ul class="pding paihang">
                 <{calldata mdl="designer/designer" city_id=$request.city_id limit=5}>
-                <li>
-                    <span class="lt"><font class="paihang_num<{if $iteration<=3}> ph_num_cl<{/if}>"><{$iteration}></font><a href="<{link ctl='blog'  arg0=$item.uid}>"><{$item.name|cutstr:35}></a>
-                    </span>
+				<li>
+                    <span class="lt"><font class="paihang_num<{if $iteration<=3}> ph_num_cl<{/if}>"><{$iteration}></font><a href="<{link ctl='blog'  arg0=$item.uid}>"><{$item.name|cutstr:35}></a></span>
                     <span class="rt">已投标：<font class="fontcl2"><{$item.tenders_num}></font></span>
                 </li>
                 <{/calldata}>
-            </ul>
-        </div>
-		<div class="mb20"><{adv id="10" name="全站右侧招商图片广告" city_id=$request.city_id}></div>
+			</ul>
+		</div>
+        <div class="mb10 area">
+			<h3 class="side_tit">工长排行榜</h3>
+			<ul class="pding paihang">
+                <{calldata mdl="gz/gz" city_id=$request.city_id limit=5}>
+				<li>
+                    <span class="lt"><font class="paihang_num<{if $iteration<=3}> ph_num_cl<{/if}>"><{$iteration}></font><a href="<{link ctl='gz-detail'  arg0=$item.uid}>"><{$item.name|cutstr:35}></a></span>
+                    <span class="rt">已投标：<font class="fontcl2"><{$item.tenders_num}></font></span>
+                </li>
+                <{/calldata}>
+			</ul>
+		</div>
+		<div class="mb20 "><{adv id="10" name="全站右侧招商图片广告" city_id=$request.city_id}></div>
 	</div>
 	<div class="cl"></div>
 	<!--主体右边内容结束-->
 </div>
 <script>
-	jQuery(window).load(function () {
-            jQuery(".imgs img").each(function () {
-                DrawImage(this, 680, 1000);
-            });
-        });
-        function DrawImage(ImgD, FitWidth, FitHeight) {
-            var image = new Image();
-            image.src = ImgD.src;
-            if (image.width > 0 && image.height > 0) {
-                if (image.width / image.height >= FitWidth / FitHeight) {
-                    if (image.width > FitWidth) {
-                        ImgD.width = FitWidth;
-                        ImgD.height = (image.height * FitWidth) / image.width;
-                    } else {
-                        ImgD.width = image.width;
-                        ImgD.height = image.height;
-                    }
-                } else {
-                    if (image.height > FitHeight) {
-                        ImgD.height = FitHeight;
-                        ImgD.width = (image.width * FitHeight) / image.height;
-                    } else {
-                        ImgD.width = image.width;
-                        ImgD.height = image.height;
-                    }
-                }
+$(".coDe ").mouseover(function(){
+	$(this).find(".show").show();
+}).mouseleave(function(){
+	$(this).find(".show").hide();
+});
+
+jQuery(window).load(function () {
+	$("#QRimg").qrcode({width:150,height:150,correctLevel:0,text:"<{$mobile_url}>"}); 
+	jQuery(".imgs img").each(function () {
+    	DrawImage(this, 680, 1000);
+    });
+});
+function DrawImage(ImgD, FitWidth, FitHeight) {
+	var image = new Image();
+    image.src = ImgD.src;
+    if (image.width > 0 && image.height > 0) {
+    	if (image.width / image.height >= FitWidth / FitHeight) {
+        	if (image.width > FitWidth) {
+            	ImgD.width = FitWidth;
+                ImgD.height = (image.height * FitWidth) / image.width;
+            } else {
+                ImgD.width = image.width;
+            	ImgD.height = image.height;
+            }
+        } else {
+            if (image.height > FitHeight) {
+                ImgD.height = FitHeight;
+	            ImgD.width = (image.width * FitHeight) / image.height;
+            } else {
+                ImgD.width = image.width;
+                ImgD.height = image.height;
             }
         }
+    }
+}
 </script>
-
 <!--底边内容开始-->
 <{include file="block/small-footer.html"}>

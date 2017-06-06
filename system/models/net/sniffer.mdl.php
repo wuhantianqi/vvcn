@@ -3,7 +3,7 @@
  * Copy Right IJH.CC
  * Each engineer has a duty to keep the code elegant
  * Author @shzhrui<Anhuike@gmail.com>
- * $Id: sniffer.mdl.php 10062 2015-05-06 02:52:49Z youyi $
+ * $Id: sniffer.mdl.php 2034 2013-12-07 03:08:33Z $
  */
 
 class Mdl_Net_Sniffer 
@@ -38,9 +38,7 @@ class Mdl_Net_Sniffer
         $useragent = strtolower($_SERVER['HTTP_USER_AGENT']);
 
         if(K::M('content/string')->strpos($useragent, $pad_list)) {
-			if(!K::M('content/string')->strpos($useragent, array('Coolpad'))){
-				return false;
-			}
+            return false;
         }
         if(($v = K::M('content/string')->strpos($useragent, $mobilebrowser_list, true))){
             return $v;

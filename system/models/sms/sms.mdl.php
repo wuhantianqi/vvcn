@@ -3,7 +3,7 @@
  * Copy Right IJH.CC
  * Each engineer has a duty to keep the code elegant
  * Author @shzhrui<Anhuike@gmail.com>
- * $Id: sms.mdl.php 10053 2015-05-05 14:18:09Z maoge $
+ * $Id: sms.mdl.php 5808 2014-07-05 07:00:20Z youyi $
  */
 
 class Mdl_Sms_Sms extends Model
@@ -24,6 +24,9 @@ class Mdl_Sms_Sms extends Model
         $this->_sitetitle = $cfg['title'];
         $this->_sitephone = $cfg['phone'];
         $this->_cityname = $system->request['city']['city_name'];
+        if(K::M('verify/check')->mobile($system->request['city']['mobile'])){
+            $cfg['mobile'] = $system->request['city']['mobile'];
+        }
         $this->_dateline = date('Y-m-d H:i:s',__TIME);
         
     }
@@ -31,12 +34,13 @@ class Mdl_Sms_Sms extends Model
     //通知管理员的短信接口
     public function admin($key, $data=array())
     {
-        $cfg = K::$system->config->get('sms');
-        if(empty($cfg['mobile'])) return false;
+        if(empty($cfg['mobile'])){
+            $cfg = K::$system->config->get('sms');
+        }
         //一般接口都支持 ,分割的多个手机号 如果不支持的请在做逻辑处理！
         $mobiles = explode(',',$cfg['mobile']);
         foreach($mobiles  as $mobile){
-            $this->send($mobile, $key, $data);
+            $this->send($mobile, $key, $data, true);
         }
         return  true;
     }
@@ -46,10 +50,12 @@ class Mdl_Sms_Sms extends Model
         if(!$this->sms->send($mobile, $content)){
             //$msg = $this->sms->lastmsg;
             //$this->err->add($msg, 450);
-            if(__CFG::DEBUG){
-                $this->err->add('短信接口错误:['.$this->sms->lastcode.':'.$this->lastmsg.']', 450);
-            }else{
-                $this->err->add('发送短信失败['.$this->sms->lastcode.']', 450);
+            if($cfg['show_error'] == '1'){
+                if(__CFG::DEBUG){
+                    $this->err->add('短信接口错误:['.$this->sms->lastcode.':'.$this->lastmsg.']', 450);
+                }else{
+                    $this->err->add('发送短信失败['.$this->sms->lastcode.']', 450);
+                }
             }
             K::M('sms/log')->create(array('mobile'=>$mobile, 'content'=>$content, 'sms'=>'56dx', 'status'=>0));
             return false;
@@ -58,12 +64,16 @@ class Mdl_Sms_Sms extends Model
         return true;        
     }
     
-    public function send($mobile, $tmpl, $data=array())
+    public function send($mobile, $tmpl, $data=array(), $checked=false)
     {   
+        $cfg = K::$system->config->get('sms');
+        if(!$cfg['short_msg']){
+            return false;
+        }
         if(!$content = $this->_parse($tmpl, $data)){
             return false;
         }
-		if(!defined('IN_ADMIN')){
+		if(!$checked && !defined('IN_ADMIN')){
             if(!$this->check_sms(__IP, $title)){
                 $this->err->add($title, 451);
                 return false;
@@ -75,18 +85,23 @@ class Mdl_Sms_Sms extends Model
 
 	public function check_sms($clientip=null, &$title='')
     {
+        $cfg = K::$system->config->get('sms');
         $clientip = $clientip ? $clientip : __IP;
         $access = K::$system->config->get('access');
         if($mobile_time = (int)$access['mobile_time']){
             if((__TIME - $mobile_time*60) < K::M('sms/log')->lasttime_by_ip($clienip)){
-                $title = '两次短信间隔不能少于'.$mobile_time.'分钟';
+                if($cfg['show_error'] == '1'){
+                    $title = '两次短信间隔不能少于'.$mobile_time.'分钟';
+                }
                 return false;
             }
         }
         if($mobile_count = (int)$access['mobile_count']){
             $time = __TIME - 86400;
             if($mobile_count <= K::M('sms/log')->count("clientip='{$clientip}' AND dateline>$time")){
-                $title = '同一IP24小时只能发送'.$mobile_count.'短信';
+                if($cfg['show_error'] == '1'){
+                    $title = '同一IP24小时只能发送'.$mobile_count.'短信';
+                }
                 return false;
             }
         }
@@ -95,11 +110,10 @@ class Mdl_Sms_Sms extends Model
 
     public function shop($shop, $tmpl, $data=array())
     {
-        if(!($mobile = $shop['mobile']) && $shop['uid']){
-            if(!$member = $shop['member']){
-                $member = K::M('member/member')->member($shop['uid']);
-            }
-            $mobile = $member['mobile'];
+        if(!($mobile = K::M('verify/check')->mobile($shop['phone'])) && $shop['uid']){
+            if($member = K::M('member/member')->member($shop['uid'])){
+                $mobile = $member['mobile'];
+            }            
         }
         if(!$data['shop_name']){
             $data['shop_name'] = $shop['name'];
@@ -116,7 +130,7 @@ class Mdl_Sms_Sms extends Model
         if(!$mobile = K::M('verify/check')->mobile($mobile)){
             return false;
         }
-        return $this->send($mobile, $tmpl, $data);
+        return $this->send($mobile, $tmpl, $data, true);
     }
 
     public function company($company, $tmpl, $data=array())
@@ -142,7 +156,7 @@ class Mdl_Sms_Sms extends Model
         if(!$mobile = K::M('verify/check')->mobile($mobile)){
             return false;
         }
-        return $this->send($mobile, $tmpl, $data);   
+        return $this->send($mobile, $tmpl, $data, true);   
     }
 
     protected function _parse($tmpl, $data=array())

@@ -1,0 +1,91 @@
+<{include file="dcenter/block/header.html"}>
+<div class="ucenter_t">
+	<ul>
+		<li><a href="<{link ctl='dcenter/member:topics'}>">我的装修贷款</a></li>
+		<li class="on">查看装修贷款</li>
+	</ul>
+</div>
+<div class="ucenter_c">
+	<table width="100%" border="0" cellspacing="0" class="info">
+		<tr>
+			<th>姓名：</th>
+			<td><{$detail.name|default:''}></td>
+			<th>身份证号码：</th>
+			<td><{$detail.card}></td>
+		</tr>
+		<tr>
+			<th>地址：</th>
+			<td><{$detail.addr|default:''}></td>
+			<th>工作单位地址</th>
+			<td><{$detail.c_addr|default:''}></td>
+		</tr>
+		<tr>
+			<th>单位电话：</th>
+			<td><{$detail.c_mobile|default:''}></td>
+			<th>职位：</th>
+			<td><{$detail.position|default:''}></td>
+		</tr>
+		<tr>
+			<th>家庭联系人：</th>
+			<td colspan="3"><{$detail.home_person}></td>
+		</tr>
+		<tr>
+			<th>关系：</th>
+			<td><{if $detail.home_relationship==1}>配偶
+				<{elseif $detail.home_relationship==2}>父亲
+				<{elseif $detail.home_relationship==3}>母亲
+				<{/if}> </td>
+			<th>电话：</th>
+			<td><{$detail.home_phone}></td>
+		</tr>
+		<tr>
+			<th>其他联系人：</th>
+			<td colspan="3"> <{$detail.orter_person|default:''}> </td>
+		</tr>
+		<tr>
+			<th>关系：</th>
+			<td > <{if $detail.orter_relationship==1}>同事
+				<{elseif $detail.orter_relationship==2}>同学
+				<{elseif $detail.orter_relationship==3}>朋友
+				<{elseif $detail.orter_relationship==4}>其他
+				<{/if}> </td>
+			<th>电话：</th>
+			<td><{$detail.orter_phone|default:'--'}></td>
+		</tr>
+		<tr>
+			<th>贷款金额：</th>
+			<td><{$detail.money|default:''}></td>
+			<th>贷款周期：</th>
+			<td><{$detail.zq}></td>
+		</tr>
+		<tr>
+			<th>还款总额：</th>
+			<td><{$all_price}></td>
+			<th>月还款金额：</th>
+			<td colspan="3"><{$month}></td>
+		</tr>
+		<{if $detail.photo1}>
+		<tr>
+			<th>正面：</th>
+			<td colspan="10"> <img src="<{$pager.img}>/<{$detail.photo1}>" photo="<{$pager.img}>/<{$detail.photo1}>"style="max-width:500px;max-height:500px;"/> </td>
+		</tr>
+		<{/if}>
+		<{if $detail.photo2}>
+		<tr>
+			<th>反面：</th>
+			<td colspan="10"> <img src="<{$pager.img}>/<{$detail.photo2}>" photo="<{$pager.img}>/<{$detail.photo2}>"style="max-width:500px;max-height:500px;"/> </td>
+		</tr>
+		<{/if}>
+		<{if $detail.photo3}>
+		<tr>
+			<th>手持：</th>
+			<td colspan="10"> <img src="<{$pager.img}>/<{$detail.photo3}>" photo="<{$pager.img}>/<{$detail.photo3}>"style="max-width:500px;max-height:500px;"/> </td>
+		</tr>
+		<{/if}>
+		<tr>
+			<th>留言评价：</th>
+			<td colspan="10"><{$detail.remark|default:'--'}></td>
+		</tr>
+	</table>
+</div>
+<{include file="dcenter/block/footer.html"}>

@@ -2,7 +2,7 @@
 /**
  * Copy Right IJH.CC
  * Each engineer has a duty to keep the code elegant
- * $Id: detail.ctl.php 9378 2015-03-27 02:07:36Z youyi $
+ * $Id: detail.ctl.php 2341 2013-12-19 01:53:02Z $
  */
 
 if(!defined('__CORE_DIR')){
@@ -23,7 +23,9 @@ class Ctl_Diary_Detail extends Ctl
             $pager['page'] = max(intval($page), 1);
             $pager['limit'] = $limit = 50;
             $filter['diary_id'] = $diary_id;
-			
+			if(CITY_ID){
+				$filter['city_id'] = CITY_ID;
+			}
             if($items = K::M('diary/detail')->items($filter, null, $page, $limit, $count)){
                 $pager['count'] = $count;
                 $pager['pagebar'] = $this->mkpage($count, $limit, $page, $this->mklink(null, array($diary_id, '{page}')), array('SO'=>$SO));
@@ -54,7 +56,9 @@ class Ctl_Diary_Detail extends Ctl
                 $data['diary_id'] = $diary_id;
                 $data['clientip'] = __IP;
                 $data['dateline']  = __TIME;
-				
+				if(CITY_ID){
+                    $data['city_id'] = CITY_ID;
+                }
                 if($detail_id = K::M('diary/detail')->create($data)){
                     K::M('diary/diary')->update($diary_id, array('status' => $data['status'],'content_num'=>$detail['content_num']+1));
                     $this->err->add('添加内容成功');

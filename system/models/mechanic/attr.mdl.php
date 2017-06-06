@@ -2,7 +2,7 @@
 /**
  * Copy Right IJH.CC
  * Each engineer has a duty to keep the code elegant
- * $Id: attr.mdl.php 10688 2015-06-07 12:17:27Z maoge $
+ * $Id$
  */
 
 class Mdl_Mechanic_Attr extends Mdl_Table

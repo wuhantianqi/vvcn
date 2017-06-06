@@ -2,7 +2,7 @@
 /**
  * Copy Right IJH.CC
  * Each engineer has a duty to keep the code elegant
- * $Id: upload.mdl.php 9378 2015-03-27 02:07:36Z youyi $
+ * $Id: upload.mdl.php 6072 2014-08-12 12:23:29Z youyi $
  */
 
 /**
@@ -22,8 +22,8 @@ class Mdl_Helper_Upload
     public $succeed = true;
 
     private $_allow_exts = array('gif','jpg', 'png','jpeg','bmp');
-    private $_allow_zip_exts = array('zip', 'tar', 'rar');
-    private $_allow_file_exts = array('doc','docx','txt','pdf', 'rtf', 'xls', 'xlsx', 'ppt', 'pptx','zip',  'tar', 'rar','gif','jpg', 'png','jpeg','bmp');
+    private $_allow_zip_exts = array('zip', 'gz', 'tar', 'rar');
+    private $_allow_file_exts = array('doc','docx','txt','pdf', 'rtf', 'xls', 'xlsx', 'ppt', 'pptx','zip', 'gz', 'tar', 'rar','gif','jpg', 'png','jpeg','bmp');
     private $_allow_type = array('image/gif', 'image/jpeg','image/pjpeg', 'image/png', 'image/x-png', 'image/bmp','application/octet-stream');
     private $_check_allow_type = true;
     private $_allow_max_size = 2097152;

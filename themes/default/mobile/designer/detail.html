@@ -1,10 +1,32 @@
 <{assign var="tpl_page_title" value="设计师简介"}>
-<{include file="mobile/designer/block/header.html"}>
-<div class="pding">
-	<{if $company}><p>所在公司：<{$company.name}></p><{/if}>
+<{include file="mobile/block/header.html"}>
+<section id="" class="page_center_box">
+<ul class="designerList mt10">
+	<li>
+		<div class="fl left"> <img src="<{$pager.img}>/<{$designer.face_80}>">
+			<p class="maincl"><{$designer.name}></p>
+		</div>
+		<div class="nr">
+			<p>设计风格：<span class="tag bg_1"><{$designer.case_num}>套</span></p>
+			<p>Q Q号码 ：<{$designer.show_qq}></p>
+			<p>设计专长：<{$designer.slogan|cutstr:50:'...'}></p>
+		</div>
+		<div class="clear"></div>
+	</li>
+</ul>
+<div class="designerDetails">
+<h1>设计师简介</h1>
+<div class="nr mb10"> <{if $company}>
+	<p>所在公司：<{$company.name}></p>
+	<{/if}>
 	<p>毕业学校：<{$designer.school}></p>
 	<p>所在地区：<{$designer.city_name}> <{$designer.area_name}></p>
 	<p>设计专长：<{$designer.slogan}></p>
-	<div class="content"><{$designer.about}></div>
+	<div class="article"><{$designer.about}></div>
 </div>
-<{include file="mobile/block/footer.html"}>
+<h1>案例展示</h1>
+<div class="nr mb10">
+	<p> <a href="<{link ctl='mobile/case:detail' arg0=$item.case_id}>"> <img src="<{$pager.img}>/<{$item.photo}>_thumb.jpg" /> </a> </p>
+</div>
+<{if $detail.group.allow_yuyue}> <a href="<{link ctl='mobile/tenders:fast'}>" class="long_btn">立即招标</a> <{else}> <a href="<{link ctl='mobile/designer:yuyue' arg0=$designer.uid}>" class="long_btn">预约设计</a> <{/if}>        
+<{include file="mobile/block/footer.html"}> 

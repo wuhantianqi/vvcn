@@ -2,7 +2,7 @@
 /**
  * Copy Right IJH.CC
  * Each engineer has a duty to keep the code elegant
- * $Id: site.mdl.php 10087 2015-05-06 10:05:49Z wanglei $
+ * $Id$
  */
 
 if(!defined('__CORE_DIR')){
@@ -14,7 +14,7 @@ class Mdl_Home_Site extends Mdl_Table
   
     protected $_table = 'home_site';
     protected $_pk = 'site_id';
-    protected $_cols = 'site_id,city_id,area_id,uid,company_id,case_id,thumb,title,home_name,home_id,house_mj,lng,lat,price,addr,intro,status,audit,clientip,dateline';
+    protected $_cols = 'site_id,city_id,area_id,uid,company_id,case_id,thumb,zxpm_id,title,home_name,home_id,house_mj,lng,lat,price,addr,intro,status,audit,clientip,dateline';
     protected $_orderby = array('site_id'=>'DESC');
 
     protected $order_list = array(0=>array('title'=>'默认'),1=>array('title'=>'面积'),2=>array('title'=>'价格'));
@@ -34,6 +34,7 @@ class Mdl_Home_Site extends Mdl_Table
         if(!$checked && !$data = $this->_check_schema($data)){
             return false;
         }
+        $data['dateline'] = __CFG::TIME;
         return $this->db->insert($this->_table, $data, true);
     }
 
@@ -42,9 +43,7 @@ class Mdl_Home_Site extends Mdl_Table
         $this->_checkpk();
         if(!$checked && !$data = $this->_check_schema($data,  $pk)){
             return false;
-        }
-        
-        $data['dateline'] = __CFG::TIME;
+        }        
         return $this->db->update($this->_table, $data, $this->field($this->_pk, $pk));
     }
 
@@ -65,6 +64,9 @@ class Mdl_Home_Site extends Mdl_Table
             }
             if($uid = (int)$site['uid']){
                 $member = K::M('member/member')->detail($uid);
+                if($member['from'] == 'gz'){
+                    $this->uid_count($uid,$member['from']);
+                }
             }
             if ($home_id = (int) $site['home_id']) {
                 $this->home_count($home_id);
@@ -79,6 +81,9 @@ class Mdl_Home_Site extends Mdl_Table
         }
         if($uid = (int)$site['uid']){
             $member = K::M('member/member')->detail($uid);
+            if($member['from'] == 'gz'){
+                $this->uid_count($uid,$member['from']);
+            }
         }
         if ($home_id = (int) $site['home_id']) {
             $this->home_count($home_id);
@@ -102,6 +107,17 @@ class Mdl_Home_Site extends Mdl_Table
         }
         if($uids){
             $member = K::M('member/member')->items_by_ids($uids);
+            $gzs  = array();
+            foreach($member as $k => $v){
+                if($v['from'] == 'gz'){
+                    $gzs[$v['uid']] = $v['uid'];
+                }
+            }
+            if(!empty($gzs)){
+                $this->uid_count($gzs,'gz');
+            }
+            
+            
         }
     }
 
@@ -146,12 +162,32 @@ class Mdl_Home_Site extends Mdl_Table
         return $count;
     }
 
+    public function home_count($val)
+    {
+        $count = 0;
+        if(!$ids = K::M('verify/check')->ids($val)){
+            return false;
+        }
+        $counts = array_fill_keys(explode(',', $ids), 0);
+        $sql = "SELECT home_id, COUNT(1) c FROM ".$this->table($this->_table)." WHERE ". self::field('home_id', $val)." GROUP BY home_id";
+        if($rs = $this->db->Execute($sql)){
+            while($row = $rs->fetch()){
+                $counts[$row['home_id']] = $row['c'];
+            }
+            foreach($counts as $k=>$v){
+                K::M('home/home')->update($k, array('site_num'=>$v), true);
+                $count ++;
+            }            
+        }
+        return $count;
+    }
+
     public function format_items_ext($items)
     {
         if(empty($items)){
             return false;
         }
-        $company_ids = array();
+        $home_ids = $company_ids = array();
         foreach((array)$items as $k=>$v){
             if($v['home_id']){
                 $home_ids[$v['home_id']] = $v['home_id'];
@@ -160,11 +196,16 @@ class Mdl_Home_Site extends Mdl_Table
                 $company_ids[$v['company_id']] = $v['company_id'];
             }
         }
+        if($home_ids){
+            $home_list = K::M('home/home')->items_by_ids($home_ids);
+        }
         if($company_ids){
             $company_list = K::M('company/company')->items_by_ids($company_ids);
         }
         foreach((array)$items as $k=>$v){
-            
+            if(!$home = $home_list[$v['home_id']]){
+                $home = array();
+            }
             if(!$company = $company_list[$v['company_id']]){
                 $company = array();
             }

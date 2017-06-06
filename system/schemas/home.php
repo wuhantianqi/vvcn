@@ -2,7 +2,7 @@
 /**
  * Copy Right IJH.CC
  * Each engineer has a duty to keep the code elegant
- * $Id: home.php 9378 2015-03-27 02:07:36Z youyi $
+ * $Id$
  */
 
 if(!defined('__CORE_DIR')){
@@ -50,7 +50,7 @@ return array (
     'add' => true,
     'edit' => true,
     'html' => false,
-    'empty' => false,
+    'empty' => true,
     'show' => false,
     'list' => false,
     'type' => 'area',

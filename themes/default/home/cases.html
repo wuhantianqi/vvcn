@@ -11,13 +11,15 @@
                             <span class="rt"><font class="fontcl2"><{$item.views}></font>人看了此方案</span></h3>
                         <p class="cl"></p>
                         <p>方案提供者：
-                            <{if $company_list[$item.company_id]}>
+                        	<{if $company_list[$item.company_id]}>
                             <a href="<{$company_list[$item.company_id].company_url}>"><font class="fontcl2"> <{$company_list[$item.company_id].name}> </font></a></h2>
+                            <{elseif $gz_list[$item.uid]}>
+                            <a href="<{link ctl='gz:detail' arg0=$item.uid}>"><font class="fontcl2"> <{$gz_list[$item.uid].name}> </font></a></h2>
                             <{elseif $designer_list[$item.uid]}>
                             <a href="<{link ctl='blog' arg0=$item.uid}>" ><font class="fontcl2"> <{$designer_list[$item.uid].name}> </font></a></h2>
                             <{else}>
                             <font class="fontcl2"><{$CONFIG.site.title}></font></h2>
-                            <{/if}>                         
+                            <{/if}>                       
                         </p>
                         <p>设计思路：<{$item.intro}></p>
                         <p class="bottom"><span class="lt"><a href="<{link ctl='home:caseDetail' arg0=$item.home_id arg1=$item.case_id}>" class="fontcl1">平面布置图</a>

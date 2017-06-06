@@ -1,0 +1,64 @@
+<{assign var="tpl_page_title" value="订单详情"}>
+<{include file="mobile/block/header.html"}>
+<header class="control">
+	<i class="left"><a href="<{if $pager.backurl}><{$pager.backurl}><{else}><{link ctl='mobile/index'}><{/if}>" id="gobackIco"></a></i>
+    <div class="title">订单详情</div>
+    <i class="right"></i>
+</header>
+
+<section id="" class="page_center_box">
+	<ul class="wl_order_list_box">
+	    <li class="wl_order_list">
+        	<div class="wl_order_bt">
+            	<div class="fl wl_order_bt_number">订单号:<{$order.order_no}><span class="c_3"><{if $order.order_status == 2}>交易成功<{/if}></span></div>
+                <!--<div class="fl wl_order_bt_state">抢单中</div>-->
+                <div class="fr wl_order_bt_pay black9"><{$order.dateline|format}></div>
+            </div>
+            <div class="wl_order_total">
+                <div class="fl">订单状态：<span class="black3">
+                	<{if $order.order_status < 0}>已取消
+                    <{elseif $order.order_status == 2}>完成
+                    <{elseif $order.order_status == 1}>已发货
+                    <{elseif $order.pay_status==1}>已支付
+                    <{else}>等待买家付款<{/if}>
+                     <{if $order.order_status == 2}>
+                        <p class="pointcl" style="font-size:14px; line-height:24px;">订单已经完成，感谢您在<{$CONFIG.site.title}>购物，欢迎您对本次交易及所购商品进行评价。</p>
+                    <{elseif $order.order_status == 1}>
+                        <{if $MEMBER.uid == $order.uid}>
+                        <p class="pointcl" style="font-size:14px; line-height:24px;">卖家已经发货，收到货品后，核对商品正确后及时确认收货。</p>
+                        <{else}>
+                       <p class="pointcl" style="font-size:14px; line-height:24px;">已经发货，等待买收货。</p>
+                        <{/if}>
+                    <{/if}>
+                	
+                </span></div>
+                <div class="fr"><span class="black3">合计：</span><{$order.jfamount}>积分</div>
+                <div class="clear"></div>
+            <div class="wl_order_addre">
+                <p><span>联系人：</span><{$order.contact}> 
+                <p><span>电话：</span><{$order.mobile}></p>
+                <p><span>地址：</span><{$order.addr}></p>
+            </div>
+            
+            <div class="wl_order_nr">
+            	<div class="title">详细订单</div>
+            	<ul>
+                    	<li>
+                            <div class="fl"> <img src="{$pager.img}>/<{$order.photo}>_small.jpg" width="76" height="60" /></div>
+                            <div class="wz">
+                                <p class="bt overflow_clear"><{$order.product_name|cutstr:15}></p>
+                                <p class="num"><{$order.product_num}></p>
+                                <p class="price"><{$order.product_jfprice}>积分</p>
+                            </div>
+                            <div class="clear"></div>
+                        </li>
+        	    </ul>
+            </div>
+        </li>
+    </ul>
+
+</section>
+
+</body>
+</html>
+

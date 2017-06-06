@@ -9,10 +9,32 @@
     <form id="account-form">
     <table cellspacing="0" cellpadding="0" class="form">
         <{if $CONFIG.connect.qq_is_open}>
-        <tr><th>腾讯QQ：</th><td><p><a href="<{link ctl='passport:qqlogin' arg0='bind'}>" class="ico_list qq_login" style="width: 140px;height: 32px;margin: 5px 0px;background-position: -301px -32px"></a></p></td></tr>
+        <tr><th>腾讯QQ：</th><td>
+            <{if $qq_bind}>
+            <b class="blue">已绑定</b>
+            <{else}>
+            <p><a href="<{link ctl='passport:qqlogin' arg0='bind'}>" class="ico_list qq_login" style="width: 140px;height: 32px;margin: 5px 0px;background-position: -301px -32px"></a></p>
+            <{/if}>
+            </td>
+        </tr>
         <{/if}>
         <{if $CONFIG.connect.weibo_is_open}>
-        <tr><th>新浪微博：</th><td><p><a href="<{link ctl='passport:weibo' arg0='bind'}>" class="ico_list weibo_login" style="width: 140px;height: 32px;margin: 5px 0px;background-position: -301px 0px;"></a></p></td></tr>
+        <tr><th>新浪微博：</th><td>
+            <{if $wb_bind}>
+            <b class="blue">已绑定</b>
+            <{else}>
+            <p><a href="<{link ctl='passport:weibo' arg0='bind'}>" class="ico_list weibo_login" style="width: 140px;height: 32px;margin: 5px 0px;background-position: -301px 0px;"></a></p>
+            <{/if}>
+            </td>
+        </tr>
+        <{/if}>
+        <{if $admin_weixin && $admin_weixin['type'] ==1}>
+        <tr><th>微信：</th><td>
+            <{if $member_wechat}><b class="blue">已绑定</b>
+            <{elseif $wechat_bind_qr}><img src="<{$wechat_bind_qr}>" width="200"/><br />扫描绑定微信帐号 
+            <{/if}>
+            </td>
+        </tr>
         <{/if}>
     </table>
     </form>

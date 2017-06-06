@@ -1,0 +1,98 @@
+<{include file="block/header.html"}>
+<link href="/themes/default/topics/static/style/topics.css" rel="stylesheet" type="text/css">
+<div class="subwd">
+	<div class="topics_date">
+		<div class="dateTit">
+			<h2>填写申请资料</h2>
+		</div>
+		<div class="date_step"><img src="%THEME%/topics/static/images/ed-3.png"></div>
+		<div class="date_cont">
+			<form action="<{link ctl='topics:reg3' http='base'}>" method="post"  ENCTYPE="multipart/form-data" onsubmit="return check()">
+            <input type="hidden" name="topics_id" value="<{$topics_id}>">
+				<div class="picpic">
+					<p>图片大小不超过1M，支持JPG,JPEG,PNG格式</p>
+					<div class="picUl">
+						<ul>
+							<li>身份证正面</li>
+							<li> <img class="imgPlus" id="upphoto1" src="<{if $topics.photo1}><{$pager.img}>/<{$topics.photo1}><{else}>%THEME%/topics/static/images/plus-new.png<{/if}>" > 
+								<div class="upimg">
+									<input type="file" name="data[photo1]" id='photo1' class="inFile" />
+									<div class="fileBtn">上传</div>
+								</div>
+							</li>
+							<li class="text">参考示例</li>
+							<li><img src="%THEME%/topics/static/images/cadrid_04.jpg"></li>
+						</ul>
+					</div>
+					<div class="picUl">
+						<ul>
+							<li>身份证反面</li>
+							<li> <img class="imgPlus" id="upphoto2" src="<{if $topics.photo2}><{$pager.img}>/<{$topics.photo2}><{else}>%THEME%/topics/static/images/plus-new.png<{/if}>" >
+								<div class="upimg">
+									<input type="file" name="data[photo2]" id='photo2' class="inFile" />
+									<div class="fileBtn">上传</div>
+								</div>
+							</li>
+							<li class="text">参考示例</li>
+							<li><img src="%THEME%/topics/static/images/cadrid_03.jpg"></li>
+						</ul>
+					</div>
+					<div class="picUl">
+						<ul>
+							<li>手持身份证</li>
+							<li> <img class="imgPlus" id="upphoto3" src="<{if $topics.photo3}><{$pager.img}>/<{$topics.photo3}><{else}>%THEME%/topics/static/images/plus-new.png<{/if}>">
+								<div class="upimg">
+									<input type="file" name="data[photo3]" id='photo3' class="inFile" />
+									<div class="fileBtn">上传</div>
+								</div>
+							</li>
+							<li class="text">参考示例</li>
+							<li><img src="%THEME%/topics/static/images/cadrid_02.jpg"></li>
+						</ul>
+					</div>
+					<div class="btnbar"> <input class="btn btn_sub_big" type="submit" value="下一步" /><a href="<{link ctl='topics:reg2' arg0=$topics_id http='base'}>" class="btn btn_sub_big btn_fanhui">返回</a></div>
+				</div>
+			</form>
+		</div>
+	</div>
+</div>
+<script language="javascript" type="text/javascript">
+	function check() {
+		if(<{$topics.photo1}>){
+			return true;
+		}
+        var photo1 = $("#photo1").val();
+		var photo2 = $("#photo2").val();
+		var photo3 = $("#photo3").val();
+		
+		var isphoto = /^([\S\s]{2,180})$/;
+        if(!isphoto.exec(photo1)){
+			Widget.MsgBox.error("请确定您身份证正面图片");
+			return false;  	
+		}
+		
+		if(!isphoto.exec(photo2)){
+			Widget.MsgBox.error("请确定您身份证反面图片");
+			return false;  	
+		}
+		if(!isphoto.exec(photo3)){
+			Widget.MsgBox.error("请确定您手持身份证图片");
+			return false;  	
+		}
+        return true;  
+    }  
+</script>
+<script>
+    $(function(){
+		$("#photo1").change(function(){
+			$("#upphoto1").attr('src','<{$pager.theme}>/default/topics/static/images/haha.jpg');
+		});
+		$("#photo2").change(function(){
+			$("#upphoto2").attr('src','<{$pager.theme}>/default/topics/static/images/haha.jpg');
+		});
+		$("#photo3").change(function(){
+			$("#upphoto3").attr('src','<{$pager.theme}>/default/topics/static/images/haha.jpg');
+		});
+	})
+</script>
+<{include file="block/small-footer.html"}> 

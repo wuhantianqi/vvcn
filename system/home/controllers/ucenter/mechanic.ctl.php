@@ -2,7 +2,7 @@
 /**
  * Copy Right IJH.CC
  * Each engineer has a duty to keep the code elegant
- * $Id: mechanic.ctl.php 9941 2015-04-28 13:13:58Z youyi $
+ * $Id$
  */
 
 if(!defined('__CORE_DIR')){

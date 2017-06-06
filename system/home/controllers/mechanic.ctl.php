@@ -2,7 +2,7 @@
 /**
  * Copy Right IJH.CC
  * Each engineer has a duty to keep the code elegant
- * $Id: mechanic.ctl.php 10025 2015-05-05 11:56:23Z youyi $
+ * $Id$
  */
 
 class Ctl_Mechanic extends Ctl

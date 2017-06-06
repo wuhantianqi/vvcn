@@ -17,7 +17,7 @@
 // |          Your Name <you@example.com>                                 |
 // +----------------------------------------------------------------------+
 //
-// $Id: netpayclient.php 9378 2015-03-27 02:07:36Z youyi $
+// $Id:$
 
 define("DES_KEY", "SCUBEPGW");
 define("HASH_PAD", "0001ffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff003021300906052b0e03021a05000414");

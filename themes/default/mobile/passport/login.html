@@ -1,42 +1,62 @@
-<{assign var="tpl_page_title" value="登录页"}>
+<{assign var="is_index_home" value="登录页"}>
 <{include file="mobile/block/header.html"}>
-<div class="pding login_cont">
-	<form id='login-form' class="login_form mb10">
-		<table>
-			<tr>
-				<td class="title">账号</td>
-				<td><input type="text" name="data[uname]" class="text full" /></td>
-			</tr>
-			<tr>
-				<td class="title">密码</td>
-				<td><input type="password" name="data[passwd]" class="text full" /></td>
-			</tr>
-             <{if $CONFIG.access.verifycode.login}>
-                <tr>
-                    <td class="title">验证码</td>
-                    <td class="middle">
-                       
-                        <input class="text short lt" type="text" name="verifycode" placeholder="请输入验证码"/><div class="rt yanzh"><img verify="#pass-verify" src="<{link ctl='magic:verify' http='ajax'}>&_=<{$pager.dateline}>" id="pass-verify"/></div></td>
-                    <td></td>
-                </tr>
-            <{/if}>
-		</table>
-		<label class="rt"><input type="checkbox" name="keep" class="check" />30天之内自动登录</label>
-        <a  href="#" id='login-btn' class="btn subbtn_full">立即登录</a>
+<body>
+<header class="control">
+	<i class="left"><a href="<{if $pager.backurl}><{$pager.backurl}><{else}><{link ctl='mobile/index'}><{/if}>" id="gobackIco"></a></i>
+    <div class="title">登录</div>
+    <i class="right"><a href="<{link ctl='mobile/passport:signup'}>" class="signupIco">注册</a></i>
+</header>
+<section id="" class="page_center_box">
+
+	<form id='login-form'>
+	<div class="loginInfor">
+        <div class="loginIf_list">
+			<div class="fl ifIco"><i class="icco icco1"></i>
+			</div>
+			<div class="ifInput">
+				<input type="text" name="data[uname]" placeholder="手机/用户名">
+			</div>
+			<div class="clear"></div>
+		</div>
+		 <div class="loginIf_list">
+			<div class="fl ifIco"><i class="icco icco9"></i>
+			</div>
+			<div class="ifInput">
+				<input type="password" name="data[passwd]" placeholder="密码">
+			</div>
+			<div class="clear"></div>
+		</div>
+        
+        <{if $CONFIG.access.verifycode.login}>
+        	 <div class="loginIf_list loginIf_list_po">
+                <div class="fl ifIco"><i class="icco icco1"></i>
+                </div>
+                <div class="ifInput">
+                    <input class="short lt" type="text" name="verifycode" placeholder="请输入验证码"/>
+                </div>
+                <div class="rt yanzh"><img verify="#pass-verify" src="<{link ctl='mobile/magic:verify' http='ajax'}>&_=<{$pager.dateline}>" id="pass-verify"/></div>
+                <div class="clear"></div>
+            </div>
+		<{/if}>
+     </div>
+    <div class="yuee_btn">
+    <a  href="#" id='login-btn' class="btn">登录</a>
+    </div>
 	</form>
-	<p>第三方账号登录：</p>
-	<div class="other_login">
-		<a href="<{link ctl='mobile/passport:qqlogin'}>" class="qq_login">
-			<span class="app_ico qq_login_ico lt"></span>
-			<span class="text">QQ账号登录</span>
-		</a>
-		<a href="<{link ctl='mobile/passport:weibo'}>" class="weibo_login">
-			<span class="app_ico weibo_login_ico lt"></span>
-			<span class="text">微博账号登录</span>
-		</a>
+	<div class="login_bot pd10">
+		<h2><span>第三方登录</span></h2>
+		<div class="login_other">
+			<a href="<{link ctl='mobile/passport:qqlogin'}>" class="fl"><i class="ico1"></i><p>QQ</p></a>
+			<a href="<{link ctl='mobile/passport:weibo'}>" class="fr"><i class="ico2"></i><p>微博</p></a>
+			<div class="clear"></div>
+		</div>
 	</div>
-	<p>没有账号？<a href="<{link ctl='mobile/passport:signup'}>" class="fontcl2">立即注册</a></p>
-</div>
+</section>
+<script>
+$("[verify]").click(function(){
+	$($(this).attr("verify")).attr("src", "<{link ctl='mobile/magic:verify' http='ajax'}>&_"+Math.random());
+});
+</script> 
 <script type="text/javascript">
 $(document).ready(function(){
     $("#login-btn").click(function(){
@@ -50,9 +70,5 @@ $(document).ready(function(){
     });        
 });
 </script>
-<script>
-$("[verify]").click(function(){
-	$($(this).attr("verify")).attr("src", "<{link ctl='magic:verify' http='ajax'}>&_"+Math.random());
-});
-</script>
-<{include file="mobile/block/footer.html"}>
+</body>
+</html>

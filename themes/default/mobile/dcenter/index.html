@@ -1,0 +1,40 @@
+<{assign var="is_index_home" value="服务人员中心"}>
+<{include file="mobile/block/header.html"}>
+<header class="control">
+	<i class="left"><a href="<{if $pager.backurl}><{$pager.backurl}><{else}><{link ctl='mobile/index'}><{/if}>" id="gobackIco"></a></i>
+    <div class="title">服务人员中心</div>
+    <i class="right"></i>
+</header>
+
+<section id="" class="page_center_box">
+	<div class="center_top">
+		<div class="pic fl">
+			<img src="<{$pager.img}>/<{$MEMBER.face}>">
+		</div>
+		<div class="text">
+			<h4><{$MEMBER.uname}></h4>
+            <p>我的金币 <b><{$MEMBER.gold}></b></p>
+			<p>我的竞标 <b><{$count.count1}></b></p>
+            
+			<p>我的预约  <b><{$count.count2}>单</b></p>
+		</div>
+	</div>
+	<div class="loginList">
+		<ul>
+        	
+            
+            <li> <a href="<{link ctl='mobile/dcenter:appointment'}>"><i class="cenIc cenIc3"></i>预约管理</a></li>
+            <li> <a href="<{link ctl='mobile/dcenter/tenders:tendered'}>"><i class="cenIc cenIc1"></i>我的竞标</a></li>
+            <li> <a href="<{link ctl='mobile/dcenter/tenders:tenders_looked'}>"><i class="cenIc cenIc2"></i>我要竞标</a></li>
+            
+            <li> <a href="<{link ctl='mobile/dcenter/truste:truste'}>"><i class="cenIc cenIc1"></i>我的维修</a></li>
+            <li> <a href="<{link ctl='mobile/dcenter/truste:truste_looked'}>"><i class="cenIc cenIc2"></i>维修竞标</a></li>
+			
+		
+		</ul>
+	</div>
+	 <div class="yuee_btn"> <a href="<{link ctl='mobile/passport:loginout'}>" class="btn">退出登录</a></div>
+</section>
+</body>
+</html>
+ 

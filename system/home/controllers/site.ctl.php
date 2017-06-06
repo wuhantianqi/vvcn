@@ -2,7 +2,7 @@
 /**
  * Copy Right IJH.CC
  * Each engineer has a duty to keep the code elegant
- * $Id: site.ctl.php 12719 2015-07-02 10:47:00Z maoge $
+ * $Id$
  */
 
 class Ctl_Site extends Ctl
@@ -12,7 +12,7 @@ class Ctl_Site extends Ctl
         $this->items();
     }
 
-	public function items($area_id=0, $order=0, $page=null)
+	public function items($area_id=0,$status, $order=0, $page=null)
 	{
         $pager = $filter = array();
         if($page === null){
@@ -24,6 +24,7 @@ class Ctl_Site extends Ctl
         $pager['count'] = $count = 0;
         $pager['order'] = $order;
         $pager['area_id'] = $area_id;
+		$pager['status'] = $status;
         if ($area_id = (int)$area_id) {
             $filter['area_id'] = $area_id;
         } else {
@@ -35,6 +36,9 @@ class Ctl_Site extends Ctl
 			$orderby = array('price'=>'ASC');
 		}else{
 			$orderby = null;
+		}
+		if($status != 0){
+			$filter['status'] = $status;
 		}
 		$filter['closed'] = 0;
         $filter['audit'] = 1;
@@ -55,16 +59,22 @@ class Ctl_Site extends Ctl
                 $this->pagedata['company_list'] = K::M('company/company')->items_by_ids($company_ids);
 			}
 			if($member_list = K::M('member/member')->items_by_ids($uids)){
-                $designer_ids  = array();
+                $designer_ids = $gz_ids = array();
                 foreach($member_list as $v){
                     if($v['from'] == 'designer'){
                         $designer_ids[$v['uid']] = $v['uid'];
+                    }
+                    if($v['from'] == 'gz'){
+                        $gz_ids[$v['uid']] = $v['uid'];
                     }
                 }
                 if($designer_ids){
                     $this->pagedata['designer_list'] = K::M('designer/designer')->items_by_ids($designer_ids);
                 }
-          
+				
+                if($gz_ids){
+                    $this->pagedata['gz_list'] = K::M('gz/gz')->items_by_ids($gz_ids);
+                }                
             }
             $pager['count'] = $count;
             $pager['pagebar'] = $this->mkpage($count, $limit,$page,$this->mklink('site:items',array($area_id, $order, '{page}')));
@@ -79,11 +89,11 @@ class Ctl_Site extends Ctl
 			if(!$order_list){
 				$order_list['1']['checked'] = true;
 			}
-			$order_list[$k]['link'] = $this->mklink('site:items', array($area_id, $k, $page));
+			$order_list[$k]['link'] = $this->mklink('site:items',array($area_id,$status, $k, $page));
         }
         $this->pagedata['order_list'] = $order_list;
 		$this->pagedata['area_list'] = $area_list;
-        
+        $this->pagedata['status'] = K::M('home/site')->get_status();
         $this->pagedata['pager'] = $pager;
         $seo = array('area_name'=>'', 'page'=>($page > 1) ? $page : '');
 		if($area_id){
@@ -107,7 +117,9 @@ class Ctl_Site extends Ctl
                 $this->pagedata['company'] = K::M('company/company')->detail($site['company_id']);
             }else if($site['uid']){
                 if($member = K::M('member/member')->member($site['uid'])){
-                    if($member['from'] == 'designer'){
+                    if($member['from'] == 'gz'){
+                        $this->pagedata['gz'] = K::M('gz/gz')->detail($site['uid']);
+                    }else if($member['from'] == 'designer'){
                         $this->pagedata['designer'] = K::M('designer/designer')->detail($site['uid']);
                     }
                     $this->pagedata['member'] = $member;
@@ -123,6 +135,7 @@ class Ctl_Site extends Ctl
                     $items[$k]['statu_name'] = $status[$v['status']];
                 }
             }
+            $this->pagedata['mobile_url'] = $this->mklink('mobile/site:detail', array($site_id));
 			$this->pagedata['status'] = $status;
             $this->pagedata['items'] = $items;
 			$this->seo->init('site_detail',array('title'=>$site['title'], 'home_name'=>$detail['home_name'], 'company_name'=>$this->pagedata['company']['name']));
@@ -134,7 +147,7 @@ class Ctl_Site extends Ctl
 	{
 		$area_list = K::M('data/area')->areas_by_city($this->request['city_id']);
 		$this->pagedata['area_list'] = $area_list;
-		$this->seo->init('site_maps');
+		K::M('helper/seo')->init('site_maps');
         $this->tmpl = 'site/maps.html';
 	}
 
@@ -166,6 +179,7 @@ class Ctl_Site extends Ctl
 						'price' => $val['price'],
                         'lng' => $val['lng'],
                         'lat' => $val['lat'],
+						'addr' => $val['addr'],
 						'status' => $status[$val['status']]
                     );
                 }				
@@ -185,7 +199,51 @@ class Ctl_Site extends Ctl
             $this->err->add('没有该内容', 212);
         }else if(!$company = K::M('company/company')->detail($detail['company_id'])){
 			$member = K::M('member/member')->detail($detail['uid']);
-			if($member['from'] == 'designer'){
+			if($member['from'] == 'gz'){
+				$gz = K::M('gz/gz')->detail($member['uid']);
+				if($this->checksubmit('data')){
+					if(!$data = $this->GP('data')){
+						$this->err->add('非法的数据提交', 201);
+					}else{
+						$verifycode_success = true;
+						$access = $this->system->config->get('access');
+						if($access['verifycode']['yuyue']){
+							if(!$verifycode = $this->GP('verifycode')){
+								$verifycode_success = false;
+								$this->err->add('验证码不正确', 212);
+							}else if(!K::M('magic/verify')->check($verifycode)){
+								$verifycode_success = false;
+								$this->err->add('验证码不正确', 212);
+							}
+						}
+						if($verifycode_success){
+							$data['uid'] = (int)$this->uid;
+							$data['gz_id'] = $gz['uid'];
+							$data['content'] = "预约参观工地：".$detail['title'];
+							$data['city_id'] =  $this->request['city_id'];
+							if($yuyue_id = K::M('gz/yuyue')->create($data)){
+								K::M('gz/gz')->update($detail['uid'],array('yuyue_num'=>$detail['yuyue_num']+1));
+								$smsdata = $maildata = array('contact'=>$data['contact'] ? $data['contact'] : '业主','mobile'=>$data['mobile'],'site'=>$detail['title'],'gz'=>$gz['name'],'company_name'=>$gz['name']);
+								K::M('sms/sms')->send($data['mobile'], 'site_yuyue', $smsdata);
+								if($gz['group']['priv']['allow_yuyue']>0){
+                                    if(K::M('verify/check')->mobile($gz['mobile'])){
+                                        K::M('sms/sms')->send($gz['mobile'], 'gz_tongzhi', $smsdata);
+                                    }
+                                    K::M('helper/mail')->sendmail($member['mail'], 'gz_site', $maildata);
+                                }								
+								$this->err->add('预约查看工地成功');
+							}
+						}
+					}
+				}else{
+					$access = $this->system->config->get('access');
+					$this->pagedata['yuyue_yz'] = $access['verifycode']['yuyue'];
+					$this->pagedata['site_id'] = $site_id;
+					$this->pagedata['detail'] = $detail;
+					$this->tmpl = 'site/yuyue.html';
+				}				
+			}else if($member['from'] == 'designer'){
+                $designer = K::M('designer/designer')->detail($member['uid']);
 				if($this->checksubmit('data')){
 					if(!$data = $this->GP('data')){
 						$this->err->add('非法的数据提交', 201);
@@ -209,12 +267,14 @@ class Ctl_Site extends Ctl
 							$data['content'] = "预约参观工地：".$detail['title'];
 							if($yuyue_id = K::M('designer/yuyue')->create($data)){
 								K::M('designer/designer')->update($detail['uid'],array('yuyue_num'=>$detail['yuyue_num']+1));
-								$smsdata = $maildata = array('contact'=>$data['contact'] ? $data['contact'] : '业主','mobile'=>$data['mobile'],'site'=>$site['title'],'designer'=>$detail['name']);
+								$smsdata = $maildata = array('contact'=>$data['contact'] ? $data['contact'] : '业主','mobile'=>$data['mobile'],'designer'=>$designer['name'],'company_name'=>$designer['name']);
 								K::M('sms/sms')->send($data['mobile'], 'designer_yuyue', $smsdata);
-								if($detail['verify_mobile'] && K::M('verify/check')->mobile($detail['mobile'])){
-									K::M('sms/sms')->send($detail['mobile'], 'designer_tongzhi', $smsdata);
-								}
-								K::M('helper/mail')->sendmail($from['mail'], 'designer_yuyue', $maildata);
+								if($designer['group']['priv']['allow_yuyue']>0){
+                                    if($designer['verify_mobile'] && K::M('verify/check')->mobile($detail['mobile'])){
+									   K::M('sms/sms')->send($designer['mobile'], 'designer_tongzhi', $smsdata);
+                                    }
+                                    K::M('helper/mail')->sendmail($from['mail'], 'designer_yuyue', $maildata);
+								}								
 								$this->err->add('预约设计师成功');
 							}
 						}
@@ -226,12 +286,14 @@ class Ctl_Site extends Ctl
 					$this->pagedata['detail'] = $detail;
 					$this->tmpl = 'site/yuyue.html';
 				}
-			}
+			}else{
+				$this->err->add('没有找到预约对象',213);  
+			}			
 		}else{
-			if($this->checksubmit('data')){
-				if(!$data = $this->GP('data')){
-					$this->err->add('非法的数据提交', 201);
-				}else{
+            if($this->checksubmit('data')){
+                if(!$data = $this->GP('data')){
+                    $this->err->add('非法的数据提交', 201);
+                }else{
 					$verifycode_success = true;
 					$access = $this->system->config->get('access');
 					if($access['verifycode']['yuyue']){
@@ -250,23 +312,26 @@ class Ctl_Site extends Ctl
 						$data['city_id'] = $this->request['city_id'];
 						$data['site_id'] = $site_id;
 						if($yuyue_id = K::M('company/yuyue')->create($data)){
-							K::M('company/company')->update_count($detail['company_id'],'yuyue_num',1);
-							$smsdata = $maildata = array('contact'=>$data['contact'] ? $data['contact'] : '业主','mobile'=>$data['mobile'],'site'=>$site['title'],'company_name'=>$company['name']);
+							K::M('company/company')->update($detail['company_id'],array('yuyue_num'=>$detail['yuyue_num']+1));
+							$smsdata = $maildata = array('contact'=>$data['contact'] ? $data['contact'] : '业主','mobile'=>$data['mobile'],'site'=>$detail['title'],'company_name'=>$company['name']);
 							K::M('sms/sms')->send($data['mobile'], 'site_yuyue', $smsdata);
-							K::M('sms/sms')->company($company, 'company_site', $smsdata);
-							K::M('helper/mail')->sendcompany($company, 'company_site', $maildata);
+							if($comopany['group']['priv']['allow_yuyue']){
+                                K::M('sms/sms')->company($company, 'company_site', $smsdata);
+                                K::M('helper/mail')->sendcompany($company, 'company_site', $maildata);                               
+                            }
 							$this->err->add('预约参观成功！');  
 						}
 					}
-				} 
-			}else{
+                } 
+            }else{
 				$access = $this->system->config->get('access');
 				$this->pagedata['yuyue_yz'] = $access['verifycode']['yuyue'];
-				$this->pagedata['site_id'] = $site_id;
+                $this->pagedata['site_id'] = $site_id;
 				$this->pagedata['detail'] = $detail;
-				$this->tmpl = 'site/yuyue.html';
-			}
+                $this->tmpl = 'site/yuyue.html';
+            }
 		}
-	}
+
+    }
 
 }

@@ -1,0 +1,41 @@
+<{include file="dcenter/block/header.html"}>
+<div class="ucenter_t">
+    <ul>
+        <li><a href="<{link ctl='dcenter/misc/truste:looked'}>">我的竞标</a></li>
+        <li class="on">竞标详情</li>
+    </ul>
+</div>
+<div class="ucenter_c">
+    <div class="tips"><{if $look.is_signed}><span class="success">恭喜您已签单</span><{elseif $detail.sign_uid > 0}>很遗憾被他人签单<{else}>还在竞标中<{/if}></div>
+    <table width="100%" border="0" cellspacing="0" class="info">
+    <tr><th>标题：</th>
+        <td colspan="5"><{$detail.title|default:'--'}></td>
+    </tr>        
+    <tr>
+        <th>ID：</th><td><{$detail.uid|default:'--'}></td>
+        <th>会员：</th><td class="w-200"><{$member.uname|default:'--'}></td>        
+    </tr>
+    </tr>
+    <tr><th>售价/金币：</th><td><{$detail.gold}></td><th>托管金额：</th><td><{$detail.truste}>&nbsp;&nbsp;&nbsp;<{if $detail.is_pay == 1}><b class="green">已支付</b><{else}><b class="red">未支付</<{/if}></td></tr>
+    <tr><th>最大投标数：</th><td><{$detail.max_look}></td><th>已投标数：</th><td><{$detail.looks}></td></tr>
+    <tr>
+        <th>发布时间：</th><td><{$detail.dateline|format}></td>
+        <th>发布IP：</th><td><b class="red"><{$detail.clientip|cutstr:6:"******"}></b>(<{$detail.clientip|iplocal}>)</td>        
+    </tr>
+    <tr><th>联系人：</th><td><{$detail.contact|default:'--'}></td>
+        <th>状态：</th><td><{if $detail.sign_uid > 0}><b>已签单</b><{else}><b class="blue">招标中</b><{/if}></td>
+    </tr>
+      <tr><th>地址：</th>
+        <td colspan="5"><{$detail.city_name|default:'--'}>  <{$detail.area_name|default:'--'}><{$detail.addr|default:'--'}></td>
+    </tr>
+    <tr><th>电话：</th><td colspan="5"><{$detail.mobile}></td></tr>
+    <tr><td colspan="10" style="height:10px;"></td></tr>
+   <tr><th>分类：</th><td><{$cates[$detail.cate_id].title|default:'--'}></td><th>预算：</th><td><{$detail.budget}></td></tr>
+
+    <{if $detail.photo}><tr><th>效果图：</th><td colspan="10"><a href="<{$pager.img}>/<{$detail.photo}>" target="_blank"><img src="<{$pager.img}>/<{$detail.photo}>" photo="<{$pager.img}>/<{$detail.photo}>" class="wh-30" style="vertical-align:middle;display:inline;"/></a></td></tr><{/if}>
+    <tr><th>业主要求：</th><td colspan="10"><{$detail.comment|default:'--'}></td></tr>
+    <tr><td colspan="10" style="height:5px;"></td></tr>
+    </table>
+   
+</div>
+<{include file="dcenter/block/footer.html"}>

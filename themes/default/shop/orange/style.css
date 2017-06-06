@@ -1,0 +1,19 @@
+/*商铺橙色模板样式开始*/
+.shop_nav{ background:#fff; border-bottom:2px solid #ff4400;}
+.shop_nav a.current, .shop_nav a:hover{ background:#ff4400; color:#fff;}
+.shop_nav a{ color:#333;}
+.orgBanner{ width:780px; height:400px; overflow:hidden;}
+.shop_banner{ width:100%; height:100px; margin-bottom:10px; overflow:hidden;}
+.shop_banner img{ width:1000px; height:100px;}
+.shop_intro{width:200px; background:#fff; padding:0px;}
+.shop_intro img.pic{ width:200px; height:200px;}
+.shop_box{ border:3px solid #d4d4d4; font-size:14px;}
+.shop_tit b{ color:#ff4400; font-size:16px;}
+.shop_news li span.liIco{ display:inline-block; width:4px; height:4px; vertical-align:middle; background:url(liIco.jpg) no-repeat; margin-right:5px;}
+.shop_news li{ height:32px; line-height:32px;}
+.org_tit{border-bottom:3px solid #cccccc; height:40px; line-height:40px; background:url(titIco.jpg) left center no-repeat; padding-left:10px;}
+.org_tit b{ font-size:20px; color:#666;}
+.org_shop_list li{ width:248px; margin:10px 0px 0px 16px;}
+.org_shop_list li a.pic img{ width:248px; height:186px;}
+.org_shop_list li p.sp{ height:35px; line-height:35px; overflow:hidden; font-size:14px; font-weight:bold;}
+/*商铺橙色模板样式结束*/

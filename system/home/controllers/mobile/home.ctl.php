@@ -2,7 +2,7 @@
 /**
  * Copy Right IJH.CC
  * Each engineer has a duty to keep the code elegant
- * $Id: home.ctl.php 10160 2015-05-09 09:39:48Z wanglei $
+ * $Id$
  */
 
 class Ctl_Mobile_Home extends Ctl_Mobile
@@ -34,6 +34,11 @@ class Ctl_Mobile_Home extends Ctl_Mobile
         $this->pagedata['items'] = $items;
 		$pager['backurl'] = $this->mklink('mobile');
         $this->pagedata['pager'] = $pager;
+        $seo = array('area_name'=>'', 'page'=>'');
+        if($page > 1){
+            $seo['page'] = $page;
+        }
+        $this->seo->init('home_tuan', $seo);        
         $this->tmpl = 'mobile/home/tuan.html';
     }
 
@@ -56,9 +61,13 @@ class Ctl_Mobile_Home extends Ctl_Mobile
             }
             $this->pagedata['tuan'] = $detail;
             $this->pagedata['package'] = $package;
-            $this->pagedata['home'] = K::M('home/home')->detail($detail['home_id']);
+            $home = K::M('home/home')->detail($detail['home_id']);
+            $this->pagedata['home'] = $home;
 			$pager['backurl'] = $this->mklink('mobile/home:tuan');
 			$this->pagedata['pager'] = $pager;
+            $seo = array('title'=>$detail['title'], 'home_name'=>$home['name'], 'company_name'=>$company['name'], 'tuan_desc'=>'');
+            $seo['tuan_desc'] = K::M('content/text')->substr(K::M('content/html')->text($detail['content'], true), 0, 200);
+            $this->seo->init('home_tuan_detail', $seo);            
             $this->tmpl = 'mobile/home/tuandetail.html';
         }
     }

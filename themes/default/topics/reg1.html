@@ -1,0 +1,99 @@
+<{include file="block/header.html"}>
+<link href="/themes/default/topics/static/style/topics.css" rel="stylesheet" type="text/css">
+<div class="subwd">
+	<div class="topics_date">
+		<div class="dateTit">
+			<h2>填写申请资料</h2>
+		</div>
+		<div class="date_step"><img src="%THEME%/topics/static/images/ed-1.png"></div>
+		<div class="date_cont">
+			<div class="info">
+				<form action="<{link ctl='topics:reg1' http='base'}>" method="post" onsubmit="return check()" >
+					<dl>
+						<dt><em class="pointcl">*</em>姓名：</dt>
+						<dd>
+							<input class="input text normal" id='name'  placeholder="请输入姓名" name="data[name]" value="<{$topics.name}>"  type="text">
+						</dd>
+					</dl>
+					<dl>
+						<dt><em class="pointcl">*</em>身份证号码：</dt>
+						<dd>
+							<input class=" input text normal" id='card'   placeholder="请输入身份证号" name="data[card]" value="<{$topics.card}>"  type="text">
+						</dd>
+					</dl>
+					<dl>
+						<dt><em class="pointcl">*</em>最高学历：</dt>
+						<dd>
+							<select name="data[education]" class="select text normal" >
+                            	<{foreach $education as $k => $item}>
+                                	<option <{if $topics.education == $k}>  selected="selected" <{/if}> value="<{$k}>"><{$item.title}></option>
+                                <{/foreach}>
+								
+							</select>
+						</dd>
+					</dl>
+					<dl>
+						<dt><em class="pointcl">*</em>婚姻状况：</dt>
+						<dd>
+							<select name="data[marriage]" class="select text normal" >
+								<{foreach $marriage as $k => $item}>
+                                	<option <{if $topics.marriage == $k}>  selected="selected" <{/if}> value="<{$k}>"><{$item.title}></option>
+                                <{/foreach}>
+							</select>
+						</dd>
+					</dl>
+				
+				<!---新增---->
+				
+				<dl>
+					<dt><em class="pointcl">*</em>详细居住地址：</dt>
+						<dd id="differentFromFitAddress">
+                        <{widget id="data/region" city_id=$topics.city_id }>
+							
+						</dd>
+				</dl>
+				<dl id="detailAddress">
+					<dt></dt>
+					<dd>
+						<input class="input" id='addr' placeholder="请不要重复填写省市区，3-60个字符。示例：科技园北区科兴科学园A4栋18楼" id="houseAddress" name="data[addr]" value="<{$topics.addr}>" maxlength="30" type="text">
+					</dd>
+				</dl>
+			</div>
+			<div class="btnbar">
+            <input class="btn btn_sub_big" type="submit" value="下一步" />
+            </div>
+		</div>
+        </form>
+	</div>
+</div>
+<script>
+$("[verify]").click(function(){
+	$($(this).attr("verify")).attr("src", "index.php?magic-verify&_"+Math.random());
+});
+</script> 
+<script language="javascript" type="text/javascript">
+	function check() {
+        var name = $("#name").val();
+		var addr = $("#addr").val();
+		var card = $("#card").val();
+		
+		var isname = /^([\S\s]{2,30})$/;
+        if(!isname.exec(name)){
+			Widget.MsgBox.error("姓名必须是2-10个字符");
+			return false;  	
+		}
+		var iscard = /^(\d{16,18})$/;
+		if(!iscard.exec(card)){
+			Widget.MsgBox.error("身份证有误");
+			return false;  	
+		}
+		var isaddr = /^([\S\s]{3,180})$/;
+		if(!isaddr.exec(addr)){
+			Widget.MsgBox.error("地址有误");
+			return false;  	
+		}
+        return true;  
+    }  
+</script>
+
+<{include file="block/small-footer.html"}> 

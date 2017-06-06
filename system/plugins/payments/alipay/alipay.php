@@ -2,7 +2,7 @@
 /**
  * Copy Right IJH.CC
  * Each engineer has a duty to keep the code elegant
- * $Id: alipay.php 10941 2015-06-19 14:43:01Z maoge $
+ * $Id: alipay.php 5379 2014-05-30 10:17:21Z youyi $
  */
 
 class Payment_Alipay 
@@ -60,77 +60,148 @@ class Payment_Alipay
 
     public function build_url($params)
     {
-        $parameter = $this->build_parameter($params);
-        $url = $this->gateway ."_input_charset=".$this->config['_input_charset']."&". $this->_build_query($parameter);
+		if(defined('IN_MOBILE')){
+			$params['service'] = 'alipay.wap.trade.create.direct';
+			$parameter = $this->build_mparameter($params);
+			$html_text = $this->http($this->mgateway, $parameter, 'POST');
+			$html_text = urldecode($html_text);
+			$para_response = $this->parse_response($html_text);
+			$params['service'] = 'alipay.wap.auth.authAndExecute';
+			$params['request_token'] = $para_response['request_token'];
+			$parameter = $this->build_mparameter($params);
+			$url = $this->gateway ."_input_charset=".$this->config['_input_charset']."&". $this->_build_query($parameter);
+
+		}else{			
+			$parameter = $this->build_parameter($params);
+			$url = $this->gateway ."_input_charset=".$this->config['_input_charset']."&". $this->_build_query($parameter);
+		}
         return $url;
     }
 
     public function build_form($params)
     {      
         //待请求参数数组
-        $parameter = $this->build_parameter($params);        
-        $html = "<form id='alipaysubmit' name='alipaysubmit' action='".$this->gateway."_input_charset=".trim(strtolower($this->config['_input_charset']))."' method='".$method."'>";
-        while (list ($key, $val) = each ($parameter)) {
-            $html.= "<input type='hidden' name='".$key."' value='".$val."'/>";
-        }
-        //submit按钮控件请不要含有name属性
-        $html .= "<input type='submit' value='立即支付'></form>";        
-        $html .= "<script>document.forms['alipaysubmit'].submit();</script>";        
+		if(defined('IN_MOBILE')){
+			$params['service'] = 'alipay.wap.trade.create.direct';
+			$parameter = $this->build_mparameter($params);
+			$html_text = $this->http($this->mgateway, $parameter, 'POST');
+			$html_text = urldecode($html_text);
+			$para_response = $this->parse_response($html_text);
+			$params['service'] = 'alipay.wap.auth.authAndExecute';
+			$params['request_token'] = $para_response['request_token'];
+			$parameter = $this->build_mparameter($params);
+
+			$html = "<form id='alipaysubmit' name='alipaysubmit' action='".$this->gateway."_input_charset=".trim(strtolower($this->config['_input_charset']))."' method='".$method."'>";
+			while (list ($key, $val) = each ($parameter)) {
+				$html.= "<input type='hidden' name='".$key."' value='".$val."'/>";
+			}
+			//submit按钮控件请不要含有name属性
+			$html .= "<input type='submit' value='立即支付'></form>";        
+			$html .= "<script>document.forms['alipaysubmit'].submit();</script>";
+
+		}else{
+			$parameter = $this->build_parameter($params);        
+			$html = "<form id='alipaysubmit' name='alipaysubmit' action='".$this->gateway."_input_charset=".trim(strtolower($this->config['_input_charset']))."' method='".$method."'>";
+			while (list ($key, $val) = each ($parameter)) {
+				$html.= "<input type='hidden' name='".$key."' value='".$val."'/>";
+			}
+			//submit按钮控件请不要含有name属性
+			$html .= "<input type='submit' value='立即支付'></form>";        
+			$html .= "<script>document.forms['alipaysubmit'].submit();</script>";
+		}
         return $html;
     }
 
     public function return_verify()
     {
-        //WAIT_BUYER_PAY,WAIT_SELLER_SEND_GOODS,WAIT_BUYER_CONFIRM_GOODS,TRADE_FINISHED,TRADE_SUCCESS,TRADE_CLOSED
-        $_allow_status = array('WAIT_SELLER_SEND_GOODS', 'WAIT_BUYER_CONFIRM_GOODS', 'TRADE_FINISHED', 'TRADE_SUCCESS');
-        if(empty($_GET)){   //判断GET来的数组是否为空
-            return false;
-        }else if(!in_array($_GET['trade_status'],$_allow_status)){
-            return false;
-        }else{
-            //判断veryfy_result是否为ture，生成的签名结果mysign与获得的签名结果sign是否一致
-            //$veryfy_result的结果不是true，与服务器设置问题、合作身份者ID、notify_id一分钟失效有关
-            //mysign与sign不等，与安全校验码、请求时的参数格式（如：带自定义参数等）、编码格式有关            
-            $notify = $this->_filter_params($_GET);
-            $mysign = $this->create_sign($notify);
-            $veryfy_result = $this->verify_notify($_GET["notify_id"]);
-            //写日志记录
-            $log  = "veryfy_result:{$veryfy_result}\n\n";
-            $log .= "return_url_log:sign={$_GET[sign]}&mysign={$mysign}&".$this->_build_query($notify);
-            $this->_logs($log);
-            if (preg_match("/true$/i",$veryfy_result) && $mysign == $_GET["sign"]){
-                return array('trade_no'=>$notify['out_trade_no'], 'pay_trade_no'=>$notify['trade_no'], 'trade_status'=>$notify['trade_status'], 'amount'=>$notify['total_fee'], 'extra_param'=>$this->_decode_params($notify['extra_common_param']));
-            }
-            return false;
-        }
-        return true;
+
+		if(defined('IN_MOBILE')){
+			if(empty($_GET)) {//判断GET来的数组是否为空
+				return false;
+			}else {
+
+				$notify = $this->_filter_params($_GET);
+				
+				$mysign = $this->create_sign($notify);
+				$log .= "return_url_log:sign={$_GET[sign]}&mysign={$mysign}&".$this->_build_query($notify);
+				$this->_logs($log);
+				if ($mysign == $_GET["sign"]){
+					return array('trade_no'=>$notify['out_trade_no'], 'pay_trade_no'=>$notify['trade_no'], 'trade_status'=>$_POST['trade_status'], 'amount'=>$notify['total_fee'], 'extra_param'=>$this->_decode_params($notify['extra_common_param']));
+				}
+				return false;
+			}
+			
+			return true;
+		}else{
+			//WAIT_BUYER_PAY,WAIT_SELLER_SEND_GOODS,WAIT_BUYER_CONFIRM_GOODS,TRADE_FINISHED,TRADE_SUCCESS,TRADE_CLOSED
+			$_allow_status = array('WAIT_SELLER_SEND_GOODS', 'WAIT_BUYER_CONFIRM_GOODS', 'TRADE_FINISHED', 'TRADE_SUCCESS');
+			if(empty($_GET)){   //判断GET来的数组是否为空
+				return false;
+			}else if(!in_array($_GET['trade_status'],$_allow_status)){
+				return false;
+			}else{
+				//判断veryfy_result是否为ture，生成的签名结果mysign与获得的签名结果sign是否一致
+				//$veryfy_result的结果不是true，与服务器设置问题、合作身份者ID、notify_id一分钟失效有关
+				//mysign与sign不等，与安全校验码、请求时的参数格式（如：带自定义参数等）、编码格式有关            
+				$notify = $this->_filter_params($_GET);
+				$mysign = $this->create_sign($notify);
+				$veryfy_result = $this->verify_notify($_GET["notify_id"]);
+				//写日志记录
+				$log  = "veryfy_result:{$veryfy_result}\n\n";
+				$log .= "return_url_log:sign={$_GET[sign]}&mysign={$mysign}&".$this->_build_query($notify);
+				$this->_logs($log);
+				if (preg_match("/true$/i",$veryfy_result) && $mysign == $_GET["sign"]){
+					return array('trade_no'=>$notify['out_trade_no'], 'pay_trade_no'=>$notify['trade_no'], 'trade_status'=>$_POST['trade_status'], 'amount'=>$notify['total_fee'], 'extra_param'=>$this->_decode_params($notify['extra_common_param']));
+				}
+				return false;
+			}
+			return true;
+		}
     }
 
     public function notify_verify()
     {
-        //WAIT_SELLER_SEND_GOODS → WAIT_BUYER_CONFIRM_GOODS
-        //WAIT_BUYER_PAY,WAIT_SELLER_SEND_GOODS,WAIT_BUYER_CONFIRM_GOODS,TRADE_FINISHED,TRADE_SUCCESS,TRADE_CLOSED
-        $_allow_status = array('WAIT_SELLER_SEND_GOODS', 'WAIT_BUYER_CONFIRM_GOODS', 'TRADE_FINISHED', 'TRADE_SUCCESS');
-        if(empty($_POST)){//判断POST来的数组是否为空
-            return false;
-        }else if(!in_array($_POST['trade_status'], $_allow_status)){
-            return false;
-        }else{
-            //判断veryfy_result是否为ture，生成的签名结果mysign与获得的签名结果sign是否一致
-            //$veryfy_result的结果不是true，与服务器设置问题、合作身份者ID、notify_id一分钟失效有关
-            //mysign与sign不等，与安全校验码、请求时的参数格式（如：带自定义参数等）、编码格式有关            
-            $notify = $this->_filter_params($_POST);
-            $mysign = $this->create_sign($notify);
-            $veryfy_result = $this->verify_notify($_POST["notify_id"]); 
-            //写日志记录
-            $log  = "veryfy_result:{$veryfy_result}\n\n";
-            $log .= "notify_url_log:sign={$_POST[sign]}&mysign={$mysign}&".$this->_build_query($notify);
-            $this->_logs($log);
-            if (preg_match("/true$/i",$veryfy_result) && $mysign == $_POST["sign"]){
-                return array('trade_no'=>$notify['out_trade_no'], 'pay_trade_no'=>$notify['trade_no'], 'trade_status'=>$_POST['trade_status'], 'amount'=>$notify['total_fee'], 'extra_param'=>$this->_decode_params($notify['extra_common_param']));
-            }
-            return false;
-        }
+
+		if(defined('IN_MOBILE')){
+			if(empty($_POST)) {//判断GET来的数组是否为空
+				return false;
+			}else {
+				$notify = $this->_filter_params($_POST);
+				$mysign = $this->create_sign($notify);
+				$log .= "return_url_log:sign={$_POST[sign]}&mysign={$mysign}&".$this->_build_query($notify);
+				$this->_logs($log);
+				if ($mysign == $_POST["sign"]){
+					return array('trade_no'=>$notify['out_trade_no'], 'pay_trade_no'=>$notify['trade_no'], 'trade_status'=>$_POST['trade_status'], 'amount'=>$notify['total_fee'], 'extra_param'=>$this->_decode_params($notify['extra_common_param']));
+				}
+				return false;
+			}
+			
+			return true;
+		}else{
+			//WAIT_SELLER_SEND_GOODS → WAIT_BUYER_CONFIRM_GOODS
+			//WAIT_BUYER_PAY,WAIT_SELLER_SEND_GOODS,WAIT_BUYER_CONFIRM_GOODS,TRADE_FINISHED,TRADE_SUCCESS,TRADE_CLOSED
+			$_allow_status = array('WAIT_SELLER_SEND_GOODS', 'WAIT_BUYER_CONFIRM_GOODS', 'TRADE_FINISHED', 'TRADE_SUCCESS');
+			if(empty($_POST)){//判断POST来的数组是否为空
+				return false;
+			}else if(!in_array($_POST['trade_status'], $_allow_status)){
+				return false;
+			}else{
+				//判断veryfy_result是否为ture，生成的签名结果mysign与获得的签名结果sign是否一致
+				//$veryfy_result的结果不是true，与服务器设置问题、合作身份者ID、notify_id一分钟失效有关
+				//mysign与sign不等，与安全校验码、请求时的参数格式（如：带自定义参数等）、编码格式有关            
+				$notify = $this->_filter_params($_POST);
+				$mysign = $this->create_sign($notify);
+				$veryfy_result = $this->verify_notify($_POST["notify_id"]); 
+				//写日志记录
+				$log  = "veryfy_result:{$veryfy_result}\n\n";
+				$log .= "notify_url_log:sign={$_POST[sign]}&mysign={$mysign}&".$this->_build_query($notify);
+				$this->_logs($log);
+				if (preg_match("/true$/i",$veryfy_result) && $mysign == $_POST["sign"]){
+					return array('trade_no'=>$notify['out_trade_no'], 'pay_trade_no'=>$notify['trade_no'], 'trade_status'=>$_POST['trade_status'], 'amount'=>$notify['total_fee'], 'extra_param'=>$this->_decode_params($notify['extra_common_param']));
+				}
+				return false;
+			}
+		}
     }
 
     public function notify_success($success=true)
@@ -156,7 +227,7 @@ class Payment_Alipay
     public function sendship($log, $trade)
     {
         $parameter = array(
-            "service" => "send_goods_confirm_by_platform",
+            "service" => $this->_parameter['service'],
             "partner" => $this->_parameter['partner'],
             "trade_no"  => $log['pay_trade_no'],
             "logistics_name"    => 'JHKJ', //快递公司
@@ -164,6 +235,8 @@ class Payment_Alipay
             "transport_type"    => 'EXPRESS',//物流发货时的运输类型，三个值可选：POST（平邮）、EXPRESS（快递）、EMS（EMS）
             "_input_charset"    => $this->_parameter['_input_charset']
         );
+
+		
         $parameter = $this->_filter_params($parameter);
         $parameter = $this->_sort_params($parameter);
         $sign = $this->create_sign($parameter);
@@ -193,13 +266,20 @@ class Payment_Alipay
             curl_setopt($ci, CURLOPT_POST, true); 
             if (!empty($params)) {
                 curl_setopt($ci, CURLOPT_POSTFIELDS, $params);
-            }            
+            }
         }else if(!empty($params)){ // get传输数据
             $url .= $this->build_query($params);
         }
         curl_setopt($ci, CURLOPT_URL, $url );
         curl_setopt($ci, CURLINFO_HEADER_OUT, TRUE);
         $res = curl_exec($ci);
+        $code = curl_getinfo($ci, CURLINFO_HTTP_CODE);
+		//var_dump($code);
+        //$info = curl_getinfo($ci);
+		//var_dump($info);
+		//var_dump($res);
+		//print_r($params);
+		//echo "File:", __FILE__, ',Line:',__LINE__;exit;
         curl_close($ci);
         return $res;
     }
@@ -246,6 +326,60 @@ class Payment_Alipay
         $parameter['sign_type'] = strtoupper($this->sign_type);
         return $parameter;
     }
+
+	protected function build_mparameter($params)
+	{
+
+		$parameter = array(
+			"service" => $params['service'], //"alipay.wap.auth.authAndExecute",
+			"partner" => $this->_parameter['partner'],
+			"sec_id" => $this->sign_type,
+			"format"	=> 'xml',
+			"v"	=> '2.0',
+			"req_id"	=> $params['trade_no'],
+			//"req_data"	=> $req_data,
+			"_input_charset"	=> 'utf-8'
+		);
+		$parameter['req_data'] = $this->_build_mreq_data($params);
+		$parameter = $this->_filter_params($parameter);
+        $parameter = $this->_sort_params($parameter);
+        $sign = $this->create_sign($parameter);
+        $parameter['sign'] = $sign;
+        //$parameter['sign_type'] = strtoupper($this->sign_type);
+		return $parameter;
+
+
+		
+		//除去待签名参数数组中的空值和签名参数
+		$para_filter = paraFilter($para_temp);
+
+		//对待签名参数数组排序
+		$para_sort = argSort($para_filter);
+
+		//生成签名结果
+		$mysign = $this->buildRequestMysign($para_sort);
+		
+		//签名结果与签名方式加入请求提交参数组中
+		$para_sort['sign'] = $mysign;
+		if($para_sort['service'] != 'alipay.wap.trade.create.direct' && $para_sort['service'] != 'alipay.wap.auth.authAndExecute') {
+			$para_sort['sign_type'] = strtoupper(trim($this->alipay_config['sign_type']));
+		}
+		
+		return $para_sort;
+
+
+
+	}
+
+	protected function _build_mreq_data($params)
+	{
+		//请求业务参数详细
+		if($params['service'] == 'alipay.wap.auth.authAndExecute'){
+			return '<auth_and_execute_req><request_token>' . $params['request_token']. '</request_token></auth_and_execute_req>';
+		}else{
+			return '<direct_trade_create_req><notify_url>' . $this->_parameter['notify_url'] . '</notify_url><call_back_url>' . $this->_parameter['return_url'] . '</call_back_url><seller_account_name>' . $this->_parameter['seller_email'] . '</seller_account_name><out_trade_no>' . $params['trade_no'] . '</out_trade_no><subject>' . $params['title'] . '</subject><total_fee>' . sprintf("%01.2f", $params['amount']) . '</total_fee><merchant_url>'.$params['show_url'].'</merchant_url></direct_trade_create_req>';
+		}
+	}
 
 
     protected function _build_query($params, $urlencode=true)
@@ -297,6 +431,34 @@ class Payment_Alipay
         $mysgin = md5($prestr); //把最终的字符串签名，获得签名结果
         return $mysgin;
     }
+
+	protected function parse_response($str_text) {
+		//以“&”字符切割字符串
+		$para_split = explode('&',$str_text);
+		//把切割后的字符串数组变成变量与数值组合的数组
+		foreach ($para_split as $item) {
+			//获得第一个=字符的位置
+			$nPos = strpos($item,'=');
+			//获得字符串长度
+			$nLen = strlen($item);
+			//获得变量名
+			$key = substr($item,0,$nPos);
+			//获得数值
+			$value = substr($item,$nPos+1,$nLen-$nPos-1);
+			//放入数组中
+			$para_text[$key] = $value;
+		}
+		
+		if( ! empty ($para_text['res_data'])) {
+			//解析加密部分字符串			
+			//token从res_data中解析出来（也就是说res_data中已经包含token的内容）
+			$doc = new DOMDocument();
+			$doc->loadXML($para_text['res_data']);
+			$para_text['request_token'] = $doc->getElementsByTagName( "request_token" )->item(0)->nodeValue;
+		}		
+		return $para_text;
+	}
+
 
     protected function _encode_params($param)
     {

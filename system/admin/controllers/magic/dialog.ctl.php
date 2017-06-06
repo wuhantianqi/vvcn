@@ -3,7 +3,7 @@
  * Copy Right IJH.CC
  * Each engineer has a duty to keep the code elegant
  * Author @shzhrui<Anhuike@gmail.com>
- * $Id: dialog.ctl.php 9378 2015-03-27 02:07:36Z youyi $
+ * $Id: dialog.ctl.php 2034 2013-12-07 03:08:33Z $
  */
 
 class Ctl_Magic_Dialog extends Ctl 

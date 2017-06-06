@@ -2,7 +2,7 @@
 /**
  * Copy Right IJH.CC
  * Each engineer has a duty to keep the code elegant
- * $Id: cart.ctl.php 9372 2015-03-26 06:32:36Z youyi $
+ * $Id$
  */
 
 if(!defined('__CORE_DIR')){
@@ -30,8 +30,15 @@ class Ctl_Mobile_Trade_Cart extends Ctl_Mobile
             $this->pagedata['shop_list'] = K::M('shop/shop')->items_by_ids($shop_ids);
         }
         $this->pagedata['cart'] = $cart;
+        $filter['uid'] = $this->uid;
+        $filter['closed'] = 0;
+        if ($items = K::M('order/address')->items($filter, null, $count)) {
+            $this->pagedata['items'] = $items;
+        }
         $this->tmpl = 'mobile/trade/order/checkout.html';
-    }    
+    }
+
+
 
     public function add($product_id=0, $spec_id=0, $num=0)
     {

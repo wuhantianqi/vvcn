@@ -2,7 +2,7 @@
 /**
  * Copy Right IJH.CC
  * Each engineer has a duty to keep the code elegant
- * $Id: so.ctl.php 9372 2015-03-26 06:32:36Z youyi $
+ * $Id: city.ctl.php 3053 2014-01-15 02:00:13Z youyi $
  */
 
 class Ctl_Mobile_So extends Ctl_Mobile

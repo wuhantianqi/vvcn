@@ -1,0 +1,33 @@
+<{include file="mobile/block/header.html"}>
+<body>
+<header class="control"> <i class="left"><a href="<{if $pager.backurl}><{$pager.backurl}><{else}><{link ctl='mobile/index'}><{/if}>" id="gobackIco"></a></i>
+	<div class="title">请绑定账号</div>
+	<i class="right"></i> </header>
+<section id="" class="page_center_box">
+	<form  id="account-form" action="<{link ctl='mobile/passport:qqreg' http='ajax'}>" method="post" mini-form="login">
+		<input type="hidden" name="access_token" value="<{$access_token}>" />
+		<input type="hidden" name="qq_app_id" value="<{$qq_app_id}>" />
+		<input type="hidden" name="openid" value="<{$openid}>" />
+		<div class="loginInfor">
+			<div class="loginIf_list">
+				<div class="fl ifIco"><i class="icco icco1"></i> </div>
+				<div class="ifInput">
+					<input name="account[uname]" type="text" placeholder="用户名" />
+				</div>
+				<div class="clear"></div>
+			</div>
+			<div class="loginIf_list">
+				<div class="fl ifIco"><i class="icco icco9"></i> </div>
+				<div class="ifInput">
+					<input name="account[passwd]" type="password" placeholder="密码" />
+				</div>
+				<div class="clear"></div>
+			</div>
+		</div>
+		<div class="yuee_btn">
+			<input type="submit" class="btn" value="立即注册" />
+		</div>
+	</form>
+</section>
+</body>
+</html>

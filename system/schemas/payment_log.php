@@ -2,7 +2,7 @@
 /**
  * Copy Right IJH.CC
  * Each engineer has a duty to keep the code elegant
- * $Id: payment_log.php 9378 2015-03-27 02:07:36Z youyi $
+ * $Id: payment_log.php 3053 2014-01-15 02:00:13Z youyi $
  */
 
 if(!defined('__CORE_DIR')){
@@ -42,6 +42,22 @@ return array (
     'default' => '',
     'SO' => 'like',
   ),
+   'truste_id' => 
+  array (
+    'field' => 'truste_id',
+    'label' => 'truste_id',
+    'pk' => false,
+    'add' => true,
+    'edit' => true,
+    'html' => false,
+    'empty' => false,
+    'show' => false,
+    'list' => true,
+    'type' => 'number',
+    'comment' => '',
+    'default' => '',
+    'SO' => '=',
+  ),
   'payment' => 
   array (
     'field' => 'payment',
@@ -73,6 +89,22 @@ return array (
     'comment' => '支付流水号',
     'default' => '',
     'SO' => 'like',
+  ),
+  'packet' => 
+  array (
+    'field' => 'packet',
+    'label' => 'packet',
+    'pk' => false,
+    'add' => true,
+    'edit' => true,
+    'html' => false,
+    'empty' => true,
+    'show' => false,
+    'list' => true,
+    'type' => 'int',
+    'comment' => '',
+    'default' => '',
+    'SO' => '=',
   ),
   'payed' => 
   array (

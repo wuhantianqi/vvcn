@@ -6,7 +6,7 @@
 .company_top_lt h1 a{color:#fff; margin-right:10px;}
 .company_top_lt h2{ margin-top:20px;}
 .company_top_lt h2 span{ margin-right:20px; color:#fff;}
-.company_top_rt{ padding:5px; background:#c86812; color:#fff;}
+.company_top_rt{ padding:15px 5px; background:#c86812; color:#fff; position:relative;}
 .company_top_rt p{ line-height:20px;}
 .company_top_rt p.title{ text-align:center; font-size:14px;}
 .com_tel{ width:24px; height:24px; background-position:0px 0px;}
@@ -16,6 +16,9 @@
 .company_nav ul a{ display:inline-block; padding:8px 20px; color:#fff; font-size:14px;}
 .company_nav ul a.current,.company_nav ul a:hover{ background:#666;}
 .company_nav_rt{ background:#666; color:#fff; padding:8px 10px;}
+.company_top_rt .code{ position:absolute; left:-110px; top:0px;padding:5px 10px;background-color:#fff;height:100px; text-align:center;}
+.company_top_rt .code p{ color:#333; font-weight:bold; margin-top:-3px; margin-bottom:3px;}
+.company_top_rt .code img{ width:90px; height:90px;}
 /*装修公司头部样式结束*/
 
 /*装修公司首页样式开始*/
@@ -28,7 +31,7 @@
 .com_title a{ font-size:12px;}
 .com_box{ border-top:1px solid #ccc; background:#f8f8f8;}
 .com_pinglun ul li{ padding:2px 0px;}
-.sub_com_design{ height:210px;}
+.sub_com_design{ height:210px; overflow:hidden;}
 .sub_com_design li img{ width:150px; height:150px;}
 .sub_com_design li{ width:150px; margin:0px 12px; float:left;} 
 .sub_com_design li p{ line-height:30px;}
@@ -51,8 +54,8 @@
 .com_youhui p.center{ width:60px; font-size:14px; margin:5px auto; }
 .com_youhui .opacity_img,.com_youhui .opacity_img img{ width:145px; height:120px;}
 .time_ico{ width:19px; height:19px; background-position:-83px 0px;}
-.com_pinglun{ padding:0px 10px;}
-.video{ width:260px; height:200px;}
+.com_pinglun{ height:200px; overflow:hidden; padding:0px 10px;}
+.video{ background:#f5f5f5; width:260px; height:200px; overflow:hidden;}
 .com_yuyue span,.com_yuyue_title span{ display:inline-block; width:30%;text-align:center; line-height:32px;}
 .com_yuyue_title{ background:#ddd; border-bottom:1px solid #e3e3e3;}
 .com_yuyue span.mid,.com_yuyue_title span.mid{ width:40%;}

@@ -2,7 +2,7 @@
 /**
  * Copy Right IJH.CC
  * Each engineer has a duty to keep the code elegant
- * $Id: yuyue.ctl.php 9378 2015-03-27 02:07:36Z youyi $
+ * $Id: yuyue.ctl.php 5681 2014-06-26 11:33:16Z youyi $
  */
 
 if(!defined('__CORE_DIR')){
@@ -25,7 +25,9 @@ class Ctl_Company_Yuyue extends Ctl
             if($SO['contact']){$filter['contact'] = "LIKE:%".$SO['contact']."%";}
             if(is_numeric($SO['status'])){$filter['status'] = $SO['status'];}
         }
-		
+		if(CITY_ID){
+            $filter['city_id'] = CITY_ID;
+        }
         if($items = K::M('company/yuyue')->items($filter, null, $page, $limit, $count)){
             foreach($items as $k=>$v){
                if(!empty($v['uid'])) $uids[$v['uid']] = $v['uid'];
@@ -60,7 +62,9 @@ class Ctl_Company_Yuyue extends Ctl
             }else if(!$this->check_city($company['city_id'])){
                 $this->err->add('不可越权操作', 403);
             }else{
-				
+				if(CITY_ID){
+                    $data['city_id'] = CITY_ID;
+                }
                 if($yuyue_id = K::M('company/yuyue')->create($data)){
 					//K::M('company/yuyue')->yuyue_count($company['company_id']);
 					K::M('company/company')->update($company['company_id'], array('yuyue_num'=>$company['yuyue_num']+1));
@@ -139,7 +143,9 @@ class Ctl_Company_Yuyue extends Ctl
             if($items = K::M('company/yuyue')->items_by_ids($ids)){
                 $aids = $company_ids = array();
                 foreach($items as $v){
-                   
+                    if(CITY_ID && CITY_ID != $v['city_id']){
+                        continue;
+                    }
                     $aids[$v['yuyue_id']] = $v['yuyue_id'];
                     $company_ids[$v['company_id']] = $v['company_id'];
                 }

@@ -20,8 +20,8 @@
 		</div>
 		<div class="site_commitment rt">
 			<ul>
-				<li><a href="<{link ctl='tenders'}>"><span class="index_ico ico1"></span></a></li>
-				<li><a href="<{link ctl='tenders'}>"><span class="index_ico ico2"></span></a></li>
+				<li><a href="<{link ctl='zxb'}>"><span class="index_ico ico1"></span></a></li>
+				<li><a href="<{link ctl='zxb'}>"><span class="index_ico ico2"></span></a></li>
 			</ul>
 		</div>
 	</div>
@@ -30,14 +30,23 @@
 			<ul>
 				<li><a href="<{link ctl='index'}>" <{if $request.ctl=='index'}>class="current"<{/if}>>首页</a>
 				</li>
-				<li><a <{if $request.ctl=='tenders'}>class="current"<{/if}> href="<{link ctl='tenders'}>">我要装修</a>
+				<li>
+					<a <{if $request.ctl=='tenders' || $request.ctl=='topics' || $request.ctl=='zbdt' || $request.ctl=='truste' }>class="current"<{/if}> href="<{link ctl='tenders'}>">我要装修</a>
+					<ul class="main_nav_son none">
+						<li><a href="<{link ctl='topics'}>">装修贷款</a></li>
+						<li><a href="<{link ctl='zbdt'}>">招标大厅</a></li>
+                        <li><a href="<{link ctl='truste'}>">维修招标</a></li>
+					</ul>
 				</li>
 				<li>
-					<a <{if $request.ctl=='gs' || $request.ctl=='designer' || $request.ctl=='gz'   || $request.ctl=='mechanic' || $request.ctl=='youhui'  }>class="current"<{/if}> href="<{link ctl='gs'}>">找装修公司</a>
+					<a <{if $request.ctl=='gs' || $request.ctl=='designer' || $request.ctl=='gz'   || $request.ctl=='mechanic' || $request.ctl=='youhui' || $request.ctl=='supervist' }>class="current"<{/if}> href="<{link ctl='gs'}>">找装修公司</a>
 					<ul class="main_nav_son none">
 						<li><a href="<{link ctl='gs'}>">找装修公司</a></li>
 						<li><a href="<{link ctl='designer'}>">找设计师</a></li>
+						<li><a href="<{link ctl='gz'}>">找工长</a></li>
 						<li><a href="<{link ctl='mechanic'}>">找工人</a></li>
+                        <li><a href="<{link ctl='supervist'}>">找监理</a>
+						</li>
 						<li><a href="<{link ctl='youhui'}>">优惠信息</a>
 						</li>
 					</ul>
@@ -61,18 +70,19 @@
 					</ul>
 				</li>
 				<li><a <{if $request.ctl=='activity' || $request.ctl=='mall/coupon'}>class="current"<{/if}> href="<{link ctl='activity'}>">优惠活动</a>
-                 
-					<ul class="main_nav_son none">
-						<li><a  href="<{link ctl='mall/coupon-items'}>">优惠券</a></li>
+				<ul class="main_nav_son none">
+						<li><a href="<{link ctl='mall/coupon-items'}>">优惠券</a></li>
 					</ul>
 				</li>
-                 <li><a <{if $request.ctl=='news'}>class="current"<{/if}> href="<{link ctl='news'}>">本地新闻</a>
+                <li><a <{if $request.ctl=='news'}>class="current"<{/if}> href="<{link ctl='news'}>">本地新闻</a>
 				</li>
 				<li class="last">
-					<a <{if $request.ctl=='mall/index' || $request.ctl=='mall/store'}>class="current"<{/if}>  href="<{link ctl='mall'}>">家居商城</a>
+					<a <{if $request.ctl=='mall/index' || $request.ctl=='mall/store' || $request.ctl=='jfproduct/jfproduct' || $request.ctl=='brand/brand' }>class="current"<{/if}> href="<{link ctl='mall'}>">家居商城</a>
 					<ul class="main_nav_son none">
 						<li><a href="<{link ctl='mall/index'}>">商城主页</a></li>
 						<li><a  href="<{link ctl='mall/store'}>">商家列表</a></li>
+						<li><a  href="<{link ctl='jfproduct/jfproduct'}>">积分商城</a></li>
+						<li><a  href="<{link ctl='brand/brand'}>">品牌筛选</a></li>
 					</ul>
 				</li>
 			</ul>
@@ -90,20 +100,5 @@ $(document).ready(function() {
 		$(this).find(".main_nav_son").hide();
 		
 	});
-	//头部登录后效果
-	$(".top_nav_login li").mouseover(function(){
-		$(this).find('.top_nav_login_son').show();
-	}).mouseout(function(){
-		$(this).find('.top_nav_login_son').hide();
-	});	
-	$("font.tp_contactus ").mouseover(function(){
-		$(this).find('a.over').addClass('on');
-		$('font.tp_contactus ').find('.tp_contactus_box').show();
-		$('font.tp_contactus ').find('span.con_ico').addClass('con_ico_over');
-	}).mouseout(function(){
-		$(this).find('a.over').removeClass('on');
-		$('font.tp_contactus ').find('.tp_contactus_box').hide();
-		$('font.tp_contactus ').find('span.con_ico').removeClass('con_ico_over');
-	});	
 });
 </script>

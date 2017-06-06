@@ -2,7 +2,7 @@
 /**
  * Copy Right IJH.CC
  * Each engineer has a duty to keep the code elegant
- * $Id: tuan.mdl.php 9378 2015-03-27 02:07:36Z youyi $
+ * $Id: tuan.mdl.php 3053 2014-01-15 02:00:13Z youyi $
  */
 
 if(!defined('__CORE_DIR')){
@@ -16,13 +16,12 @@ class Mdl_Home_Tuan extends Mdl_Table
     protected $_pk = 'tuan_id';
     protected $_cols = 'tuan_id,title,city_id,area_id,home_id,company_id,sign_num,qy_num,jieyue,content,sg_num,stime,ltime,audit,dateline';
 	
-	protected $order_list = array(1=>array('title'=>'默认'),2=>array('title'=>'报名'),3=>array('title'=>'签约'));
+	protected $order_list = array(0=>array('title'=>'默认'),1=>array('title'=>'报名'),2=>array('title'=>'签约'));
 	
 	public function get_order(){
         
         return $this->order_list;
-    }
-	
+    }	
     
     public function create($data, $checked=false)
     {

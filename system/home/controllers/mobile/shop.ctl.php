@@ -2,7 +2,7 @@
 /**
  * Copy Right IJH.CC
  * Each engineer has a duty to keep the code elegant
- * $Id: shop.ctl.php 10160 2015-05-09 09:39:48Z wanglei $
+ * $Id$
  */
 
 if(!defined('__CORE_DIR')){
@@ -32,6 +32,8 @@ class Ctl_Mobile_Shop extends Ctl_Mobile
         $this->check_shop($shop_id);
 		$pager['backurl'] = $this->mklink('mobile/store');
         $this->pagedata['pager'] = $pager;
+        $this->seo->set_shop($shop);
+        $this->seo->init('shop', array('cate_name'=>$cate['title']));        
         $this->tmpl = 'mobile/shop/detail.html';
     }
 
@@ -60,8 +62,9 @@ class Ctl_Mobile_Shop extends Ctl_Mobile
         }
 		$pager['vcat_id'] = $vcat_id;
         $pager['backurl'] = $this->mklink('mobile/shop', array($shop_id));
-		//var_dump($pager);echo "File:", __FILE__, ',Line:',__LINE__;exit;
         $this->pagedata['pager'] = $pager;
+        $this->seo->set_shop($shop);
+        $this->seo->init('shop', array('cate_name'=>$cate['title']));        
         $this->tmpl = 'mobile/shop/product.html';
     }
 
@@ -79,6 +82,8 @@ class Ctl_Mobile_Shop extends Ctl_Mobile
         }        
         $pager['backurl'] = $this->mklink('mobile/shop', array($shop_id));
         $this->pagedata['pager'] = $pager;
+        $this->seo->set_shop($shop);
+        $this->seo->init('shop', array('cate_name'=>$cate['title']));        
         $this->tmpl = 'mobile/shop/coupon.html';        
     }
 
@@ -92,6 +97,8 @@ class Ctl_Mobile_Shop extends Ctl_Mobile
         }
         $pager['backurl'] = $this->mklink('mobile/shop', array($shop_id));
         $this->pagedata['pager'] = $pager;
+        $this->seo->set_shop($shop);
+        $this->seo->init('shop', array('cate_name'=>$cate['title']));        
         $this->tmpl = 'mobile/shop/news.html';
     }
 
@@ -108,6 +115,8 @@ class Ctl_Mobile_Shop extends Ctl_Mobile
             $this->pagedata['detail'] = $detail;
             $pager['backurl'] = $this->mklink('mobile/shop:news', array($detail['shop_id'], 1));
             $this->pagedata['pager'] = $pager;
+            $this->seo->set_shop($shop);
+            $this->seo->init('shop', array('cate_name'=>$cate['title']));            
             $this->tmpl = 'mobile/shop/newsdetail.html';
         }
     }

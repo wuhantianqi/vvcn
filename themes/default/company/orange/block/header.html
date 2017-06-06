@@ -1,0 +1,29 @@
+<{include file="block/small-header.html"}>
+<link type="text/css" rel="stylesheet" href="/themes/default/company/style/default/style.css" />
+<script type="text/javascript" src="<{$pager.res}>/script/jquery.qrcode.min.js"></script> 
+<link rel="stylesheet" type="text/css" href="themes/default/<{$skin_theme}>/style.css"/>
+<!--装修公司头部开始-->
+<div class="subwd">
+<div class="companyBanner"><img src="<{$pager.img}>/<{$company.banner}>" /></div>
+<div class=" company_nav mb10">
+	<ul class="lt hoverno">
+		<li><a href="<{$company.company_url}>"<{if $request.act == 'detail'}> class="current"<{/if}>>首页</a></li>
+		<li><a href="<{link ctl='company:about' arg0=$company.company_id company=$company}>"<{if $request.act == 'about'}> class="current"<{/if}>>企业介绍</a></li>
+		<li><a href="<{link ctl='company:team' arg0=$company.company_id company=$company}>"<{if $request.act == 'team'}> class="current"<{/if}>>设计团队</a></li>
+		<li><a href="<{link ctl='company:cases' arg0=$company.company_id company=$company}>"<{if $request.act == 'cases'}> class="current"<{/if}>>装修案例</a></li>
+		<li><a href="<{link ctl='company:site' arg0=$company.company_id company=$company}>"<{if $request.act == 'site'}> class="current"<{/if}>>在建工地</a></li>
+		<li><a href="<{link ctl='company:youhui' arg0=$company.company_id company=$company}>"<{if $request.act == 'youhui'}> class="current"<{/if}>>优惠信息</a></li>
+		<li><a href="<{link ctl='company:news' arg0=$company.company_id company=$company}>"<{if $request.act == 'news'}> class="current"<{/if}>>企业新闻</a></li>
+		<li><a href="<{link ctl='company:comment' arg0=$company.company_id company=$company}>"<{if $request.act == 'comment'}> class="current"<{/if}>>业主评价</a></li>
+	</ul>
+	<div class="rt company_nav_rt">
+		<p>信誉：<{$company.score}></p>
+	</div>
+	<div class="cl"></div>
+</div>
+</div>
+<script type="text/javascript">
+(function(){
+	$("#QRimg").qrcode({width:80,height:80,correctLevel:0,text:"<{$mobile_url}>"}); 
+	})(window.KT, window.jQuery);
+</script>

@@ -2,7 +2,7 @@
 /**
  * Copy Right IJH.CC
  * Each engineer has a duty to keep the code elegant
- * $Id: shop.mdl.php 9378 2015-03-27 02:07:36Z youyi $
+ * $Id: shop.mdl.php 6243 2014-09-09 05:37:52Z maoge $
  */
 
 if(!defined('__CORE_DIR')){
@@ -138,12 +138,8 @@ class Mdl_Shop_Shop extends Mdl_Table
             $this->err->add('日志不能空', 213);
             return false;
         }
-        $sql = "UPDATE ".$this->table($this->_table)." SET `money`=`money`+{$money} WHERE shop_id='$shop_id'";
-        if($res = $this->db->Execute($sql)){
-            $audit = $money > 0 ? 1 : 0;
-            $a = array('shop_id'=>$shop_id, 'money'=>$money, 'audit'=>$audit, 'log'=>$log);
-            K::M('shop/money')->create($a);
-        }
+		$shop = K::M('shop/shop')->detail($shop_id);
+		$res = K::M('member/member')->update_money($shop['uid'],$money, $log);
         return $res;        
     }
 

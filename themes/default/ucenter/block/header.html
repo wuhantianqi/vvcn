@@ -1,3 +1,4 @@
+<{assign var="seo_sub_title" value="管理中心"}>
 <{assign var="ucenter_header" value=true}>
 <{include file="block/small-header.html"}>
 <link rel="stylesheet" type="text/css" href="%THEME%/static/css/ucenter.css">
@@ -8,43 +9,19 @@
 			<span class="rt">
                 <font class="logo_rt_icon"></font>金币：<font class="orange"><{$MEMBER.gold}></font>
                 <a href="<{link ctl='ucenter/member:gold'}>" class="green">充值金币</a>
+                积分：<font class="orange"><{$MEMBER.jifen}></font>
             </span>
             <div class="cl"></div>
 		</div>
 		<div class="nav">
 			<ul class="lt">
 				<li><a href="<{link ctl='ucenter/member:index'}>"<{if $ctlgroup=='member'}> class="on"<{/if}>>个人中心</a></li>
-				<{if $MEMBER.from=='shop'}>
-                <li><a href="<{link ctl='ucenter/shop:index'}>"<{if $ctlgroup=='shop'}> class="on"<{/if}>>商铺管理</a></li>
-                <{if $HAVE_WEIXIN}>
-                <li><a href="<{link ctl='ucenter/weixin:index'}>"<{if $ctlgroup=='weixin'}> class="on"<{/if}>>微信管理</a></li>
-                <{/if}>
-                <{elseif $MEMBER.from=='company'}>
-                <li><a href="<{link ctl='ucenter/company:index'}>"<{if $ctlgroup=='company'}> class="on"<{/if}>>公司管理</a></li>
-                <{if $HAVE_WEIXIN}>
-                <li><a href="<{link ctl='ucenter/weixin:index'}>"<{if $ctlgroup=='weixin'}> class="on"<{/if}>>微信管理</a></li>
-                <{/if}>
-                <{elseif $MEMBER.from=='designer'}>
-                <li><a href="<{link ctl='ucenter/designer:index'}>"<{if $ctlgroup=='designer'}> class="on"<{/if}>>设计师管理</a></li>
-                <{elseif $MEMBER.from=='mechanic'}>
-                <li><a href="<{link ctl='ucenter/mechanic:index'}>"<{if $ctlgroup=='mechanic'}> class="on"<{/if}>>技工管理</a></li>
-                <{elseif $MEMBER.from=='gz'}>
-                <li><a href="<{link ctl='ucenter/gz:index'}>"<{if $ctlgroup=='gz'}> class="on"<{/if}>>工长管理</a></li>
-                <{/if}>
+				
 			</ul>
 			<span class="rt">
-			<{if $request.ctl != 'ucenter/member'}>
-                <{if $MEMBER.from=='company'}>
-                <font class="nav_icon"></font><a href="<{$company.company_url}>" target="_blank">公司主页</a>
-                <{elseif $MEMBER.from=='shop'}>
-                <font class="nav_icon"></font><a href="<{link ctl='mall/shop' arg0=$shop.shop_id}>" target="_blank">店铺主页</a>
-                <{elseif $MEMBER.from=='designer'}>
-                <font class="nav_icon"></font><a href="<{link ctl='blog' arg0=$MEMBER.uid}>" target="_blank">我的博客</a>            
-                <{elseif $MEMBER.from=='mechanic'}>
-                <font class="nav_icon"></font><a href="<{link ctl='mechanic:detail' arg0=$MEMBER.uid}>" target="_blank">工人主页</a>
-                <{/if}>
-			<{/if}>
+			
             </span>
+			
 		</div>
 	</div>
 	<div class="content" id="ucenter_main_lay">

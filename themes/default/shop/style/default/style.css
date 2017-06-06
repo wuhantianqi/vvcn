@@ -42,7 +42,10 @@ p.sub_shop_tit b{ font-size:16px; color:#333; border-bottom:2px solid #fe7902; l
 .goods_tit_ul li.last{ margin-right:0px;}
 .goods_tit_ul li img{ width:68px; height:68px; border:1px solid #fff;}
 .goods_tit_ul li img:hover{border:1px solid #fe7902;}
-.goods_intro{ width:50%;}
+.goods_intro{ position:relative; width:50%;}
+.goods_intro .coDe{ position:absolute; right:40px; top:50px; width:140px; }
+.goods_intro .coDe.current{ background:#f5f5f5; }
+.goods_intro .coDe .pic.current{ background:#f5f5f5;}
 .goods_intro p.point_p{ border:1px dashed #FF9F49; background:#fdead8; padding:0px 10px; margin:5px 0px 10px 0px; font-weight:bold;}
 .point_ico{ width:17px; height:17px; background-position:-14px 0px;}
 .goods_intro p{ font-size:14px; line-height:30px;}
@@ -62,12 +65,12 @@ p.goods_buy_count a.jian{line-height:4px;}
 .buy_count_text{float:left;width:36px;height:25px;border:1px solid #e3e3e3;line-height:20px;text-align:center;}
 .goods_intro p .btn{ margin-top:10px;}
 .jh-spec dt{ font-size:14px;}
-#product_spec_ul li.sp-txt{ float:left; margin:5px 8px 5px 0px; position:relative;}
+#product_spec_ul li.sp-txt{ float:left; margin:5px 8px 5px 0px; position:relative; background:none; box-shadow:0px;}
 #product_spec_ul li.sp-txt a{ display:block; border:2px solid #ccc; padding:0px 10px;}
 #product_spec_ul li.sp-txt a:hover,#product_spec_ul li.sp-txt a.hovered{ border:2px solid #ff6600; text-decoration:none;}
 #product_spec_ul li.sp-txt i{ position:absolute; width:9px; height:9px; background:url(guige.png) no-repeat; right:0px; bottom:0px; display:none;}
 #product_spec_ul { margin-bottom:10px; overflow:hidden;}
-
+.jh-key ul li a{ margin:0px;}
 ul.mendian_list li{ border:1px solid #e0e0e0; overflow:hidden; padding:5px; margin:5px 0px; font-size:14px;}
 ul.mendian_list li a.pic img{ margin-right:10px; width:200px; height:150px;}
 ul.mendian_list li h2{ font-weight:bold;}

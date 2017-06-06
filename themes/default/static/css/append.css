@@ -40,3 +40,4 @@ dl.jh-point dd em.no { background-color: #FFE1E1; border-color: #CC6666; color:#
 .jh-promo-price { font-size: 28px; font-weight:600; line-height: 28px; height: 24px; color: #F30; margin: 2px 0; float:left; margin: 0 6px;}
 .jh-promo-time { font-size: 12px; color: #999;}
 .jh-promo div { display: inline-block;}
+.wx_login{background:url(../images/wx_login.png) no-repeat;width:150px;height:32px;display:block;}

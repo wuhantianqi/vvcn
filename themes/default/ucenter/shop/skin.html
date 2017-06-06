@@ -3,6 +3,9 @@
     <ul>
         <li><a href="<{link ctl='ucenter/shop:base'}>" >基本设置</a></li>
         <li><a href="<{link ctl='ucenter/shop:info'}>">资料设置</a></li>
+        <{if $CONFIG.domain.shop}>
+        <li><a href="<{link ctl='ucenter/shop:domain'}>">个性域名</a></li>
+        <{/if}>
         <li><a href="<{link ctl='ucenter/shop:seo'}>">SEO设置</a></li>
         <li><a href="<{link ctl='ucenter/shop:gmsm'}>">购买说明</a></li>
         <li><a href="<{link ctl='ucenter/shop/banner:index'}>">轮转广告</a></li>

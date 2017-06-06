@@ -3,7 +3,7 @@
 /**
  * Copy Right IJH.CC
  * Each engineer has a duty to keep the code elegant
- * $Id: config.php 9378 2015-03-27 02:07:36Z youyi $
+ * $Id: config.php 2531 2013-12-26 03:23:52Z zhang $
  */
 
 return array(
@@ -40,6 +40,20 @@ return array(
         'photo' => 'default/company/style/yellow/yellow.jpg',//缩略图
         'css'   => array(
                     'default/company/style/yellow/style.css'
+                    )//自动加载的CSS文件
+    ),
+	'orange'=>array(
+        'name'  => '橙色模板',//模板的中文名称
+        'photo' => 'default/company/style/orange/orange.jpg',//缩略图
+        'css'   => array(
+                    'default/company/style/orange/style.css'
+                    )//自动加载的CSS文件
+    ),
+	'new'=>array(
+        'name'  => '新模板',//模板的中文名称
+        'photo' => 'default/company/new/new.jpg',//缩略图
+        'css'   => array(
+                    'default/company/new/style.css'
                     )//自动加载的CSS文件
     ),
 );

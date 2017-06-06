@@ -3,7 +3,7 @@
  * Copy Right IJH.CC
  * Each engineer has a duty to keep the code elegant
  * Author @shzhrui<Anhuike@gmail.com>
- * $Id: article.ctl.php 10040 2015-05-05 13:21:15Z maoge $
+ * $Id: article.ctl.php 6080 2014-08-13 15:20:01Z youyi $
  */
 
 if(!defined('__CORE_DIR')){
@@ -52,6 +52,7 @@ class Ctl_Article_Article extends Ctl
         }
         $this->pagedata['items'] = $items;
         $this->pagedata['pager'] = $pager;
+        $this->pagedata['city_list'] = K::M('data/city')->fetch_all();        
         $this->tmpl = 'admin:article/article/items.html';
     }
 
@@ -115,7 +116,9 @@ class Ctl_Article_Article extends Ctl
                 $this->err->add('非法的数据提交', 201);
             }else{
                 $data['from'] = $this->article_from;
-                
+                if(CITY_ID){
+                    $data['city_id'] = CITY_ID;
+                }
                 if($article_id = K::M('article/article')->create($data)){
                     if($photos = $this->__upload()){
                         K::M('article/article')->update($article_id, $photos);
@@ -206,7 +209,7 @@ class Ctl_Article_Article extends Ctl
         }
         return $photos;      
     }
-    
+
     public function upload($article_id=0)
     {
         if($article_id = (int)$article_id){

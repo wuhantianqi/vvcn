@@ -2,7 +2,7 @@
 /**
  * Copy Right IJH.CC
  * Each engineer has a duty to keep the code elegant
- * $Id: company.php 9378 2015-03-27 02:07:36Z youyi $
+ * $Id: company.php 2378 2013-12-20 03:53:26Z $
  */
 
 if(!defined('__CORE_DIR')){
@@ -50,7 +50,7 @@ return array (
     'add' => true,
     'edit' => true,
     'html' => false,
-    'empty' => false,
+    'empty' => true,
     'show' => false,
     'list' => true,
     'type' => 'number',
@@ -150,6 +150,22 @@ return array (
     'show' => false,
     'list' => false,
     'type' => 'text',
+    'comment' => '',
+    'default' => '',
+    'SO' => false,
+  ),
+  'banner' => 
+  array (
+    'field' => 'banner',
+    'label' => 'banner图片',
+    'pk' => false,
+    'add' => true,
+    'edit' => true,
+    'html' => false,
+    'empty' => false,
+    'show' => false,
+    'list' => false,
+    'type' => 'photo',
     'comment' => '',
     'default' => '',
     'SO' => false,

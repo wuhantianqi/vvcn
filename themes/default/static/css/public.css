@@ -1,4 +1,6 @@
 body{ font-size:12px; font-family:"Microsoft YaHei","微软雅黑","宋体", Arial, sans-serif; padding:0px; margin:0px; background:#fff; color:#555; line-height:26px;}
+body.pagewd{min-width: 1200px;}
+body.smallpage{min-width: 1000px;}
 div,form,img,ul,ol,li,dl,dt,dd,h1,h2,h3,h4,h5,h6,p,i,table,tr,td,th,fieldset,label,legend,button,input{ margin:0;padding:0; font-family:"微软雅黑";}
 ul,li{list-style:none;}
 a,img,a img{border:0px;}
@@ -17,7 +19,7 @@ img{ vertical-align:top;}
 .fontcl2{ color:#fe7902;}
 .pointcl{ color:#fd0202;}
 .graycl{ color:#999;}
-.mainwd{ width:1200px; margin:0px auto;}
+.mainwd{ width:1200px; margin:0px auto;min-width: 1200px;}
 .subwd{ width:1000px;margin:0px auto;}
 .colorbg{ background-color:#f3f3f3;}
 .mb10{ margin-bottom:10px;}
@@ -36,7 +38,7 @@ input.btn{text-decoration:none; cursor:pointer;}
 .btn_main_sm{  width:80px;line-height:26px; background:#00ad28; font-size:14px;border:none; }
 .btn_sub_smler{ width:60px; line-height:20px; background:url(../images/btn_bg.jpg) center center repeat-x; font-size:12px;  border:1px solid #d36501;}
 .btn_sub_sm{ width:80px; line-height:26px;background:url(../images/btn_bg.jpg) center center repeat-x;  font-size:14px;   border:1px solid #d36501;}
-.btn_sub_big{ width:110px;line-height:36px;height:36px;background:url(../images/btn_bg.jpg) center center repeat-x;  font-size:16px;   border:1px solid #d36501;}
+.btn_sub_big{ width:110px;line-height:36px;height:36px;background:url(../images/btn_bg.jpg) center center repeat-x;  font-size:16px;   border:1px solid #d36501; }
 .btn_sub_tuan{ width:130px;line-height:36px;height:36px;background:url(../images/btn_bg.jpg) center center repeat-x;  font-size:18px;  border:1px solid #d36501;}
 .btn_sub_apply{ width:100%;line-height:32px; height:36px;background:url(../images/btn_bg.jpg) center center repeat-x; font-size:18px;  border:1px solid #d36501;}
 .btn{ display:inline-block;opacity:1;cursor:pointer; text-align:center; color:#fff;border-radius:3px; outline:none;-webkit-appearance: none;}
@@ -51,7 +53,7 @@ h3{ font-size:16px; line-height:30px; color:#333;font-weight:normal;}
 
 /*ul样式1*/
 ul.line_type li{ background:#fff; border:1px solid #e3e3e3; padding:3px; }
-ul.line_type li:hover{ border-bottom:1px solid #fe7902;}
+ul.line_type li:hover{ border:1px solid #fe7902;}
 /*ul样式1*/
 
 /*ul样式2*/

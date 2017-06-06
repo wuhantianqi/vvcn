@@ -28,8 +28,8 @@
 <td><{$item.dateline|format}></td>
 <td>
     <{link ctl="home/package" args=$item.tuan_id title="套餐设置" class="button"}>
-      <{link ctl="home/sign" args=$item.tuan_id title="报名管理" class="button"}>
-      <{link ctl="block/item:push" arg0='tuan' arg1=$item.tuan_id title="推送" load="mini:推送小区团装" class="button"}>
+    <{link ctl="home/sign" args=$item.tuan_id title="报名管理" class="button"}>
+    <{link ctl="block/item:push" arg0='tuan' arg1=$item.tuan_id title="推送" load="mini:推送小区团装" class="button"}>
     <{link ctl="home/tuan:edit" args=$item.tuan_id title="修改" class="button"}>
     <{link ctl="home/tuan:delete" args=$item.tuan_id act="mini:删除" confirm="mini:确定要删除吗？" title="删除" class="button"}>
 </td></tr>

@@ -2,7 +2,7 @@
  * Copy Right IJH.CC
  * Each engineer has a duty to keep the code elegant
  * Author shzhrui<anhuike@gmail.com>
- * $Id: widget.YMD.js 9378 2015-03-27 02:07:36Z youyi $
+ * $Id: widget.YMD.js 2034 2013-12-07 03:08:33Z langzhong $
  */
 window.KT = window.KT || { verison : "1.0a" };
 window.Widget  = window.Widget || {};

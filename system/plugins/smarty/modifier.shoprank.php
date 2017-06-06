@@ -3,7 +3,7 @@
  * Copy Right IJH.CC
  * Each engineer has a duty to keep the code elegant
  * Author shzhrui<anhuike@gmail.com>
- * $Id: modifier.shoprank.php 14553 2015-07-23 12:31:45Z maoge $
+ * $Id: modifier.shoprank.php 9335 2015-03-24 03:41:27Z youyi $
  */
 
 if(!defined('__CORE_DIR')){

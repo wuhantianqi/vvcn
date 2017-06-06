@@ -3,7 +3,7 @@
  * Copy Right IJH.CC
  * Each engineer has a duty to keep the code elegant
  * Author @shzhrui<Anhuike@gmail.com>
- * $Id: block.ctl.php 9378 2015-03-27 02:07:36Z youyi $
+ * $Id: block.ctl.php 6074 2014-08-12 17:10:33Z youyi $
  */
 
 if(!defined('__CORE_DIR')){
@@ -49,33 +49,52 @@ class Ctl_Block_Block extends Ctl
         }
     }
 
-    public function config($block_id)
-    {
-	  if($this->checksubmit()){
-		$block_id = $this->GP('block_id');
-		if(!$block_id = (int)$block_id){
-			$this->err->add('未定要管理的推荐位ID', 211);
-		}else if(!$block = K::M('block/block')->detail($block_id)){
-			$this->err->add('推荐位不存在或已经删除', 212);
-		}else if(!$data = $this->GP('data')){
-			$this->err->add('推荐位内容不存在', 213);
-		}else{
-			K::M('block/block')->update($block_id, array('tmpl'=>$data['tmpl']));
-			$this->err->add("修改推荐位模板成功");
-			$this->err->set_data('forward', '?block/block-index.html');
-		}
-	  }else{
-			if(!$block_id = (int)$block_id){
-				$this->err->add('未定要管理的推荐位ID', 211);
-			}else if(!$block = K::M('block/block')->detail($block_id)){
-				$this->err->add('推荐位不存在或已经删除', 212);
-			}else{
-				$this->pagedata['block'] = $block;
-				$this->tmpl = 'admin:block/block/config.html';
-			}
-		}
-    }
+//     public function config($block_id)
+//     {
+// 	  if($this->checksubmit()){
+// 		$block_id = $this->GP('block_id');
+// 		if(!$block_id = (int)$block_id){
+// 			$this->err->add('未定要管理的推荐位ID', 211);
+// 		}else if(!$block = K::M('block/block')->detail($block_id)){
+// 			$this->err->add('推荐位不存在或已经删除', 212);
+// 		}else if(!$data = $this->GP('data')){
+// 			$this->err->add('推荐位内容不存在', 213);
+// 		}else{
+// 			K::M('block/block')->update($block_id, array('tmpl'=>$data['tmpl']));
+// 			$this->err->add("修改推荐位模板成功");
+// 			$this->err->set_data('forward', '?block/block-index.html');
+// 		}
+// 	  }else{
+// 			if(!$block_id = (int)$block_id){
+// 				$this->err->add('未定要管理的推荐位ID', 211);
+// 			}else if(!$block = K::M('block/block')->detail($block_id)){
+// 				$this->err->add('推荐位不存在或已经删除', 212);
+// 			}else{
+// 				$this->pagedata['block'] = $block;
+// 				$this->tmpl = 'admin:block/block/config.html';
+// 			}
+// 		}
+//     }
 
+    public function config($block_id=null)
+    {
+        if($data = $this->checksubmit('data')){
+            K::M('block/block')->update($data['block_id'], array('tmpl'=>$data['tmpl']));
+            $this->err->add("修改推荐模板成功");
+        }else{
+            if(!($block_id = intval($block_id)) && !($block_id = $this->GP('block_id'))){
+                $this->err->add('未指定推荐位的ID', 211);
+            }else if(!$detail = K::M('block/block')->block_detail($block_id)){
+                $this->err->add('你要管理的推荐位不存在', 212);
+            }else{
+                $this->pagedata['detail'] = $detail;
+                $this->pagedata['tmpl'] = stripslashes($detail['tmpl']);
+                $this->tmpl = 'admin:block/block/config.html';
+            }
+        }
+    }
+    
+    
     public function code($block_id)
     {
         if(!$block_id = (int)$block_id){
@@ -84,7 +103,7 @@ class Ctl_Block_Block extends Ctl
             $this->err->add('推荐位不存在或已经删除', 212);
         }else{
             $this->pagedata['detail'] = $block;
-            $code['widget'] = '<{data id="'.$block_id.'" name="'.$block['title'].'" city_id=$request.city_id}>';
+            $code['widget'] = '<{KT id="'.$block_id.'" name="'.$block['title'].'" city_id=$request.city_id}>代码段<{/KT}>';
             $code['js'] = '<script src="'.$site['url'].'/index.php?market-block-'.$block_id.'"></script>';
             $code['widget'] = K::M('content/html')->encode($code['widget']);
             $code['js'] = K::M('content/html')->encode($code['js']);
@@ -116,6 +135,17 @@ class Ctl_Block_Block extends Ctl
         }else if(!$detail = K::M('block/block')->detail($block_id)){
             $this->err->add('推荐位不存在或已经删除', 212);
         }else if($data = $this->checksubmit('data')){
+            $zhanwei = $this->GP('zhanwei');
+            if($data['type'] == 'zhanwei'){                
+                if($attach = $_FILES['zhanwei_thumb']){
+                   if ($attach['error'] == UPLOAD_ERR_OK) {
+                        if ($a = K::M('magic/upload')->upload($attach, 'block')) {
+                            $zhanwei['thumb'] = $a['photo'];
+                        }
+                    }
+                }
+            }
+            $data['config']['zhanwei'] = $zhanwei;
             if(K::M('block/block')->update($block_id, $data)){
                 $this->err->add('修改推荐配置成功');
                 $this->err->set_data('forward', '?block/block-index.html');
@@ -123,7 +153,7 @@ class Ctl_Block_Block extends Ctl
         }else{
             $this->pagedata['detail'] = $detail;
             $this->tmpl = 'admin:block/block/edit.html';
-        }  
+        }
     }
     
     public function config2($block_id=null)

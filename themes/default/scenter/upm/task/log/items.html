@@ -1,0 +1,44 @@
+<{include file="scenter/block/header.html"}>
+<div class="ucenter_t">
+    <ul>
+        <li class="on">分销任务</li>
+     </ul>
+</div>
+<div class="ucenter_c">
+    <div class="alert alert-info">
+        <form action="" method="post">
+            <div class="tables-searchbox" id="searchSimple" >
+
+                <input type="text" class="input small" placeholder="推广员" name="SO[sales]" value="">
+                <input type="text" class="input small" placeholder="时间区间" name="SO[stime]" value="">
+                <span class="mgr5">至</span>
+                <input type="text" class="input small" placeholder="时间区间" name="SO[ltime]" value="">
+                <button type="submit" class="btn btn-primary"><i class="gicon-search white"></i>查询</button>
+            </div>
+        </form>
+</div>
+    <table width="100%" border="0" cellspacing="0" class="table">
+    <tr>
+        <th class="w-50">ID</th>
+        <th class="w-100">推广员</th>
+        <th class="w-100">推广码</th>
+        <th class="w-100">是否预约</th>
+        <th class="w-100">预约状态</th>
+        <th class="w-100">来源</th>
+        <th class="w-150">来访时间</th>
+    </tr>
+    <{foreach $items as $item}>
+    <tr>
+       <td><{$item.log_id}></td><td><{$sales_list[$item.sale_id].name}></td>
+        <td><{$item.pmid}></td><td><{if $item.yuyue_id}><a href="###">查看</a><{else}>--<{/if}></td>
+        <td><{$item.yuyue_status_title}></td>
+        <td><{if $item.wx_openid}>微信<{else}>其它<{/if}></td>
+        <td><{$detail.dateline|format:"Y-m-d H:i:s"}></td>
+    </tr>
+     <{foreachelse}>
+     <tr><td colspan="11"><p class="tips"><span class="notice">没有签到推广</span></p></td></tr>
+    <{/foreach}>
+    </table>
+	<div class="page"><{$pager.pagebar}></div>
+</div>
+<{include file="scenter/block/footer.html"}>

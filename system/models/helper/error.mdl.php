@@ -64,7 +64,7 @@ class Mdl_Helper_Error
         $objctl->pagedata['_OO_'] = 'admin:page/load.html';
         $objctl->output();      
     }
-    
+
     public function clean()
     {
         $this->_message = array();
@@ -160,10 +160,6 @@ class Mdl_Helper_Error
     {
         $request = K::$system->request;
         $objctl = &K::$system->objctl;
-        if(!is_object($objctl)){
-            Import::C(__APP__.':index');
-            $objctl = new Ctl_Index(K::$system);
-        }
         if(!$tmpl = $objctl->tmpl){
             $tmpl = $objctl->pagedata['_OO_'];
         }

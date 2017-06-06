@@ -3,7 +3,7 @@
  * Copy Right IJH.CC
  * Each engineer has a duty to keep the code elegant
  * Author shzhrui<anhuike@gmail.com>
- * $Id: file.mdl.php 9378 2015-03-27 02:07:36Z youyi $
+ * $Id: file.mdl.php 2034 2013-12-07 03:08:33Z $
  */
 
 if(!defined('__CORE_DIR')){
@@ -26,7 +26,7 @@ class Mdl_Cache_File {
     private $idx_free_pos = 48; //id 空闲链表入口地址
     private $idx_base_pos = 444; //40+20+24*16
     private $schema_struct = array('size', 'free', 'lru_head', 'lru_tail', 'hits', 'miss');
-    private $ver = '$Rev: 9378 $';
+    private $ver = '$Rev: 3 $';
     public $config = array();
 
     public function __construct($config = array()){

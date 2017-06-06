@@ -2,7 +2,7 @@
 /**
  * Copy Right IJH.CC
  * Each engineer has a duty to keep the code elegant
- * $Id: passport.ctl.php 10098 2015-05-06 14:44:00Z youyi $
+ * $Id$
  */
 
 if(!defined('__CORE_DIR')){
@@ -17,6 +17,83 @@ class Ctl_Mobile_Passport extends Ctl_Mobile
 		$pager['backurl'] = $this->mklink('mobile');
         $this->pagedata['pager'] = $pager;
         $this->tmpl = 'mobile/passport/login.html';
+    }
+
+
+    public function byphone($from)
+    {
+        if($from == 'member'){
+            if($data = $this->checksubmit('data')){
+                $session =K::M('system/session')->start();
+                if($code = $session->get('code_'.$data['phone'])){
+                    if($data['code'] == $code){
+                        if($items = K::M('member/member')->items(array('mobile'=>$data['phone']),array('uid'=>'desc'),1,1)){
+                            foreach($items as $k => $v){
+                                $uname = $v['uname'];
+                                $passwd = $v['passwd'];
+                            }
+                            if($member = $this->auth->login($uname, $passwd, 'uname', true, false)){
+                                $this->err->add("{$member[uname]}，欢迎您回来!");
+                                if(!$forward = $this->request['forward']){
+                                    $forward = K::M('helper/link')->mklink('index', array(), array(), 'base');
+                                }else if(strpos($forward, 'passport') !== false){
+                                    $forward = K::M('helper/link')->mklink('ucenter/member:index', array(), array(), 'base');
+                                }
+                                if(substr($forward, 0, 7) != 'http://'){
+                                    $forward = '/'.trim($forward, '/');
+                                }
+                                $this->err->set_data('forward', $forward);
+                            }
+                    
+                        }else{
+                            $data['uname'] = $data['phone'];
+                            $data['mail'] = $data['phone'].'@qq.com';
+                            $data['passwd'] = '123456';
+                            $data['mobile'] = $data['phone'];
+                            $data['verify'] = '2';
+                            if($detail = K::M('member/member')->items(array('mobile'=>$data['phone']))){
+								//fanxian
+                                $this->err->add('该手机号码已经被注册', 213);
+
+                            }else if($uid = K::M('member/account')->create($data)){
+								K::M('member/magic')->reg_jifen($uid);
+                                $this->err->add('恭喜您，注册会员成功');
+                                $from_list = K::M('member/member')->from_list();
+                                $account_from = $account['from'];
+                                if(!$from_list[$account_from]){
+                                    $account_from = 'member';
+                                }
+                                $forward = K::M('helper/link')->mklink('ucenter/'.$account_from.':index', array(), array(), 'base');
+                                $this->err->set_data('forward', $forward);
+                            }
+                        }
+                    }else{
+                        $this->err->add('验证码错误或者已经过期', 212);
+                    }
+                    
+                }
+            }else{
+                $this->tmpl = 'passport/byphone.html';
+            }
+        }else{
+            header('Location:'.K::M('helper/link')->mklink('passport-signup:'.$from));
+        }
+    }
+
+    public function sendsms($phone)
+    {
+        if(!$a = K::M('verify/check')->phone($phone)){
+            $this->err->add('电话号码有误', 212);
+        }else{
+            $code = rand(100000,999999);
+            $session =K::M('system/session')->start();
+            $session->set('code_'.$phone, $code,900); //15分钟缓存
+            $smsdata =  array('code'=>$code);
+            $this->err->add('恭喜您，注册会员成功');
+            if(K::M('sms/sms')->send($phone, 'login', $smsdata)){
+                $this->err->add('信息发送成功');
+            }
+        }
     }
 
     public function login()
@@ -45,6 +122,7 @@ class Ctl_Mobile_Passport extends Ctl_Mobile
 				$keep = $this->GP('keep') ? true : false;
 				$a = K::M('verify/check')->mail($uname) ? 'mail' : 'uname';
 				if($member = $this->auth->login($uname, $passwd, $a, false, $keep)){
+				    //die(var_dump($member));
 					$this->err->add("{$member['uname']}，欢迎您回来!");
 				}
 			}
@@ -71,6 +149,39 @@ class Ctl_Mobile_Passport extends Ctl_Mobile
            die;
         }     
     }
+
+	public function qqreg($access_token,$qq_app_id,$openid)
+	{
+		if($account = $this->GP('account')){
+			 if(K::M('member/qqlogin')->qqreg($this->GP('access_token'),$this->GP('qq_app_id'),$this->GP('openid'),$account['uname'],$account['passwd'])){
+				$this->err->add('恭喜您，注册会员成功');
+				$forward = K::M('helper/link')->mklink('ucenter/member:index', array(), array(), 'base');
+				$this->err->set_data('forward', $forward);
+			 }
+        }else{
+			$this->pagedata['title'] = 'QQ第三方登录';
+            $this->pagedata['access_token'] = $access_token;
+			$this->pagedata['qq_app_id'] = $qq_app_id;
+			$this->pagedata['openid'] = $openid;
+            $this->tmpl = 'mobile/passport/thirdreg.html';
+        }
+	}
+
+	public function weiboreg($openid,$access_token)
+	{
+		if($account = $this->GP('account')){
+			 if(K::M('member/weibo')->weiboreg($this->GP('openid'),$this->GP('access_token'),$account['uname'],$account['passwd'])){
+				$this->err->add('恭喜您，注册会员成功');
+				$forward = K::M('helper/link')->mklink('ucenter/member:index', array(), array(), 'base');
+				$this->err->set_data('forward', $forward);
+			 }
+        }else{
+			$this->pagedata['title'] = '微博第三方登录';
+			$this->pagedata['openid'] = $openid;
+			$this->pagedata['access_token'] = $access_token;
+            $this->tmpl = 'mobile/passport/thirdreg2.html';
+        }
+	}
     
     public function weibo()
 	{

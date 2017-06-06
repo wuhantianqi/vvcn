@@ -2,7 +2,7 @@
 /**
  * Copy Right IJH.CC
  * Each engineer has a duty to keep the code elegant
- * $Id: designer.ctl.php 10202 2015-05-13 01:54:12Z maoge $
+ * $Id$
  */
 
 if(!defined('__CORE_DIR')){
@@ -63,10 +63,10 @@ class Ctl_Mobile_Designer extends Ctl_Mobile
             $params['kw'] = $kw;
             $filter['name'] = "LIKE:%{$kw}%";
         }
-        $pager['limit'] = $limit = 10;
-        $pager['count'] = $count = 0;
         $filter['audit'] = 1;
         $filter['closed'] = 0;
+        $pager['limit'] = $limit = 10;
+        $pager['count'] = $count = 0;
         if($items = K::M('designer/designer')->items($filter, $orderby, $page, $limit, $count)){
             $pager['count'] = $count;
             $pager['pagebar'] = $this->mkpage($count, $limit, $page, $this->mklink('mobile/designer:items', array($area_id, $group_id, $order,'{page}'), $params));
@@ -76,7 +76,19 @@ class Ctl_Mobile_Designer extends Ctl_Mobile
         $this->pagedata['group_list'] = $group_list;
         $this->pagedata['order_list'] = $order_list;
         $this->pagedata['pager'] = $pager;
-        $this->tmpl = 'mobile/designer/items.html';
+        $seo = array('area_name'=>'', 'attr'=>'', 'page'=>'');
+        if($area_id){
+            $seo['area_name'] = $this->request['area_list'][$area_id]['area_name'];
+        }
+        if($group_id){
+            $seo['attr'] = $group_list[$group_id];
+        }
+        if($page > 1){
+            $seo['page'] = $page;
+        }
+        $this->seo->init('designer', $seo);
+        $this->tmpl = 'mobile/designer/items.html'; 
+
     }
 
 	public function detail($uid)
@@ -88,6 +100,7 @@ class Ctl_Mobile_Designer extends Ctl_Mobile
         $pager = array('type'=>'about');
 		$pager['backurl'] = $this->mklink('mobile/designer');
 		$this->pagedata['pager'] = $pager;
+        $this->_designer_seo($designer);
 		$this->tmpl = 'mobile/designer/detail.html';
 	}
 
@@ -104,6 +117,7 @@ class Ctl_Mobile_Designer extends Ctl_Mobile
         }
 		$pager['backurl'] = $this->mklink('mobile/designer',array('designer_id'=>$designer_id));
 		$this->pagedata['pager'] = $pager;
+        $this->_designer_seo($designer);
 		$this->tmpl = 'mobile/designer/cases.html';
 	}
 
@@ -120,6 +134,7 @@ class Ctl_Mobile_Designer extends Ctl_Mobile
         }
 		$pager['backurl'] = $this->mklink('mobile/designer',array($designer_id));
 		$this->pagedata['pager'] = $pager;
+        $this->_designer_seo($designer);
 		$this->tmpl = 'mobile/designer/article.html';
 	}
 
@@ -136,6 +151,7 @@ class Ctl_Mobile_Designer extends Ctl_Mobile
         $pager['backurl'] = $this->mklink('mobile/designer',  array($detail['uid']));
         $this->pagedata['pager'] = $pager;
         $this->pagedata['detail'] = $detail;
+        $this->_designer_seo($designer);
         $this->tmpl = 'mobile/designer/articleinfo.html';     
     }
 
@@ -181,4 +197,10 @@ class Ctl_Mobile_Designer extends Ctl_Mobile
         }
 	}
 
+    protected function _designer_seo($designer)
+    {
+        $seo = array('designer_name'=>$designer['name'], 'uname'=>$designer['name'], 'designer_school'=>$designer['school'], 'designer_slogan'=>$designer['slogan'], 'designer_desc'=>'');
+        $seo['designer_desc'] = K::M('content/text')->substr(K::M('content/html')->text($designer['about'], true), 0, 200);
+        $this->seo->init('designer_detail', $seo);        
+    }
 }

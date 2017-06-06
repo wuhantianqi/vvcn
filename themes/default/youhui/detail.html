@@ -12,15 +12,18 @@
 	<!--左边内容开始-->
 	<div class="sub_activity_lt lt">
 		<div class="mb10 area sub_activity pding">
-			<h2 class="title"><b><{$detail.title}></b></h2>
+			<h2 class="title"><b><{$detail.title}></b><div class="coDe">
+			<div class="pic">[ 手机扫码 ]<img src="%THEME%/static/images/codeico.jpg" /></div>
+			<div class="show" id="QRimg" style="padding:5px;height:150px;width:150px;" val="<{$mobile_url}>"></div>
+			</div></h2>
 			<div class="sub_activity">
 				<a class="lt pic"><img src="<{$pager.img}>/<{$detail.photo}>" /></a>
-				<div class="sub_activity_rt  rt">
+				<div class="sub_activity_rt rt">
                     <p class="title"><{if $detail.ltime>time() && $detail.stime<time()}><span class="ico_list sub_youhui_time"></span><{else}><span class="ico_list sub_over_time_ico"></span><{/if}><span  remaintime="<{$detail.ltime}>"></span></p>
 					<p>开始时间：<{$detail.stime|format:'Y-m-d'}></p>
 					<p>结束时间：<{$detail.ltime|format:'Y-m-d'}></p>
 					<p>所属公司：<{$company.name}></p>
-					<h2><{if $detail.ltime>time() && $detail.stime<time()}><a href="<{link ctl='youhui:sign' arg0=$detail.youhui_id http='empty'}>"  mini-load="我要报名" mini-width="500"  class="btn btn_sub_tuan">我要报名</a>
+					<h2><{if $detail.ltime>time()}><a href="<{link ctl='youhui:sign' arg0=$detail.youhui_id http='ajax'}>"  mini-load="我要报名" mini-width="500"  class="btn btn_sub_tuan">我要报名</a>
                     <{else}><a href="javascript:;" class="btn btn_over_tuan">报名已结束</a>
                     <{/if}><span>报名人数：<b class="fontcl2"><{$detail.sign_num}></b>名</h2>
 				</div>
@@ -61,8 +64,16 @@
 </div>
 <script type="text/javascript" src="<{$pager.res}>/script/cloud-zoom.js"></script>
 <script type="text/javascript" src="<{$pager.res}>/script/raty/jquery.raty.js"></script>
+<script type="text/javascript" src="<{$pager.res}>/script/jquery.qrcode.min.js"></script>
 <script type="text/javascript">
+$(".coDe ").mouseover(function(){
+	$(this).find(".show").show();
+}).mouseleave(function(){
+	$(this).find(".show").hide();
+});
+
 (function(K, $){
+	$("#QRimg").qrcode({width:150,height:150,correctLevel:0,text:"<{$mobile_url}>"}); 
     $(function(){
     var dateTime = new Date();
     var difference = dateTime.getTime() - <{$pager.dateline}>*1000;	

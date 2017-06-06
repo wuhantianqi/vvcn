@@ -1,0 +1,34 @@
+<{include file="scenter/block/header.html"}>
+<div class="ucenter_t">
+    <ul><li class="on">项目列表</li></ul>
+</div>
+<div class="ucenter_c">
+    <table width="100%" border="0" cellspacing="0" class="table">
+    <tr>
+        <th class="w-50">ID</th>
+        <th class="w-150">项目名称</th>
+        <th>施工小区</th>
+        <th class="w-200">装修公司</th>
+        <th class="w-50">装修进度</th>
+        <th class="w-150">开工时间</th>
+        <th class="w-100">操作</th>
+    </tr>
+    <{foreach $items as $item}>
+    <tr>
+        <td><{$item['site_id']}></th>
+        <td><{$item['title']}></td>
+        <td><{$item['home_name']}></td>
+        <td><{$item['company']}></td>
+        <td><{$steps[$item['status']]}></td>
+        <td><{$item['dateline']|format:'Y年m月d日 H:i:s'}></td>
+        <td><a class='pbtn' href="<{link ctl='scenter/company/zxpm:detail' arg0=$item.site_id}>">查看施工进度</a></td>
+    </tr>
+    <{foreachelse}>
+     <tr><td colspan="10"><p class="tips"><span class="notice">没有数据</span></p></td></tr>
+    <{/foreach}>
+
+
+    </table>
+	<div class="page"><{$pager.pagebar}></div>
+</div>
+<{include file="scenter/block/footer.html"}>

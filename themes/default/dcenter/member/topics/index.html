@@ -1,0 +1,45 @@
+<{include file="dcenter/block/header.html"}>
+<div class="ucenter_t">
+    <ul>
+        <li class="on">我的装修贷款</li>
+    </ul>
+</div>
+<div class="ucenter_c">
+    <table width="100%" border="0" cellspacing="0" class="table">
+    <tr>
+        <th class="w-80">ID</th>
+        <th class="w-100">称呼</th>
+        <th>电话</th>
+        <th class="w-100">银行卡</th>
+        <th class="w-50">贷款金额</th>
+        <th class="w-150">贷款周期</th>
+        <th class="w-100">操作</th>
+    </tr>
+    <{foreach $items as $item}>
+    <tr>
+        <td class="left"><label><{$item.topics_id}><label></td>
+        <td><{$item.name}></td><td><{$item.mobile}></td>
+        <td><{$item.bank_card}></td>
+        <td><{$item.money}></td>
+        <td>
+        	<{if $item.zq==60}>5年
+        	<{elseif $item.zq == 48}>4年
+        	<{elseif $item.zq == 36}>3年
+        	<{elseif $item.zq == 24}>2年
+        	<{elseif $item.zq == 18}>1年半
+        	<{elseif $item.zq == 12}>1年
+        	<{elseif $item.zq == 6}>半年
+        	<{elseif $item.zq == 3}>3个月
+        	<{/if}>
+        </td>
+        <td>
+            <a href="<{link ctl='dcenter/member:topicsdetail' arg0=$item.topics_id}>" class="pbtn">查看</a>
+        </td>
+    </tr>
+    <{foreachelse}>
+     <tr><td colspan="20"><p class="tips"><span class="notice">没有数据</span></p></td></tr>
+    <{/foreach}>
+    </table>
+    </form>
+</div>
+<{include file="dcenter/block/footer.html"}>

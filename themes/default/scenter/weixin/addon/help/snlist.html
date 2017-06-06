@@ -1,0 +1,24 @@
+<{include file="scenter/block/header.html"}>
+<div class="ucenter_t">
+   
+    <ul>
+        <li class="on">微助力成员管理</li>
+    </ul>
+    
+</div>
+<div class="ucenter_c">
+    <table width="100%" border="0" cellspacing="0" class="table">
+     <tr><th>用户昵称</th><th>头像</th><th class="w-100">助力时间</th></tr>
+    <{foreach $items as $item}>
+        <tr><td><{$item.nickname}></td>
+        <td><img src="<{$item.img}>" width="100" height="100" /></td>
+        <td><{$item.dateline|format}></td>
+         
+        </tr>
+   	 <{foreachelse}>
+     <tr><td colspan="20"><p class="text-align tip-notice">没有数据</p></td></tr>
+    <{/foreach}>
+    <tr><td colspan="10"><div class="page"><{$pager.pagebar}></div></td></tr>
+    </table>
+</div>
+<{include file="scenter/block/footer.html"}>

@@ -2,7 +2,7 @@
 /**
  * Copy Right IJH.CC
  * Each engineer has a duty to keep the code elegant
- * $Id: integral.mdl.php 9378 2015-03-27 02:07:36Z youyi $
+ * $Id$
  */
 
 class Mdl_Member_Integral extends Mdl_Table

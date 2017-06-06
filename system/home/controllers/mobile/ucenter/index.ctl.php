@@ -2,7 +2,7 @@
 /**
  * Copy Right IJH.CC
  * Each engineer has a duty to keep the code elegant
- * $Id: index.ctl.php 9372 2015-03-26 06:32:36Z youyi $
+ * $Id$
  */
 
 if(!defined('__CORE_DIR')){
@@ -12,9 +12,19 @@ class Ctl_Mobile_Ucenter_Index extends Ctl_Mobile_Ucenter
 {
 	public function index()
 	{
-		$pager['backurl'] = $this->mklink('mobile');
-		$this->pagedata['pager'] = $pager;
-		$this->tmpl = 'mobile/ucenter/index.html';
+	   //die(var_dump($this->MEMBER['from']));
+	    if(in_array($this->MEMBER['from'],array('shop','company'))){
+	        $url = $this->mklink('mobile/scenter/index',array(),array(),'base');
+            Header("Location:$url");
+        }else if(in_array($this->MEMBER['from'],array('designer','gz','mechanic'))){
+            $url = $this->mklink('mobile/dcenter/index',array(),array(),'base');
+            Header("Location:$url");
+        }else if ($this->MEMBER['from']=='member'){
+	        $pager['backurl'] = $this->mklink('mobile');
+	        $this->pagedata['pager'] = $pager;
+	        $this->tmpl = 'mobile/ucenter/index.html';
+	    }
+		
 	}
 
 	public function info()
@@ -32,7 +42,9 @@ class Ctl_Mobile_Ucenter_Index extends Ctl_Mobile_Ucenter
 			if (K::M('member/member')->update($this->uid, $account)) {
                 if($account['from'] == 'designer'){
                     K::M('designer/designer')->create(array('uid'=>  $this->uid,'city_id'=>$this->MEMBER['city_id']),null,true);
-                }
+                }else if($account['from'] == 'gz'){
+					K::M('gz/gz')->create(array('uid'=>$this->uid,'city_id'=>$this->MEMBER['city_id']),null,true);
+				}
                 $this->err->add('更新个人资料成功');
             }
         }
@@ -53,6 +65,7 @@ class Ctl_Mobile_Ucenter_Index extends Ctl_Mobile_Ucenter
                 $this->err->add('两次输入的密码不相同', 212);
             }else if($this->auth->update_passwd($account['passwd'], false)){
                 $this->err->add('修改密码成功');
+				$this->err->set_data('forward', $this->mklink('mobile/ucenter'));
             }
         }else{
 			$pager['backurl'] = $this->mklink('mobile/ucenter');
@@ -71,13 +84,35 @@ class Ctl_Mobile_Ucenter_Index extends Ctl_Mobile_Ucenter
             }else if($mail = K::M('member/account')->check_mail($account['new_mail'])){
                 if($this->auth->update_mail($mail, false)){
                     $this->err->add('修改邮箱成功');
+					$this->err->set_data('forward', $this->mklink('mobile/ucenter'));
                 }
             }
         }else{
 			$pager['backurl'] = $this->mklink('mobile/ucenter');
 			$this->pagedata['pager'] = $pager;
             $this->tmpl = 'mobile/ucenter/mail.html';
-        }          
+        }
+    }
+
+	public function mobile($loc=null)
+    {
+        if($loc == 'send'){
+            if(K::M('member/magic')->send_verify_mobile($this->uid)){
+                $this->err->add('验证码已经发出，请注意查收');
+            }
+        }else if($data = $this->checksubmit('data')){
+            if(!$data['code']) {
+                $this->err->add('验证码不能为空', 201);
+            }else if ($verify = K::M('member/member')->items(array('mobile'=>$this->MEMBER['mobile'],'verify'=>'>=:2'))) {
+				$this->err->add('该号码已经被验证', 202);
+            }else if (K::M('member/magic')->verify_mobile($this->uid,$data['code'])) {
+                K::M('system/integral')->commit('mobile', $this->MEMBER, '手机验证通过');
+                $this->err->add('恭喜您，验证手机成功');
+            }
+        } else {
+			$pager['backurl'] = $this->mklink('mobile/ucenter');
+            $this->tmpl = 'mobile/ucenter/mobile.html';
+        }
     }
 
 	public function appointment()
@@ -88,7 +123,7 @@ class Ctl_Mobile_Ucenter_Index extends Ctl_Mobile_Ucenter
 		}else{
 			$temp = 'ucenter_'.$form;
 			$form_list = $this->$temp();
-			$filter = array('uid'=>$form_list['uid'], 'closed'=>0);
+			$filter = array('company_id'=>$form_list['company_id'], 'closed'=>0);
 			if($items = K::M($form.'/yuyue')->items($filter)){
 				$this->pagedata['items'] = $items;
 			}

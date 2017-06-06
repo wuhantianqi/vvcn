@@ -1,0 +1,57 @@
+<{assign var="tpl_page_title" value="优惠券下载列表"}>
+<{include file="mobile/block/header.html"}>
+<header class="control">
+	<i class="left"><a href="<{if $pager.backurl}><{$pager.backurl}><{else}><{link ctl='mobile/index'}><{/if}>" id="gobackIco"></a></i>
+    <div class="title">优惠券下载列表</div>
+    <i class="right"></i>
+</header>
+
+
+<section id="" class="page_center_box">
+	 <{if !$items}> <div class="loginInfor_tishi">暂无记录信息</div><{/if}>
+    
+    <{foreach $items as $item}>
+    <div class="mb10 loginInfor_mtn">
+		<div class="loginInfor">
+        	<div class="loginIf_list">
+				<div class="fl ifIco"><i class="icco icco6"></i> </div>
+				<div class="ifInput">
+					优惠券：<{$coupon_list[$item.coupon_id].title|default:'--'}>（<{$item.number}>）
+				</div>
+				<div class="clear"></div>
+			</div>
+			<div class="loginIf_list">
+				<div class="fl ifIco"><i class="icco icco1"></i> </div>
+				<div class="ifInput">
+					姓名：<{$item.contact}>
+				</div>
+				<div class="clear"></div>
+			</div>
+			<div class="loginIf_list">
+				<div class="fl ifIco"><i class="icco icco2"></i> </div>
+				<div class="ifInput">
+					电话：<{if $group.priv.show_yuyue_mobile > 0}><{$item.mobile}><{else}><b class="pointcl"><{$item.mobile|cutstr:6}></b><{/if}>
+				</div>
+				<div class="clear"></div>
+			</div>
+			<div class="loginIf_list">
+				<div class="fl ifIco"><i class="icco icco3"></i> </div>
+				<div class="ifInput">
+					下载时间：<{$item.dateline|format}>（<{if $item.used}><b>已用</b><{else}><b>未用</b><{/if}>）
+				</div>
+				<div class="clear"></div>
+			</div>
+			<div class="loginIf_list">
+				<div class="fl ifIco"><i class="icco icco5"></i> </div>
+				<div class="ifInput">
+					预约状态：<{$item.status_title}>
+				</div>
+				<div class="clear"></div>
+			</div>
+		</div>
+	</div>
+    <{/foreach}>
+</section>
+
+</body>
+</html>

@@ -2,7 +2,7 @@
 /**
  * Copy Right IJH.CC
  * Each engineer has a duty to keep the code elegant
- * $Id: news.ctl.php 14894 2015-08-10 06:55:27Z maoge $
+ * $Id: news.ctl.php 6077 2014-08-13 13:48:56Z youyi $
  */
 
 if(!defined('__CORE_DIR')){
@@ -24,7 +24,9 @@ class Ctl_Company_News extends Ctl
             if(is_numeric($SO['audit'])){$filter['audit'] = $SO['audit'];}
         }
         $companyIds = array();
-        
+        if(CITY_ID){
+            $filter['city_id'] = CITY_ID;
+        }
         if($items = K::M('company/news')->items($filter, null, $page, $limit, $count)){
             foreach($items as $k=>$v){
             
@@ -127,7 +129,9 @@ class Ctl_Company_News extends Ctl
             if($items = K::M('company/news')->items_by_ids($ids)){
                 $aids = $company_ids = array();
                 foreach($items as $v){
-                    
+                    if(CITY_ID && CITY_ID != $v['city_id']){
+                        continue;
+                    }
                     $aids[$v['news_id']] = $v['news_id'];
                     $company_ids[$v['company_id']] = $v['company_id'];
                 }

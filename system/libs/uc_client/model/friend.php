@@ -4,7 +4,7 @@
 	[UCenter] (C)2001-2099 Comsenz Inc.
 	This is NOT a freeware, use is subject to license terms
 
-	$Id: friend.php 9378 2015-03-27 02:07:36Z youyi $
+	$Id: friend.php 2034 2013-12-07 03:08:33Z $
 */
 
 !defined('IN_UC') && exit('Access Denied');

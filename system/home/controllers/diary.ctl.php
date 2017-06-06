@@ -2,7 +2,7 @@
 /**
  * Copy Right IJH.CC
  * Each engineer has a duty to keep the code elegant
- * $Id: diary.ctl.php 14553 2015-07-23 12:31:45Z maoge $
+ * $Id$
  */
 
 class Ctl_Diary extends Ctl
@@ -86,21 +86,8 @@ class Ctl_Diary extends Ctl
         $this->pagedata['type_all_link'] = $type_all_link;
         $this->pagedata['way_all_link'] = $way_all_link;
         $this->pagedata['pager'] = $pager;
-        $seo = array('status'=>'', 'attr'=>'', 'page'=>($page > 1) ? $page : '');
-        if($status){
-            $seo['status'] = $status_list[$status]['title'];
-        }
-        $attr = array();
-        if($type_id){
-            $attr[] = $type_list[$type_id]['title'];
-        }
-        if($type_id){
-            $attr[] = $way_list[$way_id]['title'];
-        }
-        if($attr){
-            $seo['attr'] = implode('_', $attr);
-        }
-        $this->seo->init('diary_items', $seo);
+        
+        $this->seo->init('diary', $seo);
         $this->tmpl = 'diary/items.html';
 	}
 

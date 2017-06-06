@@ -1,21 +1,42 @@
 <{assign var="tpl_page_title" value="在建工地列表"}>
-<{include file="mobile/block/header.html"}>
-<div class="mb10"></div>
-<ul class="app_menu site_menu">
-    <{foreach $items as $item}>
-    <li>
-        <a href="<{link ctl='mobile/site:detail' arg0=$item.site_id}>">
-        <img src="<{$pager.img}>/<{$item.thumb}>" class="lt pic" />
-        <h2><{$item.title|cutstr:15}></h2>
-        <p class="site_p"><span class="lt">进度：<font class="site_step"><{$item.status_title|default:'等待开工'}></font></span><span class="rt">&gt;</span></p>
-        <{if $company_list}>
-            <p class="nowrap">承接公司：<{$company_list[$item.company_id].name}></p>
-        <{elseif $designer_list}>
-            <p class="nowrap">设计师:<{$designer_list[$item.uid].name}> </p>
-        <{/if}>
-        </a>
-    </li>          
-    <{/foreach}>
+<{include file="mobile/block/header.html"}> 
+<!--<script language="javascript" type="text/javascript" src="/themes/default/mobile/static/js/web.js"></script> 
+<script>
+	
+	navigator.geolocation.getCurrentPosition(function (position) {
+
+		var x_pi = 3.14159265358979324 * 3000.0 / 180.0;
+		var x = position.coords.longitude;
+		var y = position.coords.latitude;
+		var z = Math.sqrt(x * x + y * y) + 0.00002 * Math.sin(y * x_pi);
+		var theta = Math.atan2(y, x) + 0.000003 * Math.cos(x * x_pi);
+		var bd_lon = z * Math.cos(theta) + 0.0065;
+		var bd_lat = z * Math.sin(theta) + 0.006;
+		var link = "<{link ctl='mobile/index:dingwei'}>";
+		$.post(link,{lat: bd_lat, lon: bd_lon}, function(ret){														
+		});	
+	});
+</script>
+-->
+<section id="" class="page_center_box mt10">
+<ul class="decorator_list_box">
+	<{foreach $items as $item}>
+	<li class="decorator_list"><a href="<{link ctl='mobile/site:detail' arg0=$item.site_id}>">
+		<div class="fl img"><img src="<{$pager.img}>/<{$item.thumb}>"></div>
+		<div class="wz">
+			<p class="black3"><{$item.title}></p>
+			<p><span class="black9">进度：</span><font class="site_step"><{$item.status_title|default:'等待开工'}></font></p>
+		<{if $company_list}>
+		<p class="nowrap"><span class="black9">承接公司：</span><{$company_list[$item.company_id].name}></p>
+		<{elseif $gz_list}>
+		<p class="nowrap"><span class="black9"> 承接工长：</span><{$gz_list[$item.uid].name}></p>
+		<{elseif $designer_list}>
+		<p class="nowrap"><span class="black9">设计师:</span><{$designer_list[$item.uid].name}> </p>
+		<{/if}> 
+		</div>
+		<div class="clear"></div>
+		</a> </li>
+	<{/foreach}>
 </ul>
 <div class="page"><{$pager.pagebar}></div>
-<{include file="mobile/block/footer.html"}>
+<{include file="mobile/block/footer.html"}> 

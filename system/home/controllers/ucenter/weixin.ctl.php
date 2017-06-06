@@ -2,7 +2,7 @@
 /**
  * Copy Right IJH.CC
  * Each engineer has a duty to keep the code elegant
- * $Id: weixin.ctl.php 9817 2015-04-22 08:40:20Z wanglei $
+ * $Id$
  */
 
 if(!defined('__CORE_DIR')){
@@ -27,7 +27,7 @@ class Ctl_Ucenter_Weixin extends Ctl_Ucenter
     {
         $weixin = $this->ucenter_weixin();
         if($data = $this->checksubmit('data')){
-            if(!$data = $this->check_fields($data, 'wx_name,type,weixin,wx_sid,wx_type,appid,secret')){
+            if(!$data = $this->check_fields($data, 'wx_name,type,weixin,wx_sid,type,appid,secret')){
                 $this->err->add('非法的数据提交', 211);
             }else{
                 if($attach = $_FILES['weixin_face']){
@@ -57,7 +57,7 @@ class Ctl_Ucenter_Weixin extends Ctl_Ucenter
 
     public function config()
     {
-       //$weixin = $this->ucenter_weixin();
+       $weixin = $this->ucenter_weixin();
        $this->pagedata['wechat_token'] = md5(__CFG::SECRET_KEY.__CFG::Authorize);
        $this->tmpl = 'ucenter/weixin/config.html'; 
     }

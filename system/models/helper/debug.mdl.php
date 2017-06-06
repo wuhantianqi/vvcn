@@ -1,7 +1,7 @@
 <?php
 /**
  * Copy Right IJH.CC
- * $Id: debug.mdl.php 9378 2015-03-27 02:07:36Z youyi $
+ * $Id$
  */
 
 class Mdl_Helper_Debug extends Model
@@ -29,7 +29,7 @@ class Mdl_Helper_Debug extends Model
         }
         //以后添加调试转出模板
         echo '<div id="__SYSTEMDEBUG__" style="background-color:#FFFFFF;border:2px dashed #FF3300;padding:5px;overflow-x:auto;overflow-y:scroll;height:400px;display:none;position: fixed;right:0px;bottom:10px;z-index:100;">';
-        echo "<h4>江湖信息科技系统框架调试信息</h4><hr />\n";        
+        echo "<h4>江湖信息科技系统框架调试信息</h4><hr />\n";
         echo "<pre>\n+------------------------------------------------------------------------+\n";
         //echo '系统级运行时间:'.xdebug_time_index()."秒\n";
         echo '框架级运行时间:'.$this->runtime()."秒\n";

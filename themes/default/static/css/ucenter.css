@@ -118,7 +118,7 @@ body{overflow-y:scroll;}
 .ucenter_t ul li a{color:#666;}
 .ucenter_t .r{float:right;margin-right:10px;}
 .ucenter_lay .personal_menu .on{border-left:2px solid #FD6596;background:#FFF;border-top:1px solid #D5D5D5;border-bottom:1px solid #D5D5D5;width:148px;height:28px;line-height:28px;}
-
+.ucenter_t .r .btn-sm{ background:#ff4400; height:30px; margin-top:5px; line-height:30px; padding:0px 10px;}
 .w1100{width:1100px;margin: 0 auto;zoom: 1;}
 .tip-commont{font-size:12px;color: #999;margin-left: 10px;line-height: 20px;}
 .table .btn_pay, .table .btn_ship, .table .btn_cancel, .table .btn_pay{
@@ -240,3 +240,31 @@ p.refresh span{ line-height:26px; color:red;}
 p.de_refresh a{ display:inline-block; width:200px;}
 p.de_refresh span{ margin-left:10px;}
 .template_list li img{ border:1px solid #e0e0e0;}
+
+.alert{ padding:10px;}
+.alert-info{ border-left:2px solid #67a727; background:#d7ecc2;}
+.btn-primary{ background:#ff4400; padding:5px 10px; border:none; border-radius:3px;}
+
+.cardYan{ margin:10px; padding:10px; background:#fafafa; border:1px solid #f0f0f0;}
+.cardYan .btn{ width:100px; background:#ff6b23; height:32px; margin-left:10px;}
+.cardYan .text{ width:300px;}
+.index_all{border:1px solid #dddddd; padding:10px; margin-bottom:10px; font-family:"微软雅黑" !important;}
+
+/*商家管理中心样式*/
+li.menu font.sel_menu_open_icon{ background:url(../images/ucenter/scenterico.png)  -33px -27px no-repeat;}
+font.sel_index_c_lt_icon1{height:20px; width:10px; background:url(../images/ucenter/scenterico.png) -6px -76px no-repeat;padding-left:8px;}
+font.sel_index_c_lt_icon2{height:20px; width:10px; background:url(../images/ucenter/scenterico.png) -6px -51px no-repeat;padding-left:8px;}
+font.sel_index_c_lt_icon3{height:20px; width:10px; background:url(../images/ucenter/scenterico.png) -33px -76px no-repeat;padding-left:8px;}
+font.sel_index_c_rt_icon1{height:20px; width:10px; background:url(../images/ucenter/scenterico.png) -6px -98px no-repeat;padding-left:8px;}
+font.sel_index_c_rt_icon2{height:20px; width:10px; background:url(../images/ucenter/scenterico.png) -33px -96px no-repeat;padding-left:8px;}
+
+
+/*服务商管理中心样式*/
+li.menu font.facil_menu_open_icon{ background:url(../images/ucenter/dcenterrico.png)  -33px -27px no-repeat;}
+font.facil_index_c_lt_icon1{height:20px; width:10px; background:url(../images/ucenter/dcenterrico.png) -6px -76px no-repeat;padding-left:8px;}
+font.facil_index_c_lt_icon2{height:20px; width:10px; background:url(../images/ucenter/dcenterrico.png) -6px -51px no-repeat;padding-left:8px;}
+font.facil_index_c_lt_icon3{height:20px; width:10px; background:url(../images/ucenter/dcenterrico.png) -33px -76px no-repeat;padding-left:8px;}
+font.sel_index_c_rt_icon1{height:20px; width:10px; background:url(../images/ucenter/dcenterrico.png) -6px -98px no-repeat;padding-left:8px;}
+font.sel_index_c_rt_icon2{height:20px; width:10px; background:url(../images/ucenter/dcenterrico.png) -33px -96px no-repeat;padding-left:8px;}
+
+.change_wd a{ display:inline-block; height:30px; line-height:30px; margin-top:10px; margin-right:20px; background:#feeacb; border-radius:3px; border:1px solid #ffd699; padding:0px 10px;}

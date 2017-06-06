@@ -22,7 +22,9 @@
 <tr><th><span class="red">*</span>邮箱：</th><td><input type="text" name="data[mail]" value="<{$detail.mail}>" class="input w-200"/></td></tr>
 <tr><th><span class="red">*</span>密码：</th><td><input type="text" name="data[passwd]" value="******" class="input w-200"/><span class="tip-comment">不想修改密码保持不变</span></td></tr>
 <tr><th>手机：</th><td><input type="text" name="data[mobile]" value="<{$detail.mobile}>" class="input w-200"/></td></tr>
+<{if $detail.from == 'member'}>
 <tr><th><span class="red">*</span>类型：</th><td><select name="data[from]" class="w-100"><{widget id="member/from" value=$detail.from}></select></td>
+<{/if}>
 <tr><th>等级：</th><td><select name="data[group_id]" class="w-100"><{widget id="member/group" from=$detail.from value=$detail.group_id}></select></td>
 <tr><th>生日：</th><td><{YMD name="data" Y=$detail.Y M=$detail.M D=$detail.D}></td></tr>
 <tr><th>真实姓名：</th><td><input type="text" name="data[realname]" value="<{$detail.realname}>" class="input w-200"/></td></tr>

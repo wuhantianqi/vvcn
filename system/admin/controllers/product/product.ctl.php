@@ -2,7 +2,7 @@
 /**
  * Copy Right IJH.CC
  * Each engineer has a duty to keep the code elegant
- * $Id: product.ctl.php 10387 2015-05-21 18:29:31Z maoge $
+ * $Id: product.ctl.php 5867 2014-07-12 02:04:39Z youyi $
  */
 
 if(!defined('__CORE_DIR')){
@@ -33,7 +33,9 @@ class Ctl_Product_Product extends Ctl
             }
         }
         $filter['closed'] = 0;
-		
+		if(CITY_ID){
+			$filter['city_id'] = CITY_ID;
+		}
         if($items = K::M('product/product')->items($filter, null, $page, $limit, $count)){
         	$pager['count'] = $count;
         	$pager['pagebar'] = $this->mkpage($count, $limit, $page, $this->mklink(null, array('{page}')), array('SO'=>$SO));
@@ -90,7 +92,9 @@ class Ctl_Product_Product extends Ctl
                         $data = array_merge($data, $photos);
                     }
                 }
-				
+				if(CITY_ID){
+					$data['city_id'] = CITY_ID;
+				}
                 $data['shop_id'] = $shop_id;
                 $data['city_id'] = $shop['city_id'];
                 if($fields = K::M('product/fields')->check_fields($fields)){

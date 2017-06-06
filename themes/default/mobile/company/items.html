@@ -1,60 +1,120 @@
 <{assign var="tpl_page_title" value="装修公司列表"}>
 <{include file="mobile/block/header.html"}>
-<div class="choose_menu">
-    <ul>
-        <li>
-            <div class="choose_menu_cont" id="choose_menu_cont1">
-                <aa href="#"><{if $pager.area_id}><{$area_list[$pager.area_id].area_name}><{else}>全部区域<{/if}><span class="app_ico"></span></aa>
-                <div class="sub_choose_menu" id='sub_choose_menu1'>
-                    <ul>
-                        <li><a href="<{link ctl='mobile/company:items' arg0=0 arg1=$pager.group_id arg2=$pager.order arg3=1}>">全部区域</a></li>
-                         <{foreach $area_list  as $k=>$v}>
-                        <li><a href="<{link ctl='mobile/company:items' arg0=$k arg1=$pager.group_id arg2=$pager.order arg3=1}>"><{$v.area_name}></a></li>
-                         <{/foreach}>
-                    </ul>
-                </div>
-            </div>
-        </li>
-        <li>
-            <div class="choose_menu_cont" id="choose_menu_cont1">
-                <aa href="#"><{if $pager.group_id}><{$group_list[$pager.group_id]}><{else}>全部分类<{/if}><span class="app_ico"></span></aa>
-                <div class="sub_choose_menu" id='sub_choose_menu1'>
-                    <ul>
-                        <li><a  href="<{link ctl='mobile/company:items' arg0=$pager.area_id arg1=0 arg2=$pager.order arg3=1}>">全部分类</a></li>
-                         <{foreach $group_list  as $k=>$v}>
-                        <li><a href="<{link ctl='mobile/company:items' arg0=$pager.area_id arg1=$k arg2=$pager.order arg3=1}>"><{$v}></a></li>
-                         <{/foreach}>
-                    </ul>
-                </div>
-            </div>
-        </li>       
-        <li>
-            <div class="choose_menu_cont">
-                <aa href="#"><{if $pager.order}><{$order_list[$pager.order]}><{else}>默认排序<{/if}><span class="app_ico"></span></aa>
-                <div class="sub_choose_menu">
-                    <ul>
-                        <{foreach $order_list as $k=>$v}>
-                        <li><a  href="<{link ctl='mobile/company:items' arg0=$pager.area_id arg1=$pager.group_id arg2=$k arg3=1}>"><{$v}></a></li>
-                        <{/foreach}>
-                    </ul>
-                </div>
-            </div>
-        </li>
-    </ul>
-    <div class="cl"></div>
+<div id="topSearch">
+	<div class="search_box">
+		<form action="<{link ctl='mobile/company'}>" method="post">
+			<input type="text" name="kw" class="lt txt" placeholder="搜装修公司"  value="<{$pager.sokw}>" />
+			<input type="submit" value="搜装修公司" class="btn" />
+			<div class="cl"></div>
+		</form>
+	</div>
 </div>
-<ul class="app_menu">
-    <{foreach $items as $item}>
-        <li>
-            <a href="<{link ctl='mobile/company' arg0=$item.company_id}>">
-            <img src="<{$pager.img}>/<{$item.thumb}>" class="lt pic" />
-            <h2><{$item.name}></h2>
-			<p class="nowrap">口号：<{$item.slogan}></p>
-            <p class="nowrap"><span>案例(<font class="fontcl2"><{$item.case_num}></font>)</span><span>在建工地(<font class="fontcl2"><{$item.site_num}></font>)</span></p>
-            <div class="cl"></div>
-            </a>
-        </li>       
-    <{/foreach}>
+<div id="search-bar">
+	<ul class="search-bar_list">
+		<li class="list"><a href="#"><{if $pager.area_id}><{$area_list[$pager.area_id].area_name}><{else}>全部区域<{/if}><span class="app_ico"></span><em></em></a></li>
+		<li class="list"><a href="#"><{if $pager.group_id}><{$group_list[$pager.group_id]}><{else}>全部分类<{/if}><em></em></a></li>
+		<li class="list"><a href="#"><{if $pager.order}><{$order_list[$pager.order]}><{else}>默认排序<{/if}><em></em></a></li>
+	</ul>
+	<div class="search-bar_pull">
+		<div class="list_box">
+			<ul>
+				<li><a href="<{link ctl='mobile/company:items' arg0=0 arg1=$pager.group_id arg2=$pager.order arg3=1}>">全部区域</a></li>
+				<{foreach $area_list  as $k=>$v}>
+				<li><a href="<{link ctl='mobile/company:items' arg0=$k arg1=$pager.group_id arg2=$pager.order arg3=1}>"><{$v.area_name}></a></li>
+				<{/foreach}>
+			</ul>
+		</div>
+		<div class="list_box">
+			<ul>
+				<li><a  href="<{link ctl='mobile/company:items' arg0=$pager.area_id arg1=0 arg2=$pager.order arg3=1}>">全部分类</a></li>
+				<{foreach $group_list  as $k=>$v}>
+				<li><a href="<{link ctl='mobile/company:items' arg0=$pager.area_id arg1=$k arg2=$pager.order arg3=1}>"><{$v}></a></li>
+				<{/foreach}>
+			</ul>
+		</div>
+		<div class="list_box">
+			<ul>
+				<{foreach $order_list as $k=>$v}>
+				<li><a  href="<{link ctl='mobile/company:items' arg0=$pager.area_id arg1=$pager.group_id arg2=$k arg3=1}>"><{$v}></a></li>
+				<{/foreach}>
+			</ul>
+		</div>
+		<div class="mask_bg"></div>
+	</div>
+</div>
+<section id="" class="page_center_box">
+<ul class="zxCompanyList mt10">
+	<{foreach $items as $item}>
+	<li class="list"> <a href="<{link ctl='mobile/company' arg0=$item.company_id}>">
+		<div class="fl">
+			<div class="fl img"> <img src="<{$pager.img}>/<{$item.thumb}>"> </div>
+			<div class="nr">
+				<p class="overflow_clear bt"><{$item.name}></p>
+				<p class="black9">设计案例：<span class="pointcl"><{$item.case_num}></span>&nbsp;&nbsp;&nbsp;&nbsp;在建工地：<span class="pointcl"><{$item.site_num}></span></p>
+			</div>
+		</div>
+		<div class="fr">
+			<p><span class="baoTag ico_1"></span></p>
+		</div>
+		<div class="clear"></div>
+		</a> </li>
+	<{/foreach}>
+	<li>
 </ul>
 <div class="page"><{$pager.pagebar}></div>
+<script type="text/javascript">
+$(document).ready(function () {
+	/*轮播幻灯图开始*/
+	$('.flexslider').flexslider({
+		directionNav: true,
+		pauseOnAction: false,
+		/*slideshow: false,*/
+		/*touch:true,*/
+	});
+	/*轮播幻灯图结束*/
+	/*瀑布流效果开始*/
+	(function(K, $){
+	  var $container = $('#xgtContainer');
+		  $container.imagesLoaded(function(){
+			$container.masonry({itemSelector: '.case_aterfall_li'});
+		}); 
+	})(window.KT, window.jQuery);
+	/*瀑布流效果结束*/
+	/*头部下来分类开始*/
+	$("#search-bar .search-bar_list .list").each(function(e){
+		$(this).click(function(){
+			if($(this).hasClass("on")){
+				$(this).parent().find(".list").removeClass("on");
+				$(this).removeClass("on");
+				$(".mask_bg").hide();
+				$("#search-bar .search-bar_pull").hide();
+			}
+			else{
+				$(this).parent().find(".list").removeClass("on");
+				$(this).addClass("on");
+				$(".mask_bg").show();
+				$("#search-bar .search-bar_pull").show();
+			}
+			$("#search-bar .search-bar_pull .list_box").each(function(i){
+				if(e==i){
+					$(this).parent().find(".list_box").hide();
+					$(this).show();
+				}
+				else{
+					$(this).hide();
+				}
+				$(this).find("li").click(function(){
+					$(this).parent().find("li").removeClass("on");
+					$(this).addClass("on");
+					$(".mask_bg").hide();
+					$("#search-bar .search-bar_pull").hide();
+					$("#search-bar .search-bar_list .list").removeClass("on");
+				});
+			});
+		});
+	});
+	/*头部下来分类开始*/
+});
+</script> 
+<script type="text/javascript" src="<{$pager.res}>/script/jquery.masonry.min.js"></script> 
 <{include file="mobile/block/footer.html"}>

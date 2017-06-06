@@ -2,7 +2,7 @@
 /**
  * Copy Right IJH.CC
  * Each engineer has a duty to keep the code elegant
- * $Id: ucenter.ctl.php 9372 2015-03-26 06:32:36Z youyi $
+ * $Id$
  */
 
 if(!defined('__CORE_DIR')){
@@ -103,6 +103,27 @@ class Ctl_Mobile_Ucenter extends Ctl_Mobile
         }
         $this->response();        
     }   
+	public function ucenter_gz()
+    {
+        if($this->MEMBER['from'] != 'gz'){
+            $this->err->add('您的帐号不是工长类型', 211);
+        }else if($this->gz = K::M('gz/gz')->detail($this->uid)){
+            $group = K::M('member/group')->group($this->gz['group_id']);
+            $this->gz['group'] = $group;
+            $this->gz['group_name'] = $group['group_name'];
+            $this->pagedata['group'] = $group;               
+            $this->pagedata['gz'] = $this->gz;
+            return $this->gz;
+        }else if($this->request['ctl'] == 'ucenter/gz' && $this->request['act'] == 'info'){
+            $this->pagedata['gz_no_open'] = true;
+            return false;
+        }else{
+            $this->pagedata['gz_no_open'] = true;
+            $this->tmpl = 'mobile/ucenter/other_info.html';
+        }
+        $this->response();        
+    }   
+
     protected function _parse_menu($from)
     {
         $menu_list = array();

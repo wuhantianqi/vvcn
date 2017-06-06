@@ -3,7 +3,7 @@
 /**
  * Copy Right IJH.CC
  * Each engineer has a duty to keep the code elegant
- * $Id: tools.ctl.php 9372 2015-03-26 06:32:36Z youyi $
+ * $Id: tools.ctl.php 3304 2014-02-14 11:01:43Z youyi $
  */
 class Ctl_Tools extends Ctl 
 {

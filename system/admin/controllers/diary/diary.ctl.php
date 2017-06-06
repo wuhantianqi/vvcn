@@ -3,7 +3,7 @@
 /**
  * Copy Right IJH.CC
  * Each engineer has a duty to keep the code elegant
- * $Id: diary.ctl.php 9378 2015-03-27 02:07:36Z youyi $
+ * $Id: diary.ctl.php 5867 2014-07-12 02:04:39Z youyi $
  */
 if (!defined('__CORE_DIR')) {
     exit("Access Denied");
@@ -34,7 +34,9 @@ class Ctl_Diary_Diary extends Ctl {
         }
         $uids = array();
 		$filter['closed'] = 0;
-		
+		if(CITY_ID){
+            $filter['city_id'] = CITY_ID;
+        }
         if ($items = K::M('diary/diary')->items($filter, null, $page, $limit, $count)) {
             foreach ($items as $k => $v) {
                 if ($v['uid']) {
@@ -96,7 +98,9 @@ class Ctl_Diary_Diary extends Ctl {
             if(is_numeric($SO['audit'])){$filter['audit'] = $SO['audit'];}
         }
         $filter['closed'] = 0;
-		
+		if(CITY_ID){
+            $filter['city_id'] = CITY_ID;
+        }
         if($items = K::M('diary/diary')->items($filter, null, $page, $limit, $count)){
             $pager['count'] = $count;
             $pager['pagebar'] = $this->mkpage($count, $limit, $page, $this->mklink(null, array('{page}')), array('SO'=>$SO, 'multi'=>$multi));
@@ -133,7 +137,9 @@ class Ctl_Diary_Diary extends Ctl {
                         }
                     }
                 }
-				
+				if(CITY_ID){
+                    $data['city_id'] = CITY_ID;
+                }
                 if ($diary_id = K::M('diary/diary')->create($data)) {
                     $this->err->add('添加内容成功');
                     $this->err->set_data('forward', '?diary/diary-index.html');
@@ -218,7 +224,9 @@ class Ctl_Diary_Diary extends Ctl {
 			if($items = K::M('diary/diary')->items_by_ids($ids)){
                 $aids = array();
                 foreach($items as $v){
-                   
+                    if(CITY_ID && CITY_ID != $v['city_id']){
+                        continue;
+                    }
                     $aids[$v['diary_id']] = $v['diary_id'];
                 }
                 if($aids && K::M('diary/diary')->batch($aids, array('audit'=>1))){
@@ -244,7 +252,9 @@ class Ctl_Diary_Diary extends Ctl {
             if($items = K::M('diary/diary')->items_by_ids($ids)){
                 $aids = array();
                 foreach($items as $v){
-                    
+                    if(CITY_ID && CITY_ID != $v['city_id']){
+                        continue;
+                    }
                     $aids[$v['diary_id']] = $v['diary_id'];
                 }
                 if($aids && K::M('diary/diary')->delete($aids)){

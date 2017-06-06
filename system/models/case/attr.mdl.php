@@ -2,7 +2,7 @@
 /**
  * Copy Right IJH.CC
  * Each engineer has a duty to keep the code elegant
- * $Id: attr.mdl.php 9378 2015-03-27 02:07:36Z youyi $
+ * $Id: attr.mdl.php 2216 2013-12-16 06:39:13Z $
  */
 
 class Mdl_Case_Attr extends Mdl_Table
@@ -27,7 +27,6 @@ class Mdl_Case_Attr extends Mdl_Table
                 }
             }
         }
-        //print_r($sql);
         $this->db->Execute("DELETE FROM ".$this->table($this->_table)." WHERE case_id='$case_id'");
         if($sql){
             $sql = "INSERT INTO ".$this->table($this->_table)." VALUES".implode(',', $sql);

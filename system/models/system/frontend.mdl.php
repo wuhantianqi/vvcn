@@ -3,7 +3,7 @@
  * Copy Right IJH.CC
  * Each engineer has a duty to keep the code elegant
  * Author shzhrui<anhuike@gmail.com>
- * $Id: frontend.mdl.php 9378 2015-03-27 02:07:36Z youyi $
+ * $Id: frontend.mdl.php 2132 2013-12-12 10:34:20Z youyi $
  */
 
 if(!defined('__CORE_DIR')){

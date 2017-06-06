@@ -2,7 +2,7 @@
 /**
  * Copy Right IJH.CC
  * Each engineer has a duty to keep the code elegant
- * $Id: article.ctl.php 10519 2015-05-27 12:48:27Z xiaorui $
+ * $Id$
  */
 
 if(!defined('__CORE_DIR')){
@@ -25,7 +25,7 @@ class Ctl_Article extends Ctl
             $this->error(404);
         }
         $pager = $filter = $params = array();
-        $filter = array('audit'=>1,'hidden'=>'0', 'closed'=>0, 'ontime'=>'>:'.__TIME);
+        $filter = array('audit'=>1,'hidden'=>'0', 'closed'=>0, 'ontime'=>'<:'.__TIME);
         $filter['city_id'] = array(0, $this->request['city_id']);
         if($cat_id){
             if(!$cate = K::M('article/cate')->cate($cat_id)){
@@ -44,11 +44,13 @@ class Ctl_Article extends Ctl
                 if(!$childrens = K::M('article/cate')->childrens($cat_id)){
                     if($cate['level']>1){
                         $childrens = K::M('article/cate')->childrens($cate['parent_id']);
-                        $top_cate = K::M('article/cate')->cate($cate['parent_id']);
                     }                  
                 }
                 $this->pagedata['childrens'] = $childrens;                
             }
+            if($cate['level']>1){
+                $top_cate = K::M('article/cate')->cate($cate['parent_id']);
+            } 
             $this->pagedata['top_cate'] = $top_cate;
             $this->pagedata['cate'] = $cate;
         }
@@ -62,7 +64,7 @@ class Ctl_Article extends Ctl
         $pager['count'] = $count = 0;
         if($items = K::M('article/article')->items($filter, null, $page, $limit, $count)){
             $pager['count'] = $count;
-            $pager['pagebar'] = $this->mkpage($count, $limit, $page,$this->mklink(null, array($cat_id, '{page}'), $params));
+            $pager['pagebar'] = $this->mkpage($count, $limit, $page, $this->mklink(null, array($cat_id, '{page}'), $params));
             $this->pagedata['items'] = $items;
         }
         $this->pagedata['pager'] = $pager;
@@ -96,6 +98,15 @@ class Ctl_Article extends Ctl
             if($detail['linkurl']){
                 header("Location:".$detail['linkurl']);
                 exit;
+            }else if($detail['from'] != 'article'){
+                $this->error(404);
+            }else if($detail['city_id'] && ($detail['city_id'] != $this->request['city_id'])){
+                $cfg = $this->system->config->get('site');
+                if($cfg['multi_city'] && ($city = K::M('data/city')->city($detail['city_id']))){
+                    $this->system->response_code(301);
+                    header("Location:".$this->mklink("article:detail", array($article_id), null, $detail['city_id']));
+                    exit();
+                }
             }
             if($page == 'all'){
                 $curr_content = $detail['content'];
@@ -137,6 +148,7 @@ class Ctl_Article extends Ctl
             if($seo_keywords = $detail['seo_keywords']){
                 $this->seo->set_keywords($seo_keywords);
             }
+            $this->pagedata['mobile_url'] = $this->mklink('mobile/article:detail', array($article_id));
             $this->tmpl = 'article/detail.html';
         }        
     }

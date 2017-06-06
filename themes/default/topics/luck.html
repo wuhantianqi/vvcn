@@ -1,0 +1,126 @@
+<{include file="block/small-header.html"}>
+<link href="/themes/default/topics/static/style/topics.css" rel="stylesheet" type="text/css">
+<script type="text/javascript" src="/themes/default/topics/static/js/jquery.easing.min.js"></script>
+<script type="text/javascript" src="/themes/default/topics/static/js/jQueryRotate.js"></script>
+<div class="zt_luck_banner">
+	<div class="subwd zt_luck_box">
+		<div class="luck_shuom">
+			<{$CONFIG.order.prizes}>
+		</div>
+		<div class="luck_link">
+			<p><a href="<{link ctl='topics:create' arg0=1}>" mini-width='400' mini-load="我要兑换">我要兑换</a><a href="<{link ctl='ucenter/member/tickets:index'}>">中奖记录</a>
+			</p>
+			<p>你还有<span id='count'><{$count|default:0}></span>次抽奖机会</p>
+		</div>
+		<div class="luck-con-pan">
+                <{if $CONFIG.order.orderimg}>
+                     <img src="<{$pager.img}>/<{$CONFIG.order.orderimg}>" />
+                <{else}>
+                    <img src="<{$pager.theme}>/default/topics/static/images/luck_disk.png" />
+                <{/if}>
+				<img src="<{$pager.theme}>/default/topics/static/images/luck_start.png" class="luck-con-zhen" />
+		</div>
+	</div>
+</div>
+<div class="zt_luck_content">
+	<div class="subwd">
+		<h1><span class="luck_ico luck_lit1"></span>活动流程</h1>
+		<div class="luck_liucheng lt">
+			<{$CONFIG.order.proce|default:''}>
+		</div>
+		<div class="luck_name rt">
+			<h2><span class="lt">中奖快报</span></h2>
+			<p class="cl"></p>
+			<ul class="lt">
+				<{foreach $log as $k => $v}>
+				<{if $v.num<5}>
+				<li>
+					<p><span class="lt"><{$member[$v.uid].uname|cutstr:3:'**'}></span><span class="rt"><{$luck[$v.luck_id].product_name}></span></p>
+				</li>
+				<{/if}>
+				<{/foreach}>
+			</ul>
+			<ul class="rt">
+				
+				<{foreach $log as $k => $v}>
+                <{if $v.num>=5}>
+				<li>
+					<p><span class="lt"><{$member[$v.uid].uname|cutstr:3:'**'}></span><span class="rt"><{$luck[$v.luck_id].product_name}></span></p>
+				</li>
+                <{/if}>
+				<{/foreach}>
+				
+			</ul>
+		</div>
+		<div class="cl"></div>
+		<h1><span class="luck_ico luck_lit2"></span>抽奖奖品</h1>
+		<div class="zt_luck_jpin">
+			<div class="list">
+				<ul>
+                	<{calldata mdl="luck/luck" type=1 audit=1 closed=0 order="prize:asc" limit="8"}>
+                    	<li>
+                             <img src="<{$pager.img}>/<{$item.thumb}>" />
+                            <b><{$prize[$item.prize]}></b><p><{$item.product_name}></p>
+                        </li>
+                    <{/calldata}>
+				</ul>
+			</div>
+		</div>
+		<h1><span class="luck_ico luck_lit3"></span>活动说明</h1>
+		<div class="luck_intro">
+			<{$CONFIG.order.activity}>
+		</div>
+		<div class="cl"></div>
+	</div>
+</div>
+<script type="text/javascript">
+(function(K, $){
+$(document).ready(function(){
+        $(".luck_name ul.lt li:odd").addClass('purpleBg');
+        $(".luck_name ul.rt li:odd").addClass('purpleBg');
+});
+
+$(function(){
+ var __IS_RUN_ROTATE = false;
+	$(".luck-con-zhen").rotate({
+		bind:{
+			click:function(){
+                if(__IS_RUN_ROTATE){
+                    return false;
+                }
+                __IS_RUN_ROTATE = true;
+                $.post('<{link ctl="topics:result"}>', {name:"luck"}, function(result){
+                    if(result.error == 101){
+                        Widget.Login();
+                    }else if(result.error){
+                        Widget.MsgBox.error(result.message.join(","));
+                    }else{
+                        $('#count').html(result.data.count);
+                        $(".luck-con-zhen").rotate({
+                            duration:3000,               //转动时间
+                            angle: 0,                    //起始角度
+                            animateTo:3600-45-23+result.data.dengji*45,      //结束的角度
+                            easing: $.easing.easeOutSine,//动画效果，需加载jquery.easing.min.js
+                            callback: function(){
+                                Widget.MsgBox.success(result.data.title);
+                                __IS_RUN_ROTATE = false;
+								$('#count').html(result.data.count);
+                            }
+                        });                        
+                    }                
+                }, 'json');
+                 $(this).rotate({
+                        duration:3000,               //转动时间
+                        angle: 0,                    //起始角度
+                        animateTo:3600,      //结束的角度
+                        easing: $.easing.easeOutSine,//动画效果，需加载jquery.easing.min.js
+                        callback: function(){}
+                 });
+				 
+			}
+		}
+	});
+});
+})(window.KT, window.jQuery);
+		</script>
+<{include file="block/small-footer.html"}>

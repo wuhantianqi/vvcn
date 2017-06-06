@@ -1,0 +1,42 @@
+<{include file="scenter/block/header.html"}>
+<div class="ucenter_t">
+    <ul><li class="on">我的装修</li></ul>
+</div>
+
+<div class="ucenter_c">
+    <table width="100%" border="0" cellspacing="0" class="table">
+    <tr>
+        <th class="w-30">ID</th>
+        <th class="w-80">施工小区</th>
+        <th class="w-150">施工地址</th>
+        <th class="w-50">装修面积</th>
+        <th class="w-50">装修费用</th>
+        <th class="w-150">装修公司</th>
+        <th class="w-100">开工时间</th>
+        <th class="w-100">完工时间</th>
+        <th class="w-50">装修阶段</th>
+        <th class="w-50">操作</th>
+    </tr>
+    <{foreach $items as $item}>
+    <tr>
+        <td><{$item['site_id']}></th>
+        <td><{$item['home_name']}></td>
+        <td><{$item['addr']}></td>
+        <td><{$item['house_mj']}>㎡</td>
+        <td><{$item['price']}></td>
+        <td><{$item['company']}></td>
+        <td><{$item['starttime']|format:'Y年m月d日 H:i:s'}></td>
+        <td><{$item['endtime']|format:'Y年m月d日 H:i:s'}></td>
+        <td><{$steps[$item['status']]}></td>
+        <td><a class='pbtn' href="/scenter/member/mypm-detail-<{$item['site_id']}>.html">查看进度</a></td>
+    </tr>
+    <{foreachelse}>
+     <tr><td colspan="10"><p class="tips"><span class="notice">没有数据</span></p></td></tr>
+    <{/foreach}>
+
+
+    </table>
+    <div class="page"><{$pager.pagebar}></div>
+</div>
+<script type="text/javascript" src="<{$pager.res}>/script/widget.bmap.js"></script>
+<{include file="scenter/block/footer.html"}>

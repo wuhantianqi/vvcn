@@ -2,7 +2,7 @@
 /**
  * Copy Right IJH.CC
  * Each engineer has a duty to keep the code elegant
- * $Id: order.mdl.php 10798 2015-06-12 11:58:34Z wanglei $
+ * $Id: order.mdl.php 6303 2014-09-17 11:01:41Z youyi $
  */
 
 if(!defined('__CORE_DIR')){
@@ -86,7 +86,7 @@ class Mdl_Trade_Order extends Mdl_Table
             $order['uid'] = $data['uid'];
             $order['shop_id'] = $shop_id;
             $order['contact'] = $data['contact'];
-            $order['mobile'] = $data['mobile'];
+            $order['mobile'] = $data['mobile']?$data['mobile']:$data['phone'];
             $order['addr'] = $data['addr'];
             $order['note'] = $data['note'];
             $order['product_count'] = $product_count;
@@ -95,6 +95,7 @@ class Mdl_Trade_Order extends Mdl_Table
             $order['freight'] = $freight;
             $order['amount'] = $product_amount + $freight;
             $order['order_no'] = $this->create_order_no();
+			$order['city_id'] = $shop['city_id'];
             if(!$order_id = $this->create($order)){
                 return false;
             }
@@ -117,10 +118,10 @@ class Mdl_Trade_Order extends Mdl_Table
             $maildata['product_name'] = implode(',', $product_names);
             $maildata['link'] = K::M('helper/link')->mklink('trade/order:detail', array($order['order_no']), array(), true);
             //send mail to buyer
-            K::M('helper/mail')->send($member['mail'], 'order_buyer', $maildata);
+            K::M('helper/mail')->sendmail($member['mail'], 'order_buyer', $maildata);
             //send mail to seller
             if($shop = K::M('shop/shop')->detail($shop_id)){
-                K::M('helper/mail')->send('order_seller', $maildata, $shop);
+                K::M('helper/mail')->sendshop('order_seller', $maildata, $shop);
             }
         }
         //print_r($this->db->SQLLOG());
@@ -196,7 +197,7 @@ class Mdl_Trade_Order extends Mdl_Table
                     K::M('helper/mail')->sendshop($shop, 'order_payment_seller', $maildata);
                 }
                 if($member = K::M('member/member')->member($order['uid'])){
-                    K::M('helper/mail')->send($member['mail'], 'order_payment_buyer', $maildata);
+                    K::M('helper/mail')->sendmail($member['mail'], 'order_payment_buyer', $maildata);
                 }
             }
         }

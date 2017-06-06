@@ -3,7 +3,7 @@
  * Copy Right IJH.CC
  * Each engineer has a duty to keep the code elegant
  * Author @shzhrui<Anhuike@gmail.com>
- * $Id: member.php 9378 2015-03-27 02:07:36Z youyi $
+ * $Id: member.php 2893 2014-01-08 04:58:58Z $
  */
 
 if(!defined('__CORE_DIR')){
@@ -43,22 +43,6 @@ return array (
     'default' => '',
     'SO' => 'like',
   ),
-    'group_id' => 
-  array (
-    'field' => 'group_id',
-    'label' => '等级',
-    'pk' => false,
-    'add' => true,
-    'edit' => true,
-    'html' => false,
-    'empty' => false,
-    'show' => false,
-    'list' => true,
-    'type' => 'number',
-    'comment' => '',
-    'default' => '',
-    'SO' => '=',
-  ),  
   'passwd' => 
   array (
     'field' => 'passwd',
@@ -75,6 +59,22 @@ return array (
     'default' => '',
     'SO' => false,
   ),
+  'from' => 
+  array (
+    'field' => 'from',
+    'label' => '类型',
+    'pk' => false,
+    'add' => true,
+    'edit' => true,
+    'html' => false,
+    'empty' => true,
+    'show' => true,
+    'list' => true,
+    'type' => 'text',
+    'comment' => '',
+    'default' => '',
+    'SO' => 'like',
+  ),  
   'mail' => 
   array (
     'field' => 'mail',
@@ -122,6 +122,39 @@ return array (
     'comment' => '',
     'default' => '',
     'SO' => false,
+  ),
+  'jifen' => 
+  array (
+    'field' => 'jifen',
+    'label' => '积分',
+    'pk' => false,
+    'add' => true,
+    'edit' => true,
+    'html' => false,
+    'empty' => false,
+    'show' => true,
+    'list' => true,
+    'type' => 'number',
+    'comment' => '',
+    'default' => '',
+    'SO' => false,
+  ),
+  
+  'truste_money' => 
+  array (
+    'field' => 'truste_money',
+    'label' => '委托金',
+    'pk' => false,
+    'add' => true,
+    'edit' => true,
+    'html' => false,
+    'empty' => false,
+    'show' => true,
+    'list' => true,
+    'type' => 'text',
+    'comment' => 'RMB',
+    'default' => '0.00',
+    'SO' => 'like',
   ),
   'realname' => 
   array (

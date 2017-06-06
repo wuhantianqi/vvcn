@@ -2,7 +2,7 @@
 /**
  * Copy Right IJH.CC
  * Each engineer has a duty to keep the code elegant
- * $Id: select.ctl.php 14902 2015-08-12 10:17:00Z xiaorui $
+ * $Id$
  */
 
 class Ctl_Ucenter_Misc_Select extends Ctl_Ucenter
@@ -11,7 +11,9 @@ class Ctl_Ucenter_Misc_Select extends Ctl_Ucenter
     public function home($city_id=null, $page=1)
     {
         $filter = $pager = $params = array();
-        $city_id = (int)$city_id;
+        if(!$city_id = (int)$city_id){
+            $city_id = $this->ucenter_city_id;
+        }
         $pager['page'] = max(intval($page), 1);
         $pager['limit'] = $limit = 10;
         $pager['city_id'] = $city_id;
@@ -25,6 +27,7 @@ class Ctl_Ucenter_Misc_Select extends Ctl_Ucenter
             if($SO['name']){$filter['name'] = "LIKE:%".$SO['name']."%";}
             $params['SO'] = $pager['SO'] = $SO;
         }
+		$filter['city_id'] = $city_id;
         $filter['closed'] = 0;
         if($items = K::M('home/home')->items($filter, null, $page, $limit, $count)){
             $pager['count'] = $count;
@@ -39,17 +42,20 @@ class Ctl_Ucenter_Misc_Select extends Ctl_Ucenter
         $this->tmpl = 'view:select/home.html'; 
     }
 
-    public function company($page=null)
+    public function company($city_id=null,$page=null)
     {
         $filter = $pager = $params = array();
         $pager['page'] = max(intval($page), 1);
         $pager['limit'] = $limit = 10;
-        $pager['city_id'] = (int)$this->GP('city_id');
+        if(!$city_id = (int)$this->GP('city_id')){
+            $city_id = $this->ucenter_city_id;
+        }
+        $pager['city_id'] = $city_id;
         $pager['multi'] = $params['multi'] = $multi = ($this->GP('multi') == 'Y' ? 'Y' : 'N');
         if($SO = $this->GP('SO')){
             if($SO['area_id']){
                 $filter['area_id'] = $SO['area_id'];
-            }else if($pager['city_id']){
+            }else if($city_id){
                 $SO['city_id'] = $params['city_id'] = $filter['city_id'] = $pager['city_id'];
             }else if($SO['city_id']){
                 $filter['city_id'] = $SO['city_id'];
@@ -58,14 +64,17 @@ class Ctl_Ucenter_Misc_Select extends Ctl_Ucenter
             $params['SO'] = $pager['SO'] = $SO;
         }
         $filter['closed'] = 0;
+		$filter['city_id'] = $city_id;
         if($items = K::M('company/company')->items($filter, null, $page, $limit, $count)){
             $pager['count'] = $count;
             $pager['pagebar'] = $this->mkpage($count, $limit, $page, $this->mklink(null, array('{page}'), array(), 'base'), $params);
+        }        
+        if(!$city = K::M('data/city')->city($city_id)){
+            $city = $this->request['city'];
         }
+        $pager['city'] = $city;
         $this->pagedata['items'] = $items;
         $this->pagedata['pager'] = $pager;
-        $this->pagedata['city_list'] = K::M("data/city")->fetch_all();
-        $this->pagedata['area_list'] = K::M("data/area")->fetch_all();
         $this->tmpl = 'view:select/company.html'; 
     }
 
@@ -82,7 +91,7 @@ class Ctl_Ucenter_Misc_Select extends Ctl_Ucenter
         }else{
             $filter = $pager = array();
             $pager['page'] = max(intval($page), 1);
-            $pager['limit'] = $limit = 10;
+            $pager['limit'] = $limit = 3;
             $pager['multi'] = $params['multi'] = $multi = ($this->GP('multi') == 'Y' ? 'Y' : 'N');
             $filter['home_id'] = $home_id;
             $filter['type'] = 1;

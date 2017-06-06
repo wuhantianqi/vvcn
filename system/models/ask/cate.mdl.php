@@ -3,7 +3,7 @@
 /**
  * Copy Right IJH.CC
  * Each engineer has a duty to keep the code elegant
- * $Id: cate.mdl.php 9378 2015-03-27 02:07:36Z youyi $
+ * $Id: cate.mdl.php 2387 2013-12-20 07:57:21Z $
  */
 if (!defined('__CORE_DIR')) {
     exit("Access Denied");

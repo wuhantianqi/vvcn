@@ -2,7 +2,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head><{include file="block/sheader.html"}>
 </head>
-<body>
+<body class="smallpage">
 <iframe id="miniframe" name="miniframe" style="display:none;"></iframe>
 <!--头部内容开始-->
 <div class="sub_nav">
@@ -14,44 +14,23 @@
 			<a href="<{link ctl=designer}>">找设计师</a>
 			<a href="<{link ctl=case}>">效果图</a>
 		</div>
-		<div class="rt">			
+		<div class="rt">
 			<{if $MEMBER.uid}>
 			<ul class="top_nav_login hoverno lt">
 				<li>
-					<a href="<{link ctl='ucenter/member:index'}>"><span class="login_ico denglu_ico"></span><{$MEMBER.uname}><span class="ico_list login_litico"></span></a>
+					<a href="<{$MEMBER.ucenter_url}>"><span class="login_ico denglu_ico"></span><{$MEMBER.uname}><span class="ico_list login_litico"></span></a>
 					<div class="top_nav_login_son sub_nav_login_son">
-						<a href="<{link ctl='ucenter/member:index'}>">个人中心</a>
-						<a href="<{link ctl='ucenter/member/diary:index'}>">装修日记</a>
-						<a href="<{link ctl='ucenter/member/ask:index'}>">装修问答</a>
-						<a href="<{link ctl='ucenter/member/yuyue:tenders'}>">我的招标</a>
+						<a href="<{$MEMBER.ucenter_url}>">个人中心</a>
 						<a href="<{link ctl='passport:loginout'}>">退出</a>
 					</div>
 				</li>
-				<{if $MEMBER.from == 'company'}>
-				<li>
-					<a href="<{link ctl='ucenter/company:index'}>"><span class="ico_list in_t_s_ico"></span>公司管理<span class="ico_list login_litico"></span></a>
-					<div class="top_nav_login_son sub_nav_login_son">
-						<a href="<{link ctl='ucenter/company:info'}>">公司设置</a>
-						<a href="<{link ctl='ucenter/company/case:index'}>">案例管理</a>
-						<a href="<{link ctl='ucenter/company/youhui:index'}>">优惠信息</a>
-						<a href="<{link ctl='ucenter/company/yuyue:company'}>">预约管理</a>
-					</div>
-				</li>
-				<{elseif $MEMBER.from == 'shop'}>
-				<li>
-					<a href="<{link ctl='ucenter/shop:index'}>"><span class="ico_list in_t_s_ico"></span>商铺管理<span class="ico_list login_litico"></span></a>
-					<div class="top_nav_login_son sub_nav_login_son">
-						<a href="<{link ctl='ucenter/shop:info'}>">商铺设置</a>
-						<a href="<{link ctl='ucenter/shop/order:index'}>">订单管理</a>
-						<a href="<{link ctl='ucenter/shop/yuyue:shop'}>">预约管理</a>
-					</div>
-				</li>
-				<{/if}>
 			</ul>
 			<{else}>
-			<p class="lt"><a href="<{link ctl='passport'}>">登录</a>|<a href="<{link ctl='passport:reg'}>">注册</a></p>
+			<p class="lt"><a href="<{link ctl='passport'}>"><font class="login_ico denglu_ico"></font>登录</a>|<a href="<{link ctl='passport:reg'}>">注册</a>|</p>
 			<{/if}>
-			<p class="lt sub_nav_prt">|<a href="<{link ctl='trade/cart'}>">购物车<{if $COOKIE.CART_NUMBER}>(<{$COOKIE.CART_NUMBER}>)<{/if}></a>|<span> 装修热线：<{$CONFIG.site.phone}></span></p>
+			<p class="lt sub_nav_prt">
+			<a href="<{link ctl='trade/cart'}>"><font class="login_ico shipCar_ico"></font>购物车<{if $COOKIE.CART_NUMBER}>(<font class="fontcl2"><{$COOKIE.CART_NUMBER}></font>)<{/if}></a>|
+			<span><font class="ico_list in_t_tel_ico"></font>装修热线：<b class="fontcl2"><{$CONFIG.site.phone}></b></span></p>
 		</div>
 		<div class="cl"></div>
 	</div>

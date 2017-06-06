@@ -3,7 +3,7 @@
  * Copy Right IJH.CC
  * Each engineer has a duty to keep the code elegant
  * Author @shzhrui<Anhuike@gmail.com>
- * $Id: link.mdl.php 9378 2015-03-27 02:07:36Z youyi $
+ * $Id: link.mdl.php 2034 2013-12-07 03:08:33Z $
  */
 
 class Mdl_Link_Link extends Mdl_Table

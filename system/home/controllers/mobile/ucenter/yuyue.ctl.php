@@ -2,7 +2,7 @@
 /**
  * Copy Right IJH.CC
  * Each engineer has a duty to keep the code elegant
- * $Id: yuyue.ctl.php 9372 2015-03-26 06:32:36Z youyi $
+ * $Id$
  */
 
 if(!defined('__CORE_DIR')){
@@ -55,7 +55,23 @@ class Ctl_Mobile_Ucenter_Yuyue extends Ctl_Mobile_Ucenter
 		$this->tmpl = 'mobile/ucenter/yuyue/yuyueDesigner.html';
 	}
 
-	
+	public function yuyueGz()
+	{
+        $filter['uid'] = $this->uid;
+        if($items = K::M('gz/yuyue')->items($filter)){
+            $gz_ids = array();
+            foreach($items as $k=>$v){
+                $gz_ids[$v['gz_id']] = $v['gz_id'];
+            }
+            if($gz_ids){
+                $this->pagedata['gz_list'] = K::M('gz/gz')->items_by_ids($gz_ids);
+            }
+            $this->pagedata['items'] = $items;
+        }
+		$pager['backurl'] = $this->mklink('mobile/ucenter/yuyue-yuyue');
+        $this->pagedata['pager'] = $pager;
+		$this->tmpl = 'mobile/ucenter/yuyue/yuyueGz.html';
+	}
 
 	public function yuyueMechanic()
     {

@@ -1,5 +1,6 @@
 <{include file="block/small-header.html"}>
 <link type="text/css" rel="stylesheet" href="/themes/default/company/style/default/style.css" />
+<script type="text/javascript" src="<{$pager.res}>/script/jquery.qrcode.min.js"></script>
 <{if $company.skin_cfg}><{foreach $company.skin_cfg.css as $css}><link rel="stylesheet" type="text/css" href="<{$pager.theme}>/<{$css}>"/><{/foreach}><{/if}>
 <!--装修公司头部开始-->
 <div class="company_top">
@@ -26,6 +27,9 @@
 			<{foreach $CONFIG.score.company as $k=>$v}><{if $v@index>2}><{break}><{/if}>
 			<p><{$v}>：<span class="bar probar_gray"><span class="bar probar_color bar2" style="width:<{$company.avg_scores[$k]*20}>%"></span></span><{sprintf("%.2f",$company.avg_scores[$k])}></p>
 			<{/foreach}>
+			<div id="QRimg" class="code" style="" val="<{$mobile_url}>">
+			<p>手机扫码</p>
+			</div>
 		</div>
 		<div class="cl"></div>
 	</div>
@@ -42,7 +46,12 @@
 			<li><a href="<{link ctl='company:news' arg0=$company.company_id company=$company}>"<{if $request.act == 'news'}> class="current"<{/if}>>企业新闻</a></li>
 			<li><a href="<{link ctl='company:comment' arg0=$company.company_id company=$company}>"<{if $request.act == 'comment'}> class="current"<{/if}>>业主评价</a></li>
 		</ul>
-		<div class="rt company_nav_rt"><p>信誉：<{$company.scores}></p></div>
+		<div class="rt company_nav_rt"><p>信誉：<{$company.score}></p></div>
 		<div class="cl"></div>
 	</div>
 </div>
+<script type="text/javascript">
+(function(){
+	$("#QRimg").qrcode({width:80,height:80,correctLevel:0,text:"<{$mobile_url}>"}); 
+	})(window.KT, window.jQuery);
+</script>

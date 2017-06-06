@@ -3,7 +3,7 @@
 /**
  * Copy Right IJH.CC
  * Each engineer has a duty to keep the code elegant
- * $Id: app.ctl.php 9372 2015-03-26 06:32:36Z youyi $
+ * $Id: app.ctl.php 3053 2014-01-15 02:00:13Z youyi $
  */
 class Ctl_App extends Ctl {
     
@@ -33,5 +33,5 @@ class Ctl_App extends Ctl {
             $this->tmpl = 'mobile/page/add2home.html';
         }
     }
-   
+  
 }

@@ -10,9 +10,13 @@
     </table>
 </div>
 <div class="page-data">
+    <style type="text/css">.tip-notice label{float: left;display: inline-block;margin-right: 10px;}</style>
     <div class="tip-notice" style="word-wrap:break-word;">
-        <b>全局</b>:<label>网站标题:<em>{site_title}</em></label> <label>官网电话:<em>{site_phone}</em></label> <label>网站简介:<em>{site_desc}</em></label><label>城市名:<em>{city_name}</em></label> 
-        <label>城市分站seo_title:<em>{city_seo_title}</em></label> <label>城市分站seo_keywords:<em>{city_seo_keywords}</em></label> <label>城市分类站seo_description:<em>{city_seo_description}</em></label>
+        <b style="float:left;">全局:</b><label style="float:left;">网站标题:<em>{site_title}</em></label> <label style="float:left;">官网电话:<em>{site_phone}</em></label> 
+            <label style="float:left;">网站简介:<em>{site_desc}</em></label><label style="float:left;">城市名:<em>{city_name}</em></label> 
+        <label style="float:left;">城市分站seo_title:<em>{city_seo_title}</em></label> <label style="float:left;">城市分站seo_keywords:<em>{city_seo_keywords}</em></label> 
+        <label style="float:left;">城市分类站seo_description:<em>{city_seo_description}</em></label>
+        <div style="clear: both;"></div>
     </div>
     <div class="tip-notice" style="word-wrap:break-word;margin-top:5px;">
         <b class="blue" style="float:left;">当前页:</b><{foreach $detail.config as $k=>$v}><label style="float:left;"><{$v}>:<em>{<{$k}>}</em></label><{foreachelse}><label>无可用变量</label><{/foreach}>

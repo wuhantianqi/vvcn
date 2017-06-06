@@ -2,7 +2,7 @@
 /**
  * Copy Right IJH.CC
  * Each engineer has a duty to keep the code elegant
- * $Id: track.ctl.php 9954 2015-04-29 03:32:13Z maoge $
+ * $Id$
  */
 
 if(!defined('__CORE_DIR')){
@@ -21,13 +21,7 @@ class Ctl_Tenders_Track extends Ctl
             $pager['SO'] = $SO;
             
         }
-        if($items = K::M('tenders/track')->items($filter, array('track_id'=>'DESC'), $page, $limit, $count)){
-            foreach($items as $k => $v){
-                if($looks = K::M('tenders/look')->detail($v['look_id'])){
-                    $tenders = K::M('tenders/tenders')->detail($looks['tenders_id']);
-                    $items[$k]['tender'] = $tenders;
-                }
-            }
+        if($items = K::M('tenders/track')->items($filter, null, $page, $limit, $count)){
         	$pager['count'] = $count;
         	$pager['pagebar'] = $this->mkpage($count, $limit, $page, $this->mklink(null, array('{page}')), array('SO'=>$SO));
         }

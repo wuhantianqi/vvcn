@@ -1,16 +1,43 @@
 <{assign var="tpl_page_title" value="学装修列表"}>
 <{include file="mobile/block/header.html"}>
-<ul class="app_menu study_menu">
-	<{foreach $items as $item}>
-	<li>
-		<a href="<{link ctl='mobile/article:detail' arg0=$item.article_id}>">
-		<img src="<{$pager.img}>/<{$item.thumb}>" class="lt" />
-		<h2><{$item.title}></h2>
-		<p class="nowrap"><{$item.desc|cutstr:50}></p>
-		<div class="cl"></div>
-		</a>
-	</li>
-    <{/foreach}>
-</ul>
+<section id="" class="page_center_box">
+<div class="zxKnowledge_bt"> <span class="fl bt"><{$cate.title}></span>
+	
+</div>
+<div class="zxKnowledge mb10">
+	<ul class="list_box">
+		<{foreach $items as $item}>
+		<li> <a href="<{link ctl='mobile/article:detail' arg0=$item.article_id}>">
+			<div class="fl img"> <img src="<{$pager.img}>/<{$item.thumb}>" /> </div>
+			<div class="wz">
+				<h3 class="overflow_clear"><{$item.title}></h3>
+				<p class="nowrap"><{$item.desc|cutstr:50}></p>
+			</div>
+			<div class="cl"></div>
+			</a> </li>
+		<{/foreach}>
+	</ul>
+</div>
 <div class="page"><{$pager.pagebar}></div>
+<script type="text/javascript">
+$(document).ready(function () {
+	$(".zxKnowledge_bt .btn").each(function(e){
+		$(".zxKnowledge_bt .btn").click(function(){
+			if($(this).hasClass("on")){
+				$(this).parent().find(".btn").removeClass("on");
+				$(this).removeClass("on");
+				$(".mask_bg").hide();
+				$(".zxKnowledge_bt .zxKnowledge_pull").hide();
+			}
+			else{
+				$(this).parent().find(".btn").removeClass("on");
+				$(this).addClass("on");
+				$(".mask_bg").show();
+				$(".zxKnowledge_bt .zxKnowledge_pull").show();
+			}
+		});
+	});
+});
+</script>
+
 <{include file="mobile/block/footer.html"}>

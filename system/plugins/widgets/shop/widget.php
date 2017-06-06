@@ -3,7 +3,7 @@
  * Copy Right IJH.CC
  * Each engineer has a duty to keep the code elegant
  * Author @shzhrui<Anhuike@gmail.com>
- * $Id: widget.php 10421 2015-05-23 05:32:56Z wanglei $
+ * $Id: widget.php 3028 2014-01-11 08:33:54Z youyi $
  */
 
 class Widget_Shop extends Model
@@ -64,7 +64,6 @@ class Widget_Shop extends Model
         $data['name'] = $params['name'] ? $params['name'] : '';  
         $data['separator'] = $params['separator'] ? $params['separator'] : ',&nbsp;';           
         $data['options'] = K::M('shop/cate')->options();
-		
         return $data;  
     }
 
@@ -92,10 +91,40 @@ class Widget_Shop extends Model
             $parent_id = (int)$params['parent_id'];
             $data = array('parent_id'=>$parent_id);
             $data['content'] = $oTree->tree($parent_id, $tmpl, $values);
-			
             return $data;
         }
         return false;
+    }
+
+	public function cateshop(&$params)
+    {
+		$cate_list= K::M('shop/cate')->fetch_all();
+		foreach($cate_list as $k => $v){
+			if(!$v['parent_id']){
+				if(!empty($v['brand_ids'])){
+					$brand = '';
+					$brand = $v['brand_ids'];
+					$brands = K::M('shop/brand')->items_by_ids($brand);
+					$cate_list[$k]['brandlist'] = $brands;
+				}
+			}
+		}
+		
+		foreach($cate_list as $k => $v){
+			if(!$v['parent_id']){
+				$tmp = array_reverse($cate_list);
+				$num = 0;
+				foreach($tmp as $kk => $vv){
+					if($vv['parent_id']==$v['cat_id']){
+						$num++;
+						$tmp[$kk]['num'] = $num;
+					}
+				}
+				$cate_list = array_reverse($tmp);
+			}
+		}
+		//var_dump($cate_list);echo "File:", __FILE__, ',Line:',__LINE__;exit;
+        return $cate_list;
     }
 
 
@@ -121,15 +150,6 @@ class Widget_Shop extends Model
         $data['items'] = $items;
         return $data;
     }
-
-	public function catenav3(&$params)
-    {
-        $cates = K::M('shop/cate')->fetch_all();
-        $data = $cates;
-        return $data;
-    }
-
-	
 
     public function vcate(&$params)
     {
