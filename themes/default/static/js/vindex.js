@@ -1,4 +1,5 @@
 $(document).ready(function () {
+		$("#index_baner .bx-viewport").css("overflow","visible");
 	// 导航
 	$(".menu_main").mouseover(function () {
 		$(this).find("dl").show();

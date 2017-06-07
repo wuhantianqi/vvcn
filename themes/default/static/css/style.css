@@ -41,10 +41,11 @@ span.login_litico{ width:6px; height:5px; background-position:-350px -97px; marg
 .top_bottom .logo p font img{ vertical-align:middle; margin-right:5px;}
 .search_box{ margin:8px 0px 0px 100px; border:2px solid #00ad28; width:420px; height:36px; line-height:36px; }
 .search_box a:hover{ text-decoration:none;}
-.search_cont{/*position:relative; z-index:99;*/}
-.search_cont a{ background:#f8f8f8; border-right:1px solid #ddd; width:74px; text-align:center;}
+.search_cont{position:relative; }
+.search_cont a{ background:#f8f8f8; border-right:1px solid #ddd; width:74px; text-align:center;    height: 36px;
+    line-height: 36px;}
 .search_ico{ background-position:0px 0px; width:7px; height:4px;}
-.search_cont_list{ position:absolute;z-index:100;width:75px;left:-2px; top:36px; border:2px solid #00ad28; border-top:none;}
+.search_cont_list{ position:absolute;z-index:100;width:75px;left:0; top:27px;  border-top:none;}
 .search_cont_list a{ float:left;}
 .search_cont_list a:hover{ background:#fff;}
 .search_box input{ border:none; height:36px;}
@@ -1743,6 +1744,7 @@ p.goods_buy_count a:hover{opacity:0.8;}
 .other_loginfs .login_qq{ background-position:0px -52px;}
 .other_loginfs .login_weibo{ background-position:0px -26px;}
 .other_loginfs .login_weixin{ background-position:0px 0px;}
+
 
 
 

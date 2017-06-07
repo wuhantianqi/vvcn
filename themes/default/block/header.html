@@ -15,7 +15,7 @@
 			<li>
 				<a href="" title="优优美家"><img src="%THEME%/static/images/index_logo.png" alt="优优美家"></a>
 			</li>
-			<li>
+			<li class="sous">
 				<{widget id="public/sobox" sokw=$pager.sokw}>
 				<!-- <form action="">
 					<div class="head-form">
@@ -119,12 +119,11 @@
 									<input type="text" name="data[mobile]" placeholder="请输入您的联系方式">
 								</label>
 									<label for="">
-									<{widget id="tenders/setting" type="type"}>
-									<!-- <select name="" id="" class="lx">
+									
+									<select name="data[type_id]" class="lx">
 										<option value="">请选择装修类型</option>
-										<option value="">半包</option>
-										<option value="">全包</option>
-									</select> -->
+										<{widget id="tenders/setting" type="type"}>
+									</select>
 								</label>
 									<label for="">
 									<{widget id="data/region" city_id=$request.city_id class="text short"}>
@@ -156,7 +155,7 @@
 						<div class="menu_ej_r_r fl">
 							<p>品牌装修公司</p>
 							<ul>
-								<{KT id="2" name="网站首页1F推荐装修公司" city_id=$request.city_id}>
+								<{KT id="2" name="网站首页1F推荐装修公司" city_id=$request.city_id limit="5"}>
 								<li>
 									<a href="<{$item.link}>">
 										<img src="<{$pager.img}>/<{$item.logo}>" alt="">
@@ -195,28 +194,22 @@
 								</div>
 							</div>
 							<div class="menu_ej_r_l_f fl">
-								<form action="">
+								<form action="<{link ctl='tenders:save' http='base'}>" mini-form='tenders_tsj' id="tenders-tsj" method="post">
+                				<input type="hidden" name="data[from]" value="TSJ" />
 									<label for="">
-									<input type="text" placeholder="请输入您的称呼">
+									<input type="text" name="data[contact]" placeholder="请输入您的称呼">
 								</label>
 									<label for="">
-									<input type="text" placeholder="请输入您的联系方式">
+									<input type="text" name="data[mobile]" placeholder="请输入您的联系方式">
 								</label>
 									<label for="">
-									<select name="" id="" class="lx">
+									<select name="data[type_id]" class="lx">
 										<option value="">请选择装修类型</option>
-										<option value="">半包</option>
-										<option value="">全包</option>
+										<{widget id="tenders/setting" type="type"}>
 									</select>
 								</label>
 									<label for="">
-									<select name="" id="" class="dq1">
-										<option value="">武汉</option>
-									</select>
-									<select name="" id="" class="dq2">
-										<option value="">江汉</option>
-										<option value="">汉口</option>
-									</select>
+									<{widget id="data/region" city_id=$request.city_id class="text short"}>
 								</label>
 									<label for="">
 									<input type="submit" value="立即提交">
@@ -239,26 +232,19 @@
 						<div class="menu_ej_r_r fl jxsjs">
 							<p>精英设计师</p>
 							<ul>
-								<li>
-									<a href="">
-										<img src="%THEME%/static/images/193739.png" alt="">
-										<div>
-											<p>张燕</p>
-											<p>点击查看</p>
-										</div>
-
+								<{KT id="9" name="网站首页5F优秀设计师" city_id=$request.city_id limit="5"}>
+					            <li>
+									<a href="<{$item.link}>">
+									<img src="<{$pager.img}>/<{$item.thumb}>" alt="<{$item.name}>">
 									</a>
+									<div>
+										<p><{$item.name}></p>
+										<p><a href="<{$item.link}>">点击查看</a></p>
+									</div>	
 								</li>
-								<li>
-									<a href="">
-										<img src="%THEME%/static/images/193739.png" alt="">
-										<div>
-											<p>张燕</p>
-											<p>点击查看</p>
-										</div>
-									</a>
-								</li>
-								<li>
+					            <{/KT}>
+								
+								<!-- <li>
 									<a href="">
 										<img src="%THEME%/static/images/193739.png" alt="">
 										<div>
@@ -276,6 +262,15 @@
 										</div>
 									</a>
 								</li>
+								<li>
+									<a href="">
+										<img src="%THEME%/static/images/193739.png" alt="">
+										<div>
+											<p>张燕</p>
+											<p>点击查看</p>
+										</div>
+									</a>
+								</li> -->
 
 							</ul>
 						</div>
@@ -288,28 +283,22 @@
 								</div>
 							</div>
 							<div class="menu_ej_r_l_f fl">
-								<form action="">
+								<form action="<{link ctl='tenders:save' http='base'}>" mini-form='tenders_tsj' id="tenders-tsj" method="post">
+                				<input type="hidden" name="data[from]" value="TSJ" />
 									<label for="">
-									<input type="text" placeholder="请输入您的称呼">
+									<input type="text" name="data[contact]" placeholder="请输入您的称呼">
 								</label>
 									<label for="">
-									<input type="text" placeholder="请输入您的联系方式">
+									<input type="text" name="data[mobile]" placeholder="请输入您的联系方式">
 								</label>
 									<label for="">
-									<select name="" id="" class="lx">
+									<select name="data[type_id]" class="lx">
 										<option value="">请选择装修类型</option>
-										<option value="">半包</option>
-										<option value="">全包</option>
+										<{widget id="tenders/setting" type="type"}>
 									</select>
 								</label>
 									<label for="">
-									<select name="" id="" class="dq1">
-										<option value="">武汉</option>
-									</select>
-									<select name="" id="" class="dq2">
-										<option value="">江汉</option>
-										<option value="">汉口</option>
-									</select>
+									<{widget id="data/region" city_id=$request.city_id class="text short"}>
 								</label>
 									<label for="">
 									<input type="submit" value="立即提交">
@@ -444,28 +433,22 @@
 								</div>
 							</div>
 							<div class="menu_ej_r_l_f fl">
-								<form action="">
+								<form action="<{link ctl='tenders:save' http='base'}>" mini-form='tenders_tsj' id="tenders-tsj" method="post">
+                				<input type="hidden" name="data[from]" value="TSJ" />
 									<label for="">
-									<input type="text" placeholder="请输入您的称呼">
+									<input type="text" name="data[contact]" placeholder="请输入您的称呼">
 								</label>
 									<label for="">
-									<input type="text" placeholder="请输入您的联系方式">
+									<input type="text" name="data[mobile]" placeholder="请输入您的联系方式">
 								</label>
 									<label for="">
-									<select name="" id="" class="lx">
+									<select name="data[type_id]" class="lx">
 										<option value="">请选择装修类型</option>
-										<option value="">半包</option>
-										<option value="">全包</option>
+										<{widget id="tenders/setting" type="type"}>
 									</select>
 								</label>
 									<label for="">
-									<select name="" id="" class="dq1">
-										<option value="">武汉</option>
-									</select>
-									<select name="" id="" class="dq2">
-										<option value="">江汉</option>
-										<option value="">汉口</option>
-									</select>
+									<{widget id="data/region" city_id=$request.city_id class="text short"}>
 								</label>
 									<label for="">
 									<input type="submit" value="立即提交">
@@ -487,31 +470,13 @@
 						<div class="menu_ej_r_r fl">
 							<p>品牌装修公司</p>
 							<ul>
+								<{KT id="2" name="网站首页1F推荐装修公司" city_id=$request.city_id limit="5"}>
 								<li>
-									<a href="">
-										<img src="%THEME%/static/images/193739.png" alt="">
+									<a href="<{$item.link}>">
+										<img src="<{$pager.img}>/<{$item.logo}>" alt="">
 									</a>
 								</li>
-								<li>
-									<a href="">
-										<img src="%THEME%/static/images/193739.png" alt="">
-									</a>
-								</li>
-								<li>
-									<a href="">
-										<img src="%THEME%/static/images/193739.png" alt="">
-									</a>
-								</li>
-								<li>
-									<a href="">
-										<img src="%THEME%/static/images/193739.png" alt="">
-									</a>
-								</li>
-								<li>
-									<a href="">
-										<img src="%THEME%/static/images/193739.png" alt="">
-									</a>
-								</li>
+								<{/KT}>
 							</ul>
 						</div>
 					</div>
@@ -523,28 +488,22 @@
 								</div>
 							</div>
 							<div class="menu_ej_r_l_f fl">
-								<form action="">
+								<form action="<{link ctl='tenders:save' http='base'}>" mini-form='tenders_tsj' id="tenders-tsj" method="post">
+                				<input type="hidden" name="data[from]" value="TSJ" />
 									<label for="">
-									<input type="text" placeholder="请输入您的称呼">
+									<input type="text" name="data[contact]" placeholder="请输入您的称呼">
 								</label>
 									<label for="">
-									<input type="text" placeholder="请输入您的联系方式">
+									<input type="text" name="data[mobile]" placeholder="请输入您的联系方式">
 								</label>
 									<label for="">
-									<select name="" id="" class="lx">
+									<select name="data[type_id]" class="lx">
 										<option value="">请选择装修类型</option>
-										<option value="">半包</option>
-										<option value="">全包</option>
+										<{widget id="tenders/setting" type="type"}>
 									</select>
 								</label>
 									<label for="">
-									<select name="" id="" class="dq1">
-										<option value="">武汉</option>
-									</select>
-									<select name="" id="" class="dq2">
-										<option value="">江汉</option>
-										<option value="">汉口</option>
-									</select>
+									<{widget id="data/region" city_id=$request.city_id class="text short"}>
 								</label>
 									<label for="">
 									<input type="submit" value="立即提交">
@@ -566,31 +525,13 @@
 						<div class="menu_ej_r_r fl">
 							<p>品牌装修公司</p>
 							<ul>
+								<{KT id="2" name="网站首页1F推荐装修公司" city_id=$request.city_id limit="5"}>
 								<li>
-									<a href="">
-										<img src="%THEME%/static/images/193739.png" alt="">
+									<a href="<{$item.link}>">
+										<img src="<{$pager.img}>/<{$item.logo}>" alt="">
 									</a>
 								</li>
-								<li>
-									<a href="">
-										<img src="%THEME%/static/images/193739.png" alt="">
-									</a>
-								</li>
-								<li>
-									<a href="">
-										<img src="%THEME%/static/images/193739.png" alt="">
-									</a>
-								</li>
-								<li>
-									<a href="">
-										<img src="%THEME%/static/images/193739.png" alt="">
-									</a>
-								</li>
-								<li>
-									<a href="">
-										<img src="%THEME%/static/images/193739.png" alt="">
-									</a>
-								</li>
+								<{/KT}>
 							</ul>
 						</div>
 					</div>
