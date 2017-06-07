@@ -105,14 +105,14 @@
 			<div class="zxmt_ul_er">
 				<div class="zxmt_ul_er1 " style="display:none;">
 					<ul>
-						<{KT id="155" name="网站首页装修实景" city_id=$request.city_id}>
+						<{KT id="155" name="网站首页装修实景" city_id=$request.city_id limit="5"}>
 							<li><a href="<{$item.link}>"><{$item.title|cutstr:26}></a></li>
 		                <{/KT}>
 					</ul>
 				</div>
 				<div class="zxmt_ul_er1" style="display:none;">
 					<ul>
-						<{KT id="156" name="网站首页设计攻略" city_id=$request.city_id}>
+						<{KT id="156" name="网站首页设计攻略" city_id=$request.city_id limit="5"}>
 						<li><a href="<{$item.link}>"><{$item.title|cutstr:26}></a></li>
 	                    <{/KT}>
 					</ul>
@@ -127,7 +127,7 @@
 				<{adv id="112" name="网站首页装修美图" city_id=$request.city_id}>
 			</div>
 			<div class="zxmt_r_c_x">
-				<{KT id="165" name="网站装修美图下图片展" city_id=$request.city_id}>
+				<{KT id="165" name="网站装修美图下图片展" city_id=$request.city_id limit="2"}>
 				<a href="<{$item.link}>">
 						<img src="<{$pager.img}>/<{$item.thumb}>" alt="<{$item.title}>">
 				</a>	
@@ -142,7 +142,7 @@
 		</div>
 		<div class="fl zxmt_r_r">
 			<ul>
-				<{KT id="164" name="网站装修美图右图片展" city_id=$request.city_id}>
+				<{KT id="164" name="网站装修美图右图片展" city_id=$request.city_id limit="3"}>
 				<li>
 					<a href="<{$item.link}>">
 						<img src="<{$pager.img}>/<{$item.thumb}>" alt="<{$item.title}>">
@@ -274,7 +274,7 @@
 	<div class="jjsj_x">
 		<div>
 			<ul>
-				<{KT id="153" name="网站首页5F下优秀设计师" city_id=$request.city_id}>
+				<{KT id="153" name="网站首页5F下优秀设计师" city_id=$request.city_id limit="5"}>
 	            <li>
 					<a href="<{$item.link}>">
 						<img src="<{$pager.img}>/<{$item.thumb}>" alt="<{$item.name}>">
@@ -578,7 +578,7 @@
 	</div>
 	<div class="zxgl_x">
 		<div class="zxgl_x_l fl">
-			<{KT id="157" name="网站首页优惠活动图片展" city_id=$request.city_id}>
+			<{KT id="157" name="网站首页优惠活动图片展" city_id=$request.city_id limit="3"}>
 			<a href="<{$item.link}>">
 				<img src="<{$pager.img}>/<{$item.thumb}>" alt="">
 			</a>
@@ -597,7 +597,7 @@
 				<div>
 					<h2>最新优惠活动</h2>
 					<ul>
-						<{KT id="158" name="网站首页优惠信息" city_id=$request.city_id}>
+						<{KT id="158" name="网站首页优惠信息" city_id=$request.city_id limit="4"}>
 						<li>
 							<p>[进行中]</p>
 							<a href="<{$item.link}>">
@@ -632,7 +632,7 @@
 				</div>
 			</div>
 			<div class="zxgl_x_c_r fl">
-				<{KT id="160" name="网站首页最新发布旁问答图文" city_id=$request.city_id}>
+				<{KT id="160" name="网站首页最新发布旁问答图文" city_id=$request.city_id limit="4"}>
 				<a href="<{$item.link}>">
 					<img src="<{$pager.img}>/<{$item.thumb}>" alt="">
 				</a>
@@ -656,7 +656,7 @@
 					</div>
 					<div class="zxgl_x_c_r_s2">
 						<ul>
-							<{KT id="12" name="网站首页最新发布" city_id=$request.city_id}>
+							<{KT id="12" name="网站首页最新发布" city_id=$request.city_id limit="6"}>
 								<li><a href="<{$item.link}>"><{$item.title|cutstr:20}></a></li>
 							<{/KT}>
 							
@@ -823,9 +823,9 @@
 	</div>
 	<div class="jjrd_content fl">
 		<ul>
-			<{KT id="162" name="网站首页家居热点" city_id=$request.city_id}>
+			<{KT id="162" name="网站首页家居热点" city_id=$request.city_id limit="4"}>
 			<li>
-				<a href="<{$item.link}>"><{$item.title}></a>
+				<a href="<{$item.link}>"><{$item.title|cutstr:50}></a>
 				<p><{$item.desc}></p>
 			</li>
 			<{/KT}>
@@ -850,9 +850,9 @@
 			<p>本地新闻</p>
 		</div>
 		<ul>
-			<{KT id="163" name="网站首页本地新闻" city_id=$request.city_id}>
+			<{KT id="163" name="网站首页本地新闻" city_id=$request.city_id limit="6"}>
 			<li>
-				<p><a href="<{$item.link}>"><{$item.title}></a></p>
+				<p><a href="<{$item.link}>"><{$item.title|cutstr:30}></a></p>
 			</li>
 			<{/KT}>
 			
