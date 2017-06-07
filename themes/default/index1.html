@@ -1,4 +1,5 @@
 <{include file="block/header.html"}>
+<script type="text/javascript"  src="/themes/default/static/js/index.js"></script>
 <!--头部内容结束-->
 <div class="banner">
 <{adv id="11" name="商城首页轮转广告" city_id=$request.city_id}>
@@ -64,17 +65,17 @@
 		<h1 class="fl">装修美图</h1>
 		<p class="fl">展现完美设计效果 获取更多装修灵感</p>
 		<p class="fr">
-			<a href="<{link ctl='case'}>">风格</a>
+			<a href="<{link ctl='case:album' arg0=1}>">风格</a>
 			<span>/</span>
-			<a href="<{link ctl='case'}>">空间</a>
+			<a href="<{link ctl='case:album' arg0=1}>">空间</a>
 			<span>/</span>
-			<a href="<{link ctl='case'}>">小户型</a>
+			<a href="<{link ctl='case:album' arg0=1}>">小户型</a>
 			<span>/</span>
-			<a href="<{link ctl='case'}>">别墅</a>
+			<a href="<{link ctl='case:album' arg0=1}>">别墅</a>
 			<span>/</span>
-			<a href="<{link ctl='case'}>">公装</a>
+			<a href="<{link ctl='case:album' arg0=1}>">公装</a>
 			<span>/</span>
-			<a href="<{link ctl='case'}>">更多</a>
+			<a href="<{link ctl='case:album' arg0=1}>">更多</a>
 		</p>
 	</div>
 	<div class="zxmt_l fl">
@@ -105,72 +106,60 @@
 			<div class="zxmt_ul_er">
 				<div class="zxmt_ul_er1 " style="display:none;">
 					<ul>
-						<{KT id="155" name="网站首页装修实景" city_id=$request.city_id}>
-							<li><a href="<{$item.link}>"><{$item.title|cutstr:26}></a></li>
+						<{KT id="39" name="网站首页8F装修学堂-头条" city_id=$request.city_id}>
+							<li><a href="<{$item.link}>"><{$item.title|cutstr:35}></a></li>
 		                <{/KT}>
 					</ul>
 				</div>
 				<div class="zxmt_ul_er1" style="display:none;">
 					<ul>
-						<{KT id="156" name="网站首页设计攻略" city_id=$request.city_id}>
-						<li><a href="<{$item.link}>"><{$item.title|cutstr:26}></a></li>
+						<{KT id="11" name="网站首页8F装修学堂-推荐" city_id=$request.city_id}>
+						<li><a href="<{$item.link}>"><{$item.title|cutstr:46}></a></li>
 	                    <{/KT}>
 					</ul>
 				</div>
 			</div>
 		</div>
 	</div>
-	<div class="zxmt_r fl">		
-		
-		<div class="zxmt_r_c fl">
-			<div class="zxmt_r_c_l">
-				<{adv id="112" name="网站首页装修美图" city_id=$request.city_id}>
-			</div>
-			<div class="zxmt_r_c_x">
-				<{KT id="165" name="网站装修美图下图片展" city_id=$request.city_id}>
-				<a href="<{$item.link}>">
-						<img src="<{$pager.img}>/<{$item.thumb}>" alt="<{$item.title}>">
-				</a>	
-				<{/KT}>
-				<!-- <a href="">
-					<img src="images/193739.png" alt="">
-				</a>
-				<a href="">
-					<img src="images/193739.png" alt="">
-				</a> -->
-			</div>
-		</div>
-		<div class="fl zxmt_r_r">
-			<ul>
-				<{KT id="164" name="网站装修美图右图片展" city_id=$request.city_id}>
-				<li>
-					<a href="<{$item.link}>">
-						<img src="<{$pager.img}>/<{$item.thumb}>" alt="<{$item.title}>">
-					</a>
-				</li>
-				<{/KT}>
+	<div class="zxmt_r fl">
+		<{adv id="20" name="网站首页装修美图" city_id=$request.city_id}>
+		<ul>
+			<li>
 				
-				<!-- <li>
-					<a href="">
-						<img src="images/193739.png" alt="">
-					</a>
-				</li>
-				<li>
-					<a href="">
-						<img src="images/193739.png" alt="">
-					</a>
-				</li> -->
-			</ul>
-		</div>
-		
-
+			</li>
+			<li>
+				<a href="">
+					<img src="%THEME%/static/images/193739.png" alt="">
+				</a>
+			</li>
+			<li>
+				<a href="">
+					<img src="%THEME%/static/images/193739.png" alt="">
+				</a>
+			</li>
+			<li>
+				<a href="">
+					<img src="%THEME%/static/images/193739.png" alt="">
+				</a>
+			</li>
+			<li>
+				<a href="">
+					<img src="%THEME%/static/images/193739.png" alt="">
+				</a>
+			</li>
+			<li>
+				<a href="">
+					<img src="%THEME%/static/images/193739.png" alt="">
+				</a>
+			</li>
+		</ul>
 	</div>
 
 </div>
 
 <!--广告轮播-->
 <div class="gglunb1">
-	<{adv id="20" name="网站首页通栏广告1" city_id=$request.city_id}>
+	<{adv id="4" name="网站首页通栏广告1" city_id=$request.city_id}>
 </div>
 
 <!--	精英设计-->
@@ -189,7 +178,7 @@
 	<div class="jjsj_s">
 		<div>
 			<ul>
-				<{KT id="9" name="网站首页5F优秀设计师" city_id=$request.city_id limit="5"}>
+	            <{KT id="9" name="网站首页5F优秀设计师" city_id=$request.city_id limit="5"}>
 	            <li>
 					<a href="<{$item.link}>">
 						<img src="<{$pager.img}>/<{$item.thumb}>" alt="<{$item.name}>">
@@ -274,7 +263,7 @@
 	<div class="jjsj_x">
 		<div>
 			<ul>
-				<{KT id="153" name="网站首页5F下优秀设计师" city_id=$request.city_id}>
+				<{KT id="9" name="网站首页5F优秀设计师" city_id=$request.city_id limit="5"}>
 	            <li>
 					<a href="<{$item.link}>">
 						<img src="<{$pager.img}>/<{$item.thumb}>" alt="<{$item.name}>">
@@ -363,11 +352,11 @@
 		<h1 class="fl">品牌公司</h1>
 		<p class="fl">严格审核入驻资质 保障装修品质</p>
 		<p class="fr">
-			<a href="<{link ctl='gs'}>">找装修公司</a>
+			<a href="">找装修公司</a>
 			<span>/</span>
-			<a href="<{link ctl='site'}>">在建工地</a>
+			<a href="">再见工地</a>
 			<span>/</span>
-			<a href="<{link ctl='gs'}>">装修公司列表</a>
+			<a href="">装修公司列表</a>
 		</p>
 	</div>
 	<div class="ppgs_f fl">
@@ -376,12 +365,21 @@
 			<p class="fr">找靠谱装修公司</p>
 			<span class="fr">轻松装修更专业</span>
 		</div>
-		<form action="<{link ctl='tenders:save' http='base'}>" mini-form='tenders_tsj' id="tenders-tsj" method="post">
-			<input type="hidden" name="data[from]" value="TSJ" />
-			<input type="text" name="data[contact]" placeholder="请输入您的称呼">
-			<input type="text" name="data[mobile]" placeholder="请输入您的联系方式">
-			<{widget id="data/region" city_id=$request.city_id class="text short"}>
-			<input type="submit" value="立即提交">
+		<form action="">
+			<input type="text" placeholder="请输入您的称呼">
+			<input type="text" placeholder="请输入您的联系方式">
+			<label for="">
+					<select name="" id="">
+						<option value="">武汉</option>
+						<option value=""></option>
+					</select>
+						<select name="" id="">
+						<option value="">江汉区</option>
+						<option value="">汉口区</option>
+						<option value="">武昌区</option>
+					</select>
+				</label>
+			<botton>立即提交</botton>
 		</form>
 		<div class="ppgs_f_1">
 			<h2>品牌家装馆</h2>
@@ -405,12 +403,6 @@
 	</div>
 	<div class="ppgs_c fl">
 		<div>
-			<{KT id="2" name="网站首页1F推荐装修公司" city_id=$request.city_id limit="12"}>
-            <a href="<{$item.link}>"><img src="<{$pager.img}>/<{$item.logo}>" alt="<{$item.name}>"/></a>
-            <{/KT}>
-			<!-- <a href="">
-				<img src="%THEME%/static/images/193739.png" alt="">
-			</a>
 			<a href="">
 				<img src="%THEME%/static/images/193739.png" alt="">
 			</a>
@@ -421,7 +413,7 @@
 				<img src="%THEME%/static/images/193739.png" alt="">
 			</a>
 			<a href="">
-
+				<img src="%THEME%/static/images/193739.png" alt="">
 			</a>
 			<a href="">
 
@@ -443,22 +435,22 @@
 			</a>
 			<a href="">
 
-			</a> -->
+			</a>
+			<a href="">
+
+			</a>
 		</div>
 
 	</div>
 	<div class="ppgs_r fl">
 		<h2>最佳口碑榜</h2>
 		<ul>
-			<{calldata mdl="company/company" city_id=$request.city_id order="tenders_num:DESC" limit="5"}>
-            <li>
-				<i class="gs_r_ic<{$iteration}>"></i>
-				<span><a href="<{$item.company_url}>"><{$item.name}></a></span>
-				<p>口碑值：<em><{$item.score}></em></p>
+			<li>
+				<i class="gs_r_ic1"></i>
+				<span>嘉禾装饰</span>
+				<p>口碑值：<em>80</em></p>
 			</li>
-            <{/calldata}>
-			
-			<!-- <li>
+			<li>
 				<i class="gs_r_ic2"></i>
 				<span>嘉禾装饰</span>
 				<p>口碑值：<em>80</em></p>
@@ -477,14 +469,16 @@
 				<i class="gs_r_ic5"></i>
 				<span>嘉禾装饰</span>
 				<p>口碑值：<em>80</em></p>
-			</li> -->
+			</li>
 		</ul>
 	</div>
 </div>
 
 <!--广告轮播2-->
 <div class="gglunb2">
-	<{adv id="20" name="网站首页通栏广告1" city_id=$request.city_id}>
+	<a href="">
+		<img src="%THEME%/static/images/193739.png" alt="">
+	</a>
 </div>
 
 <!--装修攻略-->
@@ -493,16 +487,16 @@
 		<h1 class="fl">装修攻略</h1>
 		<p class="fl">来自两百万业主的装修攻略</p>
 		<p class="fr">
-			<a href="<{link ctl='gs'}>">装修流程</a>
+			<a href="">装修流程</a>
 			<span>/</span>
-			<a href="<{link ctl='gs'}>">装修问答</a>
+			<a href="">装修问答</a>
 			<span>/</span>
-			<a href="<{link ctl='gs'}>">在建工地</a>
+			<a href="">在建工地</a>
 
 			<span>/</span>
-			<a href="<{link ctl='gs'}>">装修计算器</a>
+			<a href="">装修计算器</a>
 			<span>/</span>
-			<a href="<{link ctl='gs'}>">更多</a>
+			<a href="">更多</a>
 		</p>
 	</div>
 	<div class="zxgl_s">
@@ -578,36 +572,32 @@
 	</div>
 	<div class="zxgl_x">
 		<div class="zxgl_x_l fl">
-			<{KT id="157" name="网站首页优惠活动图片展" city_id=$request.city_id}>
-			<a href="<{$item.link}>">
-				<img src="<{$pager.img}>/<{$item.thumb}>" alt="">
-			</a>
-			<{/KT}>
-			
-			<!-- <a href="">
+			<a href="">
 				<img src="%THEME%/static/images/193739.png" alt="">
 			</a>
 			<a href="">
 				<img src="%THEME%/static/images/193739.png" alt="">
-			</a> -->
+			</a>
+			<a href="">
+				<img src="%THEME%/static/images/193739.png" alt="">
+			</a>
 		</div>
 		<div class="zxgl_x_c fl">
 			<div class="zxgl_x_c_l fl">
-				<{adv id="114" name="网站首页优惠活动轮播图" city_id=$request.city_id}>
+				<a href="" class="img_x">
+					<img src="%THEME%/static/images/193739.png" alt="">
+				</a>
 				<div>
 					<h2>最新优惠活动</h2>
 					<ul>
-						<{KT id="158" name="网站首页优惠信息" city_id=$request.city_id}>
 						<li>
 							<p>[进行中]</p>
-							<a href="<{$item.link}>">
-								<{$item.title|cutstr:20}>
+							<a href="">
+								品牌盛宴-棕情众意-纵享品质
 							</a>
-							<span>发布时间：<i><{$item.dateline|format:"m-d"}></i></span>
-						</li>	
-						<{/KT}>
-						
-						<!-- <li>
+							<span>发布时间：<i>2017-06-01</i></span>
+						</li>
+						<li>
 							<p>[进行中]</p>
 							<a href="">
 								品牌盛宴-棕情众意-纵享品质
@@ -627,18 +617,15 @@
 								品牌盛宴-棕情众意-纵享品质
 							</a>
 							<span>发布时间：<i>2017-06-01</i></span>
-						</li> -->
+						</li>
 					</ul>
 				</div>
 			</div>
 			<div class="zxgl_x_c_r fl">
-				<{KT id="160" name="网站首页最新发布旁问答图文" city_id=$request.city_id}>
-				<a href="<{$item.link}>">
-					<img src="<{$pager.img}>/<{$item.thumb}>" alt="">
+				<a href="">
+					<img src="%THEME%/static/images/193739.png" alt="">
 				</a>
-				<{/KT}>
-				
-				<!-- <a href="">
+				<a href="">
 					<img src="%THEME%/static/images/193739.png" alt="">
 				</a>
 				<a href="">
@@ -646,33 +633,32 @@
 				</a>
 				<a href="">
 					<img src="%THEME%/static/images/193739.png" alt="">
-				</a> -->
+				</a>
 			</div>
 			<div class="zxgl_x_c_r1 fl">
 				<div class="zxgl_x_c_r_s">
 					<div class="zxgl_x_c_r_s1">
 						<h3 class="fl">最新发布</h3>
-						<span class="fr"><a href="<{$item.article}>">更多</a></span>
+						<span class="fr"><a href="">更多</a></span>
 					</div>
 					<div class="zxgl_x_c_r_s2">
 						<ul>
-							<{KT id="12" name="网站首页最新发布" city_id=$request.city_id}>
-								<li><a href="<{$item.link}>"><{$item.title|cutstr:20}></a></li>
-							<{/KT}>
-							
-							<!-- <li><a href="">验房注意事项及验房收房及验房收房及验房收房</a></li>
 							<li><a href="">验房注意事项及验房收房及验房收房及验房收房</a></li>
 							<li><a href="">验房注意事项及验房收房及验房收房及验房收房</a></li>
 							<li><a href="">验房注意事项及验房收房及验房收房及验房收房</a></li>
 							<li><a href="">验房注意事项及验房收房及验房收房及验房收房</a></li>
 							<li><a href="">验房注意事项及验房收房及验房收房及验房收房</a></li>
 							<li><a href="">验房注意事项及验房收房及验房收房及验房收房</a></li>
-							<li><a href="">验房注意事项及验房收房及验房收房及验房收房</a></li> -->
+							<li><a href="">验房注意事项及验房收房及验房收房及验房收房</a></li>
+							<li><a href="">验房注意事项及验房收房及验房收房及验房收房</a></li>
+							<li><a href="">验房注意事项及验房收房及验房收房及验房收房</a></li>
 						</ul>
 					</div>
 				</div>
 				<div class="zxgl_x_c_r_x">
-					<{adv id="115" name="网站首页最新发布下部轮播图" city_id=$request.city_id}>
+					<a href="">
+						<img src="%THEME%/static/images/193739.png" alt="">
+					</a>
 				</div>
 			</div>
 		</div>
@@ -692,46 +678,11 @@
 			</div>
 			<div class="jxwd_l_mor">
 				<p>"装修问题大杂烩，你想了解的都在这里"</p>
-				<p><a href="<{$item.ask}>">[了解更多]</a></p>
+				<p><a href="">[了解更多]</a></p>
 			</div>
 		</div>
 		<div class="jxwd_l_c">
 			<ul>
-				<{calldata mdl="ask/ask" answer_id='>:0' order="ask_id:desc" limit="15"}> 
-                <li>
-					<div class="fl tu">
-						<a target="_blank" href="<{link ctl='ask:detail' arg0=$item.ask_id}>">
-							<img src="<{$pager.img}>/<{$item.thumb}>" alt="">
-						</a>
-					</div>
-					<div class="fl wen">
-						<h3><a target="_blank" href="<{link ctl='ask:detail' arg0=$item.ask_id}>"><{$item.title|cutstr:50}></a></h3>
-						<span><{$item.intro}>
-						</span><a target="_blank" href="<{link ctl='ask:detail' arg0=$item.ask_id}>">[查看详情]</a>
-						<p>
-							<i class="jxwd_ic1"></i><span><{$item.views}></span>
-							<i class="jxwd_ic2"></i><span><{$item.comments}></span>
-						</p>
-					</div>
-				</li>
-                <{/calldata}>
-				
-				<!-- <li>
-					<div class="fl tu">
-						<a href="">
-							<img src="%THEME%/static/images/193739.png" alt="">
-						</a>
-					</div>
-					<div class="fl wen">
-						<h3><a href="">验房注意事项</a></h3>
-						<span>验房注意事项验房注意事项验房注意事项验房注意事项验房注意事项验房注意事项验房注意事项验房注意事项验房注意事项验房注意事项验房注意事项验房注意事项验房注意事项
-						</span><a href="">[查看详情]</a>
-						<p>
-							<i class="jxwd_ic1"></i><span>141</span>
-							<i class="jxwd_ic2"></i><span>1121</span>
-						</p>
-					</div>
-				</li>
 				<li>
 					<div class="fl tu">
 						<a href="">
@@ -779,36 +730,69 @@
 							<i class="jxwd_ic2"></i><span>1121</span>
 						</p>
 					</div>
-				</li> -->
+				</li>
+				<li>
+					<div class="fl tu">
+						<a href="">
+							<img src="%THEME%/static/images/193739.png" alt="">
+						</a>
+					</div>
+					<div class="fl wen">
+						<h3><a href="">验房注意事项</a></h3>
+						<span>验房注意事项验房注意事项验房注意事项验房注意事项验房注意事项验房注意事项验房注意事项验房注意事项验房注意事项验房注意事项验房注意事项验房注意事项验房注意事项
+						</span><a href="">[查看详情]</a>
+						<p>
+							<i class="jxwd_ic1"></i><span>141</span>
+							<i class="jxwd_ic2"></i><span>1121</span>
+						</p>
+					</div>
+				</li>
+				<li>
+					<div class="fl tu">
+						<a href="">
+							<img src="%THEME%/static/images/193739.png" alt="">
+						</a>
+					</div>
+					<div class="fl wen">
+						<h3><a href="">验房注意事项</a></h3>
+						<span>验房注意事项验房注意事项验房注意事项验房注意事项验房注意事项验房注意事项验房注意事项验房注意事项验房注意事项验房注意事项验房注意事项验房注意事项验房注意事项
+						</span><a href="">[查看详情]</a>
+						<p>
+							<i class="jxwd_ic1"></i><span>141</span>
+							<i class="jxwd_ic2"></i><span>1121</span>
+						</p>
+					</div>
+				</li>
 			</ul>
 		</div>
 		<div class="jxwd_l_x">
-			<a href="<{link ctl='ask'}>">更多</a>
+			<botton>更多</botton>
 		</div>
 	</div>
 	<div class="jxwd_r fl">
 		<h3>装修知识大讲堂</h3>
 		<p>已有<span>2359354</span>位业主在这里找到了答案</p>
-		<a href="<{link ctl='ask:make'}>">
+		<a href="">
 			我要提问
 		</a>
 		<p class="tx"><i></i>提问不方便？留个电话</p>
 		<p class="lx">装修管家会在30分钟内与您联系</p>
-		<form action="<{link ctl='tenders:save' http='base'}>" mini-form='tenders_tsj' id="tenders-tsj" method="post">
-			<input type="hidden" name="data[from]" value="TSJ" />
-				<input type="text" name="data[contact]" placeholder="请输入您的称呼">
-				<input type="text" name="data[mobile]" placeholder="请输入您的联系方式">
-				<input type="submit" value="提交">
+		<form action="">
+			<input type="text" placeholder="请输入您的称呼">
+			<input type="text" placeholder="请输入您的联系方式">
+			<input type="submit" value="提交">
 		</form>
 		<p>您还可以拨打我们的装修专线快速咨询！</p>
-		<p>(9:00-18:30)&nbsp;&nbsp;&nbsp;&nbsp;<{$CONFIG.site.phone}></p>
+		<p>(9:00-18:30)&nbsp;&nbsp;&nbsp;&nbsp;027-87011088</p>
 	</div>
 
 </div>
 
-<!--广告轮播3-->
+<!--广告轮播2-->
 <div class="gglunb3">
-	<{adv id="20" name="网站首页通栏广告1" city_id=$request.city_id}>
+	<a href="">
+		<img src="%THEME%/static/images/193739.png" alt="">
+	</a>
 </div>
 <!--家居热点-->
 
@@ -816,21 +800,18 @@
 	<div class="jjrd_bt">
 		<h1 class="fl">家居热点</h1>
 		<p class="fl">每一个热点 都包含了家装的无线可能</p>
-		<p class="fr"><a href="<{link ctl='article'}>">更多</a></p>
+		<p class="fr"><a href="">更多</a></p>
 	</div>
 	<div class="jjrd_left fl">
-		<{adv id="117" name="网站首页家居热点图片" city_id=$request.city_id}>
+		<a href=""><img src="%THEME%/static/images/193739.png" alt=""></a>
 	</div>
 	<div class="jjrd_content fl">
 		<ul>
-			<{KT id="162" name="网站首页家居热点" city_id=$request.city_id}>
 			<li>
-				<a href="<{$item.link}>"><{$item.title}></a>
-				<p><{$item.desc}></p>
+				<a href="">水电改造布线规范的标准是什么</a>
+				<p>水电布线,横平竖直是家装行业的规范,主要目的是:一、美观整洁,便于后期维修;二、方便其它工序施工,如铺实木地板时要打木条,走线整齐方便定位打钉,避免错打线管,造成危险。 暗埋布线方式一： 从墙面A点向另一墙面B点暗埋敷设管线此种改造方式：属于不符合国家标准改造要求、同时属于绕线的暗线敷设方式。 不合格的原因及影响： 线管超出两个直角弯未增加过线盒，后续如果发生线路损坏，无法进行抽拉更换线路检修，只能是砸墙砸地重新埋管布线，或者是走明线处理。 暗埋布线方式二： 从墙面A点向另一墙面B点暗埋敷设管线此种改造方式：属于符合国家标准要求、同时属于最优化的暗线敷设方式。 暗埋布线方式三： 从墙面A点向另一墙面B点暗埋敷设管线此种改造方式：符合国家标准改造要求、但也会增加线管长度的暗线敷设方式。</p>
 			</li>
-			<{/KT}>
-			
-			<!-- <li>
+			<li>
 				<a href="">水电改造布线规范的标准是什么</a>
 				<p>水电布线,横平竖直是家装行业的规范,主要目的是:一、美观整洁,便于后期维修;二、方便其它工序施工,如铺实木地板时要打木条,走线整齐方便定位打钉,避免错打线管,造成危险。 暗埋布线方式一： 从墙面A点向另一墙面B点暗埋敷设管线此种改造方式：属于不符合国家标准改造要求、同时属于绕线的暗线敷设方式。 不合格的原因及影响： 线管超出两个直角弯未增加过线盒，后续如果发生线路损坏，无法进行抽拉更换线路检修，只能是砸墙砸地重新埋管布线，或者是走明线处理。 暗埋布线方式二： 从墙面A点向另一墙面B点暗埋敷设管线此种改造方式：属于符合国家标准要求、同时属于最优化的暗线敷设方式。 暗埋布线方式三： 从墙面A点向另一墙面B点暗埋敷设管线此种改造方式：符合国家标准改造要求、但也会增加线管长度的暗线敷设方式。</p>
 			</li>
@@ -841,7 +822,7 @@
 			<li>
 				<a href="">水电改造布线规范的标准是什么</a>
 				<p>水电布线,横平竖直是家装行业的规范,主要目的是:一、美观整洁,便于后期维修;二、方便其它工序施工,如铺实木地板时要打木条,走线整齐方便定位打钉,避免错打线管,造成危险。 暗埋布线方式一： 从墙面A点向另一墙面B点暗埋敷设管线此种改造方式：属于不符合国家标准改造要求、同时属于绕线的暗线敷设方式。 不合格的原因及影响： 线管超出两个直角弯未增加过线盒，后续如果发生线路损坏，无法进行抽拉更换线路检修，只能是砸墙砸地重新埋管布线，或者是走明线处理。 暗埋布线方式二： 从墙面A点向另一墙面B点暗埋敷设管线此种改造方式：属于符合国家标准要求、同时属于最优化的暗线敷设方式。 暗埋布线方式三： 从墙面A点向另一墙面B点暗埋敷设管线此种改造方式：符合国家标准改造要求、但也会增加线管长度的暗线敷设方式。</p>
-			</li> -->
+			</li>
 
 		</ul>
 	</div>
@@ -850,13 +831,10 @@
 			<p>本地新闻</p>
 		</div>
 		<ul>
-			<{KT id="163" name="网站首页本地新闻" city_id=$request.city_id}>
 			<li>
-				<p><a href="<{$item.link}>"><{$item.title}></a></p>
+				<p><a href="">盛星五周年店庆狂欢日，重享更多优惠</a></p>
 			</li>
-			<{/KT}>
-			
-			<!-- <li>
+			<li>
 				<p><a href="">盛星五周年店庆狂欢日，重享更多优惠</a></p>
 			</li>
 			<li>
@@ -873,7 +851,7 @@
 			</li>
 			<li>
 				<p><a href="">盛星五周年店庆狂欢日，重享更多优惠</a></p>
-			</li> -->
+			</li>
 		</ul>
 	</div>
 

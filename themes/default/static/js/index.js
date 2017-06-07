@@ -37,13 +37,6 @@ $('ul.index_case_list li').mouseover(function(){
      });                   
 $(".index_case h2.index_tit span.tit_list a").eq(0).mouseover();
 
-//首页最新订单文字无缝滚动效果
-$(function(){
-    $("div.index_nwod_box").myScroll({
-        speed:40, //数值越大，速度越慢
-        rowHeight:40 //li的高度
-    });
-});
 
 //首页在建工地切换
 $(".index_site li").mouseover(function(){
