@@ -620,6 +620,129 @@ textarea {
 	height: 100%;
 }
 
+
+/*二级菜单面积计算表单*/
+
+.menu_ej_r .mjjs {
+	position: relative;
+	overflow: hidden;
+}
+
+.menu_ej_r .mjjs .mjjs_f1 {
+	width: 450px;
+	height: 411px;
+	box-sizing: border-box;
+	border-right: 1px solid #ddd;
+}
+
+.menu_ej_r .mjjs .mjjs_f1 .p1 {
+	color: #ffcc66;
+	text-align: center;
+	margin-top: 30px;
+}
+
+.menu_ej_r .mjjs .mjjs_f1 .p2 {
+	text-align: left;
+	margin-left: 30px;
+	margin-top: 10px;
+}
+
+.menu_ej_r .mjjs .mjjs_f1 form {
+	width: 260px;
+	height: 270px;
+	margin-top: 40px;
+	margin-left: 80px;
+}
+
+.menu_ej_r .mjjs .mjjs_f1 form .se3 select {
+	width: 32%;
+	height: 40px;
+}
+
+.menu_ej_r .mjjs .mjjs_f1 form .se2 select {
+	width: 49%;
+	height: 40px;
+	margin-top: 10px;
+	margin-bottom: 15px;
+}
+
+.menu_ej_r .mjjs .mjjs_f1 form .in1 {
+	display: block;
+	width: 100%;
+	height: 40px;
+	position: relative;
+	margin: 15px 0;
+}
+
+.menu_ej_r .mjjs .mjjs_f1 form .in1 span {
+	position: absolute;
+	right: 5px;
+	top: 10px;
+}
+
+.menu_ej_r .mjjs .mjjs_f1 form input {
+	width: 100%;
+	height: 40px;
+	box-sizing: border-box;
+	border: 1px solid #ddd;
+	padding-left: 10px;
+}
+
+.menu_ej_r .mjjs .mjjs_bt {
+	position: absolute;
+	left: 385px;
+	top: 100px;
+}
+
+.menu_ej_r .mjjs .mjjs_bt input {
+	width: 135px;
+	height: 125px;
+	background: url(../images/zxb.jpg) no-repeat;
+	background-position: 0 -169px;
+	cursor: pointer;
+}
+
+.menu_ej_r .mjjs .mjjs_bt:hover input {
+	background-position: 0 -2px;
+}
+
+.menu_ej_r .mjjs .mjjs_jg {
+	width: 400px;
+	height: 410px;
+}
+
+.menu_ej_r .mjjs .mjjs_jg h3 {
+	text-align: center;
+}
+
+.menu_ej_r .mjjs .mjjs_jg h3 span {
+	color: #ff6633;
+	font-size: 40px;
+	margin: 0 20px;
+}
+
+.menu_ej_r .mjjs .mjjs_jg div {
+	width: 340px;
+	height: 205px;
+	border: 1px solid #ddd;
+	box-sizing: border-box;
+	margin-left: 80px;
+	margin-top: 35px;
+}
+
+.menu_ej_r .mjjs .mjjs_jg div p {
+	text-align: center;
+	margin: 20px 0;
+}
+
+.menu_ej_r .mjjs .mjjs_jg div p span {
+	font-size: 20px;
+	margin: 0 20px;
+}
+
+
+/*二级菜单面积计算表单*/
+
 .menu_ej i {
 	display: block;
 	width: 36px;
@@ -804,7 +927,7 @@ i.menu_icn5 {
 .cnxy {
 	width: 1200px;
 	height: 100px;
-	margin: 20px auto 20px;
+	margin: 480px auto 20px;
 }
 
 .cnxy ul li {
@@ -1079,7 +1202,6 @@ i.menu_icn5 {
 	width: 100%;
 	height: 100%;
 }
-
 
 
 /*广告轮播一*/
@@ -1727,14 +1849,14 @@ i.menu_icn5 {
 	height: 100%;
 }
 
-/*.zxgl_x .zxgl_x_c .zxgl_x_c_l div {
+.zxgl_x .zxgl_x_c .zxgl_x_c_l div {
 	width: 490px;
 	height: 154px;
 	border: 1px solid #ddd;
 	box-sizing: border-box;
 	padding: 15px;
 	margin-top: 17px;
-}*/
+}
 
 .zxgl_x .zxgl_x_c .zxgl_x_c_l div ul li {
 	display: block;
@@ -2337,4 +2459,10 @@ i.menu_icn5 {
 
 .footer ul li:nth-child(5) p:last-child:hover a {
 	color: #FFF;
+}
+
+div.jg {
+	display: none;
+	color: red;
+	height: 1rem;
 }

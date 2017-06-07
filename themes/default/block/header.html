@@ -1,104 +1,658 @@
 <!DOCTYPE html>
-<html xmlns="http://www.w3.org/1999/xhtml">
+<html lang="en">
+
 <head>
 <{include file="block/sheader.html"}>
 </head>
+
 <body class="pagewd">
 <iframe id="miniframe" name="miniframe" style="display:none;"></iframe>
-<!--头部内容开始-->
-<{include file="block/top-header.html"}>
-<div class="main_header">
-	<div class="mainwd top_bottom">
-		<div class="logo lt">
-			<a href="<{link ctl='index'}>"><img src="<{if $CONFIG.site.logo}><{$pager.img}>/<{$CONFIG.site.logo}><{else}>%THEME%/static/images/logo.png<{/if}>" class="logo lt" /></a>
-			<p class="lt"><font><img src="<{$pager.theme}>/default/static/images/here.png"><{$request.city.city_name}></font>
-				<{if $CONFIG.site.multi_city}><a href="<{link ctl='city' http='www'}>" class="fontcl1">[切换城市]</a><{/if}>
-			</p>
-		</div>
-		<div class="search_box lt">
-			<{widget id="public/sobox" sokw=$pager.sokw}>
-		</div>
-		<div class="site_commitment rt">
-			<ul>
-				<li><a href="<{link ctl='zxb'}>"><span class="index_ico ico1"></span></a></li>
-				<li><a href="<{link ctl='zxb'}>"><span class="index_ico ico2"></span></a></li>
-			</ul>
+	<div class="head-nav">
+		<{include file="block/top-header.html"}>
+	</div>
+	<div class="head clear">
+		<ul>
+			<li>
+				<a href="" title="优优美家"><img src="%THEME%/static/images/index_logo.png" alt="优优美家"></a>
+			</li>
+			<li>
+				<{widget id="public/sobox" sokw=$pager.sokw}>
+				<!-- <form action="">
+					<div class="head-form">
+						<span>装修知识</span>
+						<ul style="display:none;">
+							<li>装修知识1</li>
+							<li>装修知识2</li>
+							<li>装修知识3</li>
+							<li>装修知识4</li>
+						</ul>
+						<p>请输入关键字</p>
+						<p>搜索</p>
+					</div>
+				</form> -->
+			</li>
+			<li class="head-tel">
+				<img src="%THEME%/static/images/index_tel.png" alt="电话">
+			</li>
+		</ul>
+	</div>
+	<div class="menu  clear">
+		<div class="menu-company clear">
+			<div class="menu_sel">
+				<p class="menu-mour"><i></i>服务分类</p>
+				<!--				二级左侧菜单-->
+				<div id="menu_er">
+
+
+					<ul class="menu_ul">
+						<li class="menu_wid">
+							<div class="menu_ej">
+								<i class="menu_icn0 me_i1"></i>
+								<a href="">
+
+									<p class="pa">找装修公司</p>
+									<p class="pa">口碑好不好？施工质量行不行？</p>
+								</a>
+							</div>
+						</li>
+						<li class="menu_wid">
+							<div class="menu_ej">
+								<i class="menu_icn1"></i>
+								<a href="">
+									<p>找装修公司</p>
+									<p>口碑好不好？施工质量行不行？</p>
+								</a>
+							</div>
+						</li>
+						<li class="menu_wid">
+							<div class="menu_ej">
+								<i class="menu_icn2"></i>
+								<a href="">
+									<p>找装修公司</p>
+									<p>口碑好不好？施工质量行不行？</p>
+								</a>
+							</div>
+						</li>
+						<li class="menu_wid">
+							<div class="menu_ej">
+								<i class="menu_icn3"></i>
+								<a href="">
+									<p>找装修公司</p>
+									<p>口碑好不好？施工质量行不行？</p>
+								</a>
+							</div>
+						</li>
+						<li class="menu_wid">
+							<div class="menu_ej">
+								<i class="menu_icn4"></i>
+								<a href="">
+									<p>找装修公司</p>
+									<p>口碑好不好？施工质量行不行？</p>
+								</a>
+							</div>
+						</li>
+						<li class="menu_wid">
+							<div class="menu_ej">
+								<i class="menu_icn5"></i>
+								<a href="">
+									<p>找装修公司</p>
+									<p>口碑好不好？施工质量行不行？</p>
+								</a>
+							</div>
+						</li>
+					</ul>
+					<!--				二级右侧菜单-->
+					<div class="menu_ej_r clear" style="display:none;">
+						<div class="menu_ej_r_l fl">
+							<div class="sigma-content">
+								<div class="sigma-middle-line">
+									<span class="sigma-line-text">101秒登记，快速找到靠谱装修公司</span>
+								</div>
+							</div>
+							<div class="menu_ej_r_l_f fl">
+								<form action="<{link ctl='tenders:save' http='base'}>" mini-form='tenders_tsj' id="tenders-tsj" method="post">
+                				<input type="hidden" name="data[from]" value="TSJ" />
+									<label for="">
+									<input type="text" name="data[contact]" placeholder="请输入您的称呼">
+								</label>
+									<label for="">
+									<input type="text" name="data[mobile]" placeholder="请输入您的联系方式">
+								</label>
+									<label for="">
+									<{widget id="tenders/setting" type="type"}>
+									<!-- <select name="" id="" class="lx">
+										<option value="">请选择装修类型</option>
+										<option value="">半包</option>
+										<option value="">全包</option>
+									</select> -->
+								</label>
+									<label for="">
+									<{widget id="data/region" city_id=$request.city_id class="text short"}>
+									<!-- <select name="" id="" class="dq1">
+										<option value="">武汉</option>
+									</select>
+									<select name="" id="" class="dq2">
+										<option value="">江汉</option>
+										<option value="">汉口</option>
+									</select> -->
+								</label>
+									<label for="">
+									<input type="submit" value="立即提交">
+								</label>
+
+								</form>
+								<p>您的信息我们将严格保密，请放心填写！</p>
+							</div>
+							<div class="menu_ej_r_l_img fl">
+								<a href="">
+									<img src="%THEME%/static/images/193739.png" alt="">
+								</a>
+								<p>严审装修公司资质</p>
+								<p>精选上好口碑公司</p>
+								<p>享优优美家保障计划</p>
+
+							</div>
+						</div>
+						<div class="menu_ej_r_r fl">
+							<p>品牌装修公司</p>
+							<ul>
+								<{KT id="2" name="网站首页1F推荐装修公司" city_id=$request.city_id}>
+								<li>
+									<a href="<{$item.link}>">
+										<img src="<{$pager.img}>/<{$item.logo}>" alt="">
+									</a>
+								</li>
+								<{/KT}>
+								
+								<!-- <li>
+									<a href="">
+										<img src="%THEME%/static/images/193739.png" alt="">
+									</a>
+								</li>
+								<li>
+									<a href="">
+										<img src="%THEME%/static/images/193739.png" alt="">
+									</a>
+								</li>
+								<li>
+									<a href="">
+										<img src="%THEME%/static/images/193739.png" alt="">
+									</a>
+								</li>
+								<li>
+									<a href="">
+										<img src="%THEME%/static/images/193739.png" alt="">
+									</a>
+								</li> -->
+							</ul>
+						</div>
+					</div>
+					<div class="menu_ej_r clear" style="display:none;">
+						<div class="menu_ej_r_l fl">
+							<div class="sigma-content">
+								<div class="sigma-middle-line">
+									<span class="sigma-line-text">合理规划空间布局，有效使用房屋面积</span>
+								</div>
+							</div>
+							<div class="menu_ej_r_l_f fl">
+								<form action="">
+									<label for="">
+									<input type="text" placeholder="请输入您的称呼">
+								</label>
+									<label for="">
+									<input type="text" placeholder="请输入您的联系方式">
+								</label>
+									<label for="">
+									<select name="" id="" class="lx">
+										<option value="">请选择装修类型</option>
+										<option value="">半包</option>
+										<option value="">全包</option>
+									</select>
+								</label>
+									<label for="">
+									<select name="" id="" class="dq1">
+										<option value="">武汉</option>
+									</select>
+									<select name="" id="" class="dq2">
+										<option value="">江汉</option>
+										<option value="">汉口</option>
+									</select>
+								</label>
+									<label for="">
+									<input type="submit" value="立即提交">
+								</label>
+
+								</form>
+								<p>您的信息我们将严格保密，请放心填写！</p>
+							</div>
+							<div class="menu_ej_r_l_img fl">
+								<a href="">
+									<img src="%THEME%/static/images/193739.png" alt="">
+								</a>
+								<p>专业设计师现身量房</p>
+								<p>帮你合理规划颜色搭配，采光和空间布局</p>
+								<p>四家公司为您免费出设计方案</p>
+								<p>不满意可重复修改，到您满意为止</p>
+
+							</div>
+						</div>
+						<div class="menu_ej_r_r fl jxsjs">
+							<p>精英设计师</p>
+							<ul>
+								<li>
+									<a href="">
+										<img src="%THEME%/static/images/193739.png" alt="">
+										<div>
+											<p>张燕</p>
+											<p>点击查看</p>
+										</div>
+
+									</a>
+								</li>
+								<li>
+									<a href="">
+										<img src="%THEME%/static/images/193739.png" alt="">
+										<div>
+											<p>张燕</p>
+											<p>点击查看</p>
+										</div>
+									</a>
+								</li>
+								<li>
+									<a href="">
+										<img src="%THEME%/static/images/193739.png" alt="">
+										<div>
+											<p>张燕</p>
+											<p>点击查看</p>
+										</div>
+									</a>
+								</li>
+								<li>
+									<a href="">
+										<img src="%THEME%/static/images/193739.png" alt="">
+										<div>
+											<p>张燕</p>
+											<p>点击查看</p>
+										</div>
+									</a>
+								</li>
+
+							</ul>
+						</div>
+					</div>
+					<div class="menu_ej_r clear" style="display:none;">
+						<div class="menu_ej_r_l fl">
+							<div class="sigma-content">
+								<div class="sigma-middle-line">
+									<span class="sigma-line-text">合理规划空间布局，有效使用房屋面积</span>
+								</div>
+							</div>
+							<div class="menu_ej_r_l_f fl">
+								<form action="">
+									<label for="">
+									<input type="text" placeholder="请输入您的称呼">
+								</label>
+									<label for="">
+									<input type="text" placeholder="请输入您的联系方式">
+								</label>
+									<label for="">
+									<select name="" id="" class="lx">
+										<option value="">请选择装修类型</option>
+										<option value="">半包</option>
+										<option value="">全包</option>
+									</select>
+								</label>
+									<label for="">
+									<select name="" id="" class="dq1">
+										<option value="">武汉</option>
+									</select>
+									<select name="" id="" class="dq2">
+										<option value="">江汉</option>
+										<option value="">汉口</option>
+									</select>
+								</label>
+									<label for="">
+									<input type="submit" value="立即提交">
+								</label>
+
+								</form>
+								<p>您的信息我们将严格保密，请放心填写！</p>
+							</div>
+							<div class="menu_ej_r_l_img fl">
+								<a href="">
+									<img src="%THEME%/static/images/193739.png" alt="">
+								</a>
+								<p>保证公平公正，不偏袒任何一方</p>
+								<p>严格审核消费节点，无隐性消费</p>
+								<p>专业施工监理，十余年工程经验</p>
+								<p>严格审核施工材料及每个施工环节</p>
+							</div>
+						</div>
+						<div class="menu_ej_r_r fl menu_ej_p3">
+							<ul>
+								<li>
+									<a href="">
+										约
+									</a>
+									<p>电话预约，上门服务</p>
+								</li>
+								<li>
+									<a href="">
+								定
+									</a>
+									<p>签订服务协议</p>
+									<p>确定开工日期</p>
+								</li>
+
+							</ul>
+						</div>
+					</div>
+					<div class="menu_ej_r clear" style="display:none;">
+						<div class="sigma-content">
+							<div class="sigma-middle-line">
+								<span class="sigma-line-text">装修得花多少钱，提前算一算</span>
+							</div>
+						</div>
+						<div class="mjjs">
+							<div class="mjjs_f1 fl">
+								<p class="p1">今天已有128位业主获得了装修预算</p>
+								<form action="">
+									<label for="" class="se3">
+										<select name="" id="">
+											<option value="">湖北</option>
+										</select>
+										<select name="" id="">
+											<option value="">武汉</option>
+											<option value="">黄冈</option>
+											<option value="">恩施</option>
+										</select>
+										<select name="" id="">
+											<option value="">武昌</option>
+											<option value="">汉口</option>
+											<option value="">汉阳</option>
+										</select>
+									</label>
+									<label for="" class="in1">
+										<input type="text" placeholder="输入您的房屋面积" class="squre">
+										<span>m&sup2;</span>
+									</label>
+									<label for="" class="se3">
+												<select name="shi"  id="shi">
+											 									<option value="1">1室</option>
+                                        <option value="2">2室</option>
+                                        <option value="3">3室</option>
+                                        <option value="4">4室</option>
+                                        <option value="5">5室</option>
+                                        <option value="6">6室</option>
+												</select>
+												<select name="ting" id="ting">
+																				<option value="1">1厅</option>
+                                        <option value="2">2厅</option>
+                                        <option value="3">3厅</option>
+                                        <option value="4">4厅</option>
+                                        <option value="5">5厅</option>
+                                        <option value="6">6厅</option>
+												</select>
+												<select name="chu"  id="chu">
+									  										<option value="1">1厨</option>
+                                        <option value="2">2厨</option>
+                                        <option value="3">3厨</option>
+												</select>
+									</label>
+									<label for="" class="se2">
+												<select name="wei" id="wei">
+											 									<option value="1">1卫</option>
+                                        <option value="2">2卫</option>
+                                        <option value="3">3卫</option>
+                                        <option value="4">4卫</option>
+                                        <option value="5">5卫</option>
+                                        <option value="6">6卫</option>
+												</select>
+												<select name="yangtai" id="yangtai">
+																				<option value="1">1阳台</option>
+                                        <option value="2">2阳台</option>
+                                        <option value="3">3阳台</option>
+                                        <option value="4">4阳台</option>
+                                        <option value="5">5阳台</option>
+                                        <option value="6">6阳台</option>
+												</select>
+									
+									</label>
+									<input type="text" placeholder="请输入您的联系方式" class="phone">
+								</form>
+								<p class="p2"><i></i>优优美家承诺：我们将严格保密您的私人信息，此服务为全程免费，绝无任何收费信息</p>
+							</div>
+							<div class="mjjs_bt">
+								<input type="submit" value="">
+							</div>
+							<div class="mjjs_jg fl">
+								<h3>您的装修预算<span>?</span>元</h3>
+								<div>
+									<p id="cailiaof">材料费：<span>?</span>元</p>
+									<p id="rengongf">人工费：<span>?</span>元</p>
+									<p id="zhijianf">质检费：<span>?</span>元</p>
+									<p id="shejif">设计费：<span>?</span>元</p>
+								</div>
+							</div>
+						</div>
+					</div>
+					<div class="menu_ej_r clear" style="display:none;">
+						<div class="menu_ej_r_l fl">
+							<div class="sigma-content">
+								<div class="sigma-middle-line">
+									<span class="sigma-line-text">105秒登记，快速找到靠谱装修公司</span>
+								</div>
+							</div>
+							<div class="menu_ej_r_l_f fl">
+								<form action="">
+									<label for="">
+									<input type="text" placeholder="请输入您的称呼">
+								</label>
+									<label for="">
+									<input type="text" placeholder="请输入您的联系方式">
+								</label>
+									<label for="">
+									<select name="" id="" class="lx">
+										<option value="">请选择装修类型</option>
+										<option value="">半包</option>
+										<option value="">全包</option>
+									</select>
+								</label>
+									<label for="">
+									<select name="" id="" class="dq1">
+										<option value="">武汉</option>
+									</select>
+									<select name="" id="" class="dq2">
+										<option value="">江汉</option>
+										<option value="">汉口</option>
+									</select>
+								</label>
+									<label for="">
+									<input type="submit" value="立即提交">
+								</label>
+
+								</form>
+								<p>您的信息我们将严格保密，请放心填写！</p>
+							</div>
+							<div class="menu_ej_r_l_img fl">
+								<a href="">
+									<img src="%THEME%/static/images/193739.png" alt="">
+								</a>
+								<p>严审装修公司资质</p>
+								<p>精选上好口碑公司</p>
+								<p>享优优美家保障计划</p>
+
+							</div>
+						</div>
+						<div class="menu_ej_r_r fl">
+							<p>品牌装修公司</p>
+							<ul>
+								<li>
+									<a href="">
+										<img src="%THEME%/static/images/193739.png" alt="">
+									</a>
+								</li>
+								<li>
+									<a href="">
+										<img src="%THEME%/static/images/193739.png" alt="">
+									</a>
+								</li>
+								<li>
+									<a href="">
+										<img src="%THEME%/static/images/193739.png" alt="">
+									</a>
+								</li>
+								<li>
+									<a href="">
+										<img src="%THEME%/static/images/193739.png" alt="">
+									</a>
+								</li>
+								<li>
+									<a href="">
+										<img src="%THEME%/static/images/193739.png" alt="">
+									</a>
+								</li>
+							</ul>
+						</div>
+					</div>
+					<div class="menu_ej_r clear" style="display:none;">
+						<div class="menu_ej_r_l fl">
+							<div class="sigma-content">
+								<div class="sigma-middle-line">
+									<span class="sigma-line-text">106秒登记，快速找到靠谱装修公司</span>
+								</div>
+							</div>
+							<div class="menu_ej_r_l_f fl">
+								<form action="">
+									<label for="">
+									<input type="text" placeholder="请输入您的称呼">
+								</label>
+									<label for="">
+									<input type="text" placeholder="请输入您的联系方式">
+								</label>
+									<label for="">
+									<select name="" id="" class="lx">
+										<option value="">请选择装修类型</option>
+										<option value="">半包</option>
+										<option value="">全包</option>
+									</select>
+								</label>
+									<label for="">
+									<select name="" id="" class="dq1">
+										<option value="">武汉</option>
+									</select>
+									<select name="" id="" class="dq2">
+										<option value="">江汉</option>
+										<option value="">汉口</option>
+									</select>
+								</label>
+									<label for="">
+									<input type="submit" value="立即提交">
+								</label>
+
+								</form>
+								<p>您的信息我们将严格保密，请放心填写！</p>
+							</div>
+							<div class="menu_ej_r_l_img fl">
+								<a href="">
+									<img src="%THEME%/static/images/193739.png" alt="">
+								</a>
+								<p>严审装修公司资质</p>
+								<p>精选上好口碑公司</p>
+								<p>享优优美家保障计划</p>
+
+							</div>
+						</div>
+						<div class="menu_ej_r_r fl">
+							<p>品牌装修公司</p>
+							<ul>
+								<li>
+									<a href="">
+										<img src="%THEME%/static/images/193739.png" alt="">
+									</a>
+								</li>
+								<li>
+									<a href="">
+										<img src="%THEME%/static/images/193739.png" alt="">
+									</a>
+								</li>
+								<li>
+									<a href="">
+										<img src="%THEME%/static/images/193739.png" alt="">
+									</a>
+								</li>
+								<li>
+									<a href="">
+										<img src="%THEME%/static/images/193739.png" alt="">
+									</a>
+								</li>
+								<li>
+									<a href="">
+										<img src="%THEME%/static/images/193739.png" alt="">
+									</a>
+								</li>
+							</ul>
+						</div>
+					</div>
+
+				</div>
+			</div>
+			<div class="menu_nav fl">
+
+				<div class="header-menu fl">
+					<ul>
+						<li><a href="/">首页</a></li>
+						<li class="menu_main">
+							<a href="">
+								<em class="menu-icon"></em> 装修图库
+							</a>
+							<dl class="menu-son" style="display:none;">
+								<dd>
+									<a href="">美图专题</a>
+								</dd>
+								<dd><a href="">案例中心</a></dd>
+							</dl>
+						</li>
+						<li class="menu_main">
+							<a href="">
+								<em class="menu-icon"></em> 装修图库
+							</a>
+							<dl class="menu-son" style="display:none;">
+								<dd>
+									<a href="">美图专题</a>
+								</dd>
+								<dd><a href="">案例中心</a></dd>
+							</dl>
+						</li>
+						<li class="menu_main">
+							<a href="">
+								<em class="menu-icon"></em> 装修图库
+							</a>
+							<dl class="menu-son" style="display:none;">
+								<dd>
+									<a href="">美图专题</a>
+								</dd>
+								<dd><a href="">案例中心</a></dd>
+							</dl>
+						</li>
+						<li class="menu_main">
+							<a href="">
+								<em class="menu-icon"></em> 装修图库
+							</a>
+							<dl class="menu-son" style="display:none;">
+								<dd>
+									<a href="">美图专题</a>
+								</dd>
+								<dd><a href="">案例中心</a></dd>
+							</dl>
+						</li>
+					</ul>
+				</div>
+
+				<p class="menu-limg fr">
+					<a href=""><img src="%THEME%/static/images/index_gif.png" alt="海量家居美图"></a>
+					<img src="%THEME%/static/images/index_ma.png" alt="" class="menu-er">
+				</p>
+			</div>
 		</div>
 	</div>
-	<div class="main_nav">
-		<div class="mainwd hoverno">
-			<ul>
-				<li><a href="<{link ctl='index'}>" <{if $request.ctl=='index'}>class="current"<{/if}>>首页</a>
-				</li>
-				<li>
-					<a <{if $request.ctl=='tenders' || $request.ctl=='topics' || $request.ctl=='zbdt' || $request.ctl=='truste' }>class="current"<{/if}> href="<{link ctl='tenders'}>">我要装修</a>
-					<ul class="main_nav_son none">
-						<li><a href="<{link ctl='topics'}>">装修贷款</a></li>
-						<li><a href="<{link ctl='zbdt'}>">招标大厅</a></li>
-                        <li><a href="<{link ctl='truste'}>">维修招标</a></li>
-					</ul>
-				</li>
-				<li>
-					<a <{if $request.ctl=='gs' || $request.ctl=='designer' || $request.ctl=='gz'   || $request.ctl=='mechanic' || $request.ctl=='youhui' || $request.ctl=='supervist' }>class="current"<{/if}> href="<{link ctl='gs'}>">找装修公司</a>
-					<ul class="main_nav_son none">
-						<li><a href="<{link ctl='gs'}>">找装修公司</a></li>
-						<li><a href="<{link ctl='designer'}>">找设计师</a></li>
-						<li><a href="<{link ctl='gz'}>">找工长</a></li>
-						<li><a href="<{link ctl='mechanic'}>">找工人</a></li>
-                        <li><a href="<{link ctl='supervist'}>">找监理</a>
-						</li>
-						<li><a href="<{link ctl='youhui'}>">优惠信息</a>
-						</li>
-					</ul>
-				</li>
-				<li>
-					<a <{if $request.ctl=='home' || $request.ctl=='site'}>class="current"<{/if}> href="<{link ctl='home'}>">我搜我家</a>
-					<ul class="main_nav_son none">
-						<li><a href="<{link ctl='home'}>">小区楼盘</a></li>
-						<li><a href="<{link ctl='home:map'}>">楼盘地图</a></li>
-						<li><a href="<{link ctl='site'}>">在建工地 </a></li>
-						<li><a href="<{link ctl='home:tuan'}>">团装小区</a></li>
-					</ul>
-				</li>
-				<li><a <{if $request.ctl=='case'}>class="current"<{/if}> href="<{link ctl='case'}>">装修案例</a></li>
-				<li>
-					<a <{if $request.ctl=='article' || $request.ctl=='diary' || $request.ctl=='ask' }>class="current"<{/if}> href="<{link ctl='article'}>">学装修</a>
-					<ul class="main_nav_son none">
-						<li><a href="<{link ctl='diary'}>">装修日记</a></li>
-						<li><a href="<{link ctl='ask'}>">知识问答</a></li>
-						<li><a href="<{link ctl='article'}>">装修课堂</a></li>
-					</ul>
-				</li>
-				<li><a <{if $request.ctl=='activity' || $request.ctl=='mall/coupon'}>class="current"<{/if}> href="<{link ctl='activity'}>">优惠活动</a>
-				<ul class="main_nav_son none">
-						<li><a href="<{link ctl='mall/coupon-items'}>">优惠券</a></li>
-					</ul>
-				</li>
-                <li><a <{if $request.ctl=='news'}>class="current"<{/if}> href="<{link ctl='news'}>">本地新闻</a>
-				</li>
-				<li class="last">
-					<a <{if $request.ctl=='mall/index' || $request.ctl=='mall/store' || $request.ctl=='jfproduct/jfproduct' || $request.ctl=='brand/brand' }>class="current"<{/if}> href="<{link ctl='mall'}>">家居商城</a>
-					<ul class="main_nav_son none">
-						<li><a href="<{link ctl='mall/index'}>">商城主页</a></li>
-						<li><a  href="<{link ctl='mall/store'}>">商家列表</a></li>
-						<li><a  href="<{link ctl='jfproduct/jfproduct'}>">积分商城</a></li>
-						<li><a  href="<{link ctl='brand/brand'}>">品牌筛选</a></li>
-					</ul>
-				</li>
-			</ul>
-		</div>
-	</div>
-</div>
-<script type="text/javascript">
-$(document).ready(function() {			
-	//绿色导航
-	$(".main_nav ul li").mouseover(function(){
-		$(this).find(".main_nav_son").show();
-		$(this).addClass('current');
-	}).mouseleave(function(){
-		$(this).removeClass('current');
-		$(this).find(".main_nav_son").hide();
-		
-	});
-});
-</script>
