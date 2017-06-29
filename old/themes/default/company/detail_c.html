@@ -1,0 +1,27 @@
+<div class="comIntro_hd lt">
+    <a target="_blank" title="<{$item.name}>" href="<{$company.company_url}>"><img src="<{$pager.img}>/<{$company.thumb}>" /></a>
+     <a href="<{link ctl='gs:yuyue'  arg0=$company.company_id http='ajax'}>" mini-width='500' mini-load="免费预约" class="btn_sub_big btn">免费预约</a>
+     <p>已有<font class="fontcl2"><{$company.yuyue_num}></font>人咨询</p>
+</div>
+<div class="comIntro_bd rt">
+    <div class="comIntro_bd_top" >
+        <h2><a target="_blank" title="<{$company.name}>" href="<{$company.company_url}>"><{$company.title}></a></h2>
+        <p class="sp_list"><span>案例：<{$company.case_num}></font>套 </span><span>在建工地：<font class="fontcl2"><{$company.site_num}></font>套</span><span>签单数：<font class="fontcl2"><{$company.tenders_num}></font>单</span><span>预约数：<font class="fontcl2"><{$company.yuyue_num}></font>人</span></p>
+        <p>地址：<{$company.addr|cutstr:70}></p>
+        <div class="comIntro_bd_koubei">
+            <p>口碑值</p>
+            <h2 class="fontcl2"><{$company.score}></h2>
+        </div>
+    </div>
+    <div class="comIntro_bd_bot">
+        <p class="intro"><{$company.info|strip_tags|cutstr:200}><a href="<{$company.company_url}>" class="fontcl1">更多>></a></p>
+        <ul class="case">
+        	<{foreach $case as $item}>
+            	 <li>
+                    <a target="_blank" href="<{link ctl='case:detail' arg0=$item.case_id}>"><img src="<{$pager.img}>/<{$item.photo}>_thumb.jpg" /></a>
+                </li>
+            <{/foreach}>
+        </ul>
+    </div>
+</div>
+<div class="cl"></div>

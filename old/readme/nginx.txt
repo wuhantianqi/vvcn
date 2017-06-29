@@ -1,0 +1,10 @@
+location ~* /themes\/.*\.(html|xml)$ {
+    return 403;
+}
+location ~* /system\/.*$ {
+    return 403;
+}
+if (!-e $request_filename) {
+    rewrite ^/attachs/demo/(.*)$ http://www.ijh.cc/attachs/zxdemo/demo/$1 redirect;
+    rewrite ^(.*)$ /index.php last;
+}

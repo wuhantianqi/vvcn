@@ -1,99 +1,344 @@
-<{include file="block/header.html"}> 
-<!--面包屑导航开始-->
-<div class="main_topnav mb20">
-	<div class="mainwd">
-		<p><span class="ico_list breadna"></span>您的位置：<a href="<{link ctl='index'}>"><{$CONFIG.site.title}></a> ><a href="<{link ctl='gs:items'}>">找装修公司</a> </p>
-	</div>
-</div>
-<!--面包屑导航结束-->
-<div class="mainwd"> 
-	<!--主体左边内容开始-->
-	<div class="main_content lt">
-		<div class="mb10 pding area choose_option">
-			<table>
-				<tr>
-					<td class="tit">区域：</td>
-					<td> <a href="<{$area_all_link}>" <{if empty($pager.area_id)}>class="current"<{/if}>>不限</a> <{foreach $area_list  as $v}> <a href="<{$v.link}>" <{if $v.area_id==$pager.area_id}>class="current"<{/if}>><{$v.area_name}></a> <{/foreach}> </td>
-				</tr>
-				<{if $group_list}>
-				<tr>
-					<td class="tit">等级：</td>
-					<td> <a href="<{$group_all_link}>" <{if empty($pager.group_id)}>class="current"<{/if}>>不限</a> <{foreach $group_list as $v}> <a href="<{$v.link}>" <{if $v.group_id==$pager.group_id}>class="current"<{/if}>><{$v.group_name}></a> <{/foreach}> </td>
-				</tr>
-				<{/if}>              
-				<{foreach $attr_values as $v}>
-				<tr>
-					<td class="tit"><{$v.title}>&nbsp;:&nbsp;</td>
-					<td><a href="<{$v.link}>" <{if $v.checked}>class="current"<{/if}>>不限</a> <{foreach $v.values as $vv}> <a  href="<{$vv.link}>"  <{if $vv.checked}>class="current"<{/if}>><{$vv.title}></a> <{/foreach}> 
-				</tr>
-				<{/foreach}>
-			</table>
+<{include file="block/header.html" }>
+	<!--面包屑导航开始-->
+	<div class="main_topnav mb20">
+		<div class="mainwd">
+			<p><span class="ico_list breadna"></span>您的位置：
+				<a href="<{link ctl='index'}>">
+					<{$CONFIG.site.title}>
+				</a> ><a href="<{link ctl='gs:items'}>">装修公司列表</a> </p>
 		</div>
-		<div class="mb20">
-			<h2>装修公司列表</h2>
-			<div class="sort_box">
-				<p class="sort_list hoverno"> <{foreach $order_list  as $k=>$v}> <a href="<{$v.link}>"><{$v.title}><span <{if $k == $pager.order}>class="sort_ico ico_list sort_on_ico"<{else}>class="sort_ico ico_list"<{/if}>></span></a> <{/foreach}> </p>
-			</div>
-			<div class="area">
-				<ul class="block_type">
-					<{foreach $items as $item}>
-					<li>
-						<div class="main_company main_list"> <a href="<{$item.company_url}>" class="lt pic"  target="_blank"><img src="<{$pager.img}>/<{$item.thumb}>" /><{if $item.is_vip}><span class="qijian_ico ico_list"></span><{/if}></a>
-							<div class="main_com_rt main_list_rt rt">
-								<h3>
-									<p class="lt"><b><a href="<{$item.company_url}>"  target="_blank"><{$item.name}></a></b><{if $item.verify_name}><span class="ps_rz_ico ico_list"></span><{/if}><{if $item.xiaobao}><span class="bz_metals"><{$item.xiaobao}>元<font class="ico_list"></font></span><{/if}></p>
-									<a href="http://wpa.qq.com/msgrd?v=3&uin=<{$item.show_qq}>&site=qq&menu=yes" class="ico_list qq_ico rt"></a></h3>
-								<div class="lt">
-									<p><span class="ico_list xinyu_ico"></span>信誉指数：<{$item.score}></p>
-									<p><span class="ico_list telephone_ico"></span>联系电话：<{$item.show_phone}></p>
-									<p><span class="ico_list address_ico"></span>地址：<{$item.addr|cutstr:70}></p>
-									<p class="sp_list"><span>案例：<font class="fontcl2"><{$item.case_num}></font>套 </span><span>在建工地：<font class="fontcl2"><{$item.site_num}></font>套</span><span>签单数：<font class="fontcl2"><{$item.tenders_num}></font>单</span><span>预约数：<font class="fontcl2"><{$item.yuyue_num}></font>人</span></p>
-								</div>
-								<div class="rt pingfen_bar"> <{foreach $CONFIG.score.company as $k=>$v}><{if $v@index>2}><{break}><{/if}>
-									<p><{$v}>:<span class="bar probar_gray"><span class="bar probar_color bar2" style="width:<{$item.avg_scores[$k]*20}>%"></span></span><{sprintf("%.2f",$item.avg_scores[$k])}></p>
-									<{/foreach}>
-									<{if $item.group.priv.allow_yuyue == 1}> <a href="<{link ctl='gs:yuyue'  arg0=$item.company_id http='ajax'}>" mini-width='500' mini-load="免费预约" class="btn_main_big btn rt">免费预约</a> <{else}> <a href="<{link ctl='tenders:fast' arg0=$item.uid http='ajax'}>" mini-width='500' mini-load="立即招标" class="btn_main_big btn rt">立即招标</a> <{/if}> </div>
-							</div>
-							<div class="cl"></div>
+	</div>
+	<!--面包屑导航结束-->
+	<!-- 广告位 开始 -->
+	<div class="w1200 zxgslb_banner">
+		<a href="javascript:;"><img src="%THEME%/static/images/20170616/gs_banner.png" /></a>
+	</div>
+	<!-- 广告位 结束 -->
+	<!-- 列表内容 开始 -->
+	<div class="zxgslb_main clearFloat w1200">
+		<div class="fl zxgslb_main_left">
+			<!-- 筛选 开始 -->
+			<div class="zxgslb_left_top">
+				<ul>
+					<li class="clearFloat">
+						<div class="fl left">
+							<span>服务区域</span>
+						</div>
+						<div class="right clearFloat">
+							<a class="add_bg" href="javascript:;">全部</a>
+							<a href="javascript:;">武昌区</a>
+							<a href="javascript:;">洪山区</a>
+							<a href="javascript:;">江汉区</a>
+							<a href="javascript:;">江岸区</a>
+							<a href="javascript:;">青山区</a>
+							<a href="javascript:;">东湖区</a>
+							<a href="javascript:;">汉阳区</a>
+							<a href="javascript:;">硚口区</a>
+							<a href="javascript:;">江夏区</a>
+							<a href="javascript:;">黄陂区</a>
+							<a href="javascript:;">蔡甸区</a>
+							<a href="javascript:;">新洲逻汉</a>
+							<a href="javascript:;">南区</a>
 						</div>
 					</li>
-					<{/foreach}>
+					<li class="clearFloat">
+						<div class="fl left">
+							<span>服务项目</span>
+						</div>
+						<div class="right clearFloat">
+							<a class="add_bg" href="javascript:;">全部</a>
+							<a href="javascript:;">家庭装修</a>
+							<a href="javascript:;">商铺装修</a>
+							<a href="javascript:;">公司装修</a>
+							<a href="javascript:;">酒店装修</a>
+							<a href="javascript:;">公寓装修</a>
+						</div>
+					</li>
+					<li class="clearFloat">
+						<div class="fl left">
+							<span>公司规模</span>
+						</div>
+						<div class="right clearFloat">
+							<a class="add_bg" href="javascript:;">全部</a>
+							<a href="javascript:;">中小型</a>
+							<a href="javascript:;">全国连锁</a>
+							<a href="javascript:;">城市连锁</a>
+						</div>
+					</li>
+					<li class="clearFloat no_border">
+						<div class="fl left">
+							<span>注册资金</span>
+						</div>
+						<div class="right clearFloat">
+							<a class="add_bg" href="javascript:;">全部</a>
+							<a href="javascript:;">0-10万</a>
+							<a href="javascript:;">10-50万</a>
+							<a href="javascript:;">50-100万</a>
+						</div>
+					</li>
 				</ul>
-				<{if $pager.pagebar}>
-				<div class="page hoverno"><{$pager.pagebar}></div>
-				<{/if}> </div>
+			</div>
+			<!-- 筛选 结束 -->
+			<!-- 筛选结果 开始 -->
+			<div class="zxgslb_left_center clearFloat">
+				<div class="left fl"><span>当前为你搜索到<i>170</i>个装修公司</span></div>
+				<div class="right fr"><span>武汉装修公司地图</span></div>
+			</div>
+			<!-- 筛选结果 结束 -->
+			<!-- 结果列表 开始 -->
+			<div class="zxgslb_left_bottom">
+				<ul>
+					<li class="clearFloat">
+						<div class="sub_left fl">
+							<a href="javascript:;"><img class="img1" src="%THEME%/static/images/20170616/LOGO.png" /><img class="img2" src="%THEME%/static/images/20170616/qjd.png" /></a>
+						</div>
+						<div class="sub_center fl">
+							<h3><a href="javascript:;">武汉市鑫大众装饰设计工程有限公司</a><img src="%THEME%/static/images/20170616/img_zheng.png" /><span>10000元</span></h3>
+							<p class="p1">
+								<span class="span1"><img src="%THEME%/static/images/20170616/img_xin.png" />信誉指数：5分</span>
+								<span class="span2"><img src="%THEME%/static/images/20170616/img_tu.png" />案例图库：42</span>
+								<span class="span3"><img src="%THEME%/static/images/20170616/img_gong.png" />在建工地：1</span>
+							</p>
+							<p class="p2">地址：武汉市江岸区二七路航天双城A座1907</p>
+							<p class="p3">服务口号：专注优质装修服务</p>
+							<p class="p4"><img class="fl" src="%THEME%/static/images/20170616/img_hui.png" /><span class="fl"> 优惠信息：端午装修有优惠，更有豪礼相送。</span><a class="fl" href="javascript:;">[查看详情]</a></p>
+						</div>
+						<div class="sub_right fr">
+							<span>综合评分</span>
+							<p class="p1">80</p>
+							<a class="a1" href="javascript:;">免费在线咨询</a>
+							<a class="a2" href="javascript:;">免费帮我做设计</a>
+						</div>
+					</li>
+
+					<li class="clearFloat">
+						<div class="sub_left fl">
+							<a href="javascript:;"><img class="img1" src="%THEME%/static/images/20170616/LOGO.png" /><img class="img2" src="%THEME%/static/images/20170616/qjd.png" /></a>
+						</div>
+						<div class="sub_center fl">
+							<h3><a href="javascript:;">武汉市鑫大众装饰设计工程有限公司</a><img src="%THEME%/static/images/20170616/img_zheng.png" /><span>10000元</span></h3>
+							<p class="p1">
+								<span class="span1"><img src="%THEME%/static/images/20170616/img_xin.png" />信誉指数：5分</span>
+								<span class="span2"><img src="%THEME%/static/images/20170616/img_tu.png" />案例图库：42</span>
+								<span class="span3"><img src="%THEME%/static/images/20170616/img_gong.png" />在建工地：1</span>
+							</p>
+							<p class="p2">地址：武汉市江岸区二七路航天双城A座1907</p>
+							<p class="p3">服务口号：专注优质装修服务</p>
+							<p class="p4"><img class="fl" src="%THEME%/static/images/20170616/img_hui.png" /><span class="fl"> 优惠信息：端午装修有优惠，更有豪礼相送。</span><a class="fl" href="javascript:;">[查看详情]</a></p>
+						</div>
+						<div class="sub_right fr">
+							<span>综合评分</span>
+							<p class="p1">80</p>
+							<a class="a1" href="javascript:;">免费在线咨询</a>
+							<a class="a2" href="javascript:;">免费帮我做设计</a>
+						</div>
+					</li>
+
+					<li class="clearFloat">
+						<div class="sub_left fl">
+							<a href="javascript:;"><img class="img1" src="%THEME%/static/images/20170616/LOGO.png" /><img class="img2" src="%THEME%/static/images/20170616/qjd.png" /></a>
+						</div>
+						<div class="sub_center fl">
+							<h3><a href="javascript:;">武汉市鑫大众装饰设计工程有限公司</a><img src="%THEME%/static/images/20170616/img_zheng.png" /><span>10000元</span></h3>
+							<p class="p1">
+								<span class="span1"><img src="%THEME%/static/images/20170616/img_xin.png" />信誉指数：5分</span>
+								<span class="span2"><img src="%THEME%/static/images/20170616/img_tu.png" />案例图库：42</span>
+								<span class="span3"><img src="%THEME%/static/images/20170616/img_gong.png" />在建工地：1</span>
+							</p>
+							<p class="p2">地址：武汉市江岸区二七路航天双城A座1907</p>
+							<p class="p3">服务口号：专注优质装修服务</p>
+							<p class="p4"><img class="fl" src="%THEME%/static/images/20170616/img_hui.png" /><span class="fl"> 优惠信息：端午装修有优惠，更有豪礼相送。</span><a class="fl" href="javascript:;">[查看详情]</a></p>
+						</div>
+						<div class="sub_right fr">
+							<span>综合评分</span>
+							<p class="p1">80</p>
+							<a class="a1" href="javascript:;">免费在线咨询</a>
+							<a class="a2" href="javascript:;">免费帮我做设计</a>
+						</div>
+					</li>
+					<li class="clearFloat">
+						<div class="sub_left fl">
+							<a href="javascript:;"><img class="img1" src="%THEME%/static/images/20170616/LOGO.png" /><img class="img2" src="%THEME%/static/images/20170616/qjd.png" /></a>
+						</div>
+						<div class="sub_center fl">
+							<h3><a href="javascript:;">武汉市鑫大众装饰设计工程有限公司</a><img src="%THEME%/static/images/20170616/img_zheng.png" /><span>10000元</span></h3>
+							<p class="p1">
+								<span class="span1"><img src="%THEME%/static/images/20170616/img_xin.png" />信誉指数：5分</span>
+								<span class="span2"><img src="%THEME%/static/images/20170616/img_tu.png" />案例图库：42</span>
+								<span class="span3"><img src="%THEME%/static/images/20170616/img_gong.png" />在建工地：1</span>
+							</p>
+							<p class="p2">地址：武汉市江岸区二七路航天双城A座1907</p>
+							<p class="p3">服务口号：专注优质装修服务</p>
+							<p class="p4"><img class="fl" src="%THEME%/static/images/20170616/img_hui.png" /><span class="fl"> 优惠信息：端午装修有优惠，更有豪礼相送。</span><a class="fl" href="javascript:;">[查看详情]</a></p>
+						</div>
+						<div class="sub_right fr">
+							<span>综合评分</span>
+							<p class="p1">80</p>
+							<a class="a1" href="javascript:;">免费在线咨询</a>
+							<a class="a2" href="javascript:;">免费帮我做设计</a>
+						</div>
+					</li>
+				</ul>
+				<div class="page_cont">
+					<a href="javascript:;">196条记录</a>
+					<a class="a_select" href="javascript:;">1</a>
+					<a href="javascript:;">2</a>
+					<a href="javascript:;">3</a>
+					<a href="javascript:;">4</a>
+					<a href="javascript:;">5</a>
+					<a href="javascript:;">下一页</a>
+					<a href="javascript:;">...20</a>
+				</div>
+			</div>
+			<!-- 结果列表 结束 -->
 		</div>
+		<!-- 右侧 开始 -->
+		<div class="zxgslb_main_right fr">
+			<!-- cont1 -->
+			<div class="zxgslb_right_cont1">
+				<div class="cont1_box">
+					<div class="p1">免费户型设计报价</div>
+					<div class="p2">已帮<i>16134</i>位业主解决装修问题</div>
+					<div class="in1"><input type="text" placeholder="请输入您的称呼" /></div>
+					<div class="sele">
+						<select>
+							<option>湖北</option>
+							<option>湖北1</option>
+							<option>湖北2</option>
+							<option>湖北3</option>
+						</select>
+						<select>
+							<option>武汉</option>
+							<option>武汉1</option>
+							<option>武汉2</option>
+							<option>武汉3</option>
+						</select>
+						<select class="select3">
+							<option>武昌区</option>
+							<option>武昌区1</option>
+							<option>武昌区2</option>
+							<option>武昌区3</option>
+						</select>
+					</div>
+					<div class="in1"><input type="text" placeholder="请输入您的电话（必填）" /></div>
+					<div class="texta">
+						<textarea placeholder="您可以在这里简单描述您的装修要求，便于我为您推荐更合适的装修公司。"></textarea>
+					</div>
+					<a class="ljtj" href="javascript:;">立即提交</a>
+					<p>我们承诺：优优美家提供该项服务<em>绝不产生任何费用</em>，为了您的利益以及我们的口碑，您的隐私将被严格保密。</p>
+				</div>
+			</div>
+			<!-- cont3 -->
+			<div class="zxgslb_right_cont3">
+				<div class="cont3_tit"><span>免费注册企业会员</span></div>
+				<div class="ig">
+					<a href="javascript:;"><img src="%THEME%/static/images/20170616/answer17.jpg" /></a>
+				</div>
+			</div>
+			<!-- cont6 -->
+			<div class="zxgslb_right_cont6">
+				<div class="cont6_box">
+					<div class="cont6_tit">在优优美家找装修公司价格实惠，施工质量严格监管，不低于行业标准！</div>
+					<ul class="list">
+						<li class="li1">
+							<a href="javascript:;">
+								<div class="li_tit">不懂装修注意事项？</div>
+								<p>优优美家300名家装顾问.免费一对一帮你解疑惑。</p>
+							</a>
+						</li>
+						<li class="li2">
+							<a href="javascript:;">
+								<div class="li_tit">不懂装修注意事项？</div>
+								<p>优优美家300名家装顾问.免费一对一帮你解疑惑。</p>
+							</a>
+						</li>
+						<li class="li3">
+							<a href="javascript:;">
+								<div class="li_tit">不懂装修注意事项？</div>
+								<p>优优美家300名家装顾问.免费一对一帮你解疑惑。</p>
+							</a>
+						</li>
+						<li class="li4">
+							<a href="javascript:;">
+								<div class="li_tit">不懂装修注意事项？</div>
+								<p>优优美家300名家装顾问.免费一对一帮你解疑惑。</p>
+							</a>
+						</li>
+					</ul>
+				</div>
+			</div>
+			<!-- cont4 -->
+			<div class="zxgslb_right_cont4">
+				<div class="cont4_tit">
+					<span>热门装修公司</span>
+				</div>
+				<ul class="list">
+					<li>
+						<a href="javascript:;">武汉市鑫大众装饰设计工程有限公司工程有限公司</a>
+					</li>
+					<li>
+						<a href="javascript:;">武汉市鑫大众装饰设计工程有限公司工程有限公司</a>
+					</li>
+					<li>
+						<a href="javascript:;">武汉市鑫大众装饰设计工程有限公司工程有限公司</a>
+					</li>
+					<li>
+						<a href="javascript:;">武汉市鑫大众装饰设计工程有限公司工程有限公司</a>
+					</li>
+					<li>
+						<a href="javascript:;">武汉市鑫大众装饰设计工程有限公司工程有限公司</a>
+					</li>
+					<li>
+						<a href="javascript:;">武汉市鑫大众装饰设计工程有限公司工程有限公司</a>
+					</li>
+					<li>
+						<a href="javascript:;">武汉市鑫大众装饰设计工程有限公司工程有限公司</a>
+					</li>
+					<li>
+						<a href="javascript:;">武汉市鑫大众装饰设计工程有限公司工程有限公司</a>
+					</li>
+					<li>
+						<a href="javascript:;">武汉市鑫大众装饰设计工程有限公司工程有限公司</a>
+					</li>
+					<li>
+						<a href="javascript:;">武汉市鑫大众装饰设计工程有限公司工程有限公司</a>
+					</li>
+				</ul>
+			</div>
+			<!-- cont5 -->
+			<div class="zxgslb_right_cont5">
+				<div class="slideBox2">
+					<div class="hd">
+						<ul>
+							<li></li>
+							<li></li>
+							<li></li>
+						</ul>
+					</div>
+					<div class="bd">
+						<ul>
+							<li>
+								<a href="javascript:;" target="_blank"><img src="%THEME%/static/images/20170616/answer17.jpg" /></a>
+							</li>
+							<li>
+								<a href="javascript:;" target="_blank"><img src="%THEME%/static/images/20170616/answer17.jpg" /></a>
+							</li>
+							<li>
+								<a href="javascript:;" target="_blank"><img src="%THEME%/static/images/20170616/answer17.jpg" /></a>
+							</li>
+						</ul>
+					</div>
+				</div>
+				<script type="text/javascript">
+					jQuery(".slideBox2").slide({
+						mainCell: ".bd ul",
+						autoPlay: true
+					});
+
+				</script>
+			</div>
+		</div>
+		<!-- 右侧 结束 -->
 	</div>
-	<!--主体左边内容结束--> 
-	<!--主体右边内容开始-->
-	<div class="side_content rt"> <{widget id="tenders/fast" title="免费装修设计" from="TSJ"}>
-		<div class="mb10 area">
-			<h3 class="side_tit">装修公司排行榜</h3>
-			<ul class="pding paihang">
-				<{calldata mdl="company/company"  city_id=$request.city_id limit=8}>
-				<li> <span class="lt"><font class="paihang_num<{if $iteration<=3}> ph_num_cl<{/if}>"><{$iteration}></font><a href="<{$item.company_url}>"><{$item.name|cutstr:35}></a></span> <span class="rt">已投标：<font class="fontcl2"><{$item.tenders_num}></font></span> </li>
-				<{/calldata}>
-			</ul>
-		</div>
-		<div class="mb10 area">
-			<h3 class="side_tit">设计师排行榜</h3>
-			<ul class="pding paihang">
-				<{calldata mdl="designer/designer" city_id=$request.city_id limit=5}>
-				<li> <span class="lt"><font class="paihang_num<{if $iteration<=3}> ph_num_cl<{/if}>"><{$iteration}></font><a href="<{link ctl='blog'  arg0=$item.uid}>"><{$item.name|cutstr:35}></a></span> <span class="rt">已投标：<font class="fontcl2"><{$item.tenders_num}></font></span> </li>
-				<{/calldata}>
-			</ul>
-		</div>
-		<div class="mb10 area">
-			<h3 class="side_tit">工长排行榜</h3>
-			<ul class="pding paihang">
-				<{calldata mdl="gz/gz" city_id=$request.city_id limit=5}>
-				<li> <span class="lt"><font class="paihang_num<{if $iteration<=3}> ph_num_cl<{/if}>"><{$iteration}></font><a href="<{link ctl='gz-detail'  arg0=$item.uid}>"><{$item.name|cutstr:35}></a></span> <span class="rt">已投标：<font class="fontcl2"><{$item.tenders_num}></font></span> </li>
-				<{/calldata}>
-			</ul>
-		</div>
-		<div class="mb20"><{adv id="10" name="全站右侧招商图片广告" city_id=$request.city_id}></div>
-	</div>
-	<div class="cl"></div>
-	<!--主体右边内容结束--> 
-</div>
-<{include file="block/footer.html"}> 
+	<!-- 列表内容 结束 -->
+	<{include file="block/footer.html" }>

@@ -106,7 +106,7 @@ a{cursor:pointer;cursor:hand;}
 /* This is the loading message. */
 .cloud-zoom-loading {color:white; background:#222; padding:3px;	border:1px solid #000;}
 
-.page{float:right;text-align:center;padding:8px 10px; margin:5px auto;height:26px;line-height:26px;margin-left:20px;}
+.page{float:right;text-align:center;padding:8px 10px; margin:5px auto;height:40px;line-height:26px;margin-left:20px;}
 .page a,.page em{display: inline-block;width: auto;height: 20px;margin: 0 3px;padding: 0 6px;line-height: 21px;border: 1px solid #DDD;text-align: center;vertical-align: middle;background: #FFF;color:#666;}
 .page a:hover{background:#0a9261;color:#FFF;text-decoration:none;}
 .page strong{display: inline-block;width: auto;height: 20px;margin: 0 3px;padding: 0 6px;line-height: 21px;background: #0a9261;border: 1px solid #FFF;cursor: pointer;vertical-align: middle;color: #FFF;}

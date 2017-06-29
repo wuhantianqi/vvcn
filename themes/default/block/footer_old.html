@@ -1,0 +1,83 @@
+<div class="authority">
+	<div class="w1200">
+		<h3><span>优优美家-</span>更放心的互联网装修平台</h3>
+		<ul class="three">
+			<li>
+				<p class="t t1"><i></i>服务业主</p>
+				<p class="n"><span class="num">29,8400+</span>位</p>
+			</li>
+			<li>
+				<p class="t t2"><i></i>交易金额</p>
+				<p class="n"><span class="num">7,103,850,00+</span>元</p>
+			</li>
+			<li>
+				<p class="t t3"><i></i>服务好评</p>
+				<p class="n"><span class="num">230500+</span>次</p>
+			</li>
+		</ul>
+		<div class="five">
+			<dl class="b1">
+				<i></i>
+				<dt>自 由 比 价</dt>
+				<dd>四家公司 自由竞价</dd>
+			</dl>
+			<dl class="b2">
+				<i></i>
+				<dt>优 质 服 务</dt>
+				<dd>优质服务 全程服务</dd>
+			</dl>
+			<dl class="b3">
+				<i></i>
+				<dt>诚 信 商 家</dt>
+				<dd>诚信商家 安全保障</dd>
+			</dl>
+			<dl class="b4">
+				<i></i>
+				<dt>业 主 监 督</dt>
+				<dd>一起消费 集体维权</dd>
+			</dl>
+			<dl class="b5">
+				<i></i>
+				<dt>平 台 保 障</dt>
+				<dd>优优美家 立信致远</dd>
+			</dl>
+		</div>
+		<div class="clear"></div>
+	</div>
+</div>
+<div class="clear"></div>
+<div class="main_footer">
+	<div class="main_footer_top">
+		<div class="subwd ">
+			<{calldata mdl="article/cate" parent_id="2" limit=10}>
+				<ul>
+					<li><span><{$item.title}></span></li>
+					<{calldata mdl='article/article' from="help" hidden="0" cat_id=$item.cat_id}>
+						<li>
+							<a href="<{$item.link}>">
+								<{$item.title}>
+							</a>
+						</li>
+						<{/calldata}>
+				</ul>
+				<{/calldata}>
+					<ul>
+						<li><span>手机客户端</span></li>
+						<li>
+							<a href="<{link ctl=" app "}>" class="index_ico dowload_ico"></a>
+						</li>
+					</ul>
+					<ul class="main_footer_weixin">
+						<li><img src="<{if $CONFIG.site.weixinqr}><{$pager.img}>/<{$CONFIG.site.weixinqr}><{else}>%THEME%/static/images/weixin.jpg<{/if}>" width="86" height="86" /></li>
+						<li><span>扫一扫  好礼相赠</span></li>
+					</ul>
+		</div>
+	</div>
+	<div class="cl"></div>
+	<{include file="block/sfooter.html" }>
+</div>
+<!--底部内容结束-->
+<{widget id="public/kefu" }>
+	</body>
+
+	</html>

@@ -1,5 +1,9 @@
 $(document).ready(function () {
-		$("#index_baner .bx-viewport").css("overflow","visible");
+
+
+
+
+	$("#index_baner .bx-viewport").css("overflow", "visible");
 	// 导航
 	$(".menu_main").mouseover(function () {
 		$(this).find("dl").show();
@@ -12,45 +16,83 @@ $(document).ready(function () {
 	});
 
 	$(".head-form ul").find("li").click(function () {
-
 		$(".head-form span").html($(this).text());
 		$(".head-form ul").hide();
 	});
 
 	//	服务分类
-	$(".menu_sel .menu-mour").mouseover(function () {
-		$(".menu_sel #menu_er").show();
-	});
 
-	$("#menu_er .menu_ej_r").eq(0).css("display", "block");
-	$("#menu_er .menu_ul li").eq(0).addClass("ll");
-	$("#menu_er .menu_ul li").eq(0).find("p").addClass("pp");
-
-	$("#menu_er .menu_ul li").each(function () {
-		var index = $(this).index();
-		var posi = $(this).find("i").css("background-position-y");
-		$("#menu_er .menu_ul li").eq(0).find("i").css({
-
-			backgroundPositionY: (parseInt(posi) - 35) + "px"
-		});
-		$(this).mouseover(function () {
-			$("#menu_er .menu_ul li i").css({
-				backgroundPositionY: -55 + "px"
-			})
-			$(this).find("i").css({
-
-				backgroundPositionY: (parseInt(posi) - 35) + "px"
+	// 本地域名
+	var wx = window.location.href;
+	var d = "http://wuhan.vvcn.cc/index.html";
+	var dd = "http://www.vvcn.cc/";
+	var ddd = "http://wuhan.vvcn.cc/";
+	if (wx == d || wx == dd || wx == ddd) {
+		$("#menu_er").css("display", "block");
+		$(".header-menu ul li").each(function () {
+			$(this).mouseover(function () {
+				$("#menu_er .menu_ej_r").css("display", "none");
 			});
-			$("#menu_er .menu_ul li.ll").removeClass("ll");
-			$(this).addClass("ll");
-			$("#menu_er .menu_ul li p.pp").removeClass("pp");
-			$(this).find("p").addClass("pp");
-
-			$("#menu_er .menu_ej_r").css("display", "none");
-			$("#menu_er .menu_ej_r").eq(index).css("display", "block");
-
 		});
-	});
+		$("#menu_er .menu_ul li").each(function () {
+			var index = $(this).index();
+			var posi = $(this).find("i").css("background-position-y");
+			$(this).mouseover(function () {
+				$("#menu_er .menu_ul li i").css({
+					backgroundPositionY: -55 + "px"
+				})
+				$(this).find("i").css({
+					backgroundPositionY: (parseInt(posi) - 35) + "px"
+				});
+				$("#menu_er .menu_ul li.ll").removeClass("ll");
+				$(this).addClass("ll");
+				$("#menu_er .menu_ul li p.pp").removeClass("pp");
+				$(this).find("p").addClass("pp");
+				$("#menu_er .menu_ej_r").css("display", "none");
+				$("#menu_er .menu_ej_r").eq(index).css("display", "block");
+				$(".menu_sel .menu-mour").mouseover(function () {
+					$("#menu_er").css("display", "block");
+				});
+			});
+		});
+
+	} else {
+		$("#menu_er").css("display", "none");
+		$(".header-menu ul li").each(function () {
+			$(this).mouseover(function () {
+				$("#menu_er").css("display", "none");
+			});
+		});
+		$("#menu_er .menu_ul li").each(function () {
+			var index = $(this).index();
+			var posi = $(this).find("i").css("background-position-y");
+			$(this).mouseover(function () {
+				$("#menu_er .menu_ul li i").css({
+					backgroundPositionY: -55 + "px"
+				})
+				$(this).find("i").css({
+					backgroundPositionY: (parseInt(posi) - 35) + "px"
+				});
+				$("#menu_er .menu_ul li.ll").removeClass("ll");
+				$(this).addClass("ll");
+				$("#menu_er .menu_ul li p.pp").removeClass("pp");
+				$(this).find("p").addClass("pp");
+				$("#menu_er .menu_ej_r").css("display", "none");
+				$("#menu_er .menu_ej_r").eq(index).css("display", "block");
+
+			});
+			$(".menu_sel .menu-mour").mouseover(function () {
+				$("#menu_er").css("display", "block");
+			});
+		});
+
+	}
+
+
+
+
+
+
 
 	//		面积计算表单
 	var nubuer = $(".mjjs_f1 .squre "); //面积
@@ -73,15 +115,7 @@ $(document).ready(function () {
 
 		$(".jg").css("display", "none");
 		$(".mjjs_f1 .squre").css("border-color", "#red");
-		//		if ($(".myend p").className = 'ondp') {
-		//			$(".myend p").removeClass('ondp');
-		//						$(".myend h2 em").html('0');
-		//						$("#rengongf span").html('0');
-		//						$("#cailiaof span").html('0');
-		//						$("#shejif span").html('0').css('text-decoration','none');
-		//						$("#zhijianf span").html('0').css('text-decoration','none');
-		//
-		//		}
+
 	})
 
 	//根据面积显示户型
@@ -177,26 +211,21 @@ $(document).ready(function () {
 
 	//精英设计
 	$(".jjsj_s ul li div").eq(0).css("display", "block");
-	$(".jjsj_s ul li").each(function () {
-		var index = $(this).index();
-		$(this).mouseover(function () {
-			$(".jjsj_s ul li div").css("display", "none");
-			$(".jjsj_s ul li div").eq(index).css("display", "block");
-		})
+	$(".jjsj_s ul li a").mouseover(function () {
+		$(".jjsj_s ul li div").css("display", "none");
+		$(this).parent().find("div").show(1000);
 	})
 	$(".jjsj_x ul li div").eq(4).css("display", "block");
-	$(".jjsj_x ul li").each(function () {
-		var index = $(this).index();
-		$(this).mouseover(function () {
-			$(".jjsj_x ul li div").css("display", "none");
-			$(".jjsj_x ul li div").eq(index).css("display", "block");
-		})
+
+	$(".jjsj_x ul li a").mouseover(function () {
+		$(".jjsj_x ul li div").css("display", "none");
+		$(this).parent().find("div").show(1000);
 	})
 
 
 	//装修攻略
 
-	$(".zxgl_s .zxgl_s_l").click(function () {
+	$(".zxgl_s .zxgl_s_r").click(function () {
 		var ll = $(".zxgl_s .zxgl_s_img").offset().left;
 		var max = 0;
 		max += ll;
@@ -208,7 +237,7 @@ $(document).ready(function () {
 		}
 
 	})
-	$(".zxgl_s .zxgl_s_r").click(function () {
+	$(".zxgl_s .zxgl_s_l").click(function () {
 		var rl = $(".zxgl_s .zxgl_s_img").offset().left;
 		var max = 0;
 		max += rl;

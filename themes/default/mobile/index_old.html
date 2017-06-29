@@ -1,0 +1,124 @@
+<{assign var="is_index_home" value=true}>
+<{include file="mobile/block/header.html"}>
+<section id="index" class="page_center_box">
+<div class="banner">
+	<div class="flexslider"> <{adv id="17" name="手机版首页轮播广告" city_id=$request.city_id limit="5"}> </div>
+</div>
+<!--主要功能区开始-->
+<ul class="function mb10">
+	<li><a href="<{link ctl='mobile/case'}>"><i class="ico_1"></i>
+		<p>效果图</p>
+		</a></li>
+	<li><a href="<{link ctl='mobile/article'}>"><i class="ico_2"><em></em></i>
+		<p>学装修</p>
+		</a></li>
+	<li><a href="<{link ctl='mobile/designer'}>"><i class="ico_3"><em></em></i>
+		<p>设计师</p>
+		</a></li>
+	<li><a href="<{link ctl='mobile/tenders'}>"><i class="ico_4"><em></em></i>
+		<p>我要装修</p>
+		</a></li>
+	<li><a href="<{link ctl='mobile/company'}>"><i class="ico_5"></i>
+		<p>装修公司</p>
+		</a></li>
+	<li><a href="<{link ctl='mobile/zxb'}>"><i class="ico_6"></i>
+		<p>装修宝</p>
+		</a></li>
+	<li><a href="<{link ctl='mobile/gz'}>"><i class="ico_7"></i>
+		<p>找工长</p>
+		</a></li>
+	<li><a href="<{link ctl='mobile/store'}>"><i class="ico_8"></i>
+		<p>材料商</p>
+		</a></li>
+</ul>
+<!--主要功能区结束--> 
+<!--装修效果图开始-->
+<div id="effectImg" class="mb10">
+	<div class="tabBox">
+		<div class="indexTitle">
+			<h1 class="fl">装修效果图</h1>
+			<div class="hd fr">
+				<ul>
+					<li class="on"><a href="###">风格</a></li>
+					<li class=""><a href="###">空间</a></li>
+					<li class=""><a href="###">别墅</a></li>
+					<li class=""><a href="###">小户型</a></li>
+				</ul>
+			</div>
+			<div class="clear"></div>
+		</div>
+		<div class="bd">
+			<div class="list_box">
+				<div class="imgList"> <{KT id="4" name="网站首页4F热门案例-风格" city_id=$request.city_id limit="3"}> <a class="img_box" href="<{link ctl='mobile/case:detail' arg0=$item.case_id}>"><img src="<{$pager.img}>/<{$item.thumb}>" /></a> <{/KT}> </div>
+				<a href="<{link ctl='mobile/case'}>" class="more pointcl">查看更多风格</a> </div>
+			<div class="list_box">
+				<div class="imgList"> <{KT id="5" name="网站首页4F热门案例-空间" city_id=$request.city_id limit="3"}> <a class="img_box" href="<{link ctl='mobile/case:detail' arg0=$item.case_id}>"><img src="<{$pager.img}>/<{$item.thumb}>" /></a> <{/KT}> </div>
+				<a href="<{link ctl='mobile/case'}>" class="more pointcl">查看更多空间</a> </div>
+			<div class="list_box">
+				<div class="imgList"> <{KT id="6" name="网站首页4F热门案例-别墅" city_id=$request.city_id limit="3"}> <a class="img_box" href="<{link ctl='mobile/case:detail'  arg0=$item.case_id}>"><img src="<{$pager.img}>/<{$item.thumb}>" /></a> <{/KT}> </div>
+				<a href="<{link ctl='mobile/case'}>" class="more pointcl">查看更多别墅</a> </div>
+			<div class="list_box">
+				<div class="imgList"> <{KT id="7" name="网站首页4F热门案例-小户型" city_id=$request.city_id limit="3"}> <a class="img_box" href="<{link ctl='mobile/case:detail'  arg0=$item.case_id}>"><img src="<{$pager.img}>/<{$item.thumb}>" /></a> <{/KT}> </div>
+				<a href="<{link ctl='mobile/case'}>" class="more pointcl">查看更多小户型</a> </div>
+		</div>
+	</div>
+</div>
+<!--装修效果图结束--> 
+<!--最新招标内容滚动开始-->
+<div class="indexTitle">
+	<h1>最新装修招标</h1>
+</div>
+<div class="index_nwod_box mb10">
+	<ul>
+		<{calldata mdl="tenders/tenders" order="dateline" limit="15"}>
+		<li><span><{$item.contact|cutstr:3}></span><span class="long"><{$item.style_title}></span><span><{$item.budget_title}></span><span><{$item.dateline|format:"m-d"}></span></li>
+		<{/calldata}>
+	</ul>
+</div>
+<!--最新招标内容滚动结束--> 
+<!--装修服务表单开始-->
+<div class="indexTitle">
+	<h1>装修服务</h1>
+</div>
+<div class="fillForm_box mb10">
+	<form class="tenders" action="<{link ctl='mobile/tenders:save' http='ajax'}>" mini-form="tenders" method="post">
+		<input type="hidden" name="data[from]" value="TZB" />
+		<input type="text" name="data[contact]" placeholder="您的称呼">
+		<input type="text" name="data[mobile]" placeholder="联系电话">
+		<div class="select_box"> <{widget id="data/region" city_id=$request.city_id level=2 class="text two"}>
+			<div class="clear"></div>
+		</div>
+		<input type="submit" class="btn mainbtn_full" value="立即申请 " />
+	</form>
+</div>
+<!--装修服务表单结束--> 
+<!--热点文章开始-->
+<div class="indexTitle">
+	<h1>热点文章</h1>
+</div>
+<div class="hotNews_box mb10">
+	<ul class="hotNews">
+		<{KT id="52" name="仿土巴兔手机版首页推荐文章" city_id=$request.city_id limit='3'}>
+		<li>
+			<div class="fl img"><a href="<{link ctl='mobile/article:detail' arg0=$item.article_id}>"><img src="<{$pager.img}>/<{$item.thumb}>" />
+				<p><{$item.title}></p>
+				</a></div>
+			<div class="wz"> <a href="<{link ctl='mobile/article:detail' arg0=$item.article_id}>">
+				<h3 class="overflow_clear"><{$item.title}></h3>
+				<p><{$item.desc|cutstr:50}></p>
+				</a> </div>
+		</li>
+		<{/KT}>
+	</ul>
+	<a href="<{link ctl='mobile/article:index'}>" class="more pointcl">查看更多文章</a> </div>
+<!--热点文章结束--> 
+<script>
+	$(function(){
+	$("div.index_nwod_box").myScroll({
+		speed:40, //数值越大，速度越慢
+		rowHeight:40 //li的高度
+	});
+});
+
+</script> 
+<{include file="mobile/block/footer.html"}> 

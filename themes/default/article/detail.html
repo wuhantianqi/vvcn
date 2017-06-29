@@ -1,119 +1,262 @@
-<{include file="block/header.html"}>
-<script type="text/javascript" src="<{$pager.res}>/script/jquery.qrcode.min.js"></script>
-<!--面包屑导航开始-->
-<div class="main_topnav mb20">
-	<div class="mainwd">
-		<p><span class="ico_list breadna"></span>您的位置：<a href="<{link ctl='index'}>"><{$CONFIG.site.title}></a>
-			&gt;<a href="<{link ctl='article'}>">学装修</a>
-			&gt;<a href="<{link ctl='article:items' arg0=$cate.cat_id}>"><{$cate.title}></a>
-		</p>
-	</div>
-</div>
-<!--面包屑导航结束-->
-<div class="mainwd">
-	<div class="main_content lt">
-		<div class=" area pding mb10 article_box">
-			<h1><{$detail.title}></h1>
-			<p class="graycl tp">
-				<span class="lt"><font class="fontcl2"><{$detail.views}></font>人已浏览   时间 : <{$detail.dateline|format}></span>
-				<span class="rt">
-				<div class="bdsharebuttonbox rt"><div class="coDe">
-					<div class="pic fontcl2">[ 手机扫码 ]<img src="%THEME%/static/images/codeico.jpg" /></div>
-					<div class="show" id="QRimg" style="padding:5px;height:80px;" val="<{$mobile_url}>"></div>
-					</div><a href="#" class="bds_more" data-cmd="more"></a><a href="#" class="bds_qzone" data-cmd="qzone" title="分享到QQ空间"></a><a href="#" class="bds_tsina" data-cmd="tsina" title="分享到新浪微博"></a><a href="#" class="bds_tqq" data-cmd="tqq" title="分享到腾讯微博"></a><a href="#" class="bds_renren" data-cmd="renren" title="分享到人人网"></a><a href="#" class="bds_weixin" data-cmd="weixin" title="分享到微信"></a>
-				</div>
-<script>window._bd_share_config={"common":{"bdSnsKey":{},"bdText":"","bdMini":"2","bdMiniList":false,"bdPic":"","bdStyle":"0","bdSize":"24"},"share":{}};with(document)0[(getElementsByTagName('head')[0]||body).appendChild(createElement('script')).src='http://bdimg.share.baidu.com/static/api/js/share.js?v=89860593.js?cdnversion='+~(-new Date()/36e5)];</script></span>
+<{include file="block/header.html" }>
+	<!--面包屑导航开始-->
+	<div class="main_topnav mb20">
+		<div class="mainwd">
+			<p><span class="ico_list breadna"></span>您的位置：
+				<a href="<{link ctl='index'}>">
+					<{$CONFIG.site.title}>
+				</a>
+				&gt;<a href="<{link ctl='article'}>">学装修</a> &gt;
+				<a href="<{link ctl='article:items' arg0=$cate.cat_id}>">
+					<{$cate.title}>
+				</a>
 			</p>
-			<div class="cl"></div>
-			<p class="colorbg daoyu">导语：<{$detail.desc}></p>
-			<div class="article_box_text"><{$detail.curr_content|taglink}>
-				<{if $detail.content_count > 1}>
-				<div class="page hoverno"><p><{for $page=1 to $detail.content_count}><a href="<{link ctl='article:detail' http=$detail.city_id|default:'www' arg0=$detail.article_id arg1=$page}>"<{if $pager.page == $page}> class="current"<{/if}>><{$page}></a><{/for}></p></div>
-				<{/if}>
-			</div>
-			<div class="article_box_bottom">
-				<p class="tp">
+		</div>
+	</div>
+	<!--面包屑导航结束-->
+	<div class="wzxq_main">
+		<div class="wzxq_main_f">
+			<div class="wzxq_main_ff">
+				<div class="title">
+					<h2>
+						<{$detail.title}>
+					</h2>
+					<p>
+						<span>发布：<em><{$detail.dateline|format}></em></span>
+						<span>浏览：<font class="fontcl2"><{$detail.views}></font></span>
+						<span>[手机扫码] <i></i> </span>
+					</p>
+					<i class="ic_y"></i>
+				</div>
+				<div class="txt">
+					<p>优优美家为业主提供靠谱的装修服务，优优美家为业主提供靠谱的装修服务，优优美家为业主提供靠谱的装修服务，优优美家为业主提供靠谱的装修服务，优优美家为业主提供靠谱的装修服务</p>
+					<p>优优美家为业主提供靠谱的装修服务，优优美家为业主提供靠谱的装修服务，优优美家为业主提供靠谱的装修服务，优优美家为业主提供靠谱的装修服务，优优美家为业主提供靠谱的装修服务</p>
+					<p>优优美家为业主提供靠谱的装修服务，优优美家为业主提供靠谱的装修服务，优优美家为业主提供靠谱的装修服务，优优美家为业主提供靠谱的装修服务，优优美家为业主提供靠谱的装修服务</p>
+					<p>优优美家为业主提供靠谱的装修服务，优优美家为业主提供靠谱的装修服务，优优美家为业主提供靠谱的装修服务，优优美家为业主提供靠谱的装修服务，优优美家为业主提供靠谱的装修服务</p>
+					<p>优优美家为业主提供靠谱的装修服务，优优美家为业主提供靠谱的装修服务，优优美家为业主提供靠谱的装修服务，优优美家为业主提供靠谱的装修服务，优优美家为业主提供靠谱的装修服务</p>
+					<p>优优美家为业主提供靠谱的装修服务，优优美家为业主提供靠谱的装修服务，优优美家为业主提供靠谱的装修服务，优优美家为业主提供靠谱的装修服务，优优美家为业主提供靠谱的装修服务</p>
+					<p>优优美家为业主提供靠谱的装修服务，优优美家为业主提供靠谱的装修服务，优优美家为业主提供靠谱的装修服务，优优美家为业主提供靠谱的装修服务，优优美家为业主提供靠谱的装修服务</p>
+					<span>
 					<{if $pager.prev}>
 					<a href="<{$pager.prev.link}>" class="lt fontcl1">上一篇：<{$pager.prev.title}></a>
 					<{/if}>
+				</span>
+					<span>
 					<{if $pager.next}>
 					<a href="<{$pager.next.link}>" class="rt fontcl1">下一篇：<{$pager.next.title}></a></p>
 					<{/if}>
-				<h2>相关推荐：</h2>
-				<ul class="ari_xg_tui">
-					<{calldata mdl='article/article' cat_id=$cate.cat_id city_id=$request.city_id limit=10}>
-					<li><span class="ico_list news_ico"></span><a href="<{$item.link}>"><{$item.title|cutstr:80}></a></li>
-                    <{/calldata}>
-				</ul>
-			</div>
-		</div>
-		<{if $detail.allow_comment}>
-		<{if $CONFIG.comment.article_type == 'sns'}>
-		<{$CONFIG.comment.snscomment}>
-		<{elseif $CONFIG.comment.article_type == 'comment'}>
-		<div class="mb20 pding area">
-			<h3>评论(共<font class="fontcl2"><{$detail.comments}></font>条)</h3>
-			<form action="<{link ctl='article:savecomment'}>" mini-form="comment" method="post" class="pinglun">
-				<input type="hidden" name="article_id" value="<{$detail.article_id}>" />
-				<img src="<{$pager.img}>/<{$MEMBER.face}>" width="108" class="lt" />
-				<div class="rt">
-					<textarea name='content' class="text" placeholder="随便说点什么..."></textarea>
-					<br />
-					<{if $comment_yz}>
-						验证码:
-								<input class="text short" type="text" name="verifycode" placeholder="请输入验证码"/>
-								<img verify="#comment-verify" src="<{link ctl='magic:verify' http='ajax'}>&_=<{$pager.dateline}>" id="comment-verify"/><a verify="#comment-verify">点击刷新验证码</a>
-							
-					<{/if}>
-					<input type="submit" value="发表评论" class="text btn rt pinglun_btn" />
+				</span>
 				</div>
-				<div class="cl"></div>
-			</form>
-			<div class="new_pinglun">
-				<p class="tit">最新评论</p>				
-				<ul>
-					<{foreach $comment_list as $item}>
-					<li>
-						<img src="<{$pager.img}>/<{$member_list[$item.uid].face_80}>" class="lt" />
-						<div class="rt">
-							<p><span class="lt name"><{$member_list[$item.uid].uname}></span><span class="rt graycl"><{$item.dateline|format}></span></p>
-							<p><{$item.content}></p>
+				<div class="fxiang">
+					<div class="ts">
+						<p>声明：本文发自优优美家装修网，如本站文章和转稿涉及版权等问题，请及时与本站管理员联系，我们会尽快处理。</p>
+						<p>提示：文章内容仅供参阅，不作任何说服依据，涉及具体数据及市场反应等问题以实际为准</p>
+					</div>
+					<div class="ic">
+						<i></i>
+						<div class="article-share bdsharebuttonbox">
+							<span>分享到：</span>
+							<a class="bds_more" data-cmd="more">更多</a>
+							<a class="bds_qzone" data-cmd="qzone"></a>
+							<a class="bds_tsina" data-cmd="tsina"></a>
+
+							<a class="bds_tqq" data-cmd="tqq"></a>
+							<a class="bds_sqq" data-cmd="sqq"></a>
+							<a class="bds_weixin" data-cmd="weixin"></a>
+							<span></span>
+							<script>
+								window._bd_share_config = {
+									"common": {
+										"bdSnsKey": {},
+										"bdText": "",
+										"bdMini": "2",
+										"bdMiniList": false,
+										"bdPic": "",
+										"bdStyle": "0",
+										"bdSize": "32"
+									},
+									"share": {}
+								};
+
+								with(document) 0[(getElementsByTagName('head')[0] || body).appendChild(createElement('script')).src = 'http://bdimg.share.baidu.com/static/api/js/share.js?v=89860593.js?cdnversion=' + ~(-new Date() / 36e5)];
+
+							</script>
 						</div>
-					</li>
-					<{/foreach}>
-				</ul>
+					</div>
+					<div class="sous">
+						<i></i>
+						<span>关键词：</span>
+						<ul>
+							<li><a href="">装修知识</a></li>
+							<li><a href="">装修公司</a></li>
+							<li><a href="">装修黑幕</a></li>
+							<li><a href="">装企访谈</a></li>
+							<li><a href="">行业动态</a></li>
+						</ul>
+					</div>
+					<div class="im">
+						<img src="images/guanggao2.png" alt="">
+					</div>
+					<div class="utest">
+						<p>最新热点推荐：</p>
+						<ul>
+							<li><a href="">房屋公共维修基金是什么 公共维修</a></li>
+							<li><a href="">房屋公共维修基金是什么 公共维修</a></li>
+							<li><a href="">房屋公共维修基金是什么 公共维修</a></li>
+							<li><a href="">房屋公共维修基金是什么 公共维修</a></li>
+							<li><a href="">房屋公共维修基金是什么 公共维修</a></li>
+							<li><a href="">房屋公共维修基金是什么 公共维修</a></li>
+							<li><a href="">房屋公共维修基金是什么 公共维修</a></li>
+							<li><a href="">房屋公共维修基金是什么 公共维修</a></li>
+							<li><a href="">房屋公共维修基金是什么 公共维修</a></li>
+							<li><a href="">房屋公共维修基金是什么 公共维修</a></li>
+						</ul>
+					</div>
+				</div>
+			</div>
+
+			<div class="dp">
+
+				<div class="pl">
+					<{if $detail.allow_comment}>
+						<{if $CONFIG.comment.article_type=='sns' }>
+							<{$CONFIG.comment.snscomment}>
+								<{elseif $CONFIG.comment.article_type=='comment' }>
+									<div class="mb20 pding area">
+										<h3>评论(共
+											<font class="fontcl2">
+												<{$detail.comments}>
+											</font>条)</h3>
+										<form action="<{link ctl='article:savecomment'}>" mini-form="comment" method="post" class="pinglun">
+											<input type="hidden" name="article_id" value="<{$detail.article_id}>" />
+											<img src="<{$pager.img}>/<{$MEMBER.face}>" width="108" class="lt" />
+											<div class="rt">
+												<div class="cl"></div>
+												<textarea name='content' class="text" placeholder="随便说点什么..."></textarea>
+												<br />
+												<{if $comment_yz}>
+													<span>验证码:</span>
+
+													<input class="text short" type="text" name="verifycode" placeholder="请输入验证码" />
+													<img verify="#comment-verify" src="<{link ctl='magic:verify' http='ajax'}>&_=<{$pager.dateline}>" id="comment-verify" /><a verify="#comment-verify">点击刷新验证码</a>
+
+													<{/if}>
+														<input type="submit" value="发表评论" class="text btn rt pinglun_btn" />
+											</div>
+											<div class="cl"></div>
+										</form>
+										<div class="new_pinglun">
+											<p class="tit">最新评论</p>
+											<ul>
+												<{foreach $comment_list as $item}>
+													<li>
+														<img src="<{$pager.img}>/<{$member_list[$item.uid].face_80}>" class="lt" />
+														<div class="rt">
+															<p><span class="lt name"><{$member_list[$item.uid].uname}></span><span class="rt graycl"><{$item.dateline|format}></span></p>
+															<p>
+																<{$item.content}>
+															</p>
+														</div>
+													</li>
+													<{/foreach}>
+											</ul>
+										</div>
+									</div>
+									<{/if}>
+										<{/if}>
+				</div>
 			</div>
 		</div>
-		<{/if}>
-		<{/if}>		
-	</div>
-	<div class="side_content rt">
-		<{widget id="tenders/fast" title="免费装修设计" from="TSJ"}>
-		<div class="area pding mb10 cont_item_rt">
-			<ul class="article_list">
-				<{calldata mdl="article/cate" parent_id=8 from='article' hidden='0'}>
-				<li>
-					<h3><span class="ico_list shu_ico"></span><{$item.title}></h3>
-					<{calldata mdl="article/cate" hidden='0' parent_id=$item.cat_id}><a href="<{link ctl='article:items' arg0=$item.cat_id}>"<{if $cate.cat_id==$item.cat_id}>  class="current"<{/if}>><{$item.title}></a><{/calldata}>
-				</li>
-				<{/calldata}>
-			</ul>
+		<div class="wzxq_main_r">
+			<div class="ask_right_cont1">
+				<div class="ask_cont1_box">
+					<div class="p1">免费户型设计报价</div>
+					<div class="p2">已帮<i>16134</i>位业主解决装修问题</div>
+					<div class="in1"><input type="text" placeholder="请输入您的称呼" /></div>
+					<div class="sele">
+						<select>
+							<option>湖北</option>
+							<option>湖北1</option>
+							<option>湖北2</option>
+							<option>湖北3</option>
+						</select>
+						<select>
+							<option>武汉</option>
+							<option>武汉1</option>
+							<option>武汉2</option>
+							<option>武汉3</option>
+						</select>
+						<select class="select3">
+							<option>武昌区</option>
+							<option>武昌区1</option>
+							<option>武昌区2</option>
+							<option>武昌区3</option>
+						</select>
+					</div>
+					<div class="in1"><input type="text" placeholder="请输入您的电话（必填）" /></div>
+					<div class="texta">
+						<textarea placeholder="您可以在这里简单描述您的装修要求，便于我为您推荐更合适的装修公司。"></textarea>
+					</div>
+					<a class="ljtj" href="javascript:;">立即提交</a>
+					<p>我们承诺：优优美家提供该项服务<em>绝不产生任何费用</em>，为了您的利益以及我们的口碑，您的隐私将被严格保密。</p>
+				</div>
+			</div>
+			<div class="erwm">
+				<div class="m"></div>
+				<div class="pp">
+					<p class="p1">关注装修圈的人和事</p>
+					<p class="p2">扫一扫</p>
+					<p class="p3">优优美家微信服务号</p>
+				</div>
+
+
+			</div>
+			<div class="jsq">
+				<div class="zzx_rb">
+					<h2>装修计算器</h2>
+					<span><a href="">More+</a></span>
+				</div>
+				<div class="zx_t">
+					<ul>
+						<li>
+							<a href="">
+								<i class="zx7"></i> 涂料
+							</a>
+						</li>
+						<li>
+							<a href="">
+								<i class="zx8"></i> 地板
+							</a>
+						</li>
+						<li>
+							<a href="">
+								<i class="zx9"></i> 壁纸
+							</a>
+						</li>
+						<li>
+							<a href="">
+								<i class="zx10"></i> 墙砖
+							</a>
+						</li>
+						<li>
+							<a href="">
+								<i class="zx11"></i> 窗帘
+							</a>
+						</li>
+						<li>
+							<a href="">
+								<i class="zx12"></i> 地砖
+							</a>
+						</li>
+						<div class="clear"></div>
+					</ul>
+				</div>
+			</div>
+			<div class="gg">
+				<a href=""><img src="images/main1.jpg" alt=""></a>
+
+			</div>
+
 		</div>
-		<div class="mb20 "><{adv id="10" name="全站右侧招商图片广告" city_id=$request.city_id}></div>
 	</div>
-	<div class="cl"></div>
-</div>
-<script type="text/javascript">
-(function(){
-	$("#QRimg").qrcode({width:80,height:80,correctLevel:0,text:"<{$mobile_url}>"}); 
-	})(window.KT, window.jQuery);
-</script>
-<!--底部内容开始-->
-<{include file="block/footer.html"}>
-<script>
-$(".coDe ").mouseover(function(){
-	$(this).find(".show").show();
-}).mouseleave(function(){
-	$(this).find(".show").hide();
-});
-</script>
+	<{include file="block/footer.html" }>

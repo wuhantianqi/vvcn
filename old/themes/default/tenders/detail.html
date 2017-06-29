@@ -1,0 +1,160 @@
+<{include file="block/small-header.html"}>
+<!--头部内容结束-->
+<!--面包屑导航开始-->
+<div class="mb10 subwd sub_topnav">
+	<p><span class="ico_list breadna"></span>您的位置：<a href="<{link ctl='index'}>"><{$CONFIG.site.title}></a>
+		&gt;<a href="<{link ctl='tenders'}>">我要装修</a>
+		&gt;招标详情 </p>
+</div>
+<!--面包屑导航结束-->
+<div class="subwd">
+	<!--主体左边内容开始-->
+	<div class="sub_content lt">
+		<div class="mb10 area">
+			<div class="colorbg tenters_detail_top pding">
+				<div class="lt tenters_de_top_lt ico_list">
+					<p>招标数</p>
+					<p><b class="pointcl"><{$detail.looks}></b><span>位</span></p>
+				</div>
+				<div class="rt">
+					<h2><{$detail.title}><{if $detail.sign_uid}><span class="ico_list tender_over">招标结束</span><{else}><span class="ico_list tender_ing">招标中</span><{/if}></h2>
+					<p><span>发布者：<{$detail.contact}></span><span>发布时间：<{$detail.dateline|format}></span></p>
+				</div>
+				<div class="cl"></div>
+			</div>
+			<div class="pding tenters_de_intro">
+				<p>招标方式：<{$detail.way_title}></p>
+				<p>招标类型：<{$detail.type_title}></p>
+				<p>服务需求：<{$detail.service_title}></p>
+				<p>装修风格：<{$detail.style_title}></p>
+				<p>房屋户型：<span class="pointcl"><{$detail.house_type_title}></span></p>
+				<p>预算总价：<span class="pointcl"><{$detail.budget_title}></span></p>
+				<p>所在区域：<{$detail.city_name}> <{$detail.area_name}></p>
+				<{if $detail.home_name}>
+				<p>小区名称：<{$detail.home_name}></p>
+				<{/if}>
+				<{if $detail.addr}>
+				<p>详细地址：<{$detail.addr}></p>
+				<{/if}>
+				<p>建筑面积：<span class="pointcl"><{$detail.house_mj}>平米</span></p>
+				<{if $detail.zx_time}>
+				<p>装修时间：<{$detail.zx_time|format:'Y-m-d'}></p>
+				<{/if}>
+				<p>具体要求：<{$detail.comment}></p>
+			</div>
+		</div>
+		<div class="mb20 area">
+			<h3 class="side_tit tender_tit"><span class="lt">参与竞标公司</span><a href="<{link ctl='tenders:look' arg0=$detail.tenders_id http='ajax'}>" mini-load="立即投标" mini-width="400" class="rt btn btn_sub_sm">我要投标</a>
+			</h3>
+			<ul class="tender_menu">
+				<{foreach $look_list as $item}>
+				<li>
+					<{if $member_list[$item.uid].from == 'company'}>
+					<div class="tender_de_com">
+						<div class="tender_de_com_lt lt">
+							<img src="<{$pager.img}>/<{$company_list[$item.uid].thumb}>" class="lt pic" />
+							<p class="tit"><{$company_list[$item.uid].name}></p>
+						</div>
+						<div class="tender_de_com_rt lt">
+							<p class="line">
+								<span>投标次数：<font class="fontcl2"><{$company_list[$item.uid].tenders_num}></font></span>
+								<span>投标时间：<{$item.dateline|format}></span>
+								<span>信誉：<{$company_list[$item.uid].score}></span>
+								<span>中标次数：<font class="fontcl2"><{$company_list[$item.uid].tenders_sign}></font></span>
+								<{if !$detail.sign_uid && $detail.uid == $MEMBER.uid}><span>业主评标：<a href="#" class="btn btn_sub_smler">中标</a>
+								</span><{/if}>
+							</p>
+							<div class="pding liuyan">
+								<p>留言：<{$item.content}></p>
+							</div>
+						</div>
+						<div class="cl"></div>
+					</div>
+                    <{/if}>
+					<{if $member_list[$item.uid].from == 'shop'}>
+					<div class="tender_de_com">
+						<div class="tender_de_com_lt lt">
+							<img src="<{$pager.img}>/<{$shop_list[$item.uid].logo}>" class="lt pic" />
+							<p class="tit">投标者：<{$shop_list[$item.uid].name}></p>
+						</div>
+						<div class="tender_de_com_rt lt">
+							<p class="line">
+								<span>投标次数：<font class="fontcl2"><{$shop_list[$item.uid].tenders_num}></font></span>
+								<span>投标时间：<{$item.dateline|format}></span>
+								<span>信誉：<{$shop_list[$item.uid].credits}></span>
+								<span>中标次数：<font class="fontcl2"><{$shop_list[$item.uid].tenders_sign}></font></span>
+								<{if !$detail.sign_uid && $detail.uid == $MEMBER.uid}><span>业主评标：<a href="#" class="btn btn_sub_smler">中标</a>
+								</span><{/if}>
+							</p>
+                            <div class="pding liuyan">
+								<p>留言：<{$item.content}></p>
+							</div>
+						</div>
+						<div class="cl"></div>
+					</div>
+                    <{/if}>
+					<{if $member_list[$item.uid].from == 'designer'}>
+					<div class="tender_de_com">
+						<div class="tender_de_com_lt lt">
+							<img src="<{$pager.img}>/<{$member_list[$item.uid].face_80}>" class="lt pic" />
+							<p class="tit"><{$designer_list[$item.uid].name}></p>
+						</div>
+						<div class="tender_de_com_rt lt">
+							<p class="line">
+							<span>投标次数：<font class="fontcl2"><{$designer_list[$item.uid].tenders_num}></font></span>
+							<span>投标时间：<{$item.dateline|format}></span>
+							<span>信誉：<{$designer_list[$item.uid].credits}></span>
+							<span>中标次数：<font class="fontcl2"><{$designer_list[$item.uid].tenders_sign}></font></span>
+							<{if !$detail.sign_uid && $detail.uid == $MEMBER.uid}><span>业主评标：<a href="#" class="btn btn_sub_smler">中标</a>
+							</span><{/if}>
+						</p>
+                       		<div class="pding liuyan">
+								<p>留言：<{$item.content}></p>
+							</div>
+						</div>
+						<div class="cl"></div>
+					</div>
+					<{/if}>
+					<{if $detail.sign_uid == $item.uid}>
+					<div class="tender_suspend"><img src="%THEME%/static/images/tender_zb.png" /></div>
+					<{/if}>
+				</li>
+				<{/foreach}>
+			</ul>
+		</div>
+	</div>
+	<!--主体左边内容结束-->
+	<!--主体右边内容开始-->
+	<div class="side_content rt">
+		<{widget id="tenders/fast" title="免费装修招标"}>
+        <div class="mb10 area">
+            <h3 class="side_tit">装修公司排行榜</h3>
+            <ul class="pding paihang">
+                <{calldata mdl="company/company"  city_id=$request.city_id limit=8}>
+                <li>
+                    <span class="lt"><font class="paihang_num<{if $iteration<=3}> ph_num_cl<{/if}>"><{$iteration}></font><a href="<{$item.company_url}>"><{$item.name|cutstr:35}></a>
+                    </span>
+                    <span class="rt">已投标：<font class="fontcl2"><{$item.tenders_num}></font></span>
+                </li>
+                <{/calldata}>
+            </ul>
+        </div>
+        <div class="mb10 area">
+            <h3 class="side_tit">设计师排行榜</h3>
+            <ul class="pding paihang">
+                <{calldata mdl="designer/designer" city_id=$request.city_id limit=5}>
+                <li>
+                    <span class="lt"><font class="paihang_num<{if $iteration<=3}> ph_num_cl<{/if}>"><{$iteration}></font><a href="<{link ctl='blog'  arg0=$item.uid}>"><{$item.name|cutstr:35}></a>
+                    </span>
+                    <span class="rt">已投标：<font class="fontcl2"><{$item.tenders_num}></font></span>
+                </li>
+                <{/calldata}>
+            </ul>
+        </div>
+        <div class="mb20"><{adv id="10" name="全站右侧招商图片广告" city_id=$request.city_id}></div>
+	</div>
+	<div class="cl"></div>
+	<!--主体右边内容结束-->
+</div>
+<!--底边内容开始-->
+<{include file="block/small-footer.html"}>

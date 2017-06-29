@@ -1,2 +1,5 @@
 User-agent: *
 Disallow: /
+Disallow: /system/
+Disallow: /themes/
+Disallow: /admin/
