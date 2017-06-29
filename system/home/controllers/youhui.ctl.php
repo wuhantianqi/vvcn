@@ -20,6 +20,10 @@ class Ctl_Youhui extends Ctl
         $pager['count'] = $count = 0;
         $filter['city_id'] = $this->request['city_id'];
         $filter['audit'] = 1;
+        var_dump($filter);
+        var_dump($page);
+        var_dump($limit);
+        var_dump($count);die;
         if ($items = K::M('company/youhui')->items($filter, null, $page, $limit, $count)) {
             $pager['count'] = $count;
             $pager['pagebar'] = $this->mkpage($count, $limit, $page, $this->mklink(null, array('{page}')));

@@ -21,38 +21,27 @@
 									<h3>10秒登记，快速找到附近靠谱装修公司</h3>
 								</div>
 								<div class="banner-form">
+									<form action="<{link ctl='tenders:save' http='base'}>" mini-form='tenders_tzx' id="tenders-tzx" method="post">
 									<div class="form-left">
 										<div class="form-label">
-											<input type="text" class="input-input" placeholder="请输入您的称呼">
+											<input type="text" name="data[contact]" class="input-input" placeholder="请输入您的称呼">
 										</div>
 										<div class="form-label">
-											<input type="text" class="input-input" placeholder="请输入您的联系方式">
+											<input type="text" class="input-input" name="data[mobile]" placeholder="请输入您的联系方式">
 										</div>
 										<div class="form-label">
-											<select name="" id="" class="select-inp">
+											<select name="data[type_id]" class="select-inp">
                                             <option value="">请选择装修类型</option>
-                                            <option value="">装修类型1</option>
-                                            <option value="">装修类型1</option>
-                                            <option value="">装修类型1</option>
+                                            <{widget id="tenders/setting" type="type"}>
                                         </select>
 										</div>
 										<div class="form-label">
-											<select name="" id="" class="select-inp2">
-                                            <option value="">请选择城市</option>
-                                            <option value="">城市1</option>
-                                            <option value="">城市1</option>
-                                            <option value="">城市1</option>
-                                        </select>
-											<select name="" id="" class="select-inp2">
-                                            <option value="">请选择地区</option>
-                                            <option value="">地区1</option>
-                                            <option value="">地区1</option>
-                                            <option value="">地区1</option>
-                                        </select>
+											<{widget id="data/region" city_id=$request.city_id class="text short"}>
 										</div>
-										<submit class="submit-btn">立即提交</submit>
+										<input class="submit-btn" type="submit" value="立即提交">
 										<p class="p2">您的信息我们将严格保密，请放心填写！</p>
 									</div>
+									</form>
 									<div class="form-right">
 										<p>严审装修公司资质</p>
 										<p>精选上好口碑公司</p>
@@ -659,7 +648,7 @@
 				<ul class="list">
 					<{calldata mdl="company/company" city_id=$request.city_id order="tenders_num:DESC" limit="10" }>
 						<li>
-							<span class="num">1、</span>
+							<span class="num"><{$iteration}>、</span>
 							<span class="name"><a href="<{$item.company_url}>"><{$item.name}></a></span>
 							<span class="kb-num">口碑值：<b><{$item.score}></b></span>
 						</li>
@@ -1093,14 +1082,20 @@
 						<h3>房屋装修</h3>
 						<a href="<{link ctl='article:items-11'}>" class="more">More+</a>
 					</div>
+					<{foreach $fwitems as $item name=foo}>
+					<{if $smarty.foreach.foo.index == 0 }>
 					<div class="img">
-						<img src="%THEME%/static/images/20170618/picture/img12.jpg" alt="">
+						<a href="<{$item.link}>"><img src="<{$pager.img}>/<{$item.thumb}>" alt=""></a>
 					</div>
+					<{/if}>
+					<{/foreach}>
+					
 					<dl class="column-list">
-						<dt><a href=""><span class="tip"></span>水管接头漏水怎么办 水管接头漏水如何维修</a></dt>
-						<dd><a href=""><b>·</b>143平米装修多少钱 143平米装修预算</a></dd>
-						<dd><a href=""><b>·</b>窗户漏风怎么办 教你几招轻松解决</a></dd>
-						<dd><a href=""><b>·</b>粉刷墙面多少钱一平 墙面乳胶漆怎么算</a></dd>
+						<{foreach $fwitems as $item name=foo}>
+						<{if $smarty.foreach.foo.index != 0 }>
+						<dd><a href="<{$item.link}>"><b>·</b><{$item.title|cutstr:20}></a></dd>
+						<{/if}>
+						<{/foreach}>
 					</dl>
 				</div>
 				<div class="zxgl-column-box fr">
