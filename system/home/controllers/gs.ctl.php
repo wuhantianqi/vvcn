@@ -120,6 +120,8 @@ class Ctl_Gs extends Ctl
             $pager['pagebar'] = $this->mkpage($count, $limit, $page, $this->mklink('gs:items', array($area_id, $group_id, implode('-', $attr_value_ids), $order, '{page}'), $params));
             $this->pagedata['items'] = $items;
         }
+        
+
         $this->pagedata['attr_values'] = $attr_values;
         $this->pagedata['area_list'] = $area_list;
         $this->pagedata['group_list'] = $group_list;

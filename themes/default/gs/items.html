@@ -61,7 +61,6 @@
 			<div class="zxgslb_left_bottom">
 				<ul>
 					<{foreach $items as $item}>
-		
 					<li class="clearFloat">
 						<div class="sub_left fl">
 							<a href="<{$item.company_url}>"><img class="img1" src="<{$pager.img}>/<{$item.thumb}>" /><img class="img2" src="%THEME%/static/images/20170616/qjd.png" /></a>
@@ -79,7 +78,7 @@
 							</p>
 							<p class="p2">地址：<{$item.addr|cutstr:70}></p>
 							<p class="p3">服务口号：<{$item.slogan}></p>
-							<p class="p4"><img class="fl" src="%THEME%/static/images/20170616/img_hui.png" /><span class="fl"> 优惠信息：端午装修有优惠，更有豪礼相送。</span><a class="fl" href="javascript:;">[查看详情]</a></p>
+							<p class="p4"><img class="fl" src="%THEME%/static/images/20170616/img_hui.png" /><span class="fl"> 优惠信息：</span><a class="fl" href="javascript:;">[查看详情]</a></p>
 						</div>
 						<div class="sub_right fr">
 							<span>综合评分</span>
@@ -254,7 +253,12 @@
 					<span>热门装修公司</span>
 				</div>
 				<ul class="list">
+					<{calldata mdl="company/company"  city_id=$request.city_id limit=8}>
 					<li>
+						<a href="<{$item.company_url}>"><{$item.name|cutstr:35}></a>
+					</li>
+					<{/calldata}>
+					<!-- <li>
 						<a href="javascript:;">武汉市鑫大众装饰设计工程有限公司工程有限公司</a>
 					</li>
 					<li>
@@ -283,7 +287,7 @@
 					</li>
 					<li>
 						<a href="javascript:;">武汉市鑫大众装饰设计工程有限公司工程有限公司</a>
-					</li>
+					</li> -->
 				</ul>
 			</div>
 			<!-- cont5 -->
