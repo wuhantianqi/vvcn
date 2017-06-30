@@ -22,25 +22,25 @@
 								</div>
 								<div class="banner-form">
 									<form action="<{link ctl='tenders:save' http='base'}>" mini-form='tenders_tzx' id="tenders-tzx" method="post">
-									<div class="form-left">
-										<div class="form-label">
-											<input type="text" name="data[contact]" class="input-input" placeholder="请输入您的称呼">
-										</div>
-										<div class="form-label">
-											<input type="text" class="input-input" name="data[mobile]" placeholder="请输入您的联系方式">
-										</div>
-										<div class="form-label">
-											<select name="data[type_id]" class="select-inp">
+										<div class="form-left">
+											<div class="form-label">
+												<input type="text" name="data[contact]" class="input-input" placeholder="请输入您的称呼">
+											</div>
+											<div class="form-label">
+												<input type="text" class="input-input" name="data[mobile]" placeholder="请输入您的联系方式">
+											</div>
+											<div class="form-label">
+												<select name="data[type_id]" class="select-inp">
                                             <option value="">请选择装修类型</option>
                                             <{widget id="tenders/setting" type="type"}>
                                         </select>
+											</div>
+											<div class="form-label">
+												<{widget id="data/region" city_id=$request.city_id class="text short" }>
+											</div>
+											<input class="submit-btn" type="submit" value="立即提交">
+											<p class="p2">您的信息我们将严格保密，请放心填写！</p>
 										</div>
-										<div class="form-label">
-											<{widget id="data/region" city_id=$request.city_id class="text short"}>
-										</div>
-										<input class="submit-btn" type="submit" value="立即提交">
-										<p class="p2">您的信息我们将严格保密，请放心填写！</p>
-									</div>
 									</form>
 									<div class="form-right">
 										<p>严审装修公司资质</p>
@@ -796,20 +796,8 @@
 				</div>
 			</div>
 			<div class="sjs-picshow">
-				<div class="sjs-picshow-wrap">
-					<div class="sjs-line">
-
-						<div class="people" style="width: 420px">
-							<span class="img">
-                            <img src="%THEME%/static/images/20170618/picture/sjs.jpg" alt=""/>
-                        </span>
-							<div class="people-dec">
-								<h4>马大帅2</h4>
-								<p>所属公司：东启创拓装饰</p>
-								<p>设计理念：追求精神的极致感受，融入思想和创意，对每一件作品赋之生命授予灵魂……</p>
-								<p class="bp"><a href="" class="xq">详情</a><a href="" class="yy">预约</a></p>
-							</div>
-						</div>
+				<ul class="sjs-picshow-wrap">
+					<li class="sjs-line">
 						<div class="people">
 							<span class="img">
                             <img src="%THEME%/static/images/20170618/picture/sjs.jpg" alt=""/>
@@ -821,24 +809,8 @@
 								<p class="bp"><a href="" class="xq">详情</a><a href="" class="yy">预约</a></p>
 							</div>
 						</div>
-
-						<!--
-						<{KT id="160" name="网站首页_设计师下" city_id=$request.city_id}>
-							<div class="people">
-								<span class="img">
-                            <img src="<{$pager.img}>/<{$item.thumb}>" alt=""/>
-                        </span>
-								<div class="people-dec">
-									<h4>
-										<{$item.name}>
-									</h4>
-									<p>所属公司：<span><{$item.ext.company.name}></span></p>
-									<p>设计理念：<span><{$item.slogan}></span></p>
-									<p class="bp"><a href="<{$item.link}>" class="xq">详情</a><a href="" class="yy">预约</a></p>
-								</div>
-							</div>
-							<{/KT}>
--->
+					</li>
+					<li class="sjs-line">
 						<div class="people">
 							<span class="img">
                             <img src="%THEME%/static/images/20170618/picture/sjs.jpg" alt=""/>
@@ -850,6 +822,8 @@
 								<p class="bp"><a href="" class="xq">详情</a><a href="" class="yy">预约</a></p>
 							</div>
 						</div>
+					</li>
+					<li class="sjs-line">
 						<div class="people">
 							<span class="img">
                             <img src="%THEME%/static/images/20170618/picture/sjs.jpg" alt=""/>
@@ -861,6 +835,8 @@
 								<p class="bp"><a href="" class="xq">详情</a><a href="" class="yy">预约</a></p>
 							</div>
 						</div>
+					</li>
+					<li class="sjs-line">
 						<div class="people">
 							<span class="img">
                             <img src="%THEME%/static/images/20170618/picture/sjs.jpg" alt=""/>
@@ -872,8 +848,8 @@
 								<p class="bp"><a href="" class="xq">详情</a><a href="" class="yy">预约</a></p>
 							</div>
 						</div>
-					</div>
-					<div class="sjs-line">
+					</li>
+					<li class="sjs-line">
 						<div class="people">
 							<span class="img">
                             <img src="%THEME%/static/images/20170618/picture/sjs.jpg" alt=""/>
@@ -885,6 +861,8 @@
 								<p class="bp"><a href="" class="xq">详情</a><a href="" class="yy">预约</a></p>
 							</div>
 						</div>
+					</li>
+					<li class="sjs-line">
 						<div class="people">
 							<span class="img">
                             <img src="%THEME%/static/images/20170618/picture/sjs.jpg" alt=""/>
@@ -896,6 +874,8 @@
 								<p class="bp"><a href="" class="xq">详情</a><a href="" class="yy">预约</a></p>
 							</div>
 						</div>
+					</li>
+					<li class="sjs-line">
 						<div class="people">
 							<span class="img">
                             <img src="%THEME%/static/images/20170618/picture/sjs.jpg" alt=""/>
@@ -907,6 +887,8 @@
 								<p class="bp"><a href="" class="xq">详情</a><a href="" class="yy">预约</a></p>
 							</div>
 						</div>
+					</li>
+					<li class="sjs-line">
 						<div class="people">
 							<span class="img">
                             <img src="%THEME%/static/images/20170618/picture/sjs.jpg" alt=""/>
@@ -918,30 +900,8 @@
 								<p class="bp"><a href="" class="xq">详情</a><a href="" class="yy">预约</a></p>
 							</div>
 						</div>
-						<div class="people" style="width: 420px;">
-							<span class="img">
-                            <img src="%THEME%/static/images/20170618/picture/sjs.jpg" alt=""/>
-                        </span>
-							<div class="people-dec">
-								<h4>马大帅2</h4>
-								<p>所属公司：东启创拓装饰</p>
-								<p>设计理念：追求精神的极致感受，融入思想和创意，对每一件作品赋之生命授予灵魂……</p>
-								<p class="bp"><a href="" class="xq">详情</a><a href="" class="yy">预约</a></p>
-							</div>
-						</div>
-					</div>
-					<div class="sjs-line">
-						<div class="people">
-							<span class="img">
-                            <img src="%THEME%/static/images/20170618/picture/sjs.jpg" alt=""/>
-                        </span>
-							<div class="people-dec" style="display: block; left: 184px; opacity: 1;">
-								<h4>马大帅2</h4>
-								<p>所属公司：东启创拓装饰</p>
-								<p>设计理念：追求精神的极致感受，融入思想和创意，对每一件作品赋之生命授予灵魂……</p>
-								<p class="bp"><a href="" class="xq">详情</a><a href="" class="yy">预约</a></p>
-							</div>
-						</div>
+					</li>
+					<li class="sjs-line">
 						<div class="people">
 							<span class="img">
                             <img src="%THEME%/static/images/20170618/picture/sjs.jpg" alt=""/>
@@ -953,17 +913,8 @@
 								<p class="bp"><a href="" class="xq">详情</a><a href="" class="yy">预约</a></p>
 							</div>
 						</div>
-						<div class="people" style="width: 420px;">
-							<span class="img">
-                            <img src="%THEME%/static/images/20170618/picture/sjs.jpg" alt=""/>
-                        </span>
-							<div class="people-dec">
-								<h4>马大帅2</h4>
-								<p>所属公司：东启创拓装饰</p>
-								<p>设计理念：追求精神的极致感受，融入思想和创意，对每一件作品赋之生命授予灵魂……</p>
-								<p class="bp"><a href="" class="xq">详情</a><a href="" class="yy">预约</a></p>
-							</div>
-						</div>
+					</li>
+					<li class="sjs-line">
 						<div class="people">
 							<span class="img">
                             <img src="%THEME%/static/images/20170618/picture/sjs.jpg" alt=""/>
@@ -975,6 +926,8 @@
 								<p class="bp"><a href="" class="xq">详情</a><a href="" class="yy">预约</a></p>
 							</div>
 						</div>
+					</li>
+					<li class="sjs-line">
 						<div class="people">
 							<span class="img">
                             <img src="%THEME%/static/images/20170618/picture/sjs.jpg" alt=""/>
@@ -986,10 +939,34 @@
 								<p class="bp"><a href="" class="xq">详情</a><a href="" class="yy">预约</a></p>
 							</div>
 						</div>
-
-					</div>
-
-				</div>
+					</li>
+					<li class="sjs-line">
+						<div class="people">
+							<span class="img">
+                            <img src="%THEME%/static/images/20170618/picture/sjs.jpg" alt=""/>
+                        </span>
+							<div class="people-dec">
+								<h4>马大帅2</h4>
+								<p>所属公司：东启创拓装饰</p>
+								<p>设计理念：追求精神的极致感受，融入思想和创意，对每一件作品赋之生命授予灵魂……</p>
+								<p class="bp"><a href="" class="xq">详情</a><a href="" class="yy">预约</a></p>
+							</div>
+						</div>
+					</li>
+					<li class="sjs-line">
+						<div class="people">
+							<span class="img">
+                            <img src="%THEME%/static/images/20170618/picture/sjs.jpg" alt=""/>
+                        </span>
+							<div class="people-dec">
+								<h4>马大帅2</h4>
+								<p>所属公司：东启创拓装饰</p>
+								<p>设计理念：追求精神的极致感受，融入思想和创意，对每一件作品赋之生命授予灵魂……</p>
+								<p class="bp"><a href="" class="xq">详情</a><a href="" class="yy">预约</a></p>
+							</div>
+						</div>
+					</li>
+				</ul>
 
 			</div>
 
@@ -1083,20 +1060,20 @@
 						<a href="<{link ctl='article:items-11'}>" class="more">More+</a>
 					</div>
 					<{foreach $fwitems as $item name=foo}>
-					<{if $smarty.foreach.foo.index == 0 }>
-					<div class="img">
-						<a href="<{$item.link}>"><img src="<{$pager.img}>/<{$item.thumb}>" alt=""></a>
-					</div>
-					<{/if}>
-					<{/foreach}>
-					
-					<dl class="column-list">
-						<{foreach $fwitems as $item name=foo}>
-						<{if $smarty.foreach.foo.index != 0 }>
-						<dd><a href="<{$item.link}>"><b>·</b><{$item.title|cutstr:20}></a></dd>
-						<{/if}>
-						<{/foreach}>
-					</dl>
+						<{if $smarty.foreach.foo.index==0 }>
+							<div class="img">
+								<a href="<{$item.link}>"><img src="<{$pager.img}>/<{$item.thumb}>" alt=""></a>
+							</div>
+							<{/if}>
+								<{/foreach}>
+
+									<dl class="column-list">
+										<{foreach $fwitems as $item name=foo}>
+											<{if $smarty.foreach.foo.index !=0 }>
+												<dd><a href="<{$item.link}>"><b>·</b><{$item.title|cutstr:20}></a></dd>
+												<{/if}>
+													<{/foreach}>
+									</dl>
 				</div>
 				<div class="zxgl-column-box fr">
 					<div class="title">

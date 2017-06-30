@@ -9,7 +9,7 @@
 
 .index-bannerx a {
 	width: 100%;
-	height: 100%;	
+	height: 100%;
 	overflow: hidden;
 	position: absolute;
 	display: block;
@@ -1451,7 +1451,8 @@
 	transition: .5s;
 	font-size: 14px;
 }
-.site-menu .menu>li>a{
+
+.site-menu .menu>li>a {
 	font-size: 16px;
 }
 
@@ -2192,19 +2193,13 @@
 
 .sjs-picshow-wrap .sjs-line {
 	float: left;
-	width: 100%;
 	height: 185px;
-	width: 100%;
 	margin-bottom: 10px;
 	overflow: hidden;
 }
 
-.sjs-picshow-wrap .sjs-line:last-child {
+.sjs-picshow-wrap .sjs-line:last-child(5n) {
 	margin-bottom: 0;
-}
-
-.sjs-picshow-wrap .sjs-line .people:last-child {
-	margin-right: 0;
 }
 
 .sjs-picshow .people {

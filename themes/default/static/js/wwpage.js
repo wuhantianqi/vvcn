@@ -5,15 +5,23 @@ $(function () {
 
 
 	//	精英设计
+	//	for (var i = 1; i++; i < 3) {
+	//		var n = 5 * i - 1;
+	//		$(".sjs-picshow .sjs-line").eq(n).find(".people").css("marginRight", "0");
+	//
+	//	}
 
-
-
+	$(".sjs-picshow .sjs-line ").eq(0).find(".people").animate("width", "420px");
+	$(".sjs-picshow .sjs-line").eq(6).animate("width", "420px");
+	$(".sjs-picshow .sjs-line").eq(13).animate("width", "420px");
 	$(".sjs-picshow .sjs-line").each(function () {
 
 		$(this).find(".people").mouseenter(function () {
-
+			var index = $(this).index();
+			$(this).css("width", "185px");
 			$(this).animate({
 				'width': '420px'
+
 			}, 1000);
 			$(this).siblings().animate({
 				'width': '185px'
