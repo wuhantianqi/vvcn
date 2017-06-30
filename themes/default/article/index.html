@@ -104,8 +104,7 @@
 -->
 				<{KT id="25" name="学装修装修流程-装修准备图" city_id=$request.city_id}>
 					<a href="<{$item.link}>"><img src="<{$pager.img}>/<{$item.thumb}>" /></a>
-
-					<{/KT}>
+				<{/KT}>
 			</div>
 			<div class="zxgl_hot_mid fl">
 				<ul class="zxgl_hot_ul">
@@ -117,7 +116,7 @@
 				<div class="hot_trt">
 					<div class="hot_trt_">
 						<div class="hot_trt_top">
-							<{KT id="14" name="学装修首页热点推荐-置顶" city_id=$request.city_id limit="2" }>
+							<{KT id="14" name="学装修首页今日热点推荐" city_id=$request.city_id limit="2" }>
 
 								<h2><i></i>
 									<a href="<{$item.link}>">
@@ -137,7 +136,7 @@
 					</div>
 					<div class="hot_trt_fot">
 						<ul>
-							<{KT id="14" name="学装修首页热点推荐-置顶" city_id=$request.city_id limit="5" }>
+							<{KT id="14" name="学装修首页装修资讯" city_id=$request.city_id limit="5" }>
 								<li>
 									<a href="<{$item.link}>">
 										<{$item.title|cutstr:60}>

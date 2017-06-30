@@ -3,7 +3,7 @@
 	<div class="ask_top">
 		<div class="w1200">
 			<span>您的位置：</span>
-			<a href="javascript:;">优优美家 &gt;</a>
+			<a href="<{link ctl='index'}>"><{$CONFIG.site.title}></a>
 			<i>知识问答</i>
 		</div>
 	</div>
@@ -19,24 +19,74 @@
 		<div class="ask_main_left fl">
 			<!-- 提交问题 -->
 			<div class="ask_main_left_cont1">
+				<form action="<{link ctl='ask:save' http='ajax'}>" mini-form="ask"  method="post">
 				<div class="ask_cont1_box">
 					<div class="area">
-						<textarea placeholder="请在这里输入您的问题，有问必答。"></textarea>
+						<textarea name='data[content]' placeholder="请在这里输入您的问题，有问必答。"></textarea>
 					</div>
 					<div class="down">
 						<span>问题分类：</span>
-						<select>
-							<option>--全部--</option>
-							<option>--全部1--</option>
-							<option>--全部2--</option>
-							<option>--全部3--</option>
-						</select>
-						<span>问题分类：</span>
-						<input type="text" placeholder="请输入验证码" />
-						<img src="%THEME%/static/images/20170616/answer4.png" />
-						<a class="tj" href="javascript:;">提交问题</a>
+						<select class="text"  id='cate_select' onchange="change(this.value)" >
+                    	 <option value="cat_all" id='cat_all' selected="selected">--全部--</option>
+						 <{foreach $cates as $item}>
+                            <{if $item.parent_id == 0}>
+                                    <option value='<{$item.cat_id}>'><{$item.title}></option>
+                            <{/if}>
+                        <{/foreach}>
+					</select>
+						<{foreach $cates as $item}>
+                    	 <{if $item.parent_id == 0}>
+                            <select class="text" id = '<{$item.cat_id}>' onchange = "changes(this.value)" style="display:none">
+                            	 <option class = 'parent_all'  value="parent_all">--全部--</option>
+                                 <{foreach $cates as $it2}>
+                                        <{if $it2.parent_id == $item.cat_id}>
+                                            <option  value='<{$it2.cat_id}>'><{$it2.title}></option>
+                                        <{/if}>
+                                 <{/foreach}>
+                            </select>
+                         <{/if}>
+                    <{/foreach}>
+						<input type="hidden" id='cat_value' name="cat_id" value="0" /> 
+                 		<{if $ask_yz}>
+                            验证码:
+                                    <input class="text short" type="text" name="verifycode" placeholder="请输入验证码"/>
+                                    <img verify="#pass-verify" src="<{link ctl='magic:verify' http='ajax'}>&_=<{$pager.dateline}>" id="pass-verify"/>
+                                
+                        <{/if}>
+						<div class="rt">
+                        
+                        <input type="submit" class="btn" value="提交问题"  />
+                    </div>
 					</div>
 				</div>
+				</form>
+				                <script>
+									$(document).ready(function(){
+				                       $("#cat_all").attr("selected",true);
+									   $('#cat_value').val(0);
+				                    });
+									
+				                	function change(cat_id){
+										<{foreach $cates as $item}>
+											<{if $item.parent_id == 0}>
+												   if(cat_id == <{$item.cat_id}>){
+														 $("#"+<{$item.cat_id}>).show();  
+												   }else{
+														 $("#"+<{$item.cat_id}>).hide();  
+												   }
+				                            <{/if}>
+										<{/foreach}>
+										$(".parent_all").attr("selected",true);
+										$('#cat_value').val(cat_id);
+									}
+									
+									function changes(val){
+										if(isNaN(val)){
+											val = 	$('#cate_select option:selected').val();
+										}
+										$('#cat_value').val(val);
+									}
+				                </script>
 			</div>
 			<!-- 左侧主题内容 -->
 			<div class="ask_main_left_cont2 clearFloat">
@@ -45,36 +95,25 @@
 					<!-- 左侧导航列表 -->
 					<div class="left_nav">
 						<ul>
-							<li class="li1">
-								<div class="li_tit"><span>家装设计</span></div>
-								<div class="li_det">
-									<div class="det_box">
-										<a href="javascript:;">装修风水</a>
-										<a href="javascript:;">装修风格</a>
-										<a href="javascript:;">客厅</a>
-										<a href="javascript:;">客厅</a>
-										<a href="javascript:;">客厅</a>
-										<a href="javascript:;">客厅</a>
-										<a href="javascript:;">客厅</a>
-										<a href="javascript:;">客厅</a>
-										<a href="javascript:;">客厅</a>
-										<a href="javascript:;">客厅</a>
-										<a href="javascript:;">客厅</a>
-										<a href="javascript:;">客厅</a>
-										<a href="javascript:;">客厅</a>
-										<a href="javascript:;">客厅</a>
-										<a href="javascript:;">客厅</a>
-										<a href="javascript:;">客厅</a>
-										<a href="javascript:;">客厅</a>
-										<a href="javascript:;">客厅</a>
-										<a href="javascript:;">客厅</a>
-										<a href="javascript:;">客厅</a>
-										<a href="javascript:;">客厅</a>
-										<a href="javascript:;">客厅</a>
-									</div>
-								</div>
-							</li>
-							<li class="li2">
+							<{foreach $cates as $item name=foo}>
+						        <{if $item.parent_id == 0}>
+						            <li class="li<{$smarty.foreach.foo.index}>">
+						            	<div class="li_tit"><span><{$item.title}></span></div>
+						            	<div class="li_det" style="display:none;">
+	    									<div class="det_box">
+						                <{foreach $cates as $it2}>
+						                <{if $it2.parent_id == $item.cat_id}>
+						                	
+	    											<a href="<{link ctl='ask:items' arg0=$it2.cat_id}>"><{$it2.title}></a>		
+						                <{/if}>
+						                <{/foreach}>
+						               		</div>
+	    								</div>
+						            </li>
+						        <{/if}>
+						    <{/foreach}>
+
+							<!-- <li class="li2">
 								<div class="li_tit"><span>家装设计</span></div>
 								<div class="li_det" style="display:none;">
 									<div class="det_box">
@@ -193,7 +232,7 @@
 										<a href="javascript:;">客厅</a>
 									</div>
 								</div>
-							</li>
+							</li> -->
 						</ul>
 					</div>
 					<!-- 左侧广告位 -->
@@ -233,34 +272,19 @@
 						<div class="hot_tit">
 							<span>热门回答</span>
 							<i>装修问题那么多，你要了解到几时？不如请个监理来帮你！</i>
-							<a href="javascript:;">更多+</a>
+							<a href="<{link ctl='ask:items' arg0=1 arg1=1}>">更多+</a>
 						</div>
 						<ul class="list">
-							<li>
-								<a href="javascript:;">
-									<span>金鱼一般可以养多久啊？</span>
-									<em>已有<i>3</i>个回答</em>
-								</a>
-							</li>
-							<li>
-								<a href="javascript:;">
-									<span>保温杯最长能保温多长时间?</span>
-									<em>已有<i>3</i>个回答</em>
-								</a>
-							</li>
-							<li>
-								<a href="javascript:;">
-									<span>希诺水杯怎么？有用过的没?我看款式还挺好看的，不知 希诺水杯怎么？有用过的没?我看款式还挺好看的，不知 ...</span>
-									<em>已有<i>3</i>个回答</em>
-								</a>
-							</li>
-							<li>
-								<a href="javascript:;">
-									<span>金鱼一般可以养多久啊？</span>
-									<em>已有<i>3</i>个回答</em>
-								</a>
-							</li>
-							<li>
+	                    	 <{calldata mdl="ask/ask" answer_id='>:0' order="ask_id:desc" limit="15"}> 
+	                            <li>
+    								<a target="_blank" href="<{link ctl='ask:detail' arg0=$item.ask_id}>">
+    									<span><{$item.title|cutstr:50}></span>
+    									<em>已有<i><{$item.answer_num}></i>个回答</em>
+    								</a>
+    							</li>
+	                         <{/calldata}>
+							
+							<!-- <li>
 								<a href="javascript:;">
 									<span>保温杯最长能保温多长时间?</span>
 									<em>已有<i>3</i>个回答</em>
@@ -326,6 +350,24 @@
 									<em>已有<i>3</i>个回答</em>
 								</a>
 							</li>
+							<li>
+								<a href="javascript:;">
+									<span>金鱼一般可以养多久啊？</span>
+									<em>已有<i>3</i>个回答</em>
+								</a>
+							</li>
+							<li>
+								<a href="javascript:;">
+									<span>保温杯最长能保温多长时间?</span>
+									<em>已有<i>3</i>个回答</em>
+								</a>
+							</li>
+							<li>
+								<a href="javascript:;">
+									<span>希诺水杯怎么？有用过的没?我看款式还挺好看的，不知 希诺水杯怎么？有用过的没?我看款式还挺好看的，不知 ...</span>
+									<em>已有<i>3</i>个回答</em>
+								</a>
+							</li> -->
 						</ul>
 					</div>
 					<!-- 待回答问题 -->
@@ -333,34 +375,19 @@
 						<div class="hot_tit">
 							<span>待回答问题</span>
 							<i>我是雷锋我来回答！</i>
-							<a href="javascript:;">更多+</a>
+							<a href="<{link ctl='ask:items' arg0=1 arg1=2}>">更多+</a>
 						</div>
 						<ul class="list">
-							<li>
-								<a href="javascript:;">
-									<span>保温杯最长能保温多长时间?</span>
-									<i>1分钟前</i>
-								</a>
-							</li>
-							<li>
-								<a href="javascript:;">
-									<span>金鱼一般可以养多久啊？</span>
-									<i>1分钟前</i>
-								</a>
-							</li>
-							<li>
-								<a href="javascript:;">
-									<span>保温杯最长能保温多长时间?</span>
-									<i>1分钟前</i>
-								</a>
-							</li>
-							<li>
-								<a href="javascript:;">
-									<span>希诺水杯怎么？有用过的没?我看款式还挺好看的，不知 希诺水杯怎么？有用过的没?我看款式还挺好看的，不知 ...</span>
-									<i>1分钟前</i>
-								</a>
-							</li>
-							<li>
+                    		<{calldata mdl="ask/ask" answer_id='0' order="ask_id:desc" limit="15"}> 
+                            	<li>
+									<a  target="_blank" href="<{link ctl='ask:detail' arg0=$item.ask_id}>">
+										<span><{$item.title|cutstr:50}></span>
+										<i><{$item.dateline|format}></i>
+									</a>
+								</li>
+                            <{/calldata}>
+							
+							<!-- <li>
 								<a href="javascript:;">
 									<span>金鱼一般可以养多久啊？</span>
 									<i>1分钟前</i>
@@ -396,6 +423,24 @@
 									<i>1分钟前</i>
 								</a>
 							</li>
+							<li>
+								<a href="javascript:;">
+									<span>金鱼一般可以养多久啊？</span>
+									<i>1分钟前</i>
+								</a>
+							</li>
+							<li>
+								<a href="javascript:;">
+									<span>保温杯最长能保温多长时间?</span>
+									<i>1分钟前</i>
+								</a>
+							</li>
+							<li>
+								<a href="javascript:;">
+									<span>希诺水杯怎么？有用过的没?我看款式还挺好看的，不知 希诺水杯怎么？有用过的没?我看款式还挺好看的，不知 ...</span>
+									<i>1分钟前</i>
+								</a>
+							</li> -->
 						</ul>
 					</div>
 				</div>
@@ -443,8 +488,8 @@
 				<div class="cont2_tit"><span>攻略快捷通道</span></div>
 				<p>总有一个人能帮您解决装修问题</p>
 				<div class="link">
-					<a href="javascript:;">我要提问</a>
-					<a href="javascript:;">我要回答</a>
+					<a href="<{link ctl='ask:make'}>">我要提问</a>
+					<a href="<{link ctl='ask:items' arg0=1 arg1=2}>">我要回答</a>
 				</div>
 			</div>
 			<!-- cont3 -->
@@ -460,7 +505,13 @@
 					<span>热门装修公司</span>
 				</div>
 				<ul class="list">
-					<li>
+					<{KT id="2" name="网站首页1F推荐装修公司" city_id=$request.city_id limit="15" }>
+						<li>
+							<a href="<{$item.link}>"><{$item.title}></a>
+						</li>
+					<{/KT}>
+					
+					<!-- <li>
 						<a href="javascript:;">武汉市鑫大众装饰设计工程有限公司工程有限公司</a>
 					</li>
 					<li>
@@ -486,10 +537,7 @@
 					</li>
 					<li>
 						<a href="javascript:;">武汉市鑫大众装饰设计工程有限公司工程有限公司</a>
-					</li>
-					<li>
-						<a href="javascript:;">武汉市鑫大众装饰设计工程有限公司工程有限公司</a>
-					</li>
+					</li> -->
 				</ul>
 			</div>
 			<!-- cont5 -->
