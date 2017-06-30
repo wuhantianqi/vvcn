@@ -10,7 +10,7 @@
 				<a href="<{link ctl='article:items' arg0=$top_cate.cat_id}>">
 					<{$top_cate.title}>
 				</a>
-				<{if $top_cate.cat_id !=$ cate.cat_id}>
+				<{if $top_cate.cat_id !=$cate.cat_id}>
 					&gt;
 					<a href="<{link ctl='article:items' arg0=$cate.cat_id}>">
 						<{$cate.title}>
