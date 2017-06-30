@@ -2169,125 +2169,6 @@
 }
 
 
-/*jingyingsheji */
-
-.jysj {
-	margin-top: 20px;
-	float: left;
-	width: 100%;
-}
-
-.sjs-picshow {
-	overflow: hidden;
-	display: block;
-	float: left;
-	margin-top: 20px;
-}
-
-.sjs-picshow-wrap {
-	width: 100%;
-	overflow: hidden;
-	display: block;
-	float: left;
-}
-
-.sjs-picshow-wrap .sjs-line {
-	float: left;
-	height: 185px;
-	margin-bottom: 10px;
-	overflow: hidden;
-}
-
-.sjs-picshow-wrap .sjs-line:last-child(5n) {
-	margin-bottom: 0;
-}
-
-.sjs-picshow .people {
-	width: 185px;
-	height: 185px;
-	margin-right: 10px;
-	float: left;
-	position: relative;
-	overflow: hidden;
-}
-
-.sjs-picshow .people:hover {
-	cursor: pointer;
-}
-
-.sjs-picshow .people .img {
-	width: 185px;
-	height: 185px;
-	display: block;
-	position: relative;
-	overflow: hidden;
-}
-
-.sjs-picshow .people .img img {
-	transition: all 0.5s ease-out;
-}
-
-.sjs-picshow .people .img img:hover {
-	transform: scale(1.1);
-	-webkit-transform: scale(1.1);
-	-moz-transform: scale(1.1);
-	-ms-transform: scale(1.1);
-	-o-transform: scale(1.1);
-}
-
-.sjs-picshow .people .people-dec {
-	width: 195px;
-	height: 165px;
-	position: absolute;
-	left: 184px;
-	top: 0px;
-	background: #f2f2f2;
-	padding: 10px 20px;
-	opacity: 1;
-}
-
-.sjs-picshow .people .people-dec h4 {
-	font-weight: normal;
-	font-size: 18px;
-	color: #333;
-	line-height: 28px;
-	padding-top: 5px;
-}
-
-.sjs-picshow .people .people-dec p {
-	font-size: 12px;
-	color: #555;
-	line-height: 25px;
-}
-
-.sjs-picshow .people .people-dec .bp {
-	padding-top: 5px;
-}
-
-.sjs-picshow .people .people-dec .xq {
-	width: 64px;
-	height: 25px;
-	background: #fa6382;
-	font-size: 12px;
-	color: #fff;
-	text-align: center;
-	line-height: 25px;
-	display: inline-block;
-	margin-right: 15px;
-}
-
-.sjs-picshow .people .people-dec .yy {
-	width: 64px;
-	height: 25px;
-	background: #cec707;
-	font-size: 12px;
-	color: #fff;
-	text-align: center;
-	line-height: 25px;
-	display: inline-block
-}
-
-
 /*pinpaigongsi*/
 
 .ppgs {
@@ -2354,6 +2235,11 @@
 	height: 140px;
 	float: left;
 	margin-top: 5px;
+	margin-right: 10px;
+}
+
+.ppgs-left .brand-show .img-logo img {
+	width: 100%;
 }
 
 .ppgs-left .brand-show .brand-info {
@@ -2368,6 +2254,7 @@
 	line-height: 24px;
 	padding-bottom: 10px;
 	padding-top: 5px;
+	margin-bottom: 10px;
 }
 
 .ppgs-left .brand-show .brand-info h3 span {
@@ -2419,9 +2306,10 @@
 }
 
 .ppgs-left .brand-show .brand-info .p2 {
-	color: #666;
+	color: #8b8b8b;
 	line-height: 32px;
 	font-size: 14px;
+	padding-left: 15px;
 }
 
 .ppgs-left .brand-show .brand-info .p2 i {
@@ -2937,7 +2825,18 @@
 	display: inline-block;
 	background: url(../images/20170618/img_index_css.png) no-repeat -95px 0;
 	position: relative;
-	top: 2px;
+	top: 4px;
+	margin-right: 5px;
+}
+
+.tip {
+	width: 42px;
+	height: 20px;
+	display: inline-block;
+	background: url(../images/20170618/img_index_css.png) no-repeat -95px 0;
+	position: relative;
+	top: 4px;
+	margin-right: 5px;
 }
 
 .zxgl-column-box .column-list dt a {
@@ -3704,6 +3603,137 @@
 	height: 24px;
 	background: url(../images/20170618/img_index_css.png) no-repeat 0 -25px;
 	margin-right: 5px;
+}
+
+
+/*精英设计*/
+
+
+/*jingyingsheji */
+
+.jysj {
+	margin-top: 20px;
+	float: left;
+	width: 100%;
+}
+
+.sjs-picshow {
+	overflow: hidden;
+	display: block;
+	float: left;
+	margin-top: 20px;
+}
+
+.sjs-picshow-wrap {
+	width: 100%;
+	overflow: hidden;
+	display: block;
+	float: left;
+}
+
+.sjs-picshow-wrap .sjs-line1,
+.sjs-picshow-wrap .sjs-line2 {
+	float: left;
+	width: 100%;
+	height: 185px;
+	width: 100%;
+	margin-bottom: 10px;
+	overflow: hidden;
+}
+
+.sjs-picshow-wrap .sjs-line1 li:last-child,
+.sjs-picshow-wrap .sjs-line2 li:last-child {
+	margin-right: 0;
+}
+
+.sjs-picshow .people {
+	width: 185px;
+	height: 185px;
+	margin-right: 10px;
+	float: left;
+	position: relative;
+	overflow: hidden;
+}
+
+.sjs-picshow .people:hover {
+	cursor: pointer;
+}
+
+.sjs-picshow .people .img {
+	width: 185px;
+	height: 185px;
+	display: block;
+	position: relative;
+	overflow: hidden;
+}
+
+.sjs-picshow .people .img img {
+	transition: all 0.5s ease-out;
+}
+
+.sjs-picshow .people .img img:hover {
+	transform: scale(1.1);
+	-webkit-transform: scale(1.1);
+	-moz-transform: scale(1.1);
+	-ms-transform: scale(1.1);
+	-o-transform: scale(1.1);
+}
+
+.sjs-picshow .people .people-dec {
+	width: 195px;
+	height: 165px;
+	position: absolute;
+	left: 184px;
+	top: 0px;
+	background: #f2f2f2;
+	padding: 10px 20px;
+	opacity: 1;
+}
+
+.sjs-picshow .people .people-dec h4 {
+	font-weight: normal;
+	font-size: 18px;
+	color: #333;
+	line-height: 28px;
+	padding-top: 5px;
+}
+
+.sjs-picshow .people .people-dec p {
+	font-size: 12px;
+	color: #555;
+	line-height: 25px;
+}
+
+.sjs-picshow .people .people-dec .bp {
+	padding-top: 5px;
+}
+
+.sjs-picshow .people .people-dec .xq {
+	width: 64px;
+	height: 25px;
+	background: #fa6382;
+	font-size: 12px;
+	color: #fff;
+	text-align: center;
+	line-height: 25px;
+	display: inline-block;
+	margin-right: 15px;
+}
+
+.sjs-picshow .people .people-dec .yy {
+	width: 64px;
+	height: 25px;
+	background: #cec707;
+	font-size: 12px;
+	color: #fff;
+	text-align: center;
+	line-height: 25px;
+	display: inline-block
+}
+
+#bannerx {
+	height: 500px;
+	overflow: hidden;
 }
 
 #bannerx img {

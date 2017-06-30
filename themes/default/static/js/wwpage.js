@@ -203,14 +203,66 @@ $(function () {
 
 		})*/
 
-	//	品牌设计
-	$(".brand-list .brand-box").each(function () {
+	//精英设计
 
-		$(this).hover(function () {
-			$(".brand-show-wrap .gs-name").html($(this).attr('data-title'));
+
+	$(".sjs-picshow .sjs-line1").each(function () {
+		$(this).find("li").eq(0).css("width", "420px")
+		$(this).find(".people").mouseenter(function () {
+
+			$(this).animate({
+				'width': '420px'
+			}, 1000);
+			$(this).siblings().animate({
+				'width': '185px'
+			}, 1000);
 		})
 
 	})
+	$(".sjs-picshow .sjs-line2").each(function () {
+		$(this).find("li").eq(2).css("width", "420px")
+		$(this).find("li").mouseenter(function () {
+
+			$(this).animate({
+				'width': '420px'
+			}, 1000);
+			$(this).siblings().animate({
+				'width': '185px'
+			}, 1000);
+		})
+
+	})
+
+
+
+	//	品牌公司
+
+	$(".brand-left li").each(function () {
+		var tsrc = $(this).find("img").data("url");
+		var til = $(this).data("title");
+		var ad = $(this).data("address");
+
+		$(this).mouseenter(function () {
+			$(".brand-show .img-logo img").attr("src", tsrc);
+			$(".brand-show .gs-name").html(til);
+			$(".brand-show .p1 span").html(ad);
+
+		})
+	})
+
+	//	房屋装修
+	$(".column-list").each(function () {
+		$(this).find("dd").eq(0).find("b").replaceWith('<span class="tip">' + '</span>');
+		$(this).find("dd").eq(0).find("a").css({
+			fontSize: "16px",
+			color: "#ff3333"
+		});
+	})
+	//	$(".column-list dd").eq(0).find("b").replaceWith('<span class="tip">' + '</span>')
+	//	$(".column-list dd").eq(0).find("a").css({
+	//		fontSize: "16px",
+	//		color: "#ff3333"
+	//	});
 
 	//	友情链接tab
 	$(".friend-title a").hover(function () {
