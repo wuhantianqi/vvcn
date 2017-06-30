@@ -1,24 +1,17 @@
-<{include file="block/header.html" }>
-	<!--面包屑导航开始-->
-	<div class="main_topnav mb20">
-		<div class="mainwd">
-			<p><span class="ico_list breadna"></span>您的位置：
-				<a href="<{link ctl='index'}>">
-					<{$CONFIG.site.title}>
-				</a>
-				&gt;<a href="<{link ctl='article'}>">学装修</a> &gt;
-				<a href="<{link ctl='article:items' arg0=$top_cate.cat_id}>">
-					<{$top_cate.title}>
-				</a>
-				<{if $top_cate.cat_id !=$ cate.cat_id}>
-					&gt;
-					<a href="<{link ctl='article:items' arg0=$cate.cat_id}>">
-						<{$cate.title}>
-					</a>
-					<{/if}>
-			</p>
-		</div>
+<{include file="block/header.html"}>
+<!--面包屑导航开始-->
+<div class="main_topnav mb20">
+	<div class="mainwd">
+		<p><span class="ico_list breadna"></span>您的位置：<a href="<{link ctl='index'}>"><{$CONFIG.site.title}></a>
+			&gt;<a href="<{link ctl='article'}>">学装修</a>
+			&gt;<a href="<{link ctl='article:items' arg0=$top_cate.cat_id}>"><{$top_cate.title}></a>
+			<{if $top_cate.cat_id != $cate.cat_id}>
+			&gt;<a href="<{link ctl='article:items' arg0=$cate.cat_id}>"><{$cate.title}></a>
+			<{/if}>
+		</p>
 	</div>
-	<!--面包屑导航结束-->
+</div>
+<!--面包屑导航结束-->
 
-	<{include file="block/footer.html" }>
+<!--底部内容开始-->
+<{include file="block/footer.html"}>

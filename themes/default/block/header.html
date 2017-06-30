@@ -13,20 +13,20 @@
 	<div class="top-nav">
 		<div class="w1200">
 			<div class="top-cite">
-				<i class="ico1"></i>
-				<span class="cite-name">武汉</span>
-				<a href="javascript:;" class="change-city">【切换城市】</a>
+				<i class="ico1"><img src="<{$pager.theme}>/default/static/images/here.png"></i>
+				<span class="cite-name"><{$request.city.city_name}></span>
+				<{if $CONFIG.site.multi_city}><a href="<{link ctl='city' http='www'}>" class="fontcl1">[切换城市]</a><{/if}>
 			</div>
 			<div class="welcome-text">
 				欢迎来到优优美家，我们将竭诚为您服务！
 			</div>
 			<ul class="nav-menu">
 				<li>
-					<a href="">
+					<a target="_blank" href="<{link ctl='passport'}>">
 						<i class="ico2"></i>登陆
 					</a>
 				</li>
-				<li><a href="">
+				<li><a target="_blank" href="<{link ctl='passport:reg'}>">
                 免费注册
             </a></li>
 				<li><a href="">
@@ -37,7 +37,7 @@
 						<i class="ico3"></i>商家入驻
 					</a>
 				</li>
-				<li class="fcolor">服务热线：027-87011088</li>
+				<li class="fcolor">服务热线：<{$CONFIG.site.phone}></li>
 				<li class="website-nav"><a href=""><i class="ico4"></i>网站导航
                 <i class="ico5"></i>
             </a>
@@ -109,19 +109,11 @@
 	<div class="web-head">
 		<div class="w1200">
 			<div class="logo">
-				<img src="%THEME%/static/images/20170618/picture/logo.jpg" alt="">
+				<a href="<{link ctl='index'}>"><img src="<{if $CONFIG.site.logo}><{$pager.img}>/<{$CONFIG.site.logo}><{else}>%THEME%/static/images/logo.png<{/if}>"/></a>
 			</div>
 			<div class="search">
 				<div class="input-wrap">
-					<div class="drop-menu">
-						<p>公司<i></i></p>
-						<ul class="drop-menu-list">
-							<li>设计师</li>
-							<li>资讯</li>
-						</ul>
-					</div>
-					<input type="text" placeholder="请输入您要搜索的关键词" class="search-input" />
-					<button class="search-btn">搜索</button>
+					<{widget id="public/sobox" sokw=$pager.sokw}>
 				</div>
 				<div class="search-info">
 					<a href="<{link ctl='gs'}>">装修公司</a><span class="line">|</span>
