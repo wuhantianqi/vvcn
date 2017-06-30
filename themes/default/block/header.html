@@ -13,9 +13,10 @@
 	<div class="top-nav">
 		<div class="w1200">
 			<div class="top-cite">
-				<i class="ico1"><img src="<{$pager.theme}>/default/static/images/here.png"></i>
+				<i class="ico1"></i>
 				<span class="cite-name"><{$request.city.city_name}></span>
-				<{if $CONFIG.site.multi_city}><a href="<{link ctl='city' http='www'}>" class="fontcl1">[切换城市]</a><{/if}>
+				<{if $CONFIG.site.multi_city}><a href="<{link ctl='city' http='www'}>" class="fontcl1">[切换城市]</a>
+					<{/if}>
 			</div>
 			<div class="welcome-text">
 				欢迎来到优优美家，我们将竭诚为您服务！
@@ -37,7 +38,9 @@
 						<i class="ico3"></i>商家入驻
 					</a>
 				</li>
-				<li class="fcolor">服务热线：<{$CONFIG.site.phone}></li>
+				<li class="fcolor">服务热线：
+					<{$CONFIG.site.phone}>
+				</li>
 				<li class="website-nav"><a href=""><i class="ico4"></i>网站导航
                 <i class="ico5"></i>
             </a>
@@ -151,59 +154,70 @@
 		<div class="w1200">
 			<ul class="menu">
 				<li>
-				    <a href="<{link ctl='index'}>" <{if $request.ctl=='index'}><{/if}>>首页</a>
-                </li>
+					<a href="<{link ctl='index'}>" <{if $request.ctl=='index' }>
+						<{/if}>>首页</a>
+				</li>
 				<li>
-				    <a <{if $request.ctl=='case'}><{/if}> href="<{link ctl='case'}>">装修美图<i></i></a>
+					<a <{if $request.ctl=='case' }>
+						<{/if}> href="
+							<{link ctl='case' }>">装修美图<i></i></a>
 					<ul class="menu-drop">
-					    <li><a href="<{link ctl='case'}>">案例中心</a></li>
+						<li><a href="<{link ctl='case'}>">案例中心</a></li>
 						<li><a href="<{link ctl='article-items-12'}>">装修风格</a></li>
 						<li><a href="<{link ctl='article:items-11'}>">房屋装修</a></li>
-					    <li><a href="<{link ctl='home'}>">热门小区</a></li>
+						<li><a href="<{link ctl='home'}>">热门小区</a></li>
 					</ul>
 				</li>
 				<li>
-					<a <{if $request.ctl=='gs' || $request.ctl=='designer' || $request.ctl=='guanjia' || $request.ctl=='youhui' }><{/if}> href="<{link ctl='gs'}>">装修公司<i></i></a>
+					<a <{if $request.ctl=='gs' || $request.ctl=='designer' || $request.ctl=='guanjia' || $request.ctl=='youhui' }>
+						<{/if}> href="
+							<{link ctl='gs' }>">装修公司<i></i></a>
 					<ul class="menu-drop">
 						<li><a href="<{link ctl='gs'}>">找装修公司</a></li>
 						<li><a href="<{link ctl='designer'}>">找设计师</a></li>
-						<li><a href="<{link ctl='guanjia'}>">找装修管家</a></li>					
+						<li><a href="<{link ctl='guanjia'}>">找装修管家</a></li>
 						<li><a href="<{link ctl='youhui'}>">优惠信息</a>
 						</li>
 					</ul>
 				</li>
 				<li>
-					<a <{if $request.ctl=='tenders'  || $request.ctl=='price' || $request.ctl=='yanfang' || $request.ctl=='topics'  }><{/if}> href="<{link ctl='tenders'}>">我要装修<i></i></a>
+					<a <{if $request.ctl=='tenders' || $request.ctl=='price' || $request.ctl=='yanfang' || $request.ctl=='topics' }>
+						<{/if}> href="
+							<{link ctl='tenders' }>">我要装修<i></i></a>
 					<ul class="menu-drop">
-					    <li><a href="<{link ctl='tenders'}>">量房设计</a></li>
+						<li><a href="<{link ctl='tenders'}>">量房设计</a></li>
 						<li><a href="<{link ctl='price'}>">装修报价</a></li>
 						<li><a href="<{link ctl='yanfang'}>">新房验房</a></li>
 						<li><a href="<{link ctl='topics'}>">装修贷款</a></li>
-                        <li><a href="<{link ctl='home:tuan'}>">团装小区</a></li>						
+						<li><a href="<{link ctl='home:tuan'}>">团装小区</a></li>
 					</ul>
 				</li>
 				<li>
-					<a <{if $request.ctl=='article' || $request.ctl=='case' || $request.ctl=='ask' || $request.ctl=='site' }><{/if}> href="<{link ctl='article'}>">装修学院<i></i></a>
+					<a <{if $request.ctl=='article' || $request.ctl=='case' || $request.ctl=='ask' || $request.ctl=='site' }>
+						<{/if}> href="
+							<{link ctl='article' }>">装修学院<i></i></a>
 					<ul class="menu-drop">
-					    <li><a href="<{link ctl='article:items-9'}>">装修课堂</a></li>
+						<li><a href="<{link ctl='article:items-9'}>">装修课堂</a></li>
 						<li><a href="<{link ctl='article:items-8'}>">装修流程</a></li>
 						<li><a href="<{link ctl='ask'}>">知识问答</a></li>
-                        <li><a href="<{link ctl='case'}>">装修美图</a></li>	
-                        <li><a href="<{link ctl='site'}>">在建工地 </a></li>						
+						<li><a href="<{link ctl='case'}>">装修美图</a></li>
+						<li><a href="<{link ctl='site'}>">在建工地 </a></li>
 					</ul>
 				</li>
 				<li>
 					<a href="<{link ctl='home:map'}>">我搜我家<i></i></a>
 					<ul class="menu-drop">
-					    <li><a href="<{link ctl='site:map'}>">工地导航</a></li>
-						<li><a href="<{link ctl='gs:map'}>">公司导航</a></li>					
+						<li><a href="<{link ctl='site:map'}>">工地导航</a></li>
+						<li><a href="<{link ctl='gs:map'}>">公司导航</a></li>
 					</ul>
 				</li>
 				<li>
-				    <a <{if $request.ctl=='activity'}><{/if}> href="<{link ctl='activity'}>">美家活动</a>
+					<a <{if $request.ctl=='activity' }>
+						<{/if}> href="
+							<{link ctl='activity' }>">美家活动</a>
 				</li>
-					
-                <!--<li>
+
+				<!--<li>
 				<a <{if $request.ctl=='news'}>class="current"<{/if}> href="<{link ctl='news'}>">本地新闻</a>
 				</li>
 				<li class="last">

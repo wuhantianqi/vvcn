@@ -1270,8 +1270,9 @@
 .web-head .search .input-wrap {
 	width: 430px;
 	height: 38px;
-	background: #ff3333;
+	/*	background: #ff3333;*/
 	border: 1px solid #ff3333;
+	position: relative;
 }
 
 .web-head .search .input-wrap .drop-menu {

@@ -281,6 +281,29 @@ span.login_litico {
 	border-right: 1px solid #f2f2f2;
 	width: 74px;
 	text-align: center;
+	height: 38px;
+	line-height: 38px;
+	box-sizing: border-box;
+}
+
+.search_cont>a {
+	padding-left: 14px;
+}
+
+.search input.text {
+	border: none;
+	height: 38px;
+	line-height: 38px;
+	padding: 0 0 0 15px;
+}
+
+.search input.btn {
+	background-color: #ff3333;
+	border-radius: 0;
+	height: 38px;
+	line-height: 38px;
+	text-align: center;
+	width: 50px;
 }
 
 .search_ico {
@@ -293,9 +316,9 @@ span.login_litico {
 	position: absolute;
 	z-index: 100;
 	width: 75px;
-	left: -2px;
-	top: 36px;
-	border: 2px solid #00ad28;
+	left: -1px;
+	top: 38px;
+	border: 1px solid #ff3333;
 	border-top: none;
 }
 
