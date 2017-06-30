@@ -601,7 +601,7 @@
 				<div class="brand-left">
 					<ul class="brand-list">
 						<{KT id="2" name="网站首页1F推荐装修公司" city_id=$request.city_id limit="15" }>
-							<li class="brand-box" data-title="鑫大众装饰"><a href="<{$item.link}>"><img src="<{$pager.img}>/<{$item.logo}>" alt="<{$item.name}>"/></a></li>
+							<li class="brand-box" data-title="<{$item.name}>" data-address="<{$item.addr}>"><a href="<{$item.link}>"><img src="<{$pager.img}>/<{$item.logo}> " data-url="<{$pager.img}>/<{$item.thumb}>" alt="<{$item.name}>"/></a></li>
 							<{/KT}>
 								<!--
 								<li class="brand-box" data-title="金福源装饰"><img src="%THEME%/static/images/20170618/picture/link2.jpg" alt=""></li>
@@ -625,15 +625,16 @@
 				<div class="brand-show">
 					<div style="display: block" class="brand-show-wrap">
 						<span class="img-logo">
-                    <img src="%THEME%/static/images/20170618/picture/img101.jpg" alt="">
+<img src="%THEME%/static/images/20170618/picture/img101.jpg" alt="">
                 </span>
 						<div class="brand-info">
 							<h3><span class="gs-name">鑫大众装饰</span>
 								<span class="pic-num"><i></i>42</span>
 								<span class="gong-num"><i></i>42</span>
 							</h3>
-							<p class="p1"><i></i>地址：武汉市江岸区二七路航天双城A座1927</p>
-							<p class="p2"><i></i>优惠信息：端午装修有优惠，更有豪礼相送。<a href="" class="more">[查看详情]</a></p>
+							<p class="p1"><i></i>地址：<span>武汉市江岸区二七路航天双城A座1927</span></p>
+							<!--							<p class="p2"><i></i>优惠信息：端午装修有优惠，更有豪礼相送。<a href="" class="more">[查看详情]</a></p>-->
+							<p class="p2">服务口号：专注优质装修服务</p>
 						</div>
 						<div class="anbtn">
 							<a href=""><i class="iop1"></i>在线装修咨询</a>
@@ -790,15 +791,15 @@
 				<h2>精英设计</h2>
 				<span class="desc">专业是我们的追求，我们的努力只为提供更好的家装设计</span>
 				<div class="tip-line">
-					<a href="<{link ctl='designer'}>">找设计师</a><span class="line">/</span>
-					<a href="<{link ctl='tenders'}>">免费量房和设计</a><span class="line">/</span>
-					<a href="<{link ctl='designer'}>">更多</a>
+					<a href="">找设计师</a><span class="line">/</span>
+					<a href="">免费量房和设计</a><span class="line">/</span>
+					<a href="">更多</a>
 				</div>
 			</div>
 			<div class="sjs-picshow">
-				<ul class="sjs-picshow-wrap">
-					<li class="sjs-line">
-						<div class="people">
+				<div class="sjs-picshow-wrap">
+					<ul class="sjs-line1">
+						<li class="people">
 							<span class="img">
                             <img src="%THEME%/static/images/20170618/picture/sjs.jpg" alt=""/>
                         </span>
@@ -808,10 +809,8 @@
 								<p>设计理念：追求精神的极致感受，融入思想和创意，对每一件作品赋之生命授予灵魂……</p>
 								<p class="bp"><a href="" class="xq">详情</a><a href="" class="yy">预约</a></p>
 							</div>
-						</div>
-					</li>
-					<li class="sjs-line">
-						<div class="people">
+						</li>
+						<li class="people">
 							<span class="img">
                             <img src="%THEME%/static/images/20170618/picture/sjs.jpg" alt=""/>
                         </span>
@@ -821,10 +820,8 @@
 								<p>设计理念：追求精神的极致感受，融入思想和创意，对每一件作品赋之生命授予灵魂……</p>
 								<p class="bp"><a href="" class="xq">详情</a><a href="" class="yy">预约</a></p>
 							</div>
-						</div>
-					</li>
-					<li class="sjs-line">
-						<div class="people">
+						</li>
+						<li class="people">
 							<span class="img">
                             <img src="%THEME%/static/images/20170618/picture/sjs.jpg" alt=""/>
                         </span>
@@ -834,10 +831,8 @@
 								<p>设计理念：追求精神的极致感受，融入思想和创意，对每一件作品赋之生命授予灵魂……</p>
 								<p class="bp"><a href="" class="xq">详情</a><a href="" class="yy">预约</a></p>
 							</div>
-						</div>
-					</li>
-					<li class="sjs-line">
-						<div class="people">
+						</li>
+						<li class="people">
 							<span class="img">
                             <img src="%THEME%/static/images/20170618/picture/sjs.jpg" alt=""/>
                         </span>
@@ -847,10 +842,8 @@
 								<p>设计理念：追求精神的极致感受，融入思想和创意，对每一件作品赋之生命授予灵魂……</p>
 								<p class="bp"><a href="" class="xq">详情</a><a href="" class="yy">预约</a></p>
 							</div>
-						</div>
-					</li>
-					<li class="sjs-line">
-						<div class="people">
+						</li>
+						<li class="people">
 							<span class="img">
                             <img src="%THEME%/static/images/20170618/picture/sjs.jpg" alt=""/>
                         </span>
@@ -860,10 +853,10 @@
 								<p>设计理念：追求精神的极致感受，融入思想和创意，对每一件作品赋之生命授予灵魂……</p>
 								<p class="bp"><a href="" class="xq">详情</a><a href="" class="yy">预约</a></p>
 							</div>
-						</div>
-					</li>
-					<li class="sjs-line">
-						<div class="people">
+						</li>
+					</ul>
+					<ul class="sjs-line2">
+						<li class="people">
 							<span class="img">
                             <img src="%THEME%/static/images/20170618/picture/sjs.jpg" alt=""/>
                         </span>
@@ -873,10 +866,8 @@
 								<p>设计理念：追求精神的极致感受，融入思想和创意，对每一件作品赋之生命授予灵魂……</p>
 								<p class="bp"><a href="" class="xq">详情</a><a href="" class="yy">预约</a></p>
 							</div>
-						</div>
-					</li>
-					<li class="sjs-line">
-						<div class="people">
+						</li>
+						<li class="people">
 							<span class="img">
                             <img src="%THEME%/static/images/20170618/picture/sjs.jpg" alt=""/>
                         </span>
@@ -886,10 +877,8 @@
 								<p>设计理念：追求精神的极致感受，融入思想和创意，对每一件作品赋之生命授予灵魂……</p>
 								<p class="bp"><a href="" class="xq">详情</a><a href="" class="yy">预约</a></p>
 							</div>
-						</div>
-					</li>
-					<li class="sjs-line">
-						<div class="people">
+						</li>
+						<li class="people">
 							<span class="img">
                             <img src="%THEME%/static/images/20170618/picture/sjs.jpg" alt=""/>
                         </span>
@@ -899,10 +888,8 @@
 								<p>设计理念：追求精神的极致感受，融入思想和创意，对每一件作品赋之生命授予灵魂……</p>
 								<p class="bp"><a href="" class="xq">详情</a><a href="" class="yy">预约</a></p>
 							</div>
-						</div>
-					</li>
-					<li class="sjs-line">
-						<div class="people">
+						</li>
+						<li class="people">
 							<span class="img">
                             <img src="%THEME%/static/images/20170618/picture/sjs.jpg" alt=""/>
                         </span>
@@ -912,10 +899,8 @@
 								<p>设计理念：追求精神的极致感受，融入思想和创意，对每一件作品赋之生命授予灵魂……</p>
 								<p class="bp"><a href="" class="xq">详情</a><a href="" class="yy">预约</a></p>
 							</div>
-						</div>
-					</li>
-					<li class="sjs-line">
-						<div class="people">
+						</li>
+						<li class="people">
 							<span class="img">
                             <img src="%THEME%/static/images/20170618/picture/sjs.jpg" alt=""/>
                         </span>
@@ -925,48 +910,10 @@
 								<p>设计理念：追求精神的极致感受，融入思想和创意，对每一件作品赋之生命授予灵魂……</p>
 								<p class="bp"><a href="" class="xq">详情</a><a href="" class="yy">预约</a></p>
 							</div>
-						</div>
-					</li>
-					<li class="sjs-line">
-						<div class="people">
-							<span class="img">
-                            <img src="%THEME%/static/images/20170618/picture/sjs.jpg" alt=""/>
-                        </span>
-							<div class="people-dec">
-								<h4>马大帅2</h4>
-								<p>所属公司：东启创拓装饰</p>
-								<p>设计理念：追求精神的极致感受，融入思想和创意，对每一件作品赋之生命授予灵魂……</p>
-								<p class="bp"><a href="" class="xq">详情</a><a href="" class="yy">预约</a></p>
-							</div>
-						</div>
-					</li>
-					<li class="sjs-line">
-						<div class="people">
-							<span class="img">
-                            <img src="%THEME%/static/images/20170618/picture/sjs.jpg" alt=""/>
-                        </span>
-							<div class="people-dec">
-								<h4>马大帅2</h4>
-								<p>所属公司：东启创拓装饰</p>
-								<p>设计理念：追求精神的极致感受，融入思想和创意，对每一件作品赋之生命授予灵魂……</p>
-								<p class="bp"><a href="" class="xq">详情</a><a href="" class="yy">预约</a></p>
-							</div>
-						</div>
-					</li>
-					<li class="sjs-line">
-						<div class="people">
-							<span class="img">
-                            <img src="%THEME%/static/images/20170618/picture/sjs.jpg" alt=""/>
-                        </span>
-							<div class="people-dec">
-								<h4>马大帅2</h4>
-								<p>所属公司：东启创拓装饰</p>
-								<p>设计理念：追求精神的极致感受，融入思想和创意，对每一件作品赋之生命授予灵魂……</p>
-								<p class="bp"><a href="" class="xq">详情</a><a href="" class="yy">预约</a></p>
-							</div>
-						</div>
-					</li>
-				</ul>
+						</li>
+					</ul>
+
+				</div>
 
 			</div>
 
@@ -1066,7 +1013,6 @@
 							</div>
 							<{/if}>
 								<{/foreach}>
-
 									<dl class="column-list">
 										<{foreach $fwitems as $item name=foo}>
 											<{if $smarty.foreach.foo.index !=0 }>
@@ -1080,30 +1026,40 @@
 						<h3>装修风格</h3>
 						<a href="<{link ctl='article:items-12'}>" class="more">More+</a>
 					</div>
-					<div class="img">
-						<img src="%THEME%/static/images/20170618/picture/img12.jpg" alt="">
-					</div>
-					<dl class="column-list">
-						<dt><a href=""><span class="tip"></span>水管接头漏水怎么办 水管接头漏水如何维修</a></dt>
-						<dd><a href=""><b>·</b>143平米装修多少钱 143平米装修预算</a></dd>
-						<dd><a href=""><b>·</b>窗户漏风怎么办 教你几招轻松解决</a></dd>
-						<dd><a href=""><b>·</b>粉刷墙面多少钱一平 墙面乳胶漆怎么算</a></dd>
-					</dl>
+					<{foreach $fwitems as $item name=foo}>
+						<{if $smarty.foreach.foo.index==0 }>
+							<div class="img">
+								<a href="<{$item.link}>"><img src="<{$pager.img}>/<{$item.thumb}>" alt=""></a>
+							</div>
+							<{/if}>
+								<{/foreach}>
+									<dl class="column-list">
+										<{foreach $fwitems as $item name=foo}>
+											<{if $smarty.foreach.foo.index !=0 }>
+												<dd><a href="<{$item.link}>"><b>·</b><{$item.title|cutstr:20}></a></dd>
+												<{/if}>
+													<{/foreach}>
+									</dl>
 				</div>
 				<div class="zxgl-column-box fl">
 					<div class="title">
 						<h3>家居风水</h3>
 						<a href="<{link ctl='article:items-13'}>" class="more">More+</a>
 					</div>
-					<div class="img">
-						<img src="%THEME%/static/images/20170618/picture/img12.jpg" alt="">
-					</div>
-					<dl class="column-list">
-						<dt><a href=""><span class="tip"></span>水管接头漏水怎么办 水管接头漏水如何维修</a></dt>
-						<dd><a href=""><b>·</b>143平米装修多少钱 143平米装修预算</a></dd>
-						<dd><a href=""><b>·</b>窗户漏风怎么办 教你几招轻松解决</a></dd>
-						<dd><a href=""><b>·</b>粉刷墙面多少钱一平 墙面乳胶漆怎么算</a></dd>
-					</dl>
+					<{foreach $fwitems as $item name=foo}>
+						<{if $smarty.foreach.foo.index==0 }>
+							<div class="img">
+								<a href="<{$item.link}>"><img src="<{$pager.img}>/<{$item.thumb}>" alt=""></a>
+							</div>
+							<{/if}>
+								<{/foreach}>
+									<dl class="column-list">
+										<{foreach $fwitems as $item name=foo}>
+											<{if $smarty.foreach.foo.index !=0 }>
+												<dd><a href="<{$item.link}>"><b>·</b><{$item.title|cutstr:20}></a></dd>
+												<{/if}>
+													<{/foreach}>
+									</dl>
 				</div>
 				<div class="zxgl-column-box fr">
 					<div class="title">
@@ -1111,15 +1067,20 @@
 						<a href="<{link ctl='article:items-14'}>" class="more">More+</a>
 					</div>
 
-					<div class="img">
-						<img src="%THEME%/static/images/20170618/picture/img12.jpg" alt="">
-					</div>
-					<dl class="column-list">
-						<dt><a href=""><span class="tip"></span>水管接头漏水怎么办 水管接头漏水如何维修</a></dt>
-						<dd><a href=""><b>·</b>143平米装修多少钱 143平米装修预算</a></dd>
-						<dd><a href=""><b>·</b>窗户漏风怎么办 教你几招轻松解决</a></dd>
-						<dd><a href=""><b>·</b>粉刷墙面多少钱一平 墙面乳胶漆怎么算</a></dd>
-					</dl>
+					<{foreach $fwitems as $item name=foo}>
+						<{if $smarty.foreach.foo.index==0 }>
+							<div class="img">
+								<a href="<{$item.link}>"><img src="<{$pager.img}>/<{$item.thumb}>" alt=""></a>
+							</div>
+							<{/if}>
+								<{/foreach}>
+									<dl class="column-list">
+										<{foreach $fwitems as $item name=foo}>
+											<{if $smarty.foreach.foo.index !=0 }>
+												<dd><a href="<{$item.link}>"><b>·</b><{$item.title|cutstr:20}></a></dd>
+												<{/if}>
+													<{/foreach}>
+									</dl>
 				</div>
 
 			</div>
