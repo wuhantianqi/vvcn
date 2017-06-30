@@ -1,217 +1,726 @@
-<{include file="$skin_theme/block/header.html"}>
-<!--装修公司头部结束-->
-<div class="subwd">
-	<!--主体左边内容开始-->
-	<div class="sub_com_lt lt">
-		<div class="mb10 com_banner">
-			<div bxSlider="company_banner">
-			<{calldata mdl="company/banner" company_id=$company.company_id limit="5" nocache=true}>
-			<div class="slider"><a href="<{$item.link}>" title="<{$item.title}>" target="_blank"><img src="<{$pager.img}>/<{$item.photo}>" width="720" height="250"></a></div>
-			<{/calldata}>
-			<{if $calldata_count<1}><div class="slider"><a><img src="<{$pager.img}>/default/company_banner.jpg" width="720" height="250"></a></div><{/if}>
+<{include file="$skin_theme/block/header.html" }>
+	<div class="zxgs_header">
+		<div class="zxgs_wrapper">
+			<div class="zxgs_header_logo">
+
+				<a href="" class="zxg_logo">
+					<img src="images/mid_1.jpg" alt="">
+				</a>
+
+				<div class="company_explain">
+					<h1>武汉优优美家</h1>
+					<p class="addr">地　　址：武汉市中央商务区泛海国际SOHO城4栋1907
+						<a href="" class="map"></a>
+					</p>
+					<p class="tel">
+						<span>免费发送至手机</span>
+						<a href="">QQ在线咨询</a>
+					</p>
+				</div>
+			</div>
+			<div class="zxgs_share">
+				<div class="article-share bdsharebuttonbox">
+					<span>分享到：</span>
+					<a class="bds_qzone" data-cmd="qzone"></a>
+					<a class="bds_tsina" data-cmd="tsina"></a>
+					<a class="bds_weixin" data-cmd="weixin"></a>
+					<a class="bds_tqq" data-cmd="tqq"></a>
+					<a class="bds_sqq" data-cmd="sqq"></a>
+					<a class="bds_more" data-cmd="more">更多</a>
+					<span></span>
+					<script>
+						window._bd_share_config = {
+							"common": {
+								"bdSnsKey": {},
+								"bdText": "",
+								"bdMini": "2",
+								"bdMiniList": false,
+								"bdPic": "",
+								"bdStyle": "0",
+								"bdSize": "32"
+							},
+							"share": {}
+						};
+
+						with(document) 0[(getElementsByTagName('head')[0] || body).appendChild(createElement('script')).src = 'http://bdimg.share.baidu.com/static/api/js/share.js?v=89860593.js?cdnversion=' + ~(-new Date() / 36e5)];
+
+					</script>
+				</div>
+
+
+
 			</div>
 		</div>
-		<div class="mb10">
-			<div class="com_intro_top lt">
-				<h3 class="com_title"><b class="lt">公司简介</b><a href="<{link ctl='company:about' arg0=$company.company_id company=$company}>" class="rt">详情<span class="com_ico more_ico"></span></a></h3>
-				<p class="cl"></p>
-				<div class="com_box pding"><a href="<{link ctl='company:about' arg0=$company.company_id company=$company}>"><{$company.desc|cutstr:260}></a></div>
+	</div>
+	<div class="zxgs_nav">
+		<div class="zxgs_wrapper">
+			<a href="" class="free">
+				<i></i> 免费设计与报价
+			</a>
+
+		</div>
+		<div class="zxgs_nav_main">
+			<div class="zxgs_wrapper">
+				<ul>
+					<li class="active"><a href="">首页</a></li>
+					<li><a href="">公司简介</a></li>
+					<li><a href="">优惠活动</a></li>
+					<li><a href="">装修案例</a></li>
+					<li><a href="">施工工地<i></i></a></li>
+					<li><a href="">设计团队</a></li>
+					<li><a href="">服务点评</a></li>
+					<li><a href="">公司资讯</a></li>
+					<li><a href="">联系我们</a></li>
+
+				</ul>
+
 			</div>
-			<div class="com_intro_top rt">
-				<h3 class="com_title"><b class="lt">企业新闻</b><a href="<{link ctl='company:news' arg0=$company.company_id company=$company}>" class="rt">更多<span class="com_ico more_ico"></span></a></h3>
-				<p class="cl"></p>
-				<div class="com_box pding">
+		</div>
+
+	</div>
+	<div class="zxgs_main">
+		<div class="zxgs_wrapper">
+			<div class="zxgs_banner">
+				<div class="zxgs_banner_lunb">
+					<a href="">
+						<img src="images/main4.jpg" alt="">
+					</a>
+				</div>
+				<div class="zxgs_banner_text">
+					<div class="zxgs_banner_text_top">
+						<div class="text_1">
+							<div class="text_1_t">
+								<h6>
+									优优美家
+									<i class="i_A"></i>
+									<i class="i_V"></i>
+									<i class="i_S"></i>
+								</h6>
+								<p class="aut">
+									<span class="s01">营</span>
+									<span class="s03">赔</span>
+									<span class="s04">惠</span> 0个
+									<span class="s07">设</span> 36个
+									<span class="s02">案</span> 199个
+									<span class="s06">评	</span> 33条
+									<span class="s05">访</span> 8868次
+								</p>
+								<div class="text_1_t">
+									<div class="mou">
+										<strong>10</strong>
+										<p>口碑值</p>
+									</div>
+								</div>
+							</div>
+							<div class="text_1_f">
+								<p class="text_1_ser">
+									<span>服务区域：</span>
+									<b>武汉区，汉口区，武昌区，洪山区</b>
+								</p>
+								<p class="text_1_work">
+									<span>业务范畴：</span>
+									<b>家装&nbsp;&nbsp;工装&nbsp;&nbsp;店面装修&nbsp;&nbsp;品牌展示</b>
+								</p>
+							</div>
+						</div>
+					</div>
+					<div class="zxgs_banner_text_middle">
+						<span>
+							<i></i>
+							支持免费量房
+						</span>
+						<span>
+							<i></i>
+							支持免费预算报价
+						</span>
+						<span>
+							<i></i>
+							支持装修保障金
+						</span>
+					</div>
+					<div class="zxgs_banner_text_foot">
+						<span>
+							已有<b>115</b>人预约
+						</span>
+						<span>
+							预约热线：<b>027-87011088</b>
+						</span>
+						<button>立即预约</button>
+					</div>
+				</div>
+			</div>
+			<div class="zxgs_zxal">
+				<div class="zxgs_zxal_menu">
+					<a href="" class="menu_more">更多</a>
+					<h3>
+						装修案例
+						<span>优优美家装饰案例(
+							<b>157</b>
+							)
+							</span>
+					</h3>
+				</div>
+				<div class="zxgs_zxal_text">
 					<ul>
-                        <{calldata mdl='company/news' company_id=$company.company_id limit=5 noext=true nocache=true}>
-						<li><span class="ico_list news_ico"></span><a href="<{link ctl='news:detail' arg0=$item.news_id}>"><{$item.title|cutstr:50}></a></li>
-                        <{/calldata}>
+						<li>
+							<div class="zxgs_zxal_img">
+								<img src="images/150504101J9-1.jpg" alt="" class="lazy">
+								<a href="" class="maaask">
+									<div class="tit">
+										<p>
+											装修方式：
+											<span>全包</span>
+										</p>
+										<p>
+											户型面积：
+											<span>120㎡</span>
+										</p>
+										<p>
+											装修预算：
+											<span>24万元</span>
+										</p>
+									</div>
+								</a>
+							</div>
+							<div class="zxgs_zxal_text">
+								<h6>
+									<a href="">国贸同悦</a>
+								</h6>
+							</div>
+						</li>
+						<li>
+							<div class="zxgs_zxal_img">
+								<img src="images/150504101J9-1.jpg" alt="" class="lazy">
+								<a href="" class="maaask">
+									<div class="tit">
+										<p>
+											装修方式：
+											<span>全包</span>
+										</p>
+										<p>
+											户型面积：
+											<span>120㎡</span>
+										</p>
+										<p>
+											装修预算：
+											<span>24万元</span>
+										</p>
+									</div>
+								</a>
+							</div>
+							<div class="zxgs_zxal_text">
+								<h6>
+									<a href="">国贸同悦</a>
+								</h6>
+							</div>
+						</li>
+						<li>
+							<div class="zxgs_zxal_img">
+								<img src="images/150504101J9-1.jpg" alt="" class="lazy">
+								<a href="" class="maaask">
+									<div class="tit">
+										<p>
+											装修方式：
+											<span>全包</span>
+										</p>
+										<p>
+											户型面积：
+											<span>120㎡</span>
+										</p>
+										<p>
+											装修预算：
+											<span>24万元</span>
+										</p>
+									</div>
+								</a>
+							</div>
+							<div class="zxgs_zxal_text">
+								<h6>
+									<a href="">国贸同悦</a>
+								</h6>
+							</div>
+						</li>
+						<li>
+							<div class="zxgs_zxal_img">
+								<img src="images/150504101J9-1.jpg" alt="" class="lazy">
+								<a href="" class="maaask">
+									<div class="tit">
+										<p>
+											装修方式：
+											<span>全包</span>
+										</p>
+										<p>
+											户型面积：
+											<span>120㎡</span>
+										</p>
+										<p>
+											装修预算：
+											<span>24万元</span>
+										</p>
+									</div>
+								</a>
+							</div>
+							<div class="zxgs_zxal_text">
+								<h6>
+									<a href="">国贸同悦</a>
+								</h6>
+							</div>
+						</li>
+						<li>
+							<div class="zxgs_zxal_img">
+								<img src="images/150504101J9-1.jpg" alt="" class="lazy">
+								<a href="" class="maaask">
+									<div class="tit">
+										<p>
+											装修方式：
+											<span>全包</span>
+										</p>
+										<p>
+											户型面积：
+											<span>120㎡</span>
+										</p>
+										<p>
+											装修预算：
+											<span>24万元</span>
+										</p>
+									</div>
+								</a>
+							</div>
+							<div class="zxgs_zxal_text">
+								<h6>
+									<a href="">国贸同悦</a>
+								</h6>
+							</div>
+						</li>
+						<li>
+							<div class="zxgs_zxal_img">
+								<img src="images/150504101J9-1.jpg" alt="" class="lazy">
+								<a href="" class="maaask">
+									<div class="tit">
+										<p>
+											装修方式：
+											<span>全包</span>
+										</p>
+										<p>
+											户型面积：
+											<span>120㎡</span>
+										</p>
+										<p>
+											装修预算：
+											<span>24万元</span>
+										</p>
+									</div>
+								</a>
+							</div>
+							<div class="zxgs_zxal_text">
+								<h6>
+									<a href="">国贸同悦</a>
+								</h6>
+							</div>
+						</li>
+						<li>
+							<div class="zxgs_zxal_img">
+								<img src="images/150504101J9-1.jpg" alt="" class="lazy">
+								<a href="" class="maaask">
+									<div class="tit">
+										<p>
+											装修方式：
+											<span>全包</span>
+										</p>
+										<p>
+											户型面积：
+											<span>120㎡</span>
+										</p>
+										<p>
+											装修预算：
+											<span>24万元</span>
+										</p>
+									</div>
+								</a>
+							</div>
+							<div class="zxgs_zxal_text">
+								<h6>
+									<a href="">国贸同悦</a>
+								</h6>
+							</div>
+						</li>
+						<li>
+							<div class="zxgs_zxal_img">
+								<img src="images/150504101J9-1.jpg" alt="" class="lazy">
+								<a href="" class="maaask">
+									<div class="tit">
+										<p>
+											装修方式：
+											<span>全包</span>
+										</p>
+										<p>
+											户型面积：
+											<span>120㎡</span>
+										</p>
+										<p>
+											装修预算：
+											<span>24万元</span>
+										</p>
+									</div>
+								</a>
+							</div>
+							<div class="zxgs_zxal_text">
+								<h6>
+									<a href="">国贸同悦</a>
+								</h6>
+							</div>
+						</li>
+					</ul>
+				</div>
+				<a href="" class="ad">
+					<img src="images/shop_banner.jpg" alt="">
+				</a>
+			</div>
+			<div class="zxgs_zxzb">
+				<div class="zxgs_zxzb_left">
+					<div class="zxgs_zxal_menu">
+						<a href="" class="menu_more">更多</a>
+						<h3>
+							资讯
+							<span>优优美家装饰案例(
+							<b>157</b>
+							)
+							</span>
+						</h3>
+					</div>
+					<div class="zxgs_zxzb_left_text">
+						<a href="" class="aaa">
+							<img src="images/150504101J9-1.jpg" alt="">
+						</a>
+						<div class="zxgs_zxzb_left_list">
+							<ul>
+								<li>
+									<a href="">梅雨季节装修利与弊</a>
+								</li>
+								<li>
+									<a href="">梅雨季节装修利与弊</a>
+								</li>
+								<li>
+									<a href="">梅雨季节装修利与弊</a>
+								</li>
+								<li>
+									<a href="">梅雨季节装修利与弊</a>
+								</li>
+								<li>
+									<a href="">梅雨季节装修利与弊</a>
+								</li>
+							</ul>
+						</div>
+
+					</div>
+				</div>
+				<div class="zxgs_zxzb_right">
+					<div class="zxgs_zxal_menu">
+						<span class="discount">
+								<a href="">
+									<b>优惠劵5000元</b>
+								</a>
+							</span>
+						<h3>
+							招标
+							<span>
+								已有
+								<b>1111638</b>
+								位业主免费发布招标
+							</span>
+						</h3>
+					</div>
+					<div class="free">
+						<a href="" class="a1">
+							<i></i> 免费发布招标
+						</a>
+						<a href="" class="a2">
+							<i></i> 免费获取报价
+						</a>
+					</div>
+					<table>
+						<thead>
+							<tr>
+								<th>业主</th>
+								<th>区域</th>
+								<th>面积</th>
+								<th>预算</th>
+							</tr>
+						</thead>
+						<tbody>
+							<tr>
+								<td>陈(先生)</td>
+								<td>福建省-厦门...</td>
+								<td>85㎡</td>
+								<td>面议</td>
+							</tr>
+							<tr>
+								<td>陈(先生)</td>
+								<td>福建省-厦门...</td>
+								<td>85㎡</td>
+								<td>面议</td>
+							</tr>
+							<tr>
+								<td>陈(先生)</td>
+								<td>福建省-厦门...</td>
+								<td>85㎡</td>
+								<td>面议</td>
+							</tr>
+						</tbody>
+					</table>
+				</div>
+			</div>
+			<div class="zxgs_sjtd">
+				<div class="zxgs_zxal_menu">
+					<a href="" class="menu_more">更多</a>
+					<h3>
+						设计团队
+						<span>优优美家设计团队(
+							<b>33</b>
+							)
+							</span>
+					</h3>
+				</div>
+				<div class="zxgs_team">
+					<ul>
+						<li>
+							<a href="" class="zxgs_img_txt">
+								<img src="images/193739.png" alt="">
+								<div class="tct">
+									<h6>
+										<strong>张富良</strong> 设计师
+									</h6>
+									<p>
+										<span>从业年限：<b>5年</b></span>
+										<b>18</b>套作品
+									</p>
+								</div>
+							</a>
+							<div class="yysjs">
+								<a href="" class="active">查看案例</a>
+								<a href="">预约设计师</a>
+							</div>
+						</li>
+						<li>
+							<a href="" class="zxgs_img_txt">
+								<img src="images/193739.png" alt="">
+								<div class="tct">
+									<h6>
+										<strong>张富良</strong> 设计师
+									</h6>
+									<p>
+										<span>从业年限：<b>5年</b></span>
+										<b>18</b>套作品
+									</p>
+								</div>
+							</a>
+							<div class="yysjs">
+								<a href="" class="active">查看案例</a>
+								<a href="">预约设计师</a>
+							</div>
+						</li>
+						<li>
+							<a href="" class="zxgs_img_txt">
+								<img src="images/193739.png" alt="">
+								<div class="tct">
+									<h6>
+										<strong>张富良</strong> 设计师
+									</h6>
+									<p>
+										<span>从业年限：<b>5年</b></span>
+										<b>18</b>套作品
+									</p>
+								</div>
+							</a>
+							<div class="yysjs">
+								<a href="" class="active">查看案例</a>
+								<a href="">预约设计师</a>
+							</div>
+						</li>
+						<li>
+							<a href="" class="zxgs_img_txt">
+								<img src="images/193739.png" alt="">
+								<div class="tct">
+									<h6>
+										<strong>张富良</strong> 设计师
+									</h6>
+									<p>
+										<span>从业年限：<b>5年</b></span>
+										<b>18</b>套作品
+									</p>
+								</div>
+							</a>
+							<div class="yysjs">
+								<a href="" class="active">查看案例</a>
+								<a href="">预约设计师</a>
+							</div>
+						</li>
+						<li>
+							<a href="" class="zxgs_img_txt">
+								<img src="images/193739.png" alt="">
+								<div class="tct">
+									<h6>
+										<strong>张富良</strong> 设计师
+									</h6>
+									<p>
+										<span>从业年限：<b>5年</b></span> 暂无作品
+									</p>
+								</div>
+							</a>
+							<div class="yysjs">
+								<a href="" class="active">查看案例</a>
+								<a href="">预约设计师</a>
+							</div>
+						</li>
 					</ul>
 				</div>
 			</div>
-			<div class="cl"></div>
-		</div>
-		<div class="mb10 ">
-			<h3 class="com_title"><b class="lt">业主评价</b><a href="<{link ctl='company:comment' arg0=$company.company_id company=$company}>" class="rt">更多<span class="com_ico more_ico"></span></a></h3>
-			<p class="cl"></p>
-			<div class="new_pinglun com_box com_pinglun">
+			<div class="zxgs_sggd">
+				<div class="zxgs_zxal_menu">
+					<div class="zxgs_sggd_site_mor fr">
+						<a href="">准备开工</a>
+						<a href="">水电阶段</a>
+						<a href="">泥水阶段</a>
+						<a href="">油漆阶段</a>
+						<a href="">竣工阶段</a>
+						<a href="" class="sggd_menu_more">更多</a>
+					</div>
+
+					<h3>
+						施工工地
+						<span>优优美家施工工地(
+							<b>36</b>
+							)
+							</span>
+					</h3>
+				</div>
+				<div class="zxgs_sggd_site">
+					<ul>
+						<li>
+							<a href="">
+								<img src="images/mid_1.jpg" alt="">
+								<h6>泰和院子</h6>
+								<span>三居室</span>
+							</a>
+						</li>
+						<li>
+							<a href="">
+								<img src="images/mid_1.jpg" alt="">
+								<h6>泰和院子</h6>
+								<span>三居室</span>
+							</a>
+						</li>
+						<li>
+							<a href="">
+								<img src="images/mid_1.jpg" alt="">
+								<h6>泰和院子</h6>
+								<span>三居室</span>
+							</a>
+						</li>
+						<li>
+							<a href="">
+								<img src="images/mid_1.jpg" alt="">
+								<h6>泰和院子</h6>
+								<span>三居室</span>
+							</a>
+						</li>
+						<li>
+							<a href="">
+								<img src="images/mid_1.jpg" alt="">
+								<h6>泰和院子</h6>
+								<span>三居室</span>
+							</a>
+						</li>
+						<li>
+							<a href="">
+								<img src="images/mid_1.jpg" alt="">
+								<h6>泰和院子</h6>
+								<span>三居室</span>
+							</a>
+						</li>
+						<li>
+							<a href="">
+								<img src="images/mid_1.jpg" alt="">
+								<h6>泰和院子</h6>
+								<span>三居室</span>
+							</a>
+						</li>
+						<li>
+							<a href="">
+								<img src="images/mid_1.jpg" alt="">
+								<h6>泰和院子</h6>
+								<span>三居室</span>
+							</a>
+						</li>
+					</ul>
+				</div>
+			</div>
+			<div class="zxgs_gsjj">
+				<div class="zxgs_zxal_menu">
+					<a href="" class="menu_more">详细</a>
+					<h3>
+						公司简介
+						<span>优优美家公司简介
+							</span>
+					</h3>
+				</div>
+				<div class="zxgs_gsjj_t">
+					<div class="zxgs_gsjj_t_f">
+						<a href="">
+							<img src="images/main4.jpg" alt="">
+						</a>
+
+					</div>
+					<div class="zxgs_gsjj_t_r">
+						<h4>优优美家</h4>
+						<span class="tit">
+								<i class="ic01"></i>
+								为大众：节省装修费用，提供便捷服务，营造幸福之家
+								<i class="ic02"></i>
+							</span>
+						<div class="art">
+							<p>有家装饰创牌于1995年，作为获得省建设厅正规资质的装修公司，有家装饰走过了19年品牌历程，是全省历史最悠久的装修公司之一。 福建多家大大小小的装修公司，有家装饰正是首屈一指的名牌，陆续获得亚太设计大奖、中国室内设计金羊奖等行业100多项设计大奖。 “帮助更多家庭实现便捷、时尚、优惠的装修梦想”是有家装饰19年坚持至今的企业使命。成立19年，有家装饰服务的家庭突破10万户，创行业记录。 2014年，有家装饰进驻厦门，办......</p>
+						</div>
+						<div class="lok">
+							<a href="" class="active">预约装修设计</a>
+							<a href="">查看详情</a>
+						</div>
+					</div>
+				</div>
+			</div>
+			<div class="zxgs_lfsj">
 				<ul>
-                    <{foreach $comment_list as $item}>
 					<li>
-						<div class="lt"><img src="<{$pager.img}>/<{$member_list[$item.uid].face_80}>" class="lt" /><br /></div>
-						<div class="rt">
-							<p class="graycl"><span class="lt"><{foreach $CONFIG.score.company as $k=>$v}><{if $v}><label><{$v}>:<{$item[$k]}><{/if}><{/foreach}></span><span class="rt time"><{$item.dateline|format}></span></p>
-							<p class="cl"></p>
-							<p><{$member_list[$item.uid].uname}>:<{$item.content}></a>
-							</p>
+						<i class="i-001"></i>
+						<div class="tzt">
+							<h6>免费量房设计</h6>
+							<p>装修立省30%</p>
 						</div>
 					</li>
-                    <{/foreach}>
-				</ul>
-			</div>
-		</div>
-		<div class="mb10 ">
-			<h3 class="com_title"><b class="lt">设计团队</b><a href="<{link ctl='company:team' arg0=$company.company_id company=$company}>" class="rt">更多<span class="com_ico more_ico"></span></a></h3>
-			<p class="cl"></p>
-			<div class="com_box pding">
-				<ul class="sub_com_design">
-                    <{calldata mdl='designer/designer' company_id=$company.company_id limit=4 nocache=true}>
 					<li>
-						<a href="<{link ctl='blog' arg0=$item.uid}>"><img src="<{$pager.img}>/<{$item.face}>" /></a>
-						<p><b><a href="<{link ctl='blog' arg0=$item.uid}>" class="lt tit"><{$item.name}></a></b><span class="rt"><{$item.group_name}></span></p>
-						<p><a href="<{link ctl='designer:yuyue' arg0=$item.uid http='ajax'}>"  mini-width='500' mini-load="我要预约" class="btn">我要预约</a></p>
-					</li>
-                    <{/calldata}>
-				</ul>
-				<div class="cl"></div>
-			</div>
-		</div>
-	</div>
-	<!--主体左边内容结束-->
-	<!--主体右边内容开始-->
-	<div class="sub_com_rt rt">
-		<div class="mb10">
-			<table cellpadding="0" cellspacing="0" class="sub_com_list">
-				<tr>
-					<td><p><b><{$company.case_num}></b></p><p>图库案例</p></td>
-					<td><p><b><{$company.tenders_num}></b></p><p>签约数</p></td>
-					<td><p><b><{$company.site_num}></b></p><p>在建工地</p></td>
-				</tr>
-				<tr>
-					<td><p><b><{$company.news_num}></b></p><p>企业新闻</p></td>
-					<td><p><b><{$company.yuyue_num}></b></p><p>预约数</p></td>
-					<td><p><b><{$company.comments}></b></p><p>业主评价</p></td>
-				</tr>
-			</table>
-		</div>
-		<div class="mb10 area sub_com_add">
-			<p><span class="com_ico com_add"></span><b class="tit">公司地址:</b></p>
-			<p><{$company.addr|cutstr:60}></p>
-		</div>
-		<p class="sub_com_tpbt">
-			<{if $company.group.allow_yuyue > 0}>
-			<a href="<{link ctl='gs:yuyue' arg0=$company.company_id http='ajax'}>" mini-load="免费预约装修公司" mini-width="400" class="btn_sub_tuan btn">免费预约</a>
-			<{else}>
-			<a href="<{link ctl='tenders:fast' http='ajax'}>" mini-load="免费发布装修招标" mini-width="500" class="btn_sub_tuan btn">免费招标</a>
-			<{/if}>
-			您是<font class="fontcl2"><{$company.views}></font>位访客</p>
-		<div class="mb10">
-			<h3 class="com_title"><b class="lt">优惠活动</b><a href="<{link ctl='company:youhui' arg0=$company.company_id company=$company}>" class="rt">更多<span class="com_ico more_ico"></span></a></h3>
-			<p class="cl"></p>
-			<div class="com_box com_youhui pding">
-                <{calldata mdl='company/youhui' company_id=$company.company_id limit=1 noext=true nocache=true}>
-				<div class="opacity_img lt">
-                    <a href="<{link ctl='youhui:detail' arg0=$item.youhui_id}>"><img src="<{$pager.img}>/<{$item.photo}>" /></a>
-					<p class="bg"></p>
-					<p class="text"><{$item.title|cutstr:15}></p>
-				</div>
-				<div class="rt">
-					<p><{if $item.ltime>time() && $item.stime<time()}><span class="ico_list sub_youhui_time"></span><{else}><span class="ico_list sub_over_time_ico"></span><{/if}>
-                    <p><span  remaintime="<{$item.ltime}>"></span></p>
-					<p><a href="<{link ctl='youhui:detail' arg0=$item.youhui_id}>" class="btn btn_sub_sm">去看看</a>
-					</p>
-				</div>
-                <{/calldata}>
-				<div class="cl"></div>
-			</div>
-		</div>
-       
-		<div class="mb10">
-			<h3><b>视频简介</b></h3>
-			<div class="video"> <{if $company.video}><embed src="<{$company.video}>" quality="high" width="260" height="200" align="middle" allowScriptAccess="always" allowFullScreen="true" mode="transparent" type="application/x-shockwave-flash"></embed><{/if}></div>
-		</div>
-        
-		<div class="mb10">
-			<h3 class="com_title"><b class="lt">最新预约</b></a>
-			</h3>
-			<p class="cl"></p>
-			<p class="com_yuyue_title tit"><span>业主</span><span class="mid">电话</span><span>日期</span>
-				</li>
-			<div class="com_box com_yuyue_box">
-				<ul class="com_yuyue">
-                    <{calldata mdl="company/yuyue" company_id=$company.company_id limit=10}>
-					<li><span><{$item.contact|cutstr:3:'**'}></span><span  class="mid"><{$item.mobile|cutstr:6:'****'}></span><span><{$item.dateline|format:'m-d'}></span></li>
-                    <{/calldata}>
-				</ul>
-			</div>
-		</div>
-	</div>
-	<!--主体右边内容结束-->
-	<div class="cl"></div>
-	<div class="mb10">
-		<h3 class="com_title"><b class="lt">装修案例</b><a href="<{link ctl='company:cases' arg0=$company.company_id}>" class="rt">更多<span class="com_ico more_ico"></span></a></h3>
-		<p class="cl"></p>
-		<div class="com_box">
-			<ul class="com_case">
-                <{calldata mdl='case/case' company_id=$company.company_id limit=4 noext=true nocache=true}>
-				<li>
-					<div class="opacity_img"><a href="<{link ctl='case:detail' arg0=$item.case_id arg1=1}>"><img src="<{$pager.img}>/<{$item.photo}>_thumb.jpg" /></a>
-						<a href="<{link ctl='case:yuyue' arg0=$item.case_id}>" class="yuyue">免费预约设计</a>
-						<p class="bg"></p>
-						<p class="text"><span class="lt"><{$item.title}></span><span class="rt"><span class="index_ico like_ico"></span><{$item.views}></span></p>
-					</div>
-				</li>
-                <{/calldata}>
-			</ul>
-			<div class="cl"></div>
-		</div>
-	</div>
-	<div class="mb20">
-		<h3 class="com_title"><b class="lt">在建工地</b><a href="<{link ctl='company:site' arg0=$company.company_id company=$company}>" class="rt">更多<span class="com_ico more_ico"></span></a></h3>
-		<p class="cl"></p>
-		<div class="com_box pding">
-			<ul class="com_site">
-                <{calldata mdl='home/site' company_id=$company.company_id limit=3 noext=true nocache=true}>
-				<li>
-					<div class="main_site main_list">
-						<a href="<{link ctl='site:detail' arg0=$item.site_id}>" class="lt pic"><img src="<{$pager.img}>/<{$item.thumb}>" /></a>
-						<div class="main_site_rt main_list_rt rt">
-							<h3><p class="lt"><b><a <{if $item.home_id}>href="<{link ctl='home:detail' arg0=$item.home_id}>"<{/if}>><{$item.home_name}></a></b></p></h3>
-							<div class="main_site_rt_top">
-								<div class="lt">
-									<p><span class="ico_list fengge_ico"></span>价格：<{$item.price}>万元</p>
-									<p><span class="ico_list company_ico"></span>小区：<{$item.home_name}></p>
-								</div>
-								<a href="<{link ctl='site:yuyue' arg0=$item.site_id http='ajax'}>" mini-width='500' mini-load="我要参观工地" class="btn_sub_sm btn rt">我要参观</a>
-							</div>
-							<div class="cl"></div>
-							<div class="site_step">
-								<p class="step bar"><span class="bar step_color step<{$item.status}>"></span></p>
-								<p><span class="step">开工大吉</span><span class="step">水电改造</span><span class="step">泥瓦阶段</span><span class="step">木工阶段</span><span class="step">油漆阶段</span><span class="step">安装阶段</span><span class="step">验收完成</span></p>
-							</div>
+						<i class="i-002"></i>
+						<div class="tzt">
+							<h6>多套设计方案</h6>
+							<p>一定有你满意的</p>
 						</div>
-						<div class="cl"></div>
-					</div>
-				</li>
-                <{/calldata}>
-			</ul>
+					</li>
+					<li>
+						<i class="i-003"></i>
+						<div class="tzt">
+							<h6>参观工地</h6>
+							<p>严格监管 保证质量</p>
+						</div>
+					</li>
+					<li>
+						<i class="i-004"></i>
+						<div class="tzt">
+							<h6>金牌保险</h6>
+							<p>全程保障 安心装修</p>
+						</div>
+					</li>
+				</ul>
+			</div>
 		</div>
 	</div>
-</div>
-<script type="text/javascript">
-(function(K, $){
-    $(function(){
-    var dateTime = new Date();
-    var difference = dateTime.getTime() - <{$pager.dateline}>*1000;	
-    setInterval(function(){
-      $("[remaintime]").each(function(){
-        var obj = $(this);
-        var endTime = new Date(parseInt(obj.attr('remaintime')) * 1000);
-        var nowTime = new Date();
-        var nMS=endTime.getTime() - nowTime.getTime() + difference;
-        var myD=Math.floor(nMS/(1000 * 60 * 60 * 24));
-        var myH=Math.floor(nMS/(1000*60*60)) % 24;
-        var myM=Math.floor(nMS/(1000*60)) % 60;
-        var myS=Math.floor(nMS/1000) % 60;
-        var myMS=Math.floor(nMS/100) % 10;
-        if(myD>= 0){
-			var str = myD+"天"+myH+"小时"+myM+"分"+myS+"."+myMS+"秒";
-        }else{
-			var str = "真遗憾您来晚了，抢购已经结束。";	
-		}
-		obj.html(str);
-      });
-    }, 100);
-});
-})(window.KT, window.jQuery);
-</script>
-<{include file="company/block/footer.html"}>
+
+	<{include file="company/block/footer.html" }>

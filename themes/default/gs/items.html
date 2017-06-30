@@ -25,29 +25,35 @@
 							<span>区域:</span>
 						</div>
 						<div class="right clearFloat">
-							<a href="<{$area_all_link}>" <{if empty($pager.area_id)}>class="add_bg"<{/if}>全部</a> 
-							<{foreach $area_list  as $v}> 
-							<a href="<{$v.link}>" <{if $v.area_id==$pager.area_id}>class="add_bg"<{/if}>><{$v.area_name}></a> <{/foreach}>
+							<a href="<{$area_all_link}>" <{if empty($pager.area_id)}>class="add_bg"<{/if}>全部</a>
+							<{foreach $area_list as $v}>
+								<a href="<{$v.link}>" <{if $v.area_id==$pager.area_id}>class="add_bg"<{/if}>><{$v.area_name}></a>
+								<{/foreach}>
 						</div>
 					</li>
 					<{if $group_list}>
-					<li class="clearFloat">
-						<div class="fl left">
-							<span>等级:</span>
-						</div>
-						<div class="right clearFloat">
-							<a href="<{$group_all_link}>" <{if empty($pager.group_id)}>class="add_bg"<{/if}>>不限</a> <{foreach $group_list as $v}> <a href="<{$v.link}>" <{if $v.group_id==$pager.group_id}>class="add_bg"<{/if}>><{$v.group_name}></a> <{/foreach}>
-						</div>
-					</li>
-					<{/if}>  
-					<{foreach $attr_values as $v}>
-					<li class="clearFloat">
-						<div class="fl left">
-							<span><{$v.title}>&nbsp;:&nbsp;</span>
-						</div>
-						<div class="right clearFloat"><a href="<{$v.link}>" <{if $v.checked}>class="add_bg"<{/if}>>不限</a> <{foreach $v.values as $vv}> <a  href="<{$vv.link}>"  <{if $vv.checked}>class="add_bg"<{/if}>><{$vv.title}></a> <{/foreach}> </div>
-					</li>
-					<{/foreach}>
+						<li class="clearFloat">
+							<div class="fl left">
+								<span>等级:</span>
+							</div>
+							<div class="right clearFloat">
+								<a href="<{$group_all_link}>" <{if empty($pager.group_id)}>class="add_bg"<{/if}>>不限</a>
+								<{foreach $group_list as $v}> <a href="<{$v.link}>" <{if $v.group_id==$pager.group_id}>class="add_bg"<{/if}>><{$v.group_name}></a>
+									<{/foreach}>
+							</div>
+						</li>
+						<{/if}>
+							<{foreach $attr_values as $v}>
+								<li class="clearFloat">
+									<div class="fl left">
+										<span><{$v.title}>:</span>
+									</div>
+									<div class="right clearFloat"><a href="<{$v.link}>" <{if $v.checked}>class="add_bg"<{/if}>>不限</a>
+										<{foreach $v.values as $vv}> <a href="<{$vv.link}>" <{if $vv.checked}>class="add_bg"<{/if}>><{$vv.title}></a>
+											<{/foreach}>
+									</div>
+								</li>
+								<{/foreach}>
 				</ul>
 			</div>
 			<!-- 筛选 结束 -->
@@ -61,34 +67,43 @@
 			<div class="zxgslb_left_bottom">
 				<ul>
 					<{foreach $items as $item}>
-					<li class="clearFloat">
-						<div class="sub_left fl">
-							<a href="<{$item.company_url}>"><img class="img1" src="<{$pager.img}>/<{$item.thumb}>" /><img class="img2" src="%THEME%/static/images/20170616/qjd.png" /></a>
-						</div>
-						<div class="sub_center fl">
-							<h3><a href="<{$item.company_url}>"><{$item.title}></a>
-							<{if $item.xiaobao}>
-							<img src="%THEME%/static/images/nimages/rz.png"><span><{$item.xiaobao}>元</span>
-							<{/if}>
-							</h3>
-							<p class="p1">
-								<span class="span1"><img src="%THEME%/static/images/20170616/img_xin.png" />信誉指数：<{$item.score}>分</span>
-								<span class="span2"><img src="%THEME%/static/images/20170616/img_tu.png" />案例图库：<{$item.case_num}></span>
-								<span class="span3"><img src="%THEME%/static/images/20170616/img_gong.png" />在建工地：<{$item.site_num}></span>
-							</p>
-							<p class="p2">地址：<{$item.addr|cutstr:70}></p>
-							<p class="p3">服务口号：<{$item.slogan}></p>
-							<!-- <p class="p4"><img class="fl" src="%THEME%/static/images/20170616/img_hui.png" /><span class="fl"> 优惠信息：</span><a class="fl" href="javascript:;">[查看详情]</a></p> -->
-						</div>
-						<div class="sub_right fr">
-							<span>综合评分</span>
-							<p class="p1"><{sprintf("%.2f",$item.avg_scores[$k])}></p>
-							<a class="a1" href="<{link ctl='gs:yuyue'  arg0=$item.company_id http='ajax'}>">免费在线咨询</a>
-							<a class="a2" href="<{link ctl='tenders:fast' arg0=$item.uid http='ajax'}>">免费帮我做设计</a>
-						</div>
-					</li>
-					<{/foreach}>
-					<!-- <li class="clearFloat">
+						<li class="clearFloat">
+							<div class="sub_left fl">
+								<a href="<{$item.company_url}>"><img class="img1" src="<{$pager.img}>/<{$item.thumb}>" /><img class="img2" src="%THEME%/static/images/20170616/qjd.png" /></a>
+							</div>
+							<div class="sub_center fl">
+								<h3>
+									<a href="<{$item.company_url}>">
+										<{$item.title}>
+									</a>
+									<{if $item.xiaobao}>
+										<img src="%THEME%/static/images/nimages/rz.png"><span><{$item.xiaobao}>元</span>
+										<{/if}>
+								</h3>
+								<p class="p1">
+									<span class="span1"><img src="%THEME%/static/images/20170616/img_xin.png" />信誉指数：<{$item.score}>分</span>
+									<span class="span2"><img src="%THEME%/static/images/20170616/img_tu.png" />案例图库：<{$item.case_num}></span>
+									<span class="span3"><img src="%THEME%/static/images/20170616/img_gong.png" />在建工地：<{$item.site_num}></span>
+								</p>
+								<p class="p2">地址：
+									<{$item.addr|cutstr:70}>
+								</p>
+								<p class="p3">服务口号：
+									<{$item.slogan}>
+								</p>
+								<!-- <p class="p4"><img class="fl" src="%THEME%/static/images/20170616/img_hui.png" /><span class="fl"> 优惠信息：</span><a class="fl" href="javascript:;">[查看详情]</a></p> -->
+							</div>
+							<div class="sub_right fr">
+								<span>综合评分</span>
+								<p class="p1">
+									<{sprintf( "%.2f",$item.avg_scores[$k])}>
+								</p>
+								<a class="a1" href="<{link ctl='gs:yuyue'  arg0=$item.company_id http='ajax'}>">免费在线咨询</a>
+								<a class="a2" href="<{link ctl='tenders:fast' arg0=$item.uid http='ajax'}>">免费帮我做设计</a>
+							</div>
+						</li>
+						<{/foreach}>
+							<!-- <li class="clearFloat">
 						<div class="sub_left fl">
 							<a href="javascript:;"><img class="img1" src="%THEME%/static/images/20170616/LOGO.png" /><img class="img2" src="%THEME%/static/images/20170616/qjd.png" /></a>
 						</div>
@@ -158,9 +173,11 @@
 				</ul>
 				<div class="page_cont">
 					<{if $pager.pagebar}>
-					<div class="a_select"><{$pager.pagebar}></div>
-					<{/if}> 
-<!-- 					<a href="javascript:;">196条记录</a>
+						<div class="a_select">
+							<{$pager.pagebar}>
+						</div>
+						<{/if}>
+							<!-- 					<a href="javascript:;">196条记录</a>
 					<a class="a_select" href="javascript:;">1</a>
 					<a href="javascript:;">2</a>
 					<a href="javascript:;">3</a>
@@ -253,12 +270,14 @@
 					<span>热门装修公司</span>
 				</div>
 				<ul class="list">
-					<{calldata mdl="company/company"  city_id=$request.city_id limit=8}>
-					<li>
-						<a href="<{$item.company_url}>"><{$item.name|cutstr:35}></a>
-					</li>
-					<{/calldata}>
-					<!-- <li>
+					<{calldata mdl="company/company" city_id=$request.city_id limit=8}>
+						<li>
+							<a href="<{$item.company_url}>">
+								<{$item.name|cutstr:35}>
+							</a>
+						</li>
+						<{/calldata}>
+							<!-- <li>
 						<a href="javascript:;">武汉市鑫大众装饰设计工程有限公司工程有限公司</a>
 					</li>
 					<li>

@@ -1,8 +1,13 @@
-<{include file="block/small-header.html"}>
-<link type="text/css" rel="stylesheet" href="/themes/default/company/style/default/style.css" />
-<script type="text/javascript" src="<{$pager.res}>/script/jquery.qrcode.min.js"></script>
-<{if $company.skin_cfg}><{foreach $company.skin_cfg.css as $css}><link rel="stylesheet" type="text/css" href="<{$pager.theme}>/<{$css}>"/><{/foreach}><{/if}>
-<!--装修公司头部开始-->
+<{include file="block/small-header.html" }>
+	<link type="text/css" rel="stylesheet" href="/themes/default/company/style/default/style.css" />
+	<script type="text/javascript" src="<{$pager.res}>/script/jquery.qrcode.min.js"></script>
+	<{if $company.skin_cfg}>
+		<{foreach $company.skin_cfg.css as $css}>
+			<link rel="stylesheet" type="text/css" href="<{$pager.theme}>/<{$css}>" />
+			<{/foreach}>
+				<{/if}>
+					<!--装修公司头部开始-->
+					<!--
 <div class="company_top">
 	<div class="subwd">
 		<img src="<{$pager.img}>/<{$company.thumb}>" class="lt pic" />
@@ -54,4 +59,4 @@
 (function(){
 	$("#QRimg").qrcode({width:80,height:80,correctLevel:0,text:"<{$mobile_url}>"}); 
 	})(window.KT, window.jQuery);
-</script>
+</script>-->

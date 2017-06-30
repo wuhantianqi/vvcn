@@ -1696,6 +1696,7 @@
 	outline: none;
 	overflow-x: hidden;
 	font-size: 14px;
+	width: 97%;
 }
 
 .site-banner .site-banner-right .site-banner-center .banner-form .form-left .form-label select.text {

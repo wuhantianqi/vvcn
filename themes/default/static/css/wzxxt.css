@@ -1,0 +1,451 @@
+/*公共样式--开始*/
+
+html,
+body,
+div,
+ul,
+li,
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+p,
+dl,
+dt,
+dd,
+ol,
+form,
+input,
+textarea,
+th,
+td,
+select {
+	margin: 0;
+	padding: 0;
+}
+
+.fl {
+	float: left
+}
+
+.fr {
+	float: right
+}
+
+a {
+	text-decoration: none;
+}
+
+ul,
+li {
+	list-style: none;
+}
+
+i,
+em {
+	font-style: normal;
+}
+
+.clear {
+	clear: both;
+}
+
+
+/*主体*/
+
+.zxxt_main {
+	width: 1200px;
+	margin: 0 auto;
+	overflow: hidden;
+}
+
+
+/*左边*/
+
+.zxxt_main_f {
+	float: left;
+	width: 320px;
+}
+
+.zxxt_tu {
+	width: 1200px;
+	height: 100px;
+	border-radius: 5px;
+	overflow: hidden;
+	margin-top: 20px;
+	margin-bottom: 20px;
+}
+
+.zxxt_tu img {
+	width: 1200px;
+	height: 100px;
+}
+
+.list_f>li {
+	margin-top: 20px;
+}
+
+.list_f li h2 {
+	font-weight: 500;
+	color: #ff3333;
+	border-bottom: 1px solid #ddd;
+}
+
+.list_f li h2 span {
+	display: inline-block;
+	border-bottom: 2px solid #ff3333;
+	padding-bottom: 5px;
+}
+
+.list_f .list {
+	overflow: hidden;
+}
+
+.list_f .list li {
+	float: left;
+	margin-right: 10px;
+	margin-top: 20px;
+	font-size: 14px;
+}
+
+.list_f .list li a {
+	display: inline-block;
+	width: 85px;
+}
+
+.list_f .list li a,
+.list_f .list li i {
+	color: #666;
+}
+
+.list_f .list li:hover a,
+.list_f .list li:hover i {
+	color: #ff3333;
+}
+
+
+/*左边列表文章*/
+
+.zxxt_text .title {
+	margin-top: 20px;
+	border-bottom: 1px solid #ddd;
+	padding-bottom: 5px;
+	overflow: hidden;
+}
+
+.zxxt_text .title h2 {
+	float: left;
+	font-weight: 500;
+	color: #666;
+}
+
+.zxxt_text .title a {
+	display: block;
+	float: right;
+	color: #666;
+	margin-top: 10px;
+}
+
+.zxlist {
+	height: 565px;
+}
+
+.zxlist ul li {
+	border-bottom: 1px solid #ddd;
+	padding: 15px 0;
+	overflow: hidden;
+}
+
+.zxlist ul li span {
+	display: inline-block;
+	width: 20px;
+	height: 20px;
+	background-color: #ddd;
+	color: #fff;
+	text-align: center;
+	line-height: 20px;
+	float: left;
+	transition: all 1s ease;
+}
+
+.zxlist ul li span.cx {
+	background-color: #ff3333;
+}
+
+.zxlist ul li p {
+	float: left;
+	font-size: 14px;
+	color: #666;
+	margin-left: 10px;
+}
+
+.zxlist ul li .tw {
+	overflow: hidden;
+	float: left;
+	margin-left: 10px;
+	margin-top: 6px;
+	display: none;
+	transition: all 1s ease;
+}
+
+.zxlist ul li .tw .tw1 {
+	border-radius: 5px;
+	overflow: hidden;
+	width: 90px;
+	height: 67px;
+	float: left;
+	transition: all 1s ease;
+}
+
+.zxlist ul li .tw .tw1 img {
+	width: 100%;
+	height: 100%;
+}
+
+.zxlist ul li .tw .tw2 {
+	float: left;
+	width: 175px;
+	margin-left: 15px;
+	transition: all 1s ease;
+}
+
+.zxlist ul li .tw .tw2 h4 {
+	text-overflow: ellipsis;
+	white-space: nowrap;
+	overflow: hidden;
+	font-size: 14px;
+	font-weight: 500;
+	margin-bottom: 5px;
+}
+
+.zxlist ul li .tw .tw2 h4 a {
+	color: #ff3333;
+}
+
+.zxlist ul li .tw .tw2 p {
+	font-size: 12px;
+	margin-left: 0;
+}
+
+.zxxt_ggt {
+	width: 320px;
+	height: 220px;
+	border-radius: 5px;
+	overflow: hidden;
+	margin-top: 40px;
+}
+
+.zxxt_ggt img {
+	width: 100%;
+	height: 100%;
+}
+
+.erwm {
+	background-color: #cccc99;
+	border-radius: 5px;
+	overflow: hidden;
+	padding: 10px;
+	box-sizing: border-box;
+	margin-top: 20px;
+}
+
+.erwm .pp {
+	float: left;
+	margin-left: 15px;
+}
+
+.erwm p {
+	font-size: 14px;
+	text-align: center;
+}
+
+.erwm .p1 {
+	margin-top: 5px;
+}
+
+.erwm .p2 {
+	margin-top: 20px;
+}
+
+.erwm .p3 {
+	margin-top: 5px;
+	color: #ff3300;
+}
+
+.erwm .m {
+	float: left;
+	display: block;
+	width: 100px;
+	height: 100px;
+	background: url(../images/img_index_css.png) no-repeat;
+	background-position: 0 -485px;
+}
+
+
+/*右边*/
+
+.zxxt_main_r {
+	float: right;
+	width: 850px;
+	margin-top: 20px;
+}
+
+.zxxt_main_r>h2 {
+	padding-bottom: 7px;
+	border-bottom: 1px solid #ddd;
+	margin-bottom: 20px;
+}
+
+.zxxt_main_r h2 i {
+	display: inline-block;
+	width: 25px;
+	height: 25px;
+	background: url(../images/img_index_css.png) no-repeat;
+	background-position: -29px -20px;
+	vertical-align: middle;
+}
+
+.zxxt_main_r h2 p {
+	display: inline-block;
+	font-weight: 500;
+	vertical-align: middle;
+	font-size: 18px;
+}
+
+.zxxt_main_r h2 span {
+	font-weight: 400;
+	font-size: 12px;
+	float: right;
+	color: #ffcc99;
+	vertical-align: middle;
+	margin-top: 15px;
+}
+
+.zxxr_r1 {
+	padding-right: 4px;
+}
+
+.zxxr_r1 ul li {
+	overflow: hidden;
+	padding: 15px 0 15px 9px;
+	margin: 10px 0;
+	border-bottom: 1px solid #eee;
+}
+
+.zxxr_r1 .zxxr_r1_img {
+	width: 165px;
+	height: 120px;
+	float: left;
+	border-radius: 5px;
+	overflow: hidden;
+}
+
+.zxxr_r1 .zxxr_r1_img img {
+	width: 100%;
+	height: 100%;
+}
+
+.zxxr_r1 ul li:hover {
+	box-shadow: 0 0 3px 3px #ddd;
+}
+
+.zxxr_r1_text {
+	width: 650px;
+	float: right;
+	position: relative;
+	height: 120px;
+}
+
+.zxxr_r1_text h2 {
+	font-size: 18px;
+	color: #666;
+	font-weight: 500;
+}
+
+.zxxr_r1_text p {
+	font-size: 14px;
+	color: #666;
+}
+
+.zxxr_r1_text p span {
+	vertical-align: middle;
+	text-align: center;
+}
+
+.zxxr_r1_text p i {
+	display: inline-block;
+	width: 20px;
+	height: 16px;
+	background: url(../images/img_index_css.png) no-repeat;
+	vertical-align: middle;
+}
+
+.zxxr_r1_text .po1 {
+	position: absolute;
+	left: 0;
+	bottom: 0;
+}
+
+.zxxr_r1_text .po2 {
+	position: absolute;
+	right: 0;
+	bottom: 0;
+}
+
+.zxxr_r1_text .po1 i {
+	background-position: -518px 0;
+}
+
+.zxxr_r1_text .po2 i {
+	background-position: -536px 0;
+}
+
+.zxx_page {
+	text-align: center;
+	padding: 8px 10px;
+	margin: 5px auto;
+	height: 26px;
+	line-height: 26px;
+	margin-left: 20px;
+}
+
+.zxx_page em,
+.zxx_page a {
+	display: inline-block;
+	width: auto;
+	height: 26px;
+	margin: 0 3px;
+	padding: 0 10px;
+	line-height: 26px;
+	border: 1px solid #DDD;
+	text-align: center;
+	vertical-align: middle;
+	background: #FFF;
+	color: #666;
+	font-weight: 100;
+	font-size: 12px;
+}
+
+.zxx_page a:hover {
+	background: #ff4401;
+	border: 1px solid #ff4401;
+	color: #fff;
+}
+
+.zxx_page strong {
+	display: inline-block;
+	width: auto;
+	height: 26px;
+	margin: 0 3px;
+	padding: 0 10px;
+	line-height: 26px;
+	background: #E22F33;
+	border: 1px solid #FFF;
+	cursor: pointer;
+	vertical-align: middle;
+	color: #fff;
+	font-weight: 100;
+	font-size: 12px;
+}
