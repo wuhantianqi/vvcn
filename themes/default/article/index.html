@@ -120,12 +120,12 @@
 
 								<h2><i></i>
 									<a href="<{$item.link}>">
-										<{$item.title|cutstr:20}>
+										<{$item.title|cutstr:50}>
 									</a>
 								</h2>
 								<p>
 									<a href="<{$item.link}>">
-										<{$item.desc|cutstr:150}>
+										<{$item.desc|cutstr:140}>
 											<font class="fontcl2">[阅读全文]</font>
 									</a>
 								</p>
@@ -136,12 +136,49 @@
 					</div>
 					<div class="hot_trt_fot">
 						<ul>
-							<{KT id="14" name="学装修首页装修资讯" city_id=$request.city_id limit="5" }>
-								<li>
+							<{KT id="14" name="学装修首页今日热点推荐" city_id=$request.city_id limit="7" }>
+								<{if $iteration > 2 }>
+									<li>
+										<a href="<{$item.link}>">
+											<{$item.desc|cutstr:60}>
+										</a>
+									</li>
+								<{/if}>
+							<{/KT}>
+						</ul>
+					</div>
+				</div>
+				<div class="hot_trt" style="display:none">
+					<div class="hot_trt_">
+						<div class="hot_trt_top">
+							<{KT id="43" name="学装修首页装修资讯" city_id=$request.city_id limit="2" }>
+
+								<h2><i></i>
 									<a href="<{$item.link}>">
-										<{$item.title|cutstr:60}>
+										<{$item.title|cutstr:50}>
 									</a>
-								</li>
+								</h2>
+								<p>
+									<a href="<{$item.link}>">
+										<{$item.desc|cutstr:140}>
+											<font class="fontcl2">[阅读全文]</font>
+									</a>
+								</p>
+
+								<{/KT}>
+						</div>
+
+					</div>
+					<div class="hot_trt_fot">
+						<ul>
+							<{KT id="43" name="学装修首页装修资讯" city_id=$request.city_id limit="7" }>
+								<{if $iteration > 2 }>
+									<li>
+										<a href="<{$item.link}>">
+											<{$item.desc|cutstr:60}>
+										</a>
+									</li>
+								<{/if}>
 								<{/KT}>
 
 						</ul>
@@ -150,16 +187,16 @@
 				<div class="hot_trt" style="display:none">
 					<div class="hot_trt_">
 						<div class="hot_trt_top">
-							<{KT id="14" name="学装修首页热点推荐-置顶" city_id=$request.city_id limit="2" }>
+							<{KT id="165" name="学装修首页好文推荐" city_id=$request.city_id limit="2" }>
 
 								<h2><i></i>
 									<a href="<{$item.link}>">
-										<{$item.title|cutstr:20}>
+										<{$item.title|cutstr:50}>
 									</a>
 								</h2>
 								<p>
 									<a href="<{$item.link}>">
-										<{$item.desc|cutstr:150}>
+										<{$item.desc|cutstr:140}>
 											<font class="fontcl2">[阅读全文]</font>
 									</a>
 								</p>
@@ -170,46 +207,14 @@
 					</div>
 					<div class="hot_trt_fot">
 						<ul>
-							<{KT id="14" name="学装修首页热点推荐-置顶" city_id=$request.city_id limit="5" }>
-								<li>
-									<a href="<{$item.link}>">
-										<{$item.title|cutstr:60}>
-									</a>
-								</li>
-								<{/KT}>
-
-						</ul>
-					</div>
-				</div>
-				<div class="hot_trt" style="display:none">
-					<div class="hot_trt_">
-						<div class="hot_trt_top">
-							<{KT id="14" name="学装修首页热点推荐-置顶" city_id=$request.city_id limit="2" }>
-
-								<h2><i></i>
-									<a href="<{$item.link}>">
-										<{$item.title|cutstr:20}>
-									</a>
-								</h2>
-								<p>
-									<a href="<{$item.link}>">
-										<{$item.desc|cutstr:150}>
-											<font class="fontcl2">[阅读全文]</font>
-									</a>
-								</p>
-
-								<{/KT}>
-						</div>
-
-					</div>
-					<div class="hot_trt_fot">
-						<ul>
-							<{KT id="14" name="学装修首页热点推荐-置顶" city_id=$request.city_id limit="5" }>
-								<li>
-									<a href="<{$item.link}>">
-										<{$item.title|cutstr:60}>
-									</a>
-								</li>
+							<{KT id="165" name="学装修首页好文推荐" city_id=$request.city_id limit="7" }>
+								<{if $iteration > 2 }>
+									<li>
+										<a href="<{$item.link}>">
+											<{$item.desc|cutstr:60}>
+										</a>
+									</li>
+								<{/if}>
 								<{/KT}>
 
 						</ul>
@@ -361,13 +366,16 @@
 					</div>
 					<div class="zxrd_main_fot">
 						<ul>
-							<{KT id="12" name="网站首页_家居热点_本地新闻" city_id=$request.city_id limit="3" }>
+							<{KT id="12" name="网站首页_家居热点_本地新闻" city_id=$request.city_id limit="4" }>
+								<{if $iteration > 1 }>
 								<li>
 									【行业动态】
 									<a href="<{$item.link}>">
 										<{$item.title|cutstr:36}>
 									</a>
 								</li>
+								<{/if}>
+								
 								<{/KT}>
 									<!--
 							<li>
@@ -419,13 +427,15 @@
 					</div>
 					<div class="zxrd_main_fot">
 						<ul>
-							<{KT id="154" name="网站首页_装修美图_装修风格" city_id=$request.city_id limit="3" }>
+							<{KT id="154" name="网站首页_装修美图_装修风格" city_id=$request.city_id limit="4" }>
+								<{if $iteration > 1 }>
 								<li>
-									【装修风格】
+									【行业动态】
 									<a href="<{$item.link}>">
 										<{$item.title|cutstr:36}>
 									</a>
 								</li>
+								<{/if}>
 								<{/KT}>
 									<!--
 							<li>
@@ -549,13 +559,15 @@
 					</div>
 					<div class="zxrd_main_fot">
 						<ul>
-							<{KT id="155" name="网站首页_装修美图_装修风水" city_id=$request.city_id limit="3" }>
+							<{KT id="155" name="网站首页_装修美图_装修风水" city_id=$request.city_id limit="4" }>
+								<{if $iteration > 1 }>
 								<li>
-									【装修风水】
+									【行业动态】
 									<a href="<{$item.link}>">
 										<{$item.title|cutstr:36}>
 									</a>
 								</li>
+								<{/if}>
 								<{/KT}>
 									<!--
 							<li>
@@ -598,7 +610,9 @@
 							<span>生活小常识</span>
 						</div>
 						<{/KT}>
-							<{KT id="155" name="网站首页_装修美图_装修风水" city_id=$request.city_id limit="1" }>
+							<{KT id="155" name="网站首页_装修美图_装修风水" city_id=$request.city_id limit="2" }>
+								<{if $iteration > 1 }>
+								
 								<div class="jjm_f xcs">
 									<h5>
 										<a href="<{$item.link}>">
@@ -610,7 +624,8 @@
 									</p>
 									<span>生活小常识</span>
 								</div>
-								<{/KT}>
+							<{/if}>
+						<{/KT}>
 				</div>
 			</div>
 		</div>
@@ -759,14 +774,16 @@
 						</div>
 						<div class="zxrd_main_fot">
 							<ul>
-								<{KT id="155" name="网站首页_装修美图_装修风水" city_id=$request.city_id limit="2" }>
+								<{KT id="155" name="网站首页_装修美图_装修风水" city_id=$request.city_id limit="3" }>
+									<{if $iteration > 1 }>
 									<li>
 										【专题】
 										<a href="<{$item.link}>">
 											<{$item.title|cutstr:36}>
 										</a>
 									</li>
-									<{/KT}>
+									<{/if}>
+								<{/KT}>
 										<!--
 								<li>
 									【专题】
