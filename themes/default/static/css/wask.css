@@ -126,6 +126,11 @@
 	line-height: 32px;
 }
 
+.ask_main .ask_main_left .ask_main_left_cont1 .ask_cont1_box .down input[type="submit"] {
+	background: #fa6381;
+	color: #fff;
+}
+
 .ask_main .ask_main_left .ask_main_left_cont1 .ask_cont1_box .down .tj {
 	display: inline-block;
 	float: right;
@@ -319,6 +324,10 @@
 	white-space: nowrap;
 	color: #333333;
 	font-size: 13px;
+}
+
+.ask_main .ask_main_left .you .you_hot .list li i span {
+	display: inline;
 }
 
 .ask_main .ask_main_left .you .you_hot .list li:hover span {
