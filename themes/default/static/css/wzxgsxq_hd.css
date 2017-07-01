@@ -1,0 +1,329 @@
+/*公共样式--开始*/
+
+html,
+body,
+div,
+ul,
+li,
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+p,
+dl,
+dt,
+dd,
+ol,
+form,
+input,
+textarea,
+th,
+td,
+select {
+	margin: 0;
+	padding: 0;
+}
+
+* {
+	box-sizing: border-box;
+}
+
+html,
+body {
+	min-height: 100%;
+}
+
+body {
+	font-family: "Microsoft YaHei";
+	font-size: 14px;
+	color: #333;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+	font-weight: normal;
+}
+
+ul,
+ol {
+	list-style: none;
+}
+
+img {
+	border: none;
+	vertical-align: middle;
+}
+
+a {
+	text-decoration: none;
+	color: #232323;
+}
+
+table {
+	border-collapse: collapse;
+	table-layout: fixed;
+}
+
+input,
+textarea {
+	outline: none;
+	border: none;
+}
+
+textarea {
+	resize: none;
+	overflow: auto;
+}
+
+.clearfix {
+	zoom: 1;
+}
+
+.clearfix:after {
+	content: ".";
+	width: 0;
+	height: 0;
+	visibility: hidden;
+	display: block;
+	clear: both;
+	overflow: hidden;
+}
+
+.fl {
+	float: left
+}
+
+.fr {
+	float: right
+}
+
+.tl {
+	text-align: left;
+}
+
+.tc {
+	text-align: center
+}
+
+.tr {
+	text-align: right;
+}
+
+.ellipse {
+	overflow: hidden;
+	text-overflow: ellipsis;
+	white-space: nowrap;
+}
+
+.inline {
+	display: inline-block;
+	*display: inline;
+	*zoom: 1;
+}
+
+.clear {
+	clear: both;
+}
+
+
+/*主体内容*/
+
+.gshd {
+	width: 1200px;
+	margin: 0 auto;
+}
+
+.gshd .til ul {
+	width: 100%;
+	text-align: center;
+	border-bottom: 1px solid #ddd;
+}
+
+.gshd .til ul li {
+	display: inline-block;
+}
+
+.gshd .til ul li a {
+	display: inline-block;
+	font-size: 18px;
+	height: 60px;
+	line-height: 80px;
+	padding: 0 30px;
+}
+
+.gshd .til ul li:hover a {
+	color: red;
+	border-bottom: 2px solid #ff3d3d;
+	margin-bottom: -1px;
+	background: rgba(255, 0, 0, 0);
+}
+
+.gshd .text {
+	width: 100%;
+	margin-top: 40px;
+}
+
+.gshd .text ul li {
+	width: 100%;
+	padding: 20px;
+	overflow: hidden;
+	border: 1px solid #ddd;
+	box-sizing: border-box;
+	box-shadow: 0 10px 10px rgba(180, 180, 180, .3);
+	transition: all .5s ease-out;
+	margin-top: 40px;
+}
+
+.gshd .text ul li:hover {
+	background: #fff6eb;
+	box-shadow: 0 11px 11px rgba(230, 230, 230, .4);
+	border: 1px #ff890b solid;
+}
+
+.gshd .text ul li .img {
+	float: left;
+	width: 680px;
+	height: 280px;
+	position: relative;
+	overflow: hidden;
+}
+
+.gshd .text ul li .img img {
+	width: 100%;
+	height: 100%;
+	transition: all .5s ease;
+}
+
+.gshd .text ul li .img:hover img {
+	transform: scale(1.2);
+}
+
+.gshd .text ul li .img i {
+	position: absolute;
+	top: 0;
+	left: 0;
+	width: 88px;
+	height: 88px;
+	background: url(../images/ongoing.png);
+	z-index: 5;
+}
+
+.gshd .text ul li .img span {
+	position: absolute;
+	top: 0;
+	right: 0;
+	background-color: rgba(0, 0, 0, .5);
+	color: #fff;
+	padding: 5px 10px;
+}
+
+.gshd .text ul li .img span em {
+	color: #ff890b;
+	margin: 0 2px;
+	font-style: normal;
+}
+
+.gshd .text ul li .txt {
+	float: right;
+	width: 450px;
+	height: 280px;
+	position: relative;
+}
+
+.gshd .text ul li .txt h3 {
+	font-size: 24px;
+	font-weight: normal;
+	line-height: 40px;
+	height: 40px;
+	overflow: hidden;
+}
+
+.gshd .text ul li .txt .news {
+	font-size: 14px;
+	border-top: 1px dotted #d8d8d8;
+	text-align: left;
+	margin-top: 15px;
+	padding-top: 15px;
+	overflow: hidden;
+	height: 185px;
+}
+
+.gshd .text ul li .txt .news p {
+	margin-top: 10px;
+}
+
+.gshd .text ul li .txt .link {
+	position: absolute;
+	bottom: 0;
+	left: 0;
+	overflow: hidden;
+	width: 460px;
+}
+
+.gshd .text ul li .txt .link a {
+	display: block;
+	float: left;
+	height: 40px;
+	text-align: center;
+	line-height: 40px;
+	margin-right: 10px;
+	font-size: 16px;
+	color: #fff;
+	width: 180px;
+}
+
+.gshd .text ul li .txt .link .blu {
+	background: #4faeff;
+}
+
+.gshd .text ul li .txt .link .blu:hover {
+	background: #1c97ff;
+}
+
+.gshd .text ul li .txt .link .yeww {
+	background: #ff890b;
+}
+
+.gshd .text ul li .txt .link .yeww:hover {
+	background: #f74a0d;
+}
+
+.common_pages {
+	margin: 0;
+	padding: 30px 0 50px;
+	text-align: center;
+	font-size: 0;
+	display: block;
+	clear: both;
+	width: 100%;
+	max-width: 1220px;
+}
+
+.common_pages a {
+	padding: 4px 14px 3px;
+	margin: 0 4px;
+	line-height: 28px;
+	text-decoration: none;
+	background-color: #fafafa;
+	border: 1px #eee solid;
+	color: #666;
+	font-size: 14px;
+	display: inline-block;
+	-moz-border-radius: 2px;
+	-webkit-border-radius: 2px;
+	border-radius: 2px;
+}
+
+.common_pages i {
+	font-size: 12px;
+	color: #999;
+	display: inline-block;
+	letter-spacing: .1em;
+	margin: 0 8px;
+}

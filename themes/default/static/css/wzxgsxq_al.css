@@ -1,0 +1,286 @@
+/*公共样式--开始*/
+
+html,
+body,
+div,
+ul,
+li,
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+p,
+dl,
+dt,
+dd,
+ol,
+form,
+input,
+textarea,
+th,
+td,
+select {
+	margin: 0;
+	padding: 0;
+}
+
+* {
+	box-sizing: border-box;
+}
+
+html,
+body {
+	min-height: 100%;
+}
+
+body {
+	font-family: "Microsoft YaHei";
+	font-size: 14px;
+	color: #333;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+	font-weight: normal;
+}
+
+ul,
+ol {
+	list-style: none;
+}
+
+img {
+	border: none;
+	vertical-align: middle;
+}
+
+a {
+	text-decoration: none;
+	color: #232323;
+}
+
+table {
+	border-collapse: collapse;
+	table-layout: fixed;
+}
+
+input,
+textarea {
+	outline: none;
+	border: none;
+}
+
+textarea {
+	resize: none;
+	overflow: auto;
+}
+
+.clearfix {
+	zoom: 1;
+}
+
+.clearfix:after {
+	content: ".";
+	width: 0;
+	height: 0;
+	visibility: hidden;
+	display: block;
+	clear: both;
+	overflow: hidden;
+}
+
+.fl {
+	float: left
+}
+
+.fr {
+	float: right
+}
+
+.tl {
+	text-align: left;
+}
+
+.tc {
+	text-align: center
+}
+
+.tr {
+	text-align: right;
+}
+
+.ellipse {
+	overflow: hidden;
+	text-overflow: ellipsis;
+	white-space: nowrap;
+}
+
+.inline {
+	display: inline-block;
+	*display: inline;
+	*zoom: 1;
+}
+
+.clear {
+	clear: both;
+}
+
+
+/*主体内容*/
+
+.gsal {
+	width: 1200px;
+	margin: 0 auto;
+}
+
+.gsal_top {
+	border: 1px solid #eee;
+	overflow: hidden;
+	border-bottom: none;
+	margin-bottom: 25px;
+	margin: 20px 0;
+}
+
+.gsal_top li {
+	overflow: hidden;
+	height: 40px;
+	border-bottom: 1px #eee solid;
+}
+
+.gsal_top li .tit {
+	display: block;
+	float: left;
+	color: #999;
+	background-color: #fafafa;
+	width: 80px;
+	height: 40px;
+	line-height: 40px;
+	text-align: center;
+	margin-right: 25px;
+}
+
+.gsal_top li .screen {
+	display: block;
+	overflow: hidden;
+}
+
+.gsal_top li .screen a {
+	display: block;
+	float: left;
+	height: 40px;
+	line-height: 40px;
+	color: #666;
+	margin-right: 30px;
+}
+
+.gsal_box {
+	overflow: hidden;
+	margin-bottom: 10px;
+	width: 1200px;
+}
+
+.gsal_box ul {
+	overflow: hidden;
+	width: 100%;
+}
+
+.gsal_box ul li {
+	float: left;
+	margin-right: 1.3333%;
+	width: 24%;
+	margin-bottom: 20px;
+}
+
+.gsal_box ul li:nth-child(4n) {
+	margin-right: 0;
+}
+
+.gsal_box ul li .img_box {
+	height: 203px;
+	overflow: hidden;
+	position: relative;
+	width: 100%;
+}
+
+.gsal_box ul li .img_box img {
+	width: 100%;
+	height: 100%;
+}
+
+.gsal_box ul li .img_box .msk {
+	background-color: rgba(0, 0, 0, .5);
+	position: absolute;
+	top: 0;
+	left: 0;
+	right: 0;
+	bottom: 0;
+	margin: auto;
+	overflow: hidden;
+	box-sizing: border-box;
+	-moz-box-sizing: border-box;
+	-webkit-box-sizing: border-box;
+	display: none;
+	-webkit-transition: all .3s ease-out;
+	-o-transition: all .3s ease-out;
+	-moz-transition: all .3s ease-out;
+	-ms-transition: all .3s ease-out;
+	transition: all .3s ease-out;
+}
+
+.gsal_box ul li .img_box .tit {
+	width: 210px;
+	height: 128px;
+	margin: 30px auto 0;
+	color: #fff;
+	font-size: 14px;
+	padding: 30px 40px;
+	box-sizing: border-box;
+	-moz-box-sizing: border-box;
+	-webkit-box-sizing: border-box;
+	-ms-box-sizing: border-box;
+	-o-box-sizing: border-box;
+}
+
+.gsal_box ul li .img_box .tit p {
+	line-height: 30px;
+}
+
+.gsal_box ul li .img_box .tit p span {
+	color: #ff890b;
+}
+
+.gsal_box ul li:hover .msk {
+	display: block;
+}
+
+.gsal_box ul li:hover .txt a {
+	color: #e62e35;
+}
+
+.gsal_box ul li:hover .txt {
+	box-shadow: -2px 0px 5px 2px #ccc;
+}
+
+.gsal_box ul li .txt {
+	overflow: hidden;
+	height: 39px;
+	line-height: 39px;
+	text-align: center;
+	border: 1px solid #eee;
+	border-top: none;
+}
+
+.gsal_box ul li .txt a {
+	text-overflow: ellipsis;
+	white-space: nowrap;
+	overflow: hidden;
+	font-size: 14px;
+	font-weight: normal;
+	display: block;
+}
