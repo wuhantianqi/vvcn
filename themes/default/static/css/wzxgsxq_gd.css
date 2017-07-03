@@ -1,0 +1,201 @@
+/*公共样式--开始*/
+
+html,
+body,
+div,
+ul,
+li,
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+p,
+dl,
+dt,
+dd,
+ol,
+form,
+input,
+textarea,
+th,
+td,
+select {
+	margin: 0;
+	padding: 0;
+}
+
+html,
+body {
+	min-height: 100%;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+	font-weight: normal;
+}
+
+ul,
+ol {
+	list-style: none;
+}
+
+img {
+	border: none;
+	vertical-align: middle;
+}
+
+a {
+	text-decoration: none;
+	color: #232323;
+}
+
+table {
+	border-collapse: collapse;
+	table-layout: fixed;
+}
+
+input,
+textarea {
+	outline: none;
+	border: none;
+}
+
+textarea {
+	resize: none;
+	overflow: auto;
+}
+
+.clearfix {
+	zoom: 1;
+}
+
+.clearfix:after {
+	content: ".";
+	width: 0;
+	height: 0;
+	visibility: hidden;
+	display: block;
+	clear: both;
+	overflow: hidden;
+}
+
+.fl {
+	float: left
+}
+
+.fr {
+	float: right
+}
+
+.tl {
+	text-align: left;
+}
+
+.tc {
+	text-align: center
+}
+
+.tr {
+	text-align: right;
+}
+
+.ellipse {
+	overflow: hidden;
+	text-overflow: ellipsis;
+	white-space: nowrap;
+}
+
+.inline {
+	display: inline-block;
+	*display: inline;
+	*zoom: 1;
+}
+
+.clear {
+	clear: both;
+}
+
+
+/*主体内容*/
+
+.gs_gdtab {
+	width: 1200px;
+	margin: 0 auto;
+}
+
+.gs_gdtab ul {
+	width: 100%;
+}
+
+.gs_gdtab ul li {
+	overflow: hidden;
+	height: 160px;
+	padding: 30px;
+	border-bottom: 1px #eee solid;
+}
+
+.gs_gdtab ul li:hover {
+	background-color: #fafafa;
+}
+
+.gs_gdtab ul li a img {
+	display: block;
+	width: 220px;
+	height: 154px;
+	float: left;
+	margin-right: 20px;
+}
+
+.gs_gdtab ul li .txt {
+	float: left;
+	position: relative;
+	height: 154px;
+	width: 700px;
+}
+
+.gs_gdtab ul li .txt h4 {
+	font-size: 24px;
+	font-weight: normal;
+	margin-bottom: 20px;
+}
+
+.gs_gdtab ul li .txt p {
+	color: #666;
+	font-size: 14px;
+}
+
+.gs_gdtab ul li .txt .speed01 {
+	background: url(../images/progress_bar02.png) no-repeat center center;
+}
+
+.gs_gdtab ul li .txt .speed {
+	display: block;
+	width: 680px;
+	height: 36px;
+	position: absolute;
+	bottom: 0;
+	left: 0;
+}
+
+.gs_gdtab ul li .look {
+	background: #e62e35;
+	text-align: center;
+	color: #fff;
+	font-size: 14px;
+	display: block;
+	float: right;
+	height: 30px;
+	line-height: 30px;
+	margin-top: 60px;
+	width: 120px;
+}
+
+.gs_gdtab ul li .look:hover {
+	background: #d6162d;
+}
