@@ -2262,6 +2262,7 @@
 	border-right: 1px solid #dcdcdc;
 	height: 130px;
 	margin-top: 10px;
+	margin-left: 10px;
 }
 
 .ppgs-left .brand-show .brand-info h3 {
@@ -2323,7 +2324,7 @@
 	color: #8b8b8b;
 	line-height: 32px;
 	font-size: 14px;
-	padding-left: 15px;
+	padding-left: 4px;
 }
 
 .ppgs-left .brand-show .brand-info .p2 i {

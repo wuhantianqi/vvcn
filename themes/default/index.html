@@ -721,7 +721,7 @@
 						<a href="<{link ctl='article:items-83'}>" class="more">查看更多</a>
 					</div>
 					<ul>
-						<{KT id="156" name="网站首页_装修攻略_装修常识" city_id=$request.city_id}>
+						<{KT id="156" name="网站首页_装修攻略_装修常识" city_id=$request.city_id limit="6"}>
 							<li><a href="<{$item.link}>"><b>·</b> <{$item.title|cutstr:30}></a></li>
 							</li>
 							<{/KT}>
@@ -756,13 +756,29 @@
 				<div class="tip-line">
 					<a href="">找设计师</a><span class="line">/</span>
 					<a href="">免费量房和设计</a><span class="line">/</span>
-					<a href="">更多</a>
+					<a href="<{link ctl='designer'}>">更多</a>
 				</div>
 			</div>
 			<div class="sjs-picshow">
 				<div class="sjs-picshow-wrap">
 					<ul class="sjs-line1">
+						<{KT id="9" name="网站首页5F优秀设计师" city_id=$request.city_id limit="5"}>
 						<li class="people">
+							<span class="img">
+                            	<a href="<{$item.link}>"><img src="<{$pager.img}>/<{$item.thumb}>" alt="<{$item.name}>"/></a>
+                        	</span>
+							<div class="people-dec">
+								<h4><a href="<{$item.link}>"><{$item.name}></a></h4>
+								<p>所属公司：<{$item.ext.company.name}></p>
+								<p>设计理念：<{$item.slogan}></p>
+								<p class="bp"><a href="" class="xq">详情</a><a href="" class="yy">预约</a></p>
+							</div>
+						</li>
+			            <{/KT}>
+
+						
+
+						<!-- <li class="people">
 							<span class="img">
                             <img src="%THEME%/static/images/20170618/picture/sjs.jpg" alt=""/>
                         </span>
@@ -805,21 +821,23 @@
 								<p>设计理念：追求精神的极致感受，融入思想和创意，对每一件作品赋之生命授予灵魂……</p>
 								<p class="bp"><a href="" class="xq">详情</a><a href="" class="yy">预约</a></p>
 							</div>
-						</li>
-						<li class="people">
-							<span class="img">
-                            <img src="%THEME%/static/images/20170618/picture/sjs.jpg" alt=""/>
-                        </span>
-							<div class="people-dec">
-								<h4>马大帅2</h4>
-								<p>所属公司：东启创拓装饰</p>
-								<p>设计理念：追求精神的极致感受，融入思想和创意，对每一件作品赋之生命授予灵魂……</p>
-								<p class="bp"><a href="" class="xq">详情</a><a href="" class="yy">预约</a></p>
-							</div>
-						</li>
+						</li> -->
 					</ul>
 					<ul class="sjs-line2">
+						<{KT id="166" name="网站首页5F优秀设计师下" city_id=$request.city_id limit="5"}>
 						<li class="people">
+							<span class="img">
+                            	<a href="<{$item.link}>"><img src="<{$pager.img}>/<{$item.thumb}>" alt="<{$item.name}>"/></a>
+                        	</span>
+							<div class="people-dec">
+								<h4><a href="<{$item.link}>"><{$item.name}></a></h4>
+								<p>所属公司：<{$item.ext.company.name}></p>
+								<p>设计理念：<{$item.slogan}></p>
+								<p class="bp"><a href="" class="xq">详情</a><a href="" class="yy">预约</a></p>
+							</div>
+						</li>
+			            <{/KT}>
+						<!-- <li class="people">
 							<span class="img">
                             <img src="%THEME%/static/images/20170618/picture/sjs.jpg" alt=""/>
                         </span>
@@ -873,7 +891,7 @@
 								<p>设计理念：追求精神的极致感受，融入思想和创意，对每一件作品赋之生命授予灵魂……</p>
 								<p class="bp"><a href="" class="xq">详情</a><a href="" class="yy">预约</a></p>
 							</div>
-						</li>
+						</li> -->
 					</ul>
 
 				</div>

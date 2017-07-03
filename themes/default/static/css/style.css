@@ -623,8 +623,11 @@ ul.main_nav_son li a:hover {
 	position: absolute;
 	right: 0px;
 	bottom: 60px;
+	overflow: hidden;
 }
-
+.footer .wx-code img{
+	width: 100%;
+}
 .footer .wx-code p {
 	font-size: 12px;
 	color: #999;
