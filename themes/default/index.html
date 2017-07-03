@@ -1007,7 +1007,7 @@
 						<h3>装修风格</h3>
 						<a href="<{link ctl='article:items-12'}>" class="more">More+</a>
 					</div>
-					<{foreach $fwitems as $item name=foo}>
+					<{foreach $zxitems as $item name=foo}>
 						<{if $smarty.foreach.foo.index==0 }>
 							<div class="img">
 								<a href="<{$item.link}>"><img src="<{$pager.img}>/<{$item.thumb}>" alt=""></a>
@@ -1015,7 +1015,7 @@
 							<{/if}>
 								<{/foreach}>
 									<dl class="column-list">
-										<{foreach $fwitems as $item name=foo}>
+										<{foreach $zxitems as $item name=foo}>
 											<{if $smarty.foreach.foo.index !=0 }>
 												<dd><a href="<{$item.link}>"><b>·</b><{$item.title|cutstr:20}></a></dd>
 												<{/if}>
@@ -1027,7 +1027,7 @@
 						<h3>家居风水</h3>
 						<a href="<{link ctl='article:items-13'}>" class="more">More+</a>
 					</div>
-					<{foreach $fwitems as $item name=foo}>
+					<{foreach $jjitems as $item name=foo}>
 						<{if $smarty.foreach.foo.index==0 }>
 							<div class="img">
 								<a href="<{$item.link}>"><img src="<{$pager.img}>/<{$item.thumb}>" alt=""></a>
@@ -1035,7 +1035,7 @@
 							<{/if}>
 								<{/foreach}>
 									<dl class="column-list">
-										<{foreach $fwitems as $item name=foo}>
+										<{foreach $jjitems as $item name=foo}>
 											<{if $smarty.foreach.foo.index !=0 }>
 												<dd><a href="<{$item.link}>"><b>·</b><{$item.title|cutstr:20}></a></dd>
 												<{/if}>
@@ -1048,7 +1048,7 @@
 						<a href="<{link ctl='article:items-14'}>" class="more">More+</a>
 					</div>
 
-					<{foreach $fwitems as $item name=foo}>
+					<{foreach $shitems as $item name=foo}>
 						<{if $smarty.foreach.foo.index==0 }>
 							<div class="img">
 								<a href="<{$item.link}>"><img src="<{$pager.img}>/<{$item.thumb}>" alt=""></a>
@@ -1056,7 +1056,7 @@
 							<{/if}>
 								<{/foreach}>
 									<dl class="column-list">
-										<{foreach $fwitems as $item name=foo}>
+										<{foreach $shitems as $item name=foo}>
 											<{if $smarty.foreach.foo.index !=0 }>
 												<dd><a href="<{$item.link}>"><b>·</b><{$item.title|cutstr:20}></a></dd>
 												<{/if}>
