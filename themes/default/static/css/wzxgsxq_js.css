@@ -26,19 +26,9 @@ select {
 	padding: 0;
 }
 
-* {
-	box-sizing: border-box;
-}
-
 html,
 body {
 	min-height: 100%;
-}
-
-body {
-	font-family: "Microsoft YaHei";
-	font-size: 14px;
-	color: #333;
 }
 
 h1,
