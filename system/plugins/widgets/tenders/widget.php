@@ -67,5 +67,11 @@ class Widget_Tenders extends Model
         }
         return $data;
     }
+	   public function formss(&$params)
+    {
+			$data = $params;
+            $params['tpl'] = 'widget:tenders/form.html';
+				return $data;
+    }
    
 }

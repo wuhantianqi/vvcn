@@ -481,6 +481,7 @@
 	border-radius: 4px;
 	padding: 15px 0 20px;
 	margin-top: 20px;
+	width: 100%;
 }
 
 .ask_main_right .ask_right_cont2 .cont2_tit {
@@ -560,6 +561,7 @@
 	border: solid 1px #e5e5e5;
 	border-radius: 4px;
 	margin-top: 20px;
+	width: 100%;
 }
 
 .ask_main_right .ask_right_cont4 .cont4_tit {

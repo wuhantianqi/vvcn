@@ -192,92 +192,60 @@
 		<!-- 右侧 开始 -->
 		<div class="zxgslb_main_right fr">
 			<!-- cont1 -->
-			<div class="zxgslb_right_cont1">
-				<div class="cont1_box">
-					<div class="p1">免费户型设计报价</div>
-					<div class="p2">已帮<i>16134</i>位业主解决装修问题</div>
-					<div class="in1"><input type="text" placeholder="请输入您的称呼" /></div>
-					<div class="sele">
-						<select>
-							<option>湖北</option>
-							<option>湖北1</option>
-							<option>湖北2</option>
-							<option>湖北3</option>
-						</select>
-						<select>
-							<option>武汉</option>
-							<option>武汉1</option>
-							<option>武汉2</option>
-							<option>武汉3</option>
-						</select>
-						<select class="select3">
-							<option>武昌区</option>
-							<option>武昌区1</option>
-							<option>武昌区2</option>
-							<option>武昌区3</option>
-						</select>
+			<{widget id="tenders/formss" }>
+				<!-- cont3 -->
+				<div class="zxgslb_right_cont3 fl">
+					<div class="cont3_tit"><a href="<{link ctl='passport'}>"><span>免费注册企业会员</span></a></div>
+					<div class="ig">
+						<a href="<{link ctl='passport'}>"><img src="%THEME%/static/images/20170616/answer17.jpg" /></a>
 					</div>
-					<div class="in1"><input type="text" placeholder="请输入您的电话（必填）" /></div>
-					<div class="texta">
-						<textarea placeholder="您可以在这里简单描述您的装修要求，便于我为您推荐更合适的装修公司。"></textarea>
+				</div>
+				<!-- cont6 -->
+				<div class="zxgslb_right_cont6 fl">
+					<div class="cont6_box">
+						<div class="cont6_tit">在优优美家找装修公司价格实惠，施工质量严格监管，不低于行业标准！</div>
+						<ul class="list">
+							<li class="li1">
+								<a href="javascript:;">
+									<div class="li_tit">不懂装修注意事项？</div>
+									<p>优优美家300名家装顾问.免费一对一帮你解疑惑。</p>
+								</a>
+							</li>
+							<li class="li2">
+								<a href="javascript:;">
+									<div class="li_tit">不懂装修注意事项？</div>
+									<p>优优美家300名家装顾问.免费一对一帮你解疑惑。</p>
+								</a>
+							</li>
+							<li class="li3">
+								<a href="javascript:;">
+									<div class="li_tit">不懂装修注意事项？</div>
+									<p>优优美家300名家装顾问.免费一对一帮你解疑惑。</p>
+								</a>
+							</li>
+							<li class="li4">
+								<a href="javascript:;">
+									<div class="li_tit">不懂装修注意事项？</div>
+									<p>优优美家300名家装顾问.免费一对一帮你解疑惑。</p>
+								</a>
+							</li>
+						</ul>
 					</div>
-					<a class="ljtj" href="javascript:;">立即提交</a>
-					<p>我们承诺：优优美家提供该项服务<em>绝不产生任何费用</em>，为了您的利益以及我们的口碑，您的隐私将被严格保密。</p>
 				</div>
-			</div>
-			<!-- cont3 -->
-			<div class="zxgslb_right_cont3">
-				<div class="cont3_tit"><a href="<{link ctl='passport'}>"><span>免费注册企业会员</span></a></div>
-				<div class="ig">
-					<a href="<{link ctl='passport'}>"><img src="%THEME%/static/images/20170616/answer17.jpg" /></a>
-				</div>
-			</div>
-			<!-- cont6 -->
-			<div class="zxgslb_right_cont6">
-				<div class="cont6_box">
-					<div class="cont6_tit">在优优美家找装修公司价格实惠，施工质量严格监管，不低于行业标准！</div>
+				<!-- cont4 -->
+				<div class="zxgslb_right_cont4 fl">
+					<div class="cont4_tit">
+						<span>热门装修公司</span>
+					</div>
 					<ul class="list">
-						<li class="li1">
-							<a href="javascript:;">
-								<div class="li_tit">不懂装修注意事项？</div>
-								<p>优优美家300名家装顾问.免费一对一帮你解疑惑。</p>
-							</a>
-						</li>
-						<li class="li2">
-							<a href="javascript:;">
-								<div class="li_tit">不懂装修注意事项？</div>
-								<p>优优美家300名家装顾问.免费一对一帮你解疑惑。</p>
-							</a>
-						</li>
-						<li class="li3">
-							<a href="javascript:;">
-								<div class="li_tit">不懂装修注意事项？</div>
-								<p>优优美家300名家装顾问.免费一对一帮你解疑惑。</p>
-							</a>
-						</li>
-						<li class="li4">
-							<a href="javascript:;">
-								<div class="li_tit">不懂装修注意事项？</div>
-								<p>优优美家300名家装顾问.免费一对一帮你解疑惑。</p>
-							</a>
-						</li>
-					</ul>
-				</div>
-			</div>
-			<!-- cont4 -->
-			<div class="zxgslb_right_cont4">
-				<div class="cont4_tit">
-					<span>热门装修公司</span>
-				</div>
-				<ul class="list">
-					<{calldata mdl="company/company" city_id=$request.city_id limit=8}>
-						<li>
-							<a href="<{$item.company_url}>">
-								<{$item.name|cutstr:35}>
-							</a>
-						</li>
-						<{/calldata}>
-							<!-- <li>
+						<{calldata mdl="company/company" city_id=$request.city_id limit=8}>
+							<li>
+								<a href="<{$item.company_url}>">
+									<{$item.name|cutstr:35}>
+								</a>
+							</li>
+							<{/calldata}>
+								<!-- <li>
 						<a href="javascript:;">武汉市鑫大众装饰设计工程有限公司工程有限公司</a>
 					</li>
 					<li>
@@ -307,40 +275,40 @@
 					<li>
 						<a href="javascript:;">武汉市鑫大众装饰设计工程有限公司工程有限公司</a>
 					</li> -->
-				</ul>
-			</div>
-			<!-- cont5 -->
-			<div class="zxgslb_right_cont5">
-				<div class="slideBox2">
-					<div class="hd">
-						<ul>
-							<li></li>
-							<li></li>
-							<li></li>
-						</ul>
-					</div>
-					<div class="bd">
-						<ul>
-							<li>
-								<a href="javascript:;" target="_blank"><img src="%THEME%/static/images/20170616/answer17.jpg" /></a>
-							</li>
-							<li>
-								<a href="javascript:;" target="_blank"><img src="%THEME%/static/images/20170616/answer17.jpg" /></a>
-							</li>
-							<li>
-								<a href="javascript:;" target="_blank"><img src="%THEME%/static/images/20170616/answer17.jpg" /></a>
-							</li>
-						</ul>
-					</div>
+					</ul>
 				</div>
-				<script type="text/javascript">
-					jQuery(".slideBox2").slide({
-						mainCell: ".bd ul",
-						autoPlay: true
-					});
+				<!-- cont5 -->
+				<div class="zxgslb_right_cont5 fl">
+					<div class="slideBox2">
+						<div class="hd">
+							<ul>
+								<li></li>
+								<li></li>
+								<li></li>
+							</ul>
+						</div>
+						<div class="bd">
+							<ul>
+								<li>
+									<a href="javascript:;" target="_blank"><img src="%THEME%/static/images/20170616/answer17.jpg" /></a>
+								</li>
+								<li>
+									<a href="javascript:;" target="_blank"><img src="%THEME%/static/images/20170616/answer17.jpg" /></a>
+								</li>
+								<li>
+									<a href="javascript:;" target="_blank"><img src="%THEME%/static/images/20170616/answer17.jpg" /></a>
+								</li>
+							</ul>
+						</div>
+					</div>
+					<script type="text/javascript">
+						jQuery(".slideBox2").slide({
+							mainCell: ".bd ul",
+							autoPlay: true
+						});
 
-				</script>
-			</div>
+					</script>
+				</div>
 		</div>
 		<!-- 右侧 结束 -->
 	</div>

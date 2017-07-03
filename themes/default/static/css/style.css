@@ -261,8 +261,8 @@ span.login_litico {
 }
 
 .search_box {
-	margin: 8px 0px 0px 100px;
-	border: 2px solid #00ad28;
+	/*	margin: 8px 0px 0px 100px;*/
+	border: 2px solid #ff3333;
 	width: 420px;
 	height: 36px;
 	line-height: 36px;
@@ -281,8 +281,8 @@ span.login_litico {
 	border-right: 1px solid #f2f2f2;
 	width: 74px;
 	text-align: center;
-	height: 38px;
-	line-height: 38px;
+	height: 36px;
+	line-height: 36px;
 	box-sizing: border-box;
 }
 
@@ -292,10 +292,10 @@ span.login_litico {
 
 .search input.text {
 	border: none;
-	height: 38px;
-	line-height: 38px;
+	height: 36px;
+	line-height: 36px;
 	padding: 0 0 0 15px;
-	width: 290px;
+	width: 250px;
 }
 
 .search input.btn {
@@ -304,7 +304,7 @@ span.login_litico {
 	height: 38px;
 	line-height: 38px;
 	text-align: center;
-	width: 50px;
+	width: 80px;
 }
 
 .search_ico {
@@ -316,10 +316,12 @@ span.login_litico {
 .search_cont_list {
 	position: absolute;
 	z-index: 100;
-	width: 75px;
+	width: 74px;
+	/*
 	left: -1px;
 	top: 38px;
-	border: 1px solid #ff3333;
+*/
+	border: 2px solid #ff3333;
 	border-top: none;
 }
 
@@ -336,11 +338,16 @@ span.login_litico {
 	height: 36px;
 }
 
+
+/*
 .search_box input.text {
 	width: 250px;
 	height: 30px;
 }
+*/
 
+
+/*
 .search_box input.btn {
 	width: 80px;
 	background: #00ad28;
@@ -349,6 +356,7 @@ span.login_litico {
 	font-weight: bold;
 	border-radius: 0px;
 }
+*/
 
 .site_commitment {
 	margin-top: 10px;
@@ -625,9 +633,11 @@ ul.main_nav_son li a:hover {
 	bottom: 60px;
 	overflow: hidden;
 }
-.footer .wx-code img{
+
+.footer .wx-code img {
 	width: 100%;
 }
+
 .footer .wx-code p {
 	font-size: 12px;
 	color: #999;
