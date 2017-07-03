@@ -1,54 +1,73 @@
-<div class="company_lt lt">
-	<div class="company_lt_intro area mb10">
-		<img src="<{$pager.img}>/<{$company.thumb}>" class="pic"/>
-		<p class="tit"><b><{$company.name}></b></p>
-		<p>信誉：<{$company.score}></p>
-		<p>电话：<{$company.show_phone}></p>
-		<p>Q Q：<{$company.show_qq|qq:1}></p>
-		<div class="pingfen_bar com_pingf">
-			<p class="title">综合评价：<{$company.avg_score}></p>
-			<{foreach $CONFIG.score.company as $k=>$v}><{if $v@index>2}><{break}><{/if}>
-			<p><{$v}><span class="bar probar_gray"><span class="bar probar_color bar2" style="width:<{$company.avg_scores[$k]*20}>%"></span></span><{sprintf("%.1f",$company.avg_scores[$k])}></p>
-			<{/foreach}>
+<div class="zxgs_header">
+		<div class="zxgs_wrapper">
+			<div class="zxgs_header_logo">
+				<a href="<{$company.company_url}>" class="zxg_logo">
+					<img src="<{$pager.img}>/<{$company.logo}>" alt="<{$company.title}>">
+				</a>
+				<div class="company_explain">
+					<h1><{$company.title}></h1>
+					<p class="addr">地　　址：<{$company.addr}>
+						<a href="" class="map"></a>
+					</p>
+					<p class="tel">
+						<span>免费发送至手机</span>
+						<a target="_blank" href="http://wpa.qq.com/msgrd?v=3&uin=<{$qq}>&site=<{$CONFIG.site.domain}>&menu=yes" title="<{$CONFIG.site.title}>">QQ在线咨询</a>
+					</p>
+				</div>
+			</div>
+			<div class="zxgs_share">
+				<div class="article-share bdsharebuttonbox">
+					<span>分享到：</span>
+					<a class="bds_qzone" data-cmd="qzone"></a>
+					<a class="bds_tsina" data-cmd="tsina"></a>
+					<a class="bds_weixin" data-cmd="weixin"></a>
+					<a class="bds_tqq" data-cmd="tqq"></a>
+					<a class="bds_sqq" data-cmd="sqq"></a>
+					<a class="bds_more" data-cmd="more">更多</a>
+					<span></span>
+					<script>
+						window._bd_share_config = {
+							"common": {
+								"bdSnsKey": {},
+								"bdText": "",
+								"bdMini": "2",
+								"bdMiniList": false,
+								"bdPic": "",
+								"bdStyle": "0",
+								"bdSize": "30"
+							},
+							"share": {}
+						};
+
+						with(document) 0[(getElementsByTagName('head')[0] || body).appendChild(createElement('script')).src = 'http://bdimg.share.baidu.com/static/api/js/share.js?v=89860593.js?cdnversion=' + ~(-new Date() / 36e5)];
+
+					</script>
+				</div>
+
+
+
+			</div>
 		</div>
 	</div>
-	<div class="mb10 area">
-		<h3 class="side_tit">装修公司排行榜</h3>
-		<ul class="pding paihang">
-			<{calldata mdl="company/company"  city_id=$request.city_id limit=8}>
-			<li>
-				<span class="lt"><font class="paihang_num<{if $iteration<=3}> ph_num_cl<{/if}>"><{$iteration}></font><a href="<{$item.company_url}>"><{$item.name|cutstr:35}></a>
-				</span>
-				<span class="rt">已投标：<font class="fontcl2"><{$item.tenders_num}></font></span>
-			</li>
-			<{/calldata}>
-		</ul>
+	<div class="zxgs_nav">
+		<div class="zxgs_wrapper">
+			<a href="" class="free">
+				<i></i> 免费设计与报价
+			</a>
+		</div>
+		<div class="zxgs_nav_main">
+			<div class="zxgs_wrapper">
+				<ul>
+					<li <{if $request.act == 'detail'}> class="active"<{/if}>><a href="<{$company.company_url}>">首页</a></li>
+					<li <{if $request.act == 'about'}> class="active"<{/if}>><a href="<{link ctl='company:about' arg0=$company.company_id company=$company}>">公司简介</a></li>
+					<li <{if $request.act == 'youhui'}> class="active"<{/if}>><a href="<{link ctl='company:youhui' arg0=$company.company_id company=$company}>">优惠活动</a></li>
+					<li <{if $request.act == 'cases'}> class="active"<{/if}>><a href="<{link ctl='company:cases' arg0=$company.company_id company=$company}>">装修案例</a></li>
+					<li <{if $request.act == 'site'}> class="active"<{/if}>><a href="<{link ctl='company:site' arg0=$company.company_id company=$company}>">施工工地<i></i></a></li>
+					<li <{if $request.act == 'team'}> class="active"<{/if}>><a href="<{link ctl='company:team' arg0=$company.company_id company=$company}>">设计团队</a></li>
+					<!-- <li <{if $request.act == 'comment'}> class="active"<{/if}>><a href="<{link ctl='company:comment' arg0=$company.company_id company=$company}>">服务点评</a></li> -->
+					<li <{if $request.act == 'news'}> class="active"<{/if}>><a href="<{link ctl='company:news' arg0=$company.company_id company=$company}>">公司资讯</a></li>
+					<!-- <li><a href="">联系我们</a></li> -->
+				</ul>
+			</div>
+		</div>
 	</div>
-	<div class="mb10 area">
-		<h3 class="side_tit">设计师排行榜</h3>
-		<ul class="pding paihang">
-			<{calldata mdl="designer/designer" city_id=$request.city_id limit=5}>
-			<li>
-				<span class="lt"><font class="paihang_num<{if $iteration<=3}> ph_num_cl<{/if}>"><{$iteration}></font><a href="<{link ctl='blog'  arg0=$item.uid}>"><{$item.name|cutstr:35}></a>
-				</span>
-				<span class="rt">已投标：<font class="fontcl2"><{$item.tenders_num}></font></span>
-			</li>
-			<{/calldata}>
-		</ul>
-	</div>
-	<div class="mb10 area">
-		<h3 class="side_tit">工长排行榜</h3>
-		<ul class="pding paihang">
-			<{calldata mdl="gz/gz" city_id=$request.city_id limit=5}>
-			<li>
-				<span class="lt"><font class="paihang_num<{if $iteration<=3}> ph_num_cl<{/if}>"><{$iteration}></font><a href="<{link ctl='gz-detail'  arg0=$item.uid}>"><{$item.name|cutstr:35}></a>
-				</span>
-				<span class="rt">已投标：<font class="fontcl2"><{$item.tenders_num}></font></span>
-			</li>
-			<{/calldata}>
-		</ul>
-	</div>
-    <div class="mb10 personAd">
-        <{adv id="31" name="设计师右侧招商图片广告" city_id=$request.city_id}>
-    </div>
-</div>
