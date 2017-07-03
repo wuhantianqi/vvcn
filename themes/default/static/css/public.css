@@ -184,6 +184,19 @@ input.btn {
 }
 
 
+.fl {
+	float: left
+}
+
+.fr {
+	float: right
+}
+
+.clear {
+	clear: both;
+}
+
+
 /*按钮样式*/
 
 .btn_main_big {
