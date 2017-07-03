@@ -102,6 +102,8 @@ class Mdl_Article_Cate extends Mdl_Table
 
     public function childrens($cat_id)
     {
+        // $items = $this->fetch_all();
+        // return $items;
         if(!$cat_id = (int)$cat_id){
             return false;
         }

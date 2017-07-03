@@ -35,6 +35,25 @@ class Ctl_Article extends Ctl
             }
             $top_cate = $cate;
             $filter['cat_id'] = $cat_id;
+            
+            //二级分类
+            $cateList=array();
+            $cates = K::M('article/cate')->fetch_all();
+            foreach ($cates as $key => $value) {
+                if( $value['parent_id']==9 ){
+                    $cateList[] = $value;
+                } 
+            }
+            foreach ($cateList as $key => $value) {
+                foreach ($cates as $ke => $valu) {
+                    if( $value['cat_id']== $valu['parent_id']){
+                        $cateList[$key]['layer'][]=$valu;
+                    }
+                }
+            }
+            $this->pagedata['cateList'] = $cateList;
+            
+
             if($cate['level'] == 3){
                 $this->pagedata['childrens'] = K::M('article/cate')->childrens($cate['parent_id']);
             }else{
