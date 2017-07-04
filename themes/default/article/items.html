@@ -132,7 +132,7 @@
 
 					</script>
 					<ul>
-						<{KT id="14" name="学装修首页今日热点推荐" city_id=$request.city_id}>
+						<{KT id="14" name="学装修首页今日热点推荐" city_id=$request.city_id limit="10"}>
 						<li>
 							<span class="cx"><{$iteration}></span>
 							<p class="b"><{$item.title|cutstr:30}></p>
@@ -317,7 +317,7 @@
 						</div>
 						<div class="zxxr_r1_text">
 							<h2><a href="<{$item.link}>"><{$item.title}></a></h2>
-							<p><{$item.desc}></p>
+							<p><{$item.desc|cutstr:180}></p>
 							<p class="po1">
 								<i></i>
 								<span>发布时间：</span>
