@@ -1,5 +1,3 @@
-
-
 /*主体*/
 
 .zxgl_main {
@@ -211,89 +209,6 @@
 
 .zxgl_hot_right {
 	width: 280px;
-}
-
-
-/*右边表单*/
-
-.form {
-	width: 280px;
-	height: 420px;
-	padding: 10px 20px;
-	background-color: #fff;
-	box-sizing: border-box;
-	border: 1px solid #ccc;
-	border-radius: 5px;
-}
-
-.form h2 {
-	font-size: 18px;
-	color: #ff6699;
-	text-align: center;
-	font-weight: 500;
-}
-
-.form h3 {
-	font-size: 12px;
-	text-align: center;
-	font-weight: 400;
-	margin: 10px 0;
-	line-height: 12px;
-}
-
-.form h3 span {
-	color: #ff6699;
-}
-
-.form input {
-	width: 235px;
-	height: 36px;
-	outline: none;
-	margin-top: 10px;
-	padding-left: 10px;
-	box-sizing: border-box;
-	border: 1px solid #ddd;
-}
-
-.form input[type="submit"] {
-	background-color: #ff6699;
-	border: none;
-	color: #fff;
-	font-size: 16px;
-	border-radius: 5px;
-}
-
-.form p {
-	margin-top: 10px;
-	color: #ccc;
-	font-size: 12px;
-	line-height: 16px;
-}
-
-.form p span {
-	color: #ff6699;
-}
-
-.form select {
-	width: 75px;
-	height: 36px;
-	margin-top: 10px;
-	border: 1px solid #ddd;
-}
-
-.form select:first-child {
-	margin-right: 1px;
-}
-
-.form textarea {
-	overflow: hidden;
-	width: 235px;
-	margin-top: 10px;
-	padding: 5px 10px;
-	box-sizing: border-box;
-	border: 1px solid #ddd;
-	font-size: 12px;
-	color: #ccc;
 }
 
 
@@ -1303,11 +1218,13 @@
 }
 
 .answer-wrap .answer-list li .title .title-name .look-num i {
-	width: 16px;
+	width: 17px;
 	height: 12px;
 	display: inline-block;
 	background: url(../images/20170618/img_index_css.png) no-repeat -482px 0;
-	padding-right: 4px;
+	margin-right: 5px;
+	vertical-align: middle;
+	margin-bottom: 2px;
 }
 
 .answer-wrap .answer-list li .title .title-name .text-num {
@@ -1320,11 +1237,13 @@
 }
 
 .answer-wrap .answer-list li .title .title-name .text-num i {
-	width: 16px;
+	width: 12px;
 	height: 12px;
 	display: inline-block;
-	background: url(../images/20170618/img_index_css.png) no-repeat -501px 0;
-	padding-right: 4px;
+	background: url(../images/20170618/img_index_css.png) no-repeat -504px 0;
+	vertical-align: middle;
+	margin-bottom: 2px;
+	margin-right: 5px;
 }
 
 .answer-wrap .answer-list li .title .title-desc {

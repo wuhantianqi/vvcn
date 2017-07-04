@@ -1,5 +1,3 @@
-
-
 /*主体*/
 
 .wzxq_main {
@@ -61,20 +59,18 @@
 	color: #666;
 }
 
-.wzxq_main_f .title p span  em {
+.wzxq_main_f .title p span em {
 	display: inline-block;
 	padding: 0 10px;
 	color: #ff9900;
 	height: 24px;
 	line-height: 24px;
-
 	font-style: normal;
 }
-.wzxq_main_f .title p span  em span{
+
+.wzxq_main_f .title p span em span {
 	color: #ff9900;
 }
-
-
 
 .wzxq_main_f .txt {
 	width: 835px;
@@ -84,6 +80,11 @@
 	line-height: 28px;
 	overflow: hidden;
 	padding-top: 15px;
+}
+
+.wzxq_main_f .txt p {
+	margin: 15px auto;
+	text-indent: 2em;
 }
 
 .wzxq_main_f .txt span {
@@ -447,8 +448,6 @@
 .wzxq_main_r .ask_right_cont1 .ask_cont1_box p em {
 	color: #d3294a;
 }
-
-
 
 .jsq {
 	margin-top: 20px;

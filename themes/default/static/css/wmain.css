@@ -1741,6 +1741,7 @@
 	margin-top: 20px;
 	border: none;
 	outline: none;
+	cursor: pointer;
 }
 
 .site-banner .site-banner-right .site-banner-center .banner-form .form-left .p2 {
@@ -2827,6 +2828,11 @@
 	overflow: hidden;
 }
 
+.zxgl-column-box .img img {
+	width: 160px;
+	height: 120px;
+}
+
 .zxgl-column-box .column-list {
 	width: 390px;
 	display: block;
@@ -3435,7 +3441,7 @@
 	margin-right: 40px;
 	display: block;
 	float: left;
-	height: 110px;
+	height: 80px;
 }
 
 .authority .five dl:last-child {
@@ -3684,6 +3690,8 @@
 
 .sjs-picshow .people .img img {
 	transition: all 0.5s ease-out;
+	width: 100%;
+	height: 100%;
 }
 
 .sjs-picshow .people .img img:hover {

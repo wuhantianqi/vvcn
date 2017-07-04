@@ -1,6 +1,3 @@
-
-
-
 /*头部顶端*/
 
 .zxgs_top {
@@ -639,7 +636,7 @@
 .zxgs_header .zxgs_header_logo {
 	display: block;
 	float: left;
-	padding: 20px 0 16px 26px;
+	padding: 20px 0 16px 20px;
 }
 
 .zxgs_header_logo .zxg_logo {
@@ -722,7 +719,7 @@
 .zxgs_header .zxgs_share {
 	float: right;
 	padding: 60px 30px 0 0;
-	width: 315px;
+	width: 230px;
 }
 
 .zxgs_share span {
@@ -1108,7 +1105,7 @@
 	height: 30px;
 	padding-bottom: 10px;
 	border-bottom: 1px #eee solid;
-	margin-bottom: 20px;
+	margin-bottom: 5px;
 }
 
 a.menu_more {
@@ -1272,18 +1269,16 @@ a.menu_more {
 }
 
 .zxgs_zxzb_left .zxgs_zxzb_left_list {
-	width: 450px;
-	float: right;
+	width: 100%;
 }
 
 .zxgs_zxzb_left_list ul li {
 	display: block;
 	border-bottom: 1px dotted #d8d8d8;
-	font-size: 16px;
-	height: 42px;
-	line-height: 42px;
+	font-size: 14px;
+	height: 36px;
+	line-height: 36px;
 	overflow: hidden;
-	width: 450px;
 	text-overflow: ellipsis;
 	white-space: nowrap;
 	list-style: disc;
@@ -1464,12 +1459,11 @@ a.menu_more {
 	display: block;
 	text-align: center;
 	float: left;
-	background-color: #fafafa;
 	color: #fff;
-	background: #666;
-	width: 115px;
-	height: 32px;
-	line-height: 32px;
+	background: #ff890b;
+	width: 230px;
+	height: 36px;
+	line-height: 36px;
 	font-size: 12px;
 }
 
@@ -1488,6 +1482,8 @@ a.menu_more {
 	font-size: 12px;
 }
 
+
+/*
 .zxgs_team ul li .yysjs a:hover {
 	color: #fff;
 	background: #999;
@@ -1496,6 +1492,7 @@ a.menu_more {
 .zxgs_team ul li .yysjs .active:hover {
 	background: #f74a0d;
 }
+*/
 
 .zxgs_team ul li>a:hover img {
 	transform: scale(1.1);

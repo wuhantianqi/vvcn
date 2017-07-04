@@ -1,5 +1,3 @@
-
-
 /*主体内容*/
 
 .gsteam {
@@ -9,7 +7,7 @@
 
 .gsteam_box {
 	width: 100%;
-	margin-top: 10px;
+	margin-top: 30px;
 }
 
 .gsteam_box ul {
@@ -127,6 +125,7 @@
 	width: 100%;
 	z-index: 9;
 	text-align: center;
+	display: none;
 }
 
 .gsteam_box ul li .hd_pt img {

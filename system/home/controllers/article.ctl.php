@@ -40,7 +40,7 @@ class Ctl_Article extends Ctl
             $cateList=array();
             $cates = K::M('article/cate')->fetch_all();
             foreach ($cates as $key => $value) {
-                if( $value['parent_id']==9 ){
+                if( $value['parent_id']==$cat_id ){
                     $cateList[] = $value;
                 } 
             }

@@ -60,7 +60,7 @@
 			<!-- 筛选结果 开始 -->
 			<div class="zxgslb_left_center clearFloat">
 				<div class="left fl"><span>当前为你搜索到<i><{$pager.count}></i>个装修公司</span></div>
-				<div class="right fr"><a href=""><span>武汉装修公司地图</span></a></div>
+				<div class="right fr"><a href="<{link ctl='gs:map'}>"><span>武汉装修公司地图</span></a></div>
 			</div>
 			<!-- 筛选结果 结束 -->
 			<!-- 结果列表 开始 -->
@@ -171,13 +171,13 @@
 						</div>
 					</li> -->
 				</ul>
-				<div class="page_cont">
-					<{if $pager.pagebar}>
-						<div class="a_select">
-							<{$pager.pagebar}>
-						</div>
-						<{/if}>
-							<!-- 					<a href="javascript:;">196条记录</a>
+
+				<{if $pager.pagebar}>
+					<div class="page hoverno">
+						<{$pager.pagebar}>
+					</div>
+					<{/if}>
+						<!-- 					<a href="javascript:;">196条记录</a>
 					<a class="a_select" href="javascript:;">1</a>
 					<a href="javascript:;">2</a>
 					<a href="javascript:;">3</a>
@@ -185,7 +185,7 @@
 					<a href="javascript:;">5</a>
 					<a href="javascript:;">下一页</a>
 					<a href="javascript:;">...20</a> -->
-				</div>
+
 			</div>
 			<!-- 结果列表 结束 -->
 		</div>

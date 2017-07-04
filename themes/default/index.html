@@ -22,16 +22,16 @@
 								</div>
 								<div class="banner-form">
 									<form action="<{link ctl='tenders:save' http='base'}>" mini-form='tenders_tzx' method="post">
-                            			<input type="hidden" name="data[from]" value="TZX" />
+										<input type="hidden" name="data[from]" value="TZX" />
 										<div class="form-left">
 											<div class="form-label">
-												<input type="text" name="data[contact]" class="input-input" placeholder="请输入您的称呼">
+												<input type="text" name="data[contact]" class="input-input" placeholder="请输入您的称呼" autocomplete="off">
 											</div>
 											<div class="form-label">
-												<input type="text" class="input-input" name="data[mobile]" placeholder="请输入您的联系方式">
+												<input type="text" class="input-input" name="data[mobile]" placeholder="请输入您的联系方式" autocomplete="off">
 											</div>
 											<div class="form-label">
-												<select name="data[type_id]" class="text long"><{widget id="tenders/setting" type="type"}></select>
+												<select name="data[type_id]" class="select-inp"><{widget id="tenders/setting" type="type"}></select>
 											</div>
 											<div class="form-label">
 												<{widget id="data/region" city_id=$request.city_id class="text short" }>
@@ -65,28 +65,28 @@
 								</div>
 								<div class="banner-form">
 									<form action="<{link ctl='tenders:save' http='base'}>" mini-form='tenders_tzx' method="post">
-                            			<input type="hidden" name="data[from]" value="TZX" />
-									<div class="form-left">
-										<div class="form-label">
-											<input type="text" name="data[contact]" class="input-input" placeholder="请输入您的称呼">
-										</div>
-										<div class="form-label">
-											<input type="text" name="data[mobile]" class="input-input" placeholder="请输入您的联系方式">
-										</div>
-										<div class="form-label">
-											<select name="" id="" class="select-inp">
+										<input type="hidden" name="data[from]" value="TZX" />
+										<div class="form-left">
+											<div class="form-label">
+												<input type="text" name="data[contact]" class="input-input" placeholder="请输入您的称呼" autocomplete="off">
+											</div>
+											<div class="form-label">
+												<input type="text" name="data[mobile]" class="input-input" placeholder="请输入您的联系方式" autocomplete="off">
+											</div>
+											<div class="form-label">
+												<select name="" id="" class="select-inp">
                                             <option value="">请选择您的户型</option>
                                             <option value="">二居室</option>
                                             <option value="">三居室</option>
                                             <option value="">四居室</option>
                                         </select>
+											</div>
+											<div class="form-label">
+												<select name="data[type_id]" class="select-inp"><{widget id="tenders/setting" type="type"}></select>
+											</div>
+											<input class="submit-btn" type="submit" value="立即提交">
+											<p class="p2">您的信息我们将严格保密，请放心填写！</p>
 										</div>
-										<div class="form-label">
-											<select name="data[type_id]" class="text long"><{widget id="tenders/setting" type="type"}></select>
-										</div>
-										<input class="submit-btn" type="submit" value="立即提交">
-										<p class="p2">您的信息我们将严格保密，请放心填写！</p>
-									</div>
 									</form>
 									<div class="form-right">
 										<p>专业设计师免费上门量房</p>
@@ -113,25 +113,25 @@
 								</div>
 								<div class="banner-form">
 									<form action="<{link ctl='tenders:save' http='base'}>" mini-form='tenders_tzx' method="post">
-                            			<input type="hidden" name="data[from]" value="TZX" />
-									<div class="form-left">
-										<div class="form-label">
-											<input type="text" name="data[contact]" class="input-input" placeholder="请输入您的称呼">
-										</div>
-										<div class="form-label">
-											<input type="text" name="data[mobile]" class="input-input" placeholder="请输入您的联系方式">
-										</div>
-										<div class="form-label">
-											<input type="text" name="data[house_mj]" class="input-input" placeholder="请输入您的房屋面积">
-										</div>
+										<input type="hidden" name="data[from]" value="TZX" />
+										<div class="form-left">
+											<div class="form-label">
+												<input type="text" name="data[contact]" class="input-input" placeholder="请输入您的称呼" autocomplete="off">
+											</div>
+											<div class="form-label">
+												<input type="text" name="data[mobile]" class="input-input" placeholder="请输入您的联系方式" autocomplete="off">
+											</div>
+											<div class="form-label">
+												<input type="text" name="data[house_mj]" class="input-input" placeholder="请输入您的房屋面积" autocomplete="off">
+											</div>
 
-										<div class="form-label">
-											<select name="data[type_id]" class="text long"><{widget id="tenders/setting" type="type"}></select>
-											<select name="data[budget_id]" class="text long"><{widget id="tenders/setting" type="budget"}></select>
+											<div class="form-label">
+												<select name="data[type_id]" class="select-inp2"><{widget id="tenders/setting" type="type"}></select>
+												<select name="data[budget_id]" class="select-inp2"><{widget id="tenders/setting" type="budget"}></select>
+											</div>
+											<input class="submit-btn" type="submit" value="立即提交">
+											<p class="p2">您的信息我们将严格保密，请放心填写！</p>
 										</div>
-										<input class="submit-btn" type="submit" value="立即提交">
-										<p class="p2">您的信息我们将严格保密，请放心填写！</p>
-									</div>
 									</form>
 									<div class="form-right">
 										<p>严审装修公司资质</p>
@@ -157,23 +157,23 @@
 								</div>
 								<div class="banner-form">
 									<form action="<{link ctl='tenders:save' http='base'}>" mini-form='tenders_tzx' method="post">
-                            			<input type="hidden" name="data[from]" value="TZX" />
-									<div class="form-left">
-										<div class="form-label">
-											<input type="text" name="data[contact]" class="input-input" placeholder="请输入您的称呼">
+										<input type="hidden" name="data[from]" value="TZX" />
+										<div class="form-left">
+											<div class="form-label">
+												<input type="text" name="data[contact]" class="input-input" placeholder="请输入您的称呼" autocomplete="off">
+											</div>
+											<div class="form-label">
+												<input type="text" name="data[mobile]" class="input-input" placeholder="请输入您的联系方式" autocomplete="off">
+											</div>
+											<div class="form-label">
+												<select name="data[type_id]" class="select-inp"><{widget id="tenders/setting" type="type"}></select>
+											</div>
+											<div class="form-label">
+												<{widget id="data/region" city_id=$request.city_id class="text short" }>
+											</div>
+											<input class="submit-btn" type="submit" value="立即提交">
+											<p class="p2">您的信息我们将严格保密，请放心填写！</p>
 										</div>
-										<div class="form-label">
-											<input type="text" name="data[mobile]" class="input-input" placeholder="请输入您的联系方式">
-										</div>
-										<div class="form-label">
-											<select name="data[type_id]" class="text long"><{widget id="tenders/setting" type="type"}></select>
-										</div>
-										<div class="form-label">
-											<{widget id="data/region" city_id=$request.city_id class="text short"}>
-										</div>
-										<input class="submit-btn" type="submit" value="立即提交">
-										<p class="p2">您的信息我们将严格保密，请放心填写！</p>
-									</div>
 									</form>
 									<div class="form-right">
 										<p>房屋装修问题一网打尽</p>
@@ -200,21 +200,21 @@
 								</div>
 								<div class="banner-form">
 									<form action="<{link ctl='tenders:save' http='base'}>" mini-form='tenders_tzx' method="post">
-                            			<input type="hidden" name="data[from]" value="TZX" />
-									<div class="form-left">
-										<div class="form-label">
-											<input type="text" name="data[contact]" class="input-input" placeholder="请输入您的称呼">
-										</div>
-										<div class="form-label">
-											<input type="text" name="data[mobile]" class="input-input" placeholder="请输入您的联系方式">
-										</div>
-										<div class="form-label">
-											<textarea name="data[comment]" rows="3" cols="35" placeholder="请简单描述您的购买需求以及预算范围"></textarea>
-										</div>
+										<input type="hidden" name="data[from]" value="TZX" />
+										<div class="form-left">
+											<div class="form-label">
+												<input type="text" name="data[contact]" class="input-input" placeholder="请输入您的称呼" autocomplete="off">
+											</div>
+											<div class="form-label">
+												<input type="text" name="data[mobile]" class="input-input" placeholder="请输入您的联系方式" autocomplete="off">
+											</div>
+											<div class="form-label">
+												<textarea name="data[comment]" rows="3" cols="35" placeholder="请简单描述您的购买需求以及预算范围"></textarea>
+											</div>
 
-										<input class="submit-btn" type="submit" value="立即提交">
-										<p class="p2">您的信息我们将严格保密，请放心填写！</p>
-									</div>
+											<input class="submit-btn" type="submit" value="立即提交">
+											<p class="p2">您的信息我们将严格保密，请放心填写！</p>
+										</div>
 									</form>
 									<div class="form-right">
 										<p>严审装修公司资质</p>
@@ -241,23 +241,23 @@
 								</div>
 								<div class="banner-form">
 									<form action="<{link ctl='tenders:save' http='base'}>" mini-form='tenders_tzx' method="post">
-                            			<input type="hidden" name="data[from]" value="TZX" />
-									<div class="form-left">
-										<div class="form-label">
-											<input type="text" name="data[contact]" class="input-input" placeholder="请输入您的称呼">
+										<input type="hidden" name="data[from]" value="TZX" />
+										<div class="form-left">
+											<div class="form-label">
+												<input type="text" name="data[contact]" class="input-input" placeholder="请输入您的称呼" autocomplete="off">
+											</div>
+											<div class="form-label">
+												<input type="text" name="data[mobile]" class="input-input" placeholder="请输入您的联系方式" autocomplete="off">
+											</div>
+											<div class="form-label">
+												<select name="data[type_id]" class="select-inp"><{widget id="tenders/setting" type="type"}></select>
+											</div>
+											<div class="form-label">
+												<select name="data[budget_id]" class="select-inp"><{widget id="tenders/setting" type="budget"}></select>
+											</div>
+											<input class="submit-btn" type="submit" value="立即提交">
+											<p class="p2">您的信息我们将严格保密，请放心填写！</p>
 										</div>
-										<div class="form-label">
-											<input type="text" name="data[mobile]" class="input-input" placeholder="请输入您的联系方式">
-										</div>
-										<div class="form-label">
-											<select name="data[type_id]" class="text long"><{widget id="tenders/setting" type="type"}></select>
-										</div>
-										<div class="form-label">
-											<select name="data[budget_id]" class="text long"><{widget id="tenders/setting" type="budget"}></select>
-										</div>
-										<input class="submit-btn" type="submit" value="立即提交">
-										<p class="p2">您的信息我们将严格保密，请放心填写！</p>
-									</div>
 									</form>
 									<div class="form-right">
 										<p>严审装修公司资质</p>
@@ -285,29 +285,29 @@
 								</div>
 								<div class="banner-form">
 									<form action="<{link ctl='tenders:save' http='base'}>" mini-form='tenders_tzx' method="post">
-                            			<input type="hidden" name="data[from]" value="TZX" />
-									<div class="form-left">
-										<div class="form-label">
-											<input type="text" name="data[contact]" class="input-input" placeholder="请输入您的称呼">
-										</div>
-										<div class="form-label">
-											<input type="text" name="data[mobile]" class="input-input" placeholder="请输入您的联系方式">
-										</div>
-										<div class="form-label">
-											<select name="" id="" class="select-inp">
+										<input type="hidden" name="data[from]" value="TZX" />
+										<div class="form-left">
+											<div class="form-label">
+												<input type="text" name="data[contact]" class="input-input" placeholder="请输入您的称呼" autocomplete="off">
+											</div>
+											<div class="form-label">
+												<input type="text" name="data[mobile]" class="input-input" placeholder="请输入您的联系方式" autocomplete="off">
+											</div>
+											<div class="form-label">
+												<select name="" id="" class="select-inp">
                                             <option value="">请选择您的户型</option>
                                             <option value="">二居室</option>
                                             <option value="">三居室</option>
                                             <option value="">四居室</option>
                                         </select>
-										</div>
-										<div class="form-label">
-											<select name="data[budget_id]" class="text long"><{widget id="tenders/setting" type="budget"}></select>
+											</div>
+											<div class="form-label">
+												<select name="data[budget_id]" class="select-inp"><{widget id="tenders/setting" type="budget"}></select>
 
+											</div>
+											<input class="submit-btn" type="submit" value="立即提交">
+											<p class="p2">您的信息我们将严格保密，请放心填写！</p>
 										</div>
-										<input class="submit-btn" type="submit" value="立即提交">
-										<p class="p2">您的信息我们将严格保密，请放心填写！</p>
-									</div>
 									</form>
 									<div class="form-right">
 										<p>高额度低利息，家装最高可贷30万</p>
@@ -520,10 +520,10 @@
 				<h2>品牌公司</h2>
 				<span class="desc">严格审核入驻资质 保障装修品质</span>
 				<div class="tip-line">
-					<a href="<{link ctl='gs'}>">中小型公司</a><span class="line">/</span>
-					<a href="<{link ctl='gs'}>">城市连锁</a><span class="line">/</span>
-					<a href="<{link ctl='gs'}>">全国连锁</a><span class="line">/</span>
-					<a href="<{link ctl='site:map'}>">公司导航</a><span class="line">/</span>
+					<a href="/gs-items-0-0-0-4-0-1.html">中小型公司</a><span class="line">/</span>
+					<a href="/gs-items-0-0-0-5-0-1.html">城市连锁</a><span class="line">/</span>
+					<a href="/gs-items-0-0-0-6-0-1.html">全国连锁</a><span class="line">/</span>
+					<a href="/gs-items-0-0-0-87-0-1.html">体验馆场馆</a><span class="line">/</span>
 					<a href="<{link ctl='youhui'}>">优惠信息</a><span class="line">/</span>
 					<a href="<{link ctl='gs'}>">更多</a>
 				</div>
@@ -560,8 +560,8 @@
                 </span>
 						<div class="brand-info">
 							<h3><span class="gs-name">鑫大众装饰</span>
-								<span class="pic-num"><i></i>42</span>
-								<span class="gong-num"><i></i>42</span>
+								<!-- <span class="pic-num"><i></i>42</span>
+								<span class="gong-num"><i></i>42</span> -->
 							</h3>
 							<p class="p1"><i></i>地址：<span>武汉市江岸区二七路航天双城A座1927</span></p>
 							<!--							<p class="p2"><i></i>优惠信息：端午装修有优惠，更有豪礼相送。<a href="" class="more">[查看详情]</a></p>-->
@@ -645,7 +645,7 @@
 					<ul>
 						<{KT id="161" name="网站首页_装修攻略_优惠信息" city_id=$request.city_id limit='2' }>
 							<li>
-								<a href="">
+								<a href="<{$item.link}>">
 									<span class="img"><img src="<{$pager.img}>/<{$item.thumb}>" alt=""></span>
 									<span class="ztitle"><{$item.title}></span>
 									<span class="link"><a href="<{$item.link}>">
@@ -689,7 +689,7 @@
 						<a href="<{link ctl='article:items-83'}>" class="more">查看更多</a>
 					</div>
 					<ul>
-						<{KT id="156" name="网站首页_装修攻略_装修常识" city_id=$request.city_id limit="6"}>
+						<{KT id="156" name="网站首页_装修攻略_装修常识" city_id=$request.city_id limit="6" }>
 							<li><a href="<{$item.link}>"><b>·</b> <{$item.title|cutstr:30}></a></li>
 							</li>
 							<{/KT}>
@@ -722,31 +722,39 @@
 				<h2>精英设计</h2>
 				<span class="desc">专业是我们的追求，我们的努力只为提供更好的家装设计</span>
 				<div class="tip-line">
-					<a href="">找设计师</a><span class="line">/</span>
-					<a href="">免费量房和设计</a><span class="line">/</span>
-					<a href="<{link ctl='designer'}>">更多</a>
+					<a href="<{link ctl='designer'}>">找设计师</a><span class="line">/</span>
+					<a href="<{link ctl='tenders'}>">免费量房和设计</a><span class="line">/</span>
+					<a href="<{link ctl='designer'}>">更多</a> tenders
 				</div>
 			</div>
 			<div class="sjs-picshow">
 				<div class="sjs-picshow-wrap">
 					<ul class="sjs-line1">
-						<{KT id="9" name="网站首页5F优秀设计师" city_id=$request.city_id limit="5"}>
-						<li class="people">
-							<span class="img">
+						<{KT id="9" name="网站首页5F优秀设计师" city_id=$request.city_id limit="5" }>
+							<li class="people">
+								<span class="img">
                             	<a href="<{$item.link}>"><img src="<{$pager.img}>/<{$item.thumb}>" alt="<{$item.name}>"/></a>
                         	</span>
-							<div class="people-dec">
-								<h4><a href="<{$item.link}>"><{$item.name}></a></h4>
-								<p>所属公司：<{$item.ext.company.name}></p>
-								<p>设计理念：<{$item.slogan}></p>
-								<p class="bp"><a href="" class="xq">详情</a><a href="" class="yy">预约</a></p>
-							</div>
-						</li>
-			            <{/KT}>
+								<div class="people-dec">
+									<h4>
+										<a href="<{$item.link}>">
+											<{$item.name}>
+										</a>
+									</h4>
+									<p>所属公司：
+										<{$item.ext.company.name}>
+									</p>
+									<p>设计理念：
+										<{$item.slogan}>
+									</p>
+									<p class="bp"><a href="<{$item.link}>" class="xq">详情</a><a href="" class="yy">预约</a></p>
+								</div>
+							</li>
+							<{/KT}>
 
-						
 
-						<!-- <li class="people">
+
+								<!-- <li class="people">
 							<span class="img">
                             <img src="%THEME%/static/images/20170618/picture/sjs.jpg" alt=""/>
                         </span>
@@ -792,20 +800,28 @@
 						</li> -->
 					</ul>
 					<ul class="sjs-line2">
-						<{KT id="166" name="网站首页5F优秀设计师下" city_id=$request.city_id limit="5"}>
-						<li class="people">
-							<span class="img">
+						<{KT id="166" name="网站首页5F优秀设计师下" city_id=$request.city_id limit="5" }>
+							<li class="people">
+								<span class="img">
                             	<a href="<{$item.link}>"><img src="<{$pager.img}>/<{$item.thumb}>" alt="<{$item.name}>"/></a>
                         	</span>
-							<div class="people-dec">
-								<h4><a href="<{$item.link}>"><{$item.name}></a></h4>
-								<p>所属公司：<{$item.ext.company.name}></p>
-								<p>设计理念：<{$item.slogan}></p>
-								<p class="bp"><a href="" class="xq">详情</a><a href="" class="yy">预约</a></p>
-							</div>
-						</li>
-			            <{/KT}>
-						<!-- <li class="people">
+								<div class="people-dec">
+									<h4>
+										<a href="<{$item.link}>">
+											<{$item.name}>
+										</a>
+									</h4>
+									<p>所属公司：
+										<{$item.ext.company.name}>
+									</p>
+									<p>设计理念：
+										<{$item.slogan}>
+									</p>
+									<p class="bp"><a href="<{$item.link}>" class="xq">详情</a><a href="" class="yy">预约</a></p>
+								</div>
+							</li>
+							<{/KT}>
+								<!-- <li class="people">
 							<span class="img">
                             <img src="%THEME%/static/images/20170618/picture/sjs.jpg" alt=""/>
                         </span>
@@ -1087,19 +1103,22 @@
 					<a href="" class="go-ask"><img src="%THEME%/static/images/20170618/picture/21.jpg" alt=""></a>
 					<p class="p2"> <i class="tip"></i> 提问不方便？留个电话</p>
 					<p class="p2"> 装修管家会在30分钟内与您联系</p>
+					<form action="<{link ctl='tenders:save' http='base'}>" mini-form='tenders_tzx' method="post">
+                            			<input type="hidden" name="data[from]" value="TZX" />
 					<div class="form-label">
 						<i class="user-name"></i>
-						<input type="text" class="input-text" />
+						<input type="text" name="data[contact]" class="input-text" />
 					</div>
 					<div class="form-label">
 						<i class="user-link"></i>
-						<input type="text" class="input-text" />
+						<input type="text" name="data[mobile]" class="input-text" />
 					</div>
 					<p class="btn-wrap">
 						<a href="" class="submit">提交</a>
 					</p>
 					<p class="p4">您还可以拨打我们的装修专线快速咨询! </p>
 					<p class="p5 fcolor01">(9:00-18:30) 027-87011088</p>
+					</form>
 				</div>
 			</div>
 		</div>
@@ -1135,7 +1154,7 @@
 				<div class="article-brand">
 					<{KT id="12" name="网站首页_家居热点_本地新闻" city_id=$request.city_id limit="1" }>
 						<h4><i class="tip"></i>
-							<{$item.title}>
+							<a href="<{$item.link}>"><{$item.title}></a>
 						</h4>
 						<p class="desc">
 							<{$item.desc|cutstr:80}><a href="<{$item.link}>" class="more">[详情]</a></p>

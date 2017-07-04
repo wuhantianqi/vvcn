@@ -1,24 +1,28 @@
 <{assign var="seo_sub_title" value="公司新闻" }>
 	<{include file="$skin_theme/block/header.html" }>
-	<{include file="company/block/info.html"}>
-		<!--装修公司头部结束-->
-		<div class="gsxq_zx">
-			<ul>
-				<{foreach $items as $item}>
-				<li>
-					<a href="<{link ctl='news:detail' arg0=$item.news_id}>">
-						<img src="images/mid_1.jpg" alt="">
-					</a>
-					<div class="txt">
-						<h3><a href="<{link ctl='news:detail' arg0=$item.news_id}>"><{$item.title|cutstr:80}></a></h3>
-						<{$item.content}>
-					</div>
-					<div class="date">
-						<{$item.dateline|format}>
-					</div>
-				</li>
-				<{/foreach}>
-				<!-- <li>
+		<{include file="company/block/info.html" }>
+			<!--装修公司头部结束-->
+			<div class="gsxq_zx">
+				<ul>
+					<{foreach $items as $item}>
+						<li>
+							<a href="<{link ctl='news:detail' arg0=$item.news_id}>">
+								<img src="images/mid_1.jpg" alt="">
+							</a>
+							<div class="txt">
+								<h3>
+									<a href="<{link ctl='news:detail' arg0=$item.news_id}>">
+										<{$item.title|cutstr:80}>
+									</a>
+								</h3>
+								<{$item.content|cutstr:480}>
+							</div>
+							<div class="date">
+								<{$item.dateline|format}>
+							</div>
+						</li>
+						<{/foreach}>
+							<!-- <li>
 					<a href="">
 						<img src="images/mid_1.jpg" alt="">
 					</a>
@@ -83,9 +87,9 @@
 						<span>2016</span>
 					</div>
 				</li> -->
-			</ul>
-		</div>
+				</ul>
+			</div>
 
 
-		<!--底边内容开始-->
-		<{include file="company/block/footer.html" }>
+			<!--底边内容开始-->
+			<{include file="company/block/footer.html" }>

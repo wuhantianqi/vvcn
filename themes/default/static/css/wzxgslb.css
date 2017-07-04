@@ -1046,31 +1046,3 @@ input {
 	color: #fff;
 	background: #fa6381;
 }
-
-.page_cont {
-	margin-top: 40px;
-	text-align: center;
-}
-
-.page_cont a {
-	display: inline-block;
-	border: 1px solid #dddddd;
-	color: #666666;
-	font-size: 12px;
-	height: 26px;
-	line-height: 26px;
-	padding: 0px 10px;
-	transition: all 0.4s;
-}
-
-.page_cont a:hover {
-	border: 1px solid #ff4401;
-	background: #ff4401;
-	color: #fff;
-}
-
-.page_cont a.a_select {
-	border: 1px solid #ff4401;
-	background: #ff4401;
-	color: #fff;
-}

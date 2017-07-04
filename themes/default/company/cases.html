@@ -28,7 +28,7 @@
 					<{foreach $items as $item}>
 		            <li>
 						<div class="img_box">
-							<img src="<{$pager.img}>/<{$item.photo}>" alt="">
+							<a href="<{link ctl='case:detail' arg0=$item.case_id}>"><img src="<{$pager.img}>/<{$item.photo}>" alt=""></a>
 						</div>
 						<div class="txt">
 							<h6><a href="<{link ctl='case:detail' arg0=$item.case_id}>"><{$item.title}></a></h6>

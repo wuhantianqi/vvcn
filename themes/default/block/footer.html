@@ -55,10 +55,12 @@
 				<span>友情链接 联系QQ: <{$CONFIG.site.kfqq}> </span>
 			</div>
 			<div class="flink flink0">
-				<{calldata mdl='market/links' city_id=$request.city_id limit="500"}>
-	            <a rel="nofollow" href="<{$item.link}>" target="_blank"><{$item.title}></a>
-	            <{/calldata}>	
-				<!-- <a href="">荆州第一房产网</a>
+				<{calldata mdl='market/links' city_id=$request.city_id limit="500" }>
+					<a rel="nofollow" href="<{$item.link}>" target="_blank">
+						<{$item.title}>
+					</a>
+					<{/calldata}>
+						<!-- <a href="">荆州第一房产网</a>
 				<a href="">湖北造价信息网</a>
 				<a href="">武汉二手房网</a>
 				<a href="">武汉家装</a>
@@ -80,9 +82,11 @@
 			</div>
 			<div class="flink flink1" style="display: none;">
 				<{KT id="2" name="网站首页1F推荐装修公司" city_id=$request.city_id limit="15" }>
-				<a href="<{$item.link}>"><{$item.name}></a>
-				<{/KT}>
-				<!-- <a href="">装修公司1</a>
+					<a href="<{$item.link}>">
+						<{$item.name}>
+					</a>
+					<{/KT}>
+						<!-- <a href="">装修公司1</a>
 				<a href="">装修公司2</a>
 				<a href="">装修公司3</a>
 				<a href="">装修公司4</a>
@@ -115,9 +119,16 @@
 
 			</div>
 		</div>
+
 		<p class="p1">
-			<{calldata mdl="article/article" city_id=$request.city_id from='about' limit="6"}><a href="<{link ctl='about' arg0=$item.page}>"><{$item.title}></a> <{if !$last}>|<{/if}> <{/calldata}>
-<!-- 			<a href="">关于我们</a>
+			<{calldata mdl="article/article" city_id=$request.city_id from='about' limit="6" }>
+				<a href="<{link ctl='about' arg0=$item.page}>">
+					<{$item.title}>
+				</a>
+				<{if !$last}>
+					<{/if}>
+						<{/calldata}>
+							<!-- 			<a href="">关于我们</a>
 			<a href="">联系我们</a>
 			<a href="">媒体报道</a>
 			<a href="">帮助中心</a>
@@ -127,10 +138,12 @@
 		</p>
 		<p class="p2">
 			免责声明：本网站部分内容由用户自行上传，如权利人发现存在误传其作品情形，请及时与本站联系。Copyright2014-2112 www.vvcn.cc,All Rights Reserved 优优美家装修网和东启创拓公司 保留所有权利</p>
-		<p class="p3"> 优优美家 ICP备案：<{$CONFIG.site.icp}> </p>
+		<p class="p3"> 优优美家 ICP备案：
+			<{$CONFIG.site.icp}>
+		</p>
 
 		<div class="wx-code">
-			<img src="<{if $CONFIG.site.weixinqr}><{$pager.img}>/<{$CONFIG.site.weixinqr}><{else}>%THEME%/static/images/weixin.jpg<{/if}>"/>
+			<img src="<{if $CONFIG.site.weixinqr}><{$pager.img}>/<{$CONFIG.site.weixinqr}><{else}>%THEME%/static/images/weixin.jpg<{/if}>" />
 			<p>微信服务号</p>
 		</div>
 

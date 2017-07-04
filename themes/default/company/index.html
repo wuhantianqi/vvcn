@@ -1,123 +1,117 @@
 <{include file="$skin_theme/block/header.html" }>
-	<{include file="company/block/info.html"}>
-	<div class="zxgs_main">
-		<div class="zxgs_wrapper">
-			<div class="zxgs_banner">
-				<div class="zxgs_banner_lunb">
-					<{calldata mdl='company/youhui' company_id=$company.company_id limit=1 noext=true nocache=true}>
-					<div class="opacity_img lt">
-	                    <a href="<{link ctl='youhui:detail' arg0=$item.youhui_id}>"><img src="<{$pager.img}>/<{$item.photo}>" /></a>
-						<p class="bg"></p>
-						<p class="text"><{$item.title|cutstr:15}></p>
-					</div>
-	                <{/calldata}>
-				</div>
-				<div class="zxgs_banner_text">
-					<div class="zxgs_banner_text_top">
-						<div class="text_1">
-							<div class="text_1_t">
-								<h6>
-									<{$company.title}>
-									<i class="i_A"></i>
-									<i class="i_V"></i>
-									<i class="i_S"></i>
-								</h6>
-								<p class="aut">
-									<span class="s01">营</span>
-									<span class="s03">赔</span>
-									<!-- <span class="s04">惠</span> 0个 -->	
-									<span class="s02">案</span> <{$company.case_num}>个
-									<span class="s07">工</span> <{$item.site_num}>个
-									<span class="s06">评	</span> <{$company.comments}>条
-									<span class="s05">访</span> <{$company.views}>次
+	<{include file="company/block/info.html" }>
+		<div class="zxgs_main">
+			<div class="zxgs_wrapper">
+				<div class="zxgs_banner">
+					<div class="zxgs_banner_lunb">
+						<{calldata mdl='company/youhui' company_id=$company.company_id limit=1 noext=true nocache=true}>
+							<div class="opacity_img lt">
+								<a href="<{link ctl='youhui:detail' arg0=$item.youhui_id}>"><img src="<{$pager.img}>/<{$item.photo}>" /></a>
+								<p class="bg"></p>
+								<p class="text">
+									<{$item.title|cutstr:15}>
 								</p>
+							</div>
+							<{/calldata}>
+					</div>
+					<div class="zxgs_banner_text">
+						<div class="zxgs_banner_text_top">
+							<div class="text_1">
 								<div class="text_1_t">
-									<div class="mou">
-										<strong><{$company.score}></strong>
-										<p>口碑值</p>
+									<h6>
+										<{$company.title}>
+											<i class="i_A"></i>
+											<i class="i_V"></i>
+											<i class="i_S"></i>
+									</h6>
+									<p class="aut">
+										<span class="s01">营</span>
+										<span class="s03">赔</span>
+										<!-- <span class="s04">惠</span> 0个 -->
+										<span class="s02">案</span>
+										<{$company.case_num}>个
+											<span class="s07">工</span>
+											<{$item.site_num}>个
+												<span class="s06">评	</span>
+												<{$company.comments}>条
+													<span class="s05">访</span>
+													<{$company.views}>次
+									</p>
+									<div class="text_1_t">
+										<div class="mou">
+											<strong><{$company.score}></strong>
+											<p>口碑值</p>
+										</div>
 									</div>
 								</div>
-							</div>
-							<div class="text_1_f">
-								<p class="text_1_ser">
-									<span>服务宗旨：</span>
-									<b><{$company.slogan}></b>
-								</p>
-								<p class="text_1_work">
-									<span>业务范畴：</span>
-									<b>家装&nbsp;&nbsp;工装&nbsp;&nbsp;店面装修&nbsp;&nbsp;品牌展示</b>
-								</p>
+								<div class="text_1_f">
+									<p class="text_1_ser">
+										<span>服务宗旨：</span>
+										<b><{$company.slogan}></b>
+									</p>
+									<p class="text_1_work">
+										<span>业务范畴：</span>
+										<b>家装&nbsp;&nbsp;工装&nbsp;&nbsp;店面装修&nbsp;&nbsp;品牌展示</b>
+									</p>
+								</div>
 							</div>
 						</div>
-					</div>
-					<div class="zxgs_banner_text_middle">
-						<span>
+						<div class="zxgs_banner_text_middle">
+							<span>
 							<i></i>
 							支持免费量房
 						</span>
-						<span>
+							<span>
 							<i></i>
 							支持免费预算报价
 						</span>
-						<span>
+							<span>
 							<i></i>
 							支持装修保障金
 						</span>
-					</div>
-					<div class="zxgs_banner_text_foot">
-						<span>
+						</div>
+						<div class="zxgs_banner_text_foot">
+							<span>
 							已有<b><{$company.yuyue_num}></b>人预约
 						</span>
-						<span>
+							<span>
 							预约热线：<b><{$company.mobile}></b>
 						</span>
-						<button>立即预约</button>
+							<button>立即预约</button>
+						</div>
 					</div>
 				</div>
-			</div>
-			<div class="zxgs_zxal">
-				<div class="zxgs_zxal_menu">
-					<a href="<{link ctl='company:cases' arg0=$company.company_id}>" class="menu_more">更多</a>
-					<h3>
-						装修案例
-						<span><{$company.name}>装饰案例(
+				<div class="zxgs_zxal">
+					<div class="zxgs_zxal_menu">
+						<a href="<{link ctl='company:cases' arg0=$company.company_id}>" class="menu_more">更多</a>
+						<h3>
+							装修案例
+							<span><{$company.name}>装饰案例(
 							<b><{$company.case_num}></b>
 							)
 							</span>
-					</h3>
-				</div>
-				<div class="zxgs_zxal_text">
-					<ul>
-						<{calldata mdl='case/case' company_id=$company.company_id limit=4 noext=true nocache=true}>
-						<li>
-							<div class="zxgs_zxal_img">
-								<img src="<{$pager.img}>/<{$item.photo}>_thumb.jpg" alt="" class="lazy">
-								<a href="<{link ctl='case:detail' arg0=$item.case_id arg1=1}>" class="maaask">
-									<div class="tit">
-										<p>
-											装修方式：
-											<span>全包</span>
-										</p>
-										<p>
-											户型面积：
-											<span>120㎡</span>
-										</p>
-										<p>
-											装修预算：
-											<span>24万元</span>
-										</p>
-									</div>
+						</h3>
+					</div>
+					<div class="zxgs_zxal_text">
+						<ul>
+							<{calldata mdl='case/case' company_id=$company.company_id limit=4 noext=true nocache=true}>
+								<li>
+									<div class="zxgs_zxal_img">
+										<a href="<{link ctl='case:detail' arg0=$item.case_id arg1=1}>" class="maaask">
+									<img src="<{$pager.img}>/<{$item.photo}>_thumb.jpg" alt="" class="lazy">
 								</a>
-							</div>
-							<div class="zxgs_zxal_text">
-								<h6>
-									<a href=""><{$item.title}></a>
-								</h6>
-							</div>
-						</li>
-		                <{/calldata}>
-						
-						<!-- <li>
+									</div>
+									<div class="zxgs_zxal_text">
+										<h6>
+											<a href="<{link ctl='case:detail' arg0=$item.case_id arg1=1}>">
+												<{$item.title}>
+											</a>
+										</h6>
+									</div>
+								</li>
+								<{/calldata}>
+
+									<!-- <li>
 							<div class="zxgs_zxal_img">
 								<img src="images/150504101J9-1.jpg" alt="" class="lazy">
 								<a href="" class="maaask">
@@ -299,37 +293,36 @@
 								</h6>
 							</div>
 						</li> -->
-					</ul>
+						</ul>
+					</div>
+					<a href="" class="ad">
+						<img src="images/shop_banner.jpg" alt="">
+					</a>
 				</div>
-				<a href="" class="ad">
-					<img src="images/shop_banner.jpg" alt="">
-				</a>
-			</div>
-			<div class="zxgs_zxzb">
-				<div class="zxgs_zxzb_left">
-					<div class="zxgs_zxal_menu">
-						<a href="<{link ctl='company:news' arg0=$company.company_id company=$company}>" class="menu_more">更多</a>
-						<h3>
-							资讯
-							<span><{$company.name}>资讯(
+				<div class="zxgs_zxzb">
+					<div class="zxgs_zxzb_left">
+						<div class="zxgs_zxal_menu">
+							<a href="<{link ctl='company:news' arg0=$company.company_id company=$company}>" class="menu_more">更多</a>
+							<h3>
+								资讯
+								<span><{$company.name}>资讯(
 							<b><{$company.news_num}></b>
 							)
 							</span>
-						</h3>
-					</div>
-					<div class="zxgs_zxzb_left_text">
-						<a href="" class="aaa">
-							<img src="images/150504101J9-1.jpg" alt="">
-						</a>
-						<div class="zxgs_zxzb_left_list">
-							<ul>
-								<{calldata mdl='company/news' company_id=$company.company_id limit=5 noext=true nocache=true}>
-								<li>
-									<a href="<{link ctl='news:detail' arg0=$item.news_id}>"><{$item.title|cutstr:50}></a>
-								</li>
-		                        <{/calldata}>
-								
-								<!-- <li>
+							</h3>
+						</div>
+						<div class="zxgs_zxzb_left_text">
+							<div class="zxgs_zxzb_left_list">
+								<ul>
+									<{calldata mdl='company/news' company_id=$company.company_id limit=5 noext=true nocache=true}>
+										<li>
+											<a href="<{link ctl='news:detail' arg0=$item.news_id}>">
+												<{$item.title|cutstr:50}>
+											</a>
+										</li>
+										<{/calldata}>
+
+											<!-- <li>
 									<a href="">梅雨季节装修利与弊</a>
 								</li>
 								<li>
@@ -341,55 +334,63 @@
 								<li>
 									<a href="">梅雨季节装修利与弊</a>
 								</li> -->
-							</ul>
-						</div>
+								</ul>
+							</div>
 
+						</div>
 					</div>
-				</div>
-				<div class="zxgs_zxzb_right">
-					<div class="zxgs_zxal_menu">
-						<span class="discount">
+					<div class="zxgs_zxzb_right">
+						<div class="zxgs_zxal_menu">
+							<span class="discount">
 								<a href="">
 									<b>优惠劵5000元</b>
 								</a>
 							</span>
-						<h3>
-							招标
-							<span>
+							<h3>
+								招标
+								<span>
 								已有
 								<b><{$company.yuyue_num}></b>
 								位业主免费发布招标
 							</span>
-						</h3>
-					</div>
-					<div class="free">
-						<a href="<{link ctl='tenders:fast' http='ajax'}>" mini-load="免费发布装修招标" mini-width="500" class="a1">
-							<i></i> 免费发布招标
-						</a>
-						<a href="<{link ctl='gs:yuyue' arg0=$company.company_id http='ajax'}>" mini-load="免费预约装修公司" mini-width="400" class="a2">
-							<i></i> 免费获取报价
-						</a>
-					</div>
-					<table>
-						<thead>
-							<tr>
-								<th>业主</th>
-								<th>电话</th>
-								<th>状态</th>
-								<th>日期</th>
-							</tr>
-						</thead>
-						<tbody>
-							<{calldata mdl="company/yuyue" company_id=$company.company_id limit=10}>
-							<tr>
-								<td><{$item.contact|cutstr:3:'**'}></td>
-								<td><{$item.mobile|cutstr:6:'****'}></td>
-								<td><{$item.status_title}></td>
-								<td><{$item.dateline|format:'m-d'}></td>
-							</tr>
-		                    <{/calldata}>
-							
-							<!-- <tr>
+							</h3>
+						</div>
+						<div class="free">
+							<a href="<{link ctl='tenders:fast' http='ajax'}>" mini-load="免费发布装修招标" mini-width="500" class="a1">
+								<i></i> 免费发布招标
+							</a>
+							<a href="<{link ctl='gs:yuyue' arg0=$company.company_id http='ajax'}>" mini-load="免费预约装修公司" mini-width="400" class="a2">
+								<i></i> 免费获取报价
+							</a>
+						</div>
+						<table>
+							<thead>
+								<tr>
+									<th>业主</th>
+									<th>电话</th>
+									<th>状态</th>
+									<th>日期</th>
+								</tr>
+							</thead>
+							<tbody>
+								<{calldata mdl="company/yuyue" company_id=$company.company_id limit=10}>
+									<tr>
+										<td>
+											<{$item.contact|cutstr:3: '**'}>
+										</td>
+										<td>
+											<{$item.mobile|cutstr:6: '****'}>
+										</td>
+										<td>
+											<{$item.status_title}>
+										</td>
+										<td>
+											<{$item.dateline|format: 'm-d'}>
+										</td>
+									</tr>
+									<{/calldata}>
+
+										<!-- <tr>
 								<td>陈(先生)</td>
 								<td>福建省-厦门...</td>
 								<td>85㎡</td>
@@ -401,26 +402,26 @@
 								<td>85㎡</td>
 								<td>面议</td>
 							</tr> -->
-						</tbody>
-					</table>
+							</tbody>
+						</table>
+					</div>
 				</div>
-			</div>
-			<div class="zxgs_sjtd">
-				<div class="zxgs_zxal_menu">
-					<a href="<{link ctl='company:team' arg0=$company.company_id company=$company}>" class="menu_more">更多</a>
-					<h3>
-						设计团队
-						<span><{$company.name}>设计团队(
+				<div class="zxgs_sjtd">
+					<div class="zxgs_zxal_menu">
+						<a href="<{link ctl='company:team' arg0=$company.company_id company=$company}>" class="menu_more">更多</a>
+						<h3>
+							设计团队
+							<span><{$company.name}>设计团队(
 							<b>33</b>
 							)
 							</span>
-					</h3>
-				</div>
-				<div class="zxgs_team">
-					<ul>
-						<{calldata mdl='designer/designer' company_id=$company.company_id limit=4 nocache=true}>
-						<li>
-							<a href="<{link ctl='blog' arg0=$item.uid}>" class="zxgs_img_txt">
+						</h3>
+					</div>
+					<div class="zxgs_team">
+						<ul>
+							<{calldata mdl='designer/designer' company_id=$company.company_id limit=4 nocache=true}>
+								<li>
+									<a href="<{link ctl='blog' arg0=$item.uid}>" class="zxgs_img_txt">
 								<img src="<{$pager.img}>/<{$item.face}>" alt="">
 								<div class="tct">
 									<h6>
@@ -432,14 +433,14 @@
 									</p>
 								</div>
 							</a>
-							<div class="yysjs">
-								<!-- <a href="" class="active">查看案例</a> -->
-								<a href="<{link ctl='designer:yuyue' arg0=$item.uid http='ajax'}>"  mini-width='500' mini-load="我要预约">预约设计师</a>
-							</div>
-						</li>
-	                    <{/calldata}>
-						
-						<!-- <li>
+									<div class="yysjs">
+										<!-- <a href="" class="active">查看案例</a> -->
+										<a href="<{link ctl='designer:yuyue' arg0=$item.uid http='ajax'}>" mini-width='500' mini-load="我要预约">预约设计师</a>
+									</div>
+								</li>
+								<{/calldata}>
+
+									<!-- <li>
 							<a href="" class="zxgs_img_txt">
 								<img src="images/193739.png" alt="">
 								<div class="tct">
@@ -510,41 +511,36 @@
 								<a href="">预约设计师</a>
 							</div>
 						</li> -->
-					</ul>
-				</div>
-			</div>
-			<div class="zxgs_sggd">
-				<div class="zxgs_zxal_menu">
-					<div class="zxgs_sggd_site_mor fr">
-						<a href="">准备开工</a>
-						<a href="">水电阶段</a>
-						<a href="">泥水阶段</a>
-						<a href="">油漆阶段</a>
-						<a href="">竣工阶段</a>
-						<a href="<{link ctl='company:site' arg0=$company.company_id company=$company}>" class="sggd_menu_more">更多</a>
+						</ul>
 					</div>
+				</div>
+				<div class="zxgs_sggd">
+					<div class="zxgs_zxal_menu">
+						<div class="zxgs_sggd_site_mor fr">
+							<a href="<{link ctl='company:site' arg0=$company.company_id company=$company}>" class="sggd_menu_more">更多</a>
+						</div>
 
-					<h3>
-						施工工地
-						<span><{$company.name}>施工工地(
+						<h3>
+							施工工地
+							<span><{$company.name}>施工工地(
 							<b><{$company.site_num}></b>
 							)
 							</span>
-					</h3>
-				</div>
-				<div class="zxgs_sggd_site">
-					<ul>
-						<{calldata mdl='home/site' company_id=$company.company_id limit=3 noext=true nocache=true}>
-						<li>
-							<a href="<{link ctl='site:detail' arg0=$item.site_id}>">
+						</h3>
+					</div>
+					<div class="zxgs_sggd_site">
+						<ul>
+							<{calldata mdl='home/site' company_id=$company.company_id limit=3 noext=true nocache=true}>
+								<li>
+									<a href="<{link ctl='site:detail' arg0=$item.site_id}>">
 								<img src="<{$pager.img}>/<{$item.thumb}>" alt="">
 								<h6><{$item.home_name}></h6>
 								<span>面积：<{$item.house_mj}></span>
 							</a>
-						</li>
-		                <{/calldata}>
-						
-						<!-- <li>
+								</li>
+								<{/calldata}>
+
+									<!-- <li>
 							<a href="">
 								<img src="images/mid_1.jpg" alt="">
 								<h6>泰和院子</h6>
@@ -593,74 +589,78 @@
 								<span>三居室</span>
 							</a>
 						</li> -->
-					</ul>
+						</ul>
+					</div>
 				</div>
-			</div>
-			<div class="zxgs_gsjj">
-				<div class="zxgs_zxal_menu">
-					<a href="<{link ctl='company:about' arg0=$company.company_id company=$company}>" class="menu_more">详细</a>
-					<h3>
-						公司简介
-						<span><{$company.name}>公司简介</span>
-					</h3>
-				</div>
-				<div class="zxgs_gsjj_t">
-					<div class="zxgs_gsjj_t_f">
-						<a href="<{link ctl='company:about' arg0=$company.company_id company=$company}>">
+				<div class="zxgs_gsjj">
+					<div class="zxgs_zxal_menu">
+						<a href="<{link ctl='company:about' arg0=$company.company_id company=$company}>" class="menu_more">详细</a>
+						<h3>
+							公司简介
+							<span><{$company.name}>公司简介</span>
+						</h3>
+					</div>
+					<div class="zxgs_gsjj_t">
+						<div class="zxgs_gsjj_t_f">
+							<a href="<{link ctl='company:about' arg0=$company.company_id company=$company}>">
 							<img src="<{$pager.img}>/<{$company.banner}>" alt="">
 						</a>
 
-					</div>
-					<div class="zxgs_gsjj_t_r">
-						<h4><{$company.name}></h4>
-						<span class="tit">
+						</div>
+						<div class="zxgs_gsjj_t_r">
+							<h4>
+								<a href="<{link ctl='company:about' arg0=$company.company_id company=$company}>">
+									<{$company.name}>
+								</a>
+							</h4>
+							<span class="tit">
 								<i class="ic01"></i>
 								<{$company.slogan}>
 								<i class="ic02"></i>
 							</span>
-						<div class="art">
-							<{$company.info}>
-						</div>
-						<div class="lok">
-							<a href="" class="active">预约装修设计</a>
-							<a href="<{link ctl='company:about' arg0=$company.company_id company=$company}>">查看详情</a>
+							<div class="art">
+								<{$company.info|cutstr:400}>
+							</div>
+							<div class="lok">
+								<a href="" class="active">预约装修设计</a>
+								<a href="<{link ctl='company:about' arg0=$company.company_id company=$company}>">查看详情</a>
+							</div>
 						</div>
 					</div>
 				</div>
-			</div>
-			<div class="zxgs_lfsj">
-				<ul>
-					<li>
-						<i class="i-001"></i>
-						<div class="tzt">
-							<h6>免费量房设计</h6>
-							<p>装修立省30%</p>
-						</div>
-					</li>
-					<li>
-						<i class="i-002"></i>
-						<div class="tzt">
-							<h6>多套设计方案</h6>
-							<p>一定有你满意的</p>
-						</div>
-					</li>
-					<li>
-						<i class="i-003"></i>
-						<div class="tzt">
-							<h6>参观工地</h6>
-							<p>严格监管 保证质量</p>
-						</div>
-					</li>
-					<li>
-						<i class="i-004"></i>
-						<div class="tzt">
-							<h6>金牌保险</h6>
-							<p>全程保障 安心装修</p>
-						</div>
-					</li>
-				</ul>
+				<div class="zxgs_lfsj">
+					<ul>
+						<li>
+							<i class="i-001"></i>
+							<div class="tzt">
+								<h6>免费量房设计</h6>
+								<p>装修立省30%</p>
+							</div>
+						</li>
+						<li>
+							<i class="i-002"></i>
+							<div class="tzt">
+								<h6>多套设计方案</h6>
+								<p>一定有你满意的</p>
+							</div>
+						</li>
+						<li>
+							<i class="i-003"></i>
+							<div class="tzt">
+								<h6>参观工地</h6>
+								<p>严格监管 保证质量</p>
+							</div>
+						</li>
+						<li>
+							<i class="i-004"></i>
+							<div class="tzt">
+								<h6>金牌保险</h6>
+								<p>全程保障 安心装修</p>
+							</div>
+						</li>
+					</ul>
+				</div>
 			</div>
 		</div>
-	</div>
 
-	<{include file="company/block/footer.html" }>
+		<{include file="company/block/footer.html" }>
