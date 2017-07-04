@@ -21,7 +21,8 @@
 									<h3>10秒登记，快速找到附近靠谱装修公司</h3>
 								</div>
 								<div class="banner-form">
-									<form action="<{link ctl='tenders:save' http='base'}>" mini-form='tenders_tzx' id="tenders-tzx" method="post">
+									<form action="<{link ctl='tenders:save' http='base'}>" mini-form='tenders_tzx' method="post">
+                            			<input type="hidden" name="data[from]" value="TZX" />
 										<div class="form-left">
 											<div class="form-label">
 												<input type="text" name="data[contact]" class="input-input" placeholder="请输入您的称呼">
@@ -66,33 +67,30 @@
 									<h3>合理规划空间布局，有效使用房屋面积</h3>
 								</div>
 								<div class="banner-form">
+									<form action="<{link ctl='tenders:save' http='base'}>" mini-form='tenders_tzx' method="post">
+                            			<input type="hidden" name="data[from]" value="TZX" />
 									<div class="form-left">
 										<div class="form-label">
-											<input type="text" class="input-input" placeholder="请输入您的称呼">
+											<input type="text" name="data[contact]" class="input-input" placeholder="请输入您的称呼">
 										</div>
 										<div class="form-label">
-											<input type="text" class="input-input" placeholder="请输入您的联系方式">
+											<input type="text" name="data[mobile]" class="input-input" placeholder="请输入您的联系方式">
 										</div>
 										<div class="form-label">
 											<select name="" id="" class="select-inp">
                                             <option value="">请选择您的户型</option>
-                                            <option value="">户型1</option>
-                                            <option value="">户型1</option>
-                                            <option value="">户型1</option>
+                                            <option value="">二居室</option>
+                                            <option value="">三居室</option>
+                                            <option value="">四居室</option>
                                         </select>
 										</div>
 										<div class="form-label">
-											<select name="" id="" class="select-inp">
-                                            <option value="">请选择您喜欢的风格</option>
-                                            <option value="">风格1</option>
-                                            <option value="">风格1</option>
-                                            <option value="">风格1</option>
-                                        </select>
-
+											<{widget id="tenders/setting" type="type"}>
 										</div>
 										<input class="submit-btn" type="submit" value="立即提交">
 										<p class="p2">您的信息我们将严格保密，请放心填写！</p>
 									</div>
+									</form>
 									<div class="form-right">
 										<p>专业设计师免费上门量房</p>
 										<p>帮您合理规划颜色搭配，采光和空间布局</p>
@@ -117,34 +115,27 @@
 									<h3>装修该花多少钱？提前算一算！</h3>
 								</div>
 								<div class="banner-form">
+									<form action="<{link ctl='tenders:save' http='base'}>" mini-form='tenders_tzx' method="post">
+                            			<input type="hidden" name="data[from]" value="TZX" />
 									<div class="form-left">
 										<div class="form-label">
-											<input type="text" class="input-input" placeholder="请输入您的称呼">
+											<input type="text" name="data[contact]" class="input-input" placeholder="请输入您的称呼">
 										</div>
 										<div class="form-label">
-											<input type="text" class="input-input" placeholder="请输入您的联系方式">
+											<input type="text" name="data[mobile]" class="input-input" placeholder="请输入您的联系方式">
 										</div>
 										<div class="form-label">
-											<input type="text" class="input-input" placeholder="请输入您的房屋面积">
+											<input type="text" name="data[house_mj]" class="input-input" placeholder="请输入您的房屋面积">
 										</div>
 
 										<div class="form-label">
-											<select name="" id="" class="select-inp2">
-                                            <option value="">装修类型</option>
-                                            <option value="">类型1</option>
-                                            <option value="">类型1</option>
-                                            <option value="">类型1</option>
-                                        </select>
-											<select name="" id="" class="select-inp2">
-                                            <option value="">预算范围</option>
-                                            <option value="">范围1</option>
-                                            <option value="">范围1</option>
-                                            <option value="">范围1</option>
-                                        </select>
+											<{widget id="tenders/setting" type="type"}>
+											<{widget id="tenders/setting" type="budget"}>
 										</div>
 										<input class="submit-btn" type="submit" value="立即提交">
 										<p class="p2">您的信息我们将严格保密，请放心填写！</p>
 									</div>
+									</form>
 									<div class="form-right">
 										<p>严审装修公司资质</p>
 										<p>精选上好口碑公司</p>
@@ -168,38 +159,25 @@
 									<h3>没空管装修，请个管家来帮您</h3>
 								</div>
 								<div class="banner-form">
+									<form action="<{link ctl='tenders:save' http='base'}>" mini-form='tenders_tzx' method="post">
+                            			<input type="hidden" name="data[from]" value="TZX" />
 									<div class="form-left">
 										<div class="form-label">
-											<input type="text" class="input-input" placeholder="请输入您的称呼">
+											<input type="text" name="data[contact]" class="input-input" placeholder="请输入您的称呼">
 										</div>
 										<div class="form-label">
-											<input type="text" class="input-input" placeholder="请输入您的联系方式">
+											<input type="text" name="data[mobile]" class="input-input" placeholder="请输入您的联系方式">
 										</div>
 										<div class="form-label">
-											<select name="" id="" class="select-inp">
-                                            <option value="">请选择装修类型</option>
-                                            <option value="">装修类型1</option>
-                                            <option value="">装修类型1</option>
-                                            <option value="">装修类型1</option>
-                                        </select>
+											<{widget id="tenders/setting" type="type"}>
 										</div>
 										<div class="form-label">
-											<select name="" id="" class="select-inp2">
-                                            <option value="">请选择城市</option>
-                                            <option value="">城市1</option>
-                                            <option value="">城市1</option>
-                                            <option value="">城市1</option>
-                                        </select>
-											<select name="" id="" class="select-inp2">
-                                            <option value="">请选择地区</option>
-                                            <option value="">地区1</option>
-                                            <option value="">地区1</option>
-                                            <option value="">地区1</option>
-                                        </select>
+											<{widget id="data/region" city_id=$request.city_id class="text short"}>
 										</div>
 										<input class="submit-btn" type="submit" value="立即提交">
 										<p class="p2">您的信息我们将严格保密，请放心填写！</p>
 									</div>
+									</form>
 									<div class="form-right">
 										<p>房屋装修问题一网打尽</p>
 										<p>施工严格监管杜绝装修猫腻</p>
@@ -224,20 +202,23 @@
 									<h3>报名家居建材团购会</h3>
 								</div>
 								<div class="banner-form">
+									<form action="<{link ctl='tenders:save' http='base'}>" mini-form='tenders_tzx' method="post">
+                            			<input type="hidden" name="data[from]" value="TZX" />
 									<div class="form-left">
 										<div class="form-label">
-											<input type="text" class="input-input" placeholder="请输入您的称呼">
+											<input type="text" name="data[contact]" class="input-input" placeholder="请输入您的称呼">
 										</div>
 										<div class="form-label">
-											<input type="text" class="input-input" placeholder="请输入您的联系方式">
+											<input type="text" name="data[mobile]" class="input-input" placeholder="请输入您的联系方式">
 										</div>
 										<div class="form-label">
-											<textarea rows="3" cols="35" placeholder="请简单描述您的购买需求以及预算范围"></textarea>
+											<textarea name="data[comment]" rows="3" cols="35" placeholder="请简单描述您的购买需求以及预算范围"></textarea>
 										</div>
 
 										<input class="submit-btn" type="submit" value="立即提交">
 										<p class="p2">您的信息我们将严格保密，请放心填写！</p>
 									</div>
+									</form>
 									<div class="form-right">
 										<p>严审装修公司资质</p>
 										<p>精选上好口碑公司</p>
