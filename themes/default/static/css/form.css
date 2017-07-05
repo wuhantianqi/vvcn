@@ -1,0 +1,422 @@
+* {
+	margin: 0;
+	padding: 0;
+}
+
+address,
+cite,
+dfn,
+em,
+var {
+	font-style: normal;
+}
+
+ul,
+li {
+	list-style: none;
+}
+
+button,
+input,
+select,
+textarea {
+	font-size: 100%;
+	font-family: "Microsoft YaHei", 微软雅黑, \9ed1\4f53, \5b8b\4f53, "Microsoft JhengHei", 华文细黑, STHeiti, MingLiu;
+	outline: none;
+}
+
+.wrap_pop_form {
+	height: 456px;
+	width: 1030px;
+	margin: 0 auto;
+	background: #FFF;
+}
+
+.dialog .tab {
+	width: 50px;
+	height: 450px;
+	float: left;
+}
+
+.dialog .tab span.active {
+	background-color: #fff;
+	border-left: 3px solid #01af63;
+	padding-left: 17px;
+	color: #01af63;
+}
+
+.dialog .tab span {
+	display: inline-block;
+	box-sizing: border-box;
+	height: 232px;
+	padding: 70px 20px;
+	font-size: 14px;
+	background-color: #f6f6f6;
+	cursor: pointer;
+}
+
+.dialog>ul {
+	float: left;
+	width: 980px;
+	height: 450px;
+	position: relative;
+}
+
+.dialog>ul>li {
+	width: 980px;
+	overflow: hidden;
+	position: absolute;
+}
+
+.pop-sheji>h3 {
+	font-size: 26px;
+	text-align: center;
+}
+
+.mod_form .form_line {
+	zoom: 1;
+}
+
+.bj_form .label {
+	width: 21%;
+	font-size: 22px;
+	color: #333;
+	text-align: left;
+	margin-left: 0;
+}
+
+.label_start {
+	float: right;
+	font-size: 24px;
+	color: #fe5f00;
+	font-family: Arial;
+	margin-top: 5px;
+}
+
+.mod_form .label {
+	width: 24.6%;
+	padding-right: 8px;
+	margin-left: -8px;
+	float: left;
+	text-align: right;
+	line-height: 34px;
+}
+
+.mod_form .element {
+	width: 75.4%;
+	float: right;
+	padding-bottom: 15px;
+}
+
+.bj_form .element {
+	width: 265px;
+	position: relative;
+	padding-bottom: 18px;
+}
+
+.bj_form input {
+	box-sizing: content-box;
+}
+
+.mod_form .select_s {
+	width: 90px;
+}
+
+.mod_form .select {
+	width: 206px;
+	border: 1px solid #ddd;
+	height: 34px;
+	line-height: 28px;
+}
+
+.bj_form .select {
+	width: 255px;
+	padding-left: 5px;
+	height: 36px;
+}
+
+.bj_form .select_s {
+	width: 122px;
+	margin-right: 10px;
+}
+
+.clear:after {
+	display: block;
+	clear: both;
+	content: "\0020";
+	visibility: hidden;
+	height: 0;
+}
+
+.mod_form .form_line:after {
+	display: block;
+	clear: both;
+	content: "\0020";
+	visibility: hidden;
+	height: 0;
+}
+
+.bj_form .text_wrap {
+	position: static;
+}
+
+.bj_form .area_text {
+	width: 223px;
+	padding: 6px 20px 6px 10px;
+	border: 1px solid #ddd;
+	color: #999;
+}
+
+.bj_form .area_text_sel {
+	width: 255px;
+}
+
+.bj_form .text {
+	font-size: 14px;
+	width: 233px;
+	padding: 5px 10px;
+}
+
+.pop-sheji form .check-box {
+	font-size: 14px;
+	text-align: center;
+	margin: 10px 0;
+}
+
+.mod_form .text {
+	border: 1px solid #ddd;
+}
+
+.pop-sheji form .check-box input {
+	position: relative;
+	top: 2px;
+	width: 20px;
+	height: 20px;
+}
+
+.pop-sheji form .check-box a {
+	color: #01af63;
+}
+
+.pop-sheji form input[type=submit] {
+	display: block;
+	width: 180px;
+	background-color: #ff4401;
+	border: none;
+	color: #fff;
+	font-size: 16px;
+	line-height: 30px;
+	margin: 0 auto;
+	border-radius: 5px;
+	cursor: pointer;
+}
+
+.bj_form {
+	width: 370px;
+	padding-top: 30px;
+	font-size: 14px;
+}
+
+.buzhou {
+	margin-right: 60px;
+	padding-top: 30px;
+}
+
+.col_r {
+	float: right;
+}
+
+.buzhou .bg {
+	display: inline-block;
+	width: 349px;
+	height: 322px;
+	background: url(../images/dialog.png) no-repeat -33px -346px;
+}
+
+.none {
+	display: none;
+}
+
+.con_bj {
+	box-shadow: initial;
+	overflow: hidden;
+	position: relative;
+	background: rgba(255, 255, 255, 0.97);
+}
+
+.con_bj_cal {
+	position: relative;
+	width: 409px;
+	padding: 50px 40px 30px;
+	border-right: 1px solid #eee;
+	padding-top: 30px;
+	padding-bottom: 12px;
+}
+
+.col_l {
+	float: left;
+}
+
+.con_bj h3.calputer_tit {
+	font-size: 20px;
+}
+
+.con_bj h3 {
+	font-weight: 500;
+}
+
+.calputer_tit span {
+	margin-left: 10px;
+	color: #f36f20;
+	font-size: 14px;
+}
+
+.calputer_tit .num_man {
+	margin: 0 2px;
+}
+
+.con_bj .mod_form .form_line {
+	margin-left: 0px;
+}
+
+.con_bj .bj_form .label {
+	width: 25%;
+}
+
+.bj_form .label {
+	font-size: 16px;
+	color: #333;
+	text-align: left;
+	margin-left: 0;
+}
+
+.calc-btn {
+	position: absolute;
+	top: 120px;
+	right: -75px;
+	display: block;
+	width: 142px;
+	height: 142px;
+	background: url(../images/zxbj_calc.jpg) no-repeat;
+	background-position: 0px -166px;
+}
+
+.con_bj_res {
+	width: 340px;
+	padding: 45px 50px 0 0;
+	color: #333;
+	font-size: 14px;
+}
+
+.bj_res_t {
+	line-height: 35px;
+	font-size: 20px;
+	text-align: center;
+}
+
+.bj_res_t b {
+	display: inline-block;
+	font-weight: normal;
+	width: 78px;
+	text-align: center;
+	color: #f36f20;
+	font-size: 28px;
+}
+
+.bj_res_ul {
+	padding: 22px 0;
+	margin: 26px auto 0;
+	border: 1px solid #ddd;
+}
+
+.bj_res_ul li {
+	height: 40px;
+	line-height: 40px;
+}
+
+.bj_res_ul li span {
+	float: left;
+	width: 50%;
+	height: 40px;
+	text-align: right;
+	font-size: 14px;
+}
+
+.bj_res_ul li strong {
+	float: left;
+	width: 50%;
+	height: 40px;
+	line-height: 40px;
+	font-weight: normal;
+	text-align: left;
+	font-size: 12px;
+}
+
+.con_bj_res .bj_explain {
+	margin-top: 10px;
+	margin-bottom: 20px;
+}
+
+.con_bj_res .bj_explain .attention {
+	color: #f36f20;
+}
+
+.con_bj_res .bj_explain p {
+	position: relative;
+	margin-left: 20px;
+	padding-left: 10px;
+	line-height: 24px;
+	color: #999;
+	font-size: 12px;
+}
+
+.con_bj_res .bj_explain p b {
+	position: absolute;
+	top: 0;
+	left: -10px;
+	width: 10px;
+	height: 24px;
+	line-height: 24px;
+	text-align: center;
+}
+
+.t_top {
+	display: none;
+}
+
+input.error {
+	border-color: red!important;
+}
+
+label.error {
+	color: red;
+}
+
+.bj_form select:focus {
+	border-color: #01af63;
+}
+
+.bj_form input:focus {
+	border-color: #01af63;
+}
+
+div.square .unit {
+	position: absolute;
+	right: 20px;
+	top: 7px;
+}
+
+#phoneInput p {
+	float: left;
+	font-size: 12px;
+}
+
+#phoneInput p i,
+.form_line_wen i {
+	float: left;
+	width: 12px;
+	height: 12px;
+	margin-top: 3px;
+	margin-right: 4px;
+	background: url(../images/gantanhao.png) no-repeat;
+}

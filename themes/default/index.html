@@ -1,5 +1,4 @@
 <{include file="block/header.html" }>
-
 	<div id="bannerx">
 		<{adv id="1" name="网站首页头部轮转广告" city_id=$request.city_id}>
 	</div>
@@ -8,7 +7,7 @@
 		<div class="w1200 wsbanner">
 			<div class="site-banner-left">
 				<div class="brand">
-					<h2>猜你需要</h2>
+					<h2>猜你需要</h2>   
 					<p>service</p>
 				</div>
 				<ul class="side-menu">
@@ -28,11 +27,8 @@
 												<input type="text" name="data[contact]" class="input-input" placeholder="请输入您的称呼" autocomplete="off">
 											</div>
 											<div class="form-label">
-<<<<<<< Updated upstream
 												<input type="text" class="input-input" name="data[mobile]" placeholder="请输入您的联系方式" autocomplete="off">
-=======
-												<input type="text" class="input-input" name="data[mobile]" placeholder="请输入您的联系方式" autocomplete="no">
->>>>>>> Stashed changes
+
 											</div>
 											<div class="form-label">
 												<select name="data[type_id]" class="select-inp"><{widget id="tenders/setting" type="type"}></select>
@@ -89,17 +85,8 @@
 												<select name="data[type_id]" class="select-inp"><{widget id="tenders/setting" type="type"}></select>
 											</div>
 											<input class="submit-btn" type="submit" value="立即提交">
-											<p class="p2">您的信息我们将严格保密，请放心填写！</p>
-										</div>
-<<<<<<< Updated upstream
-=======
-										<div class="form-label">
-											<select name="data[type_id]" class="select-inp"><{widget id="tenders/setting" type="type"}></select>
-										</div>
-										<input class="submit-btn" type="submit" value="立即提交">
-										<p class="p2">您的信息我们将严格保密，请放心填写！</p>
+											<p class="p2">您的信息我们将严格保密，请放心填写！</p>									
 									</div>
->>>>>>> Stashed changes
 									</form>
 									<div class="form-right">
 										<p>专业设计师免费上门量房</p>
@@ -334,7 +321,7 @@
 							</div>
 							<div class="site-banner-ad">
 								<{adv id="119" name="index_banner_贷款" city_id=$request.city_id}>
-							</div>
+							</div>   
 						</div>
 					</li>
 				</ul>
@@ -345,7 +332,7 @@
 		</div>
 	</div>
 	<!--site-banner end -->
-
+  
 	<!--zhuanshufuwu-->
 	<div class="zsfw">
 		<div class="w1200">
@@ -737,7 +724,7 @@
 				<div class="tip-line">
 					<a href="<{link ctl='designer'}>">找设计师</a><span class="line">/</span>
 					<a href="<{link ctl='tenders'}>">免费量房和设计</a><span class="line">/</span>
-					<a href="<{link ctl='designer'}>">更多</a> tenders
+					<a href="<{link ctl='forms'}>">更多</a>
 				</div>
 			</div>
 			<div class="sjs-picshow">
@@ -760,7 +747,7 @@
 									<p>设计理念：
 										<{$item.slogan}>
 									</p>
-									<p class="bp"><a href="<{$item.link}>" class="xq">详情</a><a href="" class="yy">预约</a></p>
+									<p class="bp"><a href="<{$item.link}>" class="xq">详情</a><a href="javascript:;" class="yy eject">预约</a></p>
 								</div>
 							</li>
 							<{/KT}>
