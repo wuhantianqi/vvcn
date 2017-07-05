@@ -7,67 +7,69 @@
 								<{foreach $v.layer as $vs}>
 								<li><i>></i><a href="<{link ctl='article:items' arg0=$vs.cat_id arg1=1}>"><{$vs.title}></a></li>
 								<{/foreach}>
-<!-- 								<li><i>></i><a href="">装修黑幕</a></li>
-								<li><i>></i><a href="">装修公司排名</a></li>
-								<li><i>></i><a href="">行业热点</a></li>
-								<li><i>></i><a href="">企业专访</a></li> -->
 							</ul>
 						</li>
-					<{/foreach}>					
-					<!-- <li>
-						<h2><span>房屋装修</span></h2>
-						<ul class="list">
-							<li><i>></i><a href="">客厅装修</a></li>
-							<li><i>></i><a href="">卧室装修</a></li>
-							<li><i>></i><a href="">书房装修</a></li>
-							<li><i>></i><a href="">儿童房装修</a></li>
-							<li><i>></i><a href="">厨房装修</a></li>
-							<li><i>></i><a href="">餐厅装修</a></li>
-							<li><i>></i><a href="">卫生间装修</a></li>
-							<li><i>></i><a href="">阳台装修</a></li>
-							<li><i>></i><a href="">别墅装修</a></li>
-							<li><i>></i><a href="">办公室装修</a></li>
-							<li><i>></i><a href="">二手房装修</a></li>
-							<li><i>></i><a href="">复式楼装修</a></li>
-						</ul>
-					</li>
-					<li>
-						<h2><span>装修风格</span></h2>
-						<ul class="list">
-							<li><i>></i><a href="">简约风格</a></li>
-							<li><i>></i><a href="">现代风格</a></li>
-							<li><i>></i><a href="">中式风格</a></li>
-							<li><i>></i><a href="">北欧风格</a></li>
-							<li><i>></i><a href="">田园风格</a></li>
-							<li><i>></i><a href="">混搭风格</a></li>
-							<li><i>></i><a href="">美式风格</a></li>
-							<li><i>></i><a href="">地中海风格</a></li>
-							<li><i>></i><a href="">日韩风格</a></li>
-							<li><i>></i><a href="">古典风格</a></li>
-							<li><i>></i><a href="">东南亚风格</a></li>
-						</ul>
-					</li>
-					<li>
-						<h2><span>家居风水</span></h2>
-						<ul class="list">
-							<li><i>></i><a href="">客厅风水</a></li>
-							<li><i>></i><a href="">卧室风水</a></li>
-							<li><i>></i><a href="">桃花运风水</a></li>
-							<li><i>></i><a href="">财运风水</a></li>
-							<li><i>></i><a href="">办公室风水</a></li>
-							<li><i>></i><a href="">装修风水</a></li>
-						</ul>
-					</li>
-					<li>
-						<h2><span>家居生活</span></h2>
-						<ul class="list">
-							<li><i>></i><a href="">软装搭配</a></li>
-							<li><i>></i><a href="">生活小常识</a></li>
-							<li><i>></i><a href="">日常保洁</a></li>
-							<li><i>></i><a href="">家居收纳</a></li>
-
-						</ul>
-					</li> -->
+				<{/foreach}>					
 				</ul>
 			</div>
+<style>
+iframe{
+	 float: left;
+
+    min-height: 1156px;
+
+}
+ul,li{
+	list-style: none;
+}
+a{
+	text-decoration: none;
+}
+*{
+	margin: 0;
+	padding:0; 
+}
+
+	.list_f>li {
+	margin-top: 20px;
+}
+
+.list_f li h2 {
+	font-weight: 500;
+	color: #ff3333;
+	border-bottom: 1px solid #ddd;
+}
+
+.list_f li h2 span {
+	display: inline-block;
+	border-bottom: 2px solid #ff3333;
+	padding-bottom: 5px;
+}
+
+.list_f .list {
+	overflow: hidden;
+}
+
+.list_f .list li {
+	float: left;
+	margin-right: 10px;
+	margin-top: 20px;
+	font-size: 14px;
+}
+
+.list_f .list li a {
+	display: inline-block;
+	width: 85px;
+}
+
+.list_f .list li a,
+.list_f .list li i {
+	color: #666;
+}
+
+.list_f .list li:hover a,
+.list_f .list li:hover i {
+	color: #ff3333;
+}
+</style>
 			

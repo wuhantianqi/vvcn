@@ -28,53 +28,16 @@
 	height: 100px;
 }
 
-.list_f>li {
-	margin-top: 20px;
-}
 
-.list_f li h2 {
-	font-weight: 500;
-	color: #ff3333;
-	border-bottom: 1px solid #ddd;
-}
-
-.list_f li h2 span {
-	display: inline-block;
-	border-bottom: 2px solid #ff3333;
-	padding-bottom: 5px;
-}
-
-.list_f .list {
-	overflow: hidden;
-}
-
-.list_f .list li {
-	float: left;
-	margin-right: 10px;
-	margin-top: 20px;
-	font-size: 14px;
-}
-
-.list_f .list li a {
-	display: inline-block;
-	width: 85px;
-}
-
-.list_f .list li a,
-.list_f .list li i {
-	color: #666;
-}
-
-.list_f .list li:hover a,
-.list_f .list li:hover i {
-	color: #ff3333;
-}
 
 
 /*左边列表文章*/
 
 .zxxt_text {
-	overflow: hidden;
+	    overflow: hidden;
+	    
+    float: left;
+    width: 100%;
 }
 
 .zxxt_text .title {

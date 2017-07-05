@@ -69,7 +69,7 @@ $(function () {
 		$(".site-banner-right").css({
 			display: "none"
 		})
-		$(this).mouseover(function () {
+		$(this).mouseenter(function () {
 			$(".site-banner-right").hide();
 			$(this).find(".site-banner-right").show();
 		})
