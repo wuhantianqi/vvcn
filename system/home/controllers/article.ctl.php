@@ -52,6 +52,8 @@ class Ctl_Article extends Ctl
                 }
             }
             $this->pagedata['cateList'] = $cateList;
+
+
             
 
             if($cate['level'] == 3){
@@ -98,6 +100,168 @@ class Ctl_Article extends Ctl
         }
         $this->seo->init('article_items', $seo);
         $this->tmpl = 'article/items.html'; 
+    }
+
+    public function items9($cat_id, $page=1)
+    {
+        $sokw = trim($this->GP('kw'));
+        $cat_id = (int)$cat_id ? $cat_id : 9;
+        $pager = $filter = $params = array();
+        $filter = array('audit'=>1,'hidden'=>'0', 'closed'=>0, 'ontime'=>'<:'.__TIME);
+        $filter['city_id'] = array(0, $this->request['city_id']);
+        if($cat_id){
+            if(!$cate = K::M('article/cate')->cate($cat_id)){
+                $this->error(404);
+            }else if('article' != $cate['from']){
+                $this->error(404);
+            }
+            $top_cate = $cate;
+            $filter['cat_id'] = $cat_id;
+
+            if($cate['level'] == 3){
+                $this->pagedata['childrens'] = K::M('article/cate')->childrens($cate['parent_id']);
+            }else{
+                if($cat_ids = K::M('article/cate')->children_ids($cat_id)){
+                    $filter['cat_id'] = explode(',', $cat_ids);
+                }
+                if(!$childrens = K::M('article/cate')->childrens($cat_id)){
+                    if($cate['level']>1){
+                        $childrens = K::M('article/cate')->childrens($cate['parent_id']);
+                    }                  
+                }
+                $this->pagedata['childrens'] = $childrens;                
+            }
+            if($cate['level']>1){
+                $top_cate = K::M('article/cate')->cate($cate['parent_id']);
+            } 
+            $this->pagedata['top_cate'] = $top_cate;
+            $this->pagedata['cate'] = $cate;
+        }
+        if($sokw){
+            $pager['sokw'] = $sokw = htmlspecialchars($sokw);
+            $filter['title'] = "LIKE:%{$sokw}%";
+            $params['kw'] = $sokw;
+        }
+        $pager['page'] = $page = max((int)$page, 1);
+        $pager['limit'] = $limit = 10;
+        $pager['count'] = $count = 0;
+        if($items = K::M('article/article')->items($filter, null, $page, $limit, $count)){
+            $pager['count'] = $count;
+            $pager['pagebar'] = $this->mkpage($count, $limit, $page, $this->mklink(null, array($cat_id, '{page}'), $params));
+            $this->pagedata['items'] = $items;
+        }
+        $this->pagedata['pager'] = $pager;
+        $seo = array('cate_name'=>'','cate_seo_title'=>'', 'cate_seo_keywords'=>'', 'cate_seo_description'=>'', 'page'=>(($page > 1) ? $page : ''));
+        if($cate){
+            $seo['cate_title'] = $seo['cate_name'] = $cate['title'];
+            $seo['cate_seo_title'] = $cate['seo_title'];
+            $seo['cate_seo_keywords'] = $cate['seo_keywords'];
+            $seo['cate_seo_description'] = $cate['seo_description'];
+        }else if($sokw){
+            $seo['cate_name'] = $sokw;
+        }
+        $this->seo->init('article_items', $seo);
+        $this->tmpl = 'article/items9.html'; 
+    }
+
+    public function items9men(){
+        //二级分类
+        $cateList=array();
+        $cates = K::M('article/cate')->fetch_all();
+        foreach ($cates as $key => $value) {
+            if( $value['parent_id']==9 ){
+                $cateList[] = $value;
+            } 
+        }
+        foreach ($cateList as $key => $value) {
+            foreach ($cates as $ke => $valu) {
+                if( $value['cat_id']== $valu['parent_id']){
+                    $cateList[$key]['layer'][]=$valu;
+                }
+            }
+        }
+        $this->pagedata['cateList'] = $cateList;
+        $this->tmpl = 'article/items9men.html'; 
+    }
+    public function items8($cat_id, $page=1)
+    {
+        $sokw = trim($this->GP('kw'));
+
+        $cat_id = (int)$cat_id ? $cat_id : 9;
+        $pager = $filter = $params = array();
+        $filter = array('audit'=>1,'hidden'=>'0', 'closed'=>0, 'ontime'=>'<:'.__TIME);
+        $filter['city_id'] = array(0, $this->request['city_id']);
+        if($cat_id){
+            if(!$cate = K::M('article/cate')->cate($cat_id)){
+                $this->error(404);
+            }else if('article' != $cate['from']){
+                $this->error(404);
+            }
+            $top_cate = $cate;
+            $filter['cat_id'] = $cat_id;
+            
+            //二级分类
+            $cateList=array();
+            $cates = K::M('article/cate')->fetch_all();
+            foreach ($cates as $key => $value) {
+                if( $value['parent_id']==8 ){
+                    $cateList[] = $value;
+                } 
+            }
+            foreach ($cateList as $key => $value) {
+                foreach ($cates as $ke => $valu) {
+                    if( $value['cat_id']== $valu['parent_id']){
+                        $cateList[$key]['layer'][]=$valu;
+                    }
+                }
+            }
+            $this->pagedata['cateList'] = $cateList;
+            
+
+            if($cate['level'] == 3){
+                $this->pagedata['childrens'] = K::M('article/cate')->childrens($cate['parent_id']);
+            }else{
+                if($cat_ids = K::M('article/cate')->children_ids($cat_id)){
+                    $filter['cat_id'] = explode(',', $cat_ids);
+                }
+                if(!$childrens = K::M('article/cate')->childrens($cat_id)){
+                    if($cate['level']>1){
+                        $childrens = K::M('article/cate')->childrens($cate['parent_id']);
+                    }                  
+                }
+                $this->pagedata['childrens'] = $childrens;                
+            }
+            if($cate['level']>1){
+                $top_cate = K::M('article/cate')->cate($cate['parent_id']);
+            } 
+            $this->pagedata['top_cate'] = $top_cate;
+            $this->pagedata['cate'] = $cate;
+        }
+        if($sokw){
+            $pager['sokw'] = $sokw = htmlspecialchars($sokw);
+            $filter['title'] = "LIKE:%{$sokw}%";
+            $params['kw'] = $sokw;
+        }
+        $pager['page'] = $page = max((int)$page, 1);
+        $pager['limit'] = $limit = 10;
+        $pager['count'] = $count = 0;
+        if($items = K::M('article/article')->items($filter, null, $page, $limit, $count)){
+            $pager['count'] = $count;
+            $pager['pagebar'] = $this->mkpage($count, $limit, $page, $this->mklink(null, array($cat_id, '{page}'), $params));
+            $this->pagedata['items'] = $items;
+        }
+        $this->pagedata['pager'] = $pager;
+        $seo = array('cate_name'=>'','cate_seo_title'=>'', 'cate_seo_keywords'=>'', 'cate_seo_description'=>'', 'page'=>(($page > 1) ? $page : ''));
+        if($cate){
+            $seo['cate_title'] = $seo['cate_name'] = $cate['title'];
+            $seo['cate_seo_title'] = $cate['seo_title'];
+            $seo['cate_seo_keywords'] = $cate['seo_keywords'];
+            $seo['cate_seo_description'] = $cate['seo_description'];
+        }else if($sokw){
+            $seo['cate_name'] = $sokw;
+        }
+        $this->seo->init('article_items', $seo);
+        $this->tmpl = 'article/items8.html'; 
     }
 
     public function detail($article_id, $page=1)
