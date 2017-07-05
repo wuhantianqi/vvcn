@@ -37,60 +37,21 @@ class Ctl_Article extends Ctl
             $filter['cat_id'] = $cat_id;
             
             //二级分类
-            $cateList=array();
-            $cates = K::M('article/cate')->fetch_all();
-            //等于1是顶级栏目
-            if($cate['level'] == 1){
-                foreach ($cates as $key => $value) {
-                    if( $value['parent_id']==$cat_id ){
-                        $cateList[] = $value;
-                    } 
-                }
-                foreach ($cateList as $key => $value) {
-                    foreach ($cates as $ke => $valu) {
-                        if( $value['cat_id']== $valu['parent_id']){
-                            $cateList[$key]['layer'][]=$valu;
-                        }
-                    }
-                }
-                $this->pagedata['cateList'] = $cateList;
-            }else{
-                //其它情况是属于二/三级子栏目
-                $top_cate = K::M('article/cate')->cate($cate['parent_id']);
-                //二级栏目
-                if( $top_cate['parent_id'] != 0){
-                    foreach ($cates as $key => $value) {
-                        if( $value['parent_id']==$top_cate['parent_id'] ){
-                            $cateList[] = $value;
-                        } 
-                    }
-                    foreach ($cateList as $key => $value) {
-                        foreach ($cates as $ke => $valu) {
-                            if( $value['cat_id']== $valu['parent_id']){
-                                $cateList[$key]['layer'][]=$valu;
-                            }
-                        }
-                    }
-                    $this->pagedata['cateList'] = $cateList;
-                }else{
-                    foreach ($cates as $key => $value) {
-                        if( $value['parent_id']==$top_cate['cat_id'] ){
-                            $cateList[] = $value;
-                        } 
-                    }
-                    foreach ($cateList as $key => $value) {
-                        foreach ($cates as $ke => $valu) {
-                            if( $value['cat_id']== $valu['parent_id']){
-                                $cateList[$key]['layer'][]=$valu;
-                            }
-                        }
-                    }
-                    $this->pagedata['cateList'] = $cateList;
-                }
-            }
-
-
-
+            // $cateList=array();
+            // $cates = K::M('article/cate')->fetch_all();
+            // foreach ($cates as $key => $value) {
+            //     if( $value['parent_id']==$cat_id ){
+            //         $cateList[] = $value;
+            //     } 
+            // }
+            // foreach ($cateList as $key => $value) {
+            //     foreach ($cates as $ke => $valu) {
+            //         if( $value['cat_id']== $valu['parent_id']){
+            //             $cateList[$key]['layer'][]=$valu;
+            //         }
+            //     }
+            // }
+            // $this->pagedata['cateList'] = $cateList;
             if($cate['level'] == 3){
                 $this->pagedata['childrens'] = K::M('article/cate')->childrens($cate['parent_id']);
             }else{
