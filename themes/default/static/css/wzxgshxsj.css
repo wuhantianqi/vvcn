@@ -26,9 +26,7 @@ select {
 	padding: 0;
 }
 
-* {
-	box-sizing: border-box;
-}
+
 
 html,
 body {
@@ -276,6 +274,7 @@ img {
 	height: 50px;
 	line-height: 50px;
 	padding-left: 20px;
+	box-sizing: border-box;
 }
 
 .ten_form .fbox .name {
@@ -414,6 +413,7 @@ img {
 	margin: 0 auto;
 	background-color: #fff;
 	padding: 30px;
+	box-sizing: border-box;
 }
 
 .ten_d,
@@ -538,6 +538,8 @@ img {
 .ten_d .box2 .p1 {
 	display: block;
 	padding: 0 5px;
+	    font-size: 12px;
+    line-height: 18px;
 }
 
 .ten_d .box2 p span:first-child {
@@ -648,6 +650,7 @@ img {
 	padding: 10px 15px;
 	width: 90%;
 	border-radius: 5px;
+	box-sizing: border-box;
 }
 
 .ten_m .boxfa ul li .box1 p span {
@@ -668,6 +671,7 @@ img {
 	background-color: rgba(0, 0, 0, .3);
 	padding: 25px 20px;
 	display: none;
+	box-sizing: border-box;
 }
 
 .ten_m .boxfa ul li .box2 .box2_1 {
@@ -677,11 +681,14 @@ img {
 	padding: 40px 30px;
 	color: #fff;
 	position: relative;
+	box-sizing: border-box;
 }
 
 .ten_m .boxfa ul li .box2 .box2_1 h3 {
 	font-size: 18px;
 	margin-bottom: 5px;
+	text-align: left;
+	color: #fff;
 }
 
 .ten_m .boxfa ul li .xian {
@@ -803,7 +810,7 @@ img {
 }
 
 .ten_s .boxfa ul li .box2 .btn {
-	text-align: center;
+	text-align: center;display: block;
 }
 
 .ten_s .boxfa ul li .box2 .btn a {
@@ -1083,6 +1090,8 @@ img {
 	float: left;
 	padding: 25px;
 	background-color: #fff;
+	    box-sizing: border-box;
+	    margin-right: 20px;
 }
 
 .meijia .left h3 {
@@ -1096,7 +1105,7 @@ img {
 .z_biaoge_list {
 	border: 1px solid #cc3333;
 	overflow: hidden;
-	height: 375px;
+	height: 297px;
 	padding: 10px 15px;
 }
 
