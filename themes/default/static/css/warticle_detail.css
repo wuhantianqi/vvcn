@@ -1,4 +1,4 @@
-/*主体*/
+﻿/*主体*/
 
 .wzxq_main {
 	width: 1200px;
@@ -33,7 +33,7 @@
 	position: absolute;
 	left: 0;
 	top: 0;
-	background: url(../images/20170618/img_index_css.png) no-repeat;
+	background: url(../images/img_index_css.png) no-repeat;
 	background-position: -510px -25px;
 }
 
@@ -136,7 +136,7 @@
 	display: block;
 	width: 25px;
 	height: 26px;
-	background: url(../images/20170618/img_index_css.png) no-repeat;
+	background: url(../images/img_index_css.png) no-repeat;
 	background-position: -169px -20px;
 	float: left;
 	margin-top: 5px;
@@ -158,7 +158,7 @@
 	display: block;
 	width: 25px;
 	height: 26px;
-	background: url(../images/20170618/img_index_css.png) no-repeat;
+	background: url(../images/img_index_css.png) no-repeat;
 	background-position: -194px -20px;
 	float: left;
 	margin-top: 5px;
@@ -470,7 +470,7 @@
 	display: block;
 	width: 40px;
 	height: 40px;
-	background: url(../images/20170618/img_index_css.png) no-repeat;
+	background: url(../images/img_index_css.png) no-repeat;
 	margin-bottom: 10px;
 }
 

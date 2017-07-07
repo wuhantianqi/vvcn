@@ -6,7 +6,7 @@
 				<a href="<{link ctl='index'}>">
 					<{$CONFIG.site.title}>
 				</a>
-				&gt;<a href="<{link ctl='article'}>">学装修</a> &gt;
+				&gt;<a href="<{link ctl='article'}>">装修学院</a> &gt;
 				<a href="<{link ctl='article:items' arg0=$cate.cat_id}>">
 					<{$cate.title}>
 				</a>
@@ -24,7 +24,7 @@
 					<p>
 						<span>发布：<em><{$detail.dateline|format}></em></span>
 						<span>浏览：<em><{$detail.views}></em>次</span>
-						<!-- <span>[手机扫码] <i></i> </span> -->
+						<span>[手机扫码] <i></i> </span>
 					</p>
 					<i class="ic_y"></i>
 				</div>
@@ -89,80 +89,16 @@
 						</ul>
 					</div> -->
 					<div class="im">
-						<img src="images/guanggao2.png" alt="">
+						<img src="%THEME%/static/images/wzguanggao.jpg" alt="免费户型设计">
 					</div>
 					<div class="utest">
 						<p>最新热点推荐：</p>
 						<ul>
-							<{calldata mdl='article/article' cat_id=$cate.cat_id city_id=$request.city_id limit=10}>
-							<li><a href="<{$item.link}>"><{$item.title|cutstr:80}></a></li>
-		                    <{/calldata}>
-							
-							<!-- <li><a href="">房屋公共维修基金是什么 公共维修</a></li>
-							<li><a href="">房屋公共维修基金是什么 公共维修</a></li>
-							<li><a href="">房屋公共维修基金是什么 公共维修</a></li>
-							<li><a href="">房屋公共维修基金是什么 公共维修</a></li>
-							<li><a href="">房屋公共维修基金是什么 公共维修</a></li>
-							<li><a href="">房屋公共维修基金是什么 公共维修</a></li>
-							<li><a href="">房屋公共维修基金是什么 公共维修</a></li>
-							<li><a href="">房屋公共维修基金是什么 公共维修</a></li>
-							<li><a href="">房屋公共维修基金是什么 公共维修</a></li> -->
+							<{KT id="11" name="最新热点推荐" city_id=$request.city_id}><li><a href="<{$item.link}>"><{$item.title|cutstr:80}></a></li><{/KT}>
 						</ul>
 					</div>
 				</div>
 			</div>
-
-			<!-- <div class="dp">
-
-				<div class="pl">
-					<{if $detail.allow_comment}>
-						<{if $CONFIG.comment.article_type=='sns' }>
-							<{$CONFIG.comment.snscomment}>
-								<{elseif $CONFIG.comment.article_type=='comment' }>
-									<div class="mb20 pding area">
-										<h3>评论(共
-											<font class="fontcl2">
-												<{$detail.comments}>
-											</font>条)</h3>
-										<form action="<{link ctl='article:savecomment'}>" mini-form="comment" method="post" class="pinglun">
-											<input type="hidden" name="article_id" value="<{$detail.article_id}>" />
-											<img src="<{$pager.img}>/<{$MEMBER.face}>" width="108" class="lt" />
-											<div class="rt">
-												<div class="cl"></div>
-												<textarea name='content' class="text" placeholder="随便说点什么..."></textarea>
-												<br />
-												<{if $comment_yz}>
-													<span>验证码:</span>
-
-													<input class="text short" type="text" name="verifycode" placeholder="请输入验证码" />
-													<img verify="#comment-verify" src="<{link ctl='magic:verify' http='ajax'}>&_=<{$pager.dateline}>" id="comment-verify" /><a verify="#comment-verify">点击刷新验证码</a>
-
-													<{/if}>
-														<input type="submit" value="发表评论" class="text btn rt pinglun_btn" />
-											</div>
-											<div class="cl"></div>
-										</form>
-										<div class="new_pinglun">
-											<p class="tit">最新评论</p>
-											<ul>
-												<{foreach $comment_list as $item}>
-													<li>
-														<img src="<{$pager.img}>/<{$member_list[$item.uid].face_80}>" class="lt" />
-														<div class="rt">
-															<p><span class="lt name"><{$member_list[$item.uid].uname}></span><span class="rt graycl"><{$item.dateline|format}></span></p>
-															<p>
-																<{$item.content}>
-															</p>
-														</div>
-													</li>
-													<{/foreach}>
-											</ul>
-										</div>
-									</div>
-									<{/if}>
-										<{/if}>
-				</div>
-			</div> -->
 		</div>
 		<div class="wzxq_main_r">
 			<{widget id="tenders/formss" }>
@@ -184,32 +120,32 @@
 				<div class="zx_t">
 					<ul>
 						<li>
-							<a href="">
+							<a href="<{link ctl='tools:items'}>">
 								<i class="zx7"></i> 涂料
 							</a>
 						</li>
 						<li>
-							<a href="">
+							<a href="<{link ctl='tools:diban'}>">
 								<i class="zx8"></i> 地板
 							</a>
 						</li>
 						<li>
-							<a href="">
+							<a href="<{link ctl='tools:bizhi'}>">
 								<i class="zx9"></i> 壁纸
 							</a>
 						</li>
 						<li>
-							<a href="">
+							<a href="<{link ctl='tools:qiangzhuan'}>">
 								<i class="zx10"></i> 墙砖
 							</a>
 						</li>
 						<li>
-							<a href="">
+							<a href="<{link ctl='tools:chuanlian'}>">
 								<i class="zx11"></i> 窗帘
 							</a>
 						</li>
 						<li>
-							<a href="">
+							<a href="<{link ctl='tools:dizhuan'}>">
 								<i class="zx12"></i> 地砖
 							</a>
 						</li>
@@ -218,8 +154,7 @@
 				</div>
 			</div>
 			<div class="gg">
-				<a href=""><img src="images/main1.jpg" alt=""></a>
-
+				<{adv id="10" name="全站右侧通用图片广告" city_id=$request.city_id}>
 			</div>
 
 		</div>

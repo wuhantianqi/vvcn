@@ -262,7 +262,7 @@ span.login_litico {
 
 .search_box {
 	/*	margin: 8px 0px 0px 100px;*/
-	border: 2px solid #ff3333;
+	border: 1px solid #ff3333;
 	width: 420px;
 	height: 36px;
 	line-height: 36px;
@@ -301,7 +301,7 @@ span.login_litico {
 .search input.btn {
 	background-color: #ff3333;
 	border-radius: 0;
-	height: 38px;
+	height: 36px;
 	line-height: 38px;
 	text-align: center;
 	width: 80px;
@@ -321,7 +321,7 @@ span.login_litico {
 	left: -1px;
 	top: 38px;
 */
-	border: 2px solid #ff3333;
+	border: 1px solid #ff3333;
 	border-top: none;
 }
 

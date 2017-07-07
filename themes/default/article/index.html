@@ -13,9 +13,7 @@
 		<div class="zxgl_ernav">
 			<ul>
 				<li>
-					<p class="ip1 fl">
-						<i class="iv_1"></i> 学装修
-					</p>
+					<p class="ip1 fl"><i class="iv_1"></i> 学装修</p>
 					<p class="ip2 fl">
 						<a href="<{link ctl='article:items-8'}>">装修流程</a>
 						<a href="<{link ctl='article:items-9'}>">装修知识</a>
@@ -26,9 +24,7 @@
 					</p>
 				</li>
 				<li>
-					<p class="ip1 fl">
-						<i class="iv_2"></i> 房屋
-					</p>
+					<p class="ip1 fl"><i class="iv_2"></i> 房屋</p>
 					<p class="ip2 fl">
 						<a href="<{link ctl='article:items-84'}>">客厅</a>
 						<a href="<{link ctl='article:items-85'}>">卧室</a>
@@ -43,9 +39,7 @@
 					</p>
 				</li>
 				<li>
-					<p class="ip1 fl">
-						<i class="iv_3"></i> 风格
-					</p>
+					<p class="ip1 fl"><i class="iv_3"></i> 风格</p>
 					<p class="ip2 fl">
 						<a href="<{link ctl='article:items-96'}>">简约</a>
 						<a href="<{link ctl='article:items-97'}>">现代</a>
@@ -61,9 +55,7 @@
 					</p>
 				</li>
 				<li>
-					<p class="ip1 fl">
-						<i class="iv_4"></i> 美图
-					</p>
+					<p class="ip1 fl"><i class="iv_4"></i> 美图</p>
 					<p class="ip2 fl">
 						<a href="<{link ctl='case:album-36-0-0-0-0-1'}>">小户型</a>
 						<a href="<{link ctl='case:album-37-0-0-0-0-1'}>">二居</a>
@@ -73,13 +65,10 @@
 						<a href="<{link ctl='case:album-40-0-0-0-0-1'}>">复式</a>
 						<a href="<{link ctl='case:album-40-0-0-97-0-1'}>">办公室</a>
 						<a href="<{link ctl='case:album-40-0-0-91-0-1'}>">酒店</a>
-
 					</p>
 				</li>
 				<li>
-					<p class="ip1 fl">
-						<i class="iv_5"></i> 服务
-					</p>
+					<p class="ip1 fl"><i class="iv_5"></i> 服务</p>
 					<p class="ip2 fl">
 						<a href="<{link ctl='tenders'}>">免费量房</a>
 						<a href="<{link ctl='tenders'}>">设计与报价</a>
@@ -88,23 +77,13 @@
 						<a href="<{link ctl='gs'}>">装修公司</a>
 						<a href="<{link ctl='designer'}>">设计师</a>
 						<a href="<{link ctl='site'}>">工地</a>
-
 					</p>
 				</li>
 			</ul>
-
-
 		</div>
 		<div class="zxgl_hot">
 			<div class="zxgl_hot_left fl">
-				<!--
-<a href="">
-					<img src="<{$pager.img}>/<{$item.thumb}>" alt="">
-				</a>
--->
-				<{KT id="25" name="学装修装修流程-装修准备图" city_id=$request.city_id}>
-					<a href="<{$item.link}>"><img src="<{$pager.img}>/<{$item.thumb}>" /></a>
-					<{/KT}>
+				<{adv id="16" name="装修学院_左大图" city_id=$request.city_id}>
 			</div>
 			<div class="zxgl_hot_mid fl">
 				<ul class="zxgl_hot_ul">
@@ -116,107 +95,51 @@
 				<div class="hot_trt">
 					<div class="hot_trt_">
 						<div class="hot_trt_top">
-							<{KT id="14" name="学装修首页今日热点推荐" city_id=$request.city_id limit="2" }>
-
-								<h2><i></i>
-									<a href="<{$item.link}>">
-										<{$item.title|cutstr:50}>
-									</a>
-								</h2>
-								<p>
-									<a href="<{$item.link}>">
-										<{$item.desc|cutstr:140}>
-											<font class="fontcl2">[阅读全文]</font>
-									</a>
-								</p>
-
-								<{/KT}>
+							<{KT id="43" name="装修学院_今日热点T" city_id=$request.city_id limit="2" }>
+							<h2><i></i><a href="<{$item.link}>"><{$item.title|cutstr:45}></a></h2>
+							<p><a href="<{$item.link}>"><{$item.desc|cutstr:140}><font class="fontcl2">[阅读全文]</font></a></p>
+							<{/KT}>
 						</div>
-
 					</div>
 					<div class="hot_trt_fot">
 						<ul>
-							<{KT id="14" name="学装修首页今日热点推荐" city_id=$request.city_id limit="7" }>
-								<{if $iteration> 2 }>
-									<li>
-										<a href="<{$item.link}>">
-											<{$item.desc|cutstr:60}>
-										</a>
-									</li>
-									<{/if}>
-										<{/KT}>
+							<{KT id="44" name="装修学院_今日热点" city_id=$request.city_id limit="8" }>
+							<{if $iteration> 2 }><li><a href="<{$item.link}>"><{$item.title|cutstr:60}></a></li><{/if}>
+							<{/KT}>
 						</ul>
 					</div>
 				</div>
 				<div class="hot_trt" style="display:none">
 					<div class="hot_trt_">
 						<div class="hot_trt_top">
-							<{KT id="43" name="学装修首页装修资讯" city_id=$request.city_id limit="2" }>
-
-								<h2><i></i>
-									<a href="<{$item.link}>">
-										<{$item.title|cutstr:50}>
-									</a>
-								</h2>
-								<p>
-									<a href="<{$item.link}>">
-										<{$item.desc|cutstr:140}>
-											<font class="fontcl2">[阅读全文]</font>
-									</a>
-								</p>
-
-								<{/KT}>
+							<{KT id="153" name="装修学院_装修资讯T" city_id=$request.city_id limit="2" }>
+							<h2><i></i><a href="<{$item.link}>"><{$item.title|cutstr:45}></a></h2>
+							<p><a href="<{$item.link}>"><{$item.desc|cutstr:140}><font class="fontcl2">[阅读全文]</font></a></p>
+                            <{/KT}>
 						</div>
-
 					</div>
 					<div class="hot_trt_fot">
 						<ul>
-							<{KT id="43" name="学装修首页装修资讯" city_id=$request.city_id limit="7" }>
-								<{if $iteration> 2 }>
-									<li>
-										<a href="<{$item.link}>">
-											<{$item.desc|cutstr:60}>
-										</a>
-									</li>
-									<{/if}>
-										<{/KT}>
-
+							<{KT id="154" name="装修学院_装修资讯" city_id=$request.city_id limit="8" }>
+							<{if $iteration> 2 }><li><a href="<{$item.link}>"><{$item.title|cutstr:60}></a></li><{/if}>
+							<{/KT}>
 						</ul>
 					</div>
 				</div>
 				<div class="hot_trt" style="display:none">
 					<div class="hot_trt_">
 						<div class="hot_trt_top">
-							<{KT id="165" name="学装修首页好文推荐" city_id=$request.city_id limit="2" }>
-
-								<h2><i></i>
-									<a href="<{$item.link}>">
-										<{$item.title|cutstr:50}>
-									</a>
-								</h2>
-								<p>
-									<a href="<{$item.link}>">
-										<{$item.desc|cutstr:140}>
-											<font class="fontcl2">[阅读全文]</font>
-									</a>
-								</p>
-
-								<{/KT}>
+							<{KT id="155" name="装修热点_好文推荐T" city_id=$request.city_id limit="2" }>
+							<h2><i></i><a href="<{$item.link}>"><{$item.title|cutstr:45}></a></h2>
+							<p><a href="<{$item.link}>"><{$item.desc|cutstr:140}><font class="fontcl2">[阅读全文]</font></a></p>
+							<{/KT}>
 						</div>
-
 					</div>
 					<div class="hot_trt_fot">
 						<ul>
-							<{KT id="165" name="学装修首页好文推荐" city_id=$request.city_id limit="7" }>
-								<{if $iteration> 2 }>
-									<li>
-										<a href="<{$item.link}>">
-											<{$item.desc|cutstr:60}>
-										</a>
-									</li>
-									<{/if}>
-										<{/KT}>
-
+							<{KT id="156" name="装修热点_好文推荐" city_id=$request.city_id limit="8" }>
+							<{if $iteration> 2 }><li><a href="<{$item.link}>"><{$item.title|cutstr:60}></a></li><{/if}>
+							<{/KT}>
 						</ul>
 					</div>
 				</div>
@@ -231,73 +154,34 @@
 					</div>
 				</li>
 				<li>
-					<div class="tline">
-						<p><span>装修前</span></p>
-					</div>
+					<div class="tline"><p><span>装修前</span></p></div>
 					<div class="ivb">
-						<a href="">
-							<i class="iv1"></i> 房产
-						</a>
-						<a href="">
-							<i class="iv2"></i> 验房
-						</a>
-						<a href="">
-							<i class="iv3"></i> 设计
-						</a>
-						<a href="">
-							<i class="iv4"></i> 预算
-						</a>
-						<a href="">
-							<i class="iv5"></i> 合同
-						</a>
+						<a href=""><i class="iv1"></i> 房产</a>
+						<a href=""><i class="iv2"></i> 验房</a>
+						<a href=""><i class="iv3"></i> 设计</a>
+						<a href=""><i class="iv4"></i> 预算</a>
+						<a href=""><i class="iv5"></i> 合同</a>
 					</div>
 				</li>
 				<li>
-					<div class="tline">
-						<p><span>装修中</span></p>
-					</div>
+					<div class="tline"><p><span>装修中</span></p></div>
 					<div class="ivb">
-						<a href="">
-							<i class="iv6"></i> 材料
-						</a>
-						<a href="">
-							<i class="iv7"></i> 拆改
-						</a>
-						<a href="">
-							<i class="iv8"></i> 水电
-						</a>
-						<a href="">
-							<i class="iv9"></i> 防水
-						</a>
-						<a href="">
-							<i class="iv10"></i> 泥瓦
-						</a>
-						<a href="">
-							<i class="iv11"></i> 木工
-						</a>
-						<a href="">
-							<i class="iv12"></i> 油漆
-						</a>
+						<a href=""><i class="iv6"></i> 材料</a>
+						<a href=""><i class="iv7"></i> 拆改</a>
+						<a href=""><i class="iv8"></i> 水电</a>
+						<a href=""><i class="iv9"></i> 防水</a>
+						<a href=""><i class="iv10"></i> 泥瓦</a>
+						<a href=""><i class="iv11"></i> 木工</a>
+						<a href=""><i class="iv12"></i> 油漆</a>
 					</div>
 				</li>
 				<li>
-					<div class="tline">
-						<p><span>装修后</span></p>
-					</div>
+					<div class="tline"><p><span>装修后</span></p></div>
 					<div class="ivb">
-						<a href="">
-							<i class="iv13"></i> 验收
-						</a>
-						<a href="">
-							<i class="iv14"></i> 软装
-						</a>
-						<a href="">
-							<i class="iv15"></i> 保洁
-						</a>
-						<a href="">
-							<i class="iv16"></i> 入住
-						</a>
-
+						<a href=""><i class="iv13"></i> 验收</a>
+						<a href=""><i class="iv14"></i> 软装</a>
+						<a href=""><i class="iv15"></i> 保洁</a>
+						<a href=""><i class="iv16"></i> 入住</a>
 					</div>
 				</li>
 			</ul>
@@ -307,17 +191,14 @@
 				<div class="bttt">
 					<h2>装修热点</h2>
 					<i></i>
-					<span><a href="<{link ctl='article:items' arg0=9}>">More+</a></span>
-
-					<span>/</span>
-					<span><a href="/article-items-82-1.html">行业动态</a></span>
-					<span>/</span>
+					<span><a href="<{link ctl='article:items' arg0=9}>">More+</a></span><span>/</span>
+					<span><a href="/article-items-82-1.html">行业动态</a></span><span>/</span>
 					<span><a href="/article-items-80-1.html">装修黑幕</a></span>
 				</div>
 				<div class="clear"></div>
 				<div class="zxrd_main">
 					<div class="zxrd_main_t">
-						<{KT id="12" name="网站首页_家居热点_本地新闻" city_id=$request.city_id limit="1" }>
+						<{KT id="23" name="装修热点图" city_id=$request.city_id limit="1" }>
 							<div class="zxrd_main_t_f">
 								<a href="<{$item.link}>">
 								<img src="<{$pager.img}>/<{$item.thumb}>" alt="">
@@ -339,7 +220,7 @@
 					</div>
 					<div class="zxrd_main_fot">
 						<ul>
-							<{KT id="12" name="网站首页_家居热点_本地新闻" city_id=$request.city_id limit="4" }>
+							<{KT id="24" name="装修热点" city_id=$request.city_id limit="4" }>
 								<{if $iteration> 1 }>
 									<li>
 										【行业动态】
@@ -348,18 +229,8 @@
 										</a>
 									</li>
 									<{/if}>
+							<{/KT}>
 
-										<{/KT}>
-											<!--
-							<li>
-								【行业动态】
-								<a href="">厨房装修这些尺寸一定要在装修前确定好！</a>
-							</li>
-							<li>
-								【行业动态】
-								<a href="">厨房装修这些尺寸一定要在装修前确定好！</a>
-							</li>
--->
 						</ul>
 					</div>
 					<div class="clear"></div>
@@ -378,7 +249,7 @@
 				<div class="clear"></div>
 				<div class="zxrd_main">
 					<div class="zxrd_main_t">
-						<{KT id="154" name="网站首页_装修美图_装修风格" city_id=$request.city_id limit="1" }>
+						<{KT id="17" name="装修风格图" city_id=$request.city_id limit="1" }>
 							<div class="zxrd_main_t_f">
 								<a href="<{$item.link}>">
 								<img src="<{$pager.img}>/<{$item.thumb}>" alt="">
@@ -400,7 +271,7 @@
 					</div>
 					<div class="zxrd_main_fot">
 						<ul>
-							<{KT id="154" name="网站首页_装修美图_装修风格" city_id=$request.city_id limit="4" }>
+							<{KT id="18" name="装修风格" city_id=$request.city_id limit="4" }>
 								<{if $iteration> 1 }>
 									<li>
 										【行业动态】
@@ -410,16 +281,6 @@
 									</li>
 									<{/if}>
 										<{/KT}>
-											<!--
-							<li>
-								【装修风格】
-								<a href="">厨房装修这些尺寸一定要在装修前确定好！</a>
-							</li>
-							<li>
-								【装修风格】
-								<a href="">厨房装修这些尺寸一定要在装修前确定好！</a>
-							</li>
--->
 						</ul>
 					</div>
 					<div class="clear"></div>
@@ -487,7 +348,7 @@
 				</div>
 				<div class="clear"></div>
 				<div class="mtt">
-					<{KT id="5" name="网站首页_装修美图_户型" city_id=$request.city_id limit="1" }>
+					<{KT id="5" name="装修学院_装修美图" city_id=$request.city_id limit="1" }>
 						<a href="<{$item.link}>"><img src="<{$pager.img}>/<{$item.thumb}>" alt="<{$item.title}>">
 						<span><{$item.title|cutstr:18}></span>
 					</a>
@@ -510,7 +371,7 @@
 				<div class="clear"></div>
 				<div class="zxrd_main">
 					<div class="zxrd_main_t">
-						<{KT id="155" name="网站首页_装修美图_装修风水" city_id=$request.city_id limit="1" }>
+						<{KT id="19" name="家居风水图" city_id=$request.city_id limit="1" }>
 							<div class="zxrd_main_t_f">
 								<a href="">
 								<img src="<{$pager.img}>/<{$item.thumb}>" alt="">
@@ -532,7 +393,7 @@
 					</div>
 					<div class="zxrd_main_fot">
 						<ul>
-							<{KT id="155" name="网站首页_装修美图_装修风水" city_id=$request.city_id limit="4" }>
+							<{KT id="20" name="家居风水" city_id=$request.city_id limit="4" }>
 								<{if $iteration> 1 }>
 									<li>
 										【行业动态】
@@ -542,16 +403,6 @@
 									</li>
 									<{/if}>
 										<{/KT}>
-											<!--
-							<li>
-								【装修风格】
-								<a href="">厨房装修这些尺寸一定要在装修前确定好！</a>
-							</li>
-							<li>
-								【装修风格】
-								<a href="">厨房装修这些尺寸一定要在装修前确定好！</a>
-							</li>
--->
 						</ul>
 					</div>
 					<div class="clear"></div>
@@ -570,7 +421,7 @@
 				</div>
 				<div class="clear"></div>
 				<div class="jjm">
-					<{KT id="155" name="网站首页_装修美图_装修风水" city_id=$request.city_id limit="1" }>
+					<{KT id="22" name="家居生活" city_id=$request.city_id limit="1" }>
 						<div class="jjm_t xcs">
 							<h5>
 								<a href="<{$item.link}>">
@@ -583,9 +434,8 @@
 							<span>生活小常识</span>
 						</div>
 						<{/KT}>
-							<{KT id="155" name="网站首页_装修美图_装修风水" city_id=$request.city_id limit="2" }>
+							<{KT id="22" name="家居生活" city_id=$request.city_id limit="2" }>
 								<{if $iteration> 1 }>
-
 									<div class="jjm_f xcs">
 										<h5>
 											<a href="<{$item.link}>">
@@ -685,7 +535,7 @@
 						<span>武汉装修优惠资讯这里拥有商家资讯的第一信息</span>
 					</div>
 					<ul>
-						<{KT id="161" name="网站首页_装修攻略_优惠活动" city_id=$request.city_id limit="3" }>
+						<{KT id="161" name="优惠活动" city_id=$request.city_id limit="3" }>
 							<li>
 								<a href="<{$item.link}>">
 									<span class="img "><img src="<{$pager.img}>/<{$item.thumb}>" alt=" "></span>
@@ -694,22 +544,6 @@
 								</a>
 							</li>
 							<{/KT}>
-								<!--
-<li>
-	<a href=" ">
-		<span class="img "><img src="images/img11.jpg " alt=" "></span>
-		<span class="ztitle ">全民好住节 抢半价装修</span>
-		<span class="link ">[查看详情]</span>
-	</a>
-</li>
-<li>
-	<a href=" ">
-		<span class="img "><img src="images/img11.jpg " alt=" "></span>
-		<span class="ztitle ">全民好住节 抢半价装修</span>
-		<span class="link ">[查看详情]</span>
-	</a>
-</li>
--->
 					</ul>
 				</div>
 
@@ -722,7 +556,7 @@
 					<div class="clear"></div>
 					<div class="zxrd_main">
 						<div class="zxrd_main_t">
-							<{KT id="155" name="网站首页_装修美图_装修风水" city_id=$request.city_id limit="1" }>
+							<{KT id="157" name="企业专访图" city_id=$request.city_id limit="1" }>
 								<div class="zxrd_main_t_f">
 									<a href="">
 									<img src="<{$pager.img}>/<{$item.thumb}>" alt="">
@@ -744,7 +578,7 @@
 						</div>
 						<div class="zxrd_main_fot">
 							<ul>
-								<{KT id="155" name="网站首页_装修美图_装修风水" city_id=$request.city_id limit="3" }>
+								<{KT id="158" name="企业专访" city_id=$request.city_id limit="3" }>
 									<{if $iteration> 1 }>
 										<li>
 											【专题】

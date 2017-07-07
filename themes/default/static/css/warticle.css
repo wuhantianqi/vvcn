@@ -29,7 +29,7 @@
 	display: block;
 	width: 40px;
 	height: 32px;
-	background: url(../images/20170618/img_index_css.png) no-repeat;
+	background: url(../images/img_index_css.png) no-repeat;
 	margin-left: 5px;
 	margin-bottom: 9px;
 }
@@ -113,7 +113,7 @@
 	width: 33.3333%;
 	box-sizing: border-box;
 	position: relative;
-	background-color: #eee;
+	background-color: #f8f8f8;
 }
 
 .zxgl_hot_mid .zxgl_hot_ul li:after {
@@ -171,7 +171,7 @@
 	display: inline-block;
 	width: 45px;
 	height: 20px;
-	background: url(../images/20170618/img_index_css.png) no-repeat;
+	background: url(../images/img_index_css.png) no-repeat;
 	background-position: -96px 0;
 	vertical-align: middle;
 	margin-bottom: 3px;
@@ -212,20 +212,18 @@
 }
 
 
-<<<<<<< Updated upstream
-=======
 
-
->>>>>>> Stashed changes
 /*装修流程*/
 
 .zxgl_zxlc {
 	width: 1200px;
 	overflow: hidden;
 	margin-top: 40px;
-	background-color: #eee;
+	background-color: #f8f8f8;
 }
-
+.zxgl_zxlc ul{
+	overflow: hidden;
+}
 .zxgl_zxlc ul li {
 	float: left;
 	padding: 20px 10px;
@@ -269,7 +267,7 @@
 	position: relative;
 	color: #ff3333;
 	padding: 0 15px;
-	background-color: #eee;
+	background-color: #f8f8f8;
 }
 
 .zxgl_zxlc .ivb {
@@ -294,7 +292,7 @@
 	display: block;
 	width: 31px;
 	height: 33px;
-	background: url(../images/20170618/img_index_css.png) no-repeat;
+	background: url(../images/img_index_css.png) no-repeat;
 	margin-bottom: 5px;
 	margin-left: 5px;
 	margin-right: 5px;
@@ -483,7 +481,7 @@
 	display: inline-block;
 	width: 28px;
 	height: 14px;
-	background: url(../images/20170618/img_index_css.png) no-repeat;
+	background: url(../images/img_index_css.png) no-repeat;
 	background-position: -190px 0;
 	margin-top: 12px;
 	margin-left: 15px;
@@ -553,7 +551,7 @@
 }
 
 .zxrd_main_fot ul li a {
-	font-size: 16px;
+	font-size: 14px;
 	color: #333;
 }
 
@@ -591,7 +589,7 @@
 	display: block;
 	width: 40px;
 	height: 40px;
-	background: url(../images/20170618/img_index_css.png) no-repeat;
+	background: url(../images/img_index_css.png) no-repeat;
 	margin-bottom: 10px;
 }
 
@@ -814,7 +812,7 @@
 	display: inline-block;
 	width: 28px;
 	height: 14px;
-	background: url(../images/20170618/img_index_css.png) no-repeat;
+	background: url(../images/img_index_css.png) no-repeat;
 	background-position: -221px 0;
 	margin-top: 10px;
 	margin-left: 10px;
@@ -833,7 +831,7 @@
 	display: block;
 	width: 100%;
 	height: 100%;
-	background: url(../images/baojia.png) no-repeat;
+	background: url(../images//baojia.png) no-repeat;
 	background-size: cover;
 }
 
@@ -1061,7 +1059,7 @@
 	width: 50px;
 	height: 20px;
 	display: inline-block;
-	background: url("../images/20170618/img_index_css.png") no-repeat;
+	background: url("../images/img_index_css.png") no-repeat;
 	position: relative;
 	top: 4px;
 	background-position: -140px 0;
@@ -1150,7 +1148,7 @@
 .answer-wrap .brand {
 	width: 812px;
 	height: 80px;
-	background: url("../images/20170618/18.jpg") no-repeat center center;
+	background: #f8f8f8;
 	position: relative;
 }
 
@@ -1187,7 +1185,7 @@
 .answer-wrap .answer-list li .tip {
 	width: 25px;
 	height: 25px;
-	background: url(../images/20170618/img_index_css.png) no-repeat -54px -26px;
+	background: url(../images/img_index_css.png) no-repeat -54px -26px;
 	display: block;
 	float: left;
 }
@@ -1226,7 +1224,7 @@
 	width: 17px;
 	height: 12px;
 	display: inline-block;
-	background: url(../images/20170618/img_index_css.png) no-repeat -482px 0;
+	background: url(../images/img_index_css.png) no-repeat -482px 0;
 	margin-right: 5px;
 	vertical-align: middle;
 	margin-bottom: 2px;
@@ -1245,7 +1243,7 @@
 	width: 12px;
 	height: 12px;
 	display: inline-block;
-	background: url(../images/20170618/img_index_css.png) no-repeat -504px 0;
+	background: url(../images/img_index_css.png) no-repeat -504px 0;
 	vertical-align: middle;
 	margin-bottom: 2px;
 	margin-right: 5px;
@@ -1289,7 +1287,6 @@
 	width: 364px;
 	height: 500px;
 	border: 1px solid #e4e4e4;
-	border-radius: 6px;
 	float: right;
 }
 
@@ -1331,7 +1328,7 @@
 	width: 14px;
 	height: 15px;
 	display: inline-block;
-	background: url(../images/20170618/img_index_css.png) no-repeat -465px 0;
+	background: url(../images/img_index_css.png) no-repeat -465px 0;
 	padding-right: 5px;
 }
 
@@ -1358,7 +1355,7 @@
 .room-wrap .form-label .user-name {
 	width: 20px;
 	height: 25px;
-	background: url(../images/20170618/img_index_css.png) no-repeat -131px -20px;
+	background: url(../images/img_index_css.png) no-repeat -131px -20px;
 	display: block;
 	float: left;
 	margin-top: 5px;
@@ -1368,7 +1365,7 @@
 .room-wrap .form-label .user-link {
 	width: 20px;
 	height: 25px;
-	background: url(../images/20170618/img_index_css.png) no-repeat -150px -22px;
+	background: url(../images/img_index_css.png) no-repeat -150px -22px;
 	display: block;
 	float: left;
 	margin-top: 5px;
@@ -1452,7 +1449,7 @@
 	float: left;
 	width: 224px;
 	height: 300px;
-	background: #e5e5e5;
+	background: #f8f8f8;
 	margin-right: 20px;
 	border-radius: 5px;
 	overflow: hidden;
@@ -1479,7 +1476,7 @@
 	text-align: center;
 	color: #333;
 	font-size: 17px;
-	background: url(../images/20170618/answer21.png) no-repeat center bottom;
+	background: url(../images/answer21.png) no-repeat center bottom;
 }
 
 .zxgl_wdzt .txt {
