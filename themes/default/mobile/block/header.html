@@ -8,14 +8,18 @@
 		<header>
 			<{if !$is_index_home}>
 				<i class="left"><a href="<{if $pager.backurl}><{$pager.backurl}><{else}><{link ctl='mobile/index'}><{/if}>" id="gobackIco"></a></i>
-				<{elseif $CONFIG.site.multi_city}>
-					<i class="left"><a href="<{link ctl='mobile/city'}>" id="logoIco"></a><a href="<{link ctl='mobile/city'}>" class="city"><{$request.city.city_name}>切换</a></i>
-					<{/if}>
-						<!--
-<div class="title">
+			<{elseif $CONFIG.site.multi_city}>
+				<i class="left"><a href="<{link ctl='mobile/city'}>" id="logoIco"></a><a href="<{link ctl='mobile/city'}>" class="city"><{$request.city.city_name}>切换</a></i>
+			<{else}>
+				<div class="title">
+					<{$tpl_page_title|default:$pager.title|default:$CONFIG.mobile.title}>
+				</div>
+			<{/if}>
+						
+<!-- <div class="title">
 	<{$tpl_page_title|default:$pager.title|default:$CONFIG.mobile.title}>
-</div>
--->
+</div> -->
+
 						<i class="right"><a href="<{link ctl='mobile/ucenter/index'}>" id="loginIco"></a><a href="#" class="menuIco" id="dt-hd-nav"></a></i>
 						<{include file="mobile/block/nav.html" }>
 		</header>

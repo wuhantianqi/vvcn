@@ -1,0 +1,496 @@
+﻿<{include file="block/header.html"}>
+    <link type="text/css" rel="stylesheet" href="%THEME%/static/css/common_2.css" />
+    <link type="text/css" rel="stylesheet" href="%THEME%/static/css/bootstrap_carousel.css" />
+    <script type="text/javascript" src="/themes/default/static/js/bootstrap.carousel.js"></script>
+<div class="wp">
+    <div class="ban">
+        <div class="main_index">
+            <div class="toplist">
+                <div class="category zh-clearfix">
+                <{foreach $attr_values as $k=>$v}>
+                    <dl class="items zh-clearfix">
+                        <dt><{$v.title}><i class="i-items-<{$k}>"></i></dt>
+                        <dd>
+                            <{foreach $v.values as $vv}>   
+                            <span class="uw" class="<{if $vv.checked ==true}>current<{/if}>"><a href="<{$vv.link}>"><{$vv.title}></a></span>
+                            <{/foreach}>
+                        </dd>
+                    </dl>
+                <{/foreach}>
+                </div>
+            </div>
+            <div class="banner">
+                <div class="slider carousel slide" id="carousel_banner" data-ride="carousel">
+                    <ul class="carousel-inner" role="listbox">
+                                                <li class="item  active itemone " style="background: #e2ded9">
+                            <a href="/case-detail-107.html" target="_blank">
+                                                                <img src="%THEME%/static/images/picture/ban1-1.jpg" alt="简单低调简约现代风格三居"/>
+                                                                <img src="%THEME%/static/images/picture/ban1-2.jpg" alt="简单低调简约现代风格三居"/>
+                                                                <img src="%THEME%/static/images/picture/ban1-3.jpg" alt="简单低调简约现代风格三居"/>
+                                                            </a>
+                            <div class="infotxt banner_text">
+                                <h3>简单低调简约现代风格三居</h3>
+                                <p>简约现代风格的装修设计讲究简洁实用，品味高雅。客厅与餐厅没有明显的隔断，自然光让空间层次感更加丰富。</p>
+                                <div class="slider-num">
+                                    <em>1</em>&nbsp;/&nbsp;<span>3</span>
+                                </div>
+                            </div>
+                        </li>
+                                                <li class="item itemtwo " style="background: #dfd8c9">
+                            <a href="/case-detail-108.html" target="_blank">
+                                                                <img src="%THEME%/static/images/picture/ban2-1.jpg" alt="宜家简约58平小户型设计"/>
+                                                                <img src="%THEME%/static/images/picture/ban2-2.jpg" alt="宜家简约58平小户型设计"/>
+                                                                <img src="%THEME%/static/images/picture/ban2-3.jpg" alt="宜家简约58平小户型设计"/>
+                                                            </a>
+                            <div class="infotxt banner_text">
+                                <h3>宜家简约58平小户型设计</h3>
+                                <p>不足60方的小空间采用宜家风格的简约设计，造型结构简练大方，整体配套自然。设计师独具匠心的客厅茶几设计是本案的亮点。</p>
+                                <div class="slider-num">
+                                    <em>2</em>&nbsp;/&nbsp;<span>3</span>
+                                </div>
+                            </div>
+                        </li>
+                                                <li class="item  itemthree " style="background: #d7dfd7">
+                            <a href="/case-detail-109.html" target="_blank">
+                                                                <img src="%THEME%/static/images/picture/ban3-1.jpg" alt="雅致清新混搭二居装修布置"/>
+                                                                <img src="%THEME%/static/images/picture/ban3-2.jpg" alt="雅致清新混搭二居装修布置"/>
+                                                                <img src="%THEME%/static/images/picture/ban3-3.jpg" alt="雅致清新混搭二居装修布置"/>
+                                                            </a>
+                            <div class="infotxt banner_text">
+                                <h3>雅致清新混搭二居装修布置</h3>
+                                <p>本案中设计师采用原木色的客厅软装搭配棉麻布艺质感的沙发，使得整个空间和谐宁静，充满着文艺的色彩。</p>
+                                <div class="slider-num">
+                                    <em>3</em>&nbsp;/&nbsp;<span>3</span>
+                                </div>
+                            </div>
+                        </li>
+                        
+                    </ul>
+                </div>
+            </div>
+            <div class="slider-btn slider_index">
+                <a class="slider-prev" href="#carousel_banner" role="button" data-slide="prev"></a>
+                <a class="slider-next" href="#carousel_banner" role="button" data-slide="next"></a>
+            </div>
+        </div>
+    </div>
+    <div class="index">
+        <div class="main">
+        	<!-- <form action="<{link ctl='tenders:save' http="ajax"}>" mini-form="fast-tenders" method="post">
+            <input type="hidden" name="data[from]" value="TZX" />
+            <div class="apply">
+                <div id="index_apply" class="apply_form">
+                    <span class="formtit">申请免费设计</span>
+                    <input name="apply_type" type="hidden" value="17" />
+                    <input class="inptxt" name="data[contact]" type="text" placeholder="您的姓名" />
+                    <input class="inptxt" name="data[mobile]" type="text" placeholder="手机号码" />
+                    <input class="btn" name="apply" type="submit" value="立即申请" />
+                </div>
+            </div>
+        	</form> -->
+            <div class="tbox">
+                <div class="tit">
+                    <h3>推荐好图</h3>
+                    <a class="abslink" href="/case.html" title="更多装修效果图">更多&nbsp;&gt;</a>
+                </div>
+                <div class="priority zh-clearfix">
+                    <ul class="priority-list">
+                                                <li class=pri-1>
+                            <div class="pribox">
+                                <div class="pri-img">
+                                    <a href="/case-items-75-0-0-0-1.html" target="_blank"><img src="%THEME%/static/images/picture/case-a1.jpg" alt="卧室装修案例" /></a>
+                                </div>
+                                                                <div class="infoone"><p>卧室装修案例</p></div>
+                                                            </div>
+                        </li>
+                                                <li class=pri-2>
+                            <div class="pribox">
+                                <div class="pri-img">
+                                    <a href="/case-items-75-0-85-0-1.html" target="_blank"><img src="%THEME%/static/images/picture/case-a2.jpg" alt="创意混搭·风格卧室效果图赏析" /></a>
+                                </div>
+                                                                <div class="infotxt">
+                                                                    <p><a href="/case-items-75-0-85-0-1.html" target="_blank">查看详情</a></p>
+                                                                    <p>免费预约设计</p>
+                                                                </div>
+                                                            </div>
+                        </li>
+                                                <li class=pri-3>
+                            <div class="pribox">
+                                <div class="pri-img">
+                                    <a href="/case-items-75-0-29-0-1.html" target="_blank"><img src="%THEME%/static/images/picture/case-a3.jpg" alt="中式雅致·风格卧室效果图赏析" /></a>
+                                </div>
+                                                                <div class="infotxt">
+                                                                    <p><a href="/case-items-75-0-29-0-1.html" target="_blank">查看详情</a></p>
+                                                                    <p>免费预约设计</p>
+                                                                </div>
+                                                            </div>
+                        </li>
+                                                <li class=pri-4>
+                            <div class="pribox">
+                                <div class="pri-img">
+                                    <a href="/case-items-75-0-101-0-1.html" target="_blank"><img src="%THEME%/static/images/picture/case-a4.jpg" alt="现代时尚·风格卧室效果图赏析" /></a>
+                                </div>
+                                                                <div class="infotxt">
+                                                                    <p><a href="/case-items-75-0-101-0-1.html" target="_blank">查看详情</a></p>
+                                                                    <p>免费预约设计</p>
+                                                                </div>
+                                                            </div>
+                        </li>
+                                                <li class=pri-5>
+                            <div class="pribox">
+                                <div class="pri-img">
+                                    <a href="/case-items-74-0-85-0-1.html" target="_blank"><img src="%THEME%/static/images/picture/case-a5.jpg" alt="时尚混搭客厅装修" /></a>
+                                </div>
+                                                                <div class="infotxt">
+                                                                    <p><a href="/case-items-74-0-85-0-1.html" target="_blank">查看详情</a></p>
+                                                                    <p>免费预约设计</p>
+                                                                </div>
+                                                            </div>
+                        </li>
+                                                <li class=pri-6>
+                            <div class="pribox">
+                                <div class="pri-img">
+                                    <a href="/case-items-74-0-101-0-1.html" target="_blank"><img src="%THEME%/static/images/picture/case-a6.jpg" alt="原木色卧室装修案例" /></a>
+                                </div>
+                                                                <div class="infotxt">
+                                                                    <p><a href="/case-items-74-0-101-0-1.html" target="_blank">查看详情</a></p>
+                                                                    <p>免费预约设计</p>
+                                                                </div>
+                                                            </div>
+                        </li>
+                                                <li class=pri-7>
+                            <div class="pribox">
+                                <div class="pri-img">
+                                    <a href="/case-items-74-0-30-0-1.html" target="_blank"><img src="%THEME%/static/images/picture/case-a7.jpg" alt="极简北欧客厅装修" /></a>
+                                </div>
+                                                                <div class="infotxt">
+                                                                    <p><a href="/case-items-74-0-30-0-1.html" target="_blank">查看详情</a></p>
+                                                                    <p>免费预约设计</p>
+                                                                </div>
+                                                            </div>
+                        </li>
+                                                <li class=pri-8>
+                            <div class="pribox">
+                                <div class="pri-img">
+                                    <a href="/case-items-74-0-29-0-1.html" target="_blank"><img src="%THEME%/static/images/picture/case-a8.jpg" alt="中式古典客厅装修" /></a>
+                                </div>
+                                                                <div class="infotxt">
+                                                                    <p><a href="/case-items-74-0-29-0-1.html" target="_blank">查看详情</a></p>
+                                                                    <p>免费预约设计</p>
+                                                                </div>
+                                                            </div>
+                        </li>
+                                             
+                    </ul>
+                </div>
+            </div>
+            <div class="tbox">
+                <div class="tit">
+                    <h3>精选案例</h3>
+                    <a class="abslink" href="/case.html" title="更多装修案例">更多&nbsp;&gt;</a>
+                </div>
+                <div class="example zh-clearfix">
+                    <ul class="pictxt">
+                                                <li>
+                            <div class="pictxtbox">
+                                <div class="ptx-img">
+                                    <a href="/case-detail-140.html" target="_blank"><img src="%THEME%/static/images/picture/case-b1.jpg" alt="东南亚风情两居装修" /></a>
+                                </div>
+                                <div class="ptx-info">
+                                    <h4 class="ptx-name">东南亚风情两居装修</h4>
+                                    <p class="ptx-des">东南亚·二居·80平</p>
+                                    <span>免费预约</span>
+                                </div>
+                            </div>
+                            <p class="line"></p>
+                        </li>
+                                                <li>
+                            <div class="pictxtbox">
+                                <div class="ptx-img">
+                                    <a href="#" target="_blank"><img src="%THEME%/static/images/picture/case-b2.jpg" alt="89方地中海两居室装修" /></a>
+                                </div>
+                                <div class="ptx-info">
+                                    <h4 class="ptx-name">89方地中海两居室装修</h4>
+                                    <p class="ptx-des">地中海·二居·89平</p>
+                                    <span>免费预约</span>
+                                </div>
+                            </div>
+                            <p class="line"></p>
+                        </li>
+                                                <li>
+                            <div class="pictxtbox">
+                                <div class="ptx-img">
+                                    <a href="#" target="_blank"><img src="%THEME%/static/images/picture/case-b3.jpg" alt="美式实用两居设计" /></a>
+                                </div>
+                                <div class="ptx-info">
+                                    <h4 class="ptx-name">美式实用两居设计</h4>
+                                    <p class="ptx-des">美式·二居·102平</p>
+                                    <span>免费预约</span>
+                                </div>
+                            </div>
+                            <p class="line"></p>
+                        </li>
+                                                <li>
+                            <div class="pictxtbox">
+                                <div class="ptx-img">
+                                    <a href="#" target="_blank"><img src="%THEME%/static/images/picture/case-b4.jpg" alt="与海为邻个性两居" /></a>
+                                </div>
+                                <div class="ptx-info">
+                                    <h4 class="ptx-name">与海为邻个性两居</h4>
+                                    <p class="ptx-des">现代·二居·94平</p>
+                                    <span>免费预约</span>
+                                </div>
+                            </div>
+                            <p class="line"></p>
+                        </li>
+                                                <li>
+                            <div class="pictxtbox">
+                                <div class="ptx-img">
+                                    <a href="#" target="_blank"><img src="%THEME%/static/images/picture/case-b5.jpg" alt="清新田园80平一居室" /></a>
+                                </div>
+                                <div class="ptx-info">
+                                    <h4 class="ptx-name">清新田园80平一居室</h4>
+                                    <p class="ptx-des">田园·一居·80平</p>
+                                    <span>免费预约</span>
+                                </div>
+                            </div>
+                            <p class="line"></p>
+                        </li>
+                                                <li>
+                            <div class="pictxtbox">
+                                <div class="ptx-img">
+                                    <a href="#" target="_blank"><img src="%THEME%/static/images/picture/case-b6.jpg" alt="现代时尚质感132平三居" /></a>
+                                </div>
+                                <div class="ptx-info">
+                                    <h4 class="ptx-name">现代时尚质感132平三居</h4>
+                                    <p class="ptx-des">现代·三居·132平</p>
+                                    <span>免费预约</span>
+                                </div>
+                            </div>
+                            <p class="line"></p>
+                        </li>
+                                                <li>
+                            <div class="pictxtbox">
+                                <div class="ptx-img">
+                                    <a href="#" target="_blank"><img src="%THEME%/static/images/picture/case-b7.jpg" alt="浪漫混搭两居设计" /></a>
+                                </div>
+                                <div class="ptx-info">
+                                    <h4 class="ptx-name">浪漫混搭两居设计</h4>
+                                    <p class="ptx-des">混搭·二居·78平</p>
+                                    <span>免费预约</span>
+                                </div>
+                            </div>
+                            <p class="line"></p>
+                        </li>
+                                                <li>
+                            <div class="pictxtbox">
+                                <div class="ptx-img">
+                                    <a href="#" target="_blank"><img src="%THEME%/static/images/picture/case-b8.jpg" alt="优雅欧式风格三居室" /></a>
+                                </div>
+                                <div class="ptx-info">
+                                    <h4 class="ptx-name">优雅欧式风格三居室</h4>
+                                    <p class="ptx-des">欧式·三居·167平</p>
+                                    <span>免费预约</span>
+                                </div>
+                            </div>
+                            <p class="line"></p>
+                        </li>
+                                            </ul>
+                </div>
+            </div>
+            <div class="tbox">
+                <div class="tit">
+                    <h3>局部美图</h3>
+                    <a class="abslink" href="/case.html" title="更多装修图片">更多&nbsp;&gt;</a>
+                </div>
+                <div class="smlpart">
+                    <ul class="smlpart-list">
+                                                <li><a class="smllink" href="/case-items-0-40-0-0-1.html" target="_blank"><img src="%THEME%/static/images/picture/case-c1.jpg"  alt="榻榻米" /><em>榻榻米</em></a></li>
+                                                <li><a class="smllink" href="/case-items-0-91-0-0-1.html" target="_blank"><img src="%THEME%/static/images/picture/case-c2.jpg"  alt="玄关" /><em>玄关</em></a></li>
+                                                <li><a class="smllink" href="/case-items-0-39-0-0-1.html" target="_blank"><img src="%THEME%/static/images/picture/case-c3.jpg"  alt="窗帘" /><em>窗帘</em></a></li>
+                                                <li><a class="smllink" href="/case-items-0-36-0-0-1.html" target="_blank"><img src="%THEME%/static/images/picture/case-c4.jpg"  alt="吊顶" /><em>吊顶</em></a></li>
+                                                <li><a class="smllink" href="/case-items-0-92-0-0-1.html" target="_blank"><img src="%THEME%/static/images/picture/case-c5.jpg"  alt="橱柜" /><em>橱柜</em></a></li>
+                                                <li><a class="smllink" href="/case-items-0-99-0-0-1.html" target="_blank"><img src="%THEME%/static/images/picture/case-c6.jpg"  alt="照片墙" /><em>照片墙</em></a></li>
+                                                <li><a class="smllink" href="/case-items-0-93-0-0-1.html" target="_blank"><img src="%THEME%/static/images/picture/case-c7.jpg"  alt="隔断" /><em>隔断</em></a></li>
+                                                <li><a class="smllink" href="/case-items-0-100-0-0-1.html" target="_blank"><img src="%THEME%/static/images/picture/case-c8.jpg"  alt="过道" /><em>过道</em></a></li>
+                                                <!--<li><a class="smllink" href="http://meitu.tugou.com/pic-b14/" target="_blank"><img src="picture/local_xg.jpg" alt="玄关" /><em>玄关</em></a></li>-->
+                        <!--<li><a class="smllink" href="http://meitu.tugou.com/pic-b19/" target="_blank"><img src="picture/local_cl.jpg" alt="窗帘" /><em>窗帘</em></a></li>-->
+                        <!--<li><a class="smllink" href="http://meitu.tugou.com/pic-b12/" target="_blank"><img src="picture/local_dd.jpg" alt="吊顶" /><em>吊顶</em></a></li>-->
+                        <!--<li><a class="smllink" href="http://meitu.tugou.com/pic-b16/" target="_blank"><img src="picture/local_cg.jpg" alt="橱柜" /><em>橱柜</em></a></li>-->
+                        <!--<li><a class="smllink" href="http://meitu.tugou.com/pic-b26/" target="_blank"><img src="picture/local_zpq.jpg" alt="照片墙" /><em>照片墙</em></a></li>-->
+                        <!--<li><a class="smllink" href="http://meitu.tugou.com/pic-b17/" target="_blank"><img src="picture/local_pc.jpg" alt="飘窗" /><em>飘窗</em></a></li>-->
+                        <!--<li><a class="smllink" href="http://meitu.tugou.com/pic-b28/" target="_blank"><img src="picture/local_gd.jpg" alt="过道" /><em>过道</em></a></li>-->
+                    </ul>
+                </div>
+                <div class="partbox">
+                    <div class="part-unit">
+                        <div class="pu-t bg-col-green"><h4><a href="/case-items-0-37-0-0-1.html" target="_blank">背景墙</a></h4></div>
+                        <div class="pu-list zh-clearfix">
+                            <ul class="pictxt">
+                                                                <li>
+                                    <div class="pictxtbox">
+                                        <div class="ptx-img">
+                                            <a href="/case-items-0-37-101-0-1.html" target="_blank"><img src="%THEME%/static/images/picture/case-d1.jpg" alt="现代时尚背景墙装修设计" /></a>
+                                            <div class="ptx_fixt">
+                                                <p><a href="/case-items-0-37-101-0-1.html" target="_blank">查看详情</a></p>
+                                                <p>免费预约设计</p>
+                                            </div>
+                                        </div>
+                                        <div class="ptx-info">
+                                            <h4 class="ptx-name">现代时尚背景墙装修设计</h4>
+                                        </div>
+                                    </div>
+                                </li>
+                                                                <li>
+                                    <div class="pictxtbox">
+                                        <div class="ptx-img">
+                                            <a href="/case-items-0-37-85-0-1.html" target="_blank"><img src="%THEME%/static/images/picture/case-d2.jpg" alt="多彩混搭背景墙美图赏析" /></a>
+                                            <div class="ptx_fixt">
+                                                <p><a href="/case-items-0-37-85-0-1.html" target="_blank">查看详情</a></p>
+                                                <p>免费预约设计</p>
+                                            </div>
+                                        </div>
+                                        <div class="ptx-info">
+                                            <h4 class="ptx-name">多彩混搭背景墙美图赏析</h4>
+                                        </div>
+                                    </div>
+                                </li>
+                                                                <li>
+                                    <div class="pictxtbox">
+                                        <div class="ptx-img">
+                                            <a href="/case-items-0-37-32-0-1.html" target="_blank"><img src="%THEME%/static/images/picture/case-d3.jpg" alt="唯美田园背景墙设计欣赏" /></a>
+                                            <div class="ptx_fixt">
+                                                <p><a href="/case-items-0-37-32-0-1.html" target="_blank">查看详情</a></p>
+                                                <p>免费预约设计</p>
+                                            </div>
+                                        </div>
+                                        <div class="ptx-info">
+                                            <h4 class="ptx-name">唯美田园背景墙设计欣赏</h4>
+                                        </div>
+                                    </div>
+                                </li>
+                                                                <li>
+                                    <div class="pictxtbox">
+                                        <div class="ptx-img">
+                                            <a href="/case-items-0-37-27-0-1.html" target="_blank"><img src="%THEME%/static/images/picture/case-d4.jpg" alt="温馨简约背景墙设计美图" /></a>
+                                            <div class="ptx_fixt">
+                                                <p><a href="/case-items-0-37-27-0-1.html" target="_blank">查看详情</a></p>
+                                                <p>免费预约设计</p>
+                                            </div>
+                                        </div>
+                                        <div class="ptx-info">
+                                            <h4 class="ptx-name">温馨简约背景墙设计美图</h4>
+                                        </div>
+                                    </div>
+                                </li>
+ 
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="part-unit">
+                        <div class="pu-t bg-col-org"><h4><a href="/case-items-0-40-0-0-1.html" target="_blank">榻榻米</a></h4></div>
+                        <div class="pu-list zh-clearfix">
+                            <ul class="pictxt">
+                                                                <li>
+                                    <div class="pictxtbox">
+                                        <div class="ptx-img">
+                                            <a href="/case-items-0-40-29-0-1.html" target="_blank"><img src="%THEME%/static/images/picture/case-e1.jpg" alt="中式书香榻榻米装修欣赏" /></a>
+                                            <div class="ptx_fixt">
+                                                <p><a href="/case-items-0-40-29-0-1.html" target="_blank">查看详情</a></p>
+                                                <p>免费预约设计</p>
+                                            </div>
+                                        </div>
+                                        <div class="ptx-info">
+                                            <h4 class="ptx-name">中式书香榻榻米装修欣赏</h4>
+                                        </div>
+                                    </div>
+                                </li>
+                                                                <li>
+                                    <div class="pictxtbox">
+                                        <div class="ptx-img">
+                                            <a href="/case-items-0-40-32-0-1.html" target="_blank"><img src="%THEME%/static/images/picture/case-e2.jpg" alt="舒适田园榻榻米装修布置" /></a>
+                                            <div class="ptx_fixt">
+                                                <p><a href="/case-items-0-40-32-0-1.html" target="_blank">查看详情</a></p>
+                                                <p>免费预约设计</p>
+                                            </div>
+                                        </div>
+                                        <div class="ptx-info">
+                                            <h4 class="ptx-name">舒适田园榻榻米装修布置</h4>
+                                        </div>
+                                    </div>
+                                </li>
+                                                                <li>
+                                    <div class="pictxtbox">
+                                        <div class="ptx-img">
+                                            <a href="/case-items-0-40-85-0-1.html" target="_blank"><img src="%THEME%/static/images/picture/case-e3.jpg" alt="个性混搭榻榻米装修设计" /></a>
+                                            <div class="ptx_fixt">
+                                                <p><a href="/case-items-0-40-85-0-1.html" target="_blank">查看详情</a></p>
+                                                <p>免费预约设计</p>
+                                            </div>
+                                        </div>
+                                        <div class="ptx-info">
+                                            <h4 class="ptx-name">个性混搭榻榻米装修设计</h4>
+                                        </div>
+                                    </div>
+                                </li>
+                                                                <li>
+                                    <div class="pictxtbox">
+                                        <div class="ptx-img">
+                                            <a href="/case-items-0-40-101-0-1.html" target="_blank"><img src="%THEME%/static/images/picture/case-e4.jpg" alt="现代休闲榻榻米美图欣赏" /></a>
+                                            <div class="ptx_fixt">
+                                                <p><a href="/case-items-0-40-101-0-1.html" target="_blank">查看详情</a></p>
+                                                <p>免费预约设计</p>
+                                            </div>
+                                        </div>
+                                        <div class="ptx-info">
+                                            <h4 class="ptx-name">现代休闲榻榻米美图欣赏</h4>
+                                        </div>
+                                    </div>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<script>
+    // 显示隐藏
+    $('.pribox').mousemove(function(event) {
+        $(this).find('.infotxt').show();
+    }).mouseleave(function(ev){
+        $(this).find('.infotxt').hide();
+    });
+    $('.ptx-img').mousemove(function(event) {
+        $(this).find('.ptx_fixt').show();
+    }).mouseleave(function(ev){
+        $(this).find('.ptx_fixt').hide();
+    });
+    // 弹出框
+    $(".infotxt p:last-child").on('click',function(){
+        layer.open({
+            type: 2,    
+            title:'',
+            area: ['1030px', '465px'], //宽高
+            content: ['<{link ctl="forms" arg0=EFFECT}>','no']
+        });
+    });
+    $(".ptx-info span").on('click',function(){
+        layer.open({
+            type: 2,    
+            title:'',
+            area: ['1030px', '465px'], //宽高
+            content: ['<{link ctl="forms" arg0=EFFECT}>','no']
+        });
+    });
+    $(".ptx_fixt p:last-child").on('click',function(){
+        layer.open({
+            type: 2,    
+            title:'',
+            area: ['1030px', '465px'], //宽高
+            content: ['<{link ctl="forms" arg0=EFFECT}>','no']
+        });
+    });
+</script>
+<{include file="block/footer.html"}>

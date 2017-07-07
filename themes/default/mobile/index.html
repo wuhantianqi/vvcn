@@ -22,7 +22,7 @@
 						<a href="<{link ctl='mobile/company'}>"><i class="m-ic4"></i>选公司</a>
 					</li>
 					<li>
-						<a href="<{link ctl='mobile/tenders'}>"><i class="m-ic5"></i>家居惠</a>
+						<a href="<{link ctl='mobile/youhui'}>"><i class="m-ic5"></i>家居惠</a>
 					</li>
 				</ul>
 			</nav>
@@ -32,40 +32,42 @@
 			<div class="m-zgs">
 				<!-- 左边部分 -->
 				<div class="m-zgs-f">
-					<h2>
-						<a href="">
-			找靠谱装修公司
-						</a>
+					<a href="<{link ctl='mobile/company'}>">
+					<h2>找靠谱装修公司
 						<i>HOT</i>
 					</h2>
 					<ul>
-						<li><a href="">比设计</a></li>
-						<li><a href="">比方案</a></li>
-						<li><a href="">比报价</a></li>
-						<li><a href="">比服务</a></li>
+						<li>比设计</li>
+						<li>比方案</li>
+						<li>比报价</li>
+						<li>比服务</li>
 					</ul>
 					<div class="imgg-box">
 						<img src="%THEME%/mobile/static/images/1.png" alt="">
 					</div>
+					</a>
 				</div>
 				<!-- 右边上面 -->
 				<div class="m-zgs-r-f">
-					<h2><a href="">户型设计</a><i>限免</i>
+					<a href="<{link ctl='mobile/tenders'}>">
+					<h2>户型设计<i>限免</i>
 						<p>3天出全屋设计图&nbsp;&nbsp;&nbsp;&nbsp;</p>
 					</h2>
 					<div class="imgg-box1">
 						<img src="%THEME%/mobile/static/images/2.png" alt="">
 					</div>
+					</a>
 				</div>
 				<!-- 右边下面 -->
 				<div class="m-zgs-r-b">
-					<h2><a href="">免费报价</a><i>热门</i>
+					<a href="<{link ctl='mobile/tenders'}>">
+					<h2>免费报价<i>热门</i>
 						<p>了解装修花多少钱&nbsp;&nbsp;</p>
 					</h2>
 					<div class="imgg-box1">
 						<img src="%THEME%/mobile/static/images/3.png" alt="">
 					</div>
-
+					</a>
 				</div>
 			</div>
 
@@ -73,7 +75,7 @@
 			<!-- 找装修公司下面的广告图 -->
 
 			<div class="m-guang1">
-				<img src="%THEME%/mobile/static/images/gg.png" alt="">
+				<{adv id="121" name="手机版首页一号广告位" city_id=$request.city_id}>
 			</div>
 
 			<!-- 新房验房菜单 -->
@@ -81,7 +83,7 @@
 				<ul>
 					<li>
 						<h2>
-							<a href="" class="a1">新房验房</a>
+							<a href="<{link ctl='mobile/yanf'}>">新房验房</a>
 						</h2>
 						<p>房屋质量一网打尽</p>
 						<a href=""><i class="ic1">GO></i></a>
@@ -90,61 +92,72 @@
 						</div>
 					</li>
 					<li>
+						<a href="<{link ctl='mobile/zxb'}>">
 						<h2>
-							<a href="" class="a2">装修管家</a>
+							装修管家
 						</h2>
 						<p>严格杜绝装修猫腻</p>
-						<a href=""><i class="ic2">GO></i></a>
+						<i class="ic2">GO></i>
 						<div class="img-box box2">
 							<img src="%THEME%/mobile/static/images/5.png" alt="">
 						</div>
+						</a>
 					</li>
 					<li>
+						<a href="<{link ctl='mobile/mxx'}>">
 						<h2>
-							<a href="" class="a3">小白装修</a>
+							小白装修
 						</h2>
 						<p>三分钟快速了解装修</p>
-						<a href=""><i class="ic3">GO></i></a>
+						<i class="ic3">GO></i>
 						<div class="img-box box3">
 							<img src="%THEME%/mobile/static/images/6.png" alt="">
 						</div>
+						</a>
 					</li>
 					<li>
+						<a href="<{link ctl='mobile/article'}>">
 						<h2>
-							<a href="" class="a4">装修历程</a>
+							装修历程
 						</h2>
 						<p>装修过程一目了然</p>
-						<a href=""><i class="ic4">GO></i></a>
+						<i class="ic4">GO></i>
 						<div class="img-box box4">
 							<img src="%THEME%/mobile/static/images/7.png" alt="">
 						</div>
+						</a>
 					</li>
 					<li>
+						<a href="<{link ctl='mobile/site'}>">
 						<h2>
-							<a href="" class="a5"> 在建工地</a>
+							 在建工地
 						</h2>
 						<p>看别人家怎么装修的</p>
-						<a href=""><i class="ic5">GO></i></a>
+						<i class="ic5">GO></i>
 						<div class="img-box box5">
 							<img src="%THEME%/mobile/static/images/8.png" alt="">
 						</div>
+						</a>
 					</li>
 					<li>
+						<a href="<{link ctl='mobile/home-tuan'}>">
 						<h2>
-							<a href="" class="a6">团装小区</a>
+							团装小区
 						</h2>
 						<p>我家小区装修优惠</p>
-						<a href=""><i class="ic6">GO></i></a>
+						<i class="ic6">GO></i>
 						<div class="img-box box6">
 							<img src="%THEME%/mobile/static/images/9.png" alt="">
 						</div>
+						</a>
 					</li>
 				</ul>
 			</div>
 
 			<!-- 中间表单 -->
 			<div class="fr-form">
-				<form action="">
+				<form class="tenders" action="<{link ctl='mobile/tenders:save' http='ajax'}>" mini-form="tenders" method="post">
+				<input type="hidden" name="data[from]" value="TZB" />
 					<h2>抢免费设计名额</h2>
 					<h1>
 						今日还剩
@@ -157,19 +170,14 @@
 					</h1>
 					<div class="inp">
 						<i class="inic1"></i>
-						<input type="text" placeholder="您的称呼">
+						<input type="text" name="data[contact]" placeholder="您的称呼">
 					</div>
 					<div class="inp">
 						<i class="inic2"></i>
-						<input type="text" placeholder="您的联系方式">
+						<input type="text" name="data[mobile]" placeholder="您的联系方式">
 					</div>
 
-					<select name="" id="">
-				<option value="">湖北</option>
-			</select>
-					<select name="" id="">
-				<option value="">武汉</option>
-			</select>
+					<{widget id="data/region" city_id=$request.city_id level=2 class="text two"}>
 					<input type="submit" value="立即申请">
 				</form>
 
@@ -193,17 +201,18 @@
 				</div>
 				<div class="youhui-text">
 					<ul>
+						<{KT id="38" name="手机版首页推荐优惠信息" city_id=$request.city_id limit="2"}>
 						<li>
-							<a href=""><img src="%THEME%/mobile/static/images/1.jpg" alt=""></a>
-							<p>跟着优优美家学免费装修...</p>
-							<a href="" class="xq">[查看详情]</a>
+							<a href="<{link ctl='mobile/youhui'}>"><img src="%THEME%/mobile/static/images/1.jpg" alt=""></a>
+							<p><{$item.title|cutstr:20}></p>
+							<a href="<{link ctl='mobile/article:detail' arg0=$item.article_id}>" class="xq">[查看详情]</a>
 						</li>
-						<li>
+						<!-- <li>
 							<a href=""><img src="%THEME%/mobile/static/images/2.jpg" alt=""></a>
 							<p>跟着优优美家学免费装修...</p>
 							<a href="" class="xq">[查看详情]</a>
-						</li>
-
+						</li> -->
+						<{/KT}>
 					</ul>
 				</div>
 			</div>
@@ -212,22 +221,25 @@
 			<div class="m_anli">
 				<div class="title">
 					<h2><i></i>案例美图</h2>
-					<ul>
-						<li><a href="">风格</a></li>
-						<li><a href="">空间</a></li>
-						<li><a href="">别墅</a></li>
-						<li><a href="">小户型</a></li>
+					<ul class="m-anli-menu">
+						<li><a href="javascript:;">风格</a></li>
+						<li><a href="javascript:;">空间</a></li>
+						<li><a href="javascript:;">别墅</a></li>
+						<li><a href="javascript:;">小户型</a></li>
 					</ul>
 				</div>
-				<div class="test">
+				<div class="test anli-meitu">
 					<ul>
-						<li>
-							<a href="">
-								<img src="%THEME%/mobile/static/images/3.jpg" alt="">
-							</a>
-							<p><a href="">泛海国际中式风格效果图</a></p>
-						</li>
-						<li>
+						<{KT id="4" name="网站首页4F热门案例-风格" city_id=$request.city_id limit="4"}> 
+							<li>
+								<a href="<{link ctl='mobile/case:detail' arg0=$item.case_id}>">
+									<img src="<{$pager.img}>/<{$item.thumb}>" alt="">
+								</a>
+								<p><a href="<{link ctl='mobile/case:detail' arg0=$item.case_id}>"><{$item.title|cutstr:20}></a></p>
+							</li>
+						<{/KT}>
+						
+						<!-- <li>
 							<a href="">
 								<img src="%THEME%/mobile/static/images/4.jpg" alt="">
 							</a>
@@ -244,9 +256,96 @@
 								<img src="%THEME%/mobile/static/images/6.jpg" alt="">
 							</a>
 							<p><a href="">泛海国际中式风格效果图</a></p>
-						</li>
+						</li> -->
 					</ul>
-					<h2><a href="">查看更多风格<span>&gt;</span></a></h2>
+					<ul>
+						<{KT id="5" name="网站首页4F热门案例-空间" city_id=$request.city_id limit="4"}> 
+							<li>
+								<a href="<{link ctl='mobile/case:detail' arg0=$item.case_id}>">
+									<img src="<{$pager.img}>/<{$item.thumb}>" alt="">
+								</a>
+								<p><a href="<{link ctl='mobile/case:detail' arg0=$item.case_id}>"><{$item.title|cutstr:20}></a></p>
+							</li>
+						<{/KT}>
+						
+						<!-- <li>
+							<a href="">
+								<img src="%THEME%/mobile/static/images/4.jpg" alt="">
+							</a>
+							<p><a href="">泛海国际中式风格效果图</a></p>
+						</li>
+						<li>
+							<a href="">
+								<img src="%THEME%/mobile/static/images/5.jpg" alt="">
+							</a>
+							<p><a href="">泛海国际中式风格效果图</a></p>
+						</li>
+						<li>
+							<a href="">
+								<img src="%THEME%/mobile/static/images/6.jpg" alt="">
+							</a>
+							<p><a href="">泛海国际中式风格效果图</a></p>
+						</li> -->
+					</ul>
+					<ul>
+						<{KT id="6" name="网站首页4F热门案例-别墅" city_id=$request.city_id limit="4"}>
+							<li>
+								<a href="<{link ctl='mobile/case:detail' arg0=$item.case_id}>">
+									<img src="<{$pager.img}>/<{$item.thumb}>" alt="">
+								</a>
+								<p><a href="<{link ctl='mobile/case:detail' arg0=$item.case_id}>"><{$item.title|cutstr:20}></a></p>
+							</li>
+						<{/KT}>
+						
+						<!-- <li>
+							<a href="">
+								<img src="%THEME%/mobile/static/images/4.jpg" alt="">
+							</a>
+							<p><a href="">泛海国际中式风格效果图</a></p>
+						</li>
+						<li>
+							<a href="">
+								<img src="%THEME%/mobile/static/images/5.jpg" alt="">
+							</a>
+							<p><a href="">泛海国际中式风格效果图</a></p>
+						</li>
+						<li>
+							<a href="">
+								<img src="%THEME%/mobile/static/images/6.jpg" alt="">
+							</a>
+							<p><a href="">泛海国际中式风格效果图</a></p>
+						</li> -->
+					</ul>
+					<ul>
+						<{KT id="7" name="网站首页4F热门案例-小户型" city_id=$request.city_id limit="4"}>
+							<li>
+								<a href="<{link ctl='mobile/case:detail' arg0=$item.case_id}>">
+									<img src="<{$pager.img}>/<{$item.thumb}>" alt="">
+								</a>
+								<p><a href="<{link ctl='mobile/case:detail' arg0=$item.case_id}>"><{$item.title|cutstr:20}></a></p>
+							</li>
+						<{/KT}>
+						
+						<!-- <li>
+							<a href="">
+								<img src="%THEME%/mobile/static/images/4.jpg" alt="">
+							</a>
+							<p><a href="">泛海国际中式风格效果图</a></p>
+						</li>
+						<li>
+							<a href="">
+								<img src="%THEME%/mobile/static/images/5.jpg" alt="">
+							</a>
+							<p><a href="">泛海国际中式风格效果图</a></p>
+						</li>
+						<li>
+							<a href="">
+								<img src="%THEME%/mobile/static/images/6.jpg" alt="">
+							</a>
+							<p><a href="">泛海国际中式风格效果图</a></p>
+						</li> -->
+					</ul>
+					<h2><a href="<{link ctl='mobile/case'}>">查看更多风格<span>&gt;</span></a></h2>
 				</div>
 			</div>
 
@@ -256,21 +355,29 @@
 				<div class="zttitle">
 					<h2><i></i>装修专题</h2>
 					<ul class="ul1">
-						<li><a href="">客厅装修</a></li>
-						<li><a href="">客厅装修</a></li>
-						<li><a href="">客厅装修</a></li>
-						<li><a href="">客厅装修</a></li>
+						<li><a href="<{link ctl='mobile/article:items-11-84'}>">客厅装修</a></li>
+						<li><a href="<{link ctl='mobile/article:items-11-85'}>">卧室装修</a></li>
+						<li><a href="<{link ctl='mobile/article:items-11-86'}>">书房装修</a></li>
+						<li><a href="<{link ctl='mobile/article:items-11-88'}>">厨房装修</a></li>
 					</ul>
 					<ul class="ul2">
-						<li><a href="">客厅装修</a></li>
-						<li><a href="">客厅装修</a></li>
-						<li><a href="">客厅装修</a></li>
-						<li><a href="">客厅装修</a></li>
+						<li><a href="<{link ctl='mobile/article:items-11-89'}>">餐厅装修</a></li>
+						<li><a href="<{link ctl='mobile/article:items-11-91'}>">阳台装修</a></li>
+						<li><a href="<{link ctl='mobile/article:items-11-92'}>">别墅装修</a></li>
+						<li><a href="<{link ctl='mobile/article:items-11-93'}>">办公室装修</a></li>
 					</ul>
 
 				</div>
 				<div class="zttest" id="wrapper">
 					<ul>
+						<{KT id="164" name="手机版首页房屋装修推荐" city_id=$request.city_id}>
+							<li>
+								<a href="<{link ctl='mobile/article:items' arg0=$item.case_id}>">
+									<img src="<{$pager.img}>/<{$item.thumb}>" alt="">
+								</a>
+								<p><a href=""><{$item.title|cutstr:20}></a></p>
+							</li>
+						<{/KT}>
 						<li>
 							<a href="">
 								<img src="%THEME%/mobile/static/images/7.jpg" alt="">
@@ -297,29 +404,9 @@
 						</li>
 
 					</ul>
-					<h2><a href="">查看更多风格<span>&gt;</span></a></h2>
+					<h2><a href="<{link ctl='mobile/article:items'}>">查看更多风格<span>&gt;</span></a></h2>
 				</div>
-				<script>
-					var myscroll;
-
-					function loaded() {
-
-						setTimeout(function() {
-
-								myscroll = new iScroll("wrapper", {
-									hScrollbar: false,
-									vScrollbar: false,
-									vScroll: false
-								});
-
-							},
-							100);
-
-					}
-
-					window.addEventListener("load", loaded, false);
-
-				</script>
+				
 			</div>
 
 			<!-- 装修早知道 -->
@@ -328,63 +415,75 @@
 					<h2><i></i>装修早知道</h2>
 				</div>
 				<div class="zzd_gg">
-					<img src="%THEME%/mobile/static/images/gg.png" alt="">
+					<{adv id="122" name="手机版首页二号广告位" city_id=$request.city_id}>
 				</div>
 				<div class="zzdtest">
 					<ul>
 						<li>
+							<a href="<{link ctl='mobile/article:items' arg0=8}>">
 							<h2>
 								装修流程
 							</h2>
-							<a>让菜鸟变专家</a>
+							让菜鸟变专家
 							<div class="imm_box bg1">
 								<img src="%THEME%/mobile/static/images/10.png" alt="">
 							</div>
+							</a>
 						</li>
 						<li>
+							<a href="<{link ctl='mobile/article:items-9-10'}>">
 							<h2>
 								行业资讯
 							</h2>
-							<a>需要了解更多一点</a>
+							需要了解更多一点
 							<div class="imm_box bg2">
 								<img src="%THEME%/mobile/static/images/11.png" alt="">
 							</div>
+							</a>
 						</li>
 						<li>
+							<a href="<{link ctl='mobile/article:items-11'}>">
 							<h2>
 								房屋装修
 							</h2>
-							<a>需要了解更多一点</a>
+							需要了解更多一点
 							<div class="imm_box bg3">
 								<img src="%THEME%/mobile/static/images/12.png" alt="">
 							</div>
+							</a>
 						</li>
 						<li>
+							<a href="<{link ctl='mobile/article:items-12'}>">
 							<h2>
 								装修风格
 							</h2>
-							<a>需要了解更多一点</a>
+							需要了解更多一点
 							<div class="imm_box bg4">
 								<img src="%THEME%/mobile/static/images/13.png" alt="">
 							</div>
+							</a>
 						</li>
 						<li>
+							<a href="<{link ctl='mobile/article:items-13-116'}>">
 							<h2>
 								装修风水
 							</h2>
-							<a>需要了解更多一点</a>
+							需要了解更多一点
 							<div class="imm_box bg5">
 								<img src="%THEME%/mobile/static/images/14.png" alt="">
 							</div>
+							</a>
 						</li>
 						<li>
+							<a href="<{link ctl='mobile/article:items-14'}>">
 							<h2>
 								家居生活
 							</h2>
-							<a>需要了解更多一点</a>
+							需要了解更多一点
 							<div class="imm_box bg6">
 								<img src="%THEME%/mobile/static/images/15.png" alt="">
 							</div>
+							</a>
 						</li>
 					</ul>
 				</div>
@@ -428,25 +527,9 @@
 						</li>
 					</ul>
 				</div>
-
-
 			</div>
-
 			<div class="m-f">
 				<p>优优美家装修网致力于为广大业主提供透明、保障、省心的装修服务！了解当地装修公司排名，获取当地装修报价，装修预算就上优优美家装修网！</p>
-
-			</div>
-
-			<div class="m-foot">
-				<p class="p1"> copyright&copy;2016-2017优优美家EECN.CC版权所有</p>
-				<p class="p2">手机版优优美家 <span>鄂ICP备16014083号-1</span></p>
-				<ul>
-					<li><a href="">关于我们</a></li>
-					<li><a href="">联系我们</a></li>
-					<li><a href="">帮助中心</a></li>
-					<li><a href="">法律条款</a></li>
-				</ul>
-				<p>免费声明：本网站部分内容（包含但不限于宣传/资料）来自网络或由用户自行上传，如权利人发现或存在误传其作品情形或其它侵权行为，请及时与本站联系。优优美家装修网和东启创拓公司保留所有权利。</p>
 			</div>
 
 			<{include file="mobile/block/footer.html" }>

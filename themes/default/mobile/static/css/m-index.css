@@ -827,7 +827,12 @@ nav ul li .m-ic5 {
 	color: #ff99cc;
 	height: .3rem;
 }
-
+.anli-meitu ul{
+	display: none;
+}
+.anli-meitu ul:first-child{
+	display: block;
+}
 .m_anli .test ul {
 	overflow: hidden;
 }
@@ -835,7 +840,7 @@ nav ul li .m-ic5 {
 .m_anli .test ul li {
 	float: left;
 	width: 49%;
-	border: 1px solid #ddd;
+	/*border: 1px solid #ddd;*/
 	box-sizing: border-box;
 	margin-top: .1rem;
 }
@@ -947,6 +952,8 @@ nav ul li .m-ic5 {
 }
 
 .m_zhuant .zttest {
+	height: 165px;
+	overflow: hidden;
 	position: relative;
 }
 
@@ -986,7 +993,7 @@ nav ul li .m-ic5 {
 .m_zhuant .zttest h2 {
 	text-align: center;
 	font-weight: 500;
-	margin-top: 1.6rem;
+	margin-top: 1.3rem;
 	margin-bottom: 0.05rem;
 }
 

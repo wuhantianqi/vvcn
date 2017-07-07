@@ -1,4 +1,3 @@
-//
 $(document).ready(function () {
 	if ($('.tender').length == 0)
 	{
@@ -31,4 +30,29 @@ $(document).ready(function () {
 	}else if($('#topSearch').length > 0){
 		$('.page_center_box').css('top', '1.05rem');
 	}
+
+	//首页滚动效果
+	var myscroll;
+	function loaded() {
+		setTimeout(function() {
+				myscroll = new iScroll("wrapper", {
+					hScrollbar: false,
+					vScrollbar: false,
+
+					onBeforeScrollStart: null
+				});
+			},
+			100);
+	}
+	window.addEventListener("load", loaded, false);
+	
+	//案例美图切换
+	$(".m-anli-menu li").each(function(index, el) {
+		$(this).click(function(event) {
+			/* Act on the event */
+			$(".anli-meitu ul").css('display','none');
+			$(".anli-meitu ul").eq(index).css('display','block');
+		});
+	});
+
 });
